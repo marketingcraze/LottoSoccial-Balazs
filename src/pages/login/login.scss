@@ -1,5 +1,6 @@
 page-login {
   	a{
+        color: map-get( $colors-light, links);
 		text-decoration: none;
 	}
 	.col{
@@ -31,8 +32,8 @@ page-login {
     }
     .auth-button{
     	max-width: 14em;
-    	max-height: 2em;
         padding: 1em;
+        max-height: 2em;
     }
 
     .showpassword{
