@@ -26,23 +26,23 @@ export class MyApp {
 
       commonSrv.getCountry1().subscribe(
       data=>{
-        CommonService.countries = data;
-        console.log("countries loaded");
-        Splashscreen.hide();
+          CommonService.countries = data;
+          console.log("countries loaded");
+          Splashscreen.hide();
       },
       err=>{
+
         let alert = alertCtrl.create({
-          title: 'Error!!!',
-          subTitle: 'Internet disabled or server error.',
-          buttons: [
-          {
-            text: 'OK',
-            handler: (data) => {
-              platform.exitApp();
-            }
-          }
-          ],
-          enableBackdropDismiss:false
+            title: 'Error!!!',
+            subTitle: 'Internet disabled or server error.',
+            enableBackdropDismiss:false,
+            buttons: [
+            {
+                text: 'OK',
+                handler: (data) => {
+                    platform.exitApp();
+                }
+            }]
         });
         alert.present();
       },

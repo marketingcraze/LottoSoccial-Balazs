@@ -23,6 +23,16 @@ page-welcome {
 		z-index: 1;
 	}
 
+	// remove video play button
+	.tp-video-play-button {display: none !important}
+	// prevent video from being clicked
+	.rev_slider video {pointer-events: none}
+	// disable native play button
+	.rev_slider video::-webkit-media-controls-start-playback-button {
+		display: none!important;
+		-webkit-appearance: none;
+	}
+
 	.slides {
 		background-color: rgba( 155,155,155, .2);
 	}
