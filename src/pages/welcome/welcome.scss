@@ -1,0 +1,62 @@
+page-welcome {
+	p{
+		font-size: .8em;
+	}
+	.bottom {
+		width: 100%;
+		bottom: 0;
+		position: absolute;
+		z-index: 10;
+		.button-md{
+			height: 4.6rem;
+		}
+	}
+	.lotto-logo {
+		padding: 2em;
+		position: absolute;
+		top: 5%;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		-moz-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
+		-o-transform: translateX(-50%);
+		z-index: 1;
+	}
+
+	.slides {
+		background-color: rgba( 155,155,155, .2);
+	}
+	.bg-vid {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: 100%;
+		z-index: -100;
+		-webkit-transform: translateX(-50%) translateY(-50%);
+		-moz-transform: translateX(-50%) translateY(-50%);
+		-ms-transform: translateX(-50%) translateY(-50%);
+		-o-transform: translateX(-50%) translateY(-50%);
+		transform: translateX(-50%) translateY(-50%);
+		background-size: cover;
+	}
+
+	.swiper-container-horizontal > .swiper-pagination-bullets{
+		bottom: 90px;
+	}
+
+    .box {
+        text-align: left;
+        padding: 2em;
+        
+        header {
+        	color: #fff;
+        	max-width: 80%;
+        	margin-top: 80%;
+        }
+    }
+
+    
+}

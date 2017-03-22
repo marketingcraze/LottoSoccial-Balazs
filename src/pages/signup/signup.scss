@@ -1,0 +1,73 @@
+page-signup {
+	p{
+		margin: 10px;
+		font-size: .9em;
+	}
+	a{
+		text-decoration: none;
+	}
+  .col{
+    padding: 0;
+  }
+  .item-md{
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.2rem;
+    
+    .item-md[item-right]{
+      margin: 0;
+    }
+  }
+  .item-md ion-icon[item-left], .item-md ion-icon[item-right]{
+      margin: 0;
+  }
+  .last-name{
+    padding-left: 4px;
+  }
+  .small-icon{
+      font-size: 1.2em;
+      padding-top: .6em;
+  }
+  .remove-inner{
+      .input-wrapper{
+          display: inline-table;
+      }
+  }
+	
+	.lotto-logo {
+      display: block;
+      width: 72px;
+      margin: 2em auto;
+      position: relative;
+      img{
+        border-radius: 50%;
+      }
+      .update-icon{
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        float: right;
+        padding: 0.1em;
+        width: 1.4em;
+        height: 1.4em;
+        bottom: 1px;
+        right: 3px
+      }
+  }
+  .profile-picture{
+    background: #e3e3e3;
+  }
+
+    .warning{
+    	margin: 0;
+      margin-top: 2em;
+    	padding: 1em;
+    	background-color: rgba(255,0,0,.1);
+    	color: red;
+    }
+
+    .auth-button{
+    	max-width: 14em;
+    	max-height: 2em;
+    }
+}

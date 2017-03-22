@@ -1,0 +1,85 @@
+<!--
+<ion-header>
+  <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+</ion-header>
+-->
+
+<ion-content >
+	
+	<h4 text-center>Start by ceating an account</h4>
+	<ion-avatar item-center icon-left>
+		<div class="lotto-logo">
+			
+			<img class="profile-picture" src="{{ signup.image ? signup.image : 'assets/icon/user.svg' }}" width="72" height="72" alt="Profile" />
+
+			<img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"/>
+			
+		</div>
+	</ion-avatar>
+	
+	
+	<form #signupForm="ngForm" (ngSubmit)="submitSignup(signupForm)">
+	<ion-grid>
+		
+	<ion-row>
+		<ion-col col-6>
+			<ion-item>
+				<ion-input type="text" name="first_name" [(ngModel)]="signup.first_name" placeholder="First name" required></ion-input>
+			</ion-item>
+		</ion-col>	
+		<ion-col class="last-name" col-6>
+			<ion-item>
+				<ion-input type="text" name="last_name" [(ngModel)]="signup.last_name" placeholder="Last name" required></ion-input>
+			</ion-item>
+		</ion-col>	
+	</ion-row>
+
+	<ion-row>
+		<ion-item>
+			<!-- <ion-label>Email address</ion-label> -->
+			<ion-input type="email" name="email" [(ngModel)]="signup.email" placeholder="Email address" required></ion-input>
+		</ion-item>
+	</ion-row>
+	<ion-row >
+		<ion-col col-2>
+			<ion-item *ngIf="selectedCountry" class="remove-inner" (click)="presentPopover($event)">
+				<span item-right ion-button clear icon-right class="{{'flag-icon flag-icon-' + selectedCountry[1] }}" width="16" height="16" >
+				</span><ion-icon item-right name="arrow-down" class="small-icon"></ion-icon>
+			</ion-item>
+		</ion-col>
+		<ion-col col-10 #popoverText>
+			<ion-item>
+				<ion-input type="tel" name="mobile" [(ngModel)]="signup.mobile" placeholder="Mobile number" required></ion-input>
+			</ion-item>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col col-10>
+			<ion-item>
+				<ion-input #input type="password" name="password" [(ngModel)]="signup.free_reg_pwd" placeholder="Choose password*" required [attr.minlength]="6"></ion-input>
+ 				<button class="btn" type="button" ></button>
+			</ion-item>
+		</ion-col>
+		<ion-col col-2>
+			<ion-item>
+				<ion-icon item-right *ngIf="showPass" name="ios-eye" (click)="showPassword(input)"></ion-icon>
+				<ion-icon item-right *ngIf="!showPass" name="ios-eye-off" (click)="showPassword(input)"></ion-icon>
+			</ion-item>
+		</ion-col>
+		<p>* At least 6 characters. No special characters allowed.</p>
+	</ion-row>
+
+	</ion-grid>
+
+	<p *ngIf="warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
+	<p *ngIf="warningPassword" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid password</p>
+	<div padding>
+		<button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round >SIGN UP</button>
+		<p><a text-center class="center" (click)="goLogin($event)">Already a member? Sign in here <ion-icon name="ios-arrow-round-forward"></ion-icon></a></p>
+		
+	</div>
+	</form>
+	
+</ion-content>
