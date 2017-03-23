@@ -56,7 +56,7 @@
   
     <div class="popover-content center" >
     	<ion-card >
-    		<div *ngIf="!forgotPassPopupConfirm" class="forgot-pass-confirmed">
+    		<div *ngIf="forgotPassPopupConfirm" class="forgot-pass-confirmed">
     			<img class="lotto-logo center" src="assets/icon/check.svg" alt="Check" width="100" height="100" />
     			<p text-center color="light">A password reminder has been sent to your mobile.</p>
 
@@ -65,7 +65,7 @@
 				</div>
     		</div>
 
-    		<div *ngIf="forgotPassPopupConfirm" >
+    		<div *ngIf="!forgotPassPopupConfirm" >
     		<p text-center>Enter the mobile number for your account to receive a password reminder</p>
 
 			<form #loginForm="ngForm" (ngSubmit)="submitMobile()">

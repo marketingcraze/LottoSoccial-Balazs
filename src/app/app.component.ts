@@ -3,6 +3,7 @@ import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { WelcomePage } from '../pages/welcome/welcome';
+import { TabsPage } from '../pages/tabs/tabs';
 
 import { CommonService } from '../services/common.service';
 
@@ -11,6 +12,7 @@ import { CommonService } from '../services/common.service';
 })
 export class MyApp {
     rootPage = WelcomePage;
+    // rootPage = TabsPage;
 
     constructor(
         platform: Platform, 
@@ -43,7 +45,7 @@ export class MyApp {
                 }
             }]
         });
-        // alert.present();
+        alert.present();
       },
       ()=> {
       });

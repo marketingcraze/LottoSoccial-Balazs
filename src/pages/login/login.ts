@@ -118,6 +118,10 @@ export class LoginPage {
 
 
     submitLogin(){
+        let nav = this.app.getRootNav();
+        nav.setRoot(TabsPage);
+        
+        /*
         this.login.free_reg_msn = "" + this.countryNumber + this.login.mobile;
         console.log("submitLogin", this.login );
         if(this.phoneValidator(this.login.free_reg_msn) ) {
@@ -157,6 +161,7 @@ export class LoginPage {
             },
             ()=> console.log("user registration complete")
             );
+            */
     }
 
     submitMobile(){
