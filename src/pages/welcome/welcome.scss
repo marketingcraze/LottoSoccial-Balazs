@@ -4,6 +4,7 @@ page-welcome {
 		font-size: 28px;
 	}
 	p{
+		margin: 0;
 		font-size: .8em;
 	}
 	.bottom {
@@ -12,7 +13,7 @@ page-welcome {
 		position: absolute;
 		z-index: 10;
 		.button-md{
-			height: 4.6rem;
+			height: 5rem;
 		}
 	}
 	.lotto-logo {
@@ -38,7 +39,7 @@ page-welcome {
 	}
 
 	.slides {
-		background-color: rgba( 155,155,155, .2);
+		background-color: rgba( 0,0,0,.2 );
 	}
 	.bg-vid {
 		position: absolute;
@@ -59,16 +60,26 @@ page-welcome {
 
 	.swiper-container-horizontal > .swiper-pagination-bullets{
 		bottom: 90px;
+		.swiper-pagination-bullet {
+		    width: 10px;
+		    height: 10px;
+		}
+		.swiper-pagination-bullet-active{
+			background-color: white;
+		}
 	}
+
+	
 
     .box {
         text-align: left;
-        padding: 2em;
-        
+        padding: 16px 16px 0 16px;
+        position: absolute;
+        bottom: 140px;
+
         header {
         	color: #fff;
         	max-width: 80%;
-        	margin-top: 80%;
         }
     }
 
