@@ -56,7 +56,17 @@
   
     <div class="popover-content center" >
     	<ion-card >
-    		<p text-center >Enter the mobile number for your account to receive a password reminder</p>
+    		<div *ngIf="!forgotPassPopupConfirm" class="forgot-pass-confirmed">
+    			<img class="lotto-logo center" src="assets/icon/check.svg" alt="Check" width="100" height="100" />
+    			<p text-center color="light">A password reminder has been sent to your mobile.</p>
+
+    			<div padding>
+					<button class="center auth-button" ion-button outline round color="light" (click)="forgotPassPopup=false;">Back to login</button>
+				</div>
+    		</div>
+
+    		<div *ngIf="forgotPassPopupConfirm" >
+    		<p text-center>Enter the mobile number for your account to receive a password reminder</p>
 
 			<form #loginForm="ngForm" (ngSubmit)="submitMobile()">
 				<ion-grid>
@@ -82,7 +92,9 @@
 					<p><a text-center class="center" (click)="forgotPassPopup=false;"><ion-icon name="ios-arrow-round-back"></ion-icon> Back to login.</a></p>
 				</div>
 			</form>
+    		</div>
 		</ion-card>
     </div>
+
 </div>
 

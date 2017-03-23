@@ -54,7 +54,6 @@ page-login {
 
     .popup{
         .popover-content{
-
             p{
                 padding: .6em;
             }
@@ -70,6 +69,17 @@ page-login {
             
             ion-card{
                 background-color: #f8f8f8;
+            }
+
+            .forgot-pass-confirmed{
+                height: 100%;
+                width: 90%;
+                color: white;
+                padding: 15px;
+                background: #18a455;
+                position: absolute;
+                z-index: 1;
+                border-radius: 3px;
             }
         }
     }

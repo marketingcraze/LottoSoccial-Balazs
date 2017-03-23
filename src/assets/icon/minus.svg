@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-297 347 12 12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2f76d1;
+      }
+    </style>
+  </defs>
+  <g id="minus-circular-button" transform="translate(-297 347)">
+    <path id="Path_76" data-name="Path 76" class="cls-1" d="M7.875,5.25H4.125a.75.75,0,0,0,0,1.5h3.75a.75.75,0,0,0,0-1.5ZM6,0a6,6,0,1,0,6,6A6,6,0,0,0,6,0ZM6,10.875A4.875,4.875,0,1,1,10.875,6,4.881,4.881,0,0,1,6,10.875Z"/>
+  </g>
+</svg>

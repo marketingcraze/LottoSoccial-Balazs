@@ -13,12 +13,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+
     public countryPopOver:any;
     public countryNumber:number = 0;
     public selectedCountry:any;
     public selectedCountryMobile:any;
     public countryNumberMobile:number = 0;
     public forgotPassPopup = false;
+    public forgotPassPopupConfirm = false;
     public warningPhone = false;
     public warningPhonePopup = false;
     public showPass = false;
@@ -177,6 +179,8 @@ export class LoginPage {
                 // this.showSuccess();
                 console.log("successful", data);
 
+                this.forgotPassPopupConfirm = true;
+                
                 // go to home page
                 if(data && data.status != "error") {
 
