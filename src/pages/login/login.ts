@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { App, NavController, Platform, NavParams, PopoverController, 
     LoadingController, AlertController } from 'ionic-angular';
 
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
@@ -118,10 +118,10 @@ export class LoginPage {
 
 
     submitLogin(){
-        let nav = this.app.getRootNav();
-        nav.setRoot(TabsPage);
+        // let nav = this.app.getRootNav();
+        // nav.setRoot(HomePage);
         
-        /*
+        
         this.login.free_reg_msn = "" + this.countryNumber + this.login.mobile;
         console.log("submitLogin", this.login );
         if(this.phoneValidator(this.login.free_reg_msn) ) {
@@ -144,7 +144,7 @@ export class LoginPage {
                 // go to home page
                 if(data && data.response.status != "error" ) {
                     let nav = this.app.getRootNav();
-                    nav.setRoot(TabsPage);
+                    nav.setRoot(HomePage);
                 }else{
                     let alert = this.alertCtrl.create({
                         title: 'Failed!',
@@ -161,7 +161,7 @@ export class LoginPage {
             },
             ()=> console.log("user registration complete")
             );
-            */
+            
     }
 
     submitMobile(){

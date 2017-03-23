@@ -3,7 +3,7 @@ import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { WelcomePage } from '../pages/welcome/welcome';
-import { TabsPage } from '../pages/tabs/tabs';
+import { HomePage } from '../pages/home/home';
 
 import { CommonService } from '../services/common.service';
 
@@ -12,7 +12,7 @@ import { CommonService } from '../services/common.service';
 })
 export class MyApp {
     rootPage = WelcomePage;
-    // rootPage = TabsPage;
+    // rootPage = HomePage;
 
     constructor(
         platform: Platform, 

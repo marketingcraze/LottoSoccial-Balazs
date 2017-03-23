@@ -1,22 +1,74 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, MenuController, Nav } from 'ionic-angular';
+import { StatusBar, Splashscreen } from 'ionic-native';
 
-/*
-  Generated class for the Home page.
+import { TabsPage } from '../tabs/tabs';
+export interface PageInterface {
+  title: string;
+  component: any;
+  icon: string;
+  index?: number;
+}
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+  @ViewChild(Nav) nav: Nav;
+
+  // set our app's pages
+  appPages: PageInterface[] = [
+    { title: 'Store', component: TabsPage, icon: 'cart' },
+    { title: 'Syndicates', component: TabsPage, index: 1, icon: 'people' },
+    { title: 'Games', component: TabsPage, index: 2, icon: 'game-controller-b' },
+    { title: 'Account', component: TabsPage, index: 3, icon: 'person' },
+    { title: 'Offers', component: TabsPage, index: 4, icon: 'cash' }
+  ];
+
+  rootPage = TabsPage;
+
+  constructor(platform: Platform, public menu: MenuController) {
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+    });
+
   }
 
+  openPage(page: PageInterface) {
+    // the nav component was found using @ViewChild(Nav)
+    // reset the nav to remove previous pages and only have this page
+    // we wouldn't want the back button to show in this scenario
+
+    this.menu.close();
+
+    if (page.index) {
+      this.nav.setRoot(page.component, { tabIndex: page.index });
+
+    } else {
+      this.nav.setRoot(page.component).catch(() => {
+        console.log("Didn't set nav root");
+      });
+    }
+  }
+
+
 }
+
+/*
+
+
+export class MyApp {
+
+
+}
+
+
+
+*/
