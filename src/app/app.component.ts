@@ -45,7 +45,7 @@ export class MyApp {
                 }
             }]
         });
-        alert.present();
+        // alert.present();
       },
       ()=> {
       });

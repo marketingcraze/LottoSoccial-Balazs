@@ -26,10 +26,12 @@ $font-path: "../assets/fonts";
 $colors: (
   primary:    #387ef5,
   secondary:  #00A651,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  danger:     #C10A09,
+  light:		#f4f4f4,
+  dark:			#222,
+  badge:		#E7D011
 );
+// danger:     #f53d3d,
 
 $colors-light:(
 	primary:    #333333,
@@ -74,6 +76,8 @@ $colors-header:(
 // Material Design only Sass variables can go here
 $button-md-border-radius: 3px;
 $button-md-height: 34px;
+$badge-font-size: 1rem;
+$badge-font-weight: normal;
 
 
 // App Windows Variables
@@ -125,7 +129,6 @@ $font-family-wp-base: "Lato", "Segoe UI", "Noto Sans", sans-serif;
 
 $toolbar-background: #2F76D1;
 $toolbar-md-height: 42px;
-
 
 
 

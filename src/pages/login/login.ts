@@ -140,19 +140,27 @@ export class LoginPage {
                 loader.dismiss();
                 // this.showSuccess();
                 console.log("user login successful", data);
+                try {
+                    data = JSON.parse(data);
+                } catch (e) {
+                    data = undefined;
+                }
 
                 // go to home page
-                if(data && data.response.status != "error" ) {
-                    let nav = this.app.getRootNav();
-                    nav.setRoot(HomePage);
-                }else{
-                    let alert = this.alertCtrl.create({
-                        title: 'Failed!',
-                        subTitle: data.response.messages,
-                        buttons: ['OK']
-                    });
-                    alert.present();
+                if(data) {
+                    if(data.response.status != "error" ) {
+                        let nav = this.app.getRootNav();
+                        nav.setRoot(HomePage);
+                    }else{
+                        let alert = this.alertCtrl.create({
+                            title: 'Failed!',
+                            subTitle: data.response.messages,
+                            buttons: ['OK']
+                        });
+                        alert.present();
+                    }
                 }
+                
                 
             },
             err=>{

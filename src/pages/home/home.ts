@@ -16,8 +16,6 @@ export interface PageInterface {
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-
   @ViewChild(Nav) nav: Nav;
 
   // set our app's pages
@@ -40,6 +38,9 @@ export class HomePage {
     });
 
   }
+  ionViewDidEnter() {
+    this.menu.swipeEnable(false, 'menu1');
+  }
 
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
@@ -58,17 +59,18 @@ export class HomePage {
     }
   }
 
+  markAsUnread(){
+    console.log("markAsUnread()");
+  }
+
+  deleteNotification(){
+    console.log("deleteNotification()");
+  }
+
+  saveItem(){
+      console.log("saveItem()");
+  }
+
 
 }
 
-/*
-
-
-export class MyApp {
-
-
-}
-
-
-
-*/

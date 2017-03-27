@@ -1,22 +1,68 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Platform, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-/*
-  Generated class for the Store page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-store',
   templateUrl: 'store.html'
 })
 export class StorePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    spaceBetween:number = -70;
+    whatsOn:boolean = false;
+    
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StorePage');
+    constructor(
+        public platform: Platform, 
+        public navCtrl: NavController, 
+      	public navParams: NavParams,
+        private iab: InAppBrowser,
+      	public actionSheetCtrl: ActionSheetController) {
+        
+        this.spaceBetween = Math.floor( platform.width() * -0.16 );
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad StorePage');
+    }
+
+    loadLink(){
+        let browser = this.iab.create('https://google.com');
+        browser.show();
+    }
+
+  showLottoSocial(){
+  	console.log("showLottoSocial()");
+
+
+  	let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modify your album',
+      cssClass:'bottom-sheet',
+      buttons: [
+        {
+          text: 'Destructive',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+          }
+        },{
+          text: 'Archive',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
+
+
 
 }

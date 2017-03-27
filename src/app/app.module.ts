@@ -16,6 +16,7 @@ import { LoginPage } from '../pages/login/login';
 
 
 import { ImagePicker } from '@ionic-native/image-picker';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
@@ -64,6 +65,6 @@ import { AuthService } from '../services/auth.service';
     TabsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  CommonService, AuthService, ImagePicker]
+  CommonService, AuthService, ImagePicker, InAppBrowser]
 })
 export class AppModule {}

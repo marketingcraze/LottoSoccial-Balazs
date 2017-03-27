@@ -1,23 +1,466 @@
 <ion-header>
 
   <ion-navbar>
-
     <ion-title>Store</ion-title>
-    
     <ion-buttons end>
-
       <button ion-button icon-only menuToggle>
-      	<span><img class="lotto-logo center" src="assets/icon/notification_ico.svg" alt="Check" width="16" height="16" /></span>
-      	<!-- <ion-icon name="menu"></ion-icon> -->
+        <span><img class="lotto-logo center" src="assets/icon/notification_ico.svg" alt="Check" width="16" height="16" /></span>
+        <!-- <ion-icon name="menu"></ion-icon> -->
+        <ion-badge item-right mode="ios" color="badge">4</ion-badge>
       </button>
-      
     </ion-buttons>
-    
   </ion-navbar>
 
 </ion-header>
 
+<ion-content >
 
-<ion-content padding>
+  <ion-grid class="score-panel">
+    <ion-row>
+      <ion-col width-50 >
+        <div text-center>
+          <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+          <span style="">CREDIT <span class="credit">&pound;15.36</span></span>
+        </div>        
+      </ion-col>
+      <ion-col width-50>
+        <div text-center>
+          <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+          <span >POINTS <span class="points">1536</span></span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-slides loop initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
+
+<!-- Slide 0 -->
+    <ion-slide class="home-slide">
+
+      <ion-card>
+        
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/home/ch_check_winnings@3x.png">
+            <h4>IS IT YOUR LUCKY DAY?</h4>
+          </div>
+        </div>
+
+        <ion-list padding>
+          <ion-item>
+            <p>Hatchster syndicate</p>
+            <img item-right src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+            <img item-right src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+          </ion-item>
+          <ion-item>
+            <p>The Lions</p>
+            <img item-right src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+          </ion-item>
+          <ion-item>
+            <p>TONY123</p>
+            <img item-right src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+          </ion-item>
+          <ion-item class="bottom-item">
+            <span>Add 3 more to check</span>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="ios-add-circle-outline"></ion-icon>
+              Add syndicate
+              </button>
+          </ion-item>
+        </ion-list>
+        
+        <div padding>
+          <button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round >CHECK MY WINNINGS</button>
+        </div>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 1 -->
+    <ion-slide>
+
+      <ion-card>
+        
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU HAVE BEEN INVITED!</h4>
+          </div>
+
+          <div class="card-image">
+            <img src="assets/img/350.png">
+            <h4 text-center>Hatchster syndicate</h4>
+          </div>
+        </div>
+
+        <ion-item >
+          <ion-avatar item-left>
+            <img src="assets/icon/account_ico.svg">
+          </ion-avatar>
+          <p item-content>Laura has invited you to join their syndicate with other 3 players</p>
+        </ion-item>
+
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >VIEW DETAILS</button>
+        </div>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 2 -->
+    <ion-slide>
+
+      <ion-card>
+        
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>IS IT YOUR LUCKY DAY?</h4>
+          </div>
+
+          <div class="card-image">
+            <img src="assets/img/350.png">
+            <h4 text-center>Hatchster syndicate</h4>
+          </div>
+        </div>
+
+        <ion-item >
+          <ion-avatar item-left>
+            <img src="assets/icon/account_ico.svg">
+          </ion-avatar>
+          <p item-content>Laura has invited you to join their syndicate with other 3 players</p>
+        </ion-item>
+        
+        <button class="center" ion-button clear >View more details</button>
+        
+        <ion-grid>
+          <ion-row>
+            <ion-col><button class="center" padding full ion-button text-center color="danger" >DECLINE</button></ion-col>
+            <ion-col><button class="center" padding ion-button full text-center color="secondary" >JOIN</button></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 3 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU HAVE GAMES TO PLAY</h4>
+          </div>
+        </div>
+
+        <div class="lucky" padding>
+          <h3>Lucky Colours</h3>
+          <p>TOP PRIZE: &pound;20</p>
+        </div>
+        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+
+        <p>you are at level 1.<br>Score 5 to complete and win 80 points</p>
+        
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >PLAY NOW</button>
+        </div>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 4 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU GOT MAIL!</h4>
+          </div>
+        </div>
+
+        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+
+        <p>You haven't bought any tickets yet<br>for Hatchster Syndicate</p>
+        
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >BUY NOW</button>
+        </div>
+        <button class="center" padding ion-button text-center clear small >Dismiss notice</button>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 5 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU GOT MAIL!</h4>
+          </div>
+        </div>
+
+        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+
+        <p>#MillionaireMoments<br>Win a trip for 2 to Paris</p>
+        
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >VIEW DETAILS</button>
+        </div>
+        <button class="center" padding ion-button text-center clear small >Dismiss notice</button>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 6 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU GOT MAIL!</h4>
+          </div>
+        </div>
+
+        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+
+        <p>It's a huge EuroMillions jackpot...<br>Get 20 lines for only &pound;2!</p>
+        
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >VIEW DETAILS</button>
+        </div>
+        <button class="center" padding ion-button text-center clear small >Dismiss notice</button>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 7 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU GOT MAIL!</h4>
+          </div>
+        </div>
+
+        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+
+        <p>Your profile is not complete.<br>Add some details</p>
+        
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >COMPLETE PROFILE</button>
+        </div>
+        <button class="center" padding ion-button text-center clear small >Dismiss notice</button>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 8 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>YOU GOT MAIL!</h4>
+          </div>
+        </div>
+
+        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+
+        <p>All your friends are playing!<br>Ready to be a millionaire?</p>
+        
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >VIEW TICKETS</button>
+        </div>
+        <button class="center" padding ion-button text-center clear small >Dismiss notice</button>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 9 -->
+    <ion-slide>
+
+      <ion-card>
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>OFFERS FOR YOU</h4>
+          </div>
+        </div>
+
+        <ion-item class="offer-up">
+          <p>LOTTO 20 LINES</p>
+          <h1>&pound;5,300,000</h1>
+        </ion-item>
+        <ion-item class="offer-down">
+          <div item-left>
+            <p>LOTTO 20 LINES</p>
+          </div>
+          <button ion-button item-right color="secondary" >BUY FOR &pound;4.99</button>
+        </ion-item>
+
+
+        
+        <button class="center" padding ion-button text-center clear small >View all offers</button>
+      </ion-card>
+
+    </ion-slide>
+
+<!-- Slide 10 -->
+    <ion-slide>
+
+      <ion-card>        
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/top.png">
+            <h4>PLAY WITH YOUR FRIENDS!</h4>
+          </div>
+
+          <div class="card-image">
+            <img src="assets/img/350.png">
+            <h4 text-center>Hatchster syndicate</h4>
+          </div>  
+        </div>
+
+        <p item-content>10 current members</p>
+        <ion-item >
+          <ion-avatar padding-left item-left>
+            <img src="assets/icon/account_ico.svg">
+          </ion-avatar>
+          <p>Make the most of your syndicate<br>more lines = more chances</p>
+        </ion-item>
+
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" >INVITE FRIENDS</button>
+        </div>
+      </ion-card>
+
+    </ion-slide>
+
+
+</ion-slides>
+
+
+<div >
+
+
+</div>
 
 </ion-content>
+
+<!-- Content end -->
+
+
+
+
+
+
+
+
+
+<ion-footer class="footer-button">
+  <div (click)="whatsOn=!whatsOn;" class="center">
+    <ion-icon item-left name="md-arrow-round-up"></ion-icon>
+    <p item-content text-center class="center">Find out what's on lotto social</p>
+  </div>
+</ion-footer>
+
+
+
+
+
+
+
+
+
+
+
+<div class="popup" *ngIf="whatsOn" style="z-index: 102;">
+  <ion-backdrop (click)="whatsOn=!whatsOn;" disable-activated="" style="opacity: .5;" role="presentation" tappable=""></ion-backdrop>
+  
+    <div class="popup-content" >
+      <ion-card class="big-content">
+        <ion-item class="popup-header">
+          <button item-left ion-button icon-only clear (click)="whatsOn=!whatsOn;" >
+            <ion-icon  name="md-close"></ion-icon>
+          </button>
+          <ion-label text-center>FIND OUT WHAT'S ON LOTTO SOCIAL</ion-label>
+        </ion-item>
+        
+
+
+
+        <ion-slides slidesPerView="2" spaceBetween=10>
+          <ion-slide>
+            <img src="assets/img/150.png" width="150" height="100">
+            <div class="slide-content">
+              <ion-item >
+                <p item-content>This is the event on title. T h i s is the event...</p>
+              </ion-item>
+              <ion-item>
+                <button ion-button item-right clear small>
+                  <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+                </button>
+              </ion-item>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/img/150.png" width="150" height="100">
+            <div class="slide-content">
+              <ion-item >
+                <p item-content>This is the event on title.</p>
+              </ion-item>
+              <ion-item>
+                <button ion-button item-right clear small>
+                  <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+                </button>
+              </ion-item>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/img/150.png" width="150" height="100">
+            <div class="slide-content">
+              <ion-item >
+                <p item-content>This is the event is the event.</p>
+              </ion-item>
+              <ion-item>
+                <button ion-button item-right clear small>
+                  <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+                </button>
+              </ion-item>
+            </div>
+          </ion-slide>
+        </ion-slides>
+
+        <ion-card class="popup-main">
+          <h4 text-center>YOUR #MILLIONAIREMOMENTS</h4>
+            <img src="assets/img/350.png" width="450" height="200">
+            <ion-item>
+              <ion-avatar item-left>
+                <span class="day">21</span>
+                <span class="year">21</span>
+                <span class="month">NOV</span>
+              </ion-avatar>
+              <h2>This is the event on title</h2>
+              <p>Event on subtitle</p>
+            </ion-item>
+            <ion-item>
+              <button ion-button item-right clear small (click)="loadLink()">
+                <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+              </button>
+            </ion-item>
+
+        </ion-card>
+
+      </ion-card>
+    </div>
+
+</div>
+
