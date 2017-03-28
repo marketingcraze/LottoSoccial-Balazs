@@ -6,6 +6,7 @@ import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'auth.html',
+  selector: 'page-auth'
 })
 export class AuthPage {
 	@ViewChild('tabs') tabsRef: Tabs;

@@ -32,7 +32,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-slides loop initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
+  <ion-slides loop initialSlide=9 spaceBetween={{spaceBetween}} class="home-slides">
 
 <!-- Slide 0 -->
     <ion-slide class="home-slide">
@@ -83,7 +83,7 @@
         
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_invited@3x.png">
             <h4>YOU HAVE BEEN INVITED!</h4>
           </div>
 
@@ -94,7 +94,7 @@
         </div>
 
         <ion-item >
-          <ion-avatar item-left>
+          <ion-avatar padding-left item-left>
             <img src="assets/icon/account_ico.svg">
           </ion-avatar>
           <p item-content>Laura has invited you to join their syndicate with other 3 players</p>
@@ -114,7 +114,7 @@
         
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_invited@3x.png">
             <h4>IS IT YOUR LUCKY DAY?</h4>
           </div>
 
@@ -125,7 +125,7 @@
         </div>
 
         <ion-item >
-          <ion-avatar item-left>
+          <ion-avatar padding-left item-left>
             <img src="assets/icon/account_ico.svg">
           </ion-avatar>
           <p item-content>Laura has invited you to join their syndicate with other 3 players</p>
@@ -149,12 +149,12 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_games@3x.png">
             <h4>YOU HAVE GAMES TO PLAY</h4>
           </div>
         </div>
 
-        <div class="lucky" padding>
+        <div class="lucky" padding padding-top>
           <h3>Lucky Colours</h3>
           <p>TOP PRIZE: &pound;20</p>
         </div>
@@ -175,7 +175,7 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_mail_warning@3x.png">
             <h4>YOU GOT MAIL!</h4>
           </div>
         </div>
@@ -198,7 +198,7 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_mail_mm@3x.png">
             <h4>YOU GOT MAIL!</h4>
           </div>
         </div>
@@ -221,7 +221,7 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_mail_promo@3x.png">
             <h4>YOU GOT MAIL!</h4>
           </div>
         </div>
@@ -244,7 +244,7 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_mail_alert@3x.png">
             <h4>YOU GOT MAIL!</h4>
           </div>
         </div>
@@ -267,7 +267,7 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_mail_success@3x.png">
             <h4>YOU GOT MAIL!</h4>
           </div>
         </div>
@@ -290,21 +290,58 @@
       <ion-card>
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_offers@3x.png">
             <h4>OFFERS FOR YOU</h4>
           </div>
         </div>
 
-        <ion-item class="offer-up">
+        <ion-item margin-top class="offer-up">
           <p>LOTTO 20 LINES</p>
           <h1>&pound;5,300,000</h1>
         </ion-item>
-        <ion-item class="offer-down">
-          <div item-left>
-            <p>LOTTO 20 LINES</p>
-          </div>
-          <button ion-button item-right color="secondary" >BUY FOR &pound;4.99</button>
+        <div class="offer-down lotto">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="cap">
+                <p><img src="assets/icon/timer.svg" width="16" height="16" > <span>TIME LEFT</span></p>
+              </ion-col>
+
+              <ion-col class="timer">
+                <div>0 <span>Days</span></div>
+                <div>21 <span>Hrs</span></div>
+                <div>48 <span>Mins</span></div>
+                <div>35 <span>Secs</span></div>
+              </ion-col>
+              
+              <ion-col padding-left><button ion-button padding color="secondary" >BUY FOR &pound;4.99</button></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        
+        <ion-item margin-top class="offer-up">
+          <p>EUROMILLIONS 20 LINES</p>
+          <h1>&pound;43,000,000</h1>
         </ion-item>
+        <div class="offer-down euro">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="cap">
+                <p><img src="assets/icon/timer.svg" width="16" height="16" > <span>TIME LEFT</span></p>
+              </ion-col>
+
+              <ion-col class="timer">
+                <div>0 <span>Days</span></div>
+                <div>21 <span>Hrs</span></div>
+                <div>48 <span>Mins</span></div>
+                <div>35 <span>Secs</span></div>
+              </ion-col>
+              
+              <ion-col padding-left><button ion-button padding color="secondary" >BUY FOR &pound;4.00</button></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        
+      
 
 
         
@@ -319,7 +356,7 @@
       <ion-card>        
         <div class="card-top" >
           <div class="card-title">
-            <img src="assets/img/top.png">
+            <img src="assets/img/home/ch_invite@3x.png">
             <h4>PLAY WITH YOUR FRIENDS!</h4>
           </div>
 

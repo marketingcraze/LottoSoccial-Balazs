@@ -1,0 +1,15 @@
+page-auth{
+	.tabs-md .tabbar{
+		color: white;
+		background-color: #1F4C87;
+	}
+	.tabs-md .tab-button, .tabs-md .tab-button[aria-selected=true]{
+		font-weight: bold;
+		color: white;
+		min-height: 42px;
+	}
+	.tabs-md[tabsHighlight=true] .tab-highlight{
+		background: white;
+		height: 4px;
+	}
+}
