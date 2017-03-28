@@ -61,7 +61,6 @@ page-store {
 		}
 
 		.offer-up{
-			background-color: #FFAAAA;
 			.label-md{
 				margin: 0;
 				padding: 6px;
@@ -111,14 +110,24 @@ page-store {
 					transform: translateY(-50%);
 				}
 			}
-
-
 		}
 	}
-	.euro{
+	.offer-up.lotto{
+		background-color: #EEBCC5;
+		h1{
+			color: #fc373c;
+		}
+	}
+	.offer-up.euro{
+		background-color: #d4e3f0;
+		h1{
+			color: #689aca;
+		}
+	}
+	.offer-down.euro{
 		color: white;
 	}
-	.lotto{
+	.offer-down.lotto{
 		color: red;
 	}
 	.score-panel{
