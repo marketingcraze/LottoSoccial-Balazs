@@ -20,7 +20,7 @@ export class StorePage {
         private iab: InAppBrowser,
       	public actionSheetCtrl: ActionSheetController) {
         
-        this.spaceBetween = Math.floor( platform.width() * -0.16 );
+        this.spaceBetween = Math.floor( platform.width() * -0.10 );
     }
 
     ionViewDidLoad() {
