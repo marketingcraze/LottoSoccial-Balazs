@@ -78,38 +78,45 @@ page-store {
 			.col{
 				padding: 0;
 			}	
-			.cap{
-				
+			
+			.timer-new{
 				img{
 					width: 16px;
 					height: 16px;
-					vertical-align: middle;
-					display: inline;
+					display: inline-table;
 				}
-				p{
-					padding: 6px;
-					font-size: .6em;
-					color: inherit;
-					position: relative;
-					top: 50%;
-					transform: translateY(-50%);
-				}
-			}
-
-			.timer{
 				span{
 					display: block;
 					font-size: .6em;
+					font-weight: normal;
 					text-align: center;
 				}
 				div{
-					width: 20%;
+					font-weight: bold;
+					font-size: .9em;
 					float: left;
-					position: relative;
-					top: 50%;
-					transform: translateY(-50%);
+					text-align: center;
+					padding: 1px;
 				}
 			}
+			.time-left{
+				vertical-align: middle;
+				line-height: 2em;
+				padding-left: 0;
+				// position: relative;
+				// top: 50%;
+				// transform: translateY(-50%);
+			}
+
+			.label-md{
+				margin: 0;
+			}
+
+			.item-md [item-right]{
+				margin: 0;
+			}
+
+
 		}
 	}
 	.offer-up.lotto{
@@ -155,7 +162,7 @@ page-store {
 			padding-left: 0;
 			.button{
 				margin: 0;
-				padding: 0;
+				// padding: 0;
 				font-size: .8em;
 				text-transform: none;
 			}
@@ -220,6 +227,7 @@ page-store {
 		position: absolute;
 		bottom: 40px;
 		width: 100%;
+		max-height: 90%;
     	// left: 50%;
 		z-index: 10;
 		.card-md{
@@ -238,6 +246,7 @@ page-store {
 		}
 		.label-md{
 			margin: 0;
+			font-size: .8em;
 		}
 
 		ion-slide{
@@ -263,10 +272,13 @@ page-store {
 		.popup-main{
 			margin: 10px 0;
 			width: 100%;
+			img{
+				max-height: 100px;
+			}
 		}
 		.day{
 			color: #AAA;
-			font-size: 2em;
+			font-size: 1.4em;
 		}
 		.month{
 			color: #AAA;
