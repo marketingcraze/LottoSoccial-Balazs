@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { WelcomePage } from '../pages/welcome/welcome';
 import { HomePage } from '../pages/home/home';
+import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 
 import { CommonService } from '../services/common.service';
 
@@ -12,6 +13,7 @@ import { CommonService } from '../services/common.service';
 })
 export class MyApp {
     rootPage = WelcomePage;
+    // rootPage = SignupInvitedPage;
     // rootPage = HomePage;
 
     constructor(

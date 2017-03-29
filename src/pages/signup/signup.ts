@@ -6,6 +6,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
+import { SignupInvitedPage } from '../signup-invited/signup-invited';
 
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
@@ -125,6 +126,9 @@ export class SignupPage {
 	}
 
 	submitSignup(form:any){
+		let nav = this.app.getRootNav();
+        nav.setRoot(SignupInvitedPage);
+		/*
 		this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
 		console.log("submitSignup", this.signup , form);
 		if(this.phoneValidator(this.signup.free_reg_msn) ) {
@@ -159,7 +163,7 @@ export class SignupPage {
 			},
 			()=> console.log("user registration complete")
 		);
-		
+		*/
 	}
 
 	phoneValidator(value: string):boolean {

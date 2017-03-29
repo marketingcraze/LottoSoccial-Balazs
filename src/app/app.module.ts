@@ -12,6 +12,7 @@ import { AuthPage } from '../pages/auth/auth';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
+import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 // import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
 
 
@@ -35,7 +36,8 @@ import { AuthService } from '../services/auth.service';
     GamesPage,
     AccountPage,
     OffersPage,
-    TabsPage
+    TabsPage,
+    SignupInvitedPage
   ],
   imports: [
     IonicModule.forRoot(MyApp,
@@ -62,7 +64,8 @@ import { AuthService } from '../services/auth.service';
     GamesPage,
     AccountPage,
     OffersPage,
-    TabsPage
+    TabsPage,
+    SignupInvitedPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   CommonService, AuthService, ImagePicker, InAppBrowser]

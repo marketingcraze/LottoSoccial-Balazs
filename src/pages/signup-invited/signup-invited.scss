@@ -1,0 +1,81 @@
+page-signup-invited {
+	.content-md{
+		background-color: white;
+	}
+	.toolbar-content p{
+		color: white;
+	}
+	.grid{
+		padding: 0;
+	}
+	.button{
+		text-transform: none;
+	}
+	.item-md.item-block .item-inner{
+		border: none;
+	}
+	.item-md{
+		width: auto;
+		margin: 4px 16px;
+		border-bottom: 1px solid #dedede;
+	}
+	.lotteries{
+		p{
+			padding-left: 16px;
+			font-size: .8em;
+		}
+		span{
+			display: inline-block;
+			width: 50px;
+			padding: 4px;
+			margin-right: 4px;
+			font-size: .7em;
+			color: white;
+			text-align: center;
+			background-color: #689aca;
+			border-radius: 3px;
+		}
+	}
+
+	.card-top{
+		position: relative;
+		
+		.card-image{
+			img{
+				width: 100%;
+			}
+			h4{
+				position: absolute;
+				width: 100%;
+				bottom: 0;
+				color: white;
+				margin: 0;
+				padding: 4px;
+				font-weight: bold;
+				background-color: rgba(0,0,0,.4);
+			}
+		}
+	}
+
+	.members{
+		img{
+			width: 50px;
+			height: 50px;
+			min-width: 50px;
+			background-color: #DDD;
+			border-radius: 50%;
+		}
+		p{
+			text-align: center;
+			margin: 4px auto;
+			font-size: .8em;
+		}
+	}
+
+	.decide-later{
+		background-color: #E8E8E8;
+
+	}
+
+
+}
