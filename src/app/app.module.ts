@@ -14,7 +14,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
-
+import { NewSyndicatePage } from '../pages/new-syndicate/new-syndicate';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -38,7 +38,8 @@ import { AuthService } from '../services/auth.service';
     OffersPage,
     TabsPage,
     SignupInvitedPage,
-    JoinSyndicatePage
+    JoinSyndicatePage,
+    NewSyndicatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp,
@@ -67,7 +68,8 @@ import { AuthService } from '../services/auth.service';
     OffersPage,
     TabsPage,
     SignupInvitedPage,
-    JoinSyndicatePage
+    JoinSyndicatePage,
+    NewSyndicatePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   CommonService, AuthService, ImagePicker, InAppBrowser]

@@ -5,6 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { HomePage } from '../pages/home/home';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
+import { NewSyndicatePage } from '../pages/new-syndicate/new-syndicate';
 
 import { CommonService } from '../services/common.service';
 
@@ -12,8 +13,8 @@ import { CommonService } from '../services/common.service';
     templateUrl: 'app.html'
 })
 export class MyApp {
-    // rootPage = WelcomePage;
-    rootPage = JoinSyndicatePage;
+    rootPage = WelcomePage;
+    // rootPage = NewSyndicatePage;
     // rootPage = HomePage;
 
     constructor(
