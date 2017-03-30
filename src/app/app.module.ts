@@ -13,7 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
-// import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
+import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
 
 
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -37,7 +37,8 @@ import { AuthService } from '../services/auth.service';
     AccountPage,
     OffersPage,
     TabsPage,
-    SignupInvitedPage
+    SignupInvitedPage,
+    JoinSyndicatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp,
@@ -65,7 +66,8 @@ import { AuthService } from '../services/auth.service';
     AccountPage,
     OffersPage,
     TabsPage,
-    SignupInvitedPage
+    SignupInvitedPage,
+    JoinSyndicatePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   CommonService, AuthService, ImagePicker, InAppBrowser]
