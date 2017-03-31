@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { InviteFriendsPage } from '../invite_friends/invite_friends';
 
 @Component({
   selector: 'page-store',
@@ -34,8 +35,6 @@ export class StorePage {
 
   showLottoSocial(){
   	console.log("showLottoSocial()");
-
-
   	let actionSheet = this.actionSheetCtrl.create({
       title: 'Modify your album',
       cssClass:'bottom-sheet',
@@ -61,6 +60,10 @@ export class StorePage {
       ]
     });
     actionSheet.present();
+  }
+
+  inviteFriends(){
+    this.navCtrl.push(InviteFriendsPage);
   }
 
 
