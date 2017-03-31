@@ -1,0 +1,136 @@
+<!--
+  Generated template for the InviteFriends page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Syndicate Members</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+            <!--<ion-icon name="close"></ion-icon>-->
+            <ion-icon ios="md-close" md="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="my-sub-head">
+    <span class="sp1">Syndicate: Hatchster syndicate</span><br>
+    <span class="sp2">Members invited to this syndicate: 1</span>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list class="c-list">
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="./assets/img/contacts.svg">
+      </ion-thumbnail>
+      <h2>Fig Nelson</h2>
+      <p>SYNDICATE MANAGER</p>
+      <button ion-button clear item-right>PLAYING</button>
+    </ion-item>
+  </ion-list>
+
+  <div class="w-div">
+   <p><ion-icon name="information-circle"></ion-icon> Not enough members in your syndicate</p>
+    <p>For its very nature, a syndicate can’t be formed  with just a member,
+    therefore Lotto Social reserves the right to be a passive share of your 
+    syndicate.</p>
+    <p>Invite some active players to retain your full share and dismiss this notice.</p>
+  </div>
+  <div class="a-div">
+    <a href="#">View Tickets <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon></a>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+    <div class="bottom_bar">
+    <button ion-button (click)="toggle()">ADD PLAYERS</button>
+    </div>
+</ion-footer>
+
+ <div class="bottom-drawer {{ close }}">
+    <div class="blank-div {{ blured }}" (click)="closed()"></div>
+    <div class="content-div">
+      <div class="contact-div">
+          <div class="p1">SELECT YOUR INVITE METHOD</div>
+          <div class="c-image"><img src="./assets/img/contacts.svg" (click)="openContacts()"/></div>
+          <div class="p2">CONTACT LIST (Recommended)</div>
+          <div class="p3">Allow LottoSocial to access your contact list</div>
+      </div>
+      <div class="social-div">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <img class="s-image" src="./assets/img/mail.svg"/>
+              <span>Email</span>
+              </ion-col>
+            <ion-col col-3>
+              <img class="s-image" src="./assets/img/facebook.svg" />
+              <span>Facebook</span>
+              </ion-col>
+            <ion-col col-3>
+              <img class="s-image" src="./assets/img/whatsapp.svg" />
+              <span>Whatsapp</span>
+              </ion-col>
+            <ion-col col-3>
+              <img class="s-image" src="./assets/img/twitter.svg" />
+              <span>Twitter</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-list-div {{ cclose }}">
+    <div #contactListHeader>
+    <ion-navbar>
+    <ion-title>Select from your contacts</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="cCancle()">
+            <ion-icon ios="md-close" md="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Filter contacts"></ion-searchbar>
+  </div>
+
+  <div>
+    
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-list class="c-list pad-0" [style.height.px]="clistheight" style="overflow: scroll;" [style.padding-bottom.px]="listPadding">
+    <ion-item *ngFor="let item of fItems; let i=index" (click)="addContact(item, i)">
+      <ion-thumbnail item-left>
+        <img src="./assets/img/user.svg" class="ct-list-icon" *ngIf="item.selected == false">
+        <img src="./assets/img/check.svg" class="ct-list-icon" *ngIf="item.selected == true">
+      </ion-thumbnail>
+      <h2>{{item.title}}</h2>
+      <p>{{item.number}}</p>
+      <p clear item-right>home</p>
+    </ion-item>
+  </ion-list>
+  </div>
+   <ion-footer [hidden]="cfoothide">
+     <div style="height: 50px; width: 100%; background: white; max-width: 100%; padding: 5px; overflow: auto; white-space: nowrap;">
+        <ion-chip *ngFor="let item of items | myfilter; let i = index" >
+          <ion-avatar>
+            <img src="./assets/img/user.svg" style="border: 0.5px solid #ccc;">
+          </ion-avatar>
+          <ion-label>{{item.title}}</ion-label>
+          <button ion-button clear color="dark" (click)="removeContact(item, i)">
+          <ion-icon name="close-circle" style="color: #999;"></ion-icon>
+          </button>
+        </ion-chip>
+     </div>
+    <div class="bottom_bar">
+    <button ion-button (click)="inviteSelected()">INVITE SELECTED</button>
+    </div>
+  </ion-footer>
+  </div>

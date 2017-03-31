@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { YourGamesPage } from '../your-games/your-games';
+import { RedeemGamesPage } from '../redeem-games/redeem-games';
 
 /*
   Generated class for the Games page.
@@ -12,8 +13,9 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'games.html'
 })
 export class GamesPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    tab1Root = YourGamesPage;
+    tab2Root = RedeemGamesPage;
+  constructor() {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage');

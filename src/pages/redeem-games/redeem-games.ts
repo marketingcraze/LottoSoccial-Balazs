@@ -2,20 +2,21 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /*
-  Generated class for the Offers page.
+  Generated class for the RedeemGames page.
+
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-offers',
-  templateUrl: 'offers.html'
+  selector: 'page-redeem-games',
+  templateUrl: 'redeem-games.html'
 })
-export class OffersPage {
-  toptab:string="offer";
+export class RedeemGamesPage {
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OffersPage');
+    console.log('ionViewDidLoad RedeemGamesPage');
   }
 
 }

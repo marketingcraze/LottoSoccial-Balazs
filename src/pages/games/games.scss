@@ -1,3 +1,46 @@
 page-games {
+    .card-background-page {
+        background-color: #E8E8E8 !important;
+        margin-top: 12px !important;
 
+        ion-card {
+            position: relative;
+            text-align: center;
+        }
+    }
+
+    ion-badge {
+        background-color: gold !important;
+        color: black !important;
+        border-radius: 10px !important;
+    }
+
+    ion-label {
+        white-space: normal !important;
+    }
+
+    .tabbar {
+        background-color: #1F4C87 !important;
+    }
+
+    .item-md .text-md-calm {
+        color: #2F76D1 !important;
+    }
+
+    .item-md .text-md-orange {
+        color: #FF9933 !important;
+    }
+
+    .item-md h2 {
+        color: #333333 !important;
+    }
+
+    .item-md .text-md-primary {
+        color: #2F76D1 !important;
+    }
+
+    .tabs-md-primary[tabsHighlight=true] .tab-highlight {
+        background: #F8F8F8 !important;
+        height:4px!important;
+    }
 }

@@ -1,26 +1,138 @@
 <!--
   Generated template for the Offers page.
-
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
-  <ion-navbar>
-
-    <ion-title>Offers</ion-title>
-    <ion-buttons end>
-
-      <button ion-button icon-only menuToggle>
-      	<ion-icon name="menu"></ion-icon>
+  <ion-navbar color="primary">
+  
+    <ion-title class="HeaderTitle">Offers</ion-title>
+     <ion-buttons start>
+      <button ion-button icon-only >
+        <ion-icon name="home"></ion-icon>
       </button>
-      
     </ion-buttons>
-  </ion-navbar>
+    
 
+     <ion-buttons end>
+      <button ion-button icon-only  >
+        <ion-icon name="notification"></ion-icon>
+    
+      </button>
+    </ion-buttons>
+    
+  </ion-navbar>
+      <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
+            <ion-segment-button value="offer"   class="Menu_Tab">
+                OFFER FOR YOU
+            </ion-segment-button>
+            <ion-segment-button value="bonus"  class="Menu_Tab">
+                SPEND BONUS CREDIT
+            </ion-segment-button>
+      </ion-segment>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content [ngSwitch]="toptab" class="MainPanel">
+ 
+  <ion-card class="Card_Padding"  *ngSwitchCase="'offer'"  >
+       <div class="card-title">
+        <img src="assets/image/euro-banner.png" class="img-responsive">
+          <div>£43,000,000 JACKPOT</div>
+          <h4>GET 20 EUROMILLIONS LINES</h4>
+       </div>
+       <div>
+      <ion-row>
+        <ion-col class="Item_img">
+            <div class="img-overlay">
+              <img src="assets/image/euro_offers@3x.png" class="img-responsive" alt="..." />
+              <div class="post-content ">
+                  <p class="Title">EUROMILLIONS 20 LINE </p>
+                  <p class="Price"> £43,000,000</p> 
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        </div>
+          <ion-row class="item1" text-center>
+                 <ion-col  width-30 class="content-left"  ><ion-icon name="md-stopwatch"></ion-icon>    TIMELEFT</ion-col>
+                <ion-col col-1  class="content-center"><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
+          </ion-row>
+          <ion-row class="item2">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold"></ion-icon></ion-col>
+              <ion-col col-11><h2 style="font-size: 1.2rem; color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <div class="itemCollapse" *ngIf="1==2">
+                <ion-row>
+                  <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                  <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £49</button></ion-col>
+                </ion-row>
+              </div>
+              <div class="itemCollapse" *ngIf="1==2">
+                <ion-row>
+                  <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                  <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £49</button></ion-col>
+                </ion-row>
+              </div>
+          </ion-row>
+        <ion-row>
+          <ion-col col-12 class="Item_img">
+            <div class="img-overlay">
+              <img src="assets/image/lotto_offers@3x.png" class="img-responsive" alt="..." />
+              <div class="post-content ">
+                  <p class="Title">LOTTO 20 LINE </p>
+                  <p class="Price redClr"> £43,000,000</p> 
+              </div>
+            </div>
+          
+          </ion-col>
+        </ion-row>
+          
+          <ion-row class="item1 redClr" text-center>
+                <ion-col  width-30 class="content-left"  ><ion-icon name="md-stopwatch"></ion-icon>    TIMELEFT</ion-col>
+                <ion-col col-1  class="content-center"><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
+          </ion-row>
+          <ion-row class="item2">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold"></ion-icon></ion-col>
+              <ion-col col-11><h2 style="font-size:1.2rem;color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+          </ion-row>
+          <ion-row>
+          <ion-col col-12 class="Item_img">
+            <div class="img-overlay">
+              <img src="assets/image/power_offers@3x.png" alt="..." class="img-responsive" />
+              <div class="post-content ">
+                  <p class="Title">POWERBALL 10 LINE </p>
+                  <p class="Price blackClr"> £43,000,000</p> 
+              </div>
+            </div>
+          
+          </ion-col>
+        </ion-row>
+
+          <ion-row class="item1" text-center >
+                
+                <ion-col  width-40 class="content-left"  ><ion-icon name="md-stopwatch"></ion-icon>    TIMELEFT</ion-col>
+                <ion-col col-1  class="content-center"><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
+          </ion-row>
+          <ion-row class="item2">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold"></ion-icon></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem;   color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+          </ion-row>
+  </ion-card>
+  <ion-list  *ngSwitchCase="'bonus'" >
+    <h1>SPEND BONUS CREDIT</h1>
+  </ion-list>
 
 </ion-content>

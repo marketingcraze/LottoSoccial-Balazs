@@ -15,6 +15,9 @@ import { LoginPage } from '../pages/login/login';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
 import { NewSyndicatePage } from '../pages/new-syndicate/new-syndicate';
+import { YourGamesPage } from '../pages/your-games/your-games';
+import { RedeemGamesPage } from '../pages/redeem-games/redeem-games';
+import { InviteFriendsPage } from '../pages/invite_friends/invite_friends';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -22,6 +25,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 
+import { MyFilterPipe } from '../pipes/contact-selected'
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { AuthService } from '../services/auth.service';
     TabsPage,
     SignupInvitedPage,
     JoinSyndicatePage,
-    NewSyndicatePage
+    NewSyndicatePage,
+    InviteFriendsPage,
+    YourGamesPage,
+    RedeemGamesPage,
+    MyFilterPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp,
@@ -69,7 +77,10 @@ import { AuthService } from '../services/auth.service';
     TabsPage,
     SignupInvitedPage,
     JoinSyndicatePage,
-    NewSyndicatePage
+    NewSyndicatePage,
+    InviteFriendsPage,
+    YourGamesPage,
+    RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   CommonService, AuthService, ImagePicker, InAppBrowser]

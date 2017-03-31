@@ -1,0 +1,180 @@
+page-invite_friends {
+    .my-sub-head {
+        padding: 0 10px;
+        .toolbar-background-md {
+            background: rgb(25, 57, 116)
+        }
+        span.sp1 {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        span.sp2 {
+            color: white;
+            font-size: 1.2rem;
+        }
+    }
+    .c-list {
+        padding-top: 20px;
+        ion-thumbnail img {
+            width: 55px;
+            height: 55px;
+        }
+        .item-md ion-thumbnail {
+            min-width: 50px;
+            min-height: 50px;
+        }
+        .item-md p {
+            font-size: 1.2rem;
+        }
+        .item-md .item-button {
+            background: #14993f;
+            font-size: 1.2rem;
+            color: white;
+        }
+    }
+    .w-div {
+       background: rgb(254,233,128);
+       padding: 20px;
+       color: rgba(34, 34, 34, 0.6);
+    }
+    .a-div {
+        text-align: center;
+        padding: 10px;
+        a {
+            text-decoration: none;
+        }
+    }
+    .bottom_bar {
+        background: rgb(25, 57, 116);
+        padding: 10px;
+        // position: fixed;
+        text-align: center;
+        // left: 0;
+        // bottom: 0;
+        width: 100%;
+        // right: 0;
+
+        .button-md {
+            height: 4.5rem;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            width: 100%;
+            background: rgb(20, 153, 63);
+        }
+    }
+    .bottom-drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        color: white;
+        height: 100vh;
+        z-index: 100;
+        transition: all 1s;
+        overflow: hidden;
+    }   
+    .bottom-drawer.close {
+        top: 100vh;
+        height: 0;
+    }
+    .transparent {
+        background: transparent;
+    }
+    .blured {
+        background: rgba(0, 0, 0, 0.7);
+    }
+    .blank-div{
+        width: 100vw;
+        height: 50vh;
+    }
+    .content-div {
+        width: 100vw;
+        height: 50vh;
+        background: white;
+        box-shadow: 0px 10px 5px #888, 0px -6px 5px #888;
+        color: black;
+        text-align: center;
+        .contact-div {
+            border-bottom: 1px solid #ccc;
+            .p1 {
+                font-size: 1.5rem;
+                padding: 10px 0 15px;
+            }
+            .c-image {
+                img {
+                    max-width: 110px;
+                }
+            }
+            .p2 {
+                font-size: 1.5rem;
+                font-weight: bold;
+                padding: 10px 0 5px;
+            }
+            .p3 {
+                padding: 0 0 20px;
+            }
+        }
+        .s-image {
+            max-width: 60px;
+        }
+    }
+
+    .contact-list-div {
+        height: 100vh;
+        width: 100vw;
+        background: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        transition: all 1s;
+        // overflow: scroll;
+
+        .list-md .item-block .item-inner {
+             border-bottom: 0px solid #dedede; 
+        }
+        .item-md {
+            border-bottom: 1px solid #ccc;
+        }
+    }
+    .contact-list-div.cclose {
+        top: 100vh;
+        height: 0;        
+    }
+    
+    .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+    .pad-0 {
+        padding: 0px;
+    }
+    .searchbar-md {
+        padding: 8px;
+        background: rgb(25, 57, 116);
+    }
+    .ct-list-icon {
+        border-radius: 50%;
+        padding: 3px;
+        background: #f4f4f4;
+    }
+    .chip-md {
+        margin: 2px 5px;
+        ion-label {
+            margin: 0 0px 0 6px;
+        }
+    }
+    
+    
+}
+.toast-md .toast-wrapper.toast-bottom {
+        bottom: 73px;
+}
+.toast-button {
+        color: yellow !important;
+    }
