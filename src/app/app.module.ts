@@ -27,6 +27,9 @@ import { AuthService } from '../services/auth.service';
 
 import { MyFilterPipe } from '../pipes/contact-selected'
 
+import { CusHeaderComponent } from '../components/cus-header/cus-header';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -47,7 +50,10 @@ import { MyFilterPipe } from '../pipes/contact-selected'
     InviteFriendsPage,
     YourGamesPage,
     RedeemGamesPage,
-    MyFilterPipe
+    MyFilterPipe,
+
+    CusHeaderComponent
+
   ],
   imports: [
     IonicModule.forRoot(MyApp,
