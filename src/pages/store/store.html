@@ -32,7 +32,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-slides loop initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
+  <ion-slides #home_slides loop initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
 
 <!-- Slide 0 -->
     <ion-slide class="home-slide">
@@ -101,7 +101,7 @@
         </ion-item>
 
         <div padding>
-          <button class="center" padding ion-button text-center color="secondary" >VIEW DETAILS</button>
+          <button class="center" padding ion-button text-center color="secondary" (click)="handle('join_syndicate')">VIEW DETAILS</button>
         </div>
       </ion-card>
 
@@ -366,8 +366,8 @@
           <p>Make the most of your syndicate<br>more lines = more chances</p>
         </ion-item>
 
-        <div padding>
-          <button class="center" padding ion-button text-center color="secondary" (click)="inviteFriends()">INVITE FRIENDS</button>
+        <div padding-bottom>
+          <button ion-button class="center" padding-left padding-right text-center color="secondary" (click)="inviteFriends()">INVITE FRIENDS</button>
         </div>
       </ion-card>
 
