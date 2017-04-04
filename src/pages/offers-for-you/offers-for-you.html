@@ -1,11 +1,10 @@
 <ion-header>
 	<ion-navbar>
     	<p padding-left>Join a syndicate to start!</p>
-        <ion-buttons end>
-            <button ion-button clear>SKIP</button>
-        </ion-buttons>	
+      <ion-buttons end>
+          <button ion-button clear (click)="goBack()">SKIP</button>
+      </ion-buttons>	
     </ion-navbar>
-
 </ion-header>
 
 
@@ -38,10 +37,14 @@
          
         </ion-item>
 
-		<ion-grid class="lines-ongoing">
-			<ion-row>
-            	<ion-col><h2>20<p>LINES</p></h2></ion-col>
-            	<ion-col><h2>ONGOING<p>TYPE</p></h2></ion-col>
+        <ion-grid class="lines-ongoing">
+          <ion-row>
+            	<ion-col padding>
+              <img src="assets/icon/information-button.svg"/>
+              <h2>20<p>LINES</p></h2></ion-col>
+            	<ion-col padding>
+              <img src="assets/icon/information-button.svg" />
+              <h2>ONGOING<p>TYPE</p></h2></ion-col>
         	</ion-row>
         </ion-grid>
 

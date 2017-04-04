@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="988 2797 22 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2f76d1;
+      }
+
+      .cls-2 {
+        fill: #f8f8f8;
+      }
+    </style>
+  </defs>
+  <g id="minus" transform="translate(868 2477)">
+    <circle id="Ellipse_237" data-name="Ellipse 237" class="cls-1" cx="11" cy="11" r="11" transform="translate(120 320)"/>
+    <rect id="Rectangle_1742" data-name="Rectangle 1742" class="cls-2" width="12" height="3" rx="1.5" transform="translate(125 330)"/>
+  </g>
+</svg>

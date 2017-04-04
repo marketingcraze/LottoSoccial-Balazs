@@ -9,18 +9,24 @@ import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
   templateUrl: 'add-syndicate.html'
 })
 export class AddSyndicatePage {
-	@ViewChild('tabs') tabsRef: Tabs;
+    @ViewChild('add_syndicate_tabs') tabsRef: Tabs;
 
     tab1Root: any = OffersForYouPage;
     tab2Root: any = CreateSyndicatePage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    selectedTabId = 0;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddSyndicatePage');
-    // this.tabsRef.select(1, {animate: false});
+    constructor(public navCtrl: NavController, 
+        public navParams: NavParams) {
 
-  }
+        this.selectedTabId = navParams.get('tab');
+    }
+
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad AddSyndicatePage');
+        
+    }
 
 
 }
