@@ -14,10 +14,13 @@ import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
+import { AddSyndicatePage } from '../pages/add-syndicate/add-syndicate';
 import { NewSyndicatePage } from '../pages/new-syndicate/new-syndicate';
 import { YourGamesPage } from '../pages/your-games/your-games';
 import { RedeemGamesPage } from '../pages/redeem-games/redeem-games';
 import { InviteFriendsPage } from '../pages/invite_friends/invite_friends';
+import { OffersForYouPage } from '../pages/offers-for-you/offers-for-you';
+import { CreateSyndicatePage } from '../pages/create-syndicate/create-syndicate';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -50,7 +53,12 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
     InviteFriendsPage,
     YourGamesPage,
     RedeemGamesPage,
+    AddSyndicatePage,
+    OffersForYouPage,
+    CreateSyndicatePage,
+
     MyFilterPipe,
+
 
     CusHeaderComponent
 
@@ -86,6 +94,10 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
     NewSyndicatePage,
     InviteFriendsPage,
     YourGamesPage,
+    AddSyndicatePage,
+    OffersForYouPage,
+    CreateSyndicatePage,
+    
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 

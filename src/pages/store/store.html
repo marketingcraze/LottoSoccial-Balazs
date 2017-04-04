@@ -48,7 +48,7 @@
           </ion-item>
           <ion-item class="bottom-item">
             <span>Add 3 more to check</span>
-            <button ion-button icon-left clear item-right>
+            <button ion-button icon-left clear item-right (click)="handle('add_syndicate')">
               <ion-icon name="ios-add-circle-outline"></ion-icon>
               Add syndicate
               </button>
@@ -409,8 +409,6 @@
           <ion-label text-center>FIND OUT WHAT'S ON LOTTO SOCIAL</ion-label>
         </ion-item>
         
-
-
 
         <ion-slides slidesPerView="2" spaceBetween=10>
           <ion-slide>

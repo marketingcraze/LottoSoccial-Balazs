@@ -4,6 +4,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { JoinSyndicatePage } from '../join-syndicate/join-syndicate';
+import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 
 @Component({
   selector: 'page-store',
@@ -75,9 +76,10 @@ export class StorePage {
 
   handle(str:string){
       switch (str) {
+          case 'add_syndicate':
+               this.nav.push(AddSyndicatePage);
+              break;
           case 'join_syndicate':
-              console.log('join_syndicate');
-              
                this.nav.push(JoinSyndicatePage);
               break;
           

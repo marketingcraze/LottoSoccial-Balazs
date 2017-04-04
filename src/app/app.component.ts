@@ -6,6 +6,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { HomePage } from '../pages/home/home';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
 import { NewSyndicatePage } from '../pages/new-syndicate/new-syndicate';
+import { AddSyndicatePage } from '../pages/add-syndicate/add-syndicate';
 
 import { CommonService } from '../services/common.service';
 
@@ -15,7 +16,7 @@ import { CommonService } from '../services/common.service';
 export class MyApp {
     // rootPage = WelcomePage;
     // rootPage = NewSyndicatePage;
-    rootPage = HomePage;
+    rootPage = AddSyndicatePage;
 
     constructor(
         platform: Platform, 
