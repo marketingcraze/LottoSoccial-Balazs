@@ -21,6 +21,6 @@ export class NewSyndicatePage {
 	goPage(page:number){
   		this.navCtrl.push(AddSyndicatePage, {tab: page});
   	}
-
+  	
 
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { App, NavController, NavParams } from 'ionic-angular';
+
+import { HomePage } from '../home/home';
 
 /*
   Generated class for the SignupInvited page.
@@ -12,11 +14,23 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'signup-invited.html'
 })
 export class SignupInvitedPage {
+	public navCtrl: NavController
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+	constructor( 
+		public app:App,
+		public navParams: NavParams) {
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupInvitedPage');
-  }
+		this.navCtrl = app.getRootNav();
+
+	}
+
+	ionViewDidLoad() {
+    	console.log('ionViewDidLoad SignupInvitedPage');
+	}
+
+	goHome(){
+		this.navCtrl.push( HomePage );
+	}
+
 
 }
