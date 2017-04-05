@@ -1,0 +1,69 @@
+page-create-syndicate5 {
+    
+    .top-header {
+        padding: 10px;
+        font-size: 16px;
+        background: #00a651;
+        text-align: center;
+        color: white;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .pad-10-tlr {
+        padding: 10px 10px 0px;
+    }
+    .pad-10-lr {
+        padding: 0 10px;
+    }
+    .section-top {
+        font-size: 14px;
+        border-bottom: 1px solid #ccc;
+    }
+    .desc-p {
+        // text-align: center;
+        margin: 5px 0;
+        // padding: 0 5px;
+        font-weight: normal;
+    }
+    .lot-img {
+        width: 40px;
+        vertical-align: middle;
+    }
+    .section-btm {
+        .head{
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .c-number {
+            background: #2f76d1;
+            font-weight: bold;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            padding: 6px;
+            margin: 0 auto;;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .btn {
+            background: #00A651;
+            height: 34px;
+            border-radius: 3px;
+            width: 50%;
+        }
+        .pad-top {
+            padding-top: 10px;
+        }
+        .text-deco {
+            text-decoration: none;
+        }
+    }
+    .item-md {
+        background-color: transparent;
+        border-bottom: 1px solid #ccc;
+    }
+}

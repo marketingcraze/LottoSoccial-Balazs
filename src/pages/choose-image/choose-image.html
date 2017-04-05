@@ -1,0 +1,27 @@
+<!--
+  Generated template for the ChooseImage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Choose a cover photo</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="marg-top-12 main-bg">
+    <div class="top-div">
+      <div>
+        Upload a picture for your syndicate or select one from the list below
+      </div>
+      <div style="padding-top: 15px;">
+        <button ion-button icon-right class="upload-btn" type="button" (click)="chooseImage()">
+              UPLOAD
+              <ion-icon ios="ios-camera" md="md-camera" class="upload-icon" style="content: url('./assets/img/upload.svg');"></ion-icon>
+        </button>
+      </div>
+    </div>
+    <div class="image-list" *ngFor="let image of images; let i=index" (click)="selectedImage(image)">
+        <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
+    </div>
+</ion-content>

@@ -1,32 +1,90 @@
 page-create-syndicate {
-	.toolbar-content p{
-		color: white;
-	}
-	.item-md.item-block .item-inner{
-		border: none;
-	}
+    
+    .pad-10 {padding: 10px;}
+    .pad-5{padding: 5px;}
+    .h-title {
+        padding-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        border-bottom: 1.5px solid #ccc;
+    }
+    .s-title {
+        font-size: 12px;
+        text-align: center;
+        padding: 10px;
+    }
+    .img-picker {
+        // background: url(http://wowslider.com/sliders/demo-10/data/images/autumn_leaves.jpg);
+        background-size: cover;
+        background: #1F4C87;
+        height: 150px;
+        text-align: center;
+    }
+    .button-outline-md {
+        border-color: white;
+        color: white;
+        background-color: transparent;
+        border-style: dashed;
+        text-transform: none;
+    }
+    .marg-55 {
+        margin-top: 55px;
+    }
+    ion-input {
+        border: 1px solid #ccc;
+        margin-top: 1px;
+    }
+    .text-input-md {
+        font-size: 15px;
+    }
+    .errorDiv {
+        text-align: left;
+        padding: 15px;
+        background: #FEE5E5;
+        color: #C10A09;
+    }
+    .btn {
+        background: #00A651;
+        height: 34px;
+        border-radius: 3px;
+        width: 50%;
+    }
 
-	.bkg{
-		width: 100%;
-	}
-	.bottom-button{
-		background-color: white;
-		.button-md{
-			margin-top: 0;
-		}
-	}
+    .cover-image-div {
+        height: 100vh;
+        width: 100vw;
+        background: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        transition: all 1s;
+        // overflow: scroll;
 
-	.head{
-		color: #AAA;
-		font-size: .8em;
-	}
-	.desc{
-		span{
-			color: #2f76d1;
-			font-weight: bold;
-		}
-	}
-	.bold{
-		font-weight: bold;
-	}
+        .list-md .item-block .item-inner {
+             border-bottom: 0px solid #dedede; 
+        }
+        .item-md {
+            border-bottom: 1px solid #ccc;
+        }
+    }
+    .cover-image-div.cclose {
+        top: 100vh;
+        height: 0;        
+    }
+    .reload {
+        position: relative;
+        float: right;
+        margin-top: -35px;
+        margin-right: 10px;
+        color: #2f76d1;
+        background: white;
+        font-size: 25px;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 2px;
+        font-weight: bold;
+    }
 }

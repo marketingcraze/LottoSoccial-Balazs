@@ -21,6 +21,11 @@ import { RedeemGamesPage } from '../pages/redeem-games/redeem-games';
 import { InviteFriendsPage } from '../pages/invite_friends/invite_friends';
 import { OffersForYouPage } from '../pages/offers-for-you/offers-for-you';
 import { CreateSyndicatePage } from '../pages/create-syndicate/create-syndicate';
+import { CreateSyndicate2Page } from '../pages/create-syndicate2/create-syndicate2';
+import { CreateSyndicate3Page } from '../pages/create-syndicate3/create-syndicate3';
+import { CreateSyndicate4Page } from '../pages/create-syndicate4/create-syndicate4';
+import { CreateSyndicate5Page } from '../pages/create-syndicate5/create-syndicate5';
+import { CreateSyndicateTab } from '../pages/create-syndicate-tab/create-syndicate-tab';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -31,7 +36,7 @@ import { AuthService } from '../services/auth.service';
 import { MyFilterPipe } from '../pipes/contact-selected'
 
 import { CusHeaderComponent } from '../components/cus-header/cus-header';
-
+import { ChooseImagePage } from '../pages/choose-image/choose-image';
 
 @NgModule({
   declarations: [
@@ -54,8 +59,14 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
     YourGamesPage,
     RedeemGamesPage,
     AddSyndicatePage,
-    OffersForYouPage,
     CreateSyndicatePage,
+    CreateSyndicate2Page,
+    CreateSyndicate3Page,
+    CreateSyndicate4Page,
+    CreateSyndicate5Page,
+    OffersForYouPage,
+    CreateSyndicateTab,
+    ChooseImagePage,
 
     MyFilterPipe,
 
@@ -96,8 +107,14 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
     YourGamesPage,
     AddSyndicatePage,
     OffersForYouPage,
+    CreateSyndicateTab,
     CreateSyndicatePage,
-    
+    CreateSyndicate2Page,
+    CreateSyndicate3Page,
+    CreateSyndicate4Page,
+    CreateSyndicate5Page,
+    ChooseImagePage,
+
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 

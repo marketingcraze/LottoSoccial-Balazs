@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Tabs } from 'ionic-angular';
 
 import { OffersForYouPage } from '../offers-for-you/offers-for-you';
-import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
+import { CreateSyndicateTab } from '../create-syndicate-tab/create-syndicate-tab';
 
 @Component({
   selector: 'page-add-syndicate',
@@ -12,7 +12,7 @@ export class AddSyndicatePage {
     @ViewChild('add_syndicate_tabs') tabsRef: Tabs;
 
     tab1Root: any = OffersForYouPage;
-    tab2Root: any = CreateSyndicatePage;
+    tab2Root: any = CreateSyndicateTab;
 
     selectedTabId = 0;
 

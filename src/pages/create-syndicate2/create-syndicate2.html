@@ -1,0 +1,58 @@
+<!--
+  Generated template for the CreateSyndicate2 page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create your syndicate</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+            <ion-icon ios="md-close" md="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="marg-top-12 main-bg">
+  <div class="syndicateRow" (click)="backTosyndicate1()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-11 class="pad-top-5"><div class="h-title"> SYNDICATE DETAILS </div></ion-col>
+            <ion-col col-1><img src="./assets/img/check.svg" /></ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div class="syndicateRow pad-10">
+    <div class="h-title" style="border-bottom: 1.5px solid #ccc;"> TYPE OF SYNDICATE </div>
+    <div>
+      <p class="desc-p">Do you want to start an ONGOING (play in every draw) or a ONE-OFF (play only in the next draw) syndicate?</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <div class="t-card" (click)="selected('ongoing')">
+                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected" [hidden]="selectedCard == 'oneoff'" /></div>
+                <img src="./assets/img/ongoing_ico.svg" class="card-img img1"/>
+                <div class="pad-5-top">ONGOING</div>
+              </div>
+              
+            </ion-col>
+            <ion-col col-6>
+              <div class="t-card" style="float: none;" (click)="selected('oneoff')">
+                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected2" [hidden]="selectedCard == 'ongoing'" /></div>
+                <img src="./assets/img/oneoff_ico.svg" class="card-img img2"/>
+                <div class="pad-5-top">ONE-OFF</div>
+              </div>
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div style="text-align: center;">
+          <button ion-button (click)="next()" class="btn" >Next</button>
+        </div>
+    </div>
+  </div>
+  
+</ion-content>

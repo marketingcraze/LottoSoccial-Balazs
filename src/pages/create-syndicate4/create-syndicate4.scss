@@ -1,0 +1,111 @@
+page-create-syndicate4 {
+    
+    .syndicateRow {
+        background: white;
+        margin-bottom: 10px;
+    }
+    .h-title {
+        padding-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .desc-p {
+        text-align: center;
+        padding: 0 5px;
+        font-weight: normal;
+    }
+    .t-card {
+        text-align: center;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        //  width: 120px;
+        height: 100%;
+        // float: right;
+        // padding: 0px 15px 0 10px;
+    }
+    .pad-5-top {
+        padding: 5px 0;
+    }
+    .tcard-selected {
+        width: 40px;
+        float: right;
+        // margin-right: -16px;
+        // margin-top: -1px;
+    }
+    .tcard-selected2 {
+        width: 40px;
+        float: right;
+        // margin-right: -21px;
+        // margin-top: -21px;
+    }
+    .card-img {
+        margin-top: -10px;
+    }
+    .check-div {
+        height: 50px;
+    }
+    .img1{
+        margin-top: -20px;
+        margin-bottom: -10px;
+        padding: 0px 10px 0;
+    }
+    .img2{
+        margin-top: -20px;
+        margin-bottom: -10px;
+        padding: 0px 10px 0;
+    }
+    .btn {
+        background: #00A651;
+        height: 34px;
+        border-radius: 3px;
+        width: 50%;
+    }
+    .errorDiv {
+        text-align: left;
+        padding: 15px;
+        background: #FEE5E5;
+        color: #C10A09;
+    }
+    .lot-img {
+        width: 40px;
+        vertical-align: middle;
+    }
+    .my-grid {
+        margin-top: -15px;
+        padding: 0px;
+    }
+    .check-icon {
+        padding-right: 6px;
+        vertical-align: middle;
+        // font-weight: bold;
+    }
+    .count-text {
+        text-align: center;
+        font-size: 20px;
+    }
+    .pm-icon {
+        width: 30px;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .pad-side-10 {
+        padding: 0 10px;
+    }
+    .border-btm {
+        border-bottom: 1px solid #ccc;
+    }
+    .selected-desc {
+        font-size: 10px;
+        text-align: center;
+    }
+    .tickb {
+        line-height: 0;
+        font-size: 30px;
+        font-weight: bold;
+        color: #2f76d1;
+    }
+}

@@ -1,0 +1,61 @@
+page-create-syndicate2 {
+    
+    .syndicateRow {
+        background: white;
+        margin-bottom: 10px;
+    }
+    .h-title {
+        padding-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .desc-p {
+        text-align: center;
+        padding: 0 5px;
+        font-weight: normal;
+    }
+    .t-card {
+        text-align: center;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+         width: 105px;
+        height: 100%;
+        float: right;
+        // padding: 0px 15px 0 10px;
+    }
+    .pad-5-top {
+        padding: 5px 0;
+    }
+    .tcard-selected {
+        width: 40px;
+        float: right;
+        // margin-right: -16px;
+        // margin-top: -1px;
+    }
+    .tcard-selected2 {
+        width: 40px;
+        float: right;
+        // margin-right: -21px;
+        // margin-top: -21px;
+    }
+    .card-img {
+        margin-top: -10px;
+    }
+    .check-div {
+        height: 50px;
+    }
+    .img1{
+        margin-top: -27px;
+        padding: 0px 15px 0;
+    }
+    .img2{
+        margin-top: -20px;
+        padding: 0px 25px 0;
+    }
+    .btn {
+        background: #00A651;
+        height: 34px;
+        border-radius: 3px;
+        width: 50%;
+    }
+}

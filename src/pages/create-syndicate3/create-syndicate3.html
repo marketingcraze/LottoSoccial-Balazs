@@ -1,0 +1,79 @@
+<!--
+  Generated template for the CreateSyndicate3 page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create your syndicate</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+            <ion-icon ios="md-close" md="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="marg-top-12 main-bg">
+  <div class="syndicateRow" (click)="backTosyndicate1()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-11 class="pad-top-5"><div class="h-title"> SYNDICATE DETAILS </div></ion-col>
+            <ion-col col-1><img src="./assets/img/check.svg" /></ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div class="syndicateRow" (click)="backTosyndicate2()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-11 class="pad-top-5"><div class="h-title"> TYPE OF SYNDICATE </div></ion-col>
+            <ion-col col-1><img src="./assets/img/check.svg" /></ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div class="syndicateRow">
+    <div class="pad-10"><div class="h-title" style="border-bottom: 1.5px solid #ccc;"> LOTTERIES </div></div>
+    <div class="pad-10">
+      <p class="desc-p">Select all lotteries you want to play</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <div class="t-card" (click)="selected('euromillions')">
+                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected" [hidden]="!euroselected" /></div>
+                <img src="./assets/img/euroball.png" class="card-img img1"/>
+                <div class="pad-5-top">EuroMillions</div>
+              </div>
+              
+            </ion-col>
+            <ion-col col-4>
+              <div class="t-card" style="float: none;" (click)="selected('lotto')">
+                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected2" [hidden]="!lottoselected" /></div>
+                <img src="./assets/img/lottoball.png" class="card-img img2"/>
+                <div class="pad-5-top">Lotto</div>
+              </div>
+              
+            </ion-col>
+            <ion-col col-4>
+              <div class="t-card" style="float: none;" (click)="selected('powerball')">
+                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected2" [hidden]="!powerselected" /></div>
+                <img src="./assets/img/powerball.png" class="card-img img2"/>
+                <div class="pad-5-top">Powerball</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+    </div>
+    <div>
+        <p class="errorDiv" *ngIf="!oneSelected"><span>&#9888;</span> Please select at least one lottery to play </p>
+        <div style="text-align: center;" class="pad-10">
+          <button ion-button type="submit" class="btn" (click)="next()">Next</button>
+        </div>
+    </div>
+        
+  </div>
+  
+</ion-content>
+

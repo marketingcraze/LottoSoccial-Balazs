@@ -1,0 +1,115 @@
+<!--
+  Generated template for the CreateSyndicate4 page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create your syndicate</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+            <ion-icon ios="md-close" md="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="marg-top-12 main-bg">
+  <div class="syndicateRow" (click)="backTosyndicate1()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-11 class="pad-top-5"><div class="h-title"> SYNDICATE DETAILS </div></ion-col>
+            <ion-col col-1><img src="./assets/img/check.svg" /></ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div class="syndicateRow" (click)="backTosyndicate2()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-11 class="pad-top-5"><div class="h-title"> TYPE OF SYNDICATE </div></ion-col>
+            <ion-col col-1><img src="./assets/img/check.svg" /></ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div class="syndicateRow" (click)="backTosyndicate3()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-11 class="pad-top-5"><div class="h-title"> LOTTERIES </div></ion-col>
+            <ion-col col-1><img src="./assets/img/check.svg" /></ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div class="syndicateRow">
+    <div class="pad-10"><div class="h-title" style="border-bottom: 1.5px solid #ccc;"> DRAWS </div></div>
+    <div class="pad-side-10">
+      <p class="desc-p"><img src="./assets/img/euroball.png" class="lot-img"/> Choose EuroMillions draws</p>
+        <ion-grid class="my-grid border-btm">
+          <ion-row>
+            <ion-col col-6 style="text-align: right;">
+             <span (click)="tick('tue')">
+               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="euroDays.tue"></ion-icon>
+               <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!euroDays.tue"></ion-icon>
+                Tuesday
+                </span>
+            </ion-col>
+            <ion-col col-1></ion-col>
+            <ion-col col-5>
+              <span (click)="tick('fri')">
+                <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="euroDays.fri"></ion-icon>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!euroDays.fri"></ion-icon>
+                 Friday
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row><ion-col class="text-center" style="font-weight: bold">Choose number of lines for each member</ion-col></ion-row>
+          <ion-row>
+            <ion-col col-5 class="text-right"><img src="./assets/img/minus.svg" class="pm-icon" (click)="decrease('c1')"/></ion-col>
+            <ion-col col-2 class="count-text">{{count1}}</ion-col>
+            <ion-col col-5><img src="./assets/img/plus.svg" class="pm-icon" (click)="increase('c1')"/></ion-col>
+          </ion-row>
+        </ion-grid>
+        
+    </div>
+    <div class="pad-side-10">
+      <p class="desc-p"><img src="./assets/img/lottoball.png" class="lot-img"/> Choose Lotto draws</p>
+        <ion-grid class="my-grid border-btm">
+          <ion-row>
+            <ion-col col-6 style="text-align: right;">
+             <span (click)="tick('wed')">
+               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="lottoDays.wed"></ion-icon>
+               <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!lottoDays.wed"></ion-icon>
+                Wednesday
+              </span>
+            </ion-col>
+            <ion-col col-1></ion-col>
+            <ion-col col-5>
+              <span (click)="tick('sat')">
+                <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="lottoDays.sat"></ion-icon>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!lottoDays.sat"></ion-icon>
+                 Saturday
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row><ion-col class="text-center" style="font-weight: bold">Choose number of lines for each member</ion-col></ion-row>
+          <ion-row>
+            <ion-col col-5 class="text-right"><img src="./assets/img/minus.svg" class="pm-icon" (click)="decrease('c2')"/></ion-col>
+            <ion-col col-2 class="count-text">{{count2}}</ion-col>
+            <ion-col col-5><img src="./assets/img/plus.svg" class="pm-icon" (click)="increase('c2')"/></ion-col>
+          </ion-row>
+        </ion-grid>
+        <p class="selected-desc">Your selection: {{count1}} line in EuroMillions <span [hidden]="!euroDays.tue">Tuesday</span> <span *ngIf="euroDays.tue && euroDays.fri">and</span> <span [hidden]="!euroDays.fri">Friday </span>+ {{count2}} lines in Lotto  <span [hidden]="!lottoDays.wed">Wednesday</span> <span *ngIf="lottoDays.wed && lottoDays.sat"> and</span><span [hidden]="!lottoDays.sat"> Saturday</span></p>
+    </div>
+    <div>
+        
+        <div style="text-align: center;" class="pad-10">
+          <button ion-button type="submit" class="btn" (click)="next()">CREATE</button>
+        </div>
+    </div>
+        
+  </div>
+  
+</ion-content>
+
+

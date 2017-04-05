@@ -1,0 +1,32 @@
+tab-create-syndicate {
+	.toolbar-content p{
+		color: white;
+	}
+	.item-md.item-block .item-inner{
+		border: none;
+	}
+
+	.bkg{
+		width: 100%;
+	}
+	.bottom-button{
+		background-color: white;
+		.button-md{
+			margin-top: 0;
+		}
+	}
+
+	.head{
+		color: #AAA;
+		font-size: .8em;
+	}
+	.desc{
+		span{
+			color: #2f76d1;
+			font-weight: bold;
+		}
+	}
+	.bold{
+		font-weight: bold;
+	}
+}
