@@ -21,31 +21,43 @@
       <p item-content>Laura has invited you to join their syndicate with other 3 players</p>
     </ion-item>
         	
-	<div class="lotteries">
-		<p item-left>Lotteries played in this syndicate</p>
-		<p><span>EURO TUE</span> x10 tickets valid for 17 Feb 2017</p>
-		<div class="line"></div>
-		<p><span>EURO FRI</span> x10 tickets valid for 17 Feb 2017</p>
-	</div>
-	
+  	<div class="lotteries">
+  		<p item-left>Lotteries played in this syndicate</p>
+  		<p><span>EURO TUE</span> x10 tickets valid for 17 Feb 2017</p>
+  		
+  		<p><span>EURO FRI</span> x10 tickets valid for 17 Feb 2017</p>
+  	</div>
     
-    <ion-item >
-      <button class="center" ion-button padding color="primary" >VIEW TICKETS</button>	
-    </ion-item>
+    <button class="center" ion-button padding color="primary" >VIEW TICKETS</button>	
+    <div margin-top class="line"></div>
+    
     
     <ion-grid class="members">
       <ion-row >
       	<p class="center">4 current members</p>
       </ion-row>
       <ion-row justify-content-center>
-      	<ion-col col-2><img src="assets/icon/account_ico.svg"><p>Paul</p></ion-col>
-      	<ion-col col-2><img src="assets/icon/account_ico.svg"><p>Martin</p></ion-col>
-      	<ion-col col-2><img src="assets/icon/account_ico.svg"><p>Jessica</p></ion-col>
-      	<ion-col col-2><img src="assets/icon/account_ico.svg"><p>Laura</p></ion-col>
+        <ion-slides loop slidesPerView=4 spaceBetween=0>
+          <ion-slide>
+            <img src="assets/icon/account_ico.svg"><p>Paul</p>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/icon/account_ico.svg"><p>Martin</p>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/icon/account_ico.svg"><p>Jessica</p>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/icon/account_ico.svg"><p>Laura</p>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/icon/account_ico.svg"><p>Martin</p>
+          </ion-slide>
+        </ion-slides>
       </ion-row>
       <ion-row justify-content-center>
         	<ion-col col-5><button class="center" padding ion-button block text-center color="danger" >DECLINE</button></ion-col>
-        	<ion-col col-5><button class="center" padding ion-button block text-center color="secondary" >JOIN</button></ion-col>
+        	<ion-col col-5><button class="center" padding ion-button block text-center color="secondary" >VIEW</button></ion-col>
         </ion-row>
         <ion-row class="decide-later">
         	<button class="center" padding ion-button text-center clear small >Decide later</button>
