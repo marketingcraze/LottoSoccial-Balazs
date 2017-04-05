@@ -77,6 +77,7 @@
 	<p *ngIf="warningPassword" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid password</p>
 	<div padding>
 		<button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round >SIGN UP</button>
+		<p><a text-center class="center" (click)="goInvited($event)">In case Invited<ion-icon name="ios-arrow-round-forward"></ion-icon></a></p>
 		<p><a text-center class="center" (click)="goLogin($event)">Already a member? Sign in here <ion-icon name="ios-arrow-round-forward"></ion-icon></a></p>
 		
 	</div>

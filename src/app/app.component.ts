@@ -8,6 +8,7 @@ import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
 import { NewSyndicatePage } from '../pages/new-syndicate/new-syndicate';
 import { AddSyndicatePage } from '../pages/add-syndicate/add-syndicate';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
+import { AuthPage } from '../pages/auth/auth';
 
 import { CommonService } from '../services/common.service';
 
@@ -15,9 +16,9 @@ import { CommonService } from '../services/common.service';
     templateUrl: 'app.html'
 })
 export class MyApp {
-    // rootPage = WelcomePage;
-    // rootPage = SignupInvitedPage;
-    rootPage = HomePage;
+    rootPage = WelcomePage;
+    // rootPage = NewSyndicatePage;
+    // rootPage = HomePage;
 
     constructor(
         platform: Platform, 
