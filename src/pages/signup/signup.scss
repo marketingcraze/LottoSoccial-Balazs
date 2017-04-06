@@ -6,8 +6,11 @@ page-signup {
 	a{
 		text-decoration: none;
 	}
-    .col{
+    .grid, .col{
         padding: 0;
+    }
+    .button-large-md{
+        font-size: 2.2rem;
     }
     .item-md{
         padding-left: 0;
@@ -35,13 +38,13 @@ page-signup {
             min-height: 48px;
           }
     }
+    .item-md ion-icon[item-left], .item-md ion-icon[item-right]{
+        margin: 0;
+    }
 
-  .item-md ion-icon[item-left], .item-md ion-icon[item-right]{
-      margin: 0;
-  }
-  .last-name{
-    padding-left: 4px;
-  }
+    .last-name{
+        padding-left: 1px;
+    }
   .small-icon{
       font-size: 1.2em;
       padding-top: .6em;
@@ -55,7 +58,7 @@ page-signup {
 	.lotto-logo {
       display: block;
       width: 72px;
-      margin: 2em auto;
+      margin: 1em auto;
       position: relative;
       img{
         border-radius: 50%;
@@ -78,14 +81,15 @@ page-signup {
 
     .warning{
     	margin: 0;
-      margin-top: 2em;
+      margin-top: 1em;
     	padding: 1em;
     	background-color: rgba(255,0,0,.1);
     	color: red;
     }
 
     .auth-button{
-    	max-width: 14em;
-    	max-height: 2em;
+    	margin: 0 1em;
+        width: calc(100% - 2em);
+    	max-height: 2.6em;
     }
 }

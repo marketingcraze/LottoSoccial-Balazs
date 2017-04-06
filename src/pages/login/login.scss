@@ -3,9 +3,15 @@ page-login {
         color: map-get( $colors-light, links);
 		text-decoration: none;
 	}
-	.col{
+    h3{
+        margin-bottom: 3rem;
+    }
+	.grid, .col{
 		padding: 0;
 	}
+    .button-large-md{
+        font-size: 2.2rem;
+    }
     .tabs-md .tabbar {
         background-color: #304d85;
         border-bottom: 1px solid #ccc;
@@ -35,23 +41,20 @@ page-login {
     .item-md ion-icon [item-left], .item-md ion-icon [item-right]{
         margin: 0;
     }
-    ion-row{
-		margin: 2px;
-	}
 	.lotto-logo {
 		padding: 1em;
 	}
     .warning{
     	margin: 0;
     	padding: 1em;
-    	margin-top: 2em;
+    	margin-top: .6em;
     	background-color: rgba(255,0,0,.1);
     	color: red;
     }
     .auth-button{
-    	max-width: 14em;
-        padding: 1em;
-        max-height: 2em;
+        margin: 0 1em;
+        width: calc(100% - 2em);
+        max-height: 2.6em;
     }
 
     .showpassword{
@@ -64,7 +67,8 @@ page-login {
         font-size: 1.2em;
         padding-top: .6em;
     }
-    .remove-inner{
+    .remove-inner.item-md.item-block{
+
         .input-wrapper{
             display: inline-table;
         }

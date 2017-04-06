@@ -38,10 +38,11 @@
 
 	<p *ngIf="warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 
-	<div padding>
-		<button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round>LOGIN</button>
+		<div padding>
+			<button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round>LOGIN</button>
+			
+		</div>
 		<p><a text-center class="center" (click)="forgotPassPopup=true;" >Forgot your password?</a></p>
-	</div>
 	</form>
 
 </ion-content>
@@ -66,7 +67,7 @@
     		</div>
 
     		<div *ngIf="!forgotPassPopupConfirm" >
-    		<p text-center>Enter the mobile number for your account to receive a password reminder</p>
+    		<p text-center padding>Enter the mobile number for your account to receive a password reminder</p>
 
 			<form #loginForm="ngForm" (ngSubmit)="submitMobile()">
 				<ion-grid>
@@ -88,7 +89,7 @@
 				<p *ngIf="warningPhonePopup" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 
 				<div padding>
-					<button class="center auth-button" type="submit" ion-button text-center color="secondary">RECOVER PASSWORD</button>
+					<button class="center" type="submit" ion-button text-center padding color="secondary">RECOVER PASSWORD</button>
 					<p><a text-center class="center" (click)="forgotPassPopup=false;"><ion-icon name="ios-arrow-round-back"></ion-icon> Back to login.</a></p>
 				</div>
 			</form>

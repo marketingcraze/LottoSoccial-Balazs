@@ -21,7 +21,7 @@ export class SignupPage {
 
 	public showPass = false;
 	public tabs:Tabs;
-	public selectedCountry:any;
+	public selectedCountry:any = ["USA", 'us', 44];
 	public countryPopOver:any;
 	public warningPassword:boolean = false;
 	public warningPhone:boolean = false;
@@ -112,6 +112,15 @@ export class SignupPage {
 	}
 
 	presentPopover(ev) {
+        let alert = this.alertCtrl.create({
+            title: 'Error!',
+            subTitle: 'API not ready yet for this job',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+		
+		// commented for API being ready
+		/*
 	    this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
 	    	cb: (data) => { 
 	    		this.selectedCountry = data; 
@@ -119,6 +128,7 @@ export class SignupPage {
 	    	}
 	    });
 	    this.countryPopOver.present({ev: ev});
+	    */
 	}
 
 	showPassword(input: any): any {

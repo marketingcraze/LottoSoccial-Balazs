@@ -9,12 +9,12 @@ import { LoginPage } from '../login/login';
   selector: 'page-auth'
 })
 export class AuthPage {
-	@ViewChild('tabs') tabsRef: Tabs;
+	// @ViewChild('tabs') tabsRef: Tabs;
 
     tab1Root: any = SignupPage;
     tab2Root: any = LoginPage;
 
-    selectedTabId = 0;
+    selectedTabId:number = 1;
 
     constructor(
       	private navCtrl:NavController,
@@ -28,7 +28,7 @@ export class AuthPage {
    	ionViewDidLoad(){
         console.log("ionViewDidLoad");
         if(this.selectedTabId) {
-          this.tabsRef.select(this.selectedTabId, {animate: false});
+          // this.tabsRef.select(this.selectedTabId, {animate: false});
         }
   	}
 

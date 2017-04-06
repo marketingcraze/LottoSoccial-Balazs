@@ -16,7 +16,7 @@ export class LoginPage {
 
     public countryPopOver:any;
     public countryNumber:number = 0;
-    public selectedCountry:any;
+    public selectedCountry:any = ["USA", 'us', 44];
     public selectedCountryMobile:any;
     public countryNumberMobile:number = 0;
     public forgotPassPopup = false;
@@ -89,6 +89,13 @@ export class LoginPage {
     }
 
     presentPopover(ev) {
+        let alert = this.alertCtrl.create({
+            title: 'Error!',
+            subTitle: 'API not ready yet for this job',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+        /*
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
             countries: this.countryes,
             cb: (data) => { 
@@ -98,9 +105,17 @@ export class LoginPage {
             }
         });
         this.countryPopOver.present({ev: ev});
+        */
     }
 
     presentPopoverMobile(ev) {
+        let alert = this.alertCtrl.create({
+            title: 'Error!',
+            subTitle: 'API not ready yet for this job',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+        /*
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
             countries: this.countryes,
             cb: (data) => { 
@@ -109,6 +124,7 @@ export class LoginPage {
             }
         });
         this.countryPopOver.present({ev: ev});
+        */
     }
 
     showPassword(input: any): any {

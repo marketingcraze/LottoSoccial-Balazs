@@ -1,11 +1,3 @@
-<!--
-<ion-header>
-  <ion-navbar>
-    <ion-title>Signup</ion-title>
-  </ion-navbar>
-</ion-header>
--->
-
 <ion-content >
 	
 	<h4 text-center>Start by ceating an account</h4>
@@ -73,14 +65,14 @@
 
 	</ion-grid>
 
-	<p *ngIf="warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
+	<p *ngIf="!warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 	<p *ngIf="warningPassword" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid password</p>
 	<div padding>
-		<button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round >SIGN UP</button>
+		<button class="center auth-button" type="submit" ion-button text-center padding large full color="secondary" round >SIGN UP</button>
+	</div>
 		<p><a text-center class="center" (click)="goInvited($event)">In case Invited<ion-icon name="ios-arrow-round-forward"></ion-icon></a></p>
 		<p><a text-center class="center" (click)="goLogin($event)">Already a member? Sign in here <ion-icon name="ios-arrow-round-forward"></ion-icon></a></p>
-		
-	</div>
+
 	</form>
 	
 </ion-content>
