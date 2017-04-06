@@ -9,11 +9,15 @@ page-new-syndicate {
 	.join{
 		margin: 4em 0 0 0;
 		width: 100%;
+		// height: 50vw;
 		background-color: white;
 		overflow: visible;
+		p{
+			width: 100%;
+		}
 		img{
-			max-width: 240px;
-			height: 240px;
+			max-width: 60vw;
+			height: 60vw;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
@@ -24,10 +28,10 @@ page-new-syndicate {
 		}
 
 		.img-right{
-			right: -40px;
+			right: -12vw;
 		}
 		.img-left{
-			left: -40px;
+			left: -12vw;
 		}
 	}
 
