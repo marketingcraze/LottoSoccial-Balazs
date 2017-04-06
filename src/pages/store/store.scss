@@ -10,6 +10,8 @@ page-store {
 	}
 
 	.home-slides{
+		padding-top: 42px;
+
 		.slide-zoom{
 			width: 90%;
 		}
@@ -138,10 +140,10 @@ page-store {
 		color: red;
 	}
 	.score-panel{
-		padding: 0;
+		padding: 42px 0 0 0;
 		background-color: white;
 		line-height: 2em;
-		
+		position: absolute;
 		img{
 			vertical-align: middle;
 		}
@@ -253,6 +255,7 @@ page-store {
 			background-color: #FFF;
 			overflow: hidden;
 			border-radius: 3px;
+
 			img{
 				width: 100%;
 			}

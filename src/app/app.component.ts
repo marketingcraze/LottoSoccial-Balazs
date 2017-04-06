@@ -17,7 +17,9 @@ import { CommonService } from '../services/common.service';
 })
 export class MyApp {
     // rootPage = WelcomePage;
-    rootPage = NewSyndicatePage;
+    // rootPage = NewSyndicatePage;
+    // rootPage = AddSyndicatePage;
+    rootPage = HomePage;
     // rootPage = AuthPage;
 
     constructor(
