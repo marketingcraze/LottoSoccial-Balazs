@@ -331,9 +331,7 @@
           
         </ion-item>
         
-      
-
-
+    
         
         <button class="center" padding ion-button text-center clear small >View all offers</button>
       </ion-card>
@@ -388,12 +386,8 @@
 
 
 
-
-
-
-
 <ion-footer class="footer-button">
-  <div (click)="whatsOn=!whatsOn;" class="center">
+  <div (click)="showWhatsOn()" class="center">
     <ion-icon item-left name="md-arrow-round-up"></ion-icon>
     <p item-content text-center class="center">Find out what's on lotto social</p>
   </div>
@@ -402,20 +396,13 @@
 
 
 
-
-
-
-
-
-
-
 <div class="popup" *ngIf="whatsOn" style="z-index: 102;">
-  <ion-backdrop (click)="whatsOn=!whatsOn;" disable-activated="" style="opacity: .5;" role="presentation" tappable=""></ion-backdrop>
+  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" tappable=""></ion-backdrop>
   
-    <div class="popup-content" >
+    <div class="popup-content animated"  [ngClass] = " (slideInUp) ? 'slideInUp' : 'slideOutDown' ">
       <ion-card class="big-content">
         <ion-item class="popup-header">
-          <button item-left ion-button icon-only clear (click)="whatsOn=!whatsOn;" >
+          <button item-left ion-button icon-only clear (click)="showWhatsOn()">
             <ion-icon  name="md-close"></ion-icon>
           </button>
           <ion-label text-center>FIND OUT WHAT'S ON LOTTO SOCIAL</ion-label>
@@ -424,7 +411,7 @@
 
         <ion-slides slidesPerView="2" spaceBetween=10>
           <ion-slide>
-            <img src="assets/img/150.png" width="150" height="100">
+            <img src="assets/img/150.png">
             <div class="slide-content">
               <ion-item >
                 <p item-content>This is the event on title. T h i s is the event...</p>

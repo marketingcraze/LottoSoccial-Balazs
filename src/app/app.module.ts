@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -39,7 +40,7 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
 import { ChooseImagePage } from '../pages/choose-image/choose-image';
 
 @NgModule({
-  declarations: [
+    declarations: [
     MyApp,
     WelcomePage,
     AuthPage,
@@ -75,7 +76,9 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp,
+      // BrowserAnimationsModule,
+      BrowserModule,
+      IonicModule.forRoot(MyApp,
       {
         tabsPlacement:'top', 
         iconMode: 'ios',

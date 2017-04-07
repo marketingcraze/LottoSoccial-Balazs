@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, Slides } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -8,7 +8,20 @@ import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 
 @Component({
   selector: 'page-store',
-  templateUrl: 'store.html'
+  templateUrl: 'store.html',
+  animations: [
+  
+    trigger('flyInOut', [
+      state('in', style({
+        transform: 'translate3d(0, 0, 0)'
+      })),
+      state('out', style({
+        transform: 'translate3d(0, 100%, 0)'
+      })),
+      transition('in => out', animate('800ms ease-in')),
+      transition('out => in', animate('800ms ease-out'))
+    ])
+    ]
 })
 export class StorePage {
     @ViewChild(Slides) home_slides: Slides;
@@ -16,6 +29,8 @@ export class StorePage {
     spaceBetween:number = -70;
     whatsOn:boolean = false;
     public nav:NavController;
+    slideInUp:boolean = false;
+    flyInOutState: String = 'out';
     
     constructor(
         public app:App,
@@ -43,6 +58,21 @@ export class StorePage {
         console.log( "ngAfterViewInit()" );
         // this.home_slides.freeMode = true;
         this.home_slides.autoplayDisableOnInteraction = false;
+    }
+
+    showWhatsOn(){
+      console.log("showWhatsOn: " + this.slideInUp);
+      if(this.slideInUp) {
+        let timeoutId = setTimeout(() => {  
+          console.log('hello');
+          this.whatsOn = !this.whatsOn;
+          clearTimeout(timeoutId);
+        }, 500);
+      }else{
+        this.whatsOn = !this.whatsOn;
+      }
+      
+      this.slideInUp = !this.slideInUp;
     }
 
   showLottoSocial(){

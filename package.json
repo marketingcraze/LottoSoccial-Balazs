@@ -10,6 +10,7 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
+    "@angular/animations": "^4.0.1",
     "@angular/common": "2.4.8",
     "@angular/compiler": "2.4.8",
     "@angular/compiler-cli": "2.4.8",
@@ -26,6 +27,7 @@
     "@ionic-native/transfer": "^3.1.0",
     "@ionic/storage": "2.0.0",
     "angular2-countrypicker": "^1.0.0",
+    "animate.css": "^3.5.2",
     "flag-icon-css": "^2.8.0",
     "ionic-angular": "2.2.0",
     "ionic-native": "2.8.1",
