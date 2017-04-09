@@ -1,4 +1,4 @@
-import { Component, ViewChild, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Component, ViewChild, trigger, state, style } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, Slides } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -8,20 +8,7 @@ import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 
 @Component({
   selector: 'page-store',
-  templateUrl: 'store.html',
-  animations: [
-  
-    trigger('flyInOut', [
-      state('in', style({
-        transform: 'translate3d(0, 0, 0)'
-      })),
-      state('out', style({
-        transform: 'translate3d(0, 100%, 0)'
-      })),
-      transition('in => out', animate('800ms ease-in')),
-      transition('out => in', animate('800ms ease-out'))
-    ])
-    ]
+  templateUrl: 'store.html'
 })
 export class StorePage {
     @ViewChild(Slides) home_slides: Slides;
@@ -62,17 +49,25 @@ export class StorePage {
 
     showWhatsOn(){
       console.log("showWhatsOn: " + this.slideInUp);
+
       if(this.slideInUp) {
         let timeoutId = setTimeout(() => {  
-          console.log('hello');
           this.whatsOn = !this.whatsOn;
           clearTimeout(timeoutId);
         }, 500);
+        this.slideInUp = !this.slideInUp;
+
       }else{
+
         this.whatsOn = !this.whatsOn;
+
+        let timeoutId = setTimeout(() => {  
+          this.slideInUp = !this.slideInUp;
+          clearTimeout(timeoutId);
+        }, 10);
       }
       
-      this.slideInUp = !this.slideInUp;
+      
     }
 
   showLottoSocial(){

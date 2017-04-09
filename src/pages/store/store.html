@@ -397,9 +397,9 @@
 
 
 <div class="popup" *ngIf="whatsOn" style="z-index: 102;">
-  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" tappable=""></ion-backdrop>
+  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
   
-    <div class="popup-content animated"  [ngClass] = " (slideInUp) ? 'slideInUp' : 'slideOutDown' ">
+    <div class="popup-content animated"  [ngClass] = "(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
       <ion-card class="big-content">
         <ion-item class="popup-header">
           <button item-left ion-button icon-only clear (click)="showWhatsOn()">
