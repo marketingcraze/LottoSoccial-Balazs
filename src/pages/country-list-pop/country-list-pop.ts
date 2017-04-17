@@ -7,13 +7,13 @@ import { CommonService } from '../../services/common.service';
 @Component({
   selector: 'page-country-list-pop',
   template:`<ion-item *ngFor="let c of countries" (click)="countrySelected(c)">
-    <span class="{{'flag-icon flag-icon-' + c[1] }}" width="16" height="16" item-left></span>
-    <ion-label>{{c[0] }}</ion-label>
+    <ion-label>{{c.country_name }}</ion-label>
   </ion-item>`
-
 
 })
 export class CountryListPopPage {
+
+// <span class="{{'flag-icon flag-icon-' + c[1] }}" width="16" height="16" item-left></span>
 
   public countries: any[] = [{"name":"Aruba","cca3":"abw"},
 {"name":"Afghanistan","cca3":"afg"},
@@ -266,13 +266,16 @@ export class CountryListPopPage {
 ;
 
   public callback:any;
+
   constructor(public viewCtrl: ViewController, 
     private params: NavParams,
     public commonSrv:CommonService) {
 
+console.log("countrys successful", CommonService.countries);
+
     this.callback = this.params.get('cb');
-    this.countries = CommonService.countries.response.payload.modules.get_countries;
-    console.log("countrys successful", this.countries);
+    this.countries = CommonService.countries;
+    
 
   }
 

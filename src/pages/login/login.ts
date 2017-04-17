@@ -15,8 +15,13 @@ import { AuthService } from '../../services/auth.service';
 export class LoginPage {
 
     public countryPopOver:any;
-    public countryNumber:number = 0;
-    public selectedCountry:any = ["USA", 'us', 44];
+    public countryNumber:string = "";
+    public selectedCountry:any = {
+        country_code: "99",
+        country_flag_url: "flag_url_for_99.png",
+        country_name:"Rollover"
+    };
+    
     public selectedCountryMobile:any;
     public countryNumberMobile:number = 0;
     public forgotPassPopup = false;
@@ -57,7 +62,7 @@ export class LoginPage {
         this.commonSrv.getCountry().subscribe(
             data=>{
                 loader.dismiss();
-                this.countryes = data.response.payload.modules.get_countries;
+                this.countryes = data;
                 this.selectedCountry = this.countryes[0];
                 console.log("countrys successful", this.countryes);
             },
@@ -89,33 +94,36 @@ export class LoginPage {
     }
 
     presentPopover(ev) {
+
+        /*
         let alert = this.alertCtrl.create({
             title: 'Error!',
             subTitle: 'API not ready yet for this job',
             buttons: ['Dismiss']
         });
         alert.present();
-        /*
+        */
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
             countries: this.countryes,
             cb: (data) => { 
                 console.log(data);
                 this.selectedCountry = data;
-                this.countryNumber = data[2];
+                this.countryNumber = data.country_code;
             }
         });
         this.countryPopOver.present({ev: ev});
-        */
+        
     }
 
     presentPopoverMobile(ev) {
+        /*
         let alert = this.alertCtrl.create({
             title: 'Error!',
             subTitle: 'API not ready yet for this job',
             buttons: ['Dismiss']
         });
         alert.present();
-        /*
+        */
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
             countries: this.countryes,
             cb: (data) => { 
@@ -124,7 +132,7 @@ export class LoginPage {
             }
         });
         this.countryPopOver.present({ev: ev});
-        */
+        
     }
 
     showPassword(input: any): any {
@@ -133,10 +141,7 @@ export class LoginPage {
     }
 
 
-    submitLogin(){
-        // let nav = this.app.getRootNav();
-        // nav.setRoot(HomePage);
-        
+    submitLogin(){        
         
         this.login.free_reg_msn = "" + this.countryNumber + this.login.mobile;
         console.log("submitLogin", this.login );
@@ -151,20 +156,23 @@ export class LoginPage {
         });
         loader.present();
 
-        this.authSrv.loginUser(this.login.free_reg_msn, this.login.free_reg_pwd).subscribe(
+        this.authSrv.loginUser(this.countryNumber, this.login.free_reg_msn, 
+            this.login.free_reg_pwd).subscribe(
+
             data=>{
                 loader.dismiss();
                 // this.showSuccess();
                 console.log("user login successful", data);
                 try {
-                    data = JSON.parse(data);
+                    data = data.response[0].login.response;
                 } catch (e) {
                     data = undefined;
                 }
-
+                
+                console.log("user login data", data);
                 // go to home page
                 if(data) {
-                    if(data.response.status != "error" ) {
+                    if(data.status != "error" ) {
                         let nav = this.app.getRootNav();
                         nav.setRoot(HomePage);
                     }else{
@@ -181,9 +189,9 @@ export class LoginPage {
             },
             err=>{
                 loader.dismiss();
-                console.log("user registration error", err);
+                console.log("user login error", err);
             },
-            ()=> console.log("user registration complete")
+            ()=> console.log("user login complete")
             );
             
     }

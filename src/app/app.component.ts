@@ -19,8 +19,8 @@ export class MyApp {
     // rootPage = WelcomePage;
     // rootPage = NewSyndicatePage;
     // rootPage = AddSyndicatePage;
-    rootPage = HomePage;
-    // rootPage = AuthPage;
+    // rootPage = HomePage;
+    rootPage = AuthPage;
 
     constructor(
         platform: Platform, 
@@ -31,11 +31,14 @@ export class MyApp {
       // StatusBar.styleDefault();
       StatusBar.hide();
 
-      commonSrv.getCountry1().subscribe(
+      commonSrv.getCountry().subscribe(
       data=>{
-          CommonService.countries = data;
-          console.log("countries loaded");
-          Splashscreen.hide();
+        if(data) {
+          CommonService.countries = data.response[0].get_country_code_flag.response.country_code_group;
+        }
+        
+        console.log("countries loaded", CommonService.countries);
+        Splashscreen.hide();
       },
       err=>{
 

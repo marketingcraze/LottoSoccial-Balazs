@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { RequestOptions, Headers} from '@angular/http';
 import { App, Platform, Tabs, NavController, NavParams, AlertController,
  PopoverController, LoadingController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -11,6 +12,11 @@ import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
 
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
+import {Observable} from 'rxjs/Observable';
+
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+
 
 @Component({
   selector: 'page-signup',
@@ -21,24 +27,32 @@ export class SignupPage {
 
 	public showPass = false;
 	public tabs:Tabs;
-	public selectedCountry:any = ["USA", 'us', 44];
+	public selectedCountry:any = {
+        country_code: "99",
+        country_flag_url: "flag_url_for_99.png",
+        country_name:"Rollover"
+    };
 	public countryPopOver:any;
 	public warningPassword:boolean = false;
 	public warningPhone:boolean = false;
-	public country_number:number = 0;
+	public country_number:string = "";
 
 	public countries:any[];
 
 	public signup = {
 		image:"",
+		profile_image_url:"",
 		email:"",
 		free_reg_msn:'',
 		free_reg_pwd: '',
-		mobile:''
+		mobile:'',
+		country_code:""
 	};
 
 
 	constructor(
+		private transfer: Transfer, private file: File,
+
 		public app:App,
 		public platform:Platform,
 		public navCtrl: NavController, 
@@ -53,6 +67,10 @@ export class SignupPage {
 		this.tabs = navCtrl.parent;
 		this.loadCountries();
 
+		platform.ready().then(() => {
+			console.log('ready');
+        });
+
 	}
 
     loadCountries(){
@@ -64,9 +82,12 @@ export class SignupPage {
         this.commonSrv.getCountry().subscribe(
             data=>{
                 loader.dismiss();
-                this.countries = data.response.payload.modules.get_countries;
-                this.selectedCountry = this.countries[0];
-                console.log("countrys successful", this.countries);
+                
+                if(data) {
+                	this.countries = data.response[0].get_country_code_flag.response.country_code_group;
+                	this.selectedCountry = this.countries[0];
+                	console.log("countries successful", this.countries);
+                }
             },
             err=>{
                 loader.dismiss();
@@ -104,31 +125,35 @@ export class SignupPage {
     	this.imagePicker.getPictures(options).then((results) => {
     		this.signup.image = results[0];
     		console.log('Image URI: ' + results[0]);
+    		this.uploadImage();
+    		// this.uploadProfilePic( results[0] );
     	}, (err) => { });
     }
+    
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad SignupPage');
 	}
 
 	presentPopover(ev) {
+		/*
         let alert = this.alertCtrl.create({
             title: 'Error!',
             subTitle: 'API not ready yet for this job',
             buttons: ['Dismiss']
         });
         alert.present();
+		*/
 		
 		// commented for API being ready
-		/*
 	    this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
 	    	cb: (data) => { 
 	    		this.selectedCountry = data; 
-	    		this.country_number = data[2];
+	    		this.country_number = data.country_code;
 	    	}
 	    });
 	    this.countryPopOver.present({ev: ev});
-	    */
+	    
 	}
 
 	showPassword(input: any): any {
@@ -136,12 +161,89 @@ export class SignupPage {
 		input.type = input.type === 'password' ? 'text' : 'password';
 	}
 
+	uploadImage(){
+		
+		let loader = this.loadingCtrl.create({
+			content: "Please wait..."
+		});
+		loader.present();
+		
+		this.authSrv.uploadProfilePic( this.signup.image ).subscribe(
+			(data:any) =>{
+				loader.dismiss();
+				console.log("image upload successful", data);
+				this.signup.profile_image_url = data.response.image_name;
+			},
+			err =>{
+				loader.dismiss();
+				console.log("image upload error", err);
+			},
+			()=> console.log("image upload complete")
+		);
+		
+	}
+
+
+/*
+	uploadProfilePic( filePath:string ){
+        
+        let server = CommonService.apiUrl + 
+            CommonService.version + '/upload/?process=profile';
+
+        let myHeaders: Headers = new Headers();
+        myHeaders.set('Authorization', 
+            'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
+            'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
+            'oauth_signature_method="HMAC-SHA1",' +
+            'oauth_timestamp="1490087533",' +
+            'oauth_nonce="dWL9pr",' +
+            'oauth_version="1.0",' +
+            'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
+            );
+        // myHeaders.append('Content-type', 'multipart/form-data');
+
+        var extension = filePath.substr(filePath.lastIndexOf('.') + 1);
+        let options = {
+            fileKey: 'file',
+            // fileName: 'name.jpg',
+            // mimeType: "multipart/form-data",
+            headers: myHeaders
+        }
+
+        console.log("options ", server, options);
+        
+        return new Observable( observer => {
+            let fileTransfer = this.transfer.create();
+
+            fileTransfer.upload(filePath, encodeURI(server), options)
+            .then((data:any) => {
+                // success
+                console.log("success" + data);
+                if(data && data.response && data.response.status == 'SUCCESS') {
+                    observer.next(data.response);
+                }else{
+                    observer.next( Error("Image upload error.") );
+                }
+                
+                observer.complete();
+            }, (err:any) => {
+                // error
+                observer.next(err);
+                observer.complete();
+            });
+        });
+    }
+*/
+
+
 	submitSignup(form:any){
-		let nav = this.app.getRootNav();
-        nav.setRoot(NewSyndicatePage);
-		/*
+		// let nav = this.app.getRootNav();
+        // nav.setRoot(NewSyndicatePage);
+		
 		this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
-		console.log("submitSignup", this.signup , form);
+		this.signup.country_code = this.country_number;
+		console.log("submitSignup", this.signup, form);
+
 		if(this.phoneValidator(this.signup.free_reg_msn) ) {
 			this.warningPhone = true;
 			return;
@@ -163,9 +265,6 @@ export class SignupPage {
 					
 				}else{
 					this.submitLogin();
-					if(this.signup.image) {
-						this.authSrv.uploadProfilePic(this.signup.image, data.customer_id);
-					}
 				}
 			},
 			err=>{
@@ -174,7 +273,7 @@ export class SignupPage {
 			},
 			()=> console.log("user registration complete")
 		);
-		*/
+		
 	}
 
 	phoneValidator(value: string):boolean {
@@ -204,11 +303,18 @@ url:""
 		});
 		loader.present();
 		
-		this.authSrv.loginUser(this.signup.free_reg_msn, this.signup.free_reg_pwd).subscribe(
+		this.authSrv.loginUser( this.country_number, this.signup.free_reg_msn, this.signup.free_reg_pwd).subscribe(
 			data=>{
 				loader.dismiss();
 				// this.showSuccess();
 				console.log("user login successful", data);
+
+				try {
+                    data = data.response[0].login.response;
+                } catch (e) {
+                    data = undefined;
+                }
+
                 // go to home page
                 if(data && data.status != 'error') {
                     let nav = this.app.getRootNav();

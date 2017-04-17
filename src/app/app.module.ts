@@ -28,6 +28,8 @@ import { CreateSyndicate4Page } from '../pages/create-syndicate4/create-syndicat
 import { CreateSyndicate5Page } from '../pages/create-syndicate5/create-syndicate5';
 import { CreateSyndicateTab } from '../pages/create-syndicate-tab/create-syndicate-tab';
 
+
+
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -36,8 +38,11 @@ import { AuthService } from '../services/auth.service';
 
 import { MyFilterPipe } from '../pipes/contact-selected'
 
+import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
 import { CusHeaderComponent } from '../components/cus-header/cus-header';
 import { ChooseImagePage } from '../pages/choose-image/choose-image';
+import { Transfer } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 
 @NgModule({
     declarations: [
@@ -72,6 +77,7 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     MyFilterPipe,
 
 
+    CountryListPopPage,
     CusHeaderComponent
 
   ],
@@ -118,9 +124,10 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     CreateSyndicate5Page,
     ChooseImagePage,
 
+    CountryListPopPage,
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  CommonService, AuthService, ImagePicker, InAppBrowser]
+  CommonService, AuthService, ImagePicker, Transfer, File, InAppBrowser]
 })
 export class AppModule {}
