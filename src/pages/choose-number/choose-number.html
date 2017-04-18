@@ -1,0 +1,87 @@
+<!--
+  Generated template for the ChooseNumber page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--<ion-header>
+  <ion-navbar>
+    <ion-title>Choose your numbers</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>-->
+            <!--<ion-icon ios="md-close" md="md-close"></ion-icon>-->
+            <!--SKIP
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="my-sub-head">
+    <span class="sp2">All the numbers in your syndicate will choose their numbers.
+    Choose yours manually or tap on lucky dip.</span>
+  </ion-toolbar>
+</ion-header>-->
+<ion-header><synd-cus-header2 title="Choose your numbers" subtitle="All the numbers in your syndicate will choose their numbers.
+    Choose yours manually or tap on lucky dip."></synd-cus-header2></ion-header>
+ 
+<ion-content class="marg-top-12 main-bg">
+  <div class="syndicateRow pad-5">
+        <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> Choose your EuroMillions numbers</p>
+        <p class="s-title"> Enter 5 numbers from 1 to 50 and 2 Lucky Stars from 1 to 12 </p>
+        <div class="text-center">
+          <ion-grid>
+            <ion-row class="grid-row" style="width: auto;">
+                <ion-col> <input class="input-number" type="number"/> </ion-col>
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <ion-icon ios="ios-star" md="md-star" class="star-icon"></ion-icon><input class="input-number st-input" type="number"/> </ion-col> 
+                <ion-col> <ion-icon ios="ios-star" md="md-star" class="star-icon"></ion-icon><input class="input-number st-input" type="number"/> </ion-col>   
+            </ion-row>  
+          </ion-grid>  
+        </div>
+        <p class="xs-title"> DRAWS INCLUDED: <span class="tag">TUE</span><span class="tag">FRI</span></p>
+        <ion-grid>
+            <ion-row>
+                <ion-col style="text-align: right;"> <button ion-button type="button" class="btn" style="background: #2F76D1;padding: 7px 33px;">LUCKY DIP</button> </ion-col>
+                <ion-col> <button ion-button type="button" class="btn" style="background: #B7B7B7;color: #333333;">CLEAR SELECTION</button> </ion-col> 
+            </ion-row>
+        </ion-grid>
+  </div>
+
+    <div class="syndicateRow">
+        <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> Choose your Lotto numbers</p>
+        <p class="s-title"> Enter 6 numbers from 1 to 59 </p>
+        <div class="text-center">
+          <ion-grid>
+            <ion-row class="grid-row">
+                <ion-col> <input class="input-number" type="number"/> </ion-col>
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+            </ion-row>  
+            <ion-row class="grid-row">
+                <ion-col> <input class="input-number" type="number"/> </ion-col>
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+                <ion-col> <input class="input-number" type="number"/> </ion-col> 
+            </ion-row> 
+          </ion-grid>  
+        </div>
+        <p class="xs-title"> DRAWS INCLUDED: <span class="tag">WED</span></p>
+        <p class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select all your numbers</p>
+        <ion-grid>
+            <ion-row>
+                <ion-col style="text-align: right;"> <button ion-button type="button" class="btn" style="background: #2F76D1;padding: 7px 36px;">LUCKY DIP</button> </ion-col>
+                <ion-col> <button ion-button type="button" class="btn" style="background: #B7B7B7;color: #333333;">CLEAR SELECTION</button> </ion-col> 
+            </ion-row>
+        </ion-grid>
+  </div>
+
+    <div class="bottom_bar">
+    <button ion-button (click)="next()">CONFIRM NUMBERS</button>
+    </div>
+</ion-content>

@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>
   <ion-navbar>
     <ion-title>Create your syndicate</ion-title>
     <ion-buttons end>
@@ -13,8 +13,8 @@
         </button>
     </ion-buttons>
   </ion-navbar>
-</ion-header>
-
+</ion-header>-->
+<ion-header><synd-cus-header1 title="Create your syndicate" notification-count="5"></synd-cus-header1></ion-header>
 
 <ion-content class="marg-top-12 main-bg">
   <div class="syndicateRow" (click)="backTosyndicate1()">
@@ -42,7 +42,7 @@
             <ion-col col-4>
               <div class="t-card" (click)="selected('euromillions')">
                 <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected" [hidden]="!euroselected" /></div>
-                <img src="./assets/img/euroball.png" class="card-img img1"/>
+                <img src="./assets/img/euroball@3x.png" class="card-img img1"/>
                 <div class="pad-5-top">EuroMillions</div>
               </div>
               
@@ -50,7 +50,7 @@
             <ion-col col-4>
               <div class="t-card" style="float: none;" (click)="selected('lotto')">
                 <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected2" [hidden]="!lottoselected" /></div>
-                <img src="./assets/img/lottoball.png" class="card-img img2"/>
+                <img src="./assets/img/lottoball@3x.png" class="card-img img2"/>
                 <div class="pad-5-top">Lotto</div>
               </div>
               
@@ -58,7 +58,7 @@
             <ion-col col-4>
               <div class="t-card" style="float: none;" (click)="selected('powerball')">
                 <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected2" [hidden]="!powerselected" /></div>
-                <img src="./assets/img/powerball.png" class="card-img img2"/>
+                <img src="./assets/img/powerball@3x.png" class="card-img img2"/>
                 <div class="pad-5-top">Powerball</div>
               </div>
             </ion-col>
@@ -67,7 +67,7 @@
         
     </div>
     <div>
-        <p class="errorDiv" *ngIf="!oneSelected"><span>&#9888;</span> Please select at least one lottery to play </p>
+        <p class="errorDiv" *ngIf="!oneSelected"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select at least one lottery to play </p>
         <div style="text-align: center;" class="pad-10">
           <button ion-button type="submit" class="btn" (click)="next()">Next</button>
         </div>

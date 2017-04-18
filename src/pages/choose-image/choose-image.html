@@ -22,6 +22,6 @@
       </div>
     </div>
     <div class="image-list" *ngFor="let image of images; let i=index" (click)="selectedImage(image)">
-        <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
+        <img src="{{image}}" />
     </div>
 </ion-content>

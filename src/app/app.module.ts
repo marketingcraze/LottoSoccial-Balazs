@@ -28,8 +28,6 @@ import { CreateSyndicate4Page } from '../pages/create-syndicate4/create-syndicat
 import { CreateSyndicate5Page } from '../pages/create-syndicate5/create-syndicate5';
 import { CreateSyndicateTab } from '../pages/create-syndicate-tab/create-syndicate-tab';
 
-
-
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -40,6 +38,8 @@ import { MyFilterPipe } from '../pipes/contact-selected'
 
 import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
 import { CusHeaderComponent } from '../components/cus-header/cus-header';
+import { CusHeader1Component } from '../components/synd-cus-header1/synd-cus-header1';
+import { CusHeader2Component } from '../components/synd-cus-header2/synd-cus-header2';
 import { ChooseImagePage } from '../pages/choose-image/choose-image';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -78,7 +78,9 @@ import { File } from '@ionic-native/file';
 
 
     CountryListPopPage,
-    CusHeaderComponent
+    CusHeaderComponent,
+    CusHeader1Component,
+    CusHeader2Component
 
   ],
   imports: [

@@ -1,0 +1,103 @@
+<!--
+  Generated template for the ConfirmNumber page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Confirm your selection</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+            <!--<ion-icon ios="md-close" md="md-close"></ion-icon>-->
+            SKIP
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="marg-top-12 main-bg">
+  <div class="syndicateRow pad-5">
+        <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> Choose your EuroMillions numbers</p>
+        <p class="s-title"> Enter 5 numbers from 1 to 50 and 2 Lucky Stars from 1 to 12 </p>
+        <div class="text-center">
+          <ion-grid>
+            <ion-row class="grid-row" style="width: auto;">
+                <ion-col> <div class="input-number">1</div> </ion-col>
+                <ion-col> <div class="input-number">11</div> </ion-col> 
+                <ion-col> <div class="input-number">21</div> </ion-col> 
+                <ion-col> <div class="input-number">43</div> </ion-col> 
+                <ion-col> <div class="input-number">24</div> </ion-col> 
+                <ion-col> <div class="input-number st-input">10</div> </ion-col> 
+                <ion-col> <div class="input-number st-input">2</div> </ion-col>   
+            </ion-row>  
+          </ion-grid>  
+        </div>
+        <p class="s-title">Valid for: Ongoing every Tuesday and Friday - &#x20A4;5 </p>
+  </div>
+
+    <div class="syndicateRow">
+        <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> Choose your Lotto numbers</p>
+        <p class="s-title"> Enter 6 numbers from 1 to 59 </p>
+        <div class="text-center">
+          <ion-grid>
+            <ion-row class="grid-row">
+                <ion-col> <div class="input-number lotto-c"> 12 </div></ion-col>
+                <ion-col> <div class="input-number lotto-c"> 42 </div></ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 13 </div></ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 7 </div></ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 18 </div></ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 21 </div></ion-col> 
+            </ion-row>  
+            <ion-row class="grid-row">
+                <ion-col> <div class="input-number lotto-c"> 25 </div> </ion-col>
+                <ion-col> <div class="input-number lotto-c"> 36 </div> </ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 24 </div> </ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 42 </div> </ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 14 </div> </ion-col> 
+                <ion-col> <div class="input-number lotto-c"> 9 </div> </ion-col> 
+            </ion-row> 
+          </ion-grid>  
+        </div>
+        <p class="s-title">Valid for: Ongoing Wednesday - &#x20A4;4</p>
+  </div>
+  <div class="like-div">
+      <div>
+        <div class="divider"></div>
+        <p>You might also like</p>
+      </div>
+  </div>
+
+  <div class="syndicateRow">
+      <div class="baner-img">
+        <img src="./assets/img/jkp_trigger_bnr@3x.png" />
+      </div>
+      <div class="desc-div text-center">
+        <p class="b-desc">
+            Select Lotto and Euro jackpots below - when the jackpot reaches the ‘trigger’ jackpot, you’ll be auto entered in to the big draws only (including rollovers)
+        </p>
+        <a href="#" class="anch">Click here for more info</a>
+      </div>
+      <div class="desc-div text-left">
+        <p class="desc-p text-left header-b"><img src="./assets/img/euroball@3x.png" class="lot-img"/>EuroMillions jackpot over <span style="color:#2f76d1;">&#x20A4;30M</span></p>
+        <ion-item class="toggle-item">
+            <ion-label> Get 20 Lines for &#x20A4;4.50 per draw</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+      </div>
+      <div class="desc-div text-left" style="border: none;">
+        <p class="desc-p text-left header-b"><img src="./assets/img/lottoball@3x.png" class="lot-img"/>Lotto jackpot over <span style="color: #ff3333;">&#x20A4;20M</span></p>
+        <ion-item class="toggle-item">
+            <ion-label> Get 20 Lines for &#x20A4;4.99 per draw</ion-label>
+            <ion-toggle checked="false"></ion-toggle>
+        </ion-item>
+      </div>
+  </div>
+
+    <div class="bottom_bar">
+    <p class="s-title" style="color: white; padding-bottom: 5px;">Includes jackpot trigger for EuroMillions jackpots over &#x20A4;30M </p>
+    <button ion-button (click)="next()">BUY NOW FOR &#x20A4;9 </button>
+    </div>
+</ion-content>
+

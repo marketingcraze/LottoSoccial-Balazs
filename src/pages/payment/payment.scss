@@ -1,5 +1,5 @@
-page-choose-image {
-        @font-face {
+page-payment {
+       @font-face {
         font-family: lato-black;
         src: url(../assets/fonts/Lato-Black.ttf);
     }
@@ -43,31 +43,4 @@ page-choose-image {
 .pad-10 {
     padding: 10px;
 }
-    font-family: lato-regular;
-    .top-div {
-        background: white;
-        text-align: center;
-        padding: 15px;
-        margin-bottom: 10px;
-        color: #666;
-    }
-    .upload-btn {
-        background:#2f76d1;
-        width: 40%;
-    }
-    .image-list {
-        height: auto;
-        background-size: cover;
-        margin-bottom: 5px;
-        img {
-            width: 100%;
-            height: 100%
-        }
-    }
-    .upload-icon {
-        width: 24px;
-        height: 32px;
-        padding: 0px 5px 2px;
-        opacity: 0.9;
-    }
 }

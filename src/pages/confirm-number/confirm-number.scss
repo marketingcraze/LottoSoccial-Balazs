@@ -1,0 +1,246 @@
+page-confirm-number {
+        @font-face {
+        font-family: lato-black;
+        src: url(../assets/fonts/Lato-Black.ttf);
+    }
+    @font-face {
+        font-family: lato-regular;
+        src: url(../assets/fonts/Lato-Regular.ttf);
+    }
+    @font-face {
+        font-family: lato-bold;
+        src: url(../assets/fonts/Lato-Bold.ttf);
+    }
+    .toolbar-background-md {
+        background: rgb(37, 95, 199);
+    }
+.toolbar-md {
+    min-height: 42px;
+}
+.toolbar-title-md {
+    color: white;
+    font-size: 16px;
+    font-family: lato-black;
+}
+.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
+    color: white;
+    font-size: 12px;
+}
+.marg-top-12{
+    margin-top: 12px;
+}
+.main-bg {
+    background: #e3e3e3;
+    font-family: lato-regular;
+}
+.inner-body {
+    background: white;
+    padding-bottom: 20px;
+}
+.pad-top-5 {
+    padding-top: 5px;
+}
+.pad-10 {
+    padding: 10px;
+}
+    font-family: lato-regular;
+    .syndicateRow {
+        background: white;
+        margin-bottom: 10px;
+        padding-bottom: 15px;
+    }
+    .h-title {
+        padding-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .desc-p {
+        text-align: center;
+        padding: 5px;
+        font-weight: normal;
+        margin: 0;
+    }
+    .s-title, .xs-title{
+        font-size: 12px;
+        text-align: center;
+        margin: 0;
+    }
+    .xs-title {
+        font-size: 10px;
+        padding: 5px;
+    }
+    .btn {
+        height: 23px;
+        font-size: 12px;
+        border-radius: 3px;
+        padding: 9px 15px;
+    }
+    .tag {
+        background: #b7b7b7;
+        padding: 3px 7px;
+        border-radius: 10px;
+        margin: 0 5px;
+    }
+    .input-number {
+        //border: 1px solid #ccc;
+        width: 38px;
+        height: 38px;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: lato-black;
+        text-align: center;
+        background: url(../assets/img/circular.png);
+        background-size: cover;
+    }
+    .st-input {
+        background: url(../assets/img/star.png);
+        background-size: cover; 
+    }
+    .lotto-c {
+        background: url(../assets/img/circular2.png);
+        background-size: cover;
+    }
+    .star-icon {
+        position: absolute;
+        top: -3px;
+        left: 4px;
+        color: #e7d011;
+    }
+    .lot-img {
+        width: 40px;
+        vertical-align: middle;
+    }
+    .pad-5 {
+        padding: 5px 10px;
+    }
+    .my-sub-head {
+        padding: 0 10px;
+        .toolbar-background-md {
+            background: #1f4c87;
+        }
+        span.sp1 {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        span.sp2 {
+            color: white;
+            font-size: 1.2rem;
+        }
+    }
+    .text-center {
+        text-align: center;
+    }
+    .errorDiv {
+        text-align: left;
+        padding: 15px;
+        background: #FEE5E5;
+        color: #C10A09;
+    }
+    .bottom_bar {
+        background: rgb(25, 57, 116);
+        padding: 10px;
+        margin-bottom: 12px;
+        // position: fixed;
+        text-align: center;
+        // left: 0;
+        // bottom: 0;
+        width: 100%;
+        // right: 0;
+
+        .button-md {
+            height: 4.5rem;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            width: 100%;
+            background: rgb(20, 153, 63);
+        }
+    }
+    .grid-row {
+        margin: 0 auto;
+        width: 260px;
+        .col {
+            max-width: 43px;
+            padding: 3px;
+        }
+    }
+    .like-div {
+        text-align: center;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-top: 30px;
+        p{
+            margin-top: -12px;
+            background: #e3e3e3;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    .divider {
+        height: 2px;
+        width: 100%;
+        background: #ccc;
+    }
+    .b-desc {
+        font-size: 14px;
+        text-align: center;
+        margin: 0;
+        padding: 10px 10px 2px;
+    }
+    .anch {
+        text-decoration: none;
+    }
+    .desc-div {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+    }
+    .text-left {
+        text-align: left;
+    }
+    .header-b {
+        font-size: 16px;
+        font-family: lato-black;
+    }
+    .pad-0 {
+        padding: 0;
+    }
+    .mar-0 {
+        margin: 0;
+    }
+    .pad-lr-10 {
+        padding: 0 10px 0 15px;
+    }
+    .toggle-item {
+        min-height: 25px;
+        height: 25px;
+        .item-inner {
+            border-bottom: 0px !important;
+        }
+    }
+    .baner-img {
+        width: 100%;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .toggle-md .toggle-icon {
+        background-color: rgba(255, 0, 0, 0.4);
+    }
+    .toggle-md .toggle-inner {
+        background-color: #FF0000;
+    }
+    .toggle-md .toggle-checked {
+        background-color: rgba(20, 153, 63, 0.5);
+    }
+    .toggle-md .toggle-checked .toggle-inner {
+        background-color: #14993f;
+        -webkit-transform: translate3d(16px, 0, 0);
+        transform: translate3d(16px, 0, 0);
+    }
+    
+
+}

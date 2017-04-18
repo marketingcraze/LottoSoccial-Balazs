@@ -18,14 +18,18 @@ export class ChooseImagePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.images = [
-      "http://lorempixel.com/400/400/technics/1/",
-       "http://lorempixel.com/400/400/technics/2/",
-        "http://lorempixel.com/400/400/technics/3/",
-         "http://lorempixel.com/400/400/technics/4/",
-          "http://lorempixel.com/400/400/technics/5/",
-           "http://lorempixel.com/400/400/technics/6/",
-            "http://lorempixel.com/400/400/technics/7/",
-            "http://lorempixel.com/400/400/technics/8/"
+      "./assets/img/pvt_cover_00"+1+"@2x.png",
+      "./assets/img/pvt_cover_00"+2+"@2x.png",
+      "./assets/img/pvt_cover_00"+3+"@2x.png",
+      "./assets/img/pvt_cover_00"+4+"@2x.png",
+      "./assets/img/pvt_cover_00"+5+"@2x.png",
+      "./assets/img/pvt_cover_00"+6+"@2x.png",
+      "./assets/img/pvt_cover_00"+7+"@2x.png",
+      "./assets/img/pvt_cover_00"+8+"@2x.png",
+      "./assets/img/pvt_cover_00"+9+"@2x.png",
+      "./assets/img/pvt_cover_0"+10+"@2x.png",
+      "./assets/img/pvt_cover_0"+11+"@2x.png",
+      "./assets/img/pvt_cover_0"+12+"@2x.png",
             ];
   }
 

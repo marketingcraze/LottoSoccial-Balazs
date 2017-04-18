@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CreateSyndicate4Page } from '../create-syndicate4/create-syndicate4';
+import { ChooseNumberPage } from '../choose-number/choose-number';
 
 /*
   Generated class for the CreateSyndicate5 page.
@@ -24,6 +25,9 @@ export class CreateSyndicate5Page {
   }
   close() {
     this.navCtrl.pop(CreateSyndicate4Page);
+  }
+  next() {
+    this.navCtrl.push(ChooseNumberPage);
   }
 
 }

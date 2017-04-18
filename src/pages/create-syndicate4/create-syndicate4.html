@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>
   <ion-navbar>
     <ion-title>Create your syndicate</ion-title>
     <ion-buttons end>
@@ -13,7 +13,8 @@
         </button>
     </ion-buttons>
   </ion-navbar>
-</ion-header>
+</ion-header>-->
+<ion-header><synd-cus-header1 title="Create your syndicate" notification-count="5"></synd-cus-header1></ion-header>
 
 
 <ion-content class="marg-top-12 main-bg">
@@ -44,21 +45,21 @@
   <div class="syndicateRow">
     <div class="pad-10"><div class="h-title" style="border-bottom: 1.5px solid #ccc;"> DRAWS </div></div>
     <div class="pad-side-10">
-      <p class="desc-p"><img src="./assets/img/euroball.png" class="lot-img"/> Choose EuroMillions draws</p>
+      <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> Choose EuroMillions draws</p>
         <ion-grid class="my-grid border-btm">
           <ion-row>
             <ion-col col-6 style="text-align: right;">
              <span (click)="tick('tue')">
-               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="euroDays.tue"></ion-icon>
-               <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!euroDays.tue"></ion-icon>
+               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon cico" [hidden]="euroDays.tue"></ion-icon>
+               <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb cico" [hidden]="!euroDays.tue" style="content: url('./assets/img/check_b.svg');"></ion-icon>
                 Tuesday
                 </span>
             </ion-col>
             <ion-col col-1></ion-col>
             <ion-col col-5>
               <span (click)="tick('fri')">
-                <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="euroDays.fri"></ion-icon>
-                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!euroDays.fri"></ion-icon>
+                <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon cico" [hidden]="euroDays.fri"></ion-icon>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb cico" [hidden]="!euroDays.fri" style="content: url('./assets/img/check_b.svg');"></ion-icon>
                  Friday
               </span>
             </ion-col>
@@ -73,21 +74,21 @@
         
     </div>
     <div class="pad-side-10">
-      <p class="desc-p"><img src="./assets/img/lottoball.png" class="lot-img"/> Choose Lotto draws</p>
+      <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> Choose Lotto draws</p>
         <ion-grid class="my-grid border-btm">
           <ion-row>
             <ion-col col-6 style="text-align: right;">
              <span (click)="tick('wed')">
-               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="lottoDays.wed"></ion-icon>
-               <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!lottoDays.wed"></ion-icon>
+               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon cico" [hidden]="lottoDays.wed"></ion-icon>
+               <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb cico" [hidden]="!lottoDays.wed" style="content: url('./assets/img/check_b.svg');"></ion-icon>
                 Wednesday
               </span>
             </ion-col>
             <ion-col col-1></ion-col>
             <ion-col col-5>
               <span (click)="tick('sat')">
-                <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon" [hidden]="lottoDays.sat"></ion-icon>
-                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb" [hidden]="!lottoDays.sat"></ion-icon>
+                <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon cico" [hidden]="lottoDays.sat"></ion-icon>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb cico" [hidden]="!lottoDays.sat" style="content: url('./assets/img/check_b.svg');"></ion-icon>
                  Saturday
               </span>
             </ion-col>
