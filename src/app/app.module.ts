@@ -31,8 +31,10 @@ import { CreateSyndicateTab } from '../pages/create-syndicate-tab/create-syndica
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { Params } from '../services/params';
 import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
+import { HomeService } from '../services/service.home';
 
 import { MyFilterPipe } from '../pipes/contact-selected'
 
@@ -130,6 +132,7 @@ import { File } from '@ionic-native/file';
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  CommonService, AuthService, ImagePicker, Transfer, File, InAppBrowser]
+  CommonService, AuthService, HomeService, Params, ImagePicker, Transfer, 
+  File, InAppBrowser]
 })
 export class AppModule {}

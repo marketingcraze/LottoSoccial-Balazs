@@ -54,7 +54,6 @@ export class AuthService {
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
         });
-
         
         var response = this.http.post(CommonService.apiUrl + action, data, opt).map(res => res.json());
         return response;

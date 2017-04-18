@@ -19,8 +19,8 @@ export class MyApp {
     // rootPage = WelcomePage;
     // rootPage = NewSyndicatePage;
     // rootPage = AddSyndicatePage;
-    // rootPage = HomePage;
-    rootPage = AuthPage;
+    rootPage = HomePage;
+    // rootPage = AuthPage;
 
     constructor(
         platform: Platform, 

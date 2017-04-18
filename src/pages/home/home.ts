@@ -31,8 +31,6 @@ export class HomePage {
 
   constructor(platform: Platform, public menu: MenuController) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
@@ -43,11 +41,7 @@ export class HomePage {
   }
 
   openPage(page: PageInterface) {
-    // the nav component was found using @ViewChild(Nav)
-    // reset the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
-
-    this.menu.close();
+     this.menu.close();
 
     if (page.index) {
       this.nav.setRoot(page.component, { tabIndex: page.index });
