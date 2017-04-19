@@ -271,12 +271,11 @@ export class CountryListPopPage {
     private params: NavParams,
     public commonSrv:CommonService) {
 
-console.log("countrys successful", CommonService.countries);
+    console.log("countrys successful", CommonService.countries);
 
     this.callback = this.params.get('cb');
-    this.countries = CommonService.countries;
+    this.countries = this.params.get('countries');
     
-
   }
 
   ionViewDidLoad() {

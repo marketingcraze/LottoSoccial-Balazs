@@ -169,6 +169,7 @@ export class SignupPage {
 		
 		// commented for API being ready
 	    this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
+	    	countries: this.countries,
 	    	cb: (data) => { 
 	    		this.selectedCountry = data; 
 	    		this.country_number = data.country_code;
