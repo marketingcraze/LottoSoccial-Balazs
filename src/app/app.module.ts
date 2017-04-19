@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
 import { StorePage } from '../pages/store/store';
 import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
@@ -37,6 +38,9 @@ import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+import { IonicStorageModule } from '@ionic/storage';
+import { Transfer } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 
 import { MyFilterPipe } from '../pipes/contact-selected'
 
@@ -45,8 +49,6 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
 import { CusHeader1Component } from '../components/synd-cus-header1/synd-cus-header1';
 import { CusHeader2Component } from '../components/synd-cus-header2/synd-cus-header2';
 import { ChooseImagePage } from '../pages/choose-image/choose-image';
-import { Transfer } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 
 @NgModule({
     declarations: [
@@ -99,6 +101,10 @@ import { File } from '@ionic-native/file';
         modalEnter: 'modal-slide-in',
         modalLeave: 'modal-slide-out',
         statusbarPadding: false
+      }),
+      IonicStorageModule.forRoot({
+          name: '__mydb',
+          driverOrder: ['indexeddb', 'sqlite', 'websql']
       })
   ],
   bootstrap: [IonicApp],

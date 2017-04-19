@@ -66,7 +66,7 @@
 
 	</ion-grid>
 
-	<p *ngIf="!warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
+	<p *ngIf="warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 	<p *ngIf="warningPassword" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid password</p>
 	<div padding>
 		<button class="center auth-button" type="submit" ion-button text-center padding large full color="secondary" round >SIGN UP</button>

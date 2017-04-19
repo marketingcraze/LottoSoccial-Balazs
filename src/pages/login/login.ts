@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { App, NavController, Platform, NavParams, PopoverController, 
     LoadingController, AlertController } from 'ionic-angular';
 
+import { Storage } from '@ionic/storage';
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 
 import { HomePage } from '../home/home';
@@ -33,11 +34,10 @@ export class LoginPage {
     public showPass = false;
 
     public countryes:any[];
-
-    private storage:SecureStorageObject;
-                    
-
-
+    
+    private storageReady:boolean = false;
+    private storageObject:SecureStorageObject;
+    
     public login:any = {
         free_reg_msn:'',
         free_reg_pwd: ''
@@ -49,6 +49,8 @@ export class LoginPage {
         public alertCtrl:AlertController,
         public navCtrl: NavController, 
         public navParams: NavParams,
+
+        private storage: Storage,
         private secureStorage: SecureStorage,
         public loadingCtrl: LoadingController,
         private popoverCtrl: PopoverController,
@@ -57,15 +59,14 @@ export class LoginPage {
 
         this.loadCountries();
 
+        storage.ready().then( ()=> this.storageReady = true  );
+
         this.secureStorage.create(CommonService.SecureStorageUser)
         .then((storage: SecureStorageObject) => {
-            this.storage = storage;
+            this.storageObject = storage;
+        });
 
-/*     storage.get('myitem')
-       .then(
-         data => console.log(data),
-         error => console.log(error)
-     );
+/*     
 
      
 
@@ -75,7 +76,6 @@ export class LoginPage {
          error => console.log(error)
      );*/
 
-  });
     }
 
     loadCountries(){
@@ -196,11 +196,21 @@ export class LoginPage {
                 
                 console.log("user login data", data);
                 // store in secure storage
-                this.storage.set('session', JSON.stringify(data))
-                .then(
-                    data => console.log(data),
-                    error => console.log(error)
-                );
+                console.log("is cordova", this.platform.is('cordova') );
+                if ( this.platform.is('cordova')) {    
+                    this.storageObject.set('session', JSON.stringify(data))
+                    .then(
+                        data => console.log(data),
+                        error => console.log(error)
+                    );
+                }else if (this.storageReady) {
+                    this.storage.set('session', JSON.stringify(data))
+                    .then(
+                        data => console.log(data),
+                        error => console.log(error)
+                    );
+                }
+                
 
 
                 // go to home page
