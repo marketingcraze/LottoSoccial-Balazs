@@ -34,7 +34,7 @@ export class MyApp {
       commonSrv.getCountry().subscribe(
       data=>{
         if(data) {
-          CommonService.countries = data.response[0].get_country_code_flag.response.country_code_group;
+          CommonService.countries = data;
         }
         
         console.log("countries loaded", CommonService.countries);

@@ -87,7 +87,7 @@ export class LoginPage {
         this.commonSrv.getCountry().subscribe(
             data=>{
                 loader.dismiss();
-                this.countryes = data;
+                this.countryes = data.response[0].get_country_code_flag.response.country_code_group;
                 this.selectedCountry = this.countryes[0];
                 console.log("countrys successful", this.countryes);
             },
