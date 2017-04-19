@@ -4,6 +4,8 @@ import { App, Platform, Tabs, NavController, NavParams, AlertController,
  PopoverController, LoadingController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
@@ -37,6 +39,7 @@ export class SignupPage {
 	public warningPhone:boolean = false;
 	public country_number:string = "";
 
+	private storage:SecureStorageObject;
 	public countries:any[];
 
 	public signup = {
@@ -51,8 +54,8 @@ export class SignupPage {
 
 
 	constructor(
-		private transfer: Transfer, private file: File,
-
+		private transfer: Transfer, 
+		private file: File,
 		public app:App,
 		public platform:Platform,
 		public navCtrl: NavController, 
@@ -60,6 +63,7 @@ export class SignupPage {
 		private imagePicker: ImagePicker,
 		private popoverCtrl: PopoverController,	
 		public alertCtrl:AlertController,
+		private secureStorage: SecureStorage,
 		private loadingCtrl: LoadingController,	
 		public commonSrv:CommonService,
 		public authSrv:AuthService) {
@@ -70,6 +74,24 @@ export class SignupPage {
 		platform.ready().then(() => {
 			console.log('ready');
         });
+
+
+        this.secureStorage.create(CommonService.SecureStorageUser)
+        .then((storage: SecureStorageObject) => {
+            this.storage = storage;
+        });
+
+/*     storage.get('myitem')
+       .then(
+         data => console.log(data),
+         error => console.log(error)
+     );
+     storage.remove('myitem')
+     .then(
+         data => console.log(data),
+         error => console.log(error)
+     );*/
+
 
 	}
 
@@ -183,59 +205,6 @@ export class SignupPage {
 		
 	}
 
-
-/*
-	uploadProfilePic( filePath:string ){
-        
-        let server = CommonService.apiUrl + 
-            CommonService.version + '/upload/?process=profile';
-
-        let myHeaders: Headers = new Headers();
-        myHeaders.set('Authorization', 
-            'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
-            'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
-            'oauth_signature_method="HMAC-SHA1",' +
-            'oauth_timestamp="1490087533",' +
-            'oauth_nonce="dWL9pr",' +
-            'oauth_version="1.0",' +
-            'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
-            );
-        // myHeaders.append('Content-type', 'multipart/form-data');
-
-        var extension = filePath.substr(filePath.lastIndexOf('.') + 1);
-        let options = {
-            fileKey: 'file',
-            // fileName: 'name.jpg',
-            // mimeType: "multipart/form-data",
-            headers: myHeaders
-        }
-
-        console.log("options ", server, options);
-        
-        return new Observable( observer => {
-            let fileTransfer = this.transfer.create();
-
-            fileTransfer.upload(filePath, encodeURI(server), options)
-            .then((data:any) => {
-                // success
-                console.log("success" + data);
-                if(data && data.response && data.response.status == 'SUCCESS') {
-                    observer.next(data.response);
-                }else{
-                    observer.next( Error("Image upload error.") );
-                }
-                
-                observer.complete();
-            }, (err:any) => {
-                // error
-                observer.next(err);
-                observer.complete();
-            });
-        });
-    }
-*/
-
-
 	submitSignup(form:any){
 		// let nav = this.app.getRootNav();
         // nav.setRoot(NewSyndicatePage);
@@ -314,6 +283,13 @@ url:""
                 } catch (e) {
                     data = undefined;
                 }
+
+                // store in secure storage
+                this.storage.set('session', JSON.stringify(data))
+                .then(
+                    data => console.log(data),
+                    error => console.log(error)
+                );
 
                 // go to home page
                 if(data && data.status != 'error') {

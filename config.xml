@@ -60,4 +60,5 @@
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.6.2" />
+    <plugin name="cordova-plugin-secure-storage" spec="~2.6.5" />
 </widget>

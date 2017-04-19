@@ -16,10 +16,10 @@ import { CommonService } from '../services/common.service';
     templateUrl: 'app.html'
 })
 export class MyApp {
-    // rootPage = WelcomePage;
+    rootPage = WelcomePage;
     // rootPage = NewSyndicatePage;
     // rootPage = AddSyndicatePage;
-    rootPage = HomePage;
+    // rootPage = HomePage;
     // rootPage = AuthPage;
 
     constructor(

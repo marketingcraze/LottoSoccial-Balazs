@@ -98,7 +98,9 @@ image:""
 last_name:"2"
 mobile:"23423423423"
 */
-        var response = this.http.post(CommonService.apiUrl, 
+        console.log("addUser", signup);
+
+        var response = this.http.post(CommonService.apiUrl + action, 
             signup, opt).map(res => res.json());
         return response;
     }

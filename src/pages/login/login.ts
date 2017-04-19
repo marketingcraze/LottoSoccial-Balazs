@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { App, NavController, Platform, NavParams, PopoverController, 
     LoadingController, AlertController } from 'ionic-angular';
 
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+
 import { HomePage } from '../home/home';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { CommonService } from '../../services/common.service';
@@ -31,6 +33,8 @@ export class LoginPage {
     public showPass = false;
 
     public countryes:any[];
+
+    private storage:SecureStorageObject;
                     
 
 
@@ -45,12 +49,33 @@ export class LoginPage {
         public alertCtrl:AlertController,
         public navCtrl: NavController, 
         public navParams: NavParams,
+        private secureStorage: SecureStorage,
         public loadingCtrl: LoadingController,
         private popoverCtrl: PopoverController,
         public commonSrv:CommonService,
         public authSrv:AuthService	) {
 
         this.loadCountries();
+
+        this.secureStorage.create(CommonService.SecureStorageUser)
+        .then((storage: SecureStorageObject) => {
+            this.storage = storage;
+
+/*     storage.get('myitem')
+       .then(
+         data => console.log(data),
+         error => console.log(error)
+     );
+
+     
+
+     storage.remove('myitem')
+     .then(
+         data => console.log(data),
+         error => console.log(error)
+     );*/
+
+  });
     }
 
     loadCountries(){
@@ -170,6 +195,14 @@ export class LoginPage {
                 }
                 
                 console.log("user login data", data);
+                // store in secure storage
+                this.storage.set('session', JSON.stringify(data))
+                .then(
+                    data => console.log(data),
+                    error => console.log(error)
+                );
+
+
                 // go to home page
                 if(data) {
                     if(data.status != "error" ) {

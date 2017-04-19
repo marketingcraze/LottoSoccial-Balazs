@@ -36,6 +36,8 @@ import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+
 import { MyFilterPipe } from '../pipes/contact-selected'
 
 import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
@@ -132,7 +134,7 @@ import { File } from '@ionic-native/file';
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  CommonService, AuthService, HomeService, Params, ImagePicker, Transfer, 
+  CommonService, AuthService, HomeService, Params, SecureStorage, ImagePicker, Transfer, 
   File, InAppBrowser]
 })
 export class AppModule {}
