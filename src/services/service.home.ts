@@ -65,54 +65,6 @@ export class HomeService {
 
     
     
-
-
-    uploadProfilePic( filePath:string ){
-        
-        let server = CommonService.apiUrl + 
-            CommonService.version + '/upload/?process=profile';
-
-        let myHeaders: Headers = new Headers();
-        myHeaders.set('Authorization', 
-            'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
-            'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
-            'oauth_signature_method="HMAC-SHA1",' +
-            'oauth_timestamp="1490087533",' +
-            'oauth_nonce="dWL9pr",' +
-            'oauth_version="1.0",' +
-            'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
-            );
-        myHeaders.append('Content-type', 'multipart/form-data');
-
-        var extension = filePath.substr(filePath.lastIndexOf('.') + 1);
-        let options = {
-            fileKey: 'file',
-            // fileName: 'name.jpg',
-            mimeType: "multipart/form-data",
-            headers: myHeaders
-        }
-
-        let formData = new FormData();
-        formData.append('image', filePath);
-
-        console.log("options ", server, options);
-
-        console.log("form data ", formData);
-        
-        var response = this.http.post(server, formData, options)
-        .map(res => res.json());
-
-        return response;
-    }
- 
- 
-    getLoggedInUser() {
-        // return firebase.auth().currentUser;
-    }
- 
-    onAuthStateChanged(callback) {
-        // return firebase.auth().onAuthStateChanged(callback);
-    }
 }
 
 

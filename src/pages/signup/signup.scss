@@ -1,4 +1,6 @@
 page-signup {
+
+  
 	p{
 		margin: 10px;
 		font-size: .9em;
@@ -6,45 +8,48 @@ page-signup {
 	a{
 		text-decoration: none;
 	}
-    .grid, .col{
-        padding: 0;
-    }
-    .button-large-md{
-        font-size: 2.2rem;
-    }
-    .item-md{
-        padding-left: 0;
-        padding-right: 0;
-        font-size: 1.4rem;
-        
-        .item-md[item-right]{
-            margin: 0;
-        }
-    }
-    .tabs-md .tabbar {
-        background-color: #304d85;
-        border-bottom: 1px solid #ccc;
 
-        .tab-highlight{
-          height: 4px;
-          background-color: #FFFFFF;
-        }
+  .grid, .col{
+    padding: 0;
+  }
+  .button-large-md{
+    font-size: 2.2rem;
+  }
 
-        .tab-button {
-            max-width: 100%;
-            text-transform: uppercase;
-            font-weight: bold;
-            color: #fff !important;
-            min-height: 48px;
-          }
+  .item-md{
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.4rem;
+
+    .item-md[item-right]{
+      margin: 0;
     }
-    .item-md ion-icon[item-left], .item-md ion-icon[item-right]{
-        margin: 0;
+  }
+
+  .tabs-md .tabbar {
+    background-color: #304d85;
+    border-bottom: 1px solid #ccc;
+
+    .tab-highlight{
+      height: 4px;
+      background-color: #FFFFFF;
     }
 
-    .last-name{
-        padding-left: 1px;
+    .tab-button {
+      max-width: 100%;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #fff !important;
+      min-height: 48px;
     }
+  }
+  .item-md ion-icon[item-left], .item-md ion-icon[item-right]{
+    margin: 0;
+  }
+
+  .last-name{
+    padding-left: 1px;
+  }
   .small-icon{
       font-size: 1.2em;
       padding-top: .6em;
@@ -56,40 +61,40 @@ page-signup {
   }
 	
 	.lotto-logo {
-      display: block;
-      width: 72px;
-      margin: 1em auto;
-      position: relative;
-      img{
-        border-radius: 50%;
-      }
-      .update-icon{
-        position: absolute;
-        background: white;
-        border-radius: 50%;
-        float: right;
-        padding: 0.1em;
-        width: 1.4em;
-        height: 1.4em;
-        bottom: 1px;
-        right: 3px
-      }
+    display: block;
+    width: 72px;
+    margin: 1em auto;
+    position: relative;
+    img{
+      border-radius: 50%;
+    }
+    .update-icon{
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      float: right;
+      padding: 0.1em;
+      width: 1.4em;
+      height: 1.4em;
+      bottom: 1px;
+      right: 3px
+    }
   }
   .profile-picture{
     background: #e3e3e3;
   }
 
-    .warning{
-    	margin: 0;
-      margin-top: 1em;
-    	padding: 1em;
-    	background-color: rgba(255,0,0,.1);
-    	color: red;
-    }
+  .warning{
+  	margin: 0;
+    margin-top: 1em;
+  	padding: 1em;
+  	background-color: rgba(255,0,0,.1);
+  	color: red;
+  }
 
-    .auth-button{
-    	margin: 0 1em;
-        width: calc(100% - 2em);
-    	max-height: 2.6em;
-    }
+  .auth-button{
+  	margin: 0 1em;
+      width: calc(100% - 2em);
+  	max-height: 2.6em;
+  }
 }

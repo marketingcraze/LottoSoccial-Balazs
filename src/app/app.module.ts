@@ -33,12 +33,14 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { Params } from '../services/params';
+import { DatabaseService } from '../services/db.service';
 import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 import { IonicStorageModule } from '@ionic/storage';
+import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 
@@ -103,7 +105,7 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
         statusbarPadding: false
       }),
       IonicStorageModule.forRoot({
-          name: '__mydb',
+          name: '__lottosocialdb',
           driverOrder: ['indexeddb', 'sqlite', 'websql']
       })
   ],
@@ -140,7 +142,8 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  CommonService, AuthService, HomeService, Params, SecureStorage, ImagePicker, Transfer, 
-  File, InAppBrowser]
+  CommonService, AuthService, HomeService, DatabaseService, Params, SecureStorage, 
+  SQLite, ImagePicker, Transfer, File, InAppBrowser]
+
 })
 export class AppModule {}

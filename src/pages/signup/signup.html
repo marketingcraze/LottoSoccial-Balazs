@@ -51,7 +51,7 @@
 	<ion-row>
 		<ion-col col-10>
 			<ion-item>
-				<ion-input #input type="password" name="password" [(ngModel)]="signup.free_reg_pwd" placeholder="Choose password*" required [attr.minlength]="6"></ion-input>
+				<ion-input #input type="password" name="password" [(ngModel)]="signup.free_reg_pwd" placeholder="Choose password*" required minlength="6" [attr.minlength]="6" ></ion-input>
  				<button class="btn" type="button" ></button>
 			</ion-item>
 		</ion-col>

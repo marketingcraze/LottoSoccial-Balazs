@@ -213,8 +213,15 @@ export class SignupPage {
 		this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
 		this.signup.country_code = this.country_number;
 		console.log("submitSignup", this.signup, form);
+		// console.log("submitSignup", form);
 
 		if(this.phoneValidator(this.signup.free_reg_msn) ) {
+			this.warningPhone = true;
+			return;
+		}
+		this.warningPhone = false;
+
+		if(this.passwordValidator(this.signup.free_reg_pwd) ) {
 			this.warningPhone = true;
 			return;
 		}
@@ -249,6 +256,15 @@ export class SignupPage {
 	phoneValidator(value: string):boolean {
 		if (value !== '') {
 			if (!value.match('\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4}')) {
+				return  true;
+			}
+		}
+		return false;
+	}
+
+	passwordValidator(value: string):boolean {
+		if (value !== '') {
+			if (!value.match('.{5,10}')) {
 				return  true;
 			}
 		}
