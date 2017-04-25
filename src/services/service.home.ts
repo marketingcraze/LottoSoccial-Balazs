@@ -1,4 +1,4 @@
-// app/shared/services/auth.service.ts
+import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import {Http, RequestOptions, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -8,6 +8,7 @@ import { Transfer, FileUploadOptions, TransferObject, } from '@ionic-native/tran
 import { File } from '@ionic-native/file';
 
 import { CommonService } from './common.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class HomeService {
@@ -17,6 +18,7 @@ export class HomeService {
     }
   
     constructor(private http:Http, 
+        public platform: Platform,
         private transfer: Transfer,
         private file: File) {
     }
@@ -42,24 +44,24 @@ export class HomeService {
         return response;
     }
 
-    getHomeCard() {
+    getHomeCard(module_name) {
+        console.log("getHomeCard");
+
         let action = CommonService.version + '/home/';
         let parameter = {
             "request": [
             {
                 "page_id": "1",
                 "screen_id": "1.4", 
-                "module_name": "get_home_card", 
+                "module_name": module_name, 
                 "customer_id":"1970400"
             } ]
         };
-
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
         });
 
-        console.log("getHomeCard", parameter);
-        var response = this.http.post(CommonService.apiUrl + action, parameter, opt).map(res => res.json());
+        var response = this.http.post(CommonService.apiUrl + action, parameter, opt).map(response => response.json());
         return response;
     }
 

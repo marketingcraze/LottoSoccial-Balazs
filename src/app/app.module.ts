@@ -142,7 +142,7 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  CommonService, AuthService, HomeService, DatabaseService, Params, SecureStorage, 
+  DatabaseService, CommonService, AuthService, HomeService, Params, SecureStorage, 
   SQLite, ImagePicker, Transfer, File, InAppBrowser]
 
 })

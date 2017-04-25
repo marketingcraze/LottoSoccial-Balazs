@@ -54,12 +54,13 @@ export class StorePage {
     }
 
     initData(){
+
       let loader = this.loadingCtrl.create({
         content: "Please wait..."
       });
       loader.present();
 
-      this.srvHome.getHomeCard().subscribe(
+      this.srvHome.getHomeCard("get_home_card").subscribe(
         data=>{
           loader.dismiss();
 

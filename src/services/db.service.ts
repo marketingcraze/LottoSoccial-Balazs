@@ -1,4 +1,4 @@
-// app/shared/services/auth.service.ts
+import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
@@ -8,19 +8,33 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 @Injectable()
 export class DatabaseService {
 
+    public static databaseName : string = "lottosocial.db";
     public database : SQLiteObject;
+    public tableCount:number = 3;
+    public databaseCreated:number = 0;
   
-    constructor(private sqlite: SQLite,) {
+    constructor(private sqlite: SQLite,
+      public platform: Platform) {
 
-        this.sqlite.create({
-          name: "lottosocial.db",
-          location: "default"
-        }).then(( db: SQLiteObject ) => {
-            this.database = db;
-        }, (error) => {
-            console.error("Unable to open database", error);
-        });
+      console.log("DatabaseService");
+      
+      this.createDatabase().then(( db: SQLiteObject ) => {
+        console.log("database created"); 
+          this.database = db;
+        // open sqlite database
+        this.prepareSqliteDatabase();
+      }, (error) => {
+        console.error("Unable to open database", error);
+      });
     }
+
+    createDatabase(){
+      return this.sqlite.create({
+        name: DatabaseService.databaseName,
+        location: "default"
+      });
+    }
+
 
     insert(tableName, columnsName, columnsValues:any[]) {
 
@@ -71,51 +85,113 @@ export class DatabaseService {
         var query = "SELECT " + columnsNames + " FROM " + tableName + " " + whereClause;
 
         console.log(query, whereArgs );
+        return this.database.executeSql(query, whereArgs )
+        .then((data) => {
+            console.log("ROWS: " + JSON.stringify(data));
+        }, (error) => {
+            console.log("ERROR: " + JSON.stringify(error.err));
+        });
+    }
 
-        return Observable.create(observer => {
+    raw_query( query:string, params:any[] ) {
+        
+        if (this.databaseCreated >= this.tableCount) {
+            console.log( query );
+            return this.database.executeSql(query, params );
+        }else{
+          
+          return new Promise( (resolve, reject) => {
 
-            this.database.executeSql(query, whereArgs )
-            .then((data) => {
-                console.log("ROWS: " + JSON.stringify(data));
-
-                observer.next(data);
-                observer.complete();
-
-            }, (error) => {
+            const source = Observable.interval(400)
+            .take(20)
+            .subscribe(res => { 
+              console.log("observing ", this.databaseCreated, res);
+              
+              if (this.databaseCreated == this.tableCount) {
+                source.unsubscribe();
                 
-                console.log("ERROR: " + JSON.stringify(error.err));
-                observer.next(error);
-                observer.complete();
+                console.log( "executing " + query );
+                this.database.executeSql(query, params ).then( (res) => {
+                    console.log( "result ", res );
+
+                    for (var i = 0 ; i < res.rows.length; i++) {
+                        console.log("row " + i + ": ", res.rows.item(i) );
+                    }
+                  resolve( res );
+                }, err => {
+                  reject(err);
+                });
+              }
+
+              if ( res > 19) {
+                reject( Error("Database taking too long to respond") );
+              }
 
             });
-        });
-    }
-
-    raw_query( query:string ) {
-
-        console.log( query );
-
-        return Observable.create(observer => {
-
-            this.database.executeSql(query, [] )
-            .then((data) => {
-                console.log("RESULT: " + JSON.stringify(data));
-
-                observer.next(data);
-                observer.complete();
-
-            }, (error) => {
-
-                console.log("ERROR: " + JSON.stringify(error.err));
-                observer.next(error);
-                observer.complete();
-
-            });
-        });
+              
+          });
+          
+        }
+        
     }
 
     
-    
+    prepareSqliteDatabase(){
+        console.log("prepareSqliteDatabase()");
+
+        let tblPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page` ("
+        + "`Page_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
+        + "`Page_Name` varchar(300) NULL,"
+        + "`Complete_Json_Data` TEXT NULL,"
+        + "`Update` TINYINT NULL,"
+        + "`Status` varchar(25) NULL,"
+        + "`Modified_By` varchar(50) NULL,"
+        + "`Modified_Date` datetime NULL,"
+        + "`Date_Created` datetime NULL)";
+
+        this.database.executeSql(tblPageCreate, {}).then((data) => {
+          this.databaseCreated++;
+          console.log("TABLE Page CREATED: ", this.databaseCreated, tblPageCreate, data);
+        }, (error) => {
+            console.error("Unable to execute sql", error);
+        });
+
+
+        let tblModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Module` ("
+        + "`Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT, " 
+        + "`Module_Name` Varchar(100) NULL, "
+        + "`SP_Name` Varchar(100) NULL, "
+        + "`Module_Json` TEXT NULL, "
+        + "`Status` varchar(25) NULL, "
+        + "`Modified_By` varchar(50) NULL, "
+        + "`Modified_Date` datetime NULL, "
+        + "`Date_Created` datetime NULL)";
+
+        this.database.executeSql(tblModuleCreate, {}).then((data) => {
+          this.databaseCreated++;
+          console.log("TABLE Module CREATED: ", this.databaseCreated, tblModuleCreate, data);
+        }, (error) => {
+          console.error("Unable to execute sql", error);
+        });
+
+        let tblPageModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page_Module` ( "
+        + "`Page_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
+        + "`Page_ID` INTEGER NULL,"
+        + "`Module_ID` INTEGER NULL,"
+        + "`Expired` TINYINT NULL,"
+        + "`Expire_At` Varchar(50) NULL,"
+        + "`Status` varchar(25) NULL,"
+        + "`Modified_By` varchar(50) NULL,"
+        + "`Modified_Date` datetime NULL,"
+        + "`Date_Created` datetime NULL) ";
+
+        this.database.executeSql(tblPageModuleCreate, {}).then((data) => {
+          this.databaseCreated++;
+          console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
+        }, (error) => {
+          console.error("Unable to execute sql", error);
+        });
+    }
     
 }
 
