@@ -58,10 +58,7 @@ export class MyApp {
         }
       });
     });
-
   }
-
-
 
   loadCountries(){
     this.commonSrv.getCountry().subscribe(

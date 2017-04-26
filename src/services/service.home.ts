@@ -23,24 +23,29 @@ export class HomeService {
         private file: File) {
     }
 
-    getOffers() {
-        let action = CommonService.version + '/offers/';
+    getModules(action:string, page_id:string, module_names:string[]) {
+        
         let parameter = {
-            "request": [
-            {
-                "page_id": "1",
-                "screen_id": "1.4", 
-                "module_name": "get_home_card", 
-                "customer_id":"1970400"
-            } ]
+            request: []
         };
+        for (var i = 0; i < module_names.length; ++i) {
+            parameter.request.push({
+                "page_id": page_id,
+                "screen_id": "1.4", 
+                "module_name": module_names[i], 
+                "customer_id":"1970400"
+            });
+        }
 
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
         });
 
-        console.log("getOffers", parameter);
-        var response = this.http.post(CommonService.apiUrl + action, parameter, opt).map(res => res.json());
+        let url = CommonService.apiUrl + CommonService.version + '/' + action + '/';
+
+        console.log("getOffers", url, parameter);
+        var response = this.http.post(url, 
+            parameter, opt).map(res => res.json());
         return response;
     }
 
@@ -55,7 +60,8 @@ export class HomeService {
                 "screen_id": "1.4", 
                 "module_name": module_name, 
                 "customer_id":"1970400"
-            } ]
+            } 
+            ]
         };
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
