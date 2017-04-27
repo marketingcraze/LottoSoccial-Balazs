@@ -3,7 +3,6 @@ import { App, NavController, Platform, NavParams, PopoverController,
     LoadingController, AlertController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 
 import { HomePage } from '../home/home';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
@@ -36,7 +35,6 @@ export class LoginPage {
     public countryes:any[];
     
     private storageReady:boolean = false;
-    private storageObject:SecureStorageObject;
     
     public login:any = {
         free_reg_msn:'',
@@ -49,9 +47,7 @@ export class LoginPage {
         public alertCtrl:AlertController,
         public navCtrl: NavController, 
         public navParams: NavParams,
-
         private storage: Storage,
-        private secureStorage: SecureStorage,
         public loadingCtrl: LoadingController,
         private popoverCtrl: PopoverController,
         public commonSrv:CommonService,
@@ -61,20 +57,13 @@ export class LoginPage {
 
         storage.ready().then( ()=> this.storageReady = true  );
 
-        this.secureStorage.create(CommonService.SecureStorageUser)
-        .then((storage: SecureStorageObject) => {
-            this.storageObject = storage;
-        });
-
-/*     
-
-     
-
-     storage.remove('myitem')
-     .then(
-         data => console.log(data),
-         error => console.log(error)
-     );*/
+        /*
+        storage.remove('myitem')
+        .then(
+            data => console.log(data),
+            error => console.log(error)
+        );
+        */
 
     }
 
@@ -100,10 +89,10 @@ export class LoginPage {
                   enableBackdropDismiss:false,
                   buttons: [
                   {
-                    text: 'OK',
-                    handler: data => {
-                      // this.platform.exitApp();
-                    }
+                      text: 'OK',
+                      handler: data => {
+                          // this.platform.exitApp();
+                      }
                   }
                   ]
                 });
@@ -196,32 +185,24 @@ export class LoginPage {
                 
                 console.log("user login data", data);
                 // store in secure storage
-                console.log("is cordova", this.platform.is('cordova') );
-                if ( this.platform.is('cordova')) {    
-                    this.storageObject.set('session', JSON.stringify(data))
-                    .then(
-                        data => console.log(data),
-                        error => console.log(error)
-                    );
-                }else if (this.storageReady) {
-                    this.storage.set('session', JSON.stringify(data))
-                    .then(
-                        data => console.log(data),
-                        error => console.log(error)
-                    );
-                }
+                console.log("is cordova", 
+                    this.platform.is('cordova'), 
+                    (data.status != "FAIL") );
                 
-
-
                 // go to home page
                 if(data) {
-                    if(data.status != "error" ) {
+                    if(data.status != "FAIL" ) {
+                        this.storage.set('session', JSON.stringify(data))
+                        .then(
+                            data => console.log(data),
+                            error => console.log(error)
+                        );
                         let nav = this.app.getRootNav();
                         nav.setRoot(HomePage);
                     }else{
                         let alert = this.alertCtrl.create({
                             title: 'Failed!',
-                            subTitle: data.response.messages,
+                            subTitle: data.message,
                             buttons: ['OK']
                         });
                         alert.present();

@@ -11,7 +11,6 @@ import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { AuthPage } from '../pages/auth/auth';
 
 import { Storage } from '@ionic/storage';
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 import { CommonService } from '../services/common.service';
 import { DatabaseService } from '../services/db.service';
 
@@ -19,10 +18,10 @@ import { DatabaseService } from '../services/db.service';
     templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage:any = WelcomePage;
+  rootPage:any = WelcomePage;
   // rootPage:any = NewSyndicatePage;
   // rootPage:any = AddSyndicatePage;
-  rootPage:any = HomePage;
+  // rootPage:any = HomePage;
   // rootPage:any = AuthPage;
 
   constructor(
@@ -30,7 +29,6 @@ export class MyApp {
     public platform: Platform, 
     public dbSrv:DatabaseService, 
     public commonSrv:CommonService, 
-    public secureStorage: SecureStorage,
     public alertCtrl:AlertController) {
 
     platform.ready().then(() => {

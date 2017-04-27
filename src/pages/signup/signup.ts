@@ -1,24 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { RequestOptions, Headers} from '@angular/http';
 import { App, Platform, Tabs, NavController, NavParams, AlertController,
  PopoverController, LoadingController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
-
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { HomePage } from '../home/home';
-import { LoginPage } from '../login/login';
 import { SignupInvitedPage } from '../signup-invited/signup-invited';
-import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
+// import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
 
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
-import {Observable} from 'rxjs/Observable';
 
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-signup',
@@ -39,7 +34,6 @@ export class SignupPage {
 	public warningPhone:boolean = false;
 	public country_number:string = "";
 
-	private storage:SecureStorageObject;
 	public countries:any[];
 
 	public signup = {
@@ -54,18 +48,18 @@ export class SignupPage {
 
 
 	constructor(
-		private transfer: Transfer, 
-		private file: File,
 		public app:App,
+		private file: File,
+		private storage: Storage,
 		public platform:Platform,
+		private transfer: Transfer, 
 		public navCtrl: NavController, 
 		public navParams: NavParams,
+		public commonSrv:CommonService,
+		public alertCtrl:AlertController,
 		private imagePicker: ImagePicker,
 		private popoverCtrl: PopoverController,	
-		public alertCtrl:AlertController,
-		private secureStorage: SecureStorage,
 		private loadingCtrl: LoadingController,	
-		public commonSrv:CommonService,
 		public authSrv:AuthService) {
 
 		this.tabs = navCtrl.parent;
@@ -73,12 +67,6 @@ export class SignupPage {
 
 		platform.ready().then(() => {
 			console.log('ready');
-        });
-
-
-        this.secureStorage.create(CommonService.SecureStorageUser)
-        .then((storage: SecureStorageObject) => {
-            this.storage = storage;
         });
 
 /*     storage.get('myitem')
@@ -129,9 +117,7 @@ export class SignupPage {
           		enableBackdropDismiss:false
 		        });
 
-            },
-            ()=> {}
-            );
+            }, ()=> {} );
         
     }
 
@@ -302,14 +288,20 @@ url:""
                 }
 
                 // store in secure storage
+                /*
                 this.storage.set('session', JSON.stringify(data))
                 .then(
                     data => console.log(data),
                     error => console.log(error)
-                );
+                );*/
 
                 // go to home page
                 if(data && data.status != 'error') {
+                	this.storage.set('session', JSON.stringify(data))
+	                .then(
+	                    data => console.log(data),
+	                    error => console.log(error)
+	                );
                     let nav = this.app.getRootNav();
                     nav.setRoot(HomePage);
                 }else{

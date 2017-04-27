@@ -38,7 +38,6 @@ import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 import { IonicStorageModule } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
@@ -142,7 +141,7 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     RedeemGamesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-  DatabaseService, CommonService, AuthService, HomeService, Params, SecureStorage, 
+  DatabaseService, CommonService, AuthService, HomeService, Params, 
   SQLite, ImagePicker, Transfer, File, InAppBrowser]
 
 })
