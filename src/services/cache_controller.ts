@@ -18,12 +18,12 @@ export class CacheController {
 		}
 
 		let sel_query = "SELECT t2.Module_Json FROM tbl_Page_Module as t1 JOIN tbl_Module as t2 ";
-		sel_query += "on (t1.Module_ID = t2.Module_ID) where t2.Module_Json !='' AND t1.Page_ID=? ";
+		sel_query += "on (t1.Module_ID = t2.Module_ID) where t2.Module_Json !='' ";
 		sel_query += "AND t2.Module_Name IN (?)";
 
 		return new Promise( (resolve, reject) => {
 
-			this.srvDb.raw_query(sel_query, [page_id, module_names.join(",")]).then((res)=> {
+			this.srvDb.raw_query(sel_query, [ module_names.join(",") ]).then((res)=> {
 
 				if (res.rows.length > 0) {
 					let data:any[] = [];
