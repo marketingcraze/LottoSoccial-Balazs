@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { ViewChild, Component } from '@angular/core';
+import { NavController, NavParams, Platform, LoadingController, AlertController, Tabs } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -21,6 +21,8 @@ import { CacheController } from '../../services/cache_controller';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild("homeTabs") homeTabs: Tabs;
+
   tab1Root: any = StorePage;
   tab2Root: any = SyndicatesPage;
   tab3Root: any = GamesPage;
@@ -56,8 +58,9 @@ export class TabsPage {
 
     this.mySelectedIndex = navParams.data.tabIndex || 0;
 
-    this.params.events.subscribe('home-data', data => {
-      console.log("home-data", data);
+    this.params.events.subscribe('go-home', () => {
+      console.log("go-home");
+      this.homeTabs.select(0);
     });
   }
 

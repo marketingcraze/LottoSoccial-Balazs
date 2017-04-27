@@ -21,9 +21,4 @@ export class GamesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage', this.navParams.data);
   }
-
-  goHomeTab(){
-    this.navCtrl.parent.select(0); 
-  }
-
 }

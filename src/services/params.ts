@@ -16,7 +16,11 @@ export class Params{
     }
 
     setHomeData( data:any ){
-    	this.homeData = data;
-    	this.events.publish("home-data", data);
+        this.homeData = data;
+        this.events.publish("home-data", data);
+    }
+
+    goHomePage(){
+    	this.events.publish("go-home");
     }
 }
