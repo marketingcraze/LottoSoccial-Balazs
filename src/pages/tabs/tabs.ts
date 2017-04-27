@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavParams, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Platform, LoadingController, AlertController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 
+import { HomePage } from '../home/home';
 import { StorePage } from '../store/store';
 import { SyndicatesPage } from '../syndicates/syndicates';
 import { GamesPage } from '../games/games';
@@ -25,6 +26,7 @@ export class TabsPage {
   tab3Root: any = GamesPage;
   tab4Root: any = AccountPage;
   tab5Root: any = OffersPage;
+  tab6Root: any = StorePage;
 
   mySelectedIndex: number;
 
@@ -38,6 +40,7 @@ export class TabsPage {
     private params: Params,
     private storage: Storage,
     private navParams: NavParams,
+    private navCtrl: NavController,
     public platform: Platform, 
     private iab: InAppBrowser,
     private srvDb:DatabaseService,
@@ -52,10 +55,15 @@ export class TabsPage {
     this.gameData = "game data";
 
     this.mySelectedIndex = navParams.data.tabIndex || 0;
+
+    this.params.events.subscribe('home-data', data => {
+      console.log("home-data", data);
+    });
   }
 
   ionViewDidLoad(){
     console.log("TabsPage::ionViewDidLoad");
+
   }
 
   ionViewDidEnter() {
@@ -65,6 +73,8 @@ export class TabsPage {
     });
     loader.present();
     
+    // this.navCtrl.push(StorePage);
+
     /*
     // this is only for test
     this.cache.loadModules("games", "3", ["get_your_game_list", "get_buy_game_list"])
@@ -99,6 +109,10 @@ export class TabsPage {
     this.gameData = this.homeCardData.game;
     this.homeData = this.homeCardData.information_for_you;
     this.params.setHomeData( this.homeData ); 
+  }
+
+  goToStore(){
+    console.log("goToStore()");
   }
 
   goToSyndicate(){

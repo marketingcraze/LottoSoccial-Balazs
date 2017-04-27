@@ -1,4 +1,7 @@
 page-tabs{
+	.tab-button:first-of-type{ // HIDE HOME PAGE TAB BUTTON
+		display: none;
+	}
 	.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
 		color: black;
 	}

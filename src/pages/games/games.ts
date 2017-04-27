@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { YourGamesPage } from '../your-games/your-games';
 import { RedeemGamesPage } from '../redeem-games/redeem-games';
 
@@ -13,14 +13,17 @@ export class GamesPage {
 
   gameGroup:any;
 
-  constructor(private navParams:NavParams) {
+  constructor(private navParams:NavParams,
+    private navCtrl:NavController) {
     this.gameGroup = this.navParams.data.game.game_group;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage', this.navParams.data);
-    
+  }
 
+  goHomeTab(){
+    this.navCtrl.parent.select(0); 
   }
 
 }

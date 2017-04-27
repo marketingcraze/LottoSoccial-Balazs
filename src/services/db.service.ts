@@ -18,20 +18,20 @@ export class DatabaseService {
 
       console.log("DatabaseService");
       
-      this.createDatabase().then(( db: SQLiteObject ) => {
+      this.createDatabase();
+    }
+
+    createDatabase(){
+      this.sqlite.create({
+        name: DatabaseService.databaseName,
+        location: "default"
+      }).then(( db: SQLiteObject ) => {
         console.log("database created"); 
           this.database = db;
         // open sqlite database
         this.prepareSqliteDatabase();
       }, (error) => {
         console.error("Unable to open database", error);
-      });
-    }
-
-    createDatabase(){
-      return this.sqlite.create({
-        name: DatabaseService.databaseName,
-        location: "default"
       });
     }
 
@@ -99,11 +99,12 @@ export class DatabaseService {
             console.log( query );
             return this.database.executeSql(query, params );
         }else{
+          this.createDatabase();
           
           return new Promise( (resolve, reject) => {
 
             const source = Observable.interval(400)
-            .take(20)
+            .take(60)
             .subscribe(res => { 
               console.log("observing ", this.databaseCreated, res);
               
@@ -123,7 +124,7 @@ export class DatabaseService {
                 });
               }
 
-              if ( res > 19) {
+              if ( res > 58) {
                 reject( Error("Database taking too long to respond") );
               }
 
