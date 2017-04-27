@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavParams, Platform, LoadingController, AlertController } from 'ionic-angular';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Storage } from '@ionic/storage';
+
 import { StorePage } from '../store/store';
 import { SyndicatesPage } from '../syndicates/syndicates';
 import { GamesPage } from '../games/games';
@@ -33,8 +36,10 @@ export class TabsPage {
 
   constructor(
     private params: Params,
+    private storage: Storage,
     private navParams: NavParams,
     public platform: Platform, 
+    private iab: InAppBrowser,
     private srvDb:DatabaseService,
     private srvHome:HomeService,
     private loadingCtrl:LoadingController,
@@ -78,22 +83,15 @@ export class TabsPage {
       console.log("TabsPage::ionViewDidEnter", data);
       for (var i = data.length - 1; i >= 0; i--) {
         // console.log("TabsPage::ionViewDidEnter", data[i]);
-
         if ( data[i]["get_home_card"] ) {
           this.populateHomeData(data[i].get_home_card.response);
           break;
         }
       }
-      
     }, err => {
       loader.dismiss();
-
       console.log("TabsPage::ionViewDidEnter", err);
-
     });
-
-
-
   }
 
   populateHomeData(data:any){
@@ -101,6 +99,22 @@ export class TabsPage {
     this.gameData = this.homeCardData.game;
     this.homeData = this.homeCardData.information_for_you;
     this.params.setHomeData( this.homeData ); 
+  }
+
+  goToSyndicate(){
+    console.log("goToSyndicate()");
+    this.storage.get('session')
+    .then(
+        data => {
+          let session:any = JSON.parse(data);
+          let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store&customer_id=';
+          url += session.customer_id + '&customer_token=' + session.customer_token;
+          console.log("session data", data, url);
+          
+          const browser = this.iab.create(url);
+        }, error => console.log(error)
+    );
+    
   }
 
 }

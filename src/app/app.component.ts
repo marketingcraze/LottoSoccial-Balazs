@@ -65,7 +65,7 @@ export class MyApp {
           CommonService.countries = data;
         }
         
-        console.log("countries loaded", CommonService.countries);
+        // console.log("countries loaded", CommonService.countries);
         Splashscreen.hide();
       },
       err=>{

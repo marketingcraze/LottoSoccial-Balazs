@@ -19,9 +19,9 @@ export class LoginPage {
     public countryPopOver:any;
     public countryNumber:string = "";
     public selectedCountry:any = {
-        country_code: "99",
-        country_flag_url: "flag_url_for_99.png",
-        country_name:"Rollover"
+        country_code: "44",
+        country_flag_url: "flag_url_for_44.png",
+        country_name:"GB"
     };
     
     public selectedCountryMobile:any;
@@ -55,8 +55,7 @@ export class LoginPage {
 
         this.loadCountries();
 
-        storage.ready().then( ()=> this.storageReady = true  );
-
+        storage.ready().then( ()=> this.storageReady = true );
         /*
         storage.remove('myitem')
         .then(
@@ -78,6 +77,7 @@ export class LoginPage {
                 loader.dismiss();
                 this.countryes = data.response[0].get_country_code_flag.response.country_code_group;
                 this.selectedCountry = this.countryes[0];
+                this.countryNumber = this.selectedCountry.country_code;
                 console.log("countrys successful", this.countryes);
             },
             err=>{
