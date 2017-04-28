@@ -196,7 +196,8 @@ export class SignupPage {
 		// let nav = this.app.getRootNav();
         // nav.setRoot(NewSyndicatePage);
 		
-		this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
+		// this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
+		this.prepareMobile();
 		this.signup.country_code = this.country_number;
 		console.log("submitSignup", this.signup, form);
 		// console.log("submitSignup", form);
@@ -238,6 +239,24 @@ export class SignupPage {
 		);
 		
 	}
+
+    prepareMobile(){
+        let free_reg_msn = this.signup.mobile;
+        let msn_len = free_reg_msn.length;
+        // var countryData = $('#free_reg_msn').intlTelInput("getSelectedCountryData");/44
+
+        var cc = this.country_number.replace('+','');
+        if ( free_reg_msn.substr(0, 1)=="0" ) {
+            var p = free_reg_msn.substr(1, msn_len);
+            free_reg_msn = cc + p;
+        } else if(free_reg_msn.substr(0, cc.length)==cc){
+            var p = free_reg_msn.substr(cc.length, msn_len);
+            free_reg_msn = cc + p;
+        } else{
+            free_reg_msn = cc + free_reg_msn;
+        }
+        this.signup.free_reg_msn = free_reg_msn;
+    }
 
 	phoneValidator(value: string):boolean {
 		if (value !== '') {
