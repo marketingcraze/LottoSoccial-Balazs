@@ -11,7 +11,8 @@ export class SyndicatesPage {
   tab1Root = YourGamesPage;
   tab2Root = RedeemGamesPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, 
+  	public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SyndicatesPage');

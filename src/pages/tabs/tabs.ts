@@ -24,11 +24,11 @@ export class TabsPage {
   @ViewChild("homeTabs") homeTabs: Tabs;
 
   tab1Root: any = StorePage;
-  tab2Root: any = SyndicatesPage;
-  tab3Root: any = GamesPage;
-  tab4Root: any = AccountPage;
-  tab5Root: any = OffersPage;
-  tab6Root: any = StorePage;
+  tab2Root: any = StorePage;
+  tab3Root: any = SyndicatesPage;
+  tab4Root: any = GamesPage;
+  tab5Root: any = AccountPage;
+  tab6Root: any = OffersPage;
 
   mySelectedIndex: number;
 
