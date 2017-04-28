@@ -116,10 +116,6 @@ export class TabsPage {
 
   goToStore(){
     console.log("goToStore()");
-  }
-
-  goToSyndicate(){
-    console.log("goToSyndicate()");
     this.storage.get('session')
     .then(
         data => {

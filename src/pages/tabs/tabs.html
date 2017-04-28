@@ -1,7 +1,7 @@
 <ion-tabs #homeTabs [selectedIndex]="mySelectedIndex" tabsLayout="icon-top" tabsPlacement="bottom">
   <ion-tab [root]="tab6Root" tabTitle="Store" tabIcon="store" ([rootParams])="homeData"></ion-tab>
-  <ion-tab [root]="tab1Root" tabTitle="Store" tabIcon="store" (ionSelect)="goToStore()"></ion-tab>
-  <ion-tab tabTitle="Syndicates" tabIcon="syndicates" (ionSelect)="goToSyndicate()"></ion-tab>
+  <ion-tab tabTitle="Store" tabIcon="store" (ionSelect)="goToStore()"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Syndicates" tabIcon="syndicates"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="Games" tabIcon="games" [rootParams]="gameData"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="Account" tabIcon="account"></ion-tab>
   <ion-tab [root]="tab5Root" tabTitle="Offers" tabIcon="offers"></ion-tab>
