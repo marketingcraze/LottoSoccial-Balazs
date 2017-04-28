@@ -124,7 +124,7 @@ export class TabsPage {
           url += session.customer_id + '&customer_token=' + session.customer_token;
           console.log("session data", data, url);
           
-          const browser = this.iab.create(url);
+          const browser = this.iab.create(url, "_blank");
         }, error => console.log(error)
     );
     
