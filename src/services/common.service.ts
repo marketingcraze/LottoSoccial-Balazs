@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class CommonService {
     public static SecureStorageUser:string = 'lotto_user';
+    public static session:any;
 
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
     public static version:string = 'v2';

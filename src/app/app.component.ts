@@ -48,6 +48,9 @@ export class MyApp {
 
     this.storage.ready().then( ()=> {
       this.storage.get('session').then((val) => {
+
+        CommonService.session = JSON.parse(val);
+        
         console.log('Your session is', val);
         if (val) {
           this.rootPage = HomePage;

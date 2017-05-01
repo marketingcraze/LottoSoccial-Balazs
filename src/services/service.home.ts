@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 
 import { Transfer, FileUploadOptions, TransferObject, } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { Storage } from '@ionic/storage';
 
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
@@ -13,27 +14,38 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class HomeService {
 
+    private customerId:string = "";
+
     static get parameters() {
         return [[Http]];
     }
   
-    constructor(private http:Http, 
+    constructor(
+        private http:Http, 
+        private storage: Storage,
         public platform: Platform,
         private transfer: Transfer,
         private file: File) {
+
+        
     }
 
     getModules(action:string, page_id:string, module_names:string[]) {
-        
-        let parameter = {
-            request: []
-        };
+
+        if (!CommonService.session) {
+            return null;
+        }
+        this.customerId = CommonService.session.customer_id;
+        console.log("getModules", CommonService.session );
+
+        let parameter = { request: [] };
+
         for (var i = 0; i < module_names.length; ++i) {
             parameter.request.push({
                 "page_id": page_id,
                 "screen_id": "1.4", 
                 "module_name": module_names[i], 
-                "customer_id":"1970400"
+                "customer_id": this.customerId
             });
         }
 
@@ -44,8 +56,7 @@ export class HomeService {
         let url = CommonService.apiUrl + CommonService.version + '/' + action + '/';
 
         console.log("getOffers", url, parameter);
-        var response = this.http.post(url, 
-            parameter, opt).map(res => res.json());
+        var response = this.http.post(url, parameter, opt).map(res => res.json());
         return response;
     }
 
@@ -59,7 +70,7 @@ export class HomeService {
                 "page_id": "1",
                 "screen_id": "1.4", 
                 "module_name": module_name, 
-                "customer_id":"1970400"
+                "customer_id": this.customerId
             } 
             ]
         };

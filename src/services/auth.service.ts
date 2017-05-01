@@ -11,7 +11,7 @@ import { CommonService } from './common.service';
 
 @Injectable()
 export class AuthService {
-
+    
     static get parameters() {
         return [[Http]];
     }

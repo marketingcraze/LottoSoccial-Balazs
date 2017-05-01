@@ -95,8 +95,8 @@ export class TabsPage {
 
       console.log("TabsPage::ionViewDidEnter", data);
       for (var i = data.length - 1; i >= 0; i--) {
-        // console.log("TabsPage::ionViewDidEnter", data[i]);
-        if ( data[i]["get_home_card"] ) {
+        // console.log("TabsPage::ionViewDidEnter", i, data[i].get_home_card);
+        if ( data[i].get_home_card ) {
           this.populateHomeData(data[i].get_home_card.response);
           break;
         }
@@ -108,6 +108,7 @@ export class TabsPage {
   }
 
   populateHomeData(data:any){
+
     this.homeCardData = data;
     this.gameData = this.homeCardData.game;
     this.homeData = this.homeCardData.information_for_you;
