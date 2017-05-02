@@ -1,22 +1,24 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 
-/*
-  Generated class for the JoinSyndicate page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-join-syndicate',
   templateUrl: 'join-syndicate.html'
 })
 export class JoinSyndicatePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, 
+  	public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JoinSyndicatePage');
+  }
+
+  goCreateSyndicate(){
+  	console.log('JoinSyndicatePage::goCreateSyndicate');
+  	this.navCtrl.push(CreateSyndicatePage);
   }
 
 }

@@ -161,25 +161,24 @@ export class StorePage {
   }
 
   handle(str:string){
-      switch (str) {
-          case 'add_syndicate':
-               this.nav.push(AddSyndicatePage);
-              break;
-          case 'join_syndicate':
-               this.nav.push(JoinSyndicatePage);
-              break;
-          
-          default:
-              // code...
-              break;
-      }
+    console.log("handle", str);
 
-  }
-
-  inviteFriends(){
-    console.log("inviteFriends()");
-    this.nav = this.app.getRootNav();
-    this.nav.push(InviteFriendsPage);
+    switch (str) {
+        case 'invite_firends':
+             this.nav.push(JoinSyndicatePage);
+             // this.nav.push(InviteFriendsPage);
+            break;
+        case 'add_syndicate':
+             this.nav.push(AddSyndicatePage);
+            break;
+        case 'join_syndicate':
+             this.nav.push(JoinSyndicatePage);
+            break;
+        
+        default:
+            // code...
+            break;
+    }
   }
 
 

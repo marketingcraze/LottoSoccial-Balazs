@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-124 -318 8.235 10">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f8f8f8;
+      }
+    </style>
+  </defs>
+  <g id="upload-button" transform="translate(-162.25 -318)">
+    <path id="Path_8" data-name="Path 8" class="cls-1" d="M40.6,7.647h3.529V4.118h2.353L42.368,0,38.25,4.118H40.6Z"/>
+    <rect id="Rectangle_12" data-name="Rectangle 12" class="cls-1" width="8.235" height="1.176" transform="translate(38.25 8.824)"/>
+  </g>
+</svg>
