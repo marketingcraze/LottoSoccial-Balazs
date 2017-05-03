@@ -18,13 +18,13 @@
       <ion-col width-50 >
         <div text-center>
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span style="">CREDIT <span class="credit">&pound;15.36</span></span>
+          <span style="">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span></span>
         </div>        
       </ion-col>
       <ion-col width-50>
         <div text-center>
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span >POINTS <span class="points">1536</span></span>
+          <span >POINTS <span class="points">{{accountDetails.reward_points}}</span></span>
         </div>
       </ion-col>
     </ion-row>
@@ -165,7 +165,7 @@
     </ion-slide>
 
 <!-- Slide 3 -->
-    <ion-slide>
+    <ion-slide *ngFor="let game of gameGroup">
 
       <ion-card>
         <div class="card-top" >
@@ -176,15 +176,16 @@
         </div>
 
         <div class="lucky" padding padding-top>
-          <h3>Lucky Colours</h3>
-          <p>TOP PRIZE: &pound;20</p>
+          <h3>{{game.game_name}}</h3>
+          <p>{{game.game_description1}}</p>
         </div>
-        <img class="center game-play-img" src="assets/icon/account_ico.svg" padding width="100" height="100">
+        <img class="center game-play-img" *ngIf="!game.game_icon_url" src="assets/icon/account_ico.svg" padding width="100" height="100">
+        <img class="center game-play-img" *ngIf="game.game_icon_url" src="{{game.game_icon_url}}" padding width="100" height="100">
 
-        <p>you are at level 1.<br>Score 5 to complete and win 80 points</p>
+        <p>{{game.user_game_target}}</p>
         
         <div padding>
-          <button class="center" padding ion-button text-center color="secondary" >PLAY NOW</button>
+          <button class="center" padding ion-button text-center color="secondary" (click)="openTarget(game.target_url)">{{game.button_label}}</button>
         </div>
       </ion-card>
 
@@ -397,7 +398,6 @@
 
 
 
-
 <div class="popup" *ngIf="whatsOn" style="z-index: 102;">
   <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
   
@@ -410,21 +410,22 @@
           <ion-label text-center>FIND OUT WHAT'S ON LOTTO SOCIAL</ion-label>
         </ion-item>
         
-
         <ion-slides slidesPerView="2" spaceBetween=10>
-          <ion-slide>
-            <img src="assets/img/150.png">
+          <ion-slide *ngFor="let item of homeBlog">
+            <img *ngIf="item.image" src="{{item.image}}">
+            <img *ngIf="!item.image" src="assets/img/150.png">
             <div class="slide-content">
               <ion-item >
-                <p item-content>This is the event on title. T h i s is the event...</p>
+                <p item-content>{{item.content.rendered}}</p>
               </ion-item>
               <ion-item>
-                <button ion-button item-right clear small>
+                <button ion-button item-right clear small (click)="loadLink(item.link)">
                   <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
                 </button>
               </ion-item>
             </div>
           </ion-slide>
+          <!-- 
           <ion-slide>
             <img src="assets/img/150.png" width="150" height="100">
             <div class="slide-content">
@@ -450,23 +451,25 @@
                 </button>
               </ion-item>
             </div>
-          </ion-slide>
+          </ion-slide> -->
         </ion-slides>
 
         <ion-card class="popup-main">
           <h4 text-center>YOUR #MILLIONAIREMOMENTS</h4>
-            <img src="assets/img/220.png" width="450" height="200">
+            <ion-content>
+              <ion-img src="{{homeEvents.event_image}}" width="450" height="200"></ion-img>
+            </ion-content>
             <ion-item>
               <ion-avatar item-left>
-                <span class="day">21</span>
-                <span class="year">21</span>
-                <span class="month">NOV</span>
+                <span class="day">{{homeEvents.event_date | date:'dd'}}</span>
+                <span class="year">{{homeEvents.event_date | date:'yy'}}</span>
+                <span class="month">{{homeEvents.event_date | date:'MMM'}}</span>
               </ion-avatar>
-              <h2>This is the event on title</h2>
-              <p>Event on subtitle</p>
+              <h2>{{homeEvents.event_title}}</h2>
+              <p>{{homeEvents.event_subtitle}}</p>
             </ion-item>
             <ion-item>
-              <button ion-button item-right clear small (click)="loadLink()">
+              <button ion-button item-right clear small (click)="loadLink('')">
                 <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
               </button>
             </ion-item>

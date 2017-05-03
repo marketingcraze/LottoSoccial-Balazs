@@ -28,10 +28,10 @@ export class CacheController {
 
 		return new Promise( (resolve, reject) => {
 
-			this.srvDb.raw_query(sel_query, [early, module_names.join(",") ]).then((res)=> {
+			this.srvDb.raw_query(sel_query, [early, module_names.join(",") ]).then((res:any)=> {
 
 				console.log("local data", res);
-				if (res.rows.length > 0) {
+				if (res && res.rows.length > 0) {
 					let data:any[] = [];
 					for (var i = 0 ; i < res.rows.length; i++) {
 						data.push( JSON.parse( res.rows.item(i).Module_Json) );
@@ -110,20 +110,23 @@ export class CacheController {
 	    var insert_query = "INSERT OR REPLACE INTO tbl_Page(`Page_ID`,`Complete_Json_Data`,`Status`,`Date_Created`) ";
 	    insert_query += "VALUES(?,?,?,?); ";
 
-	    this.srvDb.raw_query( insert_query, [page_id, JSON.stringify( fetchedData ) , 'active', new Date()]).then((page_result)=> {
+	    this.srvDb.raw_query( insert_query, [page_id, JSON.stringify( fetchedData ) , 'active', new Date()]).then((page_result:any)=> {
 	        console.log("INSERT ID -> ", page_result );
+	        if (!page_result) {
+	        	return;
+	        }
 	        result_page_id = page_result.insertId;
 
 	        // 2.tbl_modules 
 	        for (var i = 0; i < moduleName.length; ++i) {
 
 	        	insert_query = "INSERT OR REPLACE INTO tbl_Module(`Module_Name`,`Module_Json`,`Status`,`Date_Created`) VALUES(?,?,?,?); ";
-		        this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', new Date()]).then((module_result)=> {
+		        this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', new Date()]).then((module_result:any)=> {
 		            console.log("INSERT ID -> ", module_result );
 		            
 		            // 3.tbl_Page_Module 
 		            insert_query = "INSERT OR REPLACE INTO tbl_Page_Module(`Page_ID`,`Module_ID`,`Status`,`Date_Created`) VALUES(?,?,?,?); ";    
-		            this.srvDb.raw_query( insert_query, [result_page_id, module_result.insertId, 'active', new Date()]).then((result)=> {
+		            this.srvDb.raw_query( insert_query, [result_page_id, module_result.insertId, 'active', new Date()]).then((result:any)=> {
 		                  console.log("INSERT ID -> ", result);
 		              }, (error)=> {
 		                  console.error(error);

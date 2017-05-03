@@ -90,17 +90,21 @@ export class TabsPage {
     });
 */
 
-    this.cache.loadModules("home", "1", ["get_home_card"]).then( data => {
+    this.cache.loadModules("home", "1", ["get_home_card", "get_account_details", "get_home_message"])
+    .then( data => {
       loader.dismiss();
 
-      console.log("TabsPage::ionViewDidEnter", data);
+      // console.log("TabsPage::ionViewDidEnter", data);
+      this.params.setHomeData( data ); 
+      
+      /*
       for (var i = data.length - 1; i >= 0; i--) {
         // console.log("TabsPage::ionViewDidEnter", i, data[i].get_home_card);
         if ( data[i].get_home_card ) {
-          this.populateHomeData(data[i].get_home_card.response);
+          // this.populateHomeData(data[i].get_home_card.response);
           break;
         }
-      }
+      }*/
     }, err => {
       loader.dismiss();
       console.log("TabsPage::ionViewDidEnter", err);

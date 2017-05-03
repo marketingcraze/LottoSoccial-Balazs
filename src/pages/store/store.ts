@@ -25,7 +25,19 @@ export class StorePage {
     slideInUp:boolean = false;
     flyInOutState: String = 'out';
 
-    homeData:any;
+    homeCard:any;
+    gameGroup:any;
+    accountDetails:any = {
+      bonus_credit:0.00,
+      reward_points:0
+    };
+    homeMessage:any;
+    homeBlog:any;
+    homeEvents:any;
+    popMainSlide:any;
+    popSlides:any;
+
+    homeData:any = {};
     
     constructor(
         public app:App,
@@ -40,16 +52,33 @@ export class StorePage {
       	public actionSheetCtrl: ActionSheetController) {
 
       // this.initData();
-      this.homeData = this.navParams.data;
-      console.log("StorePage", this.homeData);
+      // this.homeData = this.navParams.data;
+      console.log("StorePage", this.navParams.data);
 
       this.nav = this.app.getRootNav();
       this.spaceBetween = Math.floor( platform.width() * -0.10 );
 
 
       this.params.events.subscribe('home-data', data => {
-        console.log("home-data", data);
-        this.homeData = data;
+        // console.log("home-data", data);
+        
+        for (var i = data.length - 1; i >= 0; i--) {
+          
+          if ( data[i].get_home_card ) {
+            this.homeCard = data[i].get_home_card.response;
+            this.gameGroup = this.homeCard.game.game.game_group;
+          }else if ( data[i].get_account_details ) {
+            this.accountDetails = data[i].get_account_details.response;
+          }else if ( data[i].get_home_message ) {
+            this.homeMessage = data[i].get_home_message.response;
+          }else if ( data[i].get_home_events ) {
+            this.homeEvents = data[i].get_home_events.response.events[0];
+          }else if ( data[i].get_home_blog ) {
+            this.homeBlog = data[i].get_home_blog.response.blogs;
+          }
+        }
+
+        console.log("home data", this.homeCard, this.gameGroup);
       });
     }
 
@@ -97,9 +126,9 @@ export class StorePage {
         console.log('ionViewDidLoad StorePage');
     }
 
-    loadLink(){
-        let browser = this.iab.create('https://google.com');
-        browser.show();
+    loadLink(url){
+        let browser = this.iab.create(url, '_blank');
+        // browser.show();
     }
 
     ngAfterViewInit() {
@@ -160,25 +189,29 @@ export class StorePage {
     actionSheet.present();
   }
 
+  openTarget(str:string){
+    console.log("openTarget", str);
+  }
   handle(str:string){
     console.log("handle", str);
 
     switch (str) {
-        case 'invite_firends':
-             this.nav.push(JoinSyndicatePage);
-             // this.nav.push(InviteFriendsPage);
-            break;
-        case 'add_syndicate':
-             this.nav.push(AddSyndicatePage);
-            break;
-        case 'join_syndicate':
-             this.nav.push(JoinSyndicatePage);
-            break;
-        
-        default:
-            // code...
-            break;
+      case 'invite_firends':
+           this.nav.push(JoinSyndicatePage);
+           // this.nav.push(InviteFriendsPage);
+          break;
+      case 'add_syndicate':
+           this.nav.push(AddSyndicatePage);
+          break;
+      case 'join_syndicate':
+           this.nav.push(JoinSyndicatePage);
+          break;
+      
+      default:
+          // code...
+          break;
     }
+
   }
 
 

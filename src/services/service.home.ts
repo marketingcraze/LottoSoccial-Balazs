@@ -32,7 +32,7 @@ export class HomeService {
 
     getModules(action:string, page_id:string, module_names:string[]) {
 
-        if (!CommonService.session) {
+        if ( !CommonService.session ) {
             return null;
         }
         this.customerId = CommonService.session.customer_id;
@@ -42,10 +42,10 @@ export class HomeService {
 
         for (var i = 0; i < module_names.length; ++i) {
             parameter.request.push({
-                "page_id": page_id,
-                "screen_id": "1.4", 
-                "module_name": module_names[i], 
-                "customer_id": this.customerId
+                page_id: page_id,
+                screen_id: "1.4", 
+                module_name: module_names[i], 
+                customer_id: this.customerId
             });
         }
 

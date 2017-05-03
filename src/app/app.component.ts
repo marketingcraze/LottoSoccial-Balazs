@@ -60,7 +60,7 @@ export class MyApp {
         
         console.log('Your session is', val);
         if (val) {
-          // this.rootPage = HomePage;
+          this.rootPage = HomePage;
         }else{
           this.loadCountries();
         }

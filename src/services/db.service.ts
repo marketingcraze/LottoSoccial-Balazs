@@ -94,7 +94,11 @@ export class DatabaseService {
     }
 
     raw_query( query:string, params:any[] ) {
-        
+        if ( !this.platform.is('cordova') ) {
+            return new Promise( (resolve, reject) => {
+                resolve({rows:[]});
+            });
+        }
         if (this.databaseCreated >= this.tableCount) {
             console.log( query );
             return this.database.executeSql(query, params );
