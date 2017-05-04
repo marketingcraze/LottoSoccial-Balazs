@@ -112,7 +112,6 @@ export class TabsPage {
   }
 
   populateHomeData(data:any){
-
     this.homeCardData = data;
     this.gameData = this.homeCardData.game;
     this.homeData = this.homeCardData.information_for_you;

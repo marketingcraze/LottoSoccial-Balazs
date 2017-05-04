@@ -4,11 +4,26 @@
     
     <ion-item class="notification-bar">
       <ion-icon name="ios-log-out" class="fa-rotate-180"></ion-icon>
-      4 <span class="color-white">Unread</span>
+      {{unreadCount}} <span class="color-white">Unread</span>
       <span item-right>Mark all as read</span>
     </ion-item>
 
     <ion-list>
+      <ion-item-sliding *ngFor="let message of messages">
+        <ion-item text-wrap>
+          <span item-left class="rounded-background1"><img src="assets/icon/notification_ico.svg" alt="" width="24" height="24" /></span>
+          <span class="notific-new"></span>
+          <p>{{message.title}}</p>
+        </ion-item>
+
+        <ion-item-options side="right" (ionSwipe)="saveItem()">
+          <button ion-button class="btn-delete" (click)="deleteNotification()">Delete</button>
+
+          <button ion-button text-wrap expandable class="btn-unread" (click)="markAsUnread()"><p class="wrap-text">Mark As Unread</p></button>
+        </ion-item-options>
+        
+      </ion-item-sliding>
+<!-- 
       <ion-item-sliding>
         <ion-item text-wrap>
           <span item-left class="rounded-background1"><img src="assets/icon/notification_ico.svg" alt="" width="24" height="24" /></span>
@@ -23,29 +38,7 @@
         </ion-item-options>
         
       </ion-item-sliding>
-
-      <ion-item-sliding>
-        <ion-item text-wrap>
-          <span item-left class="rounded-background1"><img src="assets/icon/notification_ico.svg" alt="" width="24" height="24" /></span>
-          <span class="notific-new"></span>
-          <p>You haven't bought any tickets yet for Hatchster Syndicate Tap to buy</p>
-        </ion-item>
-
-        <ion-item-options side="right" (ionSwipe)="saveItem()">
-          <button ion-button class="btn-delete" (click)="deleteNotification()">Delete</button>
-
-          <button ion-button text-wrap expandable class="btn-unread" (click)="markAsUnread()"><p class="wrap-text">Mark As Unread</p></button>
-        </ion-item-options>
-        
-      </ion-item-sliding>
-
-
-      <!-- 
-      <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{p.title}}
-      </button>
-       -->
+ -->
     </ion-list>
   </ion-content>
 

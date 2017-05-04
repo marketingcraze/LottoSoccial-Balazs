@@ -11,7 +11,7 @@ export class GamesPage {
   tab1Root = YourGamesPage;
   tab2Root = RedeemGamesPage;
 
-  gameGroup:any;
+  gameGroup:any = {};
 
   constructor(private navParams:NavParams,
     private navCtrl:NavController) {

@@ -32,6 +32,7 @@ export class StorePage {
       reward_points:0
     };
     homeMessage:any;
+    unreadCount:string = "0";
     homeBlog:any;
     homeEvents:any;
     popMainSlide:any;
@@ -60,7 +61,7 @@ export class StorePage {
 
 
       this.params.events.subscribe('home-data', data => {
-        // console.log("home-data", data);
+        console.log("home-data", data);
         
         for (var i = data.length - 1; i >= 0; i--) {
           
@@ -71,6 +72,7 @@ export class StorePage {
             this.accountDetails = data[i].get_account_details.response;
           }else if ( data[i].get_home_message ) {
             this.homeMessage = data[i].get_home_message.response;
+            this.unreadCount = this.homeMessage.unread;
           }else if ( data[i].get_home_events ) {
             this.homeEvents = data[i].get_home_events.response.events[0];
           }else if ( data[i].get_home_blog ) {
@@ -78,7 +80,7 @@ export class StorePage {
           }
         }
 
-        console.log("home data", this.homeCard, this.gameGroup);
+        console.log("home data", this.homeMessage );
       });
     }
 

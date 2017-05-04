@@ -1,4 +1,4 @@
-<cus-header title="Home" notification-count="5"></cus-header>
+<cus-header title="Home" notification-count="{{unreadCount}}"></cus-header>
 <!-- 
 <ion-header>
     <ion-navbar>
@@ -185,7 +185,7 @@
         <p>{{game.user_game_target}}</p>
         
         <div padding>
-          <button class="center" padding ion-button text-center color="secondary" (click)="openTarget(game.target_url)">{{game.button_label}}</button>
+          <button class="center" padding ion-button text-center color="secondary" (click)="homeMessage(game.target_url)">{{game.button_label}}</button>
         </div>
       </ion-card>
 
