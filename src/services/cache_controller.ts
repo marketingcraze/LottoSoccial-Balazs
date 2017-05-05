@@ -61,7 +61,7 @@ export class CacheController {
 
 			this.srvHome.getModules( action, pageId, moduleNames ).subscribe(
 	    	data=>{
-	    		console.log("successful", data);
+	    		console.log("fetchModuleDataFromAPI successful", data);
 	    		if(data) {
 	    			
 	    			resolve(data.response);

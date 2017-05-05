@@ -196,6 +196,7 @@ export class LoginPage {
                 // go to home page
                 if(data) {
                     if(data.status != "FAIL" ) {
+                        CommonService.session = data;
                         this.storage.set('session', JSON.stringify(data))
                         .then(
                             data => console.log(data),
