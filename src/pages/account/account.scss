@@ -1,3 +1,90 @@
 page-account {
+	.content{
+		margin-top: $toolbar-md-height;
+		height: calc(100% - #{$toolbar-md-height});
+	}
+	.card{
+		margin: 10px 1px;
+		width: calc(100% - 2px);
+	}
 
+	.account-avatar {
+	    width: 70px;
+	    position: relative;
+	    img{
+	    	width: 70px;
+	    	height: 70px;
+	    	border-radius: 50%;
+	    }
+	    .update-icon{
+	    	position: absolute;
+	    	background: white;
+	    	border-radius: 50%;
+	    	padding: 0.1em;
+	    	width: 1.4em;
+	    	height: 1.4em;
+	    	bottom: 1px;
+	    	right: 3px
+	    }
+	}
+	.profile-picture{
+		background: #e3e3e3;
+	}
+
+	.account-badge{
+		background: brown;
+	    color: white;
+	    border-radius: 50%;
+	    height: 4em;
+	    width: 4em;
+	    line-height: 4em;
+	    font-size: .8em;
+	}
+
+	.info{
+		padding: 10px;
+
+		h1{
+			font-size: 1.5em;
+			font-weight: bold;
+		}
+		p{
+			font-size: .9em;
+		}
+		.col{
+			border-right: 1px solid #e8e8e8;
+		}
+		.col:last-of-type{
+			border:none;
+		}
+	}
+
+	.options{
+		img{
+			width: initial;
+		}
+		.help p{
+			font-weight: bold;
+		}
+	}
+
+	.footer{
+		height: $toolbar-md-height;
+		background-color: #e8e8e8;
+		div{
+			height: 100%;
+		}
+		a{
+			padding: 0 1em;
+			text-transform: none;
+			border-right: 1px solid #3478ce;
+			line-height: $toolbar-md-height;
+		}
+		a:last-of-type {
+			border: none;
+		}
+
+	}
+
+	
 }

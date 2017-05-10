@@ -21,103 +21,103 @@ import { CacheController } from '../../services/cache_controller';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  @ViewChild("homeTabs") homeTabs: Tabs;
+    @ViewChild("homeTabs") homeTabs: Tabs;
 
-  tab1Root: any = StorePage;
-  tab2Root: any = StorePage;
-  tab3Root: any = SyndicatesPage;
-  tab4Root: any = GamesPage;
-  tab5Root: any = AccountPage;
-  tab6Root: any = OffersPage;
+    tab1Root: any = StorePage;
+    tab2Root: any = StorePage;
+    tab3Root: any = SyndicatesPage;
+    tab4Root: any = GamesPage;
+    tab5Root: any = AccountPage;
+    tab6Root: any = OffersPage;
 
-  mySelectedIndex: number;
+    mySelectedIndex: number;
 
-  homeCardData:any;
-  gameData:any;
-  homeData:any;
+    homeCardData:any;
+    gameData:any;
+    homeData:any;
 
-  private cache: CacheController;
+    private cache: CacheController;
 
-  constructor(
-    private params: Params,
-    private storage: Storage,
-    private navParams: NavParams,
-    private navCtrl: NavController,
-    public platform: Platform, 
-    private iab: InAppBrowser,
-    private srvDb:DatabaseService,
-    private srvHome:HomeService,
-    private loadingCtrl:LoadingController,
-    private alertCtrl:AlertController) {
+    constructor(
+        private params: Params,
+        private storage: Storage,
+        private navParams: NavParams,
+        private navCtrl: NavController,
+        public platform: Platform, 
+        private iab: InAppBrowser,
+        private srvDb:DatabaseService,
+        private srvHome:HomeService,
+        private loadingCtrl:LoadingController,
+        private alertCtrl:AlertController) {
 
-    console.log("TabsPage");
+        console.log("TabsPage");
 
-    this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
+        this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
 
-    this.gameData = "game data";
+        this.gameData = "game data";
 
-    this.mySelectedIndex = navParams.data.tabIndex || 0;
+        this.mySelectedIndex = navParams.data.tabIndex || 0;
 
-    this.params.events.subscribe('go-home', () => {
-      console.log("go-home");
-      this.homeTabs.select(0);
-    });
-  }
+        this.params.events.subscribe('go-home', () => {
+            console.log("go-home");
+            this.homeTabs.select(0);
+        });
+    }
 
-  ionViewDidLoad(){
-    console.log("TabsPage::ionViewDidLoad");
+    ionViewDidLoad(){
+        console.log("TabsPage::ionViewDidLoad");
+        this.homeTabs.select(4);
+    }
 
-  }
+    ionViewDidEnter() {
+        
+        // this.initData();
+        let loader = this.loadingCtrl.create({
+            content: "Please wait..."
+        });
+        loader.present();
+        
+        // this.navCtrl.push(StorePage);
 
-  ionViewDidEnter() {
-    
-    // this.initData();
-    let loader = this.loadingCtrl.create({
-      content: "Please wait..."
-    });
-    loader.present();
-    
-    // this.navCtrl.push(StorePage);
+        /*
+        // this is only for test
+        this.cache.loadModules("games", "3", ["get_your_game_list", "get_buy_game_list"])
+        .then( data => {
+          loader.dismiss();
+          console.log("TabsPage::ionViewDidEnter", data);
+        }, err => {
+          loader.dismiss();
+          console.log("TabsPage::ionViewDidEnter", err);
+        });
+        */
 
-    /*
-    // this is only for test
-    this.cache.loadModules("games", "3", ["get_your_game_list", "get_buy_game_list"])
-    .then( data => {
-      loader.dismiss();
-      console.log("TabsPage::ionViewDidEnter", data);
-    }, err => {
-      loader.dismiss();
-      console.log("TabsPage::ionViewDidEnter", err);
-    });
-*/
+        this.cache.loadModules("home", "1", ["get_home_card", "get_account_details", "get_home_message"])
+        .then( data => {
+            loader.dismiss();
 
-    this.cache.loadModules("home", "1", ["get_home_card", "get_account_details", "get_home_message"])
-    .then( data => {
-      loader.dismiss();
-
-      // console.log("TabsPage::ionViewDidEnter", data);
-      this.params.setHomeData( data ); 
+            // console.log("TabsPage::ionViewDidEnter", data);
+            this.params.setHomeData( data ); 
       
-      /*
-      for (var i = data.length - 1; i >= 0; i--) {
-        // console.log("TabsPage::ionViewDidEnter", i, data[i].get_home_card);
-        if ( data[i].get_home_card ) {
-          // this.populateHomeData(data[i].get_home_card.response);
-          break;
-        }
-      }*/
-    }, err => {
-      loader.dismiss();
-      console.log("TabsPage::ionViewDidEnter", err);
-    });
-  }
+            /*
+            for (var i = data.length - 1; i >= 0; i--) {
+            // console.log("TabsPage::ionViewDidEnter", i, data[i].get_home_card);
+            if ( data[i].get_home_card ) {
+              // this.populateHomeData(data[i].get_home_card.response);
+              break;
+            }
+            }*/
+        }, err => {
+            loader.dismiss();
+            console.log("TabsPage::ionViewDidEnter", err);
+        });
+    }
 
-  populateHomeData(data:any){
-    this.homeCardData = data;
-    this.gameData = this.homeCardData.game;
-    this.homeData = this.homeCardData.information_for_you;
-    this.params.setHomeData( this.homeData ); 
-  }
+    populateHomeData(data:any){
+        this.homeCardData = data;
+        this.gameData = this.homeCardData.game;
+        this.homeData = this.homeCardData.information_for_you;
+        this.params.setHomeData( this.homeData );
+    }
 
   goToStore(){
     console.log("goToStore()");
