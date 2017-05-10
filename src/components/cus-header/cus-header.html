@@ -2,10 +2,15 @@
   <ion-navbar>
     <ion-title>{{title}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only menuToggle>
-        <span><img class="lotto-logo center" src="assets/icon/notification_ico.svg" alt="Check" width="16" height="16" /></span>
-        <ion-badge item-right mode="ios" color="badge">{{notificationCount}}</ion-badge>
-      </button>
+
+    	<button *ngIf="!isHome" ion-button icon-only (click)="goHomePage()">
+            <ion-icon name="md-home"></ion-icon>
+        </button>
+    	<button ion-button icon-only menuToggle>
+            <ion-icon name="notification_ico"></ion-icon>
+            <ion-badge item-right mode="ios" color="badge">{{notificationCount}}</ion-badge>
+        </button>
+
     </ion-buttons>
   </ion-navbar>
 </ion-header>

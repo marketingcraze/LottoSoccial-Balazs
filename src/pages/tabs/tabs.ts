@@ -70,6 +70,7 @@ export class TabsPage {
   }
 
   ionViewDidEnter() {
+    
     // this.initData();
     let loader = this.loadingCtrl.create({
       content: "Please wait..."

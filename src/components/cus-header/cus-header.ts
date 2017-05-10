@@ -6,15 +6,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CusHeaderComponent {
 
-  @Input('title') title;  
-  @Input('notification-count') notificationCount;  
+	@Input('title') title;  
+	@Input('isHome') isHome;
+	@Input('notification-count') notificationCount;  
 
-  constructor() {
-    console.log('Hello CusHeader Component');
-    
-  }
+	@Output() homeClicked = new EventEmitter();
 
-  ngAfterViewInit(){
-  }
+	constructor() {
+    	console.log('Hello CusHeader Component');
+    }
+
+	ngAfterViewInit(){}
+	
+	goHomePage(){
+		this.homeClicked.emit();
+	}
 
 }
