@@ -1,18 +1,4 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>Games</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="goHomePage()">
-                <ion-icon name="md-home"></ion-icon>
-            </button>
-            <button ion-button icon-only>
-                <ion-icon name="notifications"><ion-badge>5</ion-badge></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-navbar>
-
-</ion-header>
-
+<cus-header title="Game" notification-count="{{unreadCount}}" (homeClicked)="goHomePage()"></cus-header>
 
 <ion-content class="card-background-page">
     <ion-list no-lines>

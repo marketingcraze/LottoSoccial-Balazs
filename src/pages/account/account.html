@@ -1,4 +1,4 @@
-<cus-header title="title" notification-count="4" (homeClicked)="goHome()"></cus-header>
+<cus-header title="title" notification-count="{{unreadCount}}" (homeClicked)="goHome()"></cus-header>
 
 <ion-content>
 
@@ -6,30 +6,30 @@
         
         <ion-item class="line">
 	        <ion-avatar class="account-avatar" item-center item-left>
-				<img class="profile-picture" src="{{ image ? image : 'assets/icon/user.svg' }}" width="72" height="72" alt="Profile" />
+				<img class="profile-picture" src="{{ accountDetails.profile_image ? accountDetails.profile_image : 'assets/icon/user.svg' }}" width="72" height="72" alt="Profile" />
 
 				<img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"/>
 			</ion-avatar>
-			<h2>Nickname</h2>
-			<p>234234234234234</p>
-			<p class="account-badge" item-right>BADGE?</p>
+			<h2>{{accountDetails.nick_name}}</h2>
+			<p>{{accountDetails.msn}}</p>
+			<p class="account-badge" item-right>{{accountDetails.badge}}</p>
         </ion-item>
 
         <ion-row class="info">
         	<ion-col text-center>
-	        	<h1 color="primary" text-bold>370</h1>
+	        	<h1 color="primary" text-bold>{{accountDetails.reward_points}}</h1>
 	        	<p>REWARD POINTS</p>
 	        	<button class="center" ion-button padding>redeem</button>
         	</ion-col>
          
         	<ion-col text-center>
-	        	<h1 color="bonus">&pound;22.99</h1>
+	        	<h1 color="bonus">&pound;{{accountDetails.bonus_credit}}</h1>
 	        	<p>BONUS CREDIT</p>
 	        	<button class="center" color="bonus" ion-button padding>spend</button>
         	</ion-col>
          
         	<ion-col text-center>
-	        	<h1 color="secondary">&pound;3.70</h1>
+	        	<h1 color="secondary">&pound;{{accountDetails.winning_balance}}</h1>
 	        	<p>CASH</p>
 	        	<button class="center" color="secondary" ion-button padding>cashout</button>
         	</ion-col>
@@ -60,12 +60,12 @@
 
 
 	<ion-card class="options">
-        <ion-item class="line">
+        <ion-item class="line" (click)="openUrl('https://www.facebook.com/LottoSocial/')">
         	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
 			<p>Lotto Social on Facebook</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="openUrl('https://twitter.com/lotto_social?lang=en')">
         	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
 			<p>Lotto Social on Twitter</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
@@ -74,7 +74,7 @@
 
 
 	<ion-card class="options">
-        <ion-item>
+        <ion-item (click)="logout()">
         	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
 			<p>Logout</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>

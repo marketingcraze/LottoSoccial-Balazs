@@ -1,7 +1,12 @@
 page-games {
+    .tabbar{
+        margin-top: $toolbar-md-height;
+        height: $toolbar-md-height;
+        // height: calc(100% - #{$toolbar-md-height});
+    }
+
     .card-background-page {
         background-color: #E8E8E8 !important;
-        margin-top: 12px !important;
 
         ion-card {
             position: relative;

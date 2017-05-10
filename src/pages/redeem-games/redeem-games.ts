@@ -12,6 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'redeem-games.html'
 })
 export class RedeemGamesPage {
+	private unreadCount:number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

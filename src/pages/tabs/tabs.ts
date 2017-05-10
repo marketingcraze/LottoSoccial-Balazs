@@ -43,8 +43,8 @@ export class TabsPage {
         private storage: Storage,
         private navParams: NavParams,
         private navCtrl: NavController,
-        public platform: Platform, 
         private iab: InAppBrowser,
+        public platform: Platform, 
         private srvDb:DatabaseService,
         private srvHome:HomeService,
         private loadingCtrl:LoadingController,
@@ -66,7 +66,7 @@ export class TabsPage {
 
     ionViewDidLoad(){
         console.log("TabsPage::ionViewDidLoad");
-        this.homeTabs.select(4);
+        this.homeTabs.select(0);
     }
 
     ionViewDidEnter() {
@@ -127,7 +127,7 @@ export class TabsPage {
           let session:any = JSON.parse(data);
           let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store&customer_id=';
           url += session.customer_id + '&customer_token=' + session.customer_token;
-          console.log("session data", data, url);
+          // console.log("session data", data, url);
           
           const browser = this.iab.create(url, "_blank");
         }, error => console.log(error)

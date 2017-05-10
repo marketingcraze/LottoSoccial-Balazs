@@ -52,7 +52,7 @@ export class StorePage {
         private iab: InAppBrowser,
       	public actionSheetCtrl: ActionSheetController) {
 
-      // this.initData();
+      
       // this.homeData = this.navParams.data;
       console.log("StorePage", this.navParams.data);
 
@@ -84,44 +84,6 @@ export class StorePage {
       });
     }
 
-    initData(){
-
-      let loader = this.loadingCtrl.create({
-        content: "Please wait..."
-      });
-      loader.present();
-
-      this.srvHome.getHomeCard("get_home_card").subscribe(
-        data=>{
-          loader.dismiss();
-
-          if(data) {
-            this.homeCardData = data.response[0].get_home_card.response;
-            console.log("HomeCard successful", this.homeCardData);
-            
-          }
-        },
-        err => {
-          loader.dismiss();
-          console.log("HomeCard error", err);
-
-          this.alertCtrl.create({
-            title: 'Error!!!',
-            subTitle: 'Internet disabled or server error.',
-            buttons: [
-            {
-              text: 'OK',
-              handler: data => {
-                this.platform.exitApp();
-              }
-            }
-            ],
-            enableBackdropDismiss:false
-          });
-        },
-        ()=> {}
-        );
-    }
 
 
     ionViewDidLoad() {

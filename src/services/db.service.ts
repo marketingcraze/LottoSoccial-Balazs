@@ -110,9 +110,9 @@ export class DatabaseService {
             const source = Observable.interval(400)
             .take(60)
             .subscribe(res => { 
-              console.log("observing ", this.databaseCreated, res);
+              console.log("observing ", this.databaseCreated, this.tableCount, res);
               
-              if (this.databaseCreated == this.tableCount) {
+              if (this.databaseCreated >= this.tableCount) {
                 source.unsubscribe();
                 
                 console.log( "executing " + query );

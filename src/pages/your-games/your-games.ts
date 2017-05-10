@@ -10,29 +10,28 @@ import { Params } from '../../services/params';
 export class YourGamesPage {
 
 	yourGames:any[];
+    private unreadCount:number = 0;
+    private homeMessage:any = {};
 
-  constructor(
-    private params: Params,
-    public navCtrl: NavController, 
-  	public navParams: NavParams) {
+    constructor(
+        private params: Params,
+        public navCtrl: NavController, 
+      	public navParams: NavParams) {
 
-    console.log(typeof(this.yourGames),  typeof(this.navParams.data));
+        console.log(typeof(this.yourGames),  typeof(this.navParams.data));
 
-    if ( Object.keys(this.navParams.data).length != 0) {
-      this.yourGames = this.navParams.data;
+        if ( Object.keys(this.navParams.data).length != 0) {
+          this.yourGames = this.navParams.data;
+        }
+      	console.log('constructor YourGamesPage', this.navParams.data);
     }
-  	
-  	console.log('constructor YourGamesPage', this.navParams.data);
-  }
 
 
-  goHomePage(){
-    this.params.goHomePage();
-  }
+    goHomePage(){
+        this.params.goHomePage();
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad YourGamesPage', this.navParams.data);
-  }
-
-
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad YourGamesPage', this.navParams.data);
+    }
 }
