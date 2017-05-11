@@ -1,5 +1,6 @@
 import { ViewChild, Component } from '@angular/core';
-import { NavController, NavParams, Platform, LoadingController, AlertController, Tabs } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Platform, LoadingController, 
+    AlertController, Tabs } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -47,6 +48,7 @@ export class TabsPage {
         public platform: Platform, 
         private srvDb:DatabaseService,
         private srvHome:HomeService,
+        public modalCtrl: ModalController,
         private loadingCtrl:LoadingController,
         private alertCtrl:AlertController) {
 
@@ -66,7 +68,7 @@ export class TabsPage {
 
     ionViewDidLoad(){
         console.log("TabsPage::ionViewDidLoad");
-        this.homeTabs.select(0);
+        this.homeTabs.select(4);
     }
 
     ionViewDidEnter() {

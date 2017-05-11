@@ -12,6 +12,7 @@ import { CreateSyndicate2Page } from '../pages/create-syndicate2/create-syndicat
 import { CreateSyndicate3Page } from '../pages/create-syndicate3/create-syndicate3';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { AuthPage } from '../pages/auth/auth';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
 import { Storage } from '@ionic/storage';
 import { CommonService } from '../services/common.service';
@@ -21,7 +22,7 @@ import { DatabaseService } from '../services/db.service';
     templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = WelcomePage;
+  // rootPage:any = WelcomePage;
   // rootPage:any = CreateSyndicatePage;
   // rootPage:any = CreateSyndicate2Page;
   // rootPage:any = CreateSyndicate3Page;
@@ -30,6 +31,7 @@ export class MyApp {
   // rootPage:any = JoinSyndicatePage;
   // rootPage:any = HomePage;
   // rootPage:any = AuthPage;
+  rootPage:any = EditProfilePage;
 
   constructor(
     private storage: Storage,
@@ -60,7 +62,7 @@ export class MyApp {
         
         console.log('Your session is', val);
         if (val) {
-          this.rootPage = HomePage;
+          // this.rootPage = HomePage;
         }else{
           this.loadCountries();
         }

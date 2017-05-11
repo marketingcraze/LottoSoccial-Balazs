@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { App, NavController, NavParams, Platform, LoadingController, AlertController, 
+	ModalController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -10,6 +11,7 @@ import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 
 import { AuthPage } from '../auth/auth';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 @Component({
   selector: 'page-account',
@@ -41,6 +43,7 @@ export class AccountPage {
 	    public platform: Platform, 
 	    private srvDb:DatabaseService,
 	    private srvHome:HomeService,
+	    public modalCtrl: ModalController,
 	    private loadingCtrl:LoadingController,
 	    private alertCtrl:AlertController) {
 
@@ -51,6 +54,7 @@ export class AccountPage {
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad AccountPage');
 
+    	// show loading screen
     	let loader = this.loadingCtrl.create({
             content: "Please wait..."
         });
@@ -70,7 +74,7 @@ export class AccountPage {
 		            this.unreadCount = this.homeMessage.unread;
 		        }
             }
-            console.log("AccountPage::ionViewDidLoad", this.accountDetails);
+            // console.log("AccountPage::ionViewDidLoad", this.accountDetails);
 
         }, err => {
             loader.dismiss();
@@ -92,6 +96,12 @@ export class AccountPage {
         );
 		
 		
+	}
+
+	showUpdateDetailsModal(){
+		console.log("AccountPage::showUpdateDetailsModal" );
+		let profileModal = this.modalCtrl.create(EditProfilePage, { userId: 8675309 });
+		profileModal.present();
 	}
 
 	openUrl(url:string){

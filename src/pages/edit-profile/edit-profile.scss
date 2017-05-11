@@ -1,0 +1,83 @@
+page-edit-profile {
+	p{
+		margin: 10px;
+		font-size: .9em;
+	}
+	.tabs-md .tabbar {
+	  	margin-top: 10px;
+	    background-color: #FFFFFF;
+	    
+	    .tab-highlight{
+	    	height: 4px;
+	    	background-color: #304d85;
+	    }
+	    .tab-button {
+	    	max-width: 100%;
+	    	text-transform: uppercase;
+	    	color: #000 !important;
+	    	min-height: $toolbar-md-height;
+	    	border-right: 1px solid #ccc;
+	    }
+	    .tab-button:last-of-type {
+	    	border:none;
+	    }
+
+	    .header::a{
+	    	bottom: 0;
+	    	height: 0;
+	    	background: none;
+	    }
+	    
+	}
+
+	form{
+		background-color: white;
+
+		.item{
+		    padding-left: 10px;
+		    padding-right: 10px;
+		    font-size: 1.4rem;
+
+		    .item-md[item-right]{
+		    	margin: 0;
+		    }
+		}
+
+		.item-md ion-icon[item-left], .item-md ion-icon[item-right]{
+			margin: 0;
+		}
+
+		.button{
+			max-width: 16em;
+		}
+		.input[type='password'] .input-cover{
+			width: 84%;
+		}
+	}
+	.show-pass{
+		position: absolute;
+    	bottom: 0;
+	}
+	
+	.grid, .col{
+		padding: 0;
+	}
+	
+	.small-icon{
+		font-size: 1.2em;
+		padding-top: .6em;
+	}
+	.remove-inner{
+		.input-wrapper{
+			display: inline-table;
+		}
+	}
+	.warning{
+	  	margin: 0;
+	    margin-top: 1em;
+	  	padding: 1em;
+	  	background-color: rgba(255,0,0,.1);
+	  	color: red;
+	}
+
+}

@@ -28,6 +28,10 @@ import { CreateSyndicate3Page } from '../pages/create-syndicate3/create-syndicat
 import { CreateSyndicate4Page } from '../pages/create-syndicate4/create-syndicate4';
 import { CreateSyndicate5Page } from '../pages/create-syndicate5/create-syndicate5';
 import { CreateSyndicateTab } from '../pages/create-syndicate-tab/create-syndicate-tab';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { EditProfileDetails } from '../pages/edit-profile/edit-profile-details/edit-profile-details';
+import { EditProfileEmail } from '../pages/edit-profile/edit-profile-email/edit-profile-email';
+import { EditProfilePassword } from '../pages/edit-profile/edit-profile-password/edit-profile-password';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -80,9 +84,12 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     OffersForYouPage,
     CreateSyndicateTab,
     ChooseImagePage,
+    EditProfilePage, 
+    EditProfileDetails,
+    EditProfileEmail,
+    EditProfilePassword,
 
     MyFilterPipe,
-
 
     CountryListPopPage,
     CusHeaderComponent,
@@ -136,6 +143,10 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     CreateSyndicate4Page,
     CreateSyndicate5Page,
     ChooseImagePage,
+    EditProfilePage,
+    EditProfileDetails,
+    EditProfileEmail,
+    EditProfilePassword,
 
     CountryListPopPage,
     RedeemGamesPage
