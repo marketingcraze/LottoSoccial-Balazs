@@ -10,7 +10,7 @@
 
 				<img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"/>
 			</ion-avatar>
-			<h2>{{accountDetails.nick_name}}</h2>
+			<h2>{{accountDetails.nick_name}}<span (click)="updateNickName()"><img class="update-img" item-left width="16" height="16" src="assets/icon/edit-ico.svg"/></span></h2>
 			<p>{{accountDetails.msn}}</p>
 			<p class="account-badge" item-right>{{accountDetails.badge}}</p>
         </ion-item>
@@ -47,12 +47,12 @@
 
 	<ion-card class="options">
         <ion-item class="line" (click)="showUpdateDetailsModal()">
-        	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
+        	<img item-left width="16" height="16" src="assets/icon/edit-ico.svg" alt="Update"/>
 			<p>Update your details</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>
         <ion-item class="help">
-        	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
+        	<img item-left width="16" height="16" src="assets/icon/help-ico.svg" alt="Update"/>
 			<p>Need help?</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>
@@ -61,12 +61,12 @@
 
 	<ion-card class="options">
         <ion-item class="line" (click)="openUrl('https://www.facebook.com/LottoSocial/')">
-        	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
+        	<img item-left width="16" height="16" src="assets/icon/fb-ico.svg" alt="Update"/>
 			<p>Lotto Social on Facebook</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>
         <ion-item (click)="openUrl('https://twitter.com/lotto_social?lang=en')">
-        	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
+        	<img item-left width="16" height="16" src="assets/icon/tw-ico.svg" alt="Update"/>
 			<p>Lotto Social on Twitter</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>
@@ -75,7 +75,7 @@
 
 	<ion-card class="options">
         <ion-item (click)="logout()">
-        	<img item-left width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update"/>
+        	<img item-left width="16" height="16" src="assets/icon/logout.svg" alt="Update"/>
 			<p>Logout</p>
 			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>

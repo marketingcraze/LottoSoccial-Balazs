@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1201 397 12 12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2f76d1;
+      }
+    </style>
+  </defs>
+  <g id="question" transform="translate(-1201 397)">
+    <rect id="Rectangle_12" data-name="Rectangle 12" class="cls-1" width="1.2" height="1.2" transform="translate(5.4 8.4)"/>
+    <path id="Path_33" data-name="Path 33" class="cls-1" d="M6,0a6,6,0,1,0,6,6A6,6,0,0,0,6,0ZM6,10.914A4.914,4.914,0,1,1,10.914,6,4.914,4.914,0,0,1,6,10.914Z"/>
+    <path id="Path_34" data-name="Path 34" class="cls-1" d="M132.733,86.759a2.4,2.4,0,0,0-4.734.57h1.2a1.2,1.2,0,0,1,2.4.2,1.248,1.248,0,0,1-1.266,1,.534.534,0,0,0-.534.534h0v1.266H131v-.684A2.4,2.4,0,0,0,132.733,86.759Z" transform="translate(-124.399 -82.529)"/>
+  </g>
+</svg>

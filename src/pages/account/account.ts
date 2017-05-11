@@ -9,6 +9,7 @@ import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
+import { AccountService } from '../../services/account.service';
 
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -43,6 +44,7 @@ export class AccountPage {
 	    public platform: Platform, 
 	    private srvDb:DatabaseService,
 	    private srvHome:HomeService,
+	    private srvAccount:AccountService,
 	    public modalCtrl: ModalController,
 	    private loadingCtrl:LoadingController,
 	    private alertCtrl:AlertController) {
@@ -82,6 +84,32 @@ export class AccountPage {
         });
 	}
 
+	updateNickName(){
+		let alert = this.alertCtrl.create({
+			title: 'Login',
+			inputs: [
+			{
+				name: 'nickname',
+				placeholder: 'Nickname'
+			}
+			],
+			buttons: [
+			{
+				text: 'Cancel',
+				role: 'cancel'
+			},
+			{
+				text: 'Update',
+				handler: data => {
+					// this.updateNickname( data.nickname );
+					this.accountDetails.nick_name = data.nickname;
+				}
+			}
+			]
+		});
+		alert.present();
+	}
+
 	logout(){
 		console.log( "AccountPage::logout" );
 
@@ -94,7 +122,6 @@ export class AccountPage {
             },
             error => console.log(error)
         );
-		
 	}
 
 	showUpdateDetailsModal(){
@@ -110,6 +137,40 @@ export class AccountPage {
 
   	goHome(){
 		this.params.goHomePage();
+	}
+
+	updateNickname(nick){
+		console.log('AccountPage::updateNickname() ', nick);
+
+		let loader = this.loadingCtrl.create({
+            content: "Please wait..."
+        });
+        loader.present();
+
+    	// load data
+    	this.srvAccount.updatePassword(nick).take(1)
+        .subscribe( (success:any) => {
+            loader.dismiss();
+
+            console.log("AccountPage::updateNickname", success );
+            if (success) {
+            	let res = success.response[0].update_customer_password.response;
+
+	            console.log("AccountPage::updateNickname", res );
+
+	            let alert = this.alertCtrl.create({
+	            	title: res.status,
+	            	subTitle: res.message,
+	            	buttons: ['Dismiss']
+	            });
+	            alert.present();
+            }
+            
+
+        }, err => {
+            loader.dismiss();
+            console.log("AccountPage::updateNickname", err);
+        });
 	}
 
 

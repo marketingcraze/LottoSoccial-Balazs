@@ -61,11 +61,19 @@ page-account {
 
 	.options{
 		img{
-			width: initial;
+			width: 12px;
+			min-width: 12px;
 		}
 		.help p{
 			font-weight: bold;
 		}
+	}
+
+	.item .update-img{
+		width: 12px;
+		max-width: 14px;
+		display: inherit;
+	    margin: 0 4px;
 	}
 
 	.footer{

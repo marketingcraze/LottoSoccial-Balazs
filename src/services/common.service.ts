@@ -9,6 +9,7 @@ export class CommonService {
     public static SecureStorageUser:string = 'lotto_user';
     public static session:any;
 
+    public static parentUrl:string = 'https://nima.lottosocial.com/ ';
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
     public static version:string = 'v2';
 
@@ -68,31 +69,6 @@ OAuth oauth_consumer_key="NDes1FKC0Kkg", oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",
     }
 
 
-/*
-    getCountry(){
-        if(CommonService.countries) {
-            return Observable.create( observer => {
-                observer.next(CommonService.countries);
-                observer.complete();
-            });
-        }else{
-            let action = 'module/';
-            let data = 'module_id=' + 'get_countries' +
-              '&screen_id=' + 102 +
-              '&action=' + 'fetch_countries';
-
-            let myHeaders: Headers = new Headers();
-            myHeaders.set('Content-type', 'application/x-www-form-urlencoded');
-
-            let opt: RequestOptions = new RequestOptions({
-                headers: myHeaders
-            });
-            
-            var response = this.http.post(CommonService.apiUrl + "v1/" + action, data, opt).map(res => res.json());
-            return response;
-        }
-    }
-*/
     getCountry(){
         if(CommonService.countries) {
             return Observable.create( observer => {
