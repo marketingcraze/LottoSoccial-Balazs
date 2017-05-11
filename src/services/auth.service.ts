@@ -127,7 +127,7 @@ mobile:"23423423423"
         let options = {
             fileKey: 'file',
             // fileName: 'name.jpg',
-            mimeType: "multipart/form-data",
+            // mimeType: "multipart/form-data",
             headers: myHeaders
         }
 
@@ -137,13 +137,14 @@ mobile:"23423423423"
         console.log("options ", server, options);
 
         console.log("form data ", formData);
-        
+        /*
         var response = this.http.post(server, formData, options)
         .map(res => res.json());
 
         return response;
+        */
 
-        /*
+        
         return new Observable( observer => {
             let fileTransfer = this.transfer.create();
 
@@ -165,7 +166,7 @@ mobile:"23423423423"
             });
 
         });
-        */
+        
     }
  
  

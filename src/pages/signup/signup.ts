@@ -11,9 +11,13 @@ import { SignupInvitedPage } from '../signup-invited/signup-invited';
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
 
-import { Transfer } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { File, FileEntry } from '@ionic-native/file';
 import { Storage } from '@ionic/storage';
+
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Observable, ObservableInput } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-signup',
@@ -49,6 +53,7 @@ export class SignupPage {
 
 	constructor(
 		public app:App,
+		private http:Http, 
 		private file: File,
 		private storage: Storage,
 		public platform:Platform,
@@ -133,7 +138,8 @@ export class SignupPage {
     	this.imagePicker.getPictures(options).then((results) => {
     		this.signup.image = results[0];
     		console.log('Image URI: ' + results[0]);
-    		this.uploadImage();
+    		// this.uploadImage();
+    		this.uploadPhoto(results[0]);
     		// this.uploadProfilePic( results[0] );
     	}, (err) => { });
     }
@@ -178,7 +184,7 @@ export class SignupPage {
 		loader.present();
 		
 		this.authSrv.uploadProfilePic( this.signup.image ).subscribe(
-			(data:any) =>{
+			(data:any) => {
 				loader.dismiss();
 				console.log("image upload successful", data);
 				this.signup.profile_image_url = data.response.image_name;
@@ -305,15 +311,7 @@ url:""
                 } catch (e) {
                     data = undefined;
                 }
-
-                // store in secure storage
-                /*
-                this.storage.set('session', JSON.stringify(data))
-                .then(
-                    data => console.log(data),
-                    error => console.log(error)
-                );*/
-
+                
                 // go to home page
                 if(data && data.status != 'error') {
                 	this.storage.set('session', JSON.stringify(data))
@@ -323,10 +321,7 @@ url:""
 	                );
                     let nav = this.app.getRootNav();
                     nav.setRoot(HomePage);
-                }else{
-
                 }
-				
 			},
 			err=>{
 				loader.dismiss();
@@ -343,5 +338,77 @@ url:""
 	goLogin(ev){
 		this.tabs.select(1);
 	}
+	
+
+	// upload file
+	private error;
+	private loading:any;
+	private uploadPhoto(imageFileUri: any): void {
+		this.error = null;
+		this.loading = this.loadingCtrl.create({
+			content: 'Uploading...'
+		});
+
+		this.loading.present();
+
+		this.file.resolveLocalFilesystemUrl(imageFileUri)
+		.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
+		.catch(err => console.log(err));
+	}
+
+	private readFile(file: any) {
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			const imgBlob = new Blob([reader.result], {type: file.type});
+			this.postData(imgBlob, file.name);
+		};
+		reader.readAsArrayBuffer(file);
+	}
+
+	private postData(blob:any, fileName:string) {
+		let server = CommonService.apiUrl + 
+            CommonService.version + '/upload/?process=profile';
+
+		var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
+        let myHeaders: Headers = new Headers();
+        myHeaders.set('Authorization', 
+            'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
+            'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
+            'oauth_signature_method="HMAC-SHA1",' +
+            'oauth_timestamp="1490087533",' +
+            'oauth_nonce="dWL9pr",' +
+            'oauth_version="1.0",' +
+            'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
+            );
+
+		
+        let options = {
+            fileKey: fileName,
+            fileName: fileName,
+            mimeType: "image/"+extension,
+            headers: myHeaders
+        };
+
+		console.log("SignupPage:: upload image options:", options);
+		this.http.post(server, blob, options)
+		.catch( err =>this.handleError(err))
+		.map(response => response.json())
+		.finally(() => this.loading.dismiss())
+		.subscribe(ok => console.log("uploadPhoto:", ok));
+	}
+
+	private handleError(error: Response | any) {
+		let errMsg: string;
+		if (error instanceof Response) {
+			const body = error.json() || '';
+			const err = body.error || JSON.stringify(body);
+			errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+		} else {
+			errMsg = error.message ? error.message : error.toString();
+		}
+		this.error = errMsg;
+		return Observable.throw(errMsg);
+	}
+
 
 }
