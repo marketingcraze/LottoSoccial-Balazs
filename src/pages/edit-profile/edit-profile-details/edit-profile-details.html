@@ -11,7 +11,7 @@
 
 </ion-header>
 
-<ion-content>	
+<ion-content>
 	<form #detailsForm="ngForm" (ngSubmit)="submitDetails(detailsForm)">
 
 	<ion-grid>
@@ -21,8 +21,8 @@
 			<ion-item>
 				<ion-label stacked>Title</ion-label>
 				<ion-select [(ngModel)]="details.title" name='title' interface="popover">
-					<ion-option value="mr">Mr</ion-option>
-					<ion-option value="mrs">Mrs</ion-option>
+					<ion-option value="Mr">Mr</ion-option>
+					<ion-option value="Mrs">Mrs</ion-option>
 				</ion-select>
 			</ion-item>
 		</ion-col>	
@@ -44,7 +44,8 @@
 	<ion-row>
 		<ion-item>
 			<ion-label stacked>Date of birth</ion-label>
-			<ion-input type="text" name="dob" [(ngModel)]="details.dob" required></ion-input>
+			<ion-datetime displayFormat="YYYY-MM-DD" name="dob" pickerFormat="YYYY MM DD" [(ngModel)]="details.dob"></ion-datetime>
+			<!-- <ion-input type="text" name="dob" [(ngModel)]="details.dob" required></ion-input> -->
 		</ion-item>
 	</ion-row>
 
@@ -57,8 +58,8 @@
 		</ion-col>	
 		<ion-col class="last-name" col-6>
 			<ion-item>
-				<ion-label stacked>House number</ion-label>
-				<ion-input type="text" name="house_number" [(ngModel)]="details.house_number"required></ion-input>
+				<ion-label stacked>City</ion-label>
+				<ion-input type="text" name="city" [(ngModel)]="details.city" required></ion-input>
 			</ion-item>
 		</ion-col>	
 	</ion-row>
@@ -66,20 +67,20 @@
 	<ion-row>
 		<ion-item>
 			<ion-label stacked>Address line</ion-label>
-			<ion-input type="text" name="address_line_1" [(ngModel)]="details.address_line_1" required></ion-input>
+			<ion-input type="text" name="address1" [(ngModel)]="details.address1" required></ion-input>
 		</ion-item>
 	</ion-row>
 
 	<ion-row>
 		<ion-item>
-			<ion-input type="text" name="address_line_2" [(ngModel)]="details.address_line_2"></ion-input>
+			<ion-input type="text" name="address2" [(ngModel)]="details.address2"></ion-input>
 		</ion-item>
 	</ion-row>
 
 
 	</ion-grid>
 
-	<p *ngIf="!warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
+	<p *ngIf="warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 	<p *ngIf="warningPassword" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid password</p>
 
 	<div padding>

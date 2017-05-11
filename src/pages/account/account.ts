@@ -35,10 +35,10 @@ export class AccountPage {
 	};
 
 	constructor(
+	  	public app: App, 
 	  	private params: Params,
 	    private storage: Storage,
-        public app: App, 
-	  	public navParams: NavParams,
+        public navParams: NavParams,
 		private iab: InAppBrowser,
 	    public platform: Platform, 
 	    private srvDb:DatabaseService,
@@ -95,13 +95,13 @@ export class AccountPage {
             error => console.log(error)
         );
 		
-		
 	}
 
 	showUpdateDetailsModal(){
 		console.log("AccountPage::showUpdateDetailsModal" );
-		let profileModal = this.modalCtrl.create(EditProfilePage, { userId: 8675309 });
-		profileModal.present();
+		// load account data
+        let profileModal = this.modalCtrl.create(EditProfilePage, {});
+        profileModal.present();
 	}
 
 	openUrl(url:string){
