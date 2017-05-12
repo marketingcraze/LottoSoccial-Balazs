@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="873 118 14 8.985">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #b7b7b7;
+      }
+    </style>
+  </defs>
+  <g id="bc_ico" transform="translate(873 26.3)">
+    <path id="Path_128" data-name="Path 128" class="cls-1" d="M229,96.193a4.492,4.492,0,0,0-4.493-4.493,4.419,4.419,0,0,0-.812.074,4.493,4.493,0,0,1,0,8.837,4.419,4.419,0,0,0,.812.074A4.492,4.492,0,0,0,229,96.193Z" transform="translate(-217.583)"/>
+    <path id="Path_129" data-name="Path 129" class="cls-1" d="M318.812,91.7a4.419,4.419,0,0,0-.812.074,4.493,4.493,0,0,1,0,8.837,4.419,4.419,0,0,0,.812.074,4.493,4.493,0,1,0,0-8.985Z" transform="translate(-309.305)"/>
+    <path id="Path_130" data-name="Path 130" class="cls-1" d="M8.7,101.348A4.348,4.348,0,1,0,4.348,105.7,4.348,4.348,0,0,0,8.7,101.348Z" transform="translate(0 -5.155)"/>
+  </g>
+</svg>

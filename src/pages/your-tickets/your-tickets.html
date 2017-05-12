@@ -1,0 +1,54 @@
+<!--
+  Generated template for the YourTickets page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar class="mynav">
+    <ion-title>Your tickets</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+          <span class="icon-cross" style="content: url(./assets/img/close.svg);min-width: 14px"></span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-slides loop style="height: auto;margin-top: 12px;">
+ 
+  <ion-slide>
+    <div style="height:500px; background: white; border: 1px solid rgba(204, 204, 204, 0.41);"> 
+      <div class="top-lbl">
+        <div style="position: absolute;right: 11px;top: 0;">
+          <div class="rAngle" (click)="toggles()">
+            <div class="rfl">{{rr_to_ln}}</div>
+            <div class="rfl-icon"><ion-icon name="redo"></ion-icon></div>
+          </div>
+        </div>
+        <div style="padding: 10px;">
+          <div>Syndicate: <span style="font-weight:bold">Hatchster Syndicate</span></div>
+          <div>Syndicate size:<span style="font-weight:bold"> 12 members</span></div>
+          <div>Valid for:<span style="font-weight:bold"> Euromillions Fri 12 Oct 2016</span></div>
+          <div style="padding-bottom: 4px;border-bottom: 1px solid rgba(170, 170, 170, 0.5);">Lines on ticket:<span style="font-weight:bold"> 6</span></div>
+        </div>
+      </div>
+      <div class="syndicateRow" *ngFor="let data of dataArr; let r = index;" style="height: 380px;max-height:380px;overflow:scroll;">
+        <div class="text-center">
+          <ion-grid>
+            <ion-row class="grid-row" style="width: auto;padding: 5px 0;" *ngFor="let l of dataArr[r].lines; let i = index">
+                <ion-col *ngFor="let c of l; let j = index; trackBy: small" [hidden]="hideNumber"> <div class="input-number" [ngClass]="{ 'st-input': j>4 && data.name == 'EuroMillions' }">{{c}}</div> </ion-col>
+                <ion-col style="width:250px; text-align:center;max-width:250px;" [hidden]="!hideNumber"><span class="numberLbl">{{dataArr[r].raffle[i]}}</span></ion-col>
+                <ion-col><span style="content: url('./assets/icon/eye_open.svg');width: 22px;padding-top: 10px;" (click)="viewTickets(i)"></span></ion-col>
+            </ion-row>  
+          </ion-grid>  
+        </div>
+    </div>
+    <div style="height: 1px; background: #ccc;width: 75vw;margin: 0 auto;"></div>
+    </div>
+  </ion-slide>
+ 
+</ion-slides>
+</ion-content>

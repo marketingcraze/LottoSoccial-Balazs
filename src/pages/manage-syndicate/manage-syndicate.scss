@@ -1,0 +1,52 @@
+page-manage-syndicate {
+    .toolbar-background-md { background: #255fc7; }
+    .mynav { min-height: 42px; }
+    .toolbar-title-md {
+        color: white;
+        font-size: 16px;
+        font-family: lato-black;
+    }
+    .main-bg {
+        background: #e3e3e3;
+        font-family: lato-regular;
+    }
+    .main-c {
+        margin-top: 12px;
+        background: white;
+        padding: 10px;
+    }
+    .light-header {
+        color: #AAAAAA;
+    }
+    .lb {
+        font-family: lato-black;
+        color: #333333;
+    }
+    .bline {
+        background:  #D8D8D8;
+        width: 100%;
+        height: 1px;
+        margin: 10px 0;
+    }
+    .sub-c {
+        margin-top: 10px;
+        background: white;
+        padding: 10px;
+    }
+    .tkt-day {
+        background: #6699cc;
+        padding: 3px 5px;
+        color: white;
+        font-size: 12px;
+        border-radius: 2px;
+        margin-right: 5px;
+    }
+    .s-ic {
+        margin-right: 5px;
+        font-weight: bold;
+    }
+    .a-ic {
+        float: right;
+        font-size: 20px;
+    }
+}

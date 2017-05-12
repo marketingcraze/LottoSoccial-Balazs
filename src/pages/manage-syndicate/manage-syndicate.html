@@ -1,0 +1,37 @@
+<!--
+  Generated template for the ManageSyndicate page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar class="mynav">
+    <ion-title>Manage your syndicate</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+          <span class="icon-cross" style="content: url(./assets/img/close.svg);min-width: 14px"></span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="main-bg">
+  <div class="main-c">
+    <div class="light-header" style="padding: 2px 0;">SYNDICATE INFO:</div>
+    <div style="padding: 2px 0;">NAME: <span class="lb">GREY0012</span></div>
+    <div style="padding: 2px 0;">CREATED: <span class="lb">10/02/2017</span></div>
+    <div style="padding: 2px 0;">END: <span class="lb">ONGOING</span></div>
+    <div style="padding: 2px 0;">MEMBERS: <span class="lb">49</span></div>
+    <div class="bline"></div>
+    <div class="light-header" style="padding: 2px 0;">PLAYING IN </div>
+    <div style="padding: 10px 0;"><span class="tkt-day">EURO FRI</span> <span class="tkt-day">EURO TUE</span></div>
+    <div style="padding: 2px 0;">10 Euromillions line in every Tuesday and Friday draw</div>
+  </div>
+  <div class="sub-c"><ion-icon name="ios-help-circle-outline" class="s-ic" style="color: #2F76D1;"></ion-icon>Need help?<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
+  <div class="sub-c"><span style="content: url(../assets/icon/history-ico.svg); width: 14px;margin-right: 2px;"></span>Recent draws<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
+  <div class="sub-c"><span style="content: url(../assets/icon/syndicates_ico.svg); width: 14px;margin-right: 2px;"></span> View tickets<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
+  <div class="sub-c">View syndicate agreement<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
+  <div style="text-align: center;padding: 25px;"> <a (click)="leaveSyndicate()">Leave syndicate</a></div>
+</ion-content>

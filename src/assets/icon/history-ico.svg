@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-770 1813 12.632 12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #333;
+        opacity: 0.9;
+      }
+    </style>
+  </defs>
+  <g id="history-clock-button" transform="translate(-770 1800.25)">
+    <path id="Path_1563" data-name="Path 1563" class="cls-1" d="M6.632,12.75a5.9,5.9,0,0,0-5.179,3.032L0,14.329v4.105H4.105L2.337,16.666a4.762,4.762,0,1,1-.189,3.663H.821A6.01,6.01,0,1,0,6.632,12.75Zm-.947,3.158v3.221L8.653,20.9l.505-.821L6.632,18.561V15.908Z"/>
+  </g>
+</svg>

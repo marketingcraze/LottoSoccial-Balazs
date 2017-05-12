@@ -3,11 +3,17 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CheckWinningsPage } from '../check-winnings/check-winnings';
 import { MySyndicatePage } from '../my-syndicate/my-syndicate';
 
+/*
+  Generated class for the Syndicate page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
-	selector: 'page-syndicates',
-	templateUrl: 'syndicates.html'
+  selector: 'page-syndicate',
+  templateUrl: 'syndicate.html'
 })
-export class SyndicatesPage {
+export class SyndicatePage {
   tab2child = CheckWinningsPage
   tab1child = MySyndicatePage
   indexSelected: number;

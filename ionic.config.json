@@ -1,6 +1,5 @@
 {
   "name": "LottoSocial",
   "app_id": "09c27756",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }

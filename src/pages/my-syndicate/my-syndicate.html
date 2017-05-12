@@ -1,0 +1,125 @@
+<ion-content class="marg-top-12 main-bg" id="asynd">
+  <div id="sstate">
+  <div class="synd-card">
+    <ion-card>
+      <div>
+      <img src="./assets/img/pvt_cover_003@2x.png">
+      <div class="c-title">
+        GREY0012
+      </div>
+      </div>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-50 class="left"><span class="date-lbl">Created: 10 Feb 2017</span></ion-col>
+            <ion-col col-50 class="right"><span class="date-lbl">End date: ONGOING</span></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-50 class="left"><span class="tkt-lbl">Your tickets</span></ion-col>
+            <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates()">Manage syndicate</span></ion-col>
+          </ion-row>
+          <ion-row style="padding: 10px 0 0;">
+            <ion-col class="left">
+              <span class="tkt-day">Euro TUE</span><span class="day-lbl"> x10 tickets valid fot 11 Feb 2017</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+          <div style="padding: 3px 0;"><span class="tkt-day">Euro TUE</span><span class="day-lbl"> x10 tickets valid fot 17 Feb 2017</span></div>
+          <div style="padding: 5px 0 0 0; text-align: center">
+            <button ion-button class="btn" (click)="viewTickets()"> VIEW TICKETS </button>
+          </div>
+      </ion-item>
+      <ion-item (click)="checkwins()" style="font-size: 14px;">
+        <span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <div class="synd-card">
+    <ion-card>
+      <div>
+      <img src="./assets/img/pvt_cover_006@2x.png">
+      <div class="c-title">
+        Hatchster syndicate
+      </div>
+      </div>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-50 class="left"><span class="date-lbl"><button ion-button class="chat-btn">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
+            <ion-col col-50 class="right" style="line-height: 34px;"><span class="date-lbl">PLAYING MEMBERS:</span>3/10</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-50 class="left"><span class="tkt-lbl">Your tickets</span></ion-col>
+            <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()">Manage syndicate</span></ion-col>
+          </ion-row>
+          
+        </ion-grid>
+      </ion-item>
+      <ion-row style="padding: 5px 12px; background: #FEE5E5">
+            <ion-col class="left" style="color: #C10A09;">You haven't bought tickets for your syndicate yet</ion-col>
+            <ion-col class="right"><button ion-button class="btn2"> BUY NOW </button></ion-col>
+      </ion-row>
+      <ion-item>
+          <div style="padding:0; text-align: center">
+            <button ion-button class="btn"> ADD MEMBERS </button>
+          </div>
+      </ion-item>
+      <ion-item (click)="checkwins()" style="font-size: 14px;">
+        <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span>
+      </ion-item>
+    </ion-card>
+  </div>
+  </div>
+
+  <div id="estate">
+    <div class="danger">
+      <div style="font-family: lato-black;">NO TICKETS FOUND</div>
+      <div>YOU'VE GOT TO BE IN TO WIN IT</div>
+    </div>
+    <div class="sub-div">
+      <div class="pad-10" style="border-bottom: 1px solid #ccc;">
+        <div style="font-weight: bold;">Let me tell you why you should join a ayndicate</div>
+        <ion-row style="padding-top: 10px;">
+          <ion-col col-3 style="padding: 20px;"><img src="./assets/icon/settings_ico.svg" /></ion-col>
+          <ion-col col-9 style="text-align: left">
+            <div style="color:#B7B7B7;">MORE TICKETS = MORE CHANCES</div>
+            <div>Your syndicate companions will share their lines with you meaning more chances for everyone</div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="pad-10" style="border-bottom: 1px solid #ccc;">
+        <ion-row >
+          <ion-col col-3 style="padding: 20px;">
+            <img src="./assets/icon/payment_ico.svg" />
+          </ion-col>
+          <ion-col col-9 style="text-align: left">
+            <div style="color:#B7B7B7;">NO HIDDEN FEES</div>
+            <div>100% of your winnigs is equally shared among the members of your syndicate. No hidden fees, no surprise</div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="pad-10" style="border-bottom: 1px solid #ccc;">
+        <ion-row >
+          <ion-col col-3 style="padding: 20px;"><img src="./assets/icon/syndicate_ico.svg" /></ion-col>
+          <ion-col col-9 style="text-align: left">
+            <div style="color:#B7B7B7;">MORE THAN JUST LOTTERY</div>
+            <div>Get rewards points to play games ecery time you check your winnings, bonus credits to get more tickets for free, competition, prize draws and a lot more!</div>
+          </ion-col>
+        </ion-row>
+        <div class="f-bold green" style="padding-top: 15px;">SO WHAT ARE YOU WAITING FOR?</div>
+        <div class="f-bold">Click the green button below to join or start a new syndicate!</div>
+    </div>
+  </div>
+  <div class="btn-div">
+    <button ion-button (click)="next()" class="btn">JOIN A SYNDICATE</button>
+  </div>
+  </div>
+</ion-content>
+
+
+
+
+

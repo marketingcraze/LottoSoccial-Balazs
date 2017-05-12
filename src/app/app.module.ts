@@ -32,6 +32,18 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { EditProfileDetails } from '../pages/edit-profile/edit-profile-details/edit-profile-details';
 import { EditProfileEmail } from '../pages/edit-profile/edit-profile-email/edit-profile-email';
 import { EditProfilePassword } from '../pages/edit-profile/edit-profile-password/edit-profile-password';
+ import { MySyndicatePage } from '../pages/my-syndicate/my-syndicate';
+ import { CheckWinningsPage } from '../pages/check-winnings/check-winnings';
+ import { ManageSyndicatePage } from '../pages/manage-syndicate/manage-syndicate';
+ import { LeavePage } from '../pages/leave/leave';
+ import { Leave2Page } from '../pages/leave2/leave2';
+ import { TandcPage } from '../pages/tandc/tandc';
+ import { ConfirmModalPage } from '../pages/confirm-modal/confirm-modal';
+ import { ManageSyndicate2Page } from '../pages/manage-syndicate2/manage-syndicate2';
+ import { RecentDrawPage } from '../pages/recent-draw/recent-draw';
+ import { CheckWinningsNextPage } from '../pages/check-winnings-next/check-winnings-next';
+ import { ViewTicketsPage } from '../pages/view-tickets/view-tickets';
+ import { YourTicketsPage } from '../pages/your-tickets/your-tickets';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -89,6 +101,18 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     EditProfileDetails,
     EditProfileEmail,
     EditProfilePassword,
+     ManageSyndicatePage,
+     LeavePage,
+     Leave2Page,
+     TandcPage,
+     ManageSyndicate2Page,
+     ConfirmModalPage,
+     RecentDrawPage,
+     CheckWinningsNextPage,
+     ViewTicketsPage,
+     YourTicketsPage,
+    CheckWinningsPage,
+    MySyndicatePage,
 
     MyFilterPipe,
 
@@ -148,6 +172,18 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
     EditProfileDetails,
     EditProfileEmail,
     EditProfilePassword,
+     ManageSyndicatePage,
+     LeavePage,
+     Leave2Page,
+     TandcPage,
+     ManageSyndicate2Page,
+     ConfirmModalPage,
+     RecentDrawPage,
+     CheckWinningsNextPage,
+     ViewTicketsPage,
+     YourTicketsPage,
+    CheckWinningsPage,
+    MySyndicatePage,
 
     CountryListPopPage,
     RedeemGamesPage

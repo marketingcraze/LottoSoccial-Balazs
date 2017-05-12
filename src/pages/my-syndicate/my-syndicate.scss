@@ -1,0 +1,169 @@
+page-my-syndicate {
+      ion-badge {
+        background-color: gold !important;
+        color: black !important;
+        border-radius: 10px !important;
+    }
+    .scroll-content {
+        margin-bottom: 105px;
+    }
+    
+    ion-label {
+        white-space: normal !important;
+    }
+
+    .tabbar {
+        background-color: #1F4C87 !important;
+    }
+
+    .item-md .text-md-calm {
+        color: #2F76D1 !important;
+    }
+
+    .item-md .text-md-orange {
+        color: #FF9933 !important;
+    }
+
+    .item-md h2 {
+        color: #333333 !important;
+    }
+
+    .item-md .text-md-primary {
+        color: #2F76D1 !important;
+    }
+
+    .tabs-md-primary[tabsHighlight=true] .tab-highlight {
+        background: #F8F8F8 !important;
+        height:4px!important;
+    }
+    .synd-card {
+        margin-bottom: 10px;
+    .c-title {
+        color: white;
+        font-family: lato-black;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px;
+        font-size: 16px;
+        margin-top: -30px;
+    }
+    .card-md {
+        margin: 0px;
+        width: 100%;
+    }
+    .date-lbl {
+        font-size: 14px;
+        color: #B7B7B7;
+        padding: 3px 0;
+    }
+    .left {
+        text-align: left;
+    }
+    .right {
+        text-align: right;
+    }
+    .tkt-lbl {
+        font-size: 14px;
+        color: #333333;
+        padding: 3px 0;
+    }
+    .tkt-a {
+        font-size: 14px;
+        color: #2f76d1;
+        padding: 3px 0;
+    }
+    .tkt-day {
+        background: #6699cc;
+        padding: 3px 5px;
+        color: white;
+        font-size: 12px;
+        border-radius: 2px;
+        margin-right: 5px;
+    }
+    .day-lbl {
+        font-size: 14px;
+    }
+    .grid {
+        padding: 0;
+    }
+    .col {
+        padding: 3px 0;
+    }
+    ion-item {
+        border-bottom: 1px solid #AAAAAA;
+    }
+    .btn {
+        height: 30px;
+        background: #2f76d1;
+        font-size: 12px;
+        border-radius: 3px;
+        min-width: 120px;
+    }
+    .synd-ico {
+        float: left;
+        font-size: 25px;
+        color: #ff9933;
+    }
+    .synd-f {
+        line-height: 25px;
+        margin-left: 10px;
+    }
+    .chat-btn {
+        height: 23px;
+        font-size: 12px;
+        background: #c10a09;
+        vertical-align: baseline;
+    }
+    .circle {
+        // border: 1px solid #ccc;
+        // border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        font-size: 12px;
+        padding: 5px 8px;
+        color:#c10a09;
+    }
+    .btn2 {
+        height: 30px;
+        background: #00A651;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+    }
+    .danger {
+        color: white;
+        background: red;
+        padding: 10px;
+        text-align: center;
+    }
+    .pad-10 {
+        padding: 10px;
+    }
+    .sub-div {
+        background: white;
+        margin-top: 12px;
+        text-align: center;
+    }
+    .f-bold {
+        font-family: lato-black;
+        padding: 0 25px;
+    }
+    .green {
+        color: #14993f;
+    }
+    .btn-div {
+        background-color: #304d85;
+        padding: 10px;
+        margin-top: 10px;
+        .btn {
+            height: 4.5rem;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            width: 100%;
+            background: #14993f;
+        }
+    }
+}
