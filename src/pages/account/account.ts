@@ -102,7 +102,7 @@ export class AccountPage {
 			{
 				text: 'Update',
 				handler: data => {
-					// this.updateNickname( data.nickname );
+					this.updateNickname( data.nickname );
 					this.accountDetails.nick_name = data.nickname;
 				}
 			}
@@ -154,13 +154,13 @@ export class AccountPage {
         loader.present();
 
     	// load data
-    	this.srvAccount.updatePassword(nick).take(1)
+    	this.srvAccount.updateNick(nick).take(1)
         .subscribe( (success:any) => {
             loader.dismiss();
 
             console.log("AccountPage::updateNickname", success );
             if (success) {
-            	let res = success.response[0].update_customer_password.response;
+            	let res = success.response[0].update_nick_name.response;
 
 	            console.log("AccountPage::updateNickname", res );
 

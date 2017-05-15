@@ -131,7 +131,6 @@ export class AccountService {
             });
         }
         
-
         let action = CommonService.apiUrl + CommonService.version + '/profile/';
 
         let reqData = { "request": [ Object.assign(
@@ -153,6 +152,42 @@ export class AccountService {
         });
 
         console.log("updatePassword", reqData);
+
+        var response = this.http.post(action, reqData, opt).map(res => res.json());
+        return response;
+    }
+
+    updateNick(nick:string) {
+        console.log("updateNick", nick);
+        if ( !CommonService.session ) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+        }
+        
+        let action = CommonService.apiUrl + CommonService.version + '/profile/';
+
+        let reqData = { "request": [
+            {
+                "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                "page_ID": "7",
+                "screen_id": "7.2",
+                "action": "update_nick",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "update_nick_name",
+                "customer_id": CommonService.session.customer_id,
+                "nick_name": nick
+            } ]
+        };
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        console.log("updateNick", reqData);
 
         var response = this.http.post(action, reqData, opt).map(res => res.json());
         return response;
