@@ -1,17 +1,20 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{title}}</ion-title>
-    <ion-buttons end>
-
-    	<button *ngIf="!isHome" ion-button icon-only (click)="goHomePage()">
-            <ion-icon name="md-home"></ion-icon>
-        </button>
-    	<button ion-button icon-only menuToggle>
-            <ion-icon name="notification_ico"></ion-icon>
-            <ion-badge item-right mode="ios" color="badge">{{notificationCount}}</ion-badge>
+    <ion-navbar>
+        <button class="menu2" ion-button icon-only clear menuToggle="menu2">
+            <ion-icon name="menu-left"></ion-icon>
         </button>
 
-    </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons end>
+            <button *ngIf="!isHome" ion-button icon-only (click)="goHomePage()">
+                <ion-icon name="md-home"></ion-icon>
+            </button>
+        	<button ion-button icon-only menuToggle="menu1">
+                <ion-icon name="notification_ico"></ion-icon>
+                <ion-badge item-right mode="ios" color="badge">{{notificationCount}}</ion-badge>
+            </button>
+
+        </ion-buttons>
   </ion-navbar>
 </ion-header>
 

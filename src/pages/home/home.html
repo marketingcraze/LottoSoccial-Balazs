@@ -43,4 +43,16 @@
   </ion-content>
 
 </ion-menu>
+
+<ion-menu side="left" type="overlay" [content]="content" id="menu2">
+    <ion-content>
+        <ion-item class="notification-bar"> </ion-item>
+            <ion-list>
+                <ion-item text-wrap>Accounts </ion-item>
+                <ion-item text-wrap>Checkmywinnings </ion-item>
+                <ion-item text-wrap>Help </ion-item>
+            </ion-list>
+    </ion-content>
+</ion-menu>
+
 <ion-nav #content [root]="rootPage"></ion-nav>

@@ -7,12 +7,21 @@ cus-header {
     display: block;
     width: 100%;
 
+    .ion-ios-menu-left, .ion-md-menu-left, .ion-ios-menu-left-outline,
+    .ion-md-menu-left-outline {
+        content: url(../assets/icon/menu-left.svg);
+        width: 24px;
+    }
+
     .ion-ios-notification_ico, .ion-md-notification_ico, .ion-ios-notification_ico-outline,
     .ion-md-notification_ico-outline {
         content: url(../assets/icon/notification_ico.svg);
         width: 24px;
     }
-    
+    .menu2{
+        min-width: 20px;
+        font-size: 36px;
+    }
     .badge-ios-badge{
         position: absolute;
         color: #FF0000;
@@ -20,6 +29,9 @@ cus-header {
         top: 16px;
         left: 24px;
         padding: 2px 4px;
+    }
+    .toolbar-title{
+        padding: 0;
     }
 
 
