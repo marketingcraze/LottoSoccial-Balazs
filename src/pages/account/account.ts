@@ -137,7 +137,7 @@ export class AccountPage {
 		const browser = this.iab.create(url, "_blank");
 	}
 
-  	goHome(){
+  	goHomePage(){
 		this.params.goHomePage();
 	}
 
