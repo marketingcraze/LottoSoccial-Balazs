@@ -9,7 +9,7 @@ export class CommonService {
     public static SecureStorageUser:string = 'lotto_user';
     public static session:any;
 
-    public static parentUrl:string = 'https://nima.lottosocial.com/ ';
+    public static sitename:string = 'https://nima.lottosocial.com/';
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
     public static version:string = 'v2';
 

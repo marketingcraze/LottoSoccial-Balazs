@@ -68,7 +68,7 @@ export class TabsPage {
 
     ionViewDidLoad(){
         console.log("TabsPage::ionViewDidLoad");
-        this.homeTabs.select(0);
+        this.homeTabs.select(4);
     }
 
     ionViewDidEnter() {

@@ -14,12 +14,6 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-.ion-ios-notification_ico, .ion-md-notification_ico, .ion-ios-notification_ico-outline,
-.ion-md-notification_ico-outline {
-    content: url(../assets/icon/notification_ico.svg);
-    width: 24px;
-}
-
 .center {
 	padding: 0;
     margin-left: auto;
@@ -43,14 +37,6 @@ ion-img{
 }
 .color-white{
 	color: white;
-}
-.badge-ios-badge{
-    position: absolute;
-    color: #FF0000;
-    background-color: #E7D011;
-    top: 16px;
-    left: 24px;
-    padding: 2px 4px;
 }
 
 

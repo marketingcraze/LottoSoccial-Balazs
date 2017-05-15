@@ -7,6 +7,22 @@ cus-header {
     display: block;
     width: 100%;
 
+    .ion-ios-notification_ico, .ion-md-notification_ico, .ion-ios-notification_ico-outline,
+    .ion-md-notification_ico-outline {
+        content: url(../assets/icon/notification_ico.svg);
+        width: 24px;
+    }
+    
+    .badge-ios-badge{
+        position: absolute;
+        color: #FF0000;
+        background-color: #E7D011;
+        top: 16px;
+        left: 24px;
+        padding: 2px 4px;
+    }
+
+
     .bar-button-menutoggle{
     	display: inline;
     }

@@ -10,6 +10,7 @@ import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 import { AccountService } from '../../services/account.service';
+import { CommonService } from '../../services/common.service';
 
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -44,6 +45,7 @@ export class AccountPage {
 	    public platform: Platform, 
 	    private srvDb:DatabaseService,
 	    private srvHome:HomeService,
+	    private navCtrl:NavController,
 	    private srvAccount:AccountService,
 	    public modalCtrl: ModalController,
 	    private loadingCtrl:LoadingController,
@@ -91,8 +93,7 @@ export class AccountPage {
 			{
 				name: 'nickname',
 				placeholder: 'Nickname'
-			}
-			],
+			}],
 			buttons: [
 			{
 				text: 'Cancel',
@@ -126,9 +127,10 @@ export class AccountPage {
 
 	showUpdateDetailsModal(){
 		console.log("AccountPage::showUpdateDetailsModal" );
+		this.navCtrl.push(EditProfilePage);
 		// load account data
-        let profileModal = this.modalCtrl.create(EditProfilePage, {});
-        profileModal.present();
+        // let profileModal = this.modalCtrl.create(EditProfilePage, {});
+        // profileModal.present();
 	}
 
 	openUrl(url:string){
@@ -137,6 +139,10 @@ export class AccountPage {
 
   	goHome(){
 		this.params.goHomePage();
+	}
+
+	openWebView(str:string){
+		this.iab.create(CommonService.sitename + str, 'blank');
 	}
 
 	updateNickname(nick){
