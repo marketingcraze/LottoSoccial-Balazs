@@ -14,13 +14,17 @@ export class OffersPage {
     constructor(
         public navCtrl: NavController, 
         private params: Params,
-        public navParams: NavParams) {}
+        public navParams: NavParams) {
+
+        
+    }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad OffersPage');
     }
 
     goHomePage(){
+        console.log('OffersPage::goHomePage ');
         this.params.goHomePage();
     }
 

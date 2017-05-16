@@ -142,7 +142,9 @@ export class AccountPage {
 	}
 
 	openWebView(str:string){
-		this.iab.create(CommonService.sitename + str, 'blank');
+		let opt:string = "toolbarposition=top";
+		
+		this.iab.create(CommonService.sitename + str, 'blank', opt);
 	}
 
 	updateNickname(nick){

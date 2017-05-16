@@ -6,11 +6,11 @@ import { Observable } from 'rxjs/Observable';
 export class Params{
 	public params:any;
 	public homeData:any;
+    private unreadCount:number = 0;
 
-    constructor(
-    	public events:Events
-    	){
-        console.log("Params()");  
+    constructor(public events:Events){
+        console.log( "Params()" );
+
         this.params = {};
         this.homeData = {};
     }
@@ -18,6 +18,11 @@ export class Params{
     setHomeData( data:any ){
         this.homeData = data;
         this.events.publish("home-data", data);
+    }
+
+    setUnreadCount( data ){
+        this.unreadCount = data;
+        this.events.publish("unread-count", data);
     }
 
     goHomePage(){

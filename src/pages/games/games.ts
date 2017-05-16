@@ -13,7 +13,8 @@ export class GamesPage {
 
     gameGroup:any = {};
 
-    constructor(private navParams:NavParams,
+    constructor(
+        private navParams:NavParams,
         private navCtrl:NavController) {
 
         console.log('GamesPage', this.navParams.data);

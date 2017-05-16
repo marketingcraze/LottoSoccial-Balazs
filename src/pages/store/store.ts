@@ -18,9 +18,9 @@ import { HomeService } from '../../services/service.home';
 export class StorePage {
     @ViewChild(Slides) home_slides: Slides;
 
-    homeCardData:any;
-    spaceBetween:number = -70;
-    whatsOn:boolean = false;
+    public homeCardData:any;
+    public spaceBetween:number = -70;
+    public whatsOn:boolean = false;
     public nav:NavController;
     slideInUp:boolean = false;
     flyInOutState: String = 'out';
@@ -32,7 +32,6 @@ export class StorePage {
       reward_points:0
     };
     homeMessage:any;
-    unreadCount:string = "0";
     homeBlog:any;
     homeEvents:any;
     popMainSlide:any;
@@ -72,7 +71,7 @@ export class StorePage {
             this.accountDetails = data[i].get_account_details.response;
           }else if ( data[i].get_home_message ) {
             this.homeMessage = data[i].get_home_message.response;
-            this.unreadCount = this.homeMessage.unread;
+            params.setUnreadCount(this.homeMessage.unread);
           }else if ( data[i].get_home_events ) {
             this.homeEvents = data[i].get_home_events.response.events[0];
           }else if ( data[i].get_home_blog ) {
@@ -157,27 +156,28 @@ export class StorePage {
     console.log("openTarget", str);
   }
   handle(str:string){
-    console.log("handle", str);
+        console.log("handle", str);
 
-    switch (str) {
-      case 'invite_firends':
-           this.nav.push(JoinSyndicatePage);
-           // this.nav.push(InviteFriendsPage);
-          break;
-      case 'add_syndicate':
-           this.nav.push(AddSyndicatePage);
-          break;
-      case 'join_syndicate':
-           this.nav.push(JoinSyndicatePage);
-          break;
-      
-      default:
-          // code...
-          break;
+        switch (str) {
+          case 'invite_firends':
+               this.nav.push(JoinSyndicatePage);
+               // this.nav.push(InviteFriendsPage);
+              break;
+          case 'add_syndicate':
+               this.nav.push(AddSyndicatePage);
+              break;
+          case 'join_syndicate':
+               this.nav.push(JoinSyndicatePage);
+              break;
+          
+          default:
+              // code...
+              break;
+        }
+
     }
 
-  }
-
-
-
+    goHomePage(){
+        this.params.goHomePage();
+    }
 }

@@ -1,4 +1,4 @@
-<cus-header title="Offers" notification-count="{{unreadCount}}" (homeClicked)="goHomePage()"></cus-header>
+<cus-header title="Offers" (homeClicked)="goHomePage()"></cus-header>
 <ion-content [ngSwitch]="toptab" class="MainPanel">
     <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
         <ion-segment-button value="offer"   class="Menu_Tab">
