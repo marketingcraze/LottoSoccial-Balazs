@@ -19,6 +19,8 @@ export class CusHeaderComponent {
 	constructor(private params: Params) {
     	console.log('Hello CusHeader Component');
 
+    	this.unreadCount = params.unreadCount;
+
     	params.events.subscribe('unread-count', (count)=>{
             this.unreadCount = count;
         });

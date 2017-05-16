@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 export class Params{
 	public params:any;
 	public homeData:any;
-    private unreadCount:number = 0;
+    public unreadCount;
 
     constructor(public events:Events){
         console.log( "Params()" );
