@@ -3,6 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+// Pages
 import { StorePage } from '../pages/store/store';
 import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
@@ -32,22 +33,25 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { EditProfileDetails } from '../pages/edit-profile/edit-profile-details/edit-profile-details';
 import { EditProfileEmail } from '../pages/edit-profile/edit-profile-email/edit-profile-email';
 import { EditProfilePassword } from '../pages/edit-profile/edit-profile-password/edit-profile-password';
- import { MySyndicatePage } from '../pages/my-syndicate/my-syndicate';
- import { CheckWinningsPage } from '../pages/check-winnings/check-winnings';
- import { ManageSyndicatePage } from '../pages/manage-syndicate/manage-syndicate';
- import { LeavePage } from '../pages/leave/leave';
- import { Leave2Page } from '../pages/leave2/leave2';
- import { TandcPage } from '../pages/tandc/tandc';
- import { ConfirmModalPage } from '../pages/confirm-modal/confirm-modal';
- import { ManageSyndicate2Page } from '../pages/manage-syndicate2/manage-syndicate2';
- import { RecentDrawPage } from '../pages/recent-draw/recent-draw';
- import { CheckWinningsNextPage } from '../pages/check-winnings-next/check-winnings-next';
- import { ViewTicketsPage } from '../pages/view-tickets/view-tickets';
- import { YourTicketsPage } from '../pages/your-tickets/your-tickets';
+import { MySyndicatePage } from '../pages/my-syndicate/my-syndicate';
+import { CheckWinningsPage } from '../pages/check-winnings/check-winnings';
+import { ManageSyndicatePage } from '../pages/manage-syndicate/manage-syndicate';
+import { LeavePage } from '../pages/leave/leave';
+import { Leave2Page } from '../pages/leave2/leave2';
+import { TandcPage } from '../pages/tandc/tandc';
+import { ConfirmModalPage } from '../pages/confirm-modal/confirm-modal';
+import { ManageSyndicate2Page } from '../pages/manage-syndicate2/manage-syndicate2';
+import { RecentDrawPage } from '../pages/recent-draw/recent-draw';
+import { CheckWinningsNextPage } from '../pages/check-winnings-next/check-winnings-next';
+import { ViewTicketsPage } from '../pages/view-tickets/view-tickets';
+import { YourTicketsPage } from '../pages/your-tickets/your-tickets';
+import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
+import { CusHeaderComponent } from '../components/cus-header/cus-header';
+import { CusHeader1Component } from '../components/synd-cus-header1/synd-cus-header1';
+import { CusHeader2Component } from '../components/synd-cus-header2/synd-cus-header2';
+import { ChooseImagePage } from '../pages/choose-image/choose-image';
 
-import { ImagePicker } from '@ionic-native/image-picker';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+// services
 import { Params } from '../services/params';
 import { DatabaseService } from '../services/db.service';
 import { CommonService } from '../services/common.service';
@@ -55,18 +59,18 @@ import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 import { AccountService } from '../services/account.service';
 
+// providers
+import { ImagePicker } from '@ionic-native/image-picker';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { OneSignal } from '@ionic-native/onesignal';
 import { IonicStorageModule } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 
+// pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 
-import { CountryListPopPage } from '../pages/country-list-pop/country-list-pop';
-import { CusHeaderComponent } from '../components/cus-header/cus-header';
-import { CusHeader1Component } from '../components/synd-cus-header1/synd-cus-header1';
-import { CusHeader2Component } from '../components/synd-cus-header2/synd-cus-header2';
-import { ChooseImagePage } from '../pages/choose-image/choose-image';
 
 @NgModule({
     declarations: [
@@ -190,7 +194,7 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   DatabaseService, CommonService, AuthService, HomeService, AccountService, Params, 
-  SQLite, ImagePicker, Transfer, File, InAppBrowser]
+  SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal]
 
 })
 export class AppModule {}

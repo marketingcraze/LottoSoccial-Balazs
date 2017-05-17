@@ -14,88 +14,110 @@ import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { AuthPage } from '../pages/auth/auth';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
+import {OneSignal} from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
 import { CommonService } from '../services/common.service';
 import { DatabaseService } from '../services/db.service';
+
+import { Constants } from './constants';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = WelcomePage;
-  // rootPage:any = CreateSyndicatePage;
-  // rootPage:any = CreateSyndicate2Page;
-  // rootPage:any = CreateSyndicate3Page;
-  // rootPage:any = NewSyndicatePage;
-  // rootPage:any = AddSyndicatePage;
-  // rootPage:any = JoinSyndicatePage;
-  // rootPage:any = HomePage;
-  // rootPage:any = AuthPage;
-  // rootPage:any = EditProfilePage;
-
-  constructor(
-    private storage: Storage,
-    public platform: Platform, 
-    public dbSrv:DatabaseService, 
-    public commonSrv:CommonService, 
-    public alertCtrl:AlertController) {
-
-    platform.ready().then(() => {
-      // StatusBar.styleDefault();
-      StatusBar.hide();
-
-      // check if logged in
-      this.isLoggedIn();
-      
-    });
-  }
+    rootPage:any = WelcomePage;
+    // rootPage:any = CreateSyndicatePage;
+    // rootPage:any = CreateSyndicate2Page;
+    // rootPage:any = CreateSyndicate3Page;
+    // rootPage:any = NewSyndicatePage;
+    // rootPage:any = AddSyndicatePage;
+    // rootPage:any = JoinSyndicatePage;
+    // rootPage:any = HomePage;
+    // rootPage:any = AuthPage;
+    // rootPage:any = EditProfilePage;
 
 
+    // appId = 'e718b3ed-608e-4866-8f48-28cb5b229387';
 
-  isLoggedIn(){
-    console.log("is cordova", this.platform.is('cordova') );
+    constructor(
+        private storage: Storage,
+        public platform: Platform, 
+        public dbSrv: DatabaseService, 
+        private _OneSignal: OneSignal,
+        public commonSrv:CommonService, 
+        public alertCtrl:AlertController) {
 
-    this.storage.ready().then( ()=> {
-      this.storage.get('session').then((val) => {
+        platform.ready().then(() => {
+            // StatusBar.styleDefault();
+            StatusBar.hide();
 
-        CommonService.session = JSON.parse(val);
-        
-        console.log('Your session is', val);
-        if (val) {
-          this.rootPage = HomePage;
-        }else{
-          this.loadCountries();
-        }
-      });
-    });
-  }
+            this.initializeOneSignal();
 
-  loadCountries(){
-    this.commonSrv.getCountry().subscribe(
-      data=>{
-        if(data) {
-          CommonService.countries = data;
-        }
-        
-        // console.log("countries loaded", CommonService.countries);
-        Splashscreen.hide();
-      },
-      err=>{
-        let alert = this.alertCtrl.create({
-            title: 'Error!!!',
-            subTitle: 'Internet disabled or server error.',
-            enableBackdropDismiss:false,
-            buttons: [
-            {
-              text: 'OK',
-              handler: (data) => {
-                  this.platform.exitApp();
-              }
-            }]
+            // check if logged in
+            this.isLoggedIn();
         });
-        // alert.present();
-      },
-      ()=> {});
-  }
+    }
+
+    isLoggedIn(){
+        console.log("is cordova", this.platform.is('cordova') );
+
+        this.storage.ready().then( ()=> {
+          this.storage.get('session').then((val) => {
+
+            CommonService.session = JSON.parse(val);
+            
+            console.log('Your session is', val);
+            if (val) {
+              this.rootPage = HomePage;
+            }else{
+              this.loadCountries();
+            }
+          });
+        });
+    }
+
+    loadCountries(){
+        this.commonSrv.getCountry().subscribe(
+          data=>{
+            if(data) {
+              CommonService.countries = data;
+            }
+            
+            // console.log("countries loaded", CommonService.countries);
+            Splashscreen.hide();
+          },
+          err=>{
+            let alert = this.alertCtrl.create({
+                title: 'Error!!!',
+                subTitle: 'Internet disabled or server error.',
+                enableBackdropDismiss:false,
+                buttons: [
+                {
+                  text: 'OK',
+                  handler: (data) => {
+                      this.platform.exitApp();
+                  }
+                }]
+            });
+            // alert.present();
+          },
+          ()=> {});
+    }
+
+    initializeOneSignal() {
+        // if it is running on device
+        if (this.platform.is('cordova')) {
+            this._OneSignal.startInit(Constants.OneSignal_APP_ID, "");
+            this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);
+            this._OneSignal.setSubscription(true);
+            this._OneSignal.handleNotificationReceived().subscribe(() => {
+                // handle received here how you wish.
+            });
+            this._OneSignal.handleNotificationOpened().subscribe(() => {
+                // handle opened here how you wish.
+            });
+            this._OneSignal.endInit();        
+        }
+    }
 
 }
