@@ -23,7 +23,7 @@
     "@ionic-native/file": "^3.1.0",
     "@ionic-native/image-picker": "^3.4.4",
     "@ionic-native/in-app-browser": "^3.6.1",
-    "@ionic-native/onesignal": "^3.8.1",
+    "@ionic-native/onesignal": "^3.9.2",
     "@ionic-native/secure-storage": "^3.5.0",
     "@ionic-native/sqlite": "^3.5.0",
     "@ionic-native/transfer": "^3.4.4",
@@ -44,6 +44,7 @@
     "ionic-native": "2.8.1",
     "ionic-plugin-keyboard": "~2.2.1",
     "ionicons": "3.0.0",
+    "onesignal-cordova-plugin": "^2.1.1",
     "rxjs": "5.0.1",
     "sw-toolbox": "3.4.0",
     "zone.js": "0.7.2"

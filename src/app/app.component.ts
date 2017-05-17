@@ -110,11 +110,15 @@ export class MyApp {
             this._OneSignal.startInit(Constants.OneSignal_APP_ID, "");
             this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);
             this._OneSignal.setSubscription(true);
-            this._OneSignal.handleNotificationReceived().subscribe(() => {
+            this._OneSignal.handleNotificationReceived().subscribe((data) => {
                 // handle received here how you wish.
+                console.log('handleNotificationReceived', data);
+                alert("Notification opened:\n" + JSON.stringify(data));
+
             });
             this._OneSignal.handleNotificationOpened().subscribe(() => {
                 // handle opened here how you wish.
+                console.log('handleNotificationOpened');
             });
             this._OneSignal.endInit();        
         }
