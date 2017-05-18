@@ -2,13 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate3Page } from '../create-syndicate3/create-syndicate3';
+import { SyndicateService } from '../../services/syndicate-service';
 
-/*
-  Generated class for the CreateSyndicate2 page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-create-syndicate2',
   templateUrl: 'create-syndicate2.html'
@@ -18,12 +13,16 @@ export class CreateSyndicate2Page {
   public margin_img1: number = 0
   public margin_img2: number = 0
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public _syndService: SyndicateService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateSyndicate2Page');
   }
   ionViewWillEnter() {
+    if(localStorage.getItem('cardType')) {
+      this.selectedCard = localStorage.getItem('cardType');
+    }
+
     this.viewCtrl.showBackButton(false);
   }
   backTosyndicate1() {
@@ -31,6 +30,7 @@ export class CreateSyndicate2Page {
     this.navCtrl.push(CreateSyndicatePage)
   }
   next() {
+    localStorage.setItem('cardType', this.selectedCard);
     this.navCtrl.push(CreateSyndicate3Page)
   }
   selected(selected){
@@ -44,5 +44,6 @@ export class CreateSyndicate2Page {
     this.selectedCard = selected;
     console.log(this.selectedCard);
   }
+  
 
 }

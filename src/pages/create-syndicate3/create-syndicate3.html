@@ -39,15 +39,14 @@
       <p class="desc-p">Select all lotteries you want to play</p>
         <ion-grid>
           <ion-row>
-            <ion-col col-4>
-              <div class="t-card" (click)="selected('euromillions')">
-                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected" [hidden]="!euroselected" /></div>
-                <img src="./assets/img/euroball@3x.png" class="card-img img1"/>
-                <div class="pad-5-top">EuroMillions</div>
+            <ion-col col-4 *ngFor="let c of lotteries; let i=index">
+              <div class="t-card" (click)="selected(i)">
+                <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected" [hidden]="!c.selected" /></div>
+                <div class="l-image-div"><img src="{{c.image}}" class="card-img img1"/></div>
+                <div class="pad-5-top">{{c.name}}</div>
               </div>
-              
             </ion-col>
-            <ion-col col-4>
+            <!--<ion-col col-4>
               <div class="t-card" style="float: none;" (click)="selected('lotto')">
                 <div class="check-div"><img src="./assets/img/tick_opt.svg" class="tcard-selected2" [hidden]="!lottoselected" /></div>
                 <img src="./assets/img/lottoball@3x.png" class="card-img img2"/>
@@ -61,7 +60,7 @@
                 <img src="./assets/img/powerball@3x.png" class="card-img img2"/>
                 <div class="pad-5-top">Powerball</div>
               </div>
-            </ion-col>
+            </ion-col>-->
           </ion-row>
         </ion-grid>
         
@@ -69,7 +68,7 @@
     <div>
         <p class="errorDiv" *ngIf="!oneSelected"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select at least one lottery to play </p>
         <div style="text-align: center;" class="pad-10">
-          <button ion-button type="submit" class="btn" (click)="next()">Next</button>
+          <button ion-button type="submit" class="btn" (click)="next()" [disabled]="!oneSelected">Next</button>
         </div>
     </div>
         

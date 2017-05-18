@@ -58,6 +58,7 @@ import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 import { AccountService } from '../services/account.service';
+import { SyndicateService } from '../services/syndicate-service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -70,7 +71,7 @@ import { File } from '@ionic-native/file';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
-
+import { lotsPipe } from '../pipes/selected-lottries';
 
 @NgModule({
     declarations: [
@@ -119,6 +120,7 @@ import { MyFilterPipe } from '../pipes/contact-selected'
     MySyndicatePage,
 
     MyFilterPipe,
+    lotsPipe,
 
     CountryListPopPage,
     CusHeaderComponent,
@@ -194,7 +196,7 @@ import { MyFilterPipe } from '../pipes/contact-selected'
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   DatabaseService, CommonService, AuthService, HomeService, AccountService, Params, 
-  SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal]
+  SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService]
 
 })
 export class AppModule {}

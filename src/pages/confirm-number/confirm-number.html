@@ -18,50 +18,19 @@
 
 
 <ion-content class="marg-top-12 main-bg">
-  <div class="syndicateRow pad-5">
-        <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> Choose your EuroMillions numbers</p>
-        <p class="s-title"> Enter 5 numbers from 1 to 50 and 2 Lucky Stars from 1 to 12 </p>
+  <div class="syndicateRow" *ngFor="let data of dataArr; let r = index;">
+        <p class="desc-p"><img src="{{data.product_image}}" class="lot-img"/> Choose your {{data.product_name}} numbers</p>
+        <p class="s-title"> Enter {{data.numbers}} numbers from {{data.regular_from}} to {{data.regular_to}} and {{data.bonus}} Lucky Stars from {{data.bonus_from}} to {{data.bonus_to}} </p>
         <div class="text-center">
           <ion-grid>
-            <ion-row class="grid-row" style="width: auto;">
-                <ion-col> <div class="input-number">1</div> </ion-col>
-                <ion-col> <div class="input-number">11</div> </ion-col> 
-                <ion-col> <div class="input-number">21</div> </ion-col> 
-                <ion-col> <div class="input-number">43</div> </ion-col> 
-                <ion-col> <div class="input-number">24</div> </ion-col> 
-                <ion-col> <div class="input-number st-input">10</div> </ion-col> 
-                <ion-col> <div class="input-number st-input">2</div> </ion-col>   
+            <ion-row class="grid-row" style="width: auto;" *ngFor="let l of dataArr[r].lines; let i = index">
+                <ion-col *ngFor="let c of l; let j = index; trackBy: small" > <div class="input-number" [ngClass]="{ 'st-input': j>data.numbers-1 }">{{c}}</div> </ion-col>
             </ion-row>  
           </ion-grid>  
         </div>
-        <p class="s-title">Valid for: Ongoing every Tuesday and Friday - &#x20A4;5 </p>
+        <p class="s-title">Valid for: Ongoing every <span *ngFor="let day of data.draw_day; let di = index"><span><span *ngIf="di > 0"> and </span>{{day.long}}</span></span> - &#x20A4;{{data.value}} </p>
   </div>
 
-    <div class="syndicateRow">
-        <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> Choose your Lotto numbers</p>
-        <p class="s-title"> Enter 6 numbers from 1 to 59 </p>
-        <div class="text-center">
-          <ion-grid>
-            <ion-row class="grid-row">
-                <ion-col> <div class="input-number lotto-c"> 12 </div></ion-col>
-                <ion-col> <div class="input-number lotto-c"> 42 </div></ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 13 </div></ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 7 </div></ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 18 </div></ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 21 </div></ion-col> 
-            </ion-row>  
-            <ion-row class="grid-row">
-                <ion-col> <div class="input-number lotto-c"> 25 </div> </ion-col>
-                <ion-col> <div class="input-number lotto-c"> 36 </div> </ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 24 </div> </ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 42 </div> </ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 14 </div> </ion-col> 
-                <ion-col> <div class="input-number lotto-c"> 9 </div> </ion-col> 
-            </ion-row> 
-          </ion-grid>  
-        </div>
-        <p class="s-title">Valid for: Ongoing Wednesday - &#x20A4;4</p>
-  </div>
   <div class="like-div">
       <div>
         <div class="divider"></div>

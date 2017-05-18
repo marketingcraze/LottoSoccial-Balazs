@@ -4,84 +4,40 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!--<ion-header>
-  <ion-navbar>
-    <ion-title>Choose your numbers</ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only>-->
-            <!--<ion-icon ios="md-close" md="md-close"></ion-icon>-->
-            <!--SKIP
-        </button>
-    </ion-buttons>
-  </ion-navbar>
-  <ion-toolbar class="my-sub-head">
-    <span class="sp2">All the numbers in your syndicate will choose their numbers.
-    Choose yours manually or tap on lucky dip.</span>
-  </ion-toolbar>
-</ion-header>-->
+
 <ion-header><synd-cus-header2 title="Choose your numbers" subtitle="All the numbers in your syndicate will choose their numbers.
     Choose yours manually or tap on lucky dip."></synd-cus-header2></ion-header>
  
 <ion-content class="marg-top-12 main-bg">
-  <div class="syndicateRow pad-5">
-        <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> Choose your EuroMillions numbers</p>
-        <p class="s-title"> Enter 5 numbers from 1 to 50 and 2 Lucky Stars from 1 to 12 </p>
+
+    <div class="syndicateRow" *ngFor="let data of dataArr; let r = index;">
+        <p class="desc-p"><img src="{{data.product_image}}" class="lot-img"/> Choose your {{data.product_name}} numbers</p>
+        <p class="s-title"> Enter {{data.numbers}} numbers from {{data.regular_from}} to {{data.regular_to}} and {{data.bonus}} Lucky Stars from {{data.bonus_from}} to {{data.bonus_to}} </p>
+        <!--<p class="s-title" *ngIf="data.name != 'EuroMillions'" > Enter 6 numbers from 1 to 59 </p>-->
         <div class="text-center">
           <ion-grid>
-            <ion-row class="grid-row" style="width: auto;">
-                <ion-col> <input class="input-number" type="number"/> </ion-col>
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <ion-icon ios="ios-star" md="md-star" class="star-icon"></ion-icon><input class="input-number st-input" type="number"/> </ion-col> 
-                <ion-col> <ion-icon ios="ios-star" md="md-star" class="star-icon"></ion-icon><input class="input-number st-input" type="number"/> </ion-col>   
+            <ion-row class="grid-row" style="width: auto;" *ngFor="let l of dataArr[r].lines; let i = index">
+                <ion-col *ngFor="let f of dataArr[r].lines[i]; let fi = index; trackBy:trackByIndex;"> <ion-icon *ngIf="fi > data.numbers - 1" ios="ios-star"  md="md-star" class="star-icon" ></ion-icon>  <input class="input-number" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, fi, data.regular_to, data.numbers, data.bonus_to, data.bonus)" [(ngModel)]="dataArr[r].lines[i][fi]" [ngClass]="{'st-input':fi > data.numbers - 1, 'derror': dataArr[r].hasError[i][fi]}" id="input{{r}}{{i}}{{fi}}"/> </ion-col>
+                <!--<ion-col> <input class="input-number" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, 1)" [(ngModel)]="dataArr[r].lines[i][1]" [ngClass]="{'derror': dataArr[r].hasError[i][1]}"/> </ion-col>
+                <ion-col> <input class="input-number" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, 2)" [(ngModel)]="dataArr[r].lines[i][2]" [ngClass]="{'derror': dataArr[r].hasError[i][2]}"/> </ion-col>
+                <ion-col> <input class="input-number" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, 3)" [(ngModel)]="dataArr[r].lines[i][3]" [ngClass]="{'derror': dataArr[r].hasError[i][3]}"/> </ion-col>
+                <ion-col> <input class="input-number" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, 4)" [(ngModel)]="dataArr[r].lines[i][4]" [ngClass]="{'derror': dataArr[r].hasError[i][4]}"/> </ion-col>
+                <ion-col> <ion-icon *ngIf="data.name == 'EuroMillions'" ios="ios-star"  md="md-star" class="star-icon" ></ion-icon> <input class="input-number" [ngClass]="{ 'st-input':data.name == 'EuroMillions', 'derror': dataArr[r].hasError[i][5]}" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, 5)" [(ngModel)]="dataArr[r].lines[i][5]"/> </ion-col>
+                <ion-col *ngIf="data.name == 'EuroMillions'"> <ion-icon *ngIf="data.name == 'EuroMillions'" ios="ios-star" md="md-star" class="star-icon" ></ion-icon> <input class="input-number" [ngClass]="{ 'st-input':data.name == 'EuroMillions', 'derror': dataArr[r].hasError[i][6]}" type="text" pattern="\d*" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' (blur)="onKey(r, i, 6)" [(ngModel)]="dataArr[r].lines[i][6]"/> </ion-col>-->
             </ion-row>  
           </ion-grid>  
         </div>
-        <p class="xs-title"> DRAWS INCLUDED: <span class="tag">TUE</span><span class="tag">FRI</span></p>
+        <p class="xs-title"> DRAWS INCLUDED: <span *ngFor="let day of data.draw_day; let di = index"><span class="tag" style="text-transform: uppercase">{{day.short}}</span></span></p>
+        <p class="errorDiv" *ngIf="errArr[r] == false"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select all your numbers</p>
         <ion-grid>
             <ion-row>
-                <ion-col style="text-align: right;"> <button ion-button type="button" class="btn" style="background: #2F76D1;padding: 7px 33px;">LUCKY DIP</button> </ion-col>
-                <ion-col> <button ion-button type="button" class="btn" style="background: #B7B7B7;color: #333333;">CLEAR SELECTION</button> </ion-col> 
+                <ion-col style="text-align: right;"> <button ion-button type="button" class="btn" style="background: #2F76D1;padding: 7px 36px;" (click)="getlucky(r, data.numbers, data.regular_from, data.regular_to, data.bonus, data.bonus_from, data.bonus_to)">LUCKY DIP</button> </ion-col>
+                <ion-col> <button ion-button type="button" class="btn" style="background: #B7B7B7;color: #333333;" (click)="clear(r, data.numbers, data.bonus)">CLEAR SELECTION</button> </ion-col> 
             </ion-row>
         </ion-grid>
   </div>
-
-    <div class="syndicateRow">
-        <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> Choose your Lotto numbers</p>
-        <p class="s-title"> Enter 6 numbers from 1 to 59 </p>
-        <div class="text-center">
-          <ion-grid>
-            <ion-row class="grid-row">
-                <ion-col> <input class="input-number" type="number"/> </ion-col>
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-            </ion-row>  
-            <ion-row class="grid-row">
-                <ion-col> <input class="input-number" type="number"/> </ion-col>
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-                <ion-col> <input class="input-number" type="number"/> </ion-col> 
-            </ion-row> 
-          </ion-grid>  
-        </div>
-        <p class="xs-title"> DRAWS INCLUDED: <span class="tag">WED</span></p>
-        <p class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select all your numbers</p>
-        <ion-grid>
-            <ion-row>
-                <ion-col style="text-align: right;"> <button ion-button type="button" class="btn" style="background: #2F76D1;padding: 7px 36px;">LUCKY DIP</button> </ion-col>
-                <ion-col> <button ion-button type="button" class="btn" style="background: #B7B7B7;color: #333333;">CLEAR SELECTION</button> </ion-col> 
-            </ion-row>
-        </ion-grid>
-  </div>
-
+    
     <div class="bottom_bar">
-    <button ion-button (click)="next()">CONFIRM NUMBERS</button>
+    <button ion-button (click)="next()" [disabled]="!dError">CONFIRM NUMBERS</button>
     </div>
 </ion-content>

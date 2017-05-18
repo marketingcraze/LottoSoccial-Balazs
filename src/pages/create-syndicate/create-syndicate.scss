@@ -33,6 +33,12 @@ page-create-syndicate {
     background: #e3e3e3;
     font-family: lato-regular;
 }
+.w-bg {
+    background: white;
+}
+.n-bg {
+    background: #1F4C87;
+}
 .inner-body {
     background: white;
     padding-bottom: 20px;
@@ -60,10 +66,12 @@ page-create-syndicate {
     }
     .img-picker {
         // background: url(http://wowslider.com/sliders/demo-10/data/images/autumn_leaves.jpg);
-        background-size: cover;
-        background: #1F4C87;
+        //background-size: cover;
+        
         height: auto;
         text-align: center;
+        // min-height: 120px;
+        // max-height: 139px;
     }
     .button-outline-md {
         border-color: white;
@@ -73,11 +81,11 @@ page-create-syndicate {
         text-transform: none;
     }
     .marg-35 {
-        margin: 35px;
+        margin: 42px;
     }
     ion-input {
         border: 1px solid #ccc;
-        margin-top: 1px;
+        margin-top: 0px;
     }
     .text-input-md {
         font-size: 15px;
@@ -119,17 +127,17 @@ page-create-syndicate {
         height: 0;        
     }
     .reload {
-    position: relative;
-    float: right;
-    margin-top: -35px;
-    margin-right: 10px;
-    color: #2f76d1;
-    background: white;
-    font-size: 25px;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    padding: 2px;
-    font-weight: bold;
-}
+        position: relative;
+        float: right;
+        margin-top: -40px;
+        margin-right: 10px;
+        color: #2f76d1;
+        background: white;
+        font-size: 22px;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 4px;
+        font-weight: bold;
+    }
 }
