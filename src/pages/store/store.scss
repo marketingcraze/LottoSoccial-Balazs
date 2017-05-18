@@ -73,6 +73,13 @@ page-store {
 				margin: 0;
 				padding: 6px;
 			}
+			img{
+				position: absolute;
+			    width: 100%;
+			    top: 0;
+			    left: 0;
+			    z-index: -1;
+			}
 			p{
 				font-size: .8em;
 			}

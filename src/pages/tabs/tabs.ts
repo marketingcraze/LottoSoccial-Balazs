@@ -60,9 +60,19 @@ export class TabsPage {
 
         this.mySelectedIndex = navParams.data.tabIndex || 0;
 
-        this.params.events.subscribe('go-home', () => {
-            console.log("go-home");
-            this.homeTabs.select(0);
+        this.params.events.subscribe('go-home', (tab) => {
+            console.log("go-home", tab);
+            if (!tab) {
+                tab = 0;
+            }
+            this.homeTabs.select( tab );
+        });
+        this.params.events.subscribe('go-tab', (tab) => {
+            console.log("go-tab", tab);
+            if (!tab) {
+                tab = 0;
+            }
+            this.homeTabs.select( tab );
         });
     }
 
@@ -121,20 +131,19 @@ export class TabsPage {
         this.params.setHomeData( this.homeData );
     }
 
-  goToStore(){
-    console.log("goToStore()");
-    this.storage.get('session')
-    .then(
-        data => {
-          let session:any = JSON.parse(data);
-          let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store&customer_id=';
-          url += session.customer_id + '&customer_token=' + session.customer_token;
-          // console.log("session data", data, url);
-          
-          const browser = this.iab.create(url, "_blank");
-        }, error => console.log(error)
-    );
-    
-  }
+    goToStore(){
+        console.log("goToStore()");
+        this.storage.get('session')
+        .then(
+            data => {
+              let session:any = JSON.parse(data);
+              let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store&customer_id=';
+              url += session.customer_id + '&customer_token=' + session.customer_token;
+              // console.log("session data", data, url);
+              
+              const browser = this.iab.create(url, "_blank");
+            }, error => console.log(error)
+        );
+    }
 
 }

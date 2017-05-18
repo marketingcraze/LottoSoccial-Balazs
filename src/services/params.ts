@@ -26,6 +26,10 @@ export class Params{
     }
 
     goHomePage(){
-    	this.events.publish("go-home");
+        this.events.publish("go-home");
+    }
+
+    goTab(tabIndex){
+    	this.events.publish("go-tab", tabIndex);
     }
 }

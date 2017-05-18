@@ -27,9 +27,15 @@ export class StorePage {
 
     homeCard:any;
     gameGroup:any;
+
+    offersForYou:any = {
+        card_title:"",
+        offer_group:[]
+    };
+
     accountDetails:any = {
-      bonus_credit:0.00,
-      reward_points:0
+        bonus_credit:0.00,
+        reward_points:0
     };
     homeMessage:any;
     homeBlog:any;
@@ -52,38 +58,43 @@ export class StorePage {
       	public actionSheetCtrl: ActionSheetController) {
 
       
-      // this.homeData = this.navParams.data;
-      console.log("StorePage", this.navParams.data);
+        // this.homeData = this.navParams.data;
+        console.log("StorePage", this.navParams.data);
 
-      this.nav = this.app.getRootNav();
-      this.spaceBetween = Math.floor( platform.width() * -0.10 );
+        this.nav = this.app.getRootNav();
+        this.spaceBetween = Math.floor( platform.width() * -0.10 );
 
+        this.params.events.subscribe('home-data', data => {
+            console.log("home-data", data);
+            
+            for (var i = data.length - 1; i >= 0; i--) {
 
-      this.params.events.subscribe('home-data', data => {
-        console.log("home-data", data);
-        
-        for (var i = data.length - 1; i >= 0; i--) {
-          
-          if ( data[i].get_home_card ) {
-            this.homeCard = data[i].get_home_card.response;
-            this.gameGroup = this.homeCard.game.game.game_group;
-          }else if ( data[i].get_account_details ) {
-            this.accountDetails = data[i].get_account_details.response;
-          }else if ( data[i].get_home_message ) {
-            this.homeMessage = data[i].get_home_message.response;
-            params.setUnreadCount(this.homeMessage.unread);
-          }else if ( data[i].get_home_events ) {
-            this.homeEvents = data[i].get_home_events.response.events[0];
-          }else if ( data[i].get_home_blog ) {
-            this.homeBlog = data[i].get_home_blog.response.blogs;
-          }
-        }
+                if ( data[i].get_home_card ) {
+                    this.homeCard = data[i].get_home_card.response;
+                    
+                    if ( this.homeCard.game.game.game_group ) {
+                        this.gameGroup = this.homeCard.game.game.game_group;
+                    }
+                    if (this.homeCard.offers_for_you) {
+                        this.offersForYou = this.homeCard.offers_for_you;
+                    }
+                    
+// .offer_group
+                }else if ( data[i].get_account_details ) {
+                    this.accountDetails = data[i].get_account_details.response;
+                }else if ( data[i].get_home_message ) {
+                    this.homeMessage = data[i].get_home_message.response;
+                    params.setUnreadCount(this.homeMessage.unread);
+                }else if ( data[i].get_home_events ) {
+                    this.homeEvents = data[i].get_home_events.response.events[0];
+                }else if ( data[i].get_home_blog ) {
+                    this.homeBlog = data[i].get_home_blog.response.blogs;
+                }
+            }
 
-        console.log("home data", this.homeMessage );
-      });
+            console.log("home data", this.offersForYou );
+        });
     }
-
-
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad StorePage');
@@ -101,61 +112,65 @@ export class StorePage {
     }
 
     showWhatsOn(){
-      console.log("showWhatsOn: " + this.slideInUp);
+        console.log("showWhatsOn: " + this.slideInUp);
 
-      if(this.slideInUp) {
-        let timeoutId = setTimeout(() => {  
-          this.whatsOn = !this.whatsOn;
-          clearTimeout(timeoutId);
-        }, 500);
-        this.slideInUp = !this.slideInUp;
+        if(this.slideInUp) {
 
-      }else{
+            let timeoutId = setTimeout(() => {
+                this.whatsOn = !this.whatsOn;
+                clearTimeout(timeoutId);
+            }, 500);
+            this.slideInUp = !this.slideInUp;
 
-        this.whatsOn = !this.whatsOn;
+        }else{
 
-        let timeoutId = setTimeout(() => {  
-          this.slideInUp = !this.slideInUp;
-          clearTimeout(timeoutId);
-        }, 10);
-      }
-      
-      
+            this.whatsOn = !this.whatsOn;
+
+            let timeoutId = setTimeout(() => {  
+              this.slideInUp = !this.slideInUp;
+              clearTimeout(timeoutId);
+            }, 10);
+        }
     }
 
-  showLottoSocial(){
-  	console.log("showLottoSocial()");
-  	let actionSheet = this.actionSheetCtrl.create({
-      title: 'Modify your album',
-      cssClass:'bottom-sheet',
-      buttons: [
-        {
-          text: 'Destructive',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-          }
-        },{
-          text: 'Archive',
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+    showLottoSocial(){
+      	console.log("showLottoSocial()");
+      	let actionSheet = this.actionSheetCtrl.create({
+          title: 'Modify your album',
+          cssClass:'bottom-sheet',
+          buttons: [
+            {
+              text: 'Destructive',
+              role: 'destructive',
+              handler: () => {
+                console.log('Destructive clicked');
+              }
+            },{
+              text: 'Archive',
+              handler: () => {
+                console.log('Archive clicked');
+              }
+            },{
+              text: 'Cancel',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            }
+          ]
+        });
+        actionSheet.present();
+    }
 
-  openTarget(str:string){
-    console.log("openTarget", str);
-  }
-  handle(str:string){
+    viewAllOffers(){
+        this.params.goTab(5);
+    }
+
+    openTarget(str:string){
+        console.log("openTarget", str);
+    }
+
+    handle(str:string){
         console.log("handle", str);
 
         switch (str) {
