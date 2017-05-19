@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+import { SplashPage } from '../pages/splash/splash';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { HomePage } from '../pages/home/home';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
@@ -25,7 +26,8 @@ import { Constants } from './constants';
     templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage:any = WelcomePage;
+    rootPage:any = SplashPage;
+    // rootPage:any = WelcomePage;
     // rootPage:any = CreateSyndicatePage;
     // rootPage:any = CreateSyndicate2Page;
     // rootPage:any = CreateSyndicate3Page;
@@ -52,56 +54,57 @@ export class MyApp {
             StatusBar.hide();
 
             this.initializeOneSignal();
+            
+            this.storage.ready().then( ()=> {
+                this.storage.get('session').then((val) => {
+                    
+                    CommonService.session = JSON.parse(val);
 
-            // check if logged in
-            this.isLoggedIn();
+                    console.log('Your session is', val);
+                    setTimeout(()=>{
+                        if (val) {
+                            this.rootPage = HomePage;
+                        }else{
+                            this.rootPage = WelcomePage;
+                            this.loadCountries();
+                        }
+                    }, 5000);
+                });
+            });
+
         });
     }
 
-    isLoggedIn(){
+    routeToHome(){
         console.log("is cordova", this.platform.is('cordova') );
-
-        this.storage.ready().then( ()=> {
-          this.storage.get('session').then((val) => {
-
-            CommonService.session = JSON.parse(val);
-            
-            console.log('Your session is', val);
-            if (val) {
-              this.rootPage = HomePage;
-            }else{
-              this.loadCountries();
-            }
-          });
-        });
+        CommonService.session
     }
 
     loadCountries(){
-        this.commonSrv.getCountry().subscribe(
-          data=>{
+        this.commonSrv.getCountry().subscribe(data=>{
             if(data) {
-              CommonService.countries = data;
+                CommonService.countries = data;
             }
-            
+
             // console.log("countries loaded", CommonService.countries);
             Splashscreen.hide();
-          },
-          err=>{
+        },
+        err=>{
             let alert = this.alertCtrl.create({
                 title: 'Error!!!',
                 subTitle: 'Internet disabled or server error.',
                 enableBackdropDismiss:false,
                 buttons: [
                 {
-                  text: 'OK',
-                  handler: (data) => {
-                      this.platform.exitApp();
-                  }
+                    text: 'OK',
+                    handler: (data) => {
+                        this.platform.exitApp();
+                    }
                 }]
             });
             // alert.present();
-          },
-          ()=> {});
+        },
+        ()=> {});
     }
 
     initializeOneSignal() {

@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 // Pages
+import { SplashPage } from '../pages/splash/splash';
 import { StorePage } from '../pages/store/store';
 import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
@@ -76,6 +77,7 @@ import { lotsPipe } from '../pipes/selected-lottries';
 @NgModule({
     declarations: [
     MyApp,
+    SplashPage,
     WelcomePage,
     AuthPage,
     SignupPage,
@@ -149,6 +151,7 @@ import { lotsPipe } from '../pipes/selected-lottries';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    SplashPage,
     WelcomePage,
     AuthPage,
     SignupPage,

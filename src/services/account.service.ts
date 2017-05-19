@@ -95,7 +95,6 @@ export class AccountService {
             });
         }
         
-
         let action = CommonService.apiUrl + CommonService.version + '/profile/';
 
         let reqData = { "request": [ Object.assign(
