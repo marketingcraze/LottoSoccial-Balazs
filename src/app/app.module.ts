@@ -73,6 +73,7 @@ import { File } from '@ionic-native/file';
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
+import { FilterPipe } from '../pipes/filter-pipe';
 
 @NgModule({
     declarations: [
@@ -121,8 +122,10 @@ import { lotsPipe } from '../pipes/selected-lottries';
     CheckWinningsPage,
     MySyndicatePage,
 
+// pipes
     MyFilterPipe,
     lotsPipe,
+    FilterPipe,
 
     CountryListPopPage,
     CusHeaderComponent,

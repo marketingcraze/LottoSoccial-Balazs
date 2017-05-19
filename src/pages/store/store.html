@@ -32,7 +32,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-slides #home_slides loop initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
+  <ion-slides #home_slides loop="true" initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
 
 <!-- Slide 0 -->
 
@@ -280,7 +280,7 @@
                 <ion-item margin-top class="offer-up lotto">
                     <img src="{{offer.offer_img}}">
                     <p>{{offer.offer_title}}</p>
-                    <h1>&pound;{{offer.offer_jackpot}}</h1>
+                    <h1>{{offer.offer_jackpot}}</h1>
                 </ion-item>
 
                 <ion-item class="offer-down lotto">
@@ -301,7 +301,7 @@
                 <ion-item margin-top class="offer-up euro">
                     <img src="{{offer.offer_img}}">
                     <p>{{offer.offer_title}}</p>
-                    <h1>&pound;{{offer.offer_jackpot}}</h1>
+                    <h1>{{offer.offer_jackpot}}</h1>
                 </ion-item>
                 
                 <ion-item class="offer-down euro">

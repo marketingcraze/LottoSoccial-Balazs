@@ -1,15 +1,29 @@
-<cus-header title="Offers" (homeClicked)="goHomePage()"></cus-header>
-<ion-content [ngSwitch]="toptab" class="MainPanel">
-    <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
-        <ion-segment-button value="offer"   class="Menu_Tab">
-            OFFER FOR YOU
-        </ion-segment-button>
-        <ion-segment-button value="bonus"  class="Menu_Tab">
-            SPEND BONUS CREDIT
-        </ion-segment-button>
-    </ion-segment>
+<!--
+  Generated template for the Offers page.
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
 
-    <ion-card class="Card_Padding" *ngSwitchCase="'offer'">
+  <ion-navbar color="primary">
+  
+<cus-header title="Offers" notification-count="0"></cus-header>
+    
+  </ion-navbar>
+      <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
+            <ion-segment-button value="offer"   class="Menu_Tab">
+                OFFER FOR YOU
+            </ion-segment-button>
+            <ion-segment-button value="bonus"  class="Menu_Tab">
+                SPEND BONUS CREDIT
+            </ion-segment-button>
+      </ion-segment>
+</ion-header>
+
+
+<ion-content [ngSwitch]="toptab" class="MainPanel">
+ 
+  <ion-card class="Card_Padding"  *ngSwitchCase="'offer'"  >
        <div class="card-title">
         <img src="assets/image/euro-banner.png" class="img-responsive">
           <div>£43,000,000 JACKPOT</div>
@@ -104,8 +118,163 @@
               <ion-col col-11 ><h2 style="font-size: 1.2rem;   color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
           </ion-row>
   </ion-card>
-  <ion-list  *ngSwitchCase="'bonus'" >
-    <h1>SPEND BONUS CREDIT</h1>
-  </ion-list>
+
+  <ion-content  *ngSwitchCase="'bonus'"  >
+      <!--<ion-card class="Credit_balance_card">
+        <ion-toggle color="danger" checked="true"></ion-toggle>
+       </ion-card>-->
+       <ion-item no-padding no-lines>
+          
+          <ion-toggle color="danger" checked="true"  item-left></ion-toggle>
+
+          <ion-label class="SlideTitle" >Your Bonus Credit Balance : <span ion-text color="danger">£15.36</span></ion-label>
+
+       </ion-item>
+      <ion-slides initialSlide=0 >
+          <ion-slide >
+              <ion-card class="SlideSpace">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-12>
+                        <p class="SlidePrice"> £43,000,000</p> 
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SpaceBetweenRow">
+                    <ion-col col-12>
+                       <p class="SlideSubTitle">EUROMILLIONS</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#515050">Choose Your Draw day</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SpaceBetweenRow">
+                    <ion-col col-6>
+                      <button ion-button class="slide1FontColor"  (click)="tue()" value="Tue">TUE</button>
+                    </ion-col>
+                    <ion-col col-6>
+                      <button ion-button style="background-color: #b7b7b7;color:white" (click)="fri()">FRI</button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop" >
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#515050">Choose Number Of Lines</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let item of credit_lines ; let i=index">
+                    <ion-col (click)="line1()" *ngIf="i<1"><p class="badge" >{{item.line_group.line1}}</p></ion-col>
+                    <ion-col (click)="line2()" *ngIf="i<1"><p class="badge" >{{item.line_group.line2}}</p></ion-col>
+                    <ion-col (click)="line3()" *ngIf="i<1"><p class="badge"  >{{item.line_group.line3}}</p></ion-col>
+                    <ion-col (click)="line4()" *ngIf="i<1"><p class="badge" >{{item.line_group.line4}}</p></ion-col>
+                    <ion-col (click)="line5()" *ngIf="i<1"><p class="badge" >{{item.line_group.line5}}</p></ion-col>
+                    <ion-col (click)="line6()" *ngIf="i<1"><p class="badge" >{{item.line_group.line6}}</p></ion-col>
+                    <ion-col (click)="line7()" *ngIf="i<1"><p class="badge" >{{item.line_group.line7}}</p></ion-col>
+                    
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#d0d0d0">SUMMARY</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <p class="SlideSubTitle SlideLastText" >1 Euromillions Lines on {{credit_filter_day}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let item of credit_offer | filter:{line: credit_filter_line, draw: credit_filter_draw}" >
+                    <ion-col col-12 >
+                      <p class="SlideSubTitle SlideLastText" >1 Total at 30p per Lines : <span ion-text color="danger">£{{item.prize}}</span></p>
+                    </ion-col>
+                    
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <button ion-button class="BuyBtn" style="float: none">BUY NOW</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card>
+          </ion-slide>
+
+           <ion-slide >
+              <ion-card class="SlideSpace">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-12>
+                        <p class="SlidePrice redClr"> £5,600,000</p> 
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SpaceBetweenRow">
+                    <ion-col col-12>
+                       <p class="SlideSubTitle">LOTTO</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#515050">Choose Draw day</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SpaceBetweenRow">
+                    <ion-col col-6>
+                      <button ion-button class="slide2FontColor" (click)="wed()">WED</button>
+                    </ion-col>
+                    <ion-col col-6>
+                      <button ion-button style="background-color: #b7b7b7;color:white" (click)="sat()">SAT</button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop" >
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#515050">Choose Number Of Lines</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let item of fetch_lines; let i=index">
+                    <ion-col (click)="line1()" *ngIf="i<1"><p class="badge badge2">{{item.line_group.line1}}</p></ion-col>
+                    <ion-col (click)="line2()" *ngIf="i<1"><p class="badge badge2">{{item.line_group.line2}}</p></ion-col>
+                    <ion-col (click)="line3()" *ngIf="i<1"><p class="badge badge2">{{item.line_group.line3}}</p></ion-col>
+                    <ion-col (click)="line4()" *ngIf="i<1"><p class="badge badge2">{{item.line_group.line4}}</p></ion-col>
+                    <ion-col (click)="line5()" *ngIf="i<1" ><p class="badge badge2">{{item.line_group.line5}}</p></ion-col>
+                    <ion-col (click)="line6()" *ngIf="i<1"><p class="badge badge2">{{item.line_group.line6}}</p></ion-col>
+                    <ion-col (click)="line7()" *ngIf="i<1"><p class="badge badge2">{{item.line_group.line7}}</p></ion-col>
+                    
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#d0d0d0">SUMMARY</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <p class="SlideSubTitle SlideLastText" >1 Lotto Lines on {{fetch_filter_day}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row  *ngFor="let item of fetch_offer | filter:{line: fetch_filter_line, draw: fetch_filter_draw}">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle SlideLastText" >1 Total at 30p per Lines : <span ion-text color="danger">£{{item.prize}}</span></p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <button ion-button class="BuyBtn" style="float: none">BUY NOW</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card>
+          </ion-slide>
+
+           <ion-slide >
+              <ion-card>
+                <h1>welcome3</h1>
+              </ion-card>
+          </ion-slide>
+
+           <ion-slide >
+              <ion-card>
+                <h1>welcome4</h1>
+              </ion-card>
+          </ion-slide>
+
+      </ion-slides>
+  </ion-content>
 
 </ion-content>
