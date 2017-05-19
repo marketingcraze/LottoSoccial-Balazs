@@ -29,7 +29,13 @@ export class CusHeaderComponent {
 	ngAfterViewInit(){}
 	
 	goHomePage(){
-		this.homeClicked.emit();
+		this.params.goTab(0);
+		/*
+		if (this.homeClicked) {
+			this.homeClicked.emit();
+		}else{
+			
+		}*/
 	}
 
 }

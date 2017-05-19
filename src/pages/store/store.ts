@@ -108,6 +108,7 @@ export class StorePage {
     ngAfterViewInit() {
         console.log( "ngAfterViewInit()" );
         // this.home_slides.freeMode = true;
+        this.home_slides.loop = true;
         this.home_slides.autoplayDisableOnInteraction = false;
     }
 
