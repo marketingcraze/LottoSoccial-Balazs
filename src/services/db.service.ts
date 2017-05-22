@@ -14,25 +14,25 @@ export class DatabaseService {
     public databaseCreated:number = 0;
   
     constructor(private sqlite: SQLite,
-      public platform: Platform) {
+        public platform: Platform) {
 
-      console.log("DatabaseService");
-      
-      this.createDatabase();
+        console.log("DatabaseService");
+        platform.ready().then(()=> this.createDatabase() );
+        
     }
 
     createDatabase(){
-      this.sqlite.create({
-        name: DatabaseService.databaseName,
-        location: "default"
-      }).then(( db: SQLiteObject ) => {
-        console.log("database created"); 
-          this.database = db;
-        // open sqlite database
-        this.prepareSqliteDatabase();
-      }, (error) => {
-        console.error("Unable to open database", error);
-      });
+        this.sqlite.create({
+            name: DatabaseService.databaseName,
+            location: "default"
+        }).then(( db: SQLiteObject ) => {
+            console.log("database created"); 
+            this.database = db;
+            // open sqlite database
+            this.prepareSqliteDatabase();
+        }, (error) => {
+            console.error("Unable to open database", error);
+        });
     }
 
 
@@ -197,7 +197,8 @@ export class DatabaseService {
           console.error("Unable to execute sql", error);
         });
     }
-    
+
+
 }
 
 

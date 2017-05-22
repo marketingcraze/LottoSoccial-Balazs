@@ -113,6 +113,8 @@ export class AccountPage {
 
 	logout(){
 		console.log( "AccountPage::logout" );
+		
+		this.cache.clearDatabaseOnLogout();
 
 		this.storage.remove('session')
         .then(

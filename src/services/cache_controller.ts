@@ -144,4 +144,34 @@ export class CacheController {
 
 	}
 
+	clearDatabaseOnLogout(){
+		console.log("CacheController::clearDatabaseOnLogout ");
+
+		// delete tbl_Page table data
+        let delete_page = "DELETE FROM tbl_Page;";
+        this.srvDb.raw_query( delete_page, []).then((page_result:any)=> {
+	        console.log("clearDatabaseOnLogout SUCCESS ", page_result );
+	    }, (error)=> {
+	        console.error(error);
+	    });
+
+
+    	let delete_module = "DELETE FROM tbl_Module; ";
+        this.srvDb.raw_query( delete_module, []).then((module_result:any)=> {
+            console.log("clearDatabaseOnLogout SUCCESS ", module_result );
+        }, (error)=> {
+            console.error(error);
+        });
+
+
+        // delete tbl_Page_Module data
+        let delete_page_module = "DELETE FROM tbl_Page_Module; ";    
+        this.srvDb.raw_query( delete_page_module, []).then((result:any)=> {
+        	console.log("clearDatabaseOnLogout SUCCESS ", result);
+        }, (error)=> {
+        	console.error(error);
+        });
+    }
+
+
 }

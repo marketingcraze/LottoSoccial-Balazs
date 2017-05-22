@@ -15,7 +15,7 @@ import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { AuthPage } from '../pages/auth/auth';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
-import {OneSignal} from '@ionic-native/onesignal';
+import { OneSignal } from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
 import { CommonService } from '../services/common.service';
 import { DatabaseService } from '../services/db.service';
@@ -54,24 +54,25 @@ export class MyApp {
             StatusBar.hide();
 
             this.initializeOneSignal();
-            
-            this.storage.ready().then( ()=> {
+
+            this.loadCountries();
+
+
+/*            this.storage.ready().then( ()=> {
                 this.storage.get('session').then((val) => {
                     
                     CommonService.session = JSON.parse(val);
 
                     console.log('Your session is', val);
-                    setTimeout(()=>{
-                        if (val) {
-                            this.rootPage = HomePage;
-                        }else{
-                            this.rootPage = WelcomePage;
-                            this.loadCountries();
-                        }
-                    }, 5000);
+                    if (val) {
+                        this.rootPage = HomePage;
+                    }else{
+                        this.rootPage = WelcomePage;
+                        this.loadCountries();
+                    }
                 });
             });
-
+*/
         });
     }
 
