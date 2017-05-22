@@ -107,7 +107,7 @@ export class TabsPage {
         .then( data => {
             loader.dismiss();
 
-            // console.log("TabsPage::ionViewDidEnter", data);
+            console.log("TabsPage::ionViewDidEnter", data);
             this.params.setHomeData( data ); 
       
             /*

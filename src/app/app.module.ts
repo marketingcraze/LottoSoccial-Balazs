@@ -10,6 +10,7 @@ import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
 import { AccountPage } from '../pages/account/account';
 import { OffersPage } from '../pages/offers/offers';
+import { OffersPayment } from '../pages/offers/offers-payment/offers-payment';
 import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { AuthPage } from '../pages/auth/auth';
@@ -121,6 +122,7 @@ import { FilterPipe } from '../pipes/filter-pipe';
      YourTicketsPage,
     CheckWinningsPage,
     MySyndicatePage,
+    OffersPayment,
 
 // pipes
     MyFilterPipe,
@@ -196,6 +198,9 @@ import { FilterPipe } from '../pipes/filter-pipe';
      YourTicketsPage,
     CheckWinningsPage,
     MySyndicatePage,
+
+    // popovers
+    OffersPayment,
 
     CountryListPopPage,
     RedeemGamesPage

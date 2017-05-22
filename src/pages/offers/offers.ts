@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import { HomeService } from '../../services/service.home';
-
+import { OffersPayment } from './offers-payment/offers-payment';
 
 @Component({
     selector: 'page-offers',
@@ -9,6 +9,8 @@ import { HomeService } from '../../services/service.home';
 })
 export class OffersPage  {
     toptab:string="offer";
+    slideInUp:boolean = true;
+    confirmPayment:boolean = true;
 
     credit_lines : any;
     credit_offer : any;
@@ -16,19 +18,56 @@ export class OffersPage  {
     credit_filter_draw:any;
     credit_filter_day:any;
 
-    fetch_lines : any;
+    fetch_lines :any;
     fetch_offer : any;
     fetch_filter_line:any;
     fetch_filter_draw:any;
     fetch_filter_day:any; 
 
-  //spaceBetween:number ;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public platform: Platform, public homeSrv:HomeService ) {
-  //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
-  
-     
-  }
+    //spaceBetween:number ;
+    constructor(
+        public platform: Platform, 
+        public homeSrv:HomeService,
+        public navParams: NavParams,
+        public navCtrl: NavController, 
+        public popoverCtrl:PopoverController ) {
+        // this.spaceBetween = Math.floor( platform.width() * -0.14 );
+    }
+
+    makePayment(myEvent) {
+        this.showWhatsOn();
+
+        /*
+        let popover = this.popoverCtrl.create(OffersPayment);
+        popover.present({
+            ev: null
+        });*/
+    }
+
+    showWhatsOn(){
+        console.log("showWhatsOn: " + this.slideInUp);
+
+        if(this.slideInUp) {
+
+            let timeoutId = setTimeout(() => {
+                this.confirmPayment = !this.confirmPayment;
+                clearTimeout(timeoutId);
+            }, 500);
+            this.slideInUp = !this.slideInUp;
+
+        }else{
+
+            this.confirmPayment = !this.confirmPayment;
+
+            let timeoutId = setTimeout(() => {  
+              this.slideInUp = !this.slideInUp;
+              clearTimeout(timeoutId);
+            }, 10);
+        }
+    }
+
+
+
     wed(){
         this.fetch_filter_draw="Wed";
         this.fetch_filter_day="Wednesday";
@@ -75,7 +114,9 @@ export class OffersPage  {
       this.credit_filter_line=20;
       this.fetch_filter_line=20;
     }
-  ionViewDidLoad() {
+
+
+    ionViewDidLoad() {
       this.credit_filter_line=1;
       this.credit_filter_draw="Tue";
       this.credit_filter_day="Tuesday";

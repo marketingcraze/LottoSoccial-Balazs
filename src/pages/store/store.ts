@@ -27,6 +27,7 @@ export class StorePage {
 
     homeCard:any;
     gameGroup:any;
+    siteUrl:string = CommonService.sitename;
 
     offersForYou:any = {
         card_title:"",
@@ -101,7 +102,7 @@ export class StorePage {
     }
 
     loadLink(url){
-        let browser = this.iab.create(url, '_blank');
+        this.iab.create(url, '_blank');
         // browser.show();
     }
 
