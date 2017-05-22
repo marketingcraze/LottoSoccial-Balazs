@@ -4,26 +4,23 @@ import { HomeService } from '../../services/service.home';
 
 
 @Component({
-  selector: 'page-offers',
-  templateUrl: 'offers.html',
-
+    selector: 'page-offers',
+    templateUrl: 'offers.html'
 })
-
-
 export class OffersPage  {
-   toptab:string="offer";
+    toptab:string="offer";
 
-   credit_lines : any;
-   credit_offer : any;
-   credit_filter_line:any;
-   credit_filter_draw:any;
-   credit_filter_day:any;
+    credit_lines : any;
+    credit_offer : any;
+    credit_filter_line:any;
+    credit_filter_draw:any;
+    credit_filter_day:any;
 
-   fetch_lines : any;
-   fetch_offer : any;
-   fetch_filter_line:any;
-   fetch_filter_draw:any;
-   fetch_filter_day:any; 
+    fetch_lines : any;
+    fetch_offer : any;
+    fetch_filter_line:any;
+    fetch_filter_draw:any;
+    fetch_filter_day:any; 
 
   //spaceBetween:number ;
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -31,7 +28,7 @@ export class OffersPage  {
   //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
   
      
-}
+  }
     wed(){
         this.fetch_filter_draw="Wed";
         this.fetch_filter_day="Wednesday";
@@ -95,8 +92,7 @@ export class OffersPage  {
                 err=>{
                   
                     console.log("error", err);
-                },
-                ()=> console.log("offer dislpay sucesss")
+                }
                 );
 
     this.homeSrv.get_fetch_offer().subscribe(
@@ -108,8 +104,7 @@ export class OffersPage  {
                 err=>{
                   
                     console.log("error", err);
-                },
-                ()=> console.log("offer dislpay sucesss")
+                }
                 );
       }
 }

@@ -10,21 +10,21 @@ import { CacheController } from '../../services/cache_controller';
 
 import { TabsPage } from '../tabs/tabs';
 export interface PageInterface {
-  title: string;
-  component: any;
-  icon: string;
-  index?: number;
+    title: string;
+    component: any;
+    icon: string;
+    index?: number;
 }
 
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
-  @ViewChild(Nav) nav: Nav;
+    @ViewChild(Nav) nav: Nav;
 
-  private cache: CacheController;
+    private cache: CacheController;
 
   /*// set our app's pages
   appPages: PageInterface[] = [
@@ -38,7 +38,6 @@ export class HomePage {
   rootPage = TabsPage;
 
   private homeMessage:any;
-  public unreadCount:number = 0;
   public messages:any[];
 
   constructor(
@@ -58,19 +57,19 @@ export class HomePage {
     });*/
 
     this.params.events.subscribe('home-data', data => {
-      // console.log("home-data", data);
+        // console.log("home-data", data);
       
-      for (var i = data.length - 1; i >= 0; i--) {
+        for (var i = data.length - 1; i >= 0; i--) {
         
-        if ( data[i].get_home_message ) {
-          this.homeMessage = data[i].get_home_message.response;
-          this.messages = this.homeMessage.notification;
-          this.unreadCount = this.homeMessage.unread;
-          break;
+            if ( data[i].get_home_message ) {
+                this.homeMessage = data[i].get_home_message.response;
+                this.messages = this.homeMessage.notification;
+                params.setUnreadCount(this.homeMessage.count);
+                break;
+            }
         }
-      }
 
-      console.log("HomePage::home data", this.homeMessage, this.messages );
+        console.log("HomePage::home data", this.homeMessage, this.messages );
     });
   }
 

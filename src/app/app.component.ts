@@ -56,23 +56,6 @@ export class MyApp {
             this.initializeOneSignal();
 
             this.loadCountries();
-
-
-/*            this.storage.ready().then( ()=> {
-                this.storage.get('session').then((val) => {
-                    
-                    CommonService.session = JSON.parse(val);
-
-                    console.log('Your session is', val);
-                    if (val) {
-                        this.rootPage = HomePage;
-                    }else{
-                        this.rootPage = WelcomePage;
-                        this.loadCountries();
-                    }
-                });
-            });
-*/
         });
     }
 

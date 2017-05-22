@@ -30,7 +30,7 @@ export class CacheController {
 
 			this.srvDb.raw_query(sel_query, [early, module_names.join(",") ]).then((res:any)=> {
 
-				console.log("local data", res);
+				// console.log("local data", res);
 				if (res && res.rows.length > 0) {
 					let data:any[] = [];
 					for (var i = 0 ; i < res.rows.length; i++) {
@@ -61,7 +61,7 @@ export class CacheController {
 
 			this.srvHome.getModules( action, pageId, moduleNames ).subscribe(
 	    	data=>{
-	    		console.log("fetchModuleDataFromAPI successful", data);
+	    		// console.log("fetchModuleDataFromAPI successful", data);
 	    		if(data) {
 	    			
 	    			resolve(data.response);
@@ -99,7 +99,6 @@ export class CacheController {
     }
 
 	cacheFetchedData( page_id:string, moduleName:string[], fetchedData:any[] ){
-
 	    console.log("cacheFetchedData", moduleName, fetchedData);
 
 	    let module_json:any = fetchedData;
@@ -111,7 +110,7 @@ export class CacheController {
 	    insert_query += "VALUES(?,?,?,?); ";
 
 	    this.srvDb.raw_query( insert_query, [page_id, JSON.stringify( fetchedData ) , 'active', new Date()]).then((page_result:any)=> {
-	        console.log("INSERT ID -> ", page_result );
+	        // console.log("INSERT ID -> ", page_result );
 	        if (!page_result) {
 	        	return;
 	        }
@@ -119,15 +118,14 @@ export class CacheController {
 
 	        // 2.tbl_modules 
 	        for (var i = 0; i < moduleName.length; ++i) {
-
 	        	insert_query = "INSERT OR REPLACE INTO tbl_Module(`Module_Name`,`Module_Json`,`Status`,`Date_Created`) VALUES(?,?,?,?); ";
 		        this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', new Date()]).then((module_result:any)=> {
-		            console.log("INSERT ID -> ", module_result );
+		            // console.log("INSERT ID -> ", module_result );
 		            
 		            // 3.tbl_Page_Module 
 		            insert_query = "INSERT OR REPLACE INTO tbl_Page_Module(`Page_ID`,`Module_ID`,`Status`,`Date_Created`) VALUES(?,?,?,?); ";    
 		            this.srvDb.raw_query( insert_query, [result_page_id, module_result.insertId, 'active', new Date()]).then((result:any)=> {
-		                  console.log("INSERT ID -> ", result);
+		                  // console.log("INSERT ID -> ", result);
 		              }, (error)=> {
 		                  console.error(error);
 		              });
@@ -150,24 +148,22 @@ export class CacheController {
 		// delete tbl_Page table data
         let delete_page = "DELETE FROM tbl_Page;";
         this.srvDb.raw_query( delete_page, []).then((page_result:any)=> {
-	        console.log("clearDatabaseOnLogout SUCCESS ", page_result );
+	        // console.log("clearDatabaseOnLogout SUCCESS ", page_result );
 	    }, (error)=> {
 	        console.error(error);
 	    });
 
-
     	let delete_module = "DELETE FROM tbl_Module; ";
         this.srvDb.raw_query( delete_module, []).then((module_result:any)=> {
-            console.log("clearDatabaseOnLogout SUCCESS ", module_result );
+            // console.log("clearDatabaseOnLogout SUCCESS ", module_result );
         }, (error)=> {
             console.error(error);
         });
 
-
         // delete tbl_Page_Module data
         let delete_page_module = "DELETE FROM tbl_Page_Module; ";    
         this.srvDb.raw_query( delete_page_module, []).then((result:any)=> {
-        	console.log("clearDatabaseOnLogout SUCCESS ", result);
+        	// console.log("clearDatabaseOnLogout SUCCESS ", result);
         }, (error)=> {
         	console.error(error);
         });

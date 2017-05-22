@@ -18,8 +18,8 @@ import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 
 @Component({
-  selector: 'page-tabs',
-  templateUrl: 'tabs.html'
+    selector: 'page-tabs',
+    templateUrl: 'tabs.html'
 })
 export class TabsPage {
     @ViewChild("homeTabs") homeTabs: Tabs;
@@ -132,7 +132,7 @@ export class TabsPage {
     }
 
     goToStore(){
-        console.log("goToStore()");
+        // console.log("goToStore()");
         this.storage.get('session')
         .then(
             data => {

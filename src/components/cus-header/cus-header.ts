@@ -17,11 +17,12 @@ export class CusHeaderComponent {
 	private unreadCount;
 
 	constructor(private params: Params) {
-    	console.log('Hello CusHeader Component');
+    	console.log('CusHeaderComponent');
 
     	this.unreadCount = params.unreadCount;
 
     	params.events.subscribe('unread-count', (count)=>{
+    		console.log('CusHeaderComponent::', count);
             this.unreadCount = count;
         });
     }

@@ -1,6 +1,6 @@
 import { Component, ViewChild, trigger, state, style } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, 
-  Slides, LoadingController, AlertController } from 'ionic-angular';
+    Slides, LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
@@ -12,8 +12,8 @@ import { CommonService } from '../../services/common.service';
 import { HomeService } from '../../services/service.home';
 
 @Component({
-  selector: 'page-store',
-  templateUrl: 'store.html'
+    selector: 'page-store',
+    templateUrl: 'store.html'
 })
 export class StorePage {
     @ViewChild(Slides) home_slides: Slides;
@@ -84,7 +84,7 @@ export class StorePage {
                     this.accountDetails = data[i].get_account_details.response;
                 }else if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
-                    params.setUnreadCount(this.homeMessage.unread);
+                    params.setUnreadCount(this.homeMessage.count);
                 }else if ( data[i].get_home_events ) {
                     this.homeEvents = data[i].get_home_events.response.events[0];
                 }else if ( data[i].get_home_blog ) {
@@ -92,7 +92,7 @@ export class StorePage {
                 }
             }
 
-            console.log("home data", this.offersForYou );
+            console.log("home data", this.homeMessage );
         });
     }
 

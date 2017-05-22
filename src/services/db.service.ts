@@ -99,45 +99,43 @@ export class DatabaseService {
                 resolve({rows:[]});
             });
         }
+        
         if (this.databaseCreated >= this.tableCount) {
             console.log( query );
             return this.database.executeSql(query, params );
         }else{
-          this.createDatabase();
+            this.createDatabase();
           
-          return new Promise( (resolve, reject) => {
+            return new Promise( (resolve, reject) => {
 
-            const source = Observable.interval(400)
-            .take(60)
-            .subscribe(res => { 
-              console.log("observing ", this.databaseCreated, this.tableCount, res);
-              
-              if (this.databaseCreated >= this.tableCount) {
-                source.unsubscribe();
-                
-                console.log( "executing " + query );
-                this.database.executeSql(query, params ).then( (res) => {
-                    console.log( "result ", res );
+                const source = Observable.interval(400)
+                .take(60)
+                .subscribe(res => { 
+                    console.log("observing ", this.databaseCreated, this.tableCount, res);
+                  
+                    if (this.databaseCreated >= this.tableCount) {
+                        source.unsubscribe();
+                        
+                        console.log( "executing " + query );
+                        this.database.executeSql(query, params ).then( (res) => {
+                            console.log( "result ", res );
 
-                    for (var i = 0 ; i < res.rows.length; i++) {
-                        console.log("row " + i + ": ", res.rows.item(i) );
+                            for (var i = 0 ; i < res.rows.length; i++) {
+                                console.log("row " + i + ": ", res.rows.item(i) );
+                            }
+                          resolve( res );
+                        }, err => {
+                            reject(err);
+                        });
                     }
-                  resolve( res );
-                }, err => {
-                  reject(err);
-                });
-              }
 
-              if ( res > 58) {
-                reject( Error("Database taking too long to respond") );
-              }
+                    if ( res > 58) {
+                        reject( Error("Database taking too long to respond") );
+                    }
+                });
 
             });
-              
-          });
-          
         }
-        
     }
 
     
@@ -156,7 +154,7 @@ export class DatabaseService {
 
         this.database.executeSql(tblPageCreate, {}).then((data) => {
           this.databaseCreated++;
-          console.log("TABLE Page CREATED: ", this.databaseCreated, tblPageCreate, data);
+          // console.log("TABLE Page CREATED: ", this.databaseCreated, tblPageCreate, data);
         }, (error) => {
             console.error("Unable to execute sql", error);
         });
@@ -174,7 +172,7 @@ export class DatabaseService {
 
         this.database.executeSql(tblModuleCreate, {}).then((data) => {
           this.databaseCreated++;
-          console.log("TABLE Module CREATED: ", this.databaseCreated, tblModuleCreate, data);
+          // console.log("TABLE Module CREATED: ", this.databaseCreated, tblModuleCreate, data);
         }, (error) => {
           console.error("Unable to execute sql", error);
         });
@@ -192,7 +190,7 @@ export class DatabaseService {
 
         this.database.executeSql(tblPageModuleCreate, {}).then((data) => {
           this.databaseCreated++;
-          console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
+          // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
         }, (error) => {
           console.error("Unable to execute sql", error);
         });
