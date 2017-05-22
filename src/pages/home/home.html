@@ -1,4 +1,4 @@
-<ion-menu side="right" type="push" [content]="content" id="menu1">
+<ion-menu side="right" type="push" [content]="content" id="menu1" (ionOpen)="onOpenRightMenu()">
 
   <ion-content>
     
@@ -9,6 +9,10 @@
     </ion-item>
 
     <ion-list>
+      <ion-item *ngIf="messageLoading">
+          <ion-spinner class="center" name="bubbles"></ion-spinner>
+      </ion-item>
+      
       <ion-item-sliding *ngFor="let message of messages">
         <ion-item text-wrap>
           <span item-left class="rounded-background1"><img src="assets/icon/notification_ico.svg" alt="" width="24" height="24" /></span>
@@ -44,7 +48,7 @@
 
 </ion-menu>
 
-<ion-menu side="left" type="overlay" [content]="content" id="menu2">
+<ion-menu side="left" type="overlay" [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
     <ion-content>
         <ion-item class="notification-bar"> </ion-item>
             <ion-list>

@@ -18,6 +18,12 @@ page-home {
 	}
 
 
+	ion-spinner * {
+		color: white;
+		stroke: #FFF;
+		fill: #FFF;
+	}
+	
 	.menu-inner{
 		.content{
 			background-color: #333;

@@ -82,7 +82,37 @@ export class HomeService {
         return response;
     }
 
-    // apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/v2/';
+
+    getHomeMessages() {
+
+        if ( !CommonService.session ) {
+            return null;
+        }
+        
+        console.log("getHomeCard");
+
+        let url = CommonService.apiUrl + CommonService.version + '/limb/';
+        let parameter = {
+            "request": [
+            {
+                "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                "action": "login_mobile_app",
+                "page_id": "1",
+                "screen_id": "1.8", 
+                "module_name": "get_home_message", 
+                "customer_id": CommonService.session.customer_id
+            } 
+            ]
+        };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        var response = this.http.post(url, parameter, opt).map(response => response.json());
+        return response;
+    }
+
+
     get_credit_offer(){
         let action = CommonService.apiUrl + CommonService.version + "/offers/"
         let body={"page_id":"2","screen_id":"2..3","module_name":"get_credit_offer","customer_id":"1970400" };
