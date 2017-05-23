@@ -278,40 +278,41 @@
   <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
   
     <div class="popup-content animated" [ngClass] = "(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
-      <ion-list radio-group class="windows">
-        <ion-list-header text-center>Confirm Purchage</ion-list-header>
+
+      <div class="payment-popover">
+        <p class="header" text-center>Confirm Purchage</p>
         <p text-center>This is 2 line description for payment</p>
-        <p text-center>Secure payment details</p>
+        <ion-list radio-group class="windows">
+          <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
+          
+          <ion-item>
+            <ion-label>Use preferred card:<br>VISA ending with 1294</ion-label>
+            <ion-radio value="visa1" item-left color="secondary" checked="true"></ion-radio>
+          </ion-item>
 
-        <ion-item>
-          <ion-label>Use preferred card:<br>VISA ending with 1294</ion-label>
-          <ion-radio value="visa1"></ion-radio>
-        </ion-item>
+          <ion-item>
+            <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
+            <ion-radio value="visa2" item-left color="secondary"></ion-radio>
+          </ion-item>
 
-        <ion-item>
-          <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
-          <ion-radio value="visa2"></ion-radio>
-        </ion-item>
+          <ion-item>
+            <ion-label>Use a different card</ion-label>
+            <ion-radio value="visa3" item-left color="secondary"></ion-radio>
+          </ion-item>
 
-        <ion-item>
-          <ion-label>Use a different card</ion-label>
-          <ion-radio value="visa3"></ion-radio>
-        </ion-item>
+        </ion-list>
 
-      </ion-list>
+        <div><button class="center" ion-button padding color="secondary">Buy now for &pound;4.99</button>
+        </div>
 
-      <button ion-button color="primary">Buy now for &pound;4.99</button>
-      <button ion-button clear>Not now</button>
-
-
-
+        <div>
+          <button class="center" ion-button clear (click)="showWhatsOn()">Not now</button>
+        </div>
+        <div class="buy-now">
+          
+        </div>
+      </div>
 
     </div>
-
 </div>
-
-
-
-
-
 

@@ -22,6 +22,7 @@ export class StorePage {
     public spaceBetween:number = -70;
     public whatsOn:boolean = false;
     public nav:NavController;
+
     slideInUp:boolean = false;
     flyInOutState: String = 'out';
 
@@ -104,6 +105,13 @@ export class StorePage {
     loadLink(url){
         this.iab.create(url, '_blank');
         // browser.show();
+    }
+
+    gameTargetLink(target){
+        let url = `https://nima.lottosocial.com/webview-auth/?redirect_to=${target}&customer_id=${CommonService.session.customer_id}&customer_token=${CommonService.session.customer_token}`
+
+        console.log("::gameTargetLink to ", url);
+        this.iab.create(url, '_blank');
     }
 
     ngAfterViewInit() {

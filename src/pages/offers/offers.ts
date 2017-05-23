@@ -9,8 +9,8 @@ import { OffersPayment } from './offers-payment/offers-payment';
 })
 export class OffersPage  {
     toptab:string="offer";
-    slideInUp:boolean = true;
-    confirmPayment:boolean = true;
+    slideInUp:boolean = false;
+    confirmPayment:boolean = false;
 
     credit_lines : any;
     credit_offer : any;
