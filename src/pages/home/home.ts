@@ -2,6 +2,8 @@ import { Component, ViewChild, NgZone } from '@angular/core';
 import { Platform, MenuController, Nav, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
+
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
@@ -115,6 +117,21 @@ export class HomePage {
                 console.log("Didn't set nav root");
             });
         }
+    }
+
+    goPage(page){
+        this.menu.close();
+        
+        switch (page) {
+            case 'create_syndicate':
+                this.nav.setRoot(CreateSyndicatePage);
+                break;
+            
+            default:
+                // code...
+                break;
+        }
+
     }
 
     // notification menu

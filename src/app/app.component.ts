@@ -14,6 +14,8 @@ import { CreateSyndicate3Page } from '../pages/create-syndicate3/create-syndicat
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { AuthPage } from '../pages/auth/auth';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { UpdatePage } from '../pages/update/update';
+import { OfflinePage } from '../pages/offline/offline';
 
 import { OneSignal } from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
@@ -37,6 +39,8 @@ export class MyApp {
     // rootPage:any = HomePage;
     // rootPage:any = AuthPage;
     // rootPage:any = EditProfilePage;
+    // rootPage:any = OfflinePage;
+    
 
 
     // appId = 'e718b3ed-608e-4866-8f48-28cb5b229387';

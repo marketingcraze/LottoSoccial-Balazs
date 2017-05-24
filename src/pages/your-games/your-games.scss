@@ -3,5 +3,8 @@ page-your-games {
 		margin-top: $toolbar-md-height;
 		height: calc(100% - #{$toolbar-md-height});
 	}
-	
+	no-internet-message{
+		position: absolute;
+		width: 100%;
+	}
 }

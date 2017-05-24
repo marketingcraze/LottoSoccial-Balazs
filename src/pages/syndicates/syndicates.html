@@ -1,10 +1,7 @@
-<!-- <ion-tabs tabsPlacement="top" color="primary">
-    <ion-tab [root]="tab1Root" tabTitle="YOUR GAMES" [rootParams]="gameGroup"></ion-tab>
-    <ion-tab [root]="tab2Root" tabTitle="REDEEM GAMES"></ion-tab>
-</ion-tabs>
- -->
 <cus-header title="Syndicate" (homeClicked)="goHomePage()" ></cus-header>
+<no-internet-message></no-internet-message>
 <ion-tabs tabbarPlacement="top" tabsPlacement="top" class="syn-tab" [selectedIndex]="indexSelected">
 	<ion-tab [root]="tab1child" tabTitle="MY SYNDICATE"></ion-tab>
-	<ion-tab [root]="tab2child" tabTitle="CHECK WINNINGS"></ion-tab>
+	<ion-tab [root]="tab2child" tabTitle="CREATE A SYNDICATE"></ion-tab>
+	<!-- <ion-tab [root]="tab2child" tabTitle="CHECK WINNINGS"></ion-tab> -->
 </ion-tabs>

@@ -11,6 +11,7 @@ export class OffersPage  {
     toptab:string="offer";
     slideInUp:boolean = false;
     confirmPayment:boolean = false;
+    showBuyNowView:boolean = false;
 
     credit_lines : any;
     credit_offer : any;

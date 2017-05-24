@@ -1,4 +1,8 @@
 page-offers {
+    no-internet-message{
+        position: absolute;
+        width: 100%;
+    }
 
     .popup-content{
         position: absolute;
@@ -56,6 +60,18 @@ page-offers {
                         line-height: 2rem;
                     }
                 }
+            }
+
+            .outer {
+                display: table;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+            }
+
+            .middle {
+                display: table-cell;
+                vertical-align: middle;
             }
         }
     }

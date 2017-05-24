@@ -4,4 +4,9 @@ page-redeem-games {
 		height: calc(100% - #{$toolbar-md-height});
 	}
 
+	no-internet-message{
+		position: absolute;
+		width: 100%;
+	}
+
 }

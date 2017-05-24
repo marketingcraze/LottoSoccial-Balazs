@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+
 import { NavController, NavParams } from 'ionic-angular';
 import { CheckWinningsPage } from '../check-winnings/check-winnings';
 import { MySyndicatePage } from '../my-syndicate/my-syndicate';
 import { Params } from '../../services/params';
 
+import { CreateSyndicateTab } from '../create-syndicate-tab/create-syndicate-tab';
 
 @Component({
 	selector: 'page-syndicates',
@@ -11,7 +13,7 @@ import { Params } from '../../services/params';
 })
 export class SyndicatesPage {
     tab1child = MySyndicatePage;
-    tab2child = CheckWinningsPage;
+    tab2child = CreateSyndicateTab;
 
     indexSelected: number;
 

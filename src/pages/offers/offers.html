@@ -15,7 +15,7 @@
 
 
 <ion-content [ngSwitch]="toptab" class="MainPanel">
- 
+<no-internet-message></no-internet-message> 
   <ion-card class="Card_Padding"  *ngSwitchCase="'offer'"  >
        <div class="card-title">
         <img src="assets/image/euro-banner.png" class="img-responsive">
@@ -302,15 +302,32 @@
 
         </ion-list>
 
-        <div><button class="center" ion-button padding color="secondary">Buy now for &pound;4.99</button>
+        <div><button class="center" ion-button padding color="secondary" (click)="showBuyNowView=!showBuyNowView">Buy now for &pound;4.99</button>
         </div>
 
         <div>
           <button class="center" ion-button clear (click)="showWhatsOn()">Not now</button>
         </div>
-        <div class="buy-now">
-          
+
+        <div class="buy-now" *ngIf="showBuyNowView">
+          <div class="outer">
+            <ion-grid class="middle">
+              <ion-row>
+                <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
+              </ion-row>
+              <ion-row >
+                <p class="center" text-center color="light">Syndicate TONY123 created!<br>What you want to do next?</p>
+              </ion-row>
+              <ion-row>
+                <button class="center" ion-button padding outline round color="light">VIEW TICKETS</button>
+              </ion-row>
+              <ion-row>
+                <button class="center" ion-button padding outline round color="light" (click)="showWhatsOn()">VIEW MORE OFFERS</button>
+              </ion-row>
+            </ion-grid>
+          </div>
         </div>
+        
       </div>
 
     </div>

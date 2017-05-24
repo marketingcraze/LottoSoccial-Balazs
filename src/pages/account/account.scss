@@ -1,4 +1,9 @@
 page-account {
+	no-internet-message{
+		position: absolute;
+		width: 100%;
+	}
+
 	.content{
 		margin-top: $toolbar-md-height;
 		height: calc(100% - #{$toolbar-md-height});

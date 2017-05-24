@@ -1,0 +1,36 @@
+page-offline {
+ 
+    .content-bg
+    {
+    background:url('../assets/image/offline.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    }
+    .try-btn
+    {
+        margin-top: 109%;
+        margin-left: 32%;
+    }
+    @media only screen 
+    and (min-device-width : 768px) 
+    and (max-device-width : 1024px)  { 
+        .try-btn
+        {
+            margin-top: 85%;
+            margin-left: 37%;
+            width: 27%;
+            height: 6%;
+            font-size: 2.2rem;
+        }
+    }
+
+    @media only screen 
+    and (min-device-width : 1024px) 
+    and (max-device-width : 1366px) {
+        .try-btn
+        {  
+            font-size: 3.2rem;
+        }
+    }
+}

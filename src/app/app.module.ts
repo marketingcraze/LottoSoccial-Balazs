@@ -17,6 +17,8 @@ import { AuthPage } from '../pages/auth/auth';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
+import { UpdatePage } from '../pages/update/update';
+import { OfflinePage } from '../pages/offline/offline';
 import { SignupInvitedPage } from '../pages/signup-invited/signup-invited';
 import { JoinSyndicatePage } from '../pages/join-syndicate/join-syndicate';
 import { AddSyndicatePage } from '../pages/add-syndicate/add-syndicate';
@@ -70,11 +72,13 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { Network } from '@ionic-native/network';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
+import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 
 @NgModule({
     declarations: [
@@ -91,6 +95,8 @@ import { FilterPipe } from '../pipes/filter-pipe';
     AccountPage,
     OffersPage,
     TabsPage,
+    UpdatePage,
+    OfflinePage,
     SignupInvitedPage,
     JoinSyndicatePage,
     NewSyndicatePage,
@@ -132,7 +138,8 @@ import { FilterPipe } from '../pipes/filter-pipe';
     CountryListPopPage,
     CusHeaderComponent,
     CusHeader1Component,
-    CusHeader2Component
+    CusHeader2Component,
+    NoInternetMessageComponent
 
   ],
   imports: [
@@ -168,6 +175,8 @@ import { FilterPipe } from '../pipes/filter-pipe';
     AccountPage,
     OffersPage,
     TabsPage,
+    UpdatePage,
+    OfflinePage,
     SignupInvitedPage,
     JoinSyndicatePage,
     NewSyndicatePage,
@@ -207,7 +216,8 @@ import { FilterPipe } from '../pipes/filter-pipe';
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   DatabaseService, CommonService, AuthService, HomeService, AccountService, Params, 
-  SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService]
+  SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService, 
+  Network]
 
 })
 export class AppModule {}
