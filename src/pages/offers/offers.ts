@@ -38,11 +38,9 @@ export class OffersPage  {
     makePayment(myEvent) {
         this.showWhatsOn();
 
-        /*
-        let popover = this.popoverCtrl.create(OffersPayment);
-        popover.present({
-            ev: null
-        });*/
+        // call api to check user has token
+        
+
     }
 
     showWhatsOn(){

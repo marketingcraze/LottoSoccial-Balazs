@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 
 import { CommonService } from './common.service';
+import { Params } from './params';
 
 @Injectable()
 export class AccountService {
@@ -12,12 +13,19 @@ export class AccountService {
         return [[Http]];
     }
   
-    constructor(private http:Http, 
-        private file: File) {
+    constructor(
+        private params:Params,
+        private http:Http, 
+        private file: File, ) {
 
     }
    
     loadProfile() {
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+
         if ( !CommonService.session ) {
             return new Observable(observer => {
                 observer.next(null);
@@ -52,6 +60,10 @@ export class AccountService {
     
     saveDetails(details:any) {
         console.log("saveDetails", details);
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         if ( !CommonService.session ) {
             return new Observable(observer => {
                 observer.next(null);
@@ -88,6 +100,10 @@ export class AccountService {
  
     saveEmail(details:any) {
         console.log("saveDetails", details);
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         if ( !CommonService.session ) {
             return new Observable(observer => {
                 observer.next(null);
@@ -123,6 +139,10 @@ export class AccountService {
  
     updatePassword(details:any) {
         console.log("updatePassword", details);
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         if ( !CommonService.session ) {
             return new Observable(observer => {
                 observer.next(null);
@@ -158,6 +178,10 @@ export class AccountService {
 
     updateNick(nick:string) {
         console.log("updateNick", nick);
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         if ( !CommonService.session ) {
             return new Observable(observer => {
                 observer.next(null);

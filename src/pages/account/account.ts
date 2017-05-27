@@ -116,6 +116,7 @@ export class AccountPage {
 		
 		this.cache.clearDatabaseOnLogout();
 
+		this.storage.remove('session_ID');
 		this.storage.remove('session')
         .then(
             data => { 

@@ -14,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File, FileEntry } from '@ionic-native/file';
 import { Storage } from '@ionic/storage';
+import { Network } from '@ionic-native/network';
 
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -55,6 +56,7 @@ export class SignupPage {
 		public app:App,
 		private http:Http, 
 		private file: File,
+		private network: Network,
 		private storage: Storage,
 		public platform:Platform,
 		private transfer: Transfer, 
@@ -67,9 +69,13 @@ export class SignupPage {
 		private loadingCtrl: LoadingController,	
 		public authSrv:AuthService) {
 
-		this.tabs = navCtrl.parent;
-		this.loadCountries();
+		console.log('LoginPage', network);
 
+		this.tabs = navCtrl.parent;
+		if (CommonService.countries == null) {
+			this.loadCountries();
+		}
+		
 		platform.ready().then(() => {
 			console.log('ready');
         });
@@ -314,6 +320,7 @@ url:""
                 
                 // go to home page
                 if(data && data.status != 'error') {
+                	this.storage.set('session_ID', CommonService.sessionId);
                 	this.storage.set('session', JSON.stringify(data))
 	                .then(
 	                    data => console.log(data),

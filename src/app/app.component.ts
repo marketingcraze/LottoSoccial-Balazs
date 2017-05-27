@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform, AlertController, Modal, ModalController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { SplashPage } from '../pages/splash/splash';
@@ -21,8 +21,11 @@ import { OneSignal } from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
 import { CommonService } from '../services/common.service';
 import { DatabaseService } from '../services/db.service';
+import { Params } from '../services/params';
 
 import { Constants } from './constants';
+
+import { Network } from '@ionic-native/network';
 
 @Component({
     templateUrl: 'app.html'
@@ -41,17 +44,20 @@ export class MyApp {
     // rootPage:any = EditProfilePage;
     // rootPage:any = OfflinePage;
     
-
-
     // appId = 'e718b3ed-608e-4866-8f48-28cb5b229387';
 
+    noNetworkModal:Modal;
+
     constructor(
+        private params: Params,
+        private network: Network,
         private storage: Storage,
         public platform: Platform, 
         public dbSrv: DatabaseService, 
         private _OneSignal: OneSignal,
         public commonSrv:CommonService, 
-        public alertCtrl:AlertController) {
+        public alertCtrl:AlertController,
+        public modalCtrl: ModalController) {
 
         platform.ready().then(() => {
             // StatusBar.styleDefault();
@@ -60,12 +66,36 @@ export class MyApp {
             this.initializeOneSignal();
 
             this.loadCountries();
+
+            CommonService.isOnline = (network.type != "none");
+
+            // show No network modal when user try to fetch data
+            this.noNetworkModal = this.modalCtrl.create(OfflinePage);
+            params.events.subscribe('network', (available) => {
+                CommonService.isOnline = available;
+                if (available) {
+                    this.noNetworkModal.dismiss();
+                }else{
+                    this.noNetworkModal.present();
+                }
+            });
+
+            // save current staus of network
+            network.onConnect().subscribe(()=> {
+                CommonService.isOnline = true;
+            });
+            network.onDisconnect().subscribe(()=> {
+                CommonService.isOnline = false;
+            });
+            network.onchange().subscribe((data)=> {
+                console.log("network status changed: ", data);
+            });
+            
         });
     }
 
     routeToHome(){
         console.log("is cordova", this.platform.is('cordova') );
-        CommonService.session
     }
 
     loadCountries(){

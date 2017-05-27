@@ -7,12 +7,18 @@ export class Params{
 	public params:any;
 	public homeData:any;
     public unreadCount;
+    public networkConnection:boolean = false;
 
     constructor(public events:Events){
         console.log( "Params()" );
 
         this.params = {};
         this.homeData = {};
+    }
+
+    setIsInternetAvailable(avail:boolean){
+        this.networkConnection = avail;
+        this.events.publish("network", avail);
     }
 
     setHomeData( data:any ){

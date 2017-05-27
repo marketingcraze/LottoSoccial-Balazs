@@ -1,0 +1,156 @@
+<!--
+  Generated template for the CreatesyndicatePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+  <ion-title > Join a syndicate to start!</ion-title>
+    <ion-buttons start>
+      <button ion-button >
+        <span >Skip</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+      <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
+            <ion-segment-button value="offer"   class="Menu_Tab">
+                OFFER FOR YOU
+            </ion-segment-button>
+            <ion-segment-button value="syndicate"  class="Menu_Tab">
+                CREATE A SYNDICATE
+            </ion-segment-button>
+      </ion-segment>
+</ion-header>
+
+
+<ion-content [ngSwitch]="toptab" >
+    
+      <ion-content   *ngSwitchCase="'offer'"  >
+        <ion-slides initialSlide=0 >
+              <ion-slide >
+                      <ion-card >
+                          <img src="assets/image/syndicate.png" class="img">
+                        <ion-grid class="no-padding">
+                          
+                            <ion-row class="time_col" text-center >
+                                <ion-col  col-4 offset-2 ><ion-icon name="md-stopwatch"></ion-icon> TIMELEFT</ion-col>
+                                <ion-col col-1 ><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                                <ion-col col-1  > <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                                <ion-col col-1 ><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                                <ion-col col-1 ><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                          </ion-row>
+                          <ion-row text-center>
+                              <ion-col col-6 class="border_line">
+                                  <div class="line_text">20</div>
+                                  <ion-note class="line_color">LINES</ion-note>
+                                  <div class="info_icon"><ion-icon name="information-circle" ></ion-icon></div>
+                              </ion-col>
+                              <ion-col col-6 class="border_line">
+                                  <div class="line_text">ONGOING</div>
+                                  <span  class="line_color">TYPE</span>
+                                   <div class="info_icon">  <ion-icon name="information-circle"></ion-icon></div>
+                              </ion-col>
+                          </ion-row>
+
+                          <ion-row text-center>
+                            <ion-col col-12 >
+                              <p class="main_text">Every long offer name should fit in two lines </p>
+                            </ion-col>
+                          </ion-row>
+
+                          <ion-row class="bg_color">
+                            <ion-col col-12>
+                              <p>This is an offer description  which is so long that goes on two lines,however for safety reason i'll add some gibberish to go on three line:nice</p>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row class="bg_color">
+                            <ion-col >
+                              <div class="badge_text">
+                              DRAWS INCLUDED
+                              </div>
+                              <div class="badge_text"> <ion-badge class="badge_bg">TUE</ion-badge> <ion-badge class="badge_bg">FRI</ion-badge></div>
+                            </ion-col>
+                            <ion-col col-6>
+                            <div class="badge_text">
+                            PAYMENT METHOD
+                              </div>
+                              <div class="direct_text"><span>  <ion-icon class="payment_icon" name="ios-tennisball-outline"></ion-icon></span>DIRECT DEBIT</div>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row text-center>   
+                            <ion-col>
+                                 <button ion-button color="secondary" > <ion-icon name="lock" class="btn_text"></ion-icon>  PLAY FOR £4.99</button>
+                            </ion-col>     
+                          </ion-row>
+
+                        </ion-grid>
+                 </ion-card>
+            
+              </ion-slide>
+
+              <ion-slide >
+                  <ion-card >
+                    <h1>welcome2</h1>
+                  </ion-card>
+              </ion-slide>
+
+          </ion-slides>
+
+      </ion-content>
+
+      <ion-content  *ngSwitchCase="'syndicate'"  >
+            <ion-card class="NoSpace">
+              <img src="assets/image/private_syndicate_hero@3x.png"/>
+            </ion-card>
+            <ion-card class="NoSpace">
+                <ion-list >
+                  <ion-item text-wrap class="ListBorder"> 
+                    <ion-thumbnail item-left class="thumbnailImage" >
+                      <img src="assets/image/settings_ico.svg" class="listImage">
+                    </ion-thumbnail>
+                    <ion-note class="listHead">USE THE FORCE LIKE</ion-note>
+                    <p>You are Syndicate Manager.</p>
+                    <p class="listBody">It's upto you to <span class="BlueClr">DECIDE THE RULES</span> of The Syndicate (Lotteries or number of lines to Play)</p>
+                  </ion-item>
+            
+                  <ion-item text-wrap class="ListBorder">
+                    <ion-thumbnail item-left class="thumbnailImage" >
+                      <img src="assets/image/payment_ico.svg" class="listImage">
+                    </ion-thumbnail>
+                    <ion-note class="listHead">NO CHASING FOR MONEY</ion-note>
+                    <p class="listBody"><span class="BlueClr">BUT ONLY YOUR LINES;</span> If you have decide for a syndicated ticket with Each Member has to buy 1 line</p>
+                  </ion-item>
+                  <ion-item text-wrap class="ListBorder">
+                    <ion-thumbnail item-left class="thumbnailImage">
+                      <img src="assets/image/syndicate_ico.svg" class="listImage">
+                    </ion-thumbnail>
+                    <ion-note class="listHead">LETS GET THI PARTY STARTED</ion-note>
+                    <p class="listBody"><span class="BlueClr">INVITE ALL YOUR FRIENDS </span>to the Syndicate Make The most out of your Syndicate ,more lines = More chances</p>
+                  </ion-item>
+                    <ion-row text-center>
+                        <ion-col col-12><button ion-button color="secondary">CREATE  YOUR  SYNDICATE</button></ion-col>
+                    </ion-row>
+              </ion-list>
+            </ion-card>
+            <ion-card class="NoSpace" >
+                <ion-list>
+                  <ion-item text-wrap class="ListBorder">
+                    <ion-thumbnail item-left class="thumbnailImage">
+                      <img src="assets/image/logo_ico.svg" class="listImage">
+                    </ion-thumbnail>
+                    <ion-note class="listHead cardtitle" >OR JUST SIT BACK AND RELAX</ion-note>
+                    <p class="listBody">Join One of our managed syndicates and we will managed Everything for you!</p>
+                  </ion-item>
+                  <ion-row text-center>
+                            <ion-col col-12>
+                              <button ion-button>VIEW ALL OFFERS</button>
+                            </ion-col>
+                    </ion-row>
+              
+                </ion-list>
+            </ion-card>
+        </ion-content>
+
+</ion-content>

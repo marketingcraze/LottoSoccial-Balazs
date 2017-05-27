@@ -1,0 +1,149 @@
+page-createsyndicate {
+   
+        .Menu_Tab 
+        {
+            color: white !important;
+            background: #1f4c87 !important;
+            border: 0px !important;
+            font-size: 14px;
+        }
+        .Menu_Tab:hover
+        {
+            border-bottom:4px solid white !important;
+        }
+
+  //tab 1  
+  .no-padding{
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+  }
+  .img{
+    width:100%;
+  }
+   .time_col
+       {
+            color:#fff;
+            background:#000;
+       }
+       .timeBreak
+        {
+            font-weight: bold;
+            font-size:12px; 
+            width:16px;
+        }
+        .time
+        {
+            font-weight: 100;
+            font-size: 8px;
+        }
+        .border_line
+        {
+        border:1px solid;
+        border-color:#ebebeb;
+        }
+        .main_text
+        {
+        width:62%;
+        word-break: break-all;
+        margin-left:18%;
+        }
+        .bg_color
+        {
+           background: rgb(238, 238, 238);
+            border:1px solid;
+        border-color:#f2f2f2;
+        }
+     
+        .badge_bg
+        {
+         background:rgb(221, 221, 221);
+         color:black;
+             font-size: 1.0rem;
+            font-weight: 100;
+            
+        }
+        .badge_text
+        {
+            font-size: 1.1rem;
+            color: #aba9a9;
+            text-align: left;
+        }
+        .direct_text
+        {
+         font-size: 1.0rem;
+         text-align: left;
+      
+        }
+        .payment_icon{
+             padding-right:4%;
+        }
+        .line_text
+        {
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .line_color
+        {
+        color:#aba9a9;
+        }
+        .info_icon
+        {
+         color:#aba9a9;
+         float:right;
+         margin-top: 9%;
+        }
+        .btn_text
+        {
+        padding-right:8%;
+        font-size: 1.4rem;
+        }
+       
+    // tab2
+
+      .card-background-page {
+          ion-card {
+            position: relative;
+            text-align: center;
+          }
+        
+        }
+        .BlueClr
+        {
+            color:#387ef5;
+        }
+        .listHead
+        {
+            font-size:1.4rem;
+        }
+        .listBody
+        {
+            font-size:1.4rem;
+        }
+        .NoSpace
+        {
+            margin:0px;
+            margin-top:3%; 
+           width: 100%;
+        }
+        .ListBorder
+        {
+            border-top:1px solid #a09f9f;
+        }
+       
+        .thumbnailImage{
+            min-height: 1.2rem;
+            min-width: 1.2rem;
+        }
+        .listImage{
+            max-width:4rem;
+            max-height: 4rem;
+        }
+        .cardtitle{
+            font-weight:bold;
+            color: black;
+        }
+
+
+}

@@ -1,8 +1,12 @@
 no-internet-message {
+	position: absolute;
+	top: $toolbar-md-height;
+	width: 100%;
+
 	.item{
 		height: 3rem;
 		min-height: 3rem;
-		z-index: 999;
+		z-index: 99;
 	}
 
 }

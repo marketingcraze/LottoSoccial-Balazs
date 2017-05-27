@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
 
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
+import { Params } from './params';
 
 @Injectable()
 export class HomeService {
@@ -22,10 +23,13 @@ export class HomeService {
   
     constructor(
         private http:Http, 
+        private params:Params,
         private storage: Storage,
         public platform: Platform,
         private transfer: Transfer,
         private file: File) {
+
+        console.log("HomeService");
 
         
     }
@@ -34,6 +38,10 @@ export class HomeService {
 
         if ( !CommonService.session ) {
             return null;
+        }
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
         }
         this.customerId = CommonService.session.customer_id;
         console.log("getModules", CommonService.session );
@@ -62,6 +70,10 @@ export class HomeService {
 
     getHomeCard(module_name) {
         console.log("getHomeCard");
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
 
         let action = CommonService.version + '/home/';
         let parameter = {
@@ -88,14 +100,17 @@ export class HomeService {
         if ( !CommonService.session ) {
             return null;
         }
-        
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         console.log("getHomeCard");
 
         let url = CommonService.apiUrl + CommonService.version + '/limb/';
         let parameter = {
             "request": [
             {
-                "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                "session_ID": CommonService.sessionId,
                 "action": "login_mobile_app",
                 "page_id": "1",
                 "screen_id": "1.8", 
@@ -114,6 +129,10 @@ export class HomeService {
 
 
     get_credit_offer(){
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         let action = CommonService.apiUrl + CommonService.version + "/offers/"
         let body={"page_id":"2","screen_id":"2..3","module_name":"get_credit_offer","customer_id":"1970400" };
         let opt: RequestOptions = new RequestOptions({
@@ -125,6 +144,10 @@ export class HomeService {
         return response;
     }
     get_fetch_offer(){
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         let action= CommonService.apiUrl + CommonService.version + "/offers/"
         let body={"page_id":"2","screen_id":"2..1","module_name":"get_credit_offer","customer_id":"1970400" };
         let opt: RequestOptions = new RequestOptions({

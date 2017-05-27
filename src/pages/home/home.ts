@@ -41,7 +41,7 @@ export class HomePage {
     messageLoading = false;
 
     private homeMessage:any;
-    public messages:any[];
+    public messages:any[] = [];
 
     constructor(
         public zone:NgZone,
@@ -67,7 +67,9 @@ export class HomePage {
             
                 if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
-                    this.messages = this.homeMessage.notification;
+                    if (this.homeMessage.notification) {
+                        // this.messages = this.homeMessage.notification;
+                    }
                     params.setUnreadCount(this.homeMessage.count);
                     break;
                 }

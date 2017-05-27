@@ -8,6 +8,9 @@ import {Observable} from 'rxjs/Observable';
 export class CommonService {
     public static SecureStorageUser:string = 'lotto_user';
     public static session:any;
+    public static sessionId:string = "";
+
+    public static isOnline:boolean = false;
 
     public static sitename:string = 'https://nima.lottosocial.com/';
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
@@ -15,7 +18,9 @@ export class CommonService {
 
     public static countries:any;
 
-    constructor(private http:Http) {}
+    constructor(private http:Http) {
+        
+    }
   
     static get parameters() {
         return [[Http]];

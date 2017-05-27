@@ -1,13 +1,15 @@
-// app/shared/services/auth.service.ts
-import { Injectable } from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import { Injectable, Inject } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { Http, RequestOptions, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import { Transfer, FileUploadOptions, TransferObject, } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 
 import { CommonService } from './common.service';
+import { Params } from './params';
+import { SharedService } from './shared.service';
 
 @Injectable()
 export class AuthService {
@@ -15,24 +17,102 @@ export class AuthService {
     static get parameters() {
         return [[Http]];
     }
-  
-    constructor(private http:Http, 
-        private transfer: Transfer,
-        private file: File) {
+    
 
+    makeId(){
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 26; i++ ){
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        return text;
     }
+  
+    constructor(
+        private http:Http, 
+        private file: File,
+        private params:Params,
+        public plt: Platform,
+        private transfer: Transfer) {
+
+        /*
+
+        this.isAndroid = plt.is('android');
+        this.isCordova = plt.is('cordova');
+        this.isIOS = plt.is('ios');
+
+        let connHandler = (evt)=>{
+            //console.log('****** CONN CHANGED *******', evt.type);
+            this.connType = network.type;
+            if(evt.type == 'online') this.isOnline = true;
+            else this.isOnline = false;
+        }
+
+        plt.ready()
+        .then((source)=>{
+
+            this.ready = true;
+
+            if(this.isCordova){
+
+                this.connType = network.type;
+                if(network.type != 'none') this.isOnline = true;
+
+                this.network.onchange().subscribe(connHandler);
+                this.network.onConnect().subscribe(connHandler);
+                this.network.onDisconnect().subscribe(connHandler);
+                
+                this.plt.pause.subscribe(()=>{
+                    //console.log('*******CORDOVA PAUSE*******');
+                });
+
+                this.plt.resume.subscribe(()=>{
+                    console.log('******CORDOVA RESUME*******');
+                    setTimeout(()=>{
+                        this.connType = this.network.type;
+                        console.log('******ON RESUME CONN TYPE******', this.connType);
+                    }, 3000);
+                });
+            }
+            
+        })
+        .catch(this.handleError);
+
+        */
+    }
+
+
+
+    private handleError(error){
+        console.log('NATIVE SERVICE ONREADY ERROR: ', error);
+    }
+
    
     loginUser(country_code:string, tel: string, password: string) {
+        console.log("AuthService::loginUser", CommonService.sessionId, CommonService.isOnline);
+
+        if ( !CommonService.sessionId || CommonService.sessionId == "") {
+            CommonService.sessionId = this.makeId();
+        }
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+        
         let action = CommonService.version + '/login/';
         let login = {
             "request": [
             {
-                "session_ID": "avjtjgu0f257f0orggqufcn5g2", "page_ID": "1",
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "1",
                 "screen_id": "1.1",
                 "action": "login_mobile_app",
                 "website": "Lotto Social",
                 "website_id": "27",
-                "source_site": "mobi.lottosocial.com", "module_name": "login",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "login",
                 "mobile": tel, //"447712887310",
                 "password": password, //"abc123",
                 "country_code": country_code // "44"
@@ -61,12 +141,20 @@ export class AuthService {
  
     addUser(user:any) {
         console.log("addUser", user);
+        if (!CommonService.sessionId || CommonService.sessionId == "") {
+            CommonService.sessionId = this.makeId();
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
 
         let action = CommonService.version + '/register/';
         let signup = {
             "request": [
             {
-                "session_ID": "avjtjgu0f257f0orggqufcn5g2", 
+                "session_ID": CommonService.sessionId, 
                 "page_ID": "1",
                 "screen_id": "1.2",
                 "action": "login_mobile_app",
@@ -90,12 +178,12 @@ export class AuthService {
         });
 
 /*
-email:"s@w.com"
-first_name:"1"
-free_reg_msn:"23423423423"
-free_reg_pwd:"zssdasdfasdf"
-image:""
-last_name:"2"
+email:"s@w.com",
+first_name:"1",
+free_reg_msn:"23423423423",
+free_reg_pwd:"zssdasdfasdf",
+image:"",
+last_name:"2",
 mobile:"23423423423"
 */
         console.log("addUser", signup);
@@ -108,6 +196,10 @@ mobile:"23423423423"
 
     uploadProfilePic( filePath:string ){
         
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
         let server = CommonService.apiUrl + 
             CommonService.version + '/upload/?process=profile';
 

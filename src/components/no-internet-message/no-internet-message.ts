@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
 @Component({
@@ -8,19 +9,19 @@ import { Network } from '@ionic-native/network';
 export class NoInternetMessageComponent {
 
 	text: string;
-	noInternet:boolean = false;
+	public noInternet:boolean = false;
 
-	constructor(private network: Network) {
-	    console.log('Hello NoInternetMessageComponent Component');
+	constructor(private network: Network, 
+		private navCtrl:NavController) {
+
+	    console.log('NoInternetMessageComponent Component', network.type);
 	    this.text = 'Hello World';
 
 	    network.onDisconnect().subscribe(() => {
-	    	console.log('you are offline');
 	    	this.noInternet = true;
 	    });
 
 	    network.onConnect().subscribe(()=> {
-	    	console.log('you are online');
 	    	this.noInternet = false;
 	    });
 	}

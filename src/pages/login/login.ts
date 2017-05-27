@@ -3,11 +3,13 @@ import { App, NavController, Platform, NavParams, PopoverController,
     LoadingController, AlertController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
+import { Network } from '@ionic-native/network';
 
 import { HomePage } from '../home/home';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
+import { Params } from '../../services/params';
 
 
 @Component({
@@ -43,27 +45,27 @@ export class LoginPage {
 
     constructor(
         public app:App,
-        public platform:Platform,
-        public alertCtrl:AlertController,
-        public navCtrl: NavController, 
-        public navParams: NavParams,
+        private params:Params,
+        private network:Network,
         private storage: Storage,
-        public loadingCtrl: LoadingController,
-        private popoverCtrl: PopoverController,
+        public platform:Platform,
+        public authSrv:AuthService, 
+        public navParams: NavParams,
+        public navCtrl: NavController, 
         public commonSrv:CommonService,
-        public authSrv:AuthService	) {
+        public alertCtrl:AlertController,
+        public loadingCtrl: LoadingController,
+        private popoverCtrl: PopoverController
+        ) {
 
-        this.loadCountries();
+        if (CommonService.countries == null) {
+            this.loadCountries();
+        }
 
+
+        
         storage.ready().then( ()=> this.storageReady = true );
-        /*
-        storage.remove('myitem')
-        .then(
-            data => console.log(data),
-            error => console.log(error)
-        );
-        */
-
+        
     }
 
     loadCountries(){
@@ -78,7 +80,7 @@ export class LoginPage {
                 this.countryes = data.response[0].get_country_code_flag.response.country_code_group;
                 this.selectedCountry = this.countryes[0];
                 this.countryNumber = this.selectedCountry.country_code;
-                console.log("countrys successful", this.countryes);
+                console.log("countries successful", this.countryes);
             },
             err=>{
                 loader.dismiss();
@@ -95,7 +97,7 @@ export class LoginPage {
                       }
                   }
                   ]
-                });
+                }).present();
 
             },
             ()=> {  }
@@ -108,19 +110,15 @@ export class LoginPage {
     }
 
     presentPopover(ev) {
-
-        /*
-        let alert = this.alertCtrl.create({
-            title: 'Error!',
-            subTitle: 'API not ready yet for this job',
-            buttons: ['Dismiss']
-        });
-        alert.present();
-        */
+        if (!this.countryes) {
+            this.loadCountries();
+            return;
+        }
+        
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
             countries: this.countryes,
             cb: (data) => { 
-                console.log(data);
+                // console.log(data);
                 this.selectedCountry = data;
                 this.countryNumber = data.country_code;
             }
@@ -130,14 +128,10 @@ export class LoginPage {
     }
 
     presentPopoverMobile(ev) {
-        /*
-        let alert = this.alertCtrl.create({
-            title: 'Error!',
-            subTitle: 'API not ready yet for this job',
-            buttons: ['Dismiss']
-        });
-        alert.present();
-        */
+        if (!this.countryes) {
+            this.loadCountries();
+            return;
+        }
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
             countries: this.countryes,
             cb: (data) => { 
@@ -197,6 +191,7 @@ export class LoginPage {
                 if(data) {
                     if(data.status != "FAIL" ) {
                         CommonService.session = data;
+                        this.storage.set('session_ID', CommonService.sessionId);
                         this.storage.set('session', JSON.stringify(data))
                         .then(
                             data => console.log(data),
