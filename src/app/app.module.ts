@@ -62,7 +62,7 @@ import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 import { AccountService } from '../services/account.service';
-import { SyndicateService } from '../services/syndicate-service';
+import { SyndicateService } from '../providers/syndicate-service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';

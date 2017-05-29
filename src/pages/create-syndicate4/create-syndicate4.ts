@@ -4,8 +4,13 @@ import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 import { CreateSyndicate3Page } from '../create-syndicate3/create-syndicate3';
 import { CreateSyndicate5Page } from '../create-syndicate5/create-syndicate5';
-import { SyndicateService } from '../../services/syndicate-service';
+import { SyndicateService } from '../../providers/syndicate-service';
+/*
+  Generated class for the CreateSyndicate4 page.
 
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-create-syndicate4',
   templateUrl: 'create-syndicate4.html'
@@ -25,9 +30,7 @@ export class CreateSyndicate4Page {
     sat: false
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    private viewCtrl: ViewController, public _syndService: SyndicateService, 
-    public loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
     var data = JSON.parse(localStorage.getItem('cardDefault'));

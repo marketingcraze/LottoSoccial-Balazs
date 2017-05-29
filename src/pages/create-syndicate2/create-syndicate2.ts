@@ -2,8 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate3Page } from '../create-syndicate3/create-syndicate3';
-import { SyndicateService } from '../../services/syndicate-service';
+import { SyndicateService } from '../../providers/syndicate-service';
 
+/*
+  Generated class for the CreateSyndicate2 page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-create-syndicate2',
   templateUrl: 'create-syndicate2.html'

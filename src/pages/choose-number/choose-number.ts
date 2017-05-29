@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ConfirmNumberPage } from '../confirm-number/confirm-number';
-import { SyndicateService } from '../../services/syndicate-service';
+import { SyndicateService } from '../../providers/syndicate-service';
 declare var $: any; 
 
 @Component({

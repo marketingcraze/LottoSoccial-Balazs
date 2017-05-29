@@ -3,10 +3,9 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, ObservableInput } from 'rxjs/Observable';
-import { Network } from '@ionic-native/network';
 
-import { CommonService } from './common.service';
-import { Params } from './params';
+import { CommonService } from '../services/common.service';
+import { Params } from '../services/params';
 
 @Injectable()
 export class SyndicateService {
@@ -15,7 +14,6 @@ export class SyndicateService {
     constructor(
         private http:Http,
         private params:Params,
-        private network:Network,
         private sanitizer: DomSanitizer, 
         public file: File ) {}
   
@@ -40,36 +38,38 @@ export class SyndicateService {
     }
 
     getcovers(){
-        if (!CommonService.isOnline) {
+            if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
         }
         let action = 'privatesyndicate/';
-        let data =  {
-            "session_ID": CommonService.sessionId,
-            "page_ID": "4",
-            "screen_id": "4.1",
-            "action": "ilist_banner",
-            "website": "Lotto Social",
-            "website_id": "27",
-            "source_site": "mobi.lottosocial.com",
-            "module_name": "get_syndicate_images_lib",
-            "customer_id": "1970400"  
-         };
-        let headopt = SyndicateService.getHeader();
-        return this.http.post(this.apiUrl + action, data, { headers:headopt })
-        .map(res => res.json())
-        .map((res) => {
-            return res;
-        })
+            let data =  {
+                          "session_ID":"avjtjgu0f257f0orggqufcn5g2",
+                          "page_ID": "4",
+                          "screen_id": "4.1",
+                          "action": "ilist_banner",
+                          "website": "Lotto Social",
+                          "website_id": "27",
+                          "source_site": "mobi.lottosocial.com",
+                          "module_name": "get_syndicate_images_lib",
+                          "customer_id": "1970400"  
+                        }
+            let headopt = SyndicateService.getHeader();
+            return this.http.post(this.apiUrl + action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+            })
             
     }
 
     uploadCover(filePath: any){
-        if (!CommonService.isOnline) {
+
+      if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
         }
+        
        let myHeaders: Headers = new Headers();
         myHeaders.set('Authorization', 
             'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
@@ -124,31 +124,31 @@ export class SyndicateService {
     }
 
     getLotteries() {
-        let action = 'privatesyndicate'
-        let data =  {
-            "session_ID": CommonService.sessionId,
-            "page_ID": "4",
-            "screen_id": "4.3",
-            "action": "syndicate_lotteries",
-            "website": "Lotto Social",
-            "website_id": "27",
-            "source_site": "mobi.lottosocial.com",
-            "module_name": "get_syndicate_lotteries",
-            "customer_id": "1970400"  
-        }
-        let headopt = SyndicateService.getHeader();
-        return this.http.post(this.apiUrl + action, data, { headers:headopt })
-        .map(res => res.json())
-        .map((res) => {
-            return res;
-        })
-    }
-
-    createSynd(data: any) {
-        if (!CommonService.isOnline) {
+      if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
         }
+        
+        let action = 'privatesyndicate'
+        let data =  {
+                          "session_ID":"avjtjgu0f257f0orggqufcn5g2",
+                          "page_ID": "4",
+                          "screen_id": "4.3",
+                          "action": "syndicate_lotteries",
+                          "website": "Lotto Social",
+                          "website_id": "27",
+                          "source_site": "mobi.lottosocial.com",
+                          "module_name": "get_syndicate_lotteries",
+                          "customer_id": "1970400"  
+                        }
+            let headopt = SyndicateService.getHeader();
+            return this.http.post(this.apiUrl + action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+            })
+    }
+    createSynd(data: any) {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
             return this.http.post(this.apiUrl + action, data, { headers:headopt })
@@ -158,25 +158,21 @@ export class SyndicateService {
             })
     }
     getTerms(id: any) {
-        if (!CommonService.isOnline) {
-            this.params.setIsInternetAvailable(false);
-            return;
-        }
-        let action = "privatesyndicate";
-        let headopt = SyndicateService.getHeader();
-        var data = {
-          "session_ID": CommonService.sessionId,
-          "page_ID": "4",
-          "screen_id": "4.5",
-          "action": "syndicate_terms",
-          "website": "Lotto Social",
-          "website_id": "27",
-          "source_site": "mobi.lottosocial.com",
-          "module_name": "get_private_syndicate_terms",
-          "customer_id":"1970400",
-          "private_syndicate_id":id
-        }
-        return this.http.post(this.apiUrl + action, data, { headers:headopt })
+    let action = "privatesyndicate";
+    let headopt = SyndicateService.getHeader();
+    var data = {
+      "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+      "page_ID": "4",
+      "screen_id": "4.5",
+      "action": "syndicate_terms",
+      "website": "Lotto Social",
+      "website_id": "27",
+      "source_site": "mobi.lottosocial.com",
+      "module_name": "get_private_syndicate_terms",
+      "customer_id":"1970400",
+      "private_syndicate_id":id
+    }
+    return this.http.post(this.apiUrl + action, data, { headers:headopt })
             .map(res => res.json())
             .map((res) => {
                 return res;
@@ -189,10 +185,12 @@ export class SyndicateService {
             this.params.setIsInternetAvailable(false);
             return;
         }
+        
+
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-            "session_ID": CommonService.sessionId,
+            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
             "page_ID": "4",
             "screen_id": "4.6",
             "action": "get_syndicate",
@@ -209,15 +207,18 @@ export class SyndicateService {
                 return res;
             })
     }
+
+
     getBigJack(id: any) {
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
         }
+        
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-            "session_ID": CommonService.sessionId,
+            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
             "page_ID": "4",
             "screen_id": "4.7",
             "action": "jackpot_list",
@@ -227,17 +228,24 @@ export class SyndicateService {
             "module_name": "get_big_jackpot_list",
             "customer_id":"1970400",
             "private_syndicate_id":id
-        }
-        return this.http.post(this.apiUrl + action, data, { headers:headopt })
+    }
+    return this.http.post(this.apiUrl + action, data, { headers:headopt })
             .map(res => res.json())
             .map((res) => {
                 return res;
             })
     }
+
+
     buySyndicate(data: any) {
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+        
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
-        return this.http.post(this.apiUrl + action, data, { headers:headopt })
+    return this.http.post(this.apiUrl + action, data, { headers:headopt })
             .map(res => res.json())
             .map((res) => {
                 return res;

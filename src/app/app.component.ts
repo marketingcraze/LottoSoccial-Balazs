@@ -19,8 +19,8 @@ import { OfflinePage } from '../pages/offline/offline';
 
 import { OneSignal } from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
-import { CommonService } from '../services/common.service';
 import { DatabaseService } from '../services/db.service';
+import { CommonService } from '../services/common.service';
 import { Params } from '../services/params';
 
 import { Constants } from './constants';
@@ -87,9 +87,9 @@ export class MyApp {
             network.onDisconnect().subscribe(()=> {
                 CommonService.isOnline = false;
             });
-            network.onchange().subscribe((data)=> {
-                console.log("network status changed: ", data);
-            });
+            // network.onchange().subscribe((data)=> {
+            //     console.log("network status changed: ", data);
+            // });
             
         });
     }

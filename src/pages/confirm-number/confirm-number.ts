@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PaymentPage } from '../payment/payment';
-import { SyndicateService } from '../../services/syndicate-service';
+import { SyndicateService } from '../../providers/syndicate-service';
+/*
+  Generated class for the ConfirmNumber page.
 
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-confirm-number',
   templateUrl: 'confirm-number.html'

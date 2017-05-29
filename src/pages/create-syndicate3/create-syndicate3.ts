@@ -3,8 +3,13 @@ import { NavController, NavParams, ViewController, LoadingController } from 'ion
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 import { CreateSyndicate4Page } from '../create-syndicate4/create-syndicate4';
-import { SyndicateService } from '../../services/syndicate-service';
+import { SyndicateService } from '../../providers/syndicate-service';
+/*
+  Generated class for the CreateSyndicate3 page.
 
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-create-syndicate3',
   templateUrl: 'create-syndicate3.html'
