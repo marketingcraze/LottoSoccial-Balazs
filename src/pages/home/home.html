@@ -3,9 +3,9 @@
   <ion-content>
     
     <ion-item class="notification-bar">
-      <ion-icon name="ios-log-out" class="fa-rotate-180"></ion-icon>
-      {{unreadCount}} <span class="color-white">Unread</span>
-      <span item-right>Mark all as read</span>
+      <ion-icon name="ios-log-out" (click)="closeMenu1()"></ion-icon>
+      <!-- {{unreadCount}} <span class="color-white">Unread</span>
+      <span item-right>Mark all as read</span> -->
     </ion-item>
 
     <ion-list>
@@ -15,9 +15,12 @@
       
       <ion-item-sliding *ngFor="let message of messages">
         <ion-item text-wrap>
-          <span item-left class="rounded-background1"><img src="assets/icon/notification_ico.svg" alt="" width="24" height="24" /></span>
-          <span class="notific-new"></span>
-          <p>{{message.title}}</p>
+          <span item-left class="">
+            <img *ngIf="message.icon_url" src="{{message.icon_url}}" alt="" width="24" height="24" />
+            <img *ngIf="!message.icon_url" src="assets/icon/notification_ico.svg" alt="" width="24" height="24" />
+          </span>
+          <!-- <span class="notific-new"></span> -->
+          <p>{{message.card_title}}</p>
         </ion-item>
 
         <ion-item-options side="right" (ionSwipe)="saveItem()">

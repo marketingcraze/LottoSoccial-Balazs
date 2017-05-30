@@ -109,6 +109,10 @@ export class HomePage {
         });*/
     }
 
+    closeMenu1(){
+        this.menu.close();
+    }
+
     openPage(page: PageInterface) {
         this.menu.close();
 
