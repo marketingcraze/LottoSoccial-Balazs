@@ -1,81 +1,4 @@
 page-offers {
-    no-internet-message{
-        position: absolute;
-        width: 100%;
-    }
-
-    .popup-content{
-        position: absolute;
-        bottom: 70px;
-        width: 100%;
-        max-height: 90%;
-        z-index: 10;
-        padding: 0 20px;
-
-        .header{
-            font-size: 1.2em;
-            padding: 10px;
-            border-bottom: 1px solid #dedede;
-        }
-
-        .button{
-            text-transform: none;
-        }
-
-        .buy-now{
-            position: absolute;
-            width: calc(100% - 40px);
-            height: 100%;
-            background-color: #00A651;
-            top: 0;
-            border-radius: 6px;
-        }
-
-        .payment-popover{
-            background-color: white;
-            
-            .list{
-                border: 1px solid #dedede;
-                margin: 0 20px 10px 20px;
-                border-radius: 6px;
-
-                .item {
-                    border-top: 1px solid #dedede;
-                    min-height: 6rem;
-
-                    .item-inner{
-                        border:none;
-                    }
-                    .radio[item-left] {
-                        margin: 0 16px 0 0;
-                    }
-                }
-                .list-header{
-                    margin: 0;
-                    padding: 0;
-                    background-color: #dedede;
-                    min-height: 3rem;
-                    .label{
-                        margin: 0;
-                        line-height: 2rem;
-                    }
-                }
-            }
-
-            .outer {
-                display: table;
-                position: absolute;
-                height: 100%;
-                width: 100%;
-            }
-
-            .middle {
-                display: table-cell;
-                vertical-align: middle;
-            }
-        }
-    }
-
  
         .Menu_Tab 
         {
@@ -88,7 +11,15 @@ page-offers {
         {
             border-bottom:4px solid white !important;
         }
+        .ion-ios-home, .ion-md-home, .ion-ios-home-outline, .ion-md-home-outline {
+                content: url(../assets/icon/home_ico.svg);
+            }
+        .ion-ios-notification, .ion-md-notification, .ion-ios-notification-outline, .ion-md-notification-outline {
+                content: url(../assets/icon/notification_ico.svg);
+               height: 50%;
+            }
        
+
 
 .card-title{
                 padding-top:10px;
@@ -106,7 +37,7 @@ page-offers {
                     font-size: 28px;
                     text-align: center;
                     color:white;
-                    text-shadow: 0px 0 #2f76d1, 0 3px #2f76d1, 3px 0 #2f76d1, 0 -2px #2f76d1;
+                    text-shadow: 2px 0 #2f76d1, 0 2px #2f76d1, 2px 0 #2f76d1, 0 -1px #2f76d1;
                 }
                 h4{
                     position: absolute;
@@ -115,7 +46,7 @@ page-offers {
                     top: 50px;
                     font-weight: bold;
                     font-size: 14px;
-                    color: black;
+                    color: #4b4b4b;
                 }
             }
             
@@ -191,17 +122,17 @@ border-radius: 3px;
 }
 p.Price
 {
-    font-size: 28px;
-    line-height: 0.2rem;
+    font-size: 25px;
+    line-height: 0.5rem;
     color: #6699cc;
     font-weight: bold;
 }
 p.Title
 {
-font-size: 16px;
-   font-weight:  400;
-    color: black;
-    line-height: 4.0rem;
+font-size: 14px;
+    font-weight: 500;
+    color: #4d4c4c;
+    line-height: 3rem;
 }
 .redClr
 {
@@ -225,7 +156,7 @@ p.blackClr
 {
     padding-top:2%;
     background:white;
-    color: black;
+    color: rgb(162, 162, 162);
     font-size: 1.2rem;
     width: 100%;
 
@@ -279,7 +210,9 @@ padding-top: 1.6rem;
 .slide-zoom{
 			width: 70%;
 		}
-
+.btn:focus{
+    background-color:blue;
+}
 .SlideTitle
     {
     font-size: 14px;
@@ -301,7 +234,7 @@ padding-top: 1.6rem;
     {
     font-size: 12px;
     font-weight: bold;
-    color: #a39e9e;
+    color: #6e6d6d;
     text-align: center;
     }
     .SlideLastText
@@ -378,7 +311,22 @@ padding-top: 1.6rem;
         {
             color: red;
         }
-}
+    }
+    @media only screen 
+    and (min-device-width : 320px) 
+    and (max-device-width : 568px) { 
+
+        .card-title{
+            h4{
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                top: 45px;
+                font-weight: bold;
+                font-size: 14px;
+                color: #4b4b4b;
+            }
+        }
+    }
 
 }
-

@@ -10,7 +10,7 @@ import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
 import { AccountPage } from '../pages/account/account';
 import { OffersPage } from '../pages/offers/offers';
-import { OffersPayment } from '../pages/offers/offers-payment/offers-payment';
+// import { OffersPayment } from '../pages/offers/offers-payment/offers-payment';
 import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { AuthPage } from '../pages/auth/auth';
@@ -128,7 +128,7 @@ import { NoInternetMessageComponent } from '../components/no-internet-message/no
      YourTicketsPage,
     CheckWinningsPage,
     MySyndicatePage,
-    OffersPayment,
+    // OffersPayment,
 
 // pipes
     MyFilterPipe,
@@ -209,7 +209,7 @@ import { NoInternetMessageComponent } from '../components/no-internet-message/no
     MySyndicatePage,
 
     // popovers
-    OffersPayment,
+    // OffersPayment,
 
     CountryListPopPage,
     RedeemGamesPage

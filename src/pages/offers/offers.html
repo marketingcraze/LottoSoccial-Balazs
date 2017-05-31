@@ -1,7 +1,14 @@
+<!--
+  Generated template for the Offers page.
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
 
   <ion-navbar color="primary">
-    <cus-header title="Offers" ></cus-header>  
+  
+<cus-header title="Offers" notification-count="0"></cus-header>
+    
   </ion-navbar>
       <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
             <ion-segment-button value="offer"   class="Menu_Tab">
@@ -13,8 +20,9 @@
       </ion-segment>
 </ion-header>
 
-<ion-content [ngSwitch]="toptab" class="MainPanel">
 
+<ion-content [ngSwitch]="toptab" style="background-color:#e8e8e8;">
+ 
   <ion-card class="Card_Padding"  *ngSwitchCase="'offer'"  >
        <div class="card-title">
         <img src="assets/image/euro-banner.png" class="img-responsive">
@@ -40,22 +48,24 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn" (click)="makePayment($event)">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2">
-              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold"></ion-icon></ion-col>
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
               <ion-col col-11><h2 style="font-size: 1.2rem; color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
-              <div class="itemCollapse" *ngIf="1==2">
-                <ion-row>
-                  <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                  <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £49</button></ion-col>
-                </ion-row>
-              </div>
-              <div class="itemCollapse" *ngIf="1==2">
-                <ion-row>
-                  <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                  <ion-col col-4><button ion-button class="BuyBtn" (click)="makePayment($event)">BUY FOR £49</button></ion-col>
-                </ion-row>
+              <div [hidden]="!hideElement1">
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                      </ion-row>
+                    </div>
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                      </ion-row>
+                    </div>
               </div>
           </ion-row>
         <ion-row>
@@ -77,11 +87,25 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn" (click)="makePayment($event)">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
           </ion-row>
-          <ion-row class="item2">
-              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold"></ion-icon></ion-col>
+          <ion-row class="item2" style="border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
               <ion-col col-11><h2 style="font-size:1.2rem;color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <div [hidden]="!hideElement2">
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                      </ion-row>
+                    </div>
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                      </ion-row>
+                    </div>
+              </div>
           </ion-row>
           <ion-row>
           <ion-col col-12 class="Item_img">
@@ -103,25 +127,38 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn" (click)="makePayment($event)">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
           </ion-row>
-          <ion-row class="item2">
-              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold"></ion-icon></ion-col>
-              <ion-col col-11 ><h2 style="font-size: 1.2rem;color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+          <ion-row class="item2" style="border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem;   color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <div [hidden]="!hideElement3">
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                      </ion-row>
+                    </div>
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                      </ion-row>
+                    </div>
+              </div>
           </ion-row>
   </ion-card>
 
-  <ion-content  *ngSwitchCase="'bonus'"  >
+  <ion-content  *ngSwitchCase="'bonus'" style="background-color:#e8e8e8" >
       <!--<ion-card class="Credit_balance_card">
         <ion-toggle color="danger" checked="true"></ion-toggle>
        </ion-card>-->
-       <ion-item no-padding no-lines>
+      <ion-item no-padding no-lines style="padding-left: 10px;margin-top: 8px;border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
           
           <ion-toggle color="danger" checked="true"  item-left></ion-toggle>
 
-          <ion-label class="SlideTitle" >Your Bonus Credit Balance : <span ion-text color="danger">£15.36</span></ion-label>
-
-       </ion-item>
+          <ion-label class="SlideTitle" >Your Bonus Credit Balance : <span ion-text color="danger">£{{Credit_Points}}</span></ion-label>
+      </ion-item>
       <ion-slides initialSlide=0 >
           <ion-slide >
               <ion-card class="SlideSpace">
@@ -143,10 +180,10 @@
                   </ion-row>
                   <ion-row class="SpaceBetweenRow">
                     <ion-col col-6>
-                      <button ion-button class="slide1FontColor"  (click)="tue()" value="Tue">TUE</button>
+                      <button ion-button class="slide1FontColor" [style.background-color]="drawdaytue" (click)="tue()" value="Tue">TUE</button>
                     </ion-col>
                     <ion-col col-6>
-                      <button ion-button style="background-color: #b7b7b7;color:white" (click)="fri()">FRI</button>
+                      <button ion-button  [style.background-color]="drawdayfri" (click)="fri()">FRI</button>
                     </ion-col>
                   </ion-row>
                   <ion-row class="SlideContentBorderTop" >
@@ -182,7 +219,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-12>
-                      <button ion-button class="BuyBtn" style="float: none" (click)="makePayment($event)">BUY NOW</button>
+                      <button ion-button class="BuyBtn" style="float: none">BUY NOW</button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -209,10 +246,10 @@
                   </ion-row>
                   <ion-row class="SpaceBetweenRow">
                     <ion-col col-6>
-                      <button ion-button class="slide2FontColor" (click)="wed()">WED</button>
+                      <button ion-button class="slide2FontColor" [style.background-color]="drawdaywed" (click)="wed()">WED</button>
                     </ion-col>
                     <ion-col col-6>
-                      <button ion-button style="background-color: #b7b7b7;color:white" (click)="sat()">SAT</button>
+                      <button ion-button [style.background-color]="drawdaysat" (click)="sat()">SAT</button>
                     </ion-col>
                   </ion-row>
                   <ion-row class="SlideContentBorderTop" >
@@ -247,88 +284,14 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-12>
-                      <button ion-button class="BuyBtn" style="float: none" (click)="makePayment($event)">BUY NOW</button>
+                      <button ion-button class="BuyBtn" style="float: none">BUY NOW</button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
               </ion-card>
           </ion-slide>
 
-           <ion-slide >
-              <ion-card>
-                <h1>welcome3</h1>
-              </ion-card>
-          </ion-slide>
-
-           <ion-slide >
-              <ion-card>
-                <h1>welcome4</h1>
-              </ion-card>
-          </ion-slide>
-
       </ion-slides>
   </ion-content>
+
 </ion-content>
-
-
-
-
-<div class="popup" *ngIf="confirmPayment" style="z-index: 102;">
-  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
-  
-    <div class="popup-content animated" [ngClass] = "(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
-
-      <div class="payment-popover">
-        <p class="header" text-center>Confirm Purchage</p>
-        <p text-center>This is 2 line description for payment</p>
-        <ion-list radio-group class="windows">
-          <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
-          
-          <ion-item>
-            <ion-label>Use preferred card:<br>VISA ending with 1294</ion-label>
-            <ion-radio value="visa1" item-left color="secondary" checked="true"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
-            <ion-radio value="visa2" item-left color="secondary"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Use a different card</ion-label>
-            <ion-radio value="visa3" item-left color="secondary"></ion-radio>
-          </ion-item>
-
-        </ion-list>
-
-        <div><button class="center" ion-button padding color="secondary" (click)="showBuyNowView=!showBuyNowView">Buy now for &pound;4.99</button>
-        </div>
-
-        <div>
-          <button class="center" ion-button clear (click)="showWhatsOn()">Not now</button>
-        </div>
-
-        <div class="buy-now" *ngIf="showBuyNowView">
-          <div class="outer">
-            <ion-grid class="middle">
-              <ion-row>
-                <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
-              </ion-row>
-              <ion-row >
-                <p class="center" text-center color="light">Syndicate TONY123 created!<br>What you want to do next?</p>
-              </ion-row>
-              <ion-row>
-                <button class="center" ion-button padding outline round color="light">VIEW TICKETS</button>
-              </ion-row>
-              <ion-row>
-                <button class="center" ion-button padding outline round color="light" (click)="showWhatsOn()">VIEW MORE OFFERS</button>
-              </ion-row>
-            </ion-grid>
-          </div>
-        </div>
-        
-      </div>
-
-    </div>
-</div>
-
