@@ -64,9 +64,13 @@ export class StorePage {
         console.log("StorePage", this.navParams.data);
 
         this.srvHome.getCreditOffers().subscribe((data)=> {
-            console.log("StorePage->getCreditOffers() ", data);
+            if (data.response) {
+                let res = JSON.parse( data.response );
+                console.log("StorePage->getCreditOffers() success", res);
+            }
+            
         }, (err:Error)=> {
-            console.log("StorePage->getCreditOffers() ", err);
+            console.log("StorePage->getCreditOffers() error", err);
         });
 
         this.nav = this.app.getRootNav();

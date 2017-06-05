@@ -144,12 +144,21 @@ export class HomeService {
         let parameter = {
             "params": [{
                 "name":"json_request",
-                "value": "{'page_id': '2,'screen_id': '2..1','module_name':'get_credit_offer','customer_id': '1970400'}"
+                "param_type": "IN",
+                "value": "{'page_id': '2,'screen_id': '2..1','module_name':'get_credit_offer','customer_id': '1970400'}",
+                "type": "NVARCHAR(500)",
+                "length": 0
             },
             {
-                "name":"json_response",
-                "value":null
-            }]
+                 "name": "response",
+                 "param_type": "OUT",
+                 "value": "",
+                 "type": "NVARCHAR(max)"
+            }],
+            "schema":{
+                "_field_name_":""
+            },
+            "wrapper":"response"
         };
 
         let headers = new Headers();
