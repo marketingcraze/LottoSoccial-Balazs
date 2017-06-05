@@ -63,6 +63,12 @@ export class StorePage {
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
 
+        this.srvHome.getCreditOffers().subscribe((data)=> {
+            console.log("StorePage->getCreditOffers() ", data);
+        }, (err:Error)=> {
+            console.log("StorePage->getCreditOffers() ", err);
+        });
+
         this.nav = this.app.getRootNav();
         this.spaceBetween = Math.floor( platform.width() * -0.10 );
 

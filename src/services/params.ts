@@ -10,7 +10,7 @@ export class Params{
     public networkConnection:boolean = false;
 
     constructor(public events:Events){
-        console.log( "Params()" );
+        // console.log( "Params()" );
 
         this.params = {};
         this.homeData = {};

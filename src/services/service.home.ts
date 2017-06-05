@@ -128,6 +128,43 @@ export class HomeService {
     }
     
     
+    getCreditOffers() {
+        console.log("HomeService::getCreditOffers");
+
+        if ( !CommonService.session ) {
+            return null;
+        }
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+        
+
+        let url = 'http://api.hatchster.com/api/v2/sqllbtnima2016/_proc/proc_get_credit_offers_mobile_app';
+        let parameter = {
+            "params": [{
+                "name":"json_request",
+                "value": "{'page_id': '2,'screen_id': '2..1','module_name':'get_credit_offer','customer_id': '1970400'}"
+            },
+            {
+                "name":"json_response",
+                "value":null
+            }]
+        };
+
+        let headers = new Headers();
+        headers.set('Content-type', 'application/json');
+        headers.append('X-DreamFactory-Api-Key', 'b411dd8f65ba8d090f9c063549e2d2810d35414dffb5688c9c5b22932a1d7fa4');
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: headers
+        });
+
+        var response = this.http.post(url, parameter, opt).map(response => response.json());
+        return response;
+    }
+    
+    
 }
 
 

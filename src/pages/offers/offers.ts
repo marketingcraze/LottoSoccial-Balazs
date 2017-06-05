@@ -4,12 +4,6 @@ import { AuthService } from '../../services/auth.service';
 import { FilterPipe } from '../../pipes/filter-pipe';
 
 
-
-/*
-  Generated class for the Offers page.
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
@@ -146,3 +140,5 @@ export class OffersPage  {
 
     }
 }
+
+

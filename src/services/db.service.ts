@@ -10,13 +10,13 @@ export class DatabaseService {
 
     public static databaseName : string = "lottosocial.db";
     public database : SQLiteObject;
-    public tableCount:number = 3;
+    public tableCount:number = 5;
     public databaseCreated:number = 0;
   
     constructor(private sqlite: SQLite,
         public platform: Platform) {
 
-        console.log("DatabaseService");
+        // console.log("DatabaseService");
         platform.ready().then(()=> this.createDatabase() );
         
     }
@@ -142,14 +142,14 @@ export class DatabaseService {
     prepareSqliteDatabase(){
         console.log("prepareSqliteDatabase()");
 
-        let tblPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page` ("
-        + "`Page_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
+        let tblPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Page` ("
+        + "`Page_ID` INTEGER PRIMARY KEY,"
         + "`Page_Name` varchar(300) NULL,"
-        + "`Complete_Json_Data` TEXT NULL,"
-        + "`Update` TINYINT NULL,"
-        + "`Status` varchar(25) NULL,"
-        + "`Modified_By` varchar(50) NULL,"
-        + "`Modified_Date` datetime NULL,"
+        // + "`Complete_Json_Data` TEXT NULL,"
+        // + "`Update` TINYINT NULL,"
+        // + "`Status` varchar(25) NULL,"
+        // + "`Modified_By` varchar(50) NULL,"
+        // + "`Modified_Date` datetime NULL,"
         + "`Date_Created` datetime NULL)";
 
         this.database.executeSql(tblPageCreate, {}).then((data) => {
@@ -160,15 +160,15 @@ export class DatabaseService {
         });
 
 
-        let tblModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Module` ("
-        + "`Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT, " 
-        + "`Module_Name` Varchar(100) NULL, "
-        + "`SP_Name` Varchar(100) NULL, "
-        + "`Module_Json` TEXT NULL, "
-        + "`Status` varchar(25) NULL, "
+        let tblModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Module` ("
+        + "`App_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT, " 
+        // + "`Module_Name` Varchar(100) NULL, "
+        // + "`SP_Name` Varchar(100) NULL, "
+        + "`Json_Data` TEXT NULL, "
+        + "`Expiry_Status` varchar(25) NULL, "
         + "`Modified_By` varchar(50) NULL, "
-        + "`Modified_Date` datetime NULL, "
-        + "`Date_Created` datetime NULL)";
+        + "`Expiry_Date` datetime NULL, "
+        + "`Modified_Date` datetime NULL)";
 
         this.database.executeSql(tblModuleCreate, {}).then((data) => {
           this.databaseCreated++;
@@ -181,16 +181,47 @@ export class DatabaseService {
         + "`Page_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
         + "`Page_ID` INTEGER NULL,"
         + "`Module_ID` INTEGER NULL,"
-        + "`Expired` TINYINT NULL,"
-        + "`Expire_At` Varchar(50) NULL,"
-        + "`Status` varchar(25) NULL,"
-        + "`Modified_By` varchar(50) NULL,"
+        + "`End_Point` varchar(25) NULL,"
+        // + "`Status` varchar(25) NULL,"
+        // + "`Modified_By` varchar(50) NULL,"
         + "`Modified_Date` datetime NULL,"
-        + "`Date_Created` datetime NULL) ";
+        + "`Date_Created` datetime NULL)";
+        // + "`Produst_ID` INTEGER NULL,"
+        // + "`Offer_ID` INTEGER NULL"
+        
 
         this.database.executeSql(tblPageModuleCreate, {}).then((data) => {
           this.databaseCreated++;
           // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
+        }, (error) => {
+          console.error("Unable to execute sql", error);
+        });
+
+        let tblAppReference = "CREATE TABLE IF NOT EXISTS `tbl_App_Reference` ( "
+        + "`App_ID` INTEGER PRIMARY KEY,"
+        + "`App_Version` varchar(100) NULL,"
+        + "`APP_Token` varchar(100) NULL,"
+        + "`User_ID` INTEGER NULL,"
+        + "`User_Token` varchar(50) NULL)";
+
+        this.database.executeSql(tblAppReference, {}).then((data) => {
+            this.databaseCreated++;
+            // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblAppReference, data);
+        }, (error) => {
+          console.error("Unable to execute sql", error);
+        });
+
+        let tblCustomerContactList = "CREATE TABLE IF NOT EXISTS `tbl_Customer_Contact_List` ( "
+        + "`Contact_ID` INTEGER PRIMARY KEY,"
+        + "`First_Name` varchar(100) NULL,"
+        + "`Surname` varchar(100) NULL,"
+        + "`Mobile_Number` INTEGER NULL,"
+        + "`Selected` INT2 NULL, "
+        + "`Date_Created` datetime NULL)";
+
+        this.database.executeSql(tblCustomerContactList, {}).then((data) => {
+            this.databaseCreated++;
+            // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblCustomerContactList, data);
         }, (error) => {
           console.error("Unable to execute sql", error);
         });

@@ -25,23 +25,8 @@ export class CommonService {
     static get parameters() {
         return [[Http]];
     }
-/*
-    public static getHeader(): Headers{
-        let myHeaders: Headers = new Headers();
 
-        myHeaders.set('Content-type', 'application/x-www-form-urlencoded');
-
-        myHeaders.append('Authorization', 'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
-        'oauth_signature_method="HMAC-SHA1",' +
-        'oauth_timestamp="1479395872",' +
-        'oauth_nonce="A96zvQ",' +
-        'oauth_version="1.0",' +
-        'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
-        'oauth_signature="uRpPuOZEEStiy8ohVfFVW8zRNYw%3D"');
-        
-        return myHeaders;
-    }
-*/
+    
     public static getHeaderJson(): Headers{
         let myHeaders: Headers = new Headers();
 
