@@ -146,15 +146,11 @@
           </ion-row>
   </ion-card>
 
-  <ion-content  *ngSwitchCase="'bonus'" style="background-color:#e8e8e8" >
-      <!--<ion-card class="Credit_balance_card">
-        <ion-toggle color="danger" checked="true"></ion-toggle>
-       </ion-card>-->
-      <ion-item no-padding no-lines style="padding-left: 10px;margin-top: 8px;border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
-          
-          <ion-toggle color="danger" checked="true"  item-left></ion-toggle>
-
-          <ion-label class="SlideTitle" >Your Bonus Credit Balance : <span ion-text color="danger">£{{Credit_Points}}</span></ion-label>
+  <div *ngSwitchCase="'bonus'" style="background-color:#e8e8e8" >
+      
+       <ion-item no-padding no-lines class="creditbox">
+        <img class="coins" src="assets/icon/credit_ico.png" height="10px">
+        <span class="SlideTitle" >Your Bonus Credit Balance : <span ion-text style="color:#ff3366">£{{Credit_Points}}</span></span>
       </ion-item>
       <ion-slides initialSlide=0 >
           <ion-slide >
@@ -172,7 +168,7 @@
                   </ion-row>
                   <ion-row class="SlideContentBorderTop">
                     <ion-col col-12>
-                      <p class="SlideSubTitle" style="color:#515050">Choose Your Draw day</p>
+                      <p class="SlideSubTitle" style="color:#515050">Choose Draw day</p>
                     </ion-col>
                   </ion-row>
                   <ion-row class="SpaceBetweenRow">
@@ -289,6 +285,6 @@
           </ion-slide>
 
       </ion-slides>
-  </ion-content>
+   </div>
 
 </ion-content>

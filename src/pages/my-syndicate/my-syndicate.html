@@ -1,11 +1,11 @@
 <ion-content class="marg-top-12 main-bg" id="asynd">
   <div id="sstate">
-  <div class="synd-card">
+  <div class="synd-card" *ngFor="let sd of syndArr; let i = index;">
     <ion-card>
       <div>
-      <img src="./assets/img/pvt_cover_003@2x.png">
+      <img [src]="sd.image_url">
       <div class="c-title">
-        GREY0012
+        {{sd.syndicate_name}}
       </div>
       </div>
       <ion-item>
@@ -32,7 +32,8 @@
           </div>
       </ion-item>
       <ion-item (click)="checkwins()" style="font-size: 14px;">
-        <span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span>
+        <span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f" *ngIf="sd.check_status == 'CHECKED'">CHECK NOW!</span>
+        <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f" *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'">DUE TO PLAY</span>
       </ion-item>
     </ion-card>
   </div>
