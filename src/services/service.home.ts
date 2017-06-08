@@ -83,7 +83,7 @@ export class HomeService {
                 "screen_id": "1.4", 
                 "module_name": module_name, 
                 "customer_id": this.customerId
-            } 
+            }
             ]
         };
         let opt: RequestOptions = new RequestOptions({
@@ -139,26 +139,22 @@ export class HomeService {
             return;
         }
         
-
         let url = 'http://api.hatchster.com/api/v2/sqllbtnima2016/_proc/proc_get_credit_offers_mobile_app';
         let parameter = {
             "params": [{
                 "name":"json_request",
                 "param_type": "IN",
-                "value": "{'page_id': '2,'screen_id': '2..1','module_name':'get_credit_offer','customer_id': '1970400'}",
+                "value": "{\"page_id\": \"2\",\"screen_id\": \"2..1\",\"module_name\":\"get_credit_offer\",\"customer_id\": \"1970400\"}",
                 "type": "NVARCHAR(500)",
                 "length": 0
             },
             {
-                 "name": "response",
-                 "param_type": "OUT",
-                 "value": "",
-                 "type": "NVARCHAR(max)"
+                "name": "response",
+                "param_type": "OUT",
+                "value": "",
+                "type": "NVARCHAR(max)"
             }],
-            "schema":{
-                "_field_name_":""
-            },
-            "wrapper":"response"
+            "request_source":"mobile_app"
         };
 
         let headers = new Headers();

@@ -1,234 +1,176 @@
-import { Platform } from 'ionic-angular';
-import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Platform, AlertController } from 'ionic-angular';
+import { HomeService } from './service.home';
+import { DatabaseService } from './db.service';
 
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-
-
-@Injectable()
 export class ApiController {
 
-    public static databaseName : string = "lottosocial.db";
-    public database : SQLiteObject;
-    public tableCount:number = 5;
-    public databaseCreated:number = 0;
-  
-    constructor(private sqlite: SQLite,
-        public platform: Platform) {
+    private expiresInMinutes:number = 5;
 
-        // console.log("ApiController");
-        platform.ready().then(()=> this.createDatabase() );
+    constructor(public platform: Platform, 
+        private srvDb:DatabaseService,
+        private srvHome:HomeService,
+        public alertCtrl:AlertController) {
         
+        console.log("ApiController");
     }
 
-    createDatabase(){
-        this.sqlite.create({
-            name: ApiController.databaseName,
-            location: "default"
-        }).then(( db: SQLiteObject ) => {
-            console.log("database created"); 
-            this.database = db;
-            // open sqlite database
-            this.prepareSqliteDatabase();
-        }, (error) => {
-            console.error("Unable to open database", error);
-        });
-    }
+    loadModules(action:string, page_id:string, module_names:string[]):Promise<any[]>{
 
+        // have to convert module names to module ids
 
-    insert(tableName, columnsName, columnsValues:any[]) {
-
-        console.log("INSERT INTO " + tableName 
-            + " ( " + columnsName + ") VALUES (" + columnsValues + ")");
-
-        return Observable.create(observer => {
-
-            this.database.executeSql("INSERT INTO " + tableName 
-                + " ( " + columnsName + ") VALUES (" + columnsValues + ")", [])
-            .then((data) => {
-                console.log("INSERTED: " + JSON.stringify(data));
-                observer.next(data);
-                observer.complete();
-            }, (error) => {
-                console.log("ERROR: " + JSON.stringify(error.err));
-                observer.next(error);
-                observer.complete();
-            });
-
-        });
-    }
-
-    update(tableName, columnsNames, columnsValues:any[],
-                       whereClause, whereArgs:any[]) {
-
-        console.log("UPDATE " + tableName + columnsNames + " " + whereClause, 
-            columnsValues.concat(whereArgs) );
-
-        return Observable.create(observer => {
-
-            this.database.executeSql("UPDATE " + tableName + columnsNames + " " + whereClause, 
-                columnsValues.concat(whereArgs) )
-            .then((data) => {
-                console.log("UPDATED: " + JSON.stringify(data));
-                observer.next(data);
-                observer.complete();
-            }, (error) => {
-                console.log("ERROR: " + JSON.stringify(error.err));
-                observer.next(error);
-                observer.complete();
-            });
-        });
-    }
-
-    select(tableName, columnsNames, whereClause, whereArgs:any[]) {
-
-        var query = "SELECT " + columnsNames + " FROM " + tableName + " " + whereClause;
-
-        console.log(query, whereArgs );
-        return this.database.executeSql(query, whereArgs )
-        .then((data) => {
-            console.log("ROWS: " + JSON.stringify(data));
-        }, (error) => {
-            console.log("ERROR: " + JSON.stringify(error.err));
-        });
-    }
-
-    raw_query( query:string, params:any[] ) {
-        if ( !this.platform.is('cordova') ) {
-            return new Promise( (resolve, reject) => {
-                resolve({rows:[]});
-            });
+        if (!this.platform.is('cordova')) {
+            return this.fetchModuleDataFromAPI(action, page_id, module_names );
         }
+
+        let early = new Date();
+        early.setMinutes( early.getMinutes() + this.expiresInMinutes);
+
+        let sel_query = "SELECT t2.Json_Data FROM tbl_Page_Module as t1 JOIN tbl_App_Module as t2 ";
+        sel_query += "on (t1.Module_ID = t2.App_Module_ID) where t2.Json_Data !='' AND t2.Modified_Date <=? ";
+        sel_query += "AND t2.App_Module_ID IN (?)";
+
+        return new Promise( (resolve, reject) => {
+
+            this.srvDb.raw_query(sel_query, [early, module_names.join(",") ]).then((res:any)=> {
+
+                // console.log("local data", res);
+                if (res && res.rows.length > 0) {
+                    let data:any[] = [];
+                    for (var i = 0 ; i < res.rows.length; i++) {
+                        data.push( JSON.parse( res.rows.item(i).Module_Json) );
+                    }
+                    resolve(data);
+                    
+                } else {
+                    console.log("fetching remote data");
+                    // Fetch the Data from Remote API Start
+                     this.fetchModuleDataFromAPI(action, page_id, module_names).then( data =>{
+                         resolve(data);
+                     }, err => {
+                         reject(err);
+                     });
+                }
+
+            }, err =>{
+                console.log( module_names + " local db error ", err);
+            });
+        });
+    }
+
+
+    fetchModuleDataFromAPI(action:string, pageId:string, moduleNames:string[]):Promise<any>{
+        console.log("loadHomeCard", moduleNames);
+        return new Promise( (resolve, reject) => {
+
+            this.srvHome.getModules( action, pageId, moduleNames ).subscribe(
+            data=>{
+                // console.log("fetchModuleDataFromAPI successful", data);
+                if(data) {
+                    
+                    resolve(data.response);
+                    // Fetch the Data from Remote API End
+                    // Insert the remote response into local db
+                    this.cacheFetchedData(pageId, "page_name", moduleNames, data.response);
+                }else{
+                    reject(Error("Data not found"));
+                }
+
+            }, err => {
+
+                console.log("error on " + action, err);
+
+                this.alertCtrl.create({
+                    title: 'Error!!!',
+                    subTitle: 'Internet disabled or server error.',
+                    buttons: [
+                    {
+                        text: 'OK',
+                        handler: data => {
+                            this.platform.exitApp();
+                        }
+                    }
+                    ],
+                    enableBackdropDismiss:false
+                });
+                reject(err);
+
+            }, ()=> {}
+            );
+
+        });
         
-        if (this.databaseCreated >= this.tableCount) {
-            console.log( query );
-            return this.database.executeSql(query, params );
-        }else{
-            this.createDatabase();
-          
-            return new Promise( (resolve, reject) => {
+    }
 
-                const source = Observable.interval(400)
-                .take(60)
-                .subscribe(res => { 
-                    console.log("observing ", this.databaseCreated, this.tableCount, res);
-                  
-                    if (this.databaseCreated >= this.tableCount) {
-                        source.unsubscribe();
-                        
-                        console.log( "executing " + query );
-                        this.database.executeSql(query, params ).then( (res) => {
-                            console.log( "result ", res );
+    cacheFetchedData( page_id:string, page_name:string, moduleName:string[], fetchedData:any[] ){
+        console.log("cacheFetchedData", moduleName, fetchedData);
 
-                            for (var i = 0 ; i < res.rows.length; i++) {
-                                console.log("row " + i + ": ", res.rows.item(i) );
-                            }
-                          resolve( res );
-                        }, err => {
-                            reject(err);
-                        });
-                    }
+        let module_json:any = fetchedData;
+        let result_page_id:number = -1;
+        
+        
+        // 1.tbl_App_Page 
+        var insert_query = "INSERT OR REPLACE INTO tbl_App_Page(`Page_ID`,`Page_Name`,`Date_Created`) ";
+        insert_query += "VALUES(?,?,?); ";
 
-                    if ( res > 58) {
-                        reject( Error("Database taking too long to respond") );
-                    }
+        this.srvDb.raw_query( insert_query, [page_id, page_name, new Date()]).then((page_result:any)=> {
+            console.log("INSERT ID -> ", page_result );
+            if (!page_result) {
+                return;
+            }
+            result_page_id = page_result.insertId;
+
+            // 2.tbl_App_Module 
+            for (var i = 0; i < moduleName.length; ++i) {
+                insert_query = "INSERT OR REPLACE INTO tbl_App_Module(`App_Module_ID`,`Json_Data`,`Expiry_Status`,`Expiry_Date`,`Modified_Date`) VALUES(?,?,?,?,?); ";
+                this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', new Date(), new Date()]).then((module_result:any)=> {
+                    console.log("INSERT ID -> ", module_result );
+                    
+                    // 3.tbl_Page_Module 
+                    insert_query = "INSERT OR REPLACE INTO tbl_Page_Module(`Page_ID`,`Module_ID`,`End_Point`,`Date_Created`) VALUES(?,?,?,?); ";    
+                    this.srvDb.raw_query( insert_query, [result_page_id, module_result.insertId, 'active', new Date()]).then((result:any)=> {
+                          console.log("INSERT ID -> ", result);
+                      }, (error)=> {
+                          console.error(error);
+                      });
+
+                }, (error)=> {
+                    console.error(error);
                 });
 
-            });
-        }
+            }
+            
+        }, (error)=> {
+            console.error(error);
+        });
+
     }
 
-    
-    prepareSqliteDatabase(){
-        console.log("prepareSqliteDatabase()");
+    clearDatabaseOnLogout(){
+        console.log("ApiController::clearDatabaseOnLogout ");
 
-        let tblPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Page` ("
-        + "`Page_ID` INTEGER PRIMARY KEY,"
-        + "`Page_Name` varchar(300) NULL,"
-        // + "`Complete_Json_Data` TEXT NULL,"
-        // + "`Update` TINYINT NULL,"
-        // + "`Status` varchar(25) NULL,"
-        // + "`Modified_By` varchar(50) NULL,"
-        // + "`Modified_Date` datetime NULL,"
-        + "`Date_Created` datetime NULL)";
-
-        this.database.executeSql(tblPageCreate, {}).then((data) => {
-          this.databaseCreated++;
-          // console.log("TABLE Page CREATED: ", this.databaseCreated, tblPageCreate, data);
-        }, (error) => {
-            console.error("Unable to execute sql", error);
+        // delete tbl_App_Page table data
+        let delete_page = "DELETE FROM tbl_App_Page;";
+        this.srvDb.raw_query( delete_page, []).then((page_result:any)=> {
+            // console.log("clearDatabaseOnLogout SUCCESS ", page_result );
+        }, (error)=> {
+            console.error(error);
         });
 
-
-        let tblModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Module` ("
-        + "`App_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT, " 
-        // + "`Module_Name` Varchar(100) NULL, "
-        // + "`SP_Name` Varchar(100) NULL, "
-        + "`Json_Data` TEXT NULL, "
-        + "`Expiry_Status` varchar(25) NULL, "
-        + "`Modified_By` varchar(50) NULL, "
-        + "`Expiry_Date` datetime NULL, "
-        + "`Modified_Date` datetime NULL)";
-
-        this.database.executeSql(tblModuleCreate, {}).then((data) => {
-          this.databaseCreated++;
-          // console.log("TABLE Module CREATED: ", this.databaseCreated, tblModuleCreate, data);
-        }, (error) => {
-          console.error("Unable to execute sql", error);
+        let delete_module = "DELETE FROM tbl_App_Module; ";
+        this.srvDb.raw_query( delete_module, []).then((module_result:any)=> {
+            // console.log("clearDatabaseOnLogout SUCCESS ", module_result );
+        }, (error)=> {
+            console.error(error);
         });
 
-        let tblPageModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page_Module` ( "
-        + "`Page_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
-        + "`Page_ID` INTEGER NULL,"
-        + "`Module_ID` INTEGER NULL,"
-        + "`End_Point` varchar(25) NULL,"
-        // + "`Status` varchar(25) NULL,"
-        // + "`Modified_By` varchar(50) NULL,"
-        + "`Modified_Date` datetime NULL,"
-        + "`Date_Created` datetime NULL)";
-        // + "`Produst_ID` INTEGER NULL,"
-        // + "`Offer_ID` INTEGER NULL"
-        
-
-        this.database.executeSql(tblPageModuleCreate, {}).then((data) => {
-          this.databaseCreated++;
-          // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
-        }, (error) => {
-          console.error("Unable to execute sql", error);
-        });
-
-        let tblAppReference = "CREATE TABLE IF NOT EXISTS `tbl_App_Reference` ( "
-        + "`App_ID` INTEGER PRIMARY KEY,"
-        + "`App_Version` varchar(100) NULL,"
-        + "`APP_Token` varchar(100) NULL,"
-        + "`User_ID` INTEGER NULL,"
-        + "`User_Token` varchar(50) NULL)";
-
-        this.database.executeSql(tblAppReference, {}).then((data) => {
-            this.databaseCreated++;
-            // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblAppReference, data);
-        }, (error) => {
-          console.error("Unable to execute sql", error);
-        });
-
-        let tblCustomerContactList = "CREATE TABLE IF NOT EXISTS `tbl_Customer_Contact_List` ( "
-        + "`Contact_ID` INTEGER PRIMARY KEY,"
-        + "`First_Name` varchar(100) NULL,"
-        + "`Surname` varchar(100) NULL,"
-        + "`Mobile_Number` INTEGER NULL,"
-        + "`Selected` INT2 NULL, "
-        + "`Date_Created` datetime NULL)";
-
-        this.database.executeSql(tblCustomerContactList, {}).then((data) => {
-            this.databaseCreated++;
-            // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblCustomerContactList, data);
-        }, (error) => {
-          console.error("Unable to execute sql", error);
+        // delete tbl_Page_Module data
+        let delete_page_module = "DELETE FROM tbl_Page_Module; ";    
+        this.srvDb.raw_query( delete_page_module, []).then((result:any)=> {
+            // console.log("clearDatabaseOnLogout SUCCESS ", result);
+        }, (error)=> {
+            console.error(error);
         });
     }
 
 
 }
-
-
-

@@ -1,8 +1,4 @@
-<!--
-  Generated template for the Offers page.
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+
 <ion-header>
 
   <ion-navbar color="primary">
@@ -20,6 +16,7 @@
       </ion-segment>
 </ion-header>
 
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
 <ion-content [ngSwitch]="toptab" style="background-color:#e8e8e8;">
  
@@ -48,7 +45,7 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
@@ -63,7 +60,7 @@
                     <div class="itemCollapse" >
                       <ion-row>
                         <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.00</button></ion-col>
                       </ion-row>
                     </div>
               </div>
@@ -87,7 +84,7 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
@@ -96,13 +93,13 @@
                     <div class="itemCollapse" >
                       <ion-row>
                         <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £5</button></ion-col>
                       </ion-row>
                     </div>
                     <div class="itemCollapse" >
                       <ion-row>
                         <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.00</button></ion-col>
                       </ion-row>
                     </div>
               </div>
@@ -127,22 +124,22 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
-              <ion-col col-11 ><h2 style="font-size: 1.2rem;   color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem; color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement3">
                     <div class="itemCollapse" >
                       <ion-row>
                         <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £5</button></ion-col>
                       </ion-row>
                     </div>
                     <div class="itemCollapse" >
                       <ion-row>
                         <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
-                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.00</button></ion-col>
                       </ion-row>
                     </div>
               </div>
@@ -284,7 +281,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-12>
-                      <button ion-button class="BuyBtn" style="float: none">BUY NOW</button>
+                      <button ion-button class="BuyBtn" style="float: none" (click)="showPaymentOptions()">BUY NOW</button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>

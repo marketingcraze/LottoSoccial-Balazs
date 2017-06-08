@@ -54,6 +54,13 @@ import { CusHeaderComponent } from '../components/cus-header/cus-header';
 import { CusHeader1Component } from '../components/synd-cus-header1/synd-cus-header1';
 import { CusHeader2Component } from '../components/synd-cus-header2/synd-cus-header2';
 import { ChooseImagePage } from '../pages/choose-image/choose-image';
+import { ChooseNumberPage } from '../pages/choose-number/choose-number';
+import { ConfirmNumberPage } from '../pages/confirm-number/confirm-number';
+import { PaymentPage } from '../pages/payment/payment';
+
+// components
+import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
+import { PopupConfirmPaymentComponent } from '../components/popup-confirm-payment/popup-confirm-payment';
 
 // services
 import { Params } from '../services/params';
@@ -62,6 +69,7 @@ import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/service.home';
 import { AccountService } from '../services/account.service';
+import { OfferService } from '../services/offer.service';
 import { SyndicateService } from '../providers/syndicate-service';
 
 // providers
@@ -78,7 +86,6 @@ import { Network } from '@ionic-native/network';
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
-import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 
 @NgModule({
     declarations: [
@@ -112,6 +119,9 @@ import { NoInternetMessageComponent } from '../components/no-internet-message/no
     OffersForYouPage,
     CreateSyndicateTab,
     ChooseImagePage,
+    ChooseNumberPage,
+    ConfirmNumberPage,
+    PaymentPage,
     EditProfilePage, 
     EditProfileDetails,
     EditProfileEmail,
@@ -139,7 +149,8 @@ import { NoInternetMessageComponent } from '../components/no-internet-message/no
     CusHeaderComponent,
     CusHeader1Component,
     CusHeader2Component,
-    NoInternetMessageComponent
+    NoInternetMessageComponent,
+    PopupConfirmPaymentComponent
 
   ],
   imports: [
@@ -191,6 +202,9 @@ import { NoInternetMessageComponent } from '../components/no-internet-message/no
     CreateSyndicate4Page,
     CreateSyndicate5Page,
     ChooseImagePage,
+    ChooseNumberPage,
+    ConfirmNumberPage,
+    PaymentPage,
     EditProfilePage,
     EditProfileDetails,
     EditProfileEmail,
@@ -217,7 +231,7 @@ import { NoInternetMessageComponent } from '../components/no-internet-message/no
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   DatabaseService, CommonService, AuthService, HomeService, AccountService, Params, 
   SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService, 
-  Network]
+  Network, OfferService]
 
 })
 export class AppModule {}

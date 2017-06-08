@@ -298,6 +298,7 @@ mobile:"23423423423"
         var response = this.http.post(action, body,opt).map(res => res.json());
         return response;
     }
+
     get_fetch_offer(){
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
@@ -305,6 +306,7 @@ mobile:"23423423423"
         }
         let action= CommonService.apiUrl + CommonService.version + "/offers/"
         let body={"page_id":"2","screen_id":"2..1","module_name":"get_credit_offer","customer_id":"1970400" };
+
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
         });
@@ -315,7 +317,7 @@ mobile:"23423423423"
     }
 
     get_Credit_Points(){
-        let action="profile/"
+        let action= CommonService.version + "/profile/"
         let body={
             "session_ID": "avjtjgu0f257f0orggqufcn5g2",
             "action": "login_mobile_app",

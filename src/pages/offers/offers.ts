@@ -1,49 +1,83 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams,Platform } from 'ionic-angular';
-import { AuthService } from '../../services/auth.service';
-import { FilterPipe } from '../../pipes/filter-pipe';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
 
+import { AuthService } from '../../services/auth.service';
+import { OfferService } from '../../services/offer.service';
 
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
-
 })
-
-
 export class OffersPage  {
-   toptab:string="offer";
+  @ViewChild("confirmPayment")confirmPayment;
 
-   credit_lines : any;
-   credit_offer : any;
-   credit_filter_line:any;
-   credit_filter_draw:any;
-   credit_filter_day:any;
+  toptab:string="offer";
 
-   fetch_lines : any;
-   fetch_offer : any;
-   fetch_filter_line:any;
-   fetch_filter_draw:any;
-   fetch_filter_day:any; 
-    drawdaytue:any ="#6297dc";
-    drawdayfri:any= "#b7b7b7";
-    drawdaywed:any ="#f53d3d";
-    drawdaysat:any= "#b7b7b7";
-    Credit_Points:any;
-  //spaceBetween:number ;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public platform: Platform,public authSrv:AuthService ) {
-  //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
- 
- 
-     
-}
+  userCards:any;
+  
+
+  credit_lines : any;
+  credit_offer : any;
+  credit_filter_line:any;
+  credit_filter_draw:any;
+  credit_filter_day:any;
+
+  fetch_lines : any;
+  fetch_offer : any;
+  fetch_filter_line:any;
+  fetch_filter_draw:any;
+  fetch_filter_day:any; 
+  drawdaytue:any ="#6297dc";
+  drawdayfri:any = "#b7b7b7";
+  drawdaywed:any ="#f53d3d";
+  drawdaysat:any = "#b7b7b7";
+  Credit_Points:any;
+  
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public platform: Platform,
+    public loadingCtrl:LoadingController,
+    public srvOffer:OfferService,
+    public authSrv:AuthService ) {
+
+    //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
+  }
+
+  showPaymentOptions(){
+    
+    let loader = this._showLoader();
+
+    this.srvOffer.getExistingPaymilCards().subscribe((data)=>{
+      console.log("OffersPage::showPaymentOptions() success", data );
+      this.userCards = data;
+      loader.dismiss();
+      this.confirmPayment.togglePopup()
+    }, (err) => {
+      console.log("OffersPage::showPaymentOptions() error", err);
+      loader.dismiss();
+    })
+
+
+  }
+
+  private _showLoader() {
+      let loader = this.loadingCtrl.create({
+        content: "Loading data..."
+      });
+      loader.present()
+      return loader;
+  }
+
+
     wed(){
         this.fetch_filter_draw="Wed";
         this.fetch_filter_day="Wednesday";
         this.drawdaywed="#f53d3d";
         this.drawdaysat="#b7b7b7";
-        
     }
+
     tue(){
       this.credit_filter_draw="Tue";
       this.credit_filter_day="Tuesday";
@@ -93,6 +127,8 @@ export class OffersPage  {
       this.credit_filter_line=20;
       this.fetch_filter_line=20;
     }
+
+
   ionViewDidLoad() {
      this.credit_filter_line=1;
       this.credit_filter_draw="Tue";
@@ -100,9 +136,13 @@ export class OffersPage  {
       this.fetch_filter_line=1;
       this.fetch_filter_draw="Wed";
       this.fetch_filter_day="Wednesday";
+
     this.authSrv.get_credit_offer().subscribe(
                 data=>{
-                  this.credit_lines=data.response.response.product;
+
+                    console.log("OffersPage::ionViewDidLoad", data);
+
+                  this.credit_lines=data.response.product;
                   this.credit_offer=data.response.offers;
                
                 //    console.log("get_credit_offer",this.credit_offer);
@@ -114,9 +154,10 @@ export class OffersPage  {
                 ()=> console.log("offer dislpay sucesss")
                 );
 
-    this.authSrv.get_fetch_offer().subscribe(
+    this.authSrv.get_fetch_offer()
+    .subscribe(
                 data=>{
-                   this.fetch_lines=data.response.response.product;
+                   this.fetch_lines=data.response.product;
                    this.fetch_offer=data.response.offers;
                //  console.log("dd",data)
                 },
@@ -126,13 +167,13 @@ export class OffersPage  {
                 },
                 ()=> console.log("offer dislpay sucesss")
                 );
-                this.authSrv.get_Credit_Points().subscribe(data=>{
-            this.Credit_Points=data.response.response.bonus_credit;
+
+     this.authSrv.get_Credit_Points().subscribe(data=>{
+            this.Credit_Points=data.response.bonus_credit;
            // console.log(data);
                 
                 },
                 err=>{
-                  
                     console.log("error", err);
                 },
                 ()=> console.log("offer dislpay sucesss")

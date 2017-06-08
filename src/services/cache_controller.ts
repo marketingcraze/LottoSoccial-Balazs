@@ -11,6 +11,7 @@ export class CacheController {
 	    private srvHome:HomeService,
 	    public alertCtrl:AlertController) {
 		
+		console.log("CacheController");
 	}
 
 	loadModules(action:string, page_id:string, module_names:string[]):Promise<any[]>{

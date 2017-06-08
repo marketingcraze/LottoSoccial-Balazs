@@ -64,9 +64,10 @@ export class StorePage {
         console.log("StorePage", this.navParams.data);
 
         this.srvHome.getCreditOffers().subscribe((data)=> {
+            console.log("StorePage->getCreditOffers() success", data);
             if (data.response) {
-                let res = JSON.parse( data.response );
-                console.log("StorePage->getCreditOffers() success", res);
+                // let res = JSON.parse( data.response );
+                // console.log("StorePage->getCreditOffers() success", res);
             }
             
         }, (err:Error)=> {
@@ -91,7 +92,6 @@ export class StorePage {
                         this.offersForYou = this.homeCard.offers_for_you;
                     }
                     
-// .offer_group
                 }else if ( data[i].get_account_details ) {
                     this.accountDetails = data[i].get_account_details.response;
                 }else if ( data[i].get_home_message ) {

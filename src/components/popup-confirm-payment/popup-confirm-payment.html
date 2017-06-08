@@ -1,0 +1,58 @@
+<div class="popup" *ngIf="confirmPayment" style="z-index: 102;">
+  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
+  
+    <div class="popup-content animated" [ngClass] = "(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
+
+      <div class="payment-popover">
+        <p class="header" text-center>Confirm Purchage</p>
+        <p text-center>This is 2 line description for payment</p>
+        <ion-list radio-group class="windows" [(ngModel)]="cardSelected">
+          <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
+          
+          <ion-item *ngIf="cardsValue">
+            <ion-label>Use preferred card:<br>VISA ending with 1294</ion-label>
+            <ion-radio value="visa1" item-left color="secondary" checked="true"></ion-radio>
+          </ion-item>
+
+          <ion-item *ngIf="cardsValue">
+            <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
+            <ion-radio value="visa2" item-left color="secondary"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Use a different card</ion-label>
+            <ion-radio value="visa3" item-left color="secondary"></ion-radio>
+          </ion-item>
+
+        </ion-list>
+
+        <div><button class="center" ion-button padding color="secondary" (click)="buyNow()">Buy now for &pound;4.99</button>
+        </div>
+
+        <div>
+          <button class="center" ion-button clear (click)="togglePopup()">Not now</button>
+        </div>
+
+        <div class="buy-now" *ngIf="showBuyNowView">
+          <div class="outer">
+            <ion-grid class="middle">
+              <ion-row>
+                <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
+              </ion-row>
+              <ion-row >
+                <p class="center" text-center color="light">Syndicate TONY123 created!<br>What you want to do next?</p>
+              </ion-row>
+              <ion-row>
+                <button class="center" ion-button padding outline round color="light">VIEW TICKETS</button>
+              </ion-row>
+              <ion-row>
+                <button class="center" ion-button padding outline round color="light" (click)="togglePopup()">VIEW MORE OFFERS</button>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+</div>
