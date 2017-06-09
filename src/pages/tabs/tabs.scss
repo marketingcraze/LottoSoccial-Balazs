@@ -1,5 +1,9 @@
 page-tabs{
-	.homeTabs > .tabbar .tab-button:first-of-type{ // HIDE HOME PAGE TAB BUTTON
+
+	.hidehome.homeTabs > .tabbar .tab-button:first-of-type{ // HIDE HOME PAGE TAB BUTTON
+		display: none;
+	}
+	.hide-account.homeTabs > .tabbar .tab-button:nth-child(5){ // HIDE HOME PAGE TAB BUTTON
 		display: none;
 	}
 	.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
@@ -23,6 +27,10 @@ page-tabs{
 	.ion-ios-none, .ion-md-none, .ion-ios-none-outline,
 	.ion-md-none-outline {
 		display: none;
+	}
+	.ion-ios-home, .ion-md-home, .ion-ios-home-outline,
+	.ion-md-home-outline {
+		content: url(../assets/icon/home_ico_black.svg);
 	}
 	.ion-ios-store, .ion-md-store, .ion-ios-store-outline,
 	.ion-md-store-outline {

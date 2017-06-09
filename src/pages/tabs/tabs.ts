@@ -1,4 +1,4 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component, ElementRef, Renderer } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform, LoadingController, 
     AlertController, Tabs } from 'ionic-angular';
 
@@ -40,6 +40,9 @@ export class TabsPage {
     private cache: CacheController;
 
     constructor(
+
+        public el: ElementRef, public renderer: Renderer,
+
         private params: Params,
         private storage: Storage,
         private navParams: NavParams,
@@ -125,6 +128,25 @@ export class TabsPage {
             loader.dismiss();
             console.log("TabsPage::ionViewDidEnter", err);
         });
+    }
+
+    onSelectTab(tab){
+        // console.log("TabsPage::onSelectTab", tab);
+        
+        switch(tab){
+            case 'account':
+                // tabElement.nativeElement.style.backgroundColor = 'yellow';
+                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', false)
+                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', true)
+                break
+            case 'store':
+                this.goToStore();
+            default:
+                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', true)
+                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', false)
+                break
+
+        }
     }
 
     populateHomeData(data:any){
