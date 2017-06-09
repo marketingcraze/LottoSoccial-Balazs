@@ -77,10 +77,13 @@ export class LoginPage {
         this.commonSrv.getCountry().subscribe(
             data=>{
                 loader.dismiss();
-                this.countryes = data.response[0].get_country_code_flag.response.country_code_group;
-                this.selectedCountry = this.countryes[0];
-                this.countryNumber = this.selectedCountry.country_code;
-                console.log("countries successful", this.countryes);
+                console.log( "loadCountries", data);
+                if ( data ) {
+                    this.countryes = data;
+                    this.selectedCountry = this.countryes[0];
+                    this.countryNumber = this.selectedCountry.country_code;
+                    console.log("countries successful", this.countryes);
+                }
             },
             err=>{
                 loader.dismiss();

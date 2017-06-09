@@ -43,7 +43,7 @@ export class SplashPage {
 	}
 
 	ionViewDidLoad() {
-    	console.log('ionViewDidLoad SplashPagePage');
+    	// console.log('ionViewDidLoad SplashPage');
     }
 
 }

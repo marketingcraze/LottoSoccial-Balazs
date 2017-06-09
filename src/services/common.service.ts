@@ -16,6 +16,9 @@ export class CommonService {
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
     public static version:string = 'v2';
 
+    public static apiUrlDF:string = 'http://api.hatchster.com/api/v2/sqllbtnima2016/_proc/';
+    
+
     public static countries:any;
 
     constructor(private http:Http) {
@@ -54,6 +57,15 @@ OAuth oauth_consumer_key="NDes1FKC0Kkg", oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",
             'oauth_version="1.0",' +
             'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
             );
+        
+        return myHeaders;
+    }
+
+    public static getHeaderDF(): Headers{
+        let myHeaders: Headers = new Headers();
+
+        myHeaders.set('Content-type', 'application/json');
+        myHeaders.append('X-DreamFactory-Api-Key', 'b411dd8f65ba8d090f9c063549e2d2810d35414dffb5688c9c5b22932a1d7fa4');
         
         return myHeaders;
     }

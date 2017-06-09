@@ -317,7 +317,7 @@ mobile:"23423423423"
     }
 
     get_Credit_Points(){
-        let action= CommonService.version + "/profile/"
+        let action= CommonService.apiUrl + CommonService.version + "/profile/"
         let body={
             "session_ID": "avjtjgu0f257f0orggqufcn5g2",
             "action": "login_mobile_app",
@@ -335,7 +335,7 @@ mobile:"23423423423"
         });
 
        
-        var response = this.http.post(CommonService.apiUrl + action, body,opt).map(res => res.json());
+        var response = this.http.post(action, body,opt).map(res => res.json());
         return response;
 
     }

@@ -139,7 +139,7 @@ export class HomeService {
             return;
         }
         
-        let url = 'http://api.hatchster.com/api/v2/sqllbtnima2016/_proc/proc_get_credit_offers_mobile_app';
+        let url = CommonService.apiUrlDF + 'proc_get_credit_offers_mobile_app';
         let parameter = {
             "params": [{
                 "name":"json_request",
@@ -157,12 +157,8 @@ export class HomeService {
             "request_source":"mobile_app"
         };
 
-        let headers = new Headers();
-        headers.set('Content-type', 'application/json');
-        headers.append('X-DreamFactory-Api-Key', 'b411dd8f65ba8d090f9c063549e2d2810d35414dffb5688c9c5b22932a1d7fa4');
-
         let opt: RequestOptions = new RequestOptions({
-            headers: headers
+            headers: CommonService.getHeaderDF()
         });
 
         var response = this.http.post(url, parameter, opt).map(response => response.json());

@@ -156,14 +156,17 @@ export class SignupPage {
 	}
 
 	presentPopover(ev) {
-		/*
-        let alert = this.alertCtrl.create({
-            title: 'Error!',
-            subTitle: 'API not ready yet for this job',
-            buttons: ['Dismiss']
-        });
-        alert.present();
-		*/
+		console.log('SignupPage::presentPopover	', this.countries);
+
+		if (this.countries == null) {
+			if (CommonService.countries) {
+				this.countries = CommonService.countries
+				this.selectedCountry = this.countries[0]
+			}else{
+				this.loadCountries();
+				return;
+			}
+		}
 		
 		// commented for API being ready
 	    this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {

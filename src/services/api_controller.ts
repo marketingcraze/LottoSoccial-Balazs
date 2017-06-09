@@ -4,7 +4,7 @@ import { DatabaseService } from './db.service';
 
 export class ApiController {
 
-    private expiresInMinutes:number = 5;
+    private expiresInSeconds:number = 300;
 
     constructor(public platform: Platform, 
         private srvDb:DatabaseService,
@@ -17,13 +17,12 @@ export class ApiController {
     loadModules(action:string, page_id:string, module_names:string[]):Promise<any[]>{
 
         // have to convert module names to module ids
-
         if (!this.platform.is('cordova')) {
             return this.fetchModuleDataFromAPI(action, page_id, module_names );
         }
 
         let early = new Date();
-        early.setMinutes( early.getMinutes() + this.expiresInMinutes);
+        early.setSeconds( early.getSeconds() + this.expiresInSeconds);
 
         let sel_query = "SELECT t2.Json_Data FROM tbl_Page_Module as t1 JOIN tbl_App_Module as t2 ";
         sel_query += "on (t1.Module_ID = t2.App_Module_ID) where t2.Json_Data !='' AND t2.Modified_Date <=? ";
@@ -106,7 +105,8 @@ export class ApiController {
 
         let module_json:any = fetchedData;
         let result_page_id:number = -1;
-        
+        let expiresIn = new Date();
+        expiresIn.setSeconds( expiresIn.getSeconds() + this.expiresInSeconds);
         
         // 1.tbl_App_Page 
         var insert_query = "INSERT OR REPLACE INTO tbl_App_Page(`Page_ID`,`Page_Name`,`Date_Created`) ";
@@ -122,7 +122,7 @@ export class ApiController {
             // 2.tbl_App_Module 
             for (var i = 0; i < moduleName.length; ++i) {
                 insert_query = "INSERT OR REPLACE INTO tbl_App_Module(`App_Module_ID`,`Json_Data`,`Expiry_Status`,`Expiry_Date`,`Modified_Date`) VALUES(?,?,?,?,?); ";
-                this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', new Date(), new Date()]).then((module_result:any)=> {
+                this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', expiresIn, new Date()]).then((module_result:any)=> {
                     console.log("INSERT ID -> ", module_result );
                     
                     // 3.tbl_Page_Module 

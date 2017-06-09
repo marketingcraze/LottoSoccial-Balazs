@@ -60,20 +60,23 @@ export class TabsPage {
 
         this.mySelectedIndex = navParams.data.tabIndex || 0;
 
-        this.params.events.subscribe('go-home', (tab) => {
-            console.log("go-home", tab);
-            if (!tab) {
-                tab = 0;
-            }
-            this.homeTabs.select( tab );
-        });
-        this.params.events.subscribe('go-tab', (tab) => {
-            console.log("go-tab", tab);
-            if (!tab) {
-                tab = 0;
-            }
-            this.homeTabs.select( tab );
-        });
+        if (this.params.events) {
+            this.params.events.subscribe('go-home', (tab) => {
+                console.log("go-home", tab);
+                if (!tab) {
+                    tab = 0;
+                }
+                this.homeTabs.select( tab );
+            });
+            this.params.events.subscribe('go-tab', (tab) => {
+                console.log("go-tab", tab);
+                if (!tab) {
+                    tab = 0;
+                }
+                this.homeTabs.select( tab );
+            });
+        }
+
     }
 
     ionViewDidLoad(){

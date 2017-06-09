@@ -71,24 +71,24 @@
     </ion-card>
 
 
-	<ion-card class="options">
+    <ion-card class="options">
         <ion-item (click)="logout()">
-        	<img item-left width="16" height="16" src="assets/icon/logout.svg" alt="Update"/>
-			<p>Logout</p>
-			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+            <img item-left width="16" height="16" src="assets/icon/logout.svg" alt="Update"/>
+            <p>Logout</p>
+            <ion-icon ios="ios-arrow-forward" item-right></ion-icon>
         </ion-item>
+    </ion-card>
+    
+	<ion-card class="links">
+        <div text-center>
+            <a (click)="openWebView('about/')">About</a>
+            <a (click)="openWebView('terms-and-conditions/')">Terms of service</a>
+            <a (click)="openWebView('privacy-policy-for-lottery-syndicate-members/')">Privacy policy</a>
+        </div>
     </ion-card>
 	
 </ion-content>
 
-
-<ion-footer>
-  <div text-center>
-  	<a (click)="openWebView('about/')">About</a>
-  	<a (click)="openWebView('terms-and-conditions/')">Terms of service</a>
-  	<a (click)="openWebView('privacy-policy-for-lottery-syndicate-members/')">Privacy policy</a>
-  </div>
-</ion-footer>
 
 
 

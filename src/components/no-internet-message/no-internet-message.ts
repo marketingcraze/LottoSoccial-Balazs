@@ -8,15 +8,13 @@ import { Network } from '@ionic-native/network';
 })
 export class NoInternetMessageComponent {
 
-	text: string;
 	public noInternet:boolean = false;
 
 	constructor(private network: Network, 
 		private navCtrl:NavController) {
 
-	    console.log('NoInternetMessageComponent Component', network.type);
-	    this.text = 'Hello World';
-
+	    // console.log('NoInternetMessageComponent Component', network.type);
+	    
 	    network.onDisconnect().subscribe(() => {
 	    	this.noInternet = true;
 	    });

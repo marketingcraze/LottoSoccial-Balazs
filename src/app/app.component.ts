@@ -100,8 +100,8 @@ export class MyApp {
 
     loadCountries(){
         this.commonSrv.getCountry().subscribe(data=>{
-            if(data) {
-                CommonService.countries = data;
+            if(data.response) {
+                CommonService.countries = data.response[0].get_country_code_flag.response.country_code_group;
             }
 
             // console.log("countries loaded", CommonService.countries);
