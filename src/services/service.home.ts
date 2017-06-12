@@ -132,11 +132,17 @@ export class HomeService {
         console.log("HomeService::getCreditOffers");
 
         if ( !CommonService.session ) {
-            return null;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
         }
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
-            return;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
         }
         
         let url = CommonService.apiUrlDF + 'proc_get_credit_offers_mobile_app';

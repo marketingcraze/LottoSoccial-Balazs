@@ -30,6 +30,10 @@ page-tabs{
 	}
 	.ion-ios-home, .ion-md-home, .ion-ios-home-outline,
 	.ion-md-home-outline {
+		content: url(../assets/icon/home_ico.svg);
+	}
+	.ion-ios-home-black, .ion-md-home-black, .ion-ios-home-black-outline,
+	.ion-md-home-black-outline {
 		content: url(../assets/icon/home_ico_black.svg);
 	}
 	.ion-ios-store, .ion-md-store, .ion-ios-store-outline,

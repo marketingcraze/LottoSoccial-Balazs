@@ -30,8 +30,38 @@ export class OfferService {
 
 
 
-// https://nima.lottosocial.com/wp-json/mobi/v2/paywithtoken/
-    getExistingPaymilCards() {
+    getJackpotList() {
+        console.log("getExistingPaymilCards");
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+
+        let action = CommonService.apiUrl + CommonService.version + '/privatesyndicate/';
+        let parameter = {
+            "request": [
+            {
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "4",
+                "screen_id": "4.7",
+                "action": "jackpot_list",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "get_big_jackpot_list", 
+                "customer_id":"1970400", 
+                "private_syndicate_id":"298"
+            } ]
+        };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+        console.log("getExistingPaymilCards", action, parameter, opt);
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+        return response;
+    }
+
+    processPaymillCardPayment() {
         console.log("getExistingPaymilCards");
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
@@ -78,6 +108,48 @@ export class OfferService {
             headers: CommonService.getHeaderJson()
         });
         console.log("getExistingPaymilCards", action, parameter, opt);
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+        return response;
+    }
+
+    getExistingPaymilCardsDetails() {
+        console.log("getExistingPaymilCardsDetails");
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+
+        // let action = CommonService.apiUrlDF + 'Proc_fetch_private_syndicates_Mobile_App';
+        let action = CommonService.apiUrl + CommonService.version + '/privatesyndicate/';
+        let parameter = {
+            "request": [
+            {
+                "session_ID": "avjtjgu0f257f0orggqufcn5g2", 
+                "page_ID": "4",
+                "screen_id": "4.10",
+                "action": "get_card_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "get_customer_paymill_card_details", 
+                "customer_id": "1970400",
+                "p_type": "10",
+                "paymill_offer_id": "1019"
+            }, {
+                "session_ID": "avjtjgu0f257f0orggqufcn5g2", "page_ID": "7",
+                "screen_id": "7.2",
+                "action": "profile_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",  
+                "module_name": "get_customer_details", 
+                "customer_id":"1970400"
+            } ]
+        };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+        console.log("getExistingPaymilCardsDetails", action, parameter, opt);
         var response = this.http.post(action, parameter, opt).map(response => response.json());
         return response;
     }

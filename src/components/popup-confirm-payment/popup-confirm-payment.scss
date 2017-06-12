@@ -24,15 +24,20 @@ popup-confirm-payment {
             background-color: #00A651;
             top: 0;
             border-radius: 6px;
+            z-index: 1;
         }
 
         .payment-popover{
             background-color: white;
+            max-height: 80vh;
             
-            .list{
+            .scroll-content{
                 border: 1px solid #dedede;
                 margin: 0 20px 10px 20px;
                 border-radius: 6px;
+            }
+            .list{
+                height: 50%;
 
                 .item {
                     border-top: 1px solid #dedede;

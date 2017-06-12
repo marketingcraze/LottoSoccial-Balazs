@@ -60,10 +60,7 @@ export class LoginPage {
 
         if (CommonService.countries == null) {
             this.loadCountries();
-        }
-
-
-        
+        }        
         storage.ready().then( ()=> this.storageReady = true );
         
     }
@@ -114,8 +111,12 @@ export class LoginPage {
 
     presentPopover(ev) {
         if (!this.countryes) {
-            this.loadCountries();
-            return;
+            if (CommonService.countries) {
+                this.countryes = CommonService.countries
+            }else{
+                this.loadCountries();
+                return;
+            }
         }
         
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {

@@ -56,9 +56,9 @@
     <ion-content>
         <ion-item class="notification-bar"> </ion-item>
             <ion-list>
-                <ion-item text-wrap>Accounts </ion-item>
-                <ion-item text-wrap>Check My Winnings </ion-item>
-                <ion-item text-wrap>Help </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('accounts')">Accounts </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')">Check My Winnings </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('help')">Help </ion-item>
             </ion-list>
     </ion-content>
 </ion-menu>

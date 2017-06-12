@@ -6,26 +6,27 @@
       <div class="payment-popover">
         <p class="header" text-center>Confirm Purchage</p>
         <p text-center>This is 2 line description for payment</p>
-        <ion-list radio-group class="windows" [(ngModel)]="cardSelected">
-          <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
-          
-          <ion-item *ngIf="cardsValue">
-            <ion-label>Use preferred card:<br>VISA ending with 1294</ion-label>
-            <ion-radio value="visa1" item-left color="secondary" checked="true"></ion-radio>
-          </ion-item>
+        <ion-scroll style="width:100%;height:50vh" scrollY="true">
+          <ion-list radio-group class="windows" [(ngModel)]="cardSelected" scroll="true">
+            <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
+            
+            <ion-item *ngFor="let card of cardsList; let i = index">
+              <ion-label>Use preferred card:<br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
+              <ion-radio value="{{card.last4_digit}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
+            </ion-item>
 
-          <ion-item *ngIf="cardsValue">
-            <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
-            <ion-radio value="visa2" item-left color="secondary"></ion-radio>
-          </ion-item>
+  <!--           <ion-item *ngIf="cardsValue">
+              <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
+              <ion-radio value="visa2" item-left color="secondary"></ion-radio>
+            </ion-item> -->
 
-          <ion-item>
-            <ion-label>Use a different card</ion-label>
-            <ion-radio value="visa3" item-left color="secondary"></ion-radio>
-          </ion-item>
+            <ion-item>
+              <ion-label>Use a different card</ion-label>
+              <ion-radio value="visa3" item-left color="secondary"></ion-radio>
+            </ion-item>
 
-        </ion-list>
-
+          </ion-list>
+        </ion-scroll>
         <div><button class="center" ion-button padding color="secondary" (click)="buyNow()">Buy now for &pound;4.99</button>
         </div>
 

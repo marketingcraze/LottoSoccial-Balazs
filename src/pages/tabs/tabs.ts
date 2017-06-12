@@ -46,7 +46,7 @@ export class TabsPage {
         private params: Params,
         private storage: Storage,
         private navParams: NavParams,
-        private navCtrl: NavController,
+        public navCtrl: NavController,
         private iab: InAppBrowser,
         public platform: Platform, 
         private srvDb:DatabaseService,

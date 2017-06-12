@@ -36,6 +36,10 @@ export class Params{
     }
 
     goTab(tabIndex){
-    	this.events.publish("go-tab", tabIndex);
+        this.events.publish("go-tab", tabIndex);
+    }
+
+    goPage(page){
+    	this.events.publish("go-page", page);
     }
 }

@@ -63,9 +63,9 @@ export class StorePage {
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
 
-        this.srvHome.getCreditOffers().subscribe((data)=> {
+        this.srvHome.getCreditOffers().subscribe((data:any)=> {
             console.log("StorePage->getCreditOffers() success", data);
-            if (data.response) {
+            if (data && data.response) {
                 // let res = JSON.parse( data.response );
                 // console.log("StorePage->getCreditOffers() success", res);
             }
@@ -106,6 +106,13 @@ export class StorePage {
 
             console.log("home data", this.homeMessage );
         });
+
+        this.params.events.subscribe('go-page', (page) => {
+            if (page) {
+                this.navCtrl.push(page);
+            }
+        });
+        
     }
 
     ionViewDidLoad() {

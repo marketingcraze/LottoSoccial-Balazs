@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-import { CheckWinningsPage } from '../check-winnings/check-winnings';
+import { CheckWinningsPage } from '../check-winnings/check-winnings'
 import { MySyndicatePage } from '../my-syndicate/my-syndicate';
 import { Params } from '../../services/params';
 
@@ -22,6 +22,11 @@ export class SyndicatesPage {
         public navCtrl: NavController, 
         public navParams: NavParams) {
     
+        this.params.events.subscribe('go-page', (page) => {
+            if (page) {
+                this.navCtrl.push(page);
+            }
+        });
     }
 
     ionViewDidLoad() {

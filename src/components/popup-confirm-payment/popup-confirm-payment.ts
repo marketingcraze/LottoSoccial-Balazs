@@ -1,5 +1,9 @@
 import { Component, Input, SimpleChange, OnChanges } from '@angular/core';
+import { LoadingController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+import { OfferService } from '../../services/offer.service';
+
 
 @Component({
     selector: 'popup-confirm-payment',
@@ -10,20 +14,43 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     confirmPayment:boolean = false;
     showBuyNowView:boolean = false;
 
-    public cardSelected:any;
-    public cardsValue:any;
+    public cardSelected:any
+    public cardsValue:any
+    public cardsList:any[]
+
+    public customerDetails
 
     @Input('existing-cards') existingPaymilCards;  
     
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
-        console.log('Change detected:', changes["existingPaymilCards"]);
+        // console.log('Change detected:', changes["existingPaymilCards"]);
         
-        if (changes["existingPaymilCards"]) {
+        if (changes["existingPaymilCards"] && changes["existingPaymilCards"].currentValue) {
             this.cardsValue = changes["existingPaymilCards"].currentValue;
+            
+            // console.log("existingPaymilCards", this.cardsValue);
+
+            for (var i = 0; i < this.cardsValue.length; ++i) {
+                
+                // console.log("existingPaymilCards", this.cardsValue[i]);
+
+                if (this.cardsValue[i].get_customer_paymill_card_details) {
+                    this.cardsList = this.cardsValue[i].get_customer_paymill_card_details.response.cards
+                }else if (this.cardsValue[i].get_customer_details) {
+                    this.customerDetails = this.cardsValue[i].get_customer_details.response
+                }
+            }
+
+            console.log("cardsList", this.cardsList );
+            console.log("customerDetails", this.customerDetails );
+            
         }
     }
     
-    constructor(private iab: InAppBrowser) {
+    constructor(
+        private iab: InAppBrowser,
+        public srvOffer: OfferService,
+        public loadingCtrl: LoadingController) {
         console.log('Hello PopupConfirmPaymentComponent Component');
     }
 
@@ -36,8 +63,24 @@ export class PopupConfirmPaymentComponent implements OnChanges{
 
             // this.showBuyNowView = !this.showBuyNowView
             this.iab.create( str, 'blank', opt);
+        }else{
+            this.makeCardPayment(this.cardSelected);
         }
     }
+
+    makeCardPayment(selectedCardEndDigits){
+        let loader = this._showLoader();
+
+        this.srvOffer.processPaymillCardPayment().subscribe((data) => {
+            console.log("OffersPage::checkCardExists() success", data);
+            loader.dismiss();
+            this.showBuyNowView = true;
+        }, (err) => {
+            console.log("OffersPage::checkCardExists() error", err);
+            loader.dismiss();
+        })
+    }
+
 
     public togglePopup(){
         console.log("showWhatsOn: " + this.slideInUp);
@@ -58,4 +101,14 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             }, 10);
         }
     }
+
+    private _showLoader() {
+        let loader = this.loadingCtrl.create({
+            content: "Saving data..."
+        });
+        loader.present()
+        return loader;
+    }
+
+
 }

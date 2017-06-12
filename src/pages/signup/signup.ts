@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { App, Platform, Tabs, NavController, NavParams, AlertController,
- PopoverController, LoadingController } from 'ionic-angular';
+ PopoverController, LoadingController, ToastController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
@@ -64,7 +64,8 @@ export class SignupPage {
 		public navParams: NavParams,
 		public commonSrv:CommonService,
 		public alertCtrl:AlertController,
-		private imagePicker: ImagePicker,
+		public toastCtrl:ToastController,
+		public imagePicker: ImagePicker,
 		private popoverCtrl: PopoverController,	
 		private loadingCtrl: LoadingController,	
 		public authSrv:AuthService) {
@@ -74,24 +75,14 @@ export class SignupPage {
 		this.tabs = navCtrl.parent;
 		if (CommonService.countries == null) {
 			this.loadCountries();
+		}else{
+			this.countries = CommonService.countries
+			this.selectedCountry = this.countries[0]
 		}
 		
 		platform.ready().then(() => {
 			console.log('ready');
         });
-
-/*     storage.get('myitem')
-       .then(
-         data => console.log(data),
-         error => console.log(error)
-     );
-     storage.remove('myitem')
-     .then(
-         data => console.log(data),
-         error => console.log(error)
-     );*/
-
-
 	}
 
     loadCountries(){
@@ -240,10 +231,29 @@ export class SignupPage {
 				
 				console.log("user registration successful", data);
 				// show register success message and redirect to login
-				if(data.response.status == "error") {
+				try {
+                    data = data.response[0].register.response;
+                } catch (e) {
+                    data = undefined;
+                }
+
+				if(data.status == "FAIL") {
+					// registration failed
+					this.toastCtrl.create({
+						message: 'Registration FAILED!',
+						duration: 3000
+					}).present()
 					
 				}else{
-					this.submitLogin();
+					// this.submitLogin();
+					this.storage.set('session_ID', CommonService.sessionId);
+                	this.storage.set('session', JSON.stringify(data))
+	                .then(
+	                    data => console.log(data),
+	                    error => console.log(error)
+	                );
+                    let nav = this.app.getRootNav();
+                    nav.setRoot(HomePage);
 				}
 			},
 			err=>{
@@ -322,7 +332,7 @@ url:""
                 }
                 
                 // go to home page
-                if(data && data.status != 'error') {
+                if(data && data.status != 'FAIL') {
                 	this.storage.set('session_ID', CommonService.sessionId);
                 	this.storage.set('session', JSON.stringify(data))
 	                .then(

@@ -1,12 +1,16 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Platform, MenuController, Nav, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, MenuController, Nav, NavController, LoadingController, 
+    AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
+import { CheckWinningsPage } from '../check-winnings/check-winnings'
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
+import { CommonService } from '../../services/common.service';
 import { CacheController } from '../../services/cache_controller';
 
 
@@ -28,16 +32,7 @@ export class HomePage {
 
     private cache: CacheController;
 
-  /*// set our app's pages
-  appPages: PageInterface[] = [
-    { title: 'Store', component: TabsPage, icon: 'cart' },
-    { title: 'Syndicates', component: TabsPage, index: 1, icon: 'people' },
-    { title: 'Games', component: TabsPage, index: 2, icon: 'game-controller-b' },
-    { title: 'Account', component: TabsPage, index: 3, icon: 'person' },
-    { title: 'Offers', component: TabsPage, index: 4, icon: 'cash' }
-  ];
-*/
-    rootPage = TabsPage;
+    rootPage:any = TabsPage;
     messageLoading = false;
 
     private homeMessage:any;
@@ -46,25 +41,27 @@ export class HomePage {
     constructor(
         public zone:NgZone,
         public params:Params,
+        private iab: InAppBrowser,
         public platform: Platform, 
         private srvHome:HomeService,
         public menu: MenuController,
+        private navCtrl:NavController,
         private srvDb:DatabaseService,
         private alertCtrl:AlertController,
         private loadingCtrl:LoadingController) {
 
         this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
 
-        /*platform.ready().then(() => {
-          StatusBar.styleDefault();
-          Splashscreen.hide();
-        });*/
-
+/*
+        platform.ready().then(() => {
+            StatusBar.styleDefault();
+            Splashscreen.hide();
+        });
+*/
         this.params.events.subscribe('home-data', data => {
             // console.log("home-data", data);
             
             for (var i = data.length - 1; i >= 0; i--) {
-            
                 if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
                     if (this.homeMessage.notification) {
@@ -113,6 +110,22 @@ export class HomePage {
         this.menu.close();
     }
 
+    onLeftMenuSelection(selection){
+        this.menu.close();
+        switch(selection){
+            case 'accounts':
+                this.params.goTab(4)
+                break
+            case 'check_winnings':
+                this.params.goPage( CheckWinningsPage )
+                break
+            case 'help':
+                let opt:string = "toolbarposition=top";
+                this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);
+                break
+        }
+    }
+
     openPage(page: PageInterface) {
         this.menu.close();
 
@@ -154,7 +167,6 @@ export class HomePage {
                 this.messages = this.homeMessage.notification;
                 this.params.setUnreadCount(this.homeMessage.count);
             });
-            
             
         }, (err)=>{
             console.log("onOpenRightMenu error ", err);

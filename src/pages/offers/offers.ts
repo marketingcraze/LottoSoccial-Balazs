@@ -1,8 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 import { AuthService } from '../../services/auth.service';
 import { OfferService } from '../../services/offer.service';
+import { Params } from '../../services/params';
 
 @Component({
   selector: 'page-offers',
@@ -14,6 +17,10 @@ export class OffersPage {
   toptab: string = "offer";
 
   userCards: any;
+  userCardsCount:number = 0;
+  customerToken:string;
+  jackpotList:any
+  jackpotGroup:any
 
 
   credit_lines: any;
@@ -35,31 +42,65 @@ export class OffersPage {
 
 
   constructor(
+    public params: Params,
+    public iab: InAppBrowser,
+    public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public platform: Platform,
-    public loadingCtrl: LoadingController,
+    public authSrv: AuthService,
     public srvOffer: OfferService,
-    public authSrv: AuthService) {
+    public loadingCtrl: LoadingController) {
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
+      this.params.events.subscribe('go-page', (page) => {
+          if (page) {
+              this.navCtrl.push(page);
+          }
+      });
+
+      this.checkCardExists();
+  }
+
+  checkCardExists(){
+    console.log("OffersPage::checkCardExists()");
+    let loader = this._showLoader();
+    
+    this.srvOffer.getJackpotList().subscribe((data) => {
+      console.log("OffersPage::getJackpotList() success", data);
+      if (data.response && data.response[0].get_big_jackpot_list) {
+        this.jackpotList = data.response[0].get_big_jackpot_list.response;
+        // this.customerToken = this.jackpotList.customer_token;
+      }
+
+      loader.dismiss();
+      
+    }, (err) => {
+      console.log("OffersPage::getJackpotList() error", err);
+      loader.dismiss();
+    })
   }
 
   showPaymentOptions() {
+    console.log("OffersPage::showPaymentOptions()");
 
-    let loader = this._showLoader();
-
-    this.srvOffer.getExistingPaymilCards().subscribe((data) => {
-      console.log("OffersPage::showPaymentOptions() success", data);
-      this.userCards = data;
-      loader.dismiss();
-      this.confirmPayment.togglePopup()
-    }, (err) => {
-      console.log("OffersPage::showPaymentOptions() error", err);
-      loader.dismiss();
-    })
-
-
+    if (this.customerToken) {
+      let opt:string = "toolbarposition=top";
+      let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+      str += '&customer_id=1970400&customer_token='+this.customerToken+'&Offer_ID=1188'
+      this.iab.create( str, 'blank', opt);
+    }else{
+      let loader = this._showLoader();
+      // get all the cards details
+      this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
+        console.log("OffersPage::showPaymentOptions() success", data);
+        this.userCards = data.response;
+        loader.dismiss();
+        this.confirmPayment.togglePopup()
+      }, (err) => {
+        console.log("OffersPage::showPaymentOptions() error", err);
+        loader.dismiss();
+      })
+    }
   }
 
   private _showLoader() {

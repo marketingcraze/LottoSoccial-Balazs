@@ -53,6 +53,11 @@ export class AccountPage {
 
   		this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
 
+        this.params.events.subscribe('go-page', (page) => {
+            if (page) {
+                this.navCtrl.push(page);
+            }
+        });
 	}
 
 	ionViewDidLoad() {
@@ -146,7 +151,6 @@ export class AccountPage {
 
 	openWebView(str:string){
 		let opt:string = "toolbarposition=top";
-		
 		this.iab.create(CommonService.sitename + str, 'blank', opt);
 	}
 
