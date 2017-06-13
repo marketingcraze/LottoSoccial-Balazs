@@ -1,9 +1,9 @@
 <no-internet-message></no-internet-message>
-<ion-tabs #homeTabs class="homeTabs hidehome" [selectedIndex]="mySelectedIndex" tabsLayout="icon-top" tabsPlacement="bottom">
+<ion-tabs #homeTabs class="homeTabs" [selectedIndex]="mySelectedIndex" tabsLayout="icon-top" tabsPlacement="bottom">
 	<ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home-black" ([rootParams])="homeData" (ionSelect)="onSelectTab('home')"></ion-tab>
 	<ion-tab tabTitle="Store" tabIcon="store"  (ionSelect)="onSelectTab('store')"></ion-tab>
 	<ion-tab [root]="tab3Root" tabTitle="Syndicates" tabIcon="syndicates" (ionSelect)="onSelectTab('syndicates')"></ion-tab>
 	<ion-tab [root]="tab4Root" tabTitle="Games" tabIcon="games" [rootParams]="gameData" (ionSelect)="onSelectTab('games')"></ion-tab>
-	<ion-tab [root]="tab5Root" tabTitle="Account" tabIcon="account" (ionSelect)="onSelectTab('account')"></ion-tab>
+	<!-- <ion-tab [root]="tab5Root" tabTitle="Account" tabIcon="account" (ionSelect)="onSelectTab('account')"></ion-tab> -->
 	<ion-tab [root]="tab6Root" tabTitle="Offers" tabIcon="offers" (ionSelect)="onSelectTab('offers')"></ion-tab>
 </ion-tabs>

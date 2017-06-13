@@ -31,7 +31,8 @@ export class CacheController {
 
 		return new Promise( (resolve, reject) => {
 
-			this.srvDb.raw_query(sel_query, [early, module_names.join(",") ]).then((res:any)=> {
+			this.srvDb.raw_query(sel_query, [early, module_names.join(",") ])
+			.then((res:any)=> {
 
 				// console.log("local data", res);
 				if (res && res.rows.length > 0) {
@@ -44,7 +45,8 @@ export class CacheController {
 				} else {
 					console.log("fetching remote data");
 					// Fetch the Data from Remote API Start
-				 	this.fetchModuleDataFromAPI(action, page_id, module_names).then( data =>{
+				 	this.fetchModuleDataFromAPI(action, page_id, module_names)
+				 	.then( data =>{
 				 		resolve(data);
 				 	}, err => {
 				 		reject(err);
@@ -62,7 +64,8 @@ export class CacheController {
 		console.log("loadHomeCard", moduleNames);
 		return new Promise( (resolve, reject) => {
 
-			this.srvHome.getModules( action, pageId, moduleNames ).subscribe(
+			this.srvHome.getModules( action, pageId, moduleNames ).take(1)
+			.subscribe(
 	    	data=>{
 	    		// console.log("fetchModuleDataFromAPI successful", data);
 	    		if(data) {

@@ -135,15 +135,14 @@ export class TabsPage {
         
         switch(tab){
             case 'account':
-                // tabElement.nativeElement.style.backgroundColor = 'yellow';
-                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', false)
-                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', true)
+                // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', false)
+                // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', true)
                 break
             case 'store':
                 this.goToStore();
             default:
-                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', true)
-                this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', false)
+                // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', true)
+                // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', false)
                 break
 
         }

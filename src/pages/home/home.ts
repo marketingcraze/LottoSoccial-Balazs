@@ -6,6 +6,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CheckWinningsPage } from '../check-winnings/check-winnings'
+import { AccountPage } from '../account/account';
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
@@ -114,7 +115,8 @@ export class HomePage {
         this.menu.close();
         switch(selection){
             case 'accounts':
-                this.params.goTab(4)
+                // this.params.goTab(4)
+                this.params.goPage( AccountPage )
                 break
             case 'check_winnings':
                 this.params.goPage( CheckWinningsPage )
