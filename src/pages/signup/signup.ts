@@ -78,6 +78,8 @@ export class SignupPage {
 		}else{
 			this.countries = CommonService.countries
 			this.selectedCountry = this.countries[0]
+			console.log("selectedCountry", this.selectedCountry)
+			this.country_number = this.selectedCountry.country_code;
 		}
 		
 		platform.ready().then(() => {
@@ -245,15 +247,7 @@ export class SignupPage {
 					}).present()
 					
 				}else{
-					// this.submitLogin();
-					this.storage.set('session_ID', CommonService.sessionId);
-                	this.storage.set('session', JSON.stringify(data))
-	                .then(
-	                    data => console.log(data),
-	                    error => console.log(error)
-	                );
-                    let nav = this.app.getRootNav();
-                    nav.setRoot(HomePage);
+					this.onRegistrationSuccess(data)
 				}
 			},
 			err=>{
@@ -263,6 +257,50 @@ export class SignupPage {
 			()=> console.log("user registration complete")
 		);
 		
+	}
+
+	onRegistrationSuccess(data:any){
+		console.log('onRegistrationSuccess', data);
+		// this.submitLogin();
+		if (data.message == "both_exists") {
+			let alert = this.alertCtrl.create({
+                title: 'Cool!',
+                subTitle: "You already have an account with us. We're loggin you in..",
+                buttons: [
+                {
+                	// text: 'Cancel',
+                	handler: () => { }
+                },
+                {
+                	text: 'OK',
+                	handler: () => { this.submitLogin(); }
+                }]
+            });
+            alert.present();
+		}else if (data.message == 'msn_exists') {
+			let alert = this.alertCtrl.create({
+                title: 'Error!',
+                subTitle: 'An account with this mobile number already exists, enter correct password to login or try with other new msn',
+                buttons: [
+                {
+                	text: 'OK',
+                	handler: (data) => { 
+                		// this.tabs.select(1)
+                	}
+                }]
+            });
+            alert.present();
+		}else{
+			this.storage.set('session_ID', CommonService.sessionId);
+	    	this.storage.set('session', JSON.stringify(data))
+	        .then(
+	            data => console.log(data),
+	            error => console.log(error)
+	        );
+	        let nav = this.app.getRootNav();
+	        nav.setRoot(HomePage);
+		}
+
 	}
 
     prepareMobile(){
@@ -319,7 +357,8 @@ url:""
 		});
 		loader.present();
 		
-		this.authSrv.loginUser( this.country_number, this.signup.free_reg_msn, this.signup.free_reg_pwd).subscribe(
+		this.authSrv.loginUser( this.country_number, this.signup.mobile, this.signup.free_reg_pwd)
+		.subscribe(
 			data=>{
 				loader.dismiss();
 				// this.showSuccess();

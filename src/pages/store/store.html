@@ -465,8 +465,8 @@
           </ion-slide> -->
         </ion-slides>
 
-        <ion-card class="popup-main">
-          <h4 text-center>YOUR #MILLIONAIREMOMENTS</h4>
+        <ion-card class="popup-main" *ngIf="homeEvents">
+            <h4 text-center>YOUR #MILLIONAIREMOMENTS</h4>
             <ion-content>
               <ion-img src="{{homeEvents.event_image}}" width="450" height="200"></ion-img>
             </ion-content>

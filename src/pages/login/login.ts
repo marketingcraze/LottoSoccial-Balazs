@@ -60,7 +60,11 @@ export class LoginPage {
 
         if (CommonService.countries == null) {
             this.loadCountries();
-        }        
+        }else{
+            this.countryes = CommonService.countries
+            this.selectedCountry = this.countryes[0]
+            this.countryNumber = this.selectedCountry.country_code;
+        }
         storage.ready().then( ()=> this.storageReady = true );
         
     }

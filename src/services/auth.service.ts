@@ -138,8 +138,71 @@ export class AuthService {
         var response = this.http.post(CommonService.apiUrl + action, data, opt).map(res => res.json());
         return response;
     }
- 
+ /*
+email:"s@w.com",
+first_name:"1",
+free_reg_msn:"23423423423",
+free_reg_pwd:"zssdasdfasdf",
+image:"",
+last_name:"2",
+mobile:"23423423423"
+*/
+
+    /**
+     * New user registration API call (DF version)
+     * 
+     * @param {any}
+     */
     addUser(user:any) {
+        console.log("addUser", user);
+        if (!CommonService.sessionId || CommonService.sessionId == "") {
+            CommonService.sessionId = this.makeId();
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+
+        let action = CommonService.apiUrlDF + 'proc_freeRegistrationStep1_Mobile_App';
+        let signup = {
+            "request": [
+            {
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "1",
+                "screen_id": "1.2",
+                "action": "login_mobile_app",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "register",
+
+                "mobile": user.mobile,
+                "password": user.free_reg_pwd,
+                "country_code": user.country_code, 
+                "first_name": user.first_name, 
+                "last_name": user.last_name, 
+                "email": user.email, 
+                "profile_image_url": user.profile_image_url
+            } ]
+        };
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderDF()
+        });
+        
+        console.log("addUser", signup);
+        var response = this.http.post(action, 
+            signup, opt).map(res => res.json());
+        return response;
+    }
+
+    /**
+     * New user registration API call (WP version)
+     * 
+     * @param {any}
+     */
+/*    addUser(user:any) {
         console.log("addUser", user);
         if (!CommonService.sessionId || CommonService.sessionId == "") {
             CommonService.sessionId = this.makeId();
@@ -177,21 +240,11 @@ export class AuthService {
             headers: CommonService.getHeaderJson()
         });
 
-/*
-email:"s@w.com",
-first_name:"1",
-free_reg_msn:"23423423423",
-free_reg_pwd:"zssdasdfasdf",
-image:"",
-last_name:"2",
-mobile:"23423423423"
-*/
         console.log("addUser", signup);
-
         var response = this.http.post(CommonService.apiUrl + action, 
             signup, opt).map(res => res.json());
         return response;
-    }
+    }*/
 
 
     uploadProfilePic( filePath:string ){

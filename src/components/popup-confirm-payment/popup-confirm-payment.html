@@ -12,7 +12,7 @@
             
             <ion-item *ngFor="let card of cardsList; let i = index">
               <ion-label>Use preferred card:<br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
-              <ion-radio value="{{card.last4_digit}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
+              <ion-radio value="{{card.pay_stored_detail_id}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
             </ion-item>
 
   <!--           <ion-item *ngIf="cardsValue">

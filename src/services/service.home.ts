@@ -37,11 +37,17 @@ export class HomeService {
     getModules(action:string, page_id:string, module_names:string[]) {
 
         if ( !CommonService.session ) {
-            return null;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
         }
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
-            return;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
         }
         this.customerId = CommonService.session.customer_id;
         console.log("getModules", CommonService.session );

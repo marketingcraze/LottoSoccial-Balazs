@@ -1,3 +1,4 @@
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 <ion-content class="marg-top-12 main-bg" id="asynd">
   <div id="sstate">
   <div class="synd-card" *ngFor="let sd of syndArr; let i = index;">
@@ -61,7 +62,7 @@
       </ion-item>
       <ion-row style="padding: 5px 12px; background: #FEE5E5">
             <ion-col class="left" style="color: #C10A09;">You haven't bought tickets for your syndicate yet</ion-col>
-            <ion-col class="right"><button ion-button class="btn2"> BUY NOW </button></ion-col>
+            <ion-col class="right"><button ion-button class="btn2" (click)="showPaymentOptions()"> BUY NOW </button></ion-col>
       </ion-row>
       <ion-item>
           <div style="padding:0; text-align: center">
