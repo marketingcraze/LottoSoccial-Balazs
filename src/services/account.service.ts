@@ -14,16 +14,19 @@ export class AccountService {
     }
   
     constructor(
+        public http:Http, 
         private params:Params,
-        private http:Http, 
-        private file: File, ) {
+        private file: File ) {
 
     }
    
     loadProfile() {
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
-            return;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
         }
 
         if ( !CommonService.session ) {
@@ -36,7 +39,7 @@ export class AccountService {
         let data = {
             "request": [
             {
-                "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                "session_ID": CommonService.sessionId,
                 "page_ID": "7",
                 "screen_id": "7.2",
                 "action": "profile_details",
@@ -52,7 +55,7 @@ export class AccountService {
             headers: CommonService.getHeaderJson()
         });
 
-        console.log("loadProfile", data);
+        // console.log("AccountService::loadProfile", data);
         var response = this.http.post(server, data, opt).map(res => res.json());
         return response;
     }
@@ -62,7 +65,10 @@ export class AccountService {
         console.log("saveDetails", details);
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
-            return;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
         }
         if ( !CommonService.session ) {
             return new Observable(observer => {
@@ -102,7 +108,10 @@ export class AccountService {
         console.log("saveDetails", details);
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
-            return;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
         }
         if ( !CommonService.session ) {
             return new Observable(observer => {
@@ -141,7 +150,10 @@ export class AccountService {
         console.log("updatePassword", details);
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
-            return;
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
         }
         if ( !CommonService.session ) {
             return new Observable(observer => {

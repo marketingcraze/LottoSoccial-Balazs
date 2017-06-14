@@ -16,7 +16,7 @@ import { HomeService } from '../../services/service.home';
     templateUrl: 'store.html'
 })
 export class StorePage {
-    @ViewChild(Slides) home_slides: Slides;
+    // @ViewChild(Slides) home_slides: Slides;
 
     public homeCardData:any;
     public spaceBetween:number = -70;
@@ -80,7 +80,7 @@ export class StorePage {
         this.params.events.subscribe('home-data', data => {
             console.log("home-data", data);
             
-            for (var i = data.length - 1; i >= 0; i--) {
+            for (var i = 0; i < data.length; i++) {
 
                 if ( data[i].get_home_card ) {
                     this.homeCard = data[i].get_home_card.response;
@@ -134,8 +134,8 @@ export class StorePage {
     ngAfterViewInit() {
         console.log( "ngAfterViewInit()" );
         // this.home_slides.freeMode = true;
-        this.home_slides.loop = true;
-        this.home_slides.autoplayDisableOnInteraction = false;
+        // this.home_slides.loop = true;
+        // this.home_slides.autoplayDisableOnInteraction = false;
     }
 
     showWhatsOn(){
@@ -190,7 +190,7 @@ export class StorePage {
     }
 
     viewAllOffers(){
-        this.params.goTab(5);
+        this.params.goTab(4);
     }
 
     openTarget(str:string){

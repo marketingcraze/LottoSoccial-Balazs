@@ -91,7 +91,7 @@ export class EditProfilePage {
 	loadProfileData(){
 		let loader = this.loadingCtrl.create({
             content: "Please wait..."
-        });
+        })
         loader.present();
 
     	// load data

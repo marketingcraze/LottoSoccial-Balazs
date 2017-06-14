@@ -1,4 +1,7 @@
 page-edit-profile {
+	.scroll-content{
+		margin-bottom: $toolbar-md-height;
+	}
 	p{
 		margin: 10px;
 		font-size: .9em;
@@ -32,6 +35,7 @@ page-edit-profile {
 
 	form{
 		margin-top: 20px;
+		margin-bottom: 20px;
 	    background-color: white;
 
 		.item{
