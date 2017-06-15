@@ -22,7 +22,7 @@ export class OfflinePage  {
 	checkInternet(){
 		console.log("checkInternet()");
 
-		if (this.network.type != "none") {
+		if (this.params && this.network.type != "none") {
 			this.params.setIsInternetAvailable(this.network.type != "none")
 		}
 	}

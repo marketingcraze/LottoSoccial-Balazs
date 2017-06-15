@@ -33,13 +33,15 @@ export class AuthPage {
 
    	ionViewDidLoad(){
         console.log("AuthPage::ionViewDidLoad", this.network.type);
-        this.params.setIsInternetAvailable(this.network.type != "none");
+        if (this.params) {
+            this.params.setIsInternetAvailable(this.network.type != "none");
+        }
         
         if(this.selectedTabId) {
             this.tabsRef.select(this.selectedTabId, {animate: false});
         }
-
-
-
-  	}
+    }
 }
+
+
+

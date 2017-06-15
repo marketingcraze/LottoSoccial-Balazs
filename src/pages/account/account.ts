@@ -87,6 +87,8 @@ export class AccountPage {
 
         }, err => {
             loader.dismiss();
+            // show offline
+            this.params.setIsInternetAvailable(false);
             console.log("AccountPage::ionViewDidLoad", err);
         });
 	}
@@ -185,6 +187,8 @@ export class AccountPage {
 
         }, err => {
             loader.dismiss();
+            // show offline
+            this.params.setIsInternetAvailable(false);
             console.log("AccountPage::updateNickname", err);
         });
 	}

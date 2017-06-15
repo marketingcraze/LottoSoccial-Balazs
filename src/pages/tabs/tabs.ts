@@ -126,6 +126,8 @@ export class TabsPage {
             }*/
         }, err => {
             loader.dismiss();
+            // show offline
+            this.params.setIsInternetAvailable(false);
             console.log("TabsPage::ionViewDidEnter", err);
         });
     }
@@ -167,7 +169,11 @@ export class TabsPage {
               
               let opt:string = "toolbarposition=top";
               const browser = this.iab.create(url, "_blank", opt);
-            }, error => console.log(error)
+            }, error =>{
+                // show offline
+                this.params.setIsInternetAvailable(false);
+                console.log(error)
+            } 
         );
     }
 
