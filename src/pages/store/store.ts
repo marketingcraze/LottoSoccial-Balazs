@@ -85,8 +85,12 @@ export class StorePage {
                 if ( data[i].get_home_card ) {
                     this.homeCard = data[i].get_home_card.response;
                     
-                    if ( this.homeCard.game.game.game_group ) {
+                    if ( this.homeCard.game 
+                        && this.homeCard.game.game 
+                        && this.homeCard.game.game.game_group ) {
+
                         this.gameGroup = this.homeCard.game.game.game_group;
+
                     }
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
@@ -120,15 +124,16 @@ export class StorePage {
     }
 
     loadLink(url){
-        this.iab.create(url, '_blank');
-        // browser.show();
+        let opt:string = "toolbarposition=top";
+        this.iab.create(url, '_blank', opt);
     }
 
     gameTargetLink(target){
         let url = `https://nima.lottosocial.com/webview-auth/?redirect_to=${target}&customer_id=${CommonService.session.customer_id}&customer_token=${CommonService.session.customer_token}`
 
         console.log("::gameTargetLink to ", url);
-        this.iab.create(url, '_blank');
+        let opt:string = "toolbarposition=top";
+        this.iab.create(url, '_blank', opt);
     }
 
     ngAfterViewInit() {

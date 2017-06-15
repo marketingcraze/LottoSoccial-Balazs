@@ -142,7 +142,8 @@ export class AccountPage {
 	}
 
 	openUrl(url:string){
-		const browser = this.iab.create(url, "_blank");
+		let opt:string = "toolbarposition=top";
+		this.iab.create(url, "_blank", opt);
 	}
 
   	goHomePage(){

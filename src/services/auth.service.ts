@@ -153,7 +153,7 @@ mobile:"23423423423"
      * 
      * @param {any}
      */
-    addUser(user:any) {
+/*    addUser(user:any) {
         console.log("addUser", user);
         if (!CommonService.sessionId || CommonService.sessionId == "") {
             CommonService.sessionId = this.makeId();
@@ -196,13 +196,13 @@ mobile:"23423423423"
             signup, opt).map(res => res.json());
         return response;
     }
-
+*/
     /**
      * New user registration API call (WP version)
      * 
      * @param {any}
      */
-/*    addUser(user:any) {
+    addUser(user:any) {
         console.log("addUser", user);
         if (!CommonService.sessionId || CommonService.sessionId == "") {
             CommonService.sessionId = this.makeId();
@@ -244,7 +244,7 @@ mobile:"23423423423"
         var response = this.http.post(CommonService.apiUrl + action, 
             signup, opt).map(res => res.json());
         return response;
-    }*/
+    }
 
 
     uploadProfilePic( filePath:string ){

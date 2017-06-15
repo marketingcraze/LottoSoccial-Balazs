@@ -196,7 +196,7 @@ export class DatabaseService {
         }, (error) => {
           console.error("Unable to execute sql", error);
         });
-
+        
         let tblAppReference = "CREATE TABLE IF NOT EXISTS `tbl_App_Reference` ( "
         + "`App_ID` INTEGER PRIMARY KEY,"
         + "`App_Version` varchar(100) NULL,"

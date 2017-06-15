@@ -165,7 +165,8 @@ export class TabsPage {
               url += session.customer_id + '&customer_token=' + session.customer_token;
               // console.log("session data", data, url);
               
-              const browser = this.iab.create(url, "_blank");
+              let opt:string = "toolbarposition=top";
+              const browser = this.iab.create(url, "_blank", opt);
             }, error => console.log(error)
         );
     }
