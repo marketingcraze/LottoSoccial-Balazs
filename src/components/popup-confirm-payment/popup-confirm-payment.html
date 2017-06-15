@@ -6,7 +6,7 @@
       <div class="payment-popover">
         <p class="header" text-center>Confirm Purchage</p>
         <p text-center>This is 2 line description for payment</p>
-        <ion-scroll style="width:100%;height:50vh" scrollY="true">
+        <ion-scroll style="width:100%;height:40vh" scrollY="true">
           <ion-list radio-group class="windows" [(ngModel)]="cardSelected" scroll="true">
             <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
             
@@ -41,13 +41,13 @@
                 <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
               </ion-row>
               <ion-row >
-                <p class="center" text-center color="light">Syndicate TONY123 created!<br>What you want to do next?</p>
+                <p class="center" text-center color="light">Syndicate {{syndicate.syndicate_name}} created!<br>What you want to do next?</p>
               </ion-row>
               <ion-row>
-                <button class="center" ion-button padding outline round color="light">VIEW TICKETS</button>
+                <button class="center" ion-button padding outline round color="light" (click)="viewTickets()">VIEW TICKETS</button>
               </ion-row>
               <ion-row>
-                <button class="center" ion-button padding outline round color="light" (click)="togglePopup()">VIEW MORE OFFERS</button>
+                <button class="center" ion-button padding outline round color="light" (click)="viewOffers()">VIEW MORE OFFERS</button>
               </ion-row>
             </ion-grid>
           </div>

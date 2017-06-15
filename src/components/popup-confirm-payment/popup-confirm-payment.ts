@@ -3,6 +3,7 @@ import { LoadingController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { OfferService } from '../../services/offer.service';
+import { Params } from '../../services/params';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     public cardsList:any[]
 
     public customerDetails
+    public syndicate = {
+        syndicate_name: ""
+    }
 
     @Input('existing-cards') existingPaymilCards;  
     
@@ -28,16 +32,19 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         if (changes["existingPaymilCards"] && changes["existingPaymilCards"].currentValue) {
             this.cardsValue = changes["existingPaymilCards"].currentValue;
             
-            // console.log("existingPaymilCards", this.cardsValue);
+            console.log("existingPaymilCards", this.cardsValue);
 
             for (var i = 0; i < this.cardsValue.length; ++i) {
                 
-                // console.log("existingPaymilCards", this.cardsValue[i]);
+                console.log("existingPaymilCards", this.cardsValue[i]);
 
                 if (this.cardsValue[i].get_customer_paymill_card_details) {
                     this.cardsList = this.cardsValue[i].get_customer_paymill_card_details.response.cards
                 }else if (this.cardsValue[i].get_customer_details) {
                     this.customerDetails = this.cardsValue[i].get_customer_details.response
+                }else if (this.cardsValue[i].syndicate) {
+                    this.syndicate = this.cardsValue[i].syndicate
+
                 }
             }
 
@@ -48,6 +55,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     }
     
     constructor(
+        private params:Params,
         private iab: InAppBrowser,
         public srvOffer: OfferService,
         public loadingCtrl: LoadingController) {
@@ -79,6 +87,16 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             console.log("OffersPage::checkCardExists() error", err);
             loader.dismiss();
         })
+    }
+
+    viewTickets(){
+        this.togglePopup();
+        this.params.goTab(2);
+    }
+
+    viewOffers(){
+        this.togglePopup();
+        this.params.goTab(4);
     }
 
 

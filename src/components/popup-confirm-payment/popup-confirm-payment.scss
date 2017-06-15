@@ -1,10 +1,10 @@
 popup-confirm-payment {
 	.popup-content{
         position: absolute;
-        bottom: 70px;
+        bottom: 120px;
         width: 100%;
-        max-height: 90%;
-        z-index: 10;
+        max-height: 70%;
+        z-index: 100;
         padding: 0 20px;
 
         .header{
@@ -17,27 +17,20 @@ popup-confirm-payment {
             text-transform: none;
         }
 
-        .buy-now{
-            position: absolute;
-            width: calc(100% - 40px);
-            height: 100%;
-            background-color: #00A651;
-            top: 0;
-            border-radius: 6px;
-            z-index: 1;
-        }
+        
 
         .payment-popover{
             background-color: white;
-            max-height: 80vh;
-            
+            max-height: 70vh;
+            border-radius: 6px;
+
             .scroll-content{
                 border: 1px solid #dedede;
                 margin: 0 20px 10px 20px;
-                border-radius: 6px;
+                
             }
             .list{
-                height: 50%;
+                height: 40%;
 
                 .item {
                     border-top: 1px solid #dedede;
@@ -62,6 +55,16 @@ popup-confirm-payment {
                 }
             }
 
+            .buy-now{
+                position: absolute;
+                width: calc(100% - 40px);
+                height: 100%;
+                background-color: #00A651;
+                top: 0;
+                margin-top: 16px;
+                border-radius: 6px;
+                z-index: 1;
+            }
             .outer {
                 display: table;
                 position: absolute;

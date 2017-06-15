@@ -89,8 +89,8 @@ export class MySyndicatePage {
         })
     }
 
-    showPaymentOptions() {
-        console.log("OffersPage::showPaymentOptions()");
+    showPaymentOptions(syndicate) {
+        console.log("OffersPage::showPaymentOptions()", syndicate);
 
         if (this.customerToken) {
             let opt: string = "toolbarposition=top";
@@ -102,6 +102,7 @@ export class MySyndicatePage {
             // get all the cards details
             this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
                 console.log("OffersPage::showPaymentOptions() success", data);
+                data.response.push({ syndicate: syndicate });
                 this.userCards = data.response;
                 loader.dismiss();
                 this.confirmPayment.togglePopup()
