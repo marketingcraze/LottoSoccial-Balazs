@@ -142,7 +142,7 @@ export class DatabaseService {
     prepareSqliteDatabase(){
         console.log("prepareSqliteDatabase()");
 
-        let tblPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Page` ("
+        let tblAppPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Page` ("
         + "`Page_ID` INTEGER PRIMARY KEY,"
         + "`Page_Name` varchar(300) NULL,"
         // + "`Complete_Json_Data` TEXT NULL,"
@@ -152,7 +152,7 @@ export class DatabaseService {
         // + "`Modified_Date` datetime NULL,"
         + "`Date_Created` datetime NULL)";
 
-        this.database.executeSql(tblPageCreate, {}).then((data) => {
+        this.database.executeSql(tblAppPageCreate, {}).then((data) => {
           this.databaseCreated++;
           // console.log("TABLE Page CREATED: ", this.databaseCreated, tblPageCreate, data);
         }, (error) => {
@@ -160,7 +160,7 @@ export class DatabaseService {
         });
 
 
-        let tblModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Module` ("
+        let tblAppModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Module` ("
         + "`App_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT, " 
         // + "`Module_Name` Varchar(100) NULL, "
         // + "`SP_Name` Varchar(100) NULL, "
@@ -170,14 +170,14 @@ export class DatabaseService {
         + "`Expiry_Date` datetime NULL, "
         + "`Modified_Date` datetime NULL)";
 
-        this.database.executeSql(tblModuleCreate, {}).then((data) => {
+        this.database.executeSql(tblAppModuleCreate, {}).then((data) => {
           this.databaseCreated++;
           // console.log("TABLE Module CREATED: ", this.databaseCreated, tblModuleCreate, data);
         }, (error) => {
           console.error("Unable to execute sql", error);
         });
 
-        let tblPageModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page_Module` ( "
+        let tblAppPageModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_App_Page_Module` ( "
         + "`Page_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
         + "`Page_ID` INTEGER NULL,"
         + "`Module_ID` INTEGER NULL,"
@@ -190,7 +190,7 @@ export class DatabaseService {
         // + "`Offer_ID` INTEGER NULL"
         
 
-        this.database.executeSql(tblPageModuleCreate, {}).then((data) => {
+        this.database.executeSql(tblAppPageModuleCreate, {}).then((data) => {
           this.databaseCreated++;
           // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
         }, (error) => {
@@ -225,6 +225,65 @@ export class DatabaseService {
         }, (error) => {
           console.error("Unable to execute sql", error);
         });
+
+
+
+
+
+        // WP REST API tables create
+        let tblPageCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page` ("
+        + "`Page_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
+        + "`Page_Name` varchar(300) NULL,"
+        + "`Complete_Json_Data` TEXT NULL,"
+        + "`Update` TINYINT NULL,"
+        + "`Status` varchar(25) NULL,"
+        + "`Modified_By` varchar(50) NULL,"
+        + "`Modified_Date` datetime NULL,"
+        + "`Date_Created` datetime NULL)";
+
+        this.database.executeSql(tblPageCreate, {}).then((data) => {
+          this.databaseCreated++;
+          // console.log("TABLE Page CREATED: ", this.databaseCreated, tblPageCreate, data);
+        }, (error) => {
+            console.error("Unable to execute sql", error);
+        });
+
+
+        let tblModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Module` ("
+        + "`Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT, " 
+        + "`Module_Name` Varchar(100) NULL, "
+        + "`SP_Name` Varchar(100) NULL, "
+        + "`Module_Json` TEXT NULL, "
+        + "`Status` varchar(25) NULL, "
+        + "`Modified_By` varchar(50) NULL, "
+        + "`Modified_Date` datetime NULL, "
+        + "`Date_Created` datetime NULL)";
+
+        this.database.executeSql(tblModuleCreate, {}).then((data) => {
+          this.databaseCreated++;
+          // console.log("TABLE Module CREATED: ", this.databaseCreated, tblModuleCreate, data);
+        }, (error) => {
+          console.error("Unable to execute sql", error);
+        });
+
+        let tblPageModuleCreate = "CREATE TABLE IF NOT EXISTS `tbl_Page_Module` ( "
+        + "`Page_Module_ID` INTEGER PRIMARY KEY AUTOINCREMENT,"
+        + "`Page_ID` INTEGER NULL,"
+        + "`Module_ID` INTEGER NULL,"
+        + "`Expired` TINYINT NULL,"
+        + "`Expire_At` Varchar(50) NULL,"
+        + "`Status` varchar(25) NULL,"
+        + "`Modified_By` varchar(50) NULL,"
+        + "`Modified_Date` datetime NULL,"
+        + "`Date_Created` datetime NULL) ";
+
+        this.database.executeSql(tblPageModuleCreate, {}).then((data) => {
+          this.databaseCreated++;
+          // console.log("TABLE PageModule CREATED: ", this.databaseCreated, tblPageModuleCreate, data);
+        }, (error) => {
+          console.error("Unable to execute sql", error);
+        });
+
     }
 
 

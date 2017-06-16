@@ -109,14 +109,7 @@ export class StorePage {
             }
 
             console.log("home data", this.homeMessage );
-        });
-
-        this.params.events.subscribe('go-page', (page) => {
-            if (page) {
-                this.navCtrl.push(page);
-            }
-        });
-        
+        });        
     }
 
     ionViewDidLoad() {

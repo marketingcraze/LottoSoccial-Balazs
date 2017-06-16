@@ -52,12 +52,6 @@ export class OffersPage {
     public loadingCtrl: LoadingController) {
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
-      this.params.events.subscribe('go-page', (page) => {
-          if (page) {
-              this.navCtrl.push(page);
-          }
-      });
-
       this.checkCardExists();
   }
 

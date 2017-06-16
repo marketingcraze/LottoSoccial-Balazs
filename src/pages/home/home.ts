@@ -51,7 +51,7 @@ export class HomePage {
         private alertCtrl:AlertController,
         private loadingCtrl:LoadingController) {
 
-        this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
+        this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
 /*
         platform.ready().then(() => {
@@ -112,10 +112,10 @@ export class HomePage {
     }
 
     onLeftMenuSelection(selection){
+        console.log("HomePage::onLeftMenuSelection");
         this.menu.close();
         switch(selection){
             case 'accounts':
-                // this.params.goTab(4)
                 this.params.goPage( AccountPage )
                 break
             case 'check_winnings':

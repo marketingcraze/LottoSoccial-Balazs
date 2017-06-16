@@ -51,19 +51,20 @@ export class AccountPage {
 	    private loadingCtrl:LoadingController,
 	    private alertCtrl:AlertController) {
 
-  		this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
+		console.log('AccountPage');
 
-        this.params.events.subscribe('go-page', (page) => {
-            if (page) {
-                this.navCtrl.push(page);
-            }
-        });
+  		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
+
+        this.loadAccountData()
 	}
 
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad AccountPage');
 
-    	// show loading screen
+	}
+
+	loadAccountData(){
+		// show loading screen
     	let loader = this.loadingCtrl.create({
             content: "Please wait..."
         });
@@ -74,7 +75,7 @@ export class AccountPage {
         .then( data => {
             loader.dismiss();
 
-            // console.log("AccountPage::ionViewDidLoad", data);
+            console.log("AccountPage::ionViewDidLoad", data);
             for (var i = data.length - 1; i >= 0; i--) {
             	if ( data[i].get_account_details ) {
             		this.accountDetails = data[i].get_account_details.response;
@@ -91,6 +92,7 @@ export class AccountPage {
             this.params.setIsInternetAvailable(false);
             console.log("AccountPage::ionViewDidLoad", err);
         });
+
 	}
 
 	updateNickName(){

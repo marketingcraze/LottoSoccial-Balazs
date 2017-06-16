@@ -21,13 +21,7 @@ export class SyndicatesPage {
         public params:Params,
         public navCtrl: NavController, 
         public navParams: NavParams) {
-    
-        this.params.events.subscribe('go-page', (page) => {
-            if (page) {
-                this.navCtrl.push(page);
-            }
-        });
-    }
+        }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SyndicatePage');

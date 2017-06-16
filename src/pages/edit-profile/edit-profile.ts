@@ -6,7 +6,7 @@ import { EditProfileEmail } from './edit-profile-email/edit-profile-email';
 import { EditProfilePassword } from './edit-profile-password/edit-profile-password';
 
 import { AccountService } from '../../services/account.service';
-
+import { Params } from '../../services/params'
 
 @Component({
 	selector: 'page-edit-profile',
@@ -25,6 +25,7 @@ export class EditProfilePage {
 	private accountData:any;
 
 	constructor(
+		public params:Params,
 		public navCtrl: NavController, 
 		public viewCtrl:ViewController,
 		public events:Events,
@@ -83,6 +84,8 @@ export class EditProfilePage {
         }, err => {
             loader.dismiss();
             console.log("AccountPage::ionViewDidLoad", err);
+            // show offline
+            this.params.setIsInternetAvailable(false);
         });
 	}
 
@@ -118,6 +121,8 @@ export class EditProfilePage {
         }, err => {
             loader.dismiss();
             console.log("AccountPage::ionViewDidLoad", err);
+            // show offline
+            this.params.setIsInternetAvailable(false);
         });
 	}
 

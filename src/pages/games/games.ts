@@ -26,14 +26,6 @@ export class GamesPage {
         if (this.navParams.data.game) {
             this.gameGroup = this.navParams.data.game.game_group;
         }
-
-        this.params.events.subscribe('go-page', (page) => {
-            if (page) {
-                this.navCtrl.push(page);
-            }
-        });
-
-
     }
 
     ionViewDidLoad() {

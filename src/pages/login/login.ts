@@ -79,8 +79,14 @@ export class LoginPage {
             data=>{
                 loader.dismiss();
                 console.log( "loadCountries", data);
-                if ( data ) {
-                    this.countryes = data;
+                if ( data 
+                    && data.response[0]
+                    && data.response[0].get_country_code_flag
+                    && data.response[0].get_country_code_flag.response
+                    && data.response[0].get_country_code_flag.response.country_code_group
+                    ) {
+
+                    this.countryes = data.response[0].get_country_code_flag.response.country_code_group
                     this.selectedCountry = this.countryes[0];
                     this.countryNumber = this.selectedCountry.country_code;
                     console.log("countries successful", this.countryes);
@@ -89,20 +95,9 @@ export class LoginPage {
             err=>{
                 loader.dismiss();
                 console.log("error", err);
-                this.alertCtrl.create({
-                  title: 'Error!!!',
-                  subTitle: 'Internet disabled or server error.',
-                  enableBackdropDismiss:false,
-                  buttons: [
-                  {
-                      text: 'OK',
-                      handler: data => {
-                          // this.platform.exitApp();
-                      }
-                  }
-                  ]
-                }).present();
-
+                // show offline
+                this.params.setIsInternetAvailable(false);
+            
             },
             ()=> {  }
             );
@@ -222,6 +217,8 @@ export class LoginPage {
             err=>{
                 loader.dismiss();
                 console.log("user login error", err);
+                // show offline
+                this.params.setIsInternetAvailable(false);
             },
             ()=> console.log("user login complete")
             );
@@ -261,6 +258,8 @@ export class LoginPage {
             err=>{
                 loader.dismiss();
                 console.log("error", err);
+                // show offline
+                this.params.setIsInternetAvailable(false);
             },
             ()=>{
                 console.log("complete");

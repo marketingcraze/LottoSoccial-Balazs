@@ -57,19 +57,18 @@ export class TabsPage {
 
         console.log("TabsPage");
 
-        this.cache = new CacheController(platform, srvDb, srvHome, alertCtrl);
+        this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
         this.gameData = "game data";
 
         this.mySelectedIndex = navParams.data.tabIndex || 0;
 
         if (this.params.events) {
-            this.params.events.subscribe('go-home', (tab) => {
-                console.log("go-home", tab);
-                if (!tab) {
-                    tab = 0;
+            this.params.events.subscribe('go-page', (tab) => {
+                console.log("go-page", tab);
+                if (tab) {
+                    this.homeTabs.getActiveChildNav().push(tab)
                 }
-                this.homeTabs.select( tab );
             });
             this.params.events.subscribe('go-tab', (tab) => {
                 console.log("go-tab", tab);
@@ -78,6 +77,8 @@ export class TabsPage {
                 }
                 this.homeTabs.select( tab );
             });
+
+
         }
 
     }

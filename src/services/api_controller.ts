@@ -24,7 +24,7 @@ export class ApiController {
         let early = new Date();
         early.setSeconds( early.getSeconds() + this.expiresInSeconds);
 
-        let sel_query = "SELECT t2.Json_Data FROM tbl_Page_Module as t1 JOIN tbl_App_Module as t2 ";
+        let sel_query = "SELECT t2.Json_Data FROM tbl_App_Page_Module as t1 JOIN tbl_App_Module as t2 ";
         sel_query += "on (t1.Module_ID = t2.App_Module_ID) where t2.Json_Data !='' AND t2.Modified_Date <=? ";
         sel_query += "AND t2.App_Module_ID IN (?)";
 
@@ -125,8 +125,8 @@ export class ApiController {
                 this.srvDb.raw_query( insert_query, [moduleName[i], JSON.stringify( module_json[i] ), 'active', expiresIn, new Date()]).then((module_result:any)=> {
                     console.log("INSERT ID -> ", module_result );
                     
-                    // 3.tbl_Page_Module 
-                    insert_query = "INSERT OR REPLACE INTO tbl_Page_Module(`Page_ID`,`Module_ID`,`End_Point`,`Date_Created`) VALUES(?,?,?,?); ";    
+                    // 3.tbl_App_Page_Module 
+                    insert_query = "INSERT OR REPLACE INTO tbl_App_Page_Module(`Page_ID`,`Module_ID`,`End_Point`,`Date_Created`) VALUES(?,?,?,?); ";    
                     this.srvDb.raw_query( insert_query, [result_page_id, module_result.insertId, 'active', new Date()]).then((result:any)=> {
                           console.log("INSERT ID -> ", result);
                       }, (error)=> {
@@ -163,8 +163,8 @@ export class ApiController {
             console.error(error);
         });
 
-        // delete tbl_Page_Module data
-        let delete_page_module = "DELETE FROM tbl_Page_Module; ";    
+        // delete tbl_App_Page_Module data
+        let delete_page_module = "DELETE FROM tbl_App_Page_Module; ";    
         this.srvDb.raw_query( delete_page_module, []).then((result:any)=> {
             // console.log("clearDatabaseOnLogout SUCCESS ", result);
         }, (error)=> {
