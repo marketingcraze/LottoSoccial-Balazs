@@ -23,6 +23,7 @@ export class AccountPage {
 
 	private cache: CacheController;
 
+	private refreshCache:boolean = false;
 	private unreadCount:number = 0;
 	private homeMessage:any = {
 	};
@@ -71,12 +72,14 @@ export class AccountPage {
         loader.present();
 
     	// load data
-    	this.cache.loadModules("home", "1", ["get_account_details"])
+    	this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
         .then( data => {
             loader.dismiss();
 
+            this.refreshCache = false;
+
             console.log("AccountPage::ionViewDidLoad", data);
-            for (var i = data.length - 1; i >= 0; i--) {
+            for (var i = 0; i < data.length; i++) {
             	if ( data[i].get_account_details ) {
             		this.accountDetails = data[i].get_account_details.response;
             	}else if ( data[i].get_home_message ) {
@@ -84,7 +87,7 @@ export class AccountPage {
 		            this.unreadCount = this.homeMessage.unread;
 		        }
             }
-            // console.log("AccountPage::ionViewDidLoad", this.accountDetails);
+            console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
 
         }, err => {
             loader.dismiss();
@@ -175,6 +178,9 @@ export class AccountPage {
             console.log("AccountPage::updateNickname", success );
             if (success) {
             	let res = success.response[0].update_nick_name.response;
+
+            	this.refreshCache = true;
+            	this.loadAccountData();
 
 	            console.log("AccountPage::updateNickname", res );
 

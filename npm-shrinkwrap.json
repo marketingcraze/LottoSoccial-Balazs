@@ -51,6 +51,11 @@
             "version": "https://registry.npmjs.org/@angular/tsc-wrapped/-/tsc-wrapped-0.5.2.tgz",
             "integrity": "sha1-Lt30csRn/LM06pTe3aqnGZDFpII="
         },
+        "@ionic-native/app-version": {
+            "version": "3.12.1",
+            "resolved": "https://registry.npmjs.org/@ionic-native/app-version/-/app-version-3.12.1.tgz",
+            "integrity": "sha512-zBzEkKD5P50R7fdTH8DZWn8oblal7ezDqeyLsTvAZd4rcQWt/tjPR2nP2gRfCuF5GYvnRPj2nQRlG2t2cZwcZA=="
+        },
         "@ionic-native/camera": {
             "version": "3.12.1",
             "resolved": "https://registry.npmjs.org/@ionic-native/camera/-/camera-3.12.1.tgz",
@@ -1225,6 +1230,11 @@
                     "bundled": true
                 }
             }
+        },
+        "cordova-plugin-app-version": {
+            "version": "0.1.9",
+            "resolved": "https://registry.npmjs.org/cordova-plugin-app-version/-/cordova-plugin-app-version-0.1.9.tgz",
+            "integrity": "sha1-nbBgeGMzenEEiTAuX1CpBPFEm9s="
         },
         "cordova-plugin-camera": {
             "version": "2.4.1",
