@@ -164,28 +164,51 @@ mobile:"23423423423"
             return;
         }
 
-        let action = CommonService.apiUrlDF + 'proc_freeRegistrationStep1_Mobile_App';
-        let signup = {
-            "request": [
-            {
-                "session_ID": CommonService.sessionId, 
-                "page_ID": "1",
-                "screen_id": "1.2",
-                "action": "login_mobile_app",
-                "website": "Lotto Social",
-                "website_id": "27",
-                "source_site": "mobi.lottosocial.com", 
-                "module_name": "register",
+        let value = {
+            "session_ID": CommonService.sessionId, 
+            "page_ID": "1",
+            "screen_id": "1.2",
+            "action": "login_mobile_app",
+            "website": "Lotto Social",
+            "website_id": "27",
+            "source_site": "mobi.lottosocial.com", 
+            "module_name": "register",
 
-                "mobile": user.mobile,
-                "password": user.free_reg_pwd,
-                "country_code": user.country_code, 
-                "first_name": user.first_name, 
-                "last_name": user.last_name, 
-                "email": user.email, 
-                "profile_image_url": user.profile_image_url
-            } ]
+            "mobile": user.mobile,
+            "password": user.free_reg_pwd,
+            "country_code": user.country_code, 
+            "first_name": user.first_name, 
+            "last_name": user.last_name, 
+            "email": user.email, 
+            "profile_image_url": user.profile_image_url
         };
+
+        let valueStr = JSON.stringify(value)
+        console.log("value string:", valueStr );
+        // valueStr = valueStr.replace( /"/g, "\\\"" )
+        console.log("value string:", valueStr );
+
+        let action = CommonService.apiUrlDF + 'proc_freeRegistrationStep1_Mobile_App';
+        let signup = 
+        {
+            "params": [
+            {
+                "name": "json_request",
+                "param_type": "IN",
+                "value": valueStr,
+                "type": "NVARCHAR(MAX)",
+                "length": 0
+            },
+            {
+                "name": "response",
+                "param_type": "OUT",
+                "value": "",
+                "type": "NVARCHAR(MAX)"
+            }
+            ],
+            "request_source":"mobile_app"
+        };
+
 
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderDF()
@@ -195,8 +218,8 @@ mobile:"23423423423"
         var response = this.http.post(action, 
             signup, opt).map(res => res.json());
         return response;
-    }
-*/
+    }*/
+
     /**
      * New user registration API call (WP version)
      * 

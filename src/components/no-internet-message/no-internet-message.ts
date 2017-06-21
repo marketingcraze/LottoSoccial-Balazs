@@ -10,7 +10,8 @@ export class NoInternetMessageComponent {
 
 	public noInternet:boolean = false;
 
-	constructor(private network: Network, 
+	constructor(
+		private network: Network, 
 		private navCtrl:NavController) {
 
 	    // console.log('NoInternetMessageComponent Component', network.type);
@@ -25,8 +26,8 @@ export class NoInternetMessageComponent {
 	}
 
 	removeMessage(){
-	  	console.log('removeMessage');
-	  	this.noInternet = !this.noInternet;
-	 }
+		console.log('removeMessage');
+		this.noInternet = !this.noInternet;
+	}
 
 }

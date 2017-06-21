@@ -12,22 +12,16 @@
             
             <ion-item *ngFor="let card of cardsList; let i = index">
               <ion-label>Use preferred card:<br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
-              <ion-radio value="{{card.pay_stored_detail_id}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
+              <ion-radio value="{{i}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
             </ion-item>
-
-  <!--           <ion-item *ngIf="cardsValue">
-              <ion-label>Use preferred card:<br>MASTERCARD ending with 1381</ion-label>
-              <ion-radio value="visa2" item-left color="secondary"></ion-radio>
-            </ion-item> -->
-
             <ion-item>
               <ion-label>Use a different card</ion-label>
-              <ion-radio value="visa3" item-left color="secondary"></ion-radio>
+              <ion-radio value="-1" item-left color="secondary"></ion-radio>
             </ion-item>
 
           </ion-list>
         </ion-scroll>
-        <div><button class="center" ion-button padding color="secondary" (click)="buyNow()">Buy now for &pound;4.99</button>
+        <div><button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for &pound;{{syndicate.total_cost}}</button>
         </div>
 
         <div>

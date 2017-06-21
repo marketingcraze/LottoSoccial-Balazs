@@ -66,7 +66,7 @@ export class TabsPage {
         if (this.params.events) {
             this.params.events.subscribe('go-page', (tab) => {
                 console.log("go-page", tab);
-                if (tab) {
+                if (tab && this.homeTabs.getActiveChildNav()) {
                     this.homeTabs.getActiveChildNav().push(tab)
                 }
             });

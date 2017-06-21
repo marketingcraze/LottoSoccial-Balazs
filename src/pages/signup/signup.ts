@@ -234,7 +234,7 @@ export class SignupPage {
 				console.log("user registration successful", data);
 				// show register success message and redirect to login
 				try {
-                    data = data.response[0].register.response;
+                    data = data.response;
                 } catch (e) {
                     data = undefined;
                 }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DomSanitizer } from '@angular/platform-browser';
-//import { Observable, ObservableInput } from 'rxjs/Observable';
+
+import { CommonService } from '../services/common.service';
 
 @Injectable()
 export class SyndicateService {
@@ -110,7 +111,7 @@ export class SyndicateService {
     getLotteries() {
         let action = 'privatesyndicate'
         let data = {
-            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+            "session_ID": CommonService.sessionId,
             "page_ID": "4",
             "screen_id": "4.3",
             "action": "syndicate_lotteries",
@@ -118,7 +119,7 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_syndicate_lotteries",
-            "customer_id": "1970400"
+            "customer_id": CommonService.session.customer_id
         }
         let headopt = SyndicateService.getHeader();
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
@@ -140,7 +141,7 @@ export class SyndicateService {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+            "session_ID": CommonService.sessionId,
             "page_ID": "4",
             "screen_id": "4.5",
             "action": "syndicate_terms",
@@ -148,7 +149,7 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_private_syndicate_terms",
-            "customer_id": "1970400",
+            "customer_id": CommonService.session.customer_id,
             "private_syndicate_id": id
         }
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
@@ -163,7 +164,7 @@ export class SyndicateService {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+            "session_ID": CommonService.sessionId,
             "page_ID": "4",
             "screen_id": "4.6",
             "action": "get_syndicate",
@@ -171,7 +172,7 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_private_syndicate_details",
-            "customer_id": "1970400",
+            "customer_id": CommonService.session.customer_id,
             "private_syndicate_id": id
         }
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
@@ -184,7 +185,7 @@ export class SyndicateService {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+            "session_ID": CommonService.sessionId,
             "page_ID": "4",
             "screen_id": "4.7",
             "action": "jackpot_list",
@@ -192,7 +193,7 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_big_jackpot_list",
-            "customer_id": "1970400",
+            "customer_id": CommonService.session.customer_id,
             "private_syndicate_id": id
         }
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
@@ -215,7 +216,7 @@ export class SyndicateService {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+            "session_ID": CommonService.sessionId,
             "page_ID": "6",
             "screen_id": "6.1",
             "action": "syndicate_list",
@@ -223,7 +224,7 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_syndicate_list",
-            "customer_id": "1970400"
+            "customer_id": CommonService.session.customer_id
         }
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
             .map(res => res.json())

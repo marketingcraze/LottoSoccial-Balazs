@@ -31,7 +31,7 @@ export class OfferService {
 
 
     getJackpotList() {
-        console.log("getExistingPaymilCards");
+        console.log("getExistingPaymilCards", CommonService.session );
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
@@ -49,8 +49,8 @@ export class OfferService {
                 "website_id": "27",
                 "source_site": "mobi.lottosocial.com", 
                 "module_name": "get_big_jackpot_list", 
-                "customer_id":"1970400", 
-                "private_syndicate_id":"298"
+                "customer_id": CommonService.session.customer_id, 
+                "private_syndicate_id": "298"
             } ]
         };
         let opt: RequestOptions = new RequestOptions({
@@ -61,47 +61,52 @@ export class OfferService {
         return response;
     }
 
-    processPaymillCardPayment() {
-        console.log("getExistingPaymilCards");
+    processPaymillCardPayment(offer:any, customer:any, payment:any) {
+        console.log("getExistingPaymilCards", offer, customer, payment);
+
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
         }
 
-        let action = CommonService.apiUrl + CommonService.version + '/paywithtoken/';
+        let action = 
+        CommonService.apiUrl + 
+        CommonService.version + '/paywithtoken/';
+
         let parameter = {
             "request": [
             {
                 "session_ID": CommonService.sessionId, 
                 "page_ID": "4",
                 "screen_id": "4.11",
-                "action": "process_paymill_card_payment", "website": "Lotto Social",
+                "action": "process_paymill_card_payment",
+                "website": "Lotto Social",
                 "website_id": "27",
                 "source_site": "mobi.lottosocial.com", 
                 "module_name": "process_paymill_card_payment", 
-                "customer_id": "1970400",
-                "title": "Mr",
-                "first_name": "Nadeshs",
-                "last_name": "Narayan",
-                "dob": "",
-                "phone": "447712887310",
-                "mobile": "447712887310",
-                "email": "olu.testerr@gmail.com",
-                "amount": "5.5",
+                "customer_id": CommonService.session.customer_id,
+                "title": customer.title,
+                "first_name": customer.first_name,
+                "last_name": customer.last_name,
+                "dob": customer.dob,
+                "phone": customer.mobile_number,
+                "mobile": customer.mobile_number,
+                "email": customer.email_address,
+                "amount": offer.total_cost,
                 "customer_web_lead_id": "",
                 "TP1": "",
                 "TP2": "",
                 "p_type": "10",
-                "offer_id": "1188",
+                "offer_id": offer.offer_id,
                 "status": "olu.testerr@gmail.com",
                 "prosub_id": "2279",
                 "payment_currency": "GBP",
                 "payment_type": "payment",
                 "award_id": "",
                 "transaction_log_id": "", 
-                "customer_payment_stored_detail_id": "3475", 
-                "client_id": "client_7bcfd5d9454662d9b80b", 
-                "client_pay_id": "pay_14e434cf6a515bc0469b7c2d"
+                "customer_payment_stored_detail_id": payment.pay_stored_detail_id, 
+                "client_id": payment.client_id, 
+                "client_pay_id": payment.client_pay_id
             } ]
         };
         let opt: RequestOptions = new RequestOptions({
@@ -113,7 +118,7 @@ export class OfferService {
     }
 
     getExistingPaymilCardsDetails() {
-        console.log("getExistingPaymilCardsDetails");
+        console.log("getExistingPaymilCardsDetails", CommonService.session);
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
@@ -124,7 +129,7 @@ export class OfferService {
         let parameter = {
             "request": [
             {
-                "session_ID": "avjtjgu0f257f0orggqufcn5g2", 
+                "session_ID": CommonService.sessionId, 
                 "page_ID": "4",
                 "screen_id": "4.10",
                 "action": "get_card_details",
@@ -132,18 +137,19 @@ export class OfferService {
                 "website_id": "27",
                 "source_site": "mobi.lottosocial.com", 
                 "module_name": "get_customer_paymill_card_details", 
-                "customer_id": "1970400",
+                "customer_id": CommonService.session.customer_id,
                 "p_type": "10",
                 "paymill_offer_id": "1019"
             }, {
-                "session_ID": "avjtjgu0f257f0orggqufcn5g2", "page_ID": "7",
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "7",
                 "screen_id": "7.2",
                 "action": "profile_details",
                 "website": "Lotto Social",
                 "website_id": "27",
                 "source_site": "mobi.lottosocial.com",  
                 "module_name": "get_customer_details", 
-                "customer_id":"1970400"
+                "customer_id": CommonService.session.customer_id
             } ]
         };
         let opt: RequestOptions = new RequestOptions({

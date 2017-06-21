@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChange, OnChanges } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { OfferService } from '../../services/offer.service';
@@ -21,7 +21,8 @@ export class PopupConfirmPaymentComponent implements OnChanges{
 
     public customerDetails
     public syndicate = {
-        syndicate_name: ""
+        syndicate_name: "",
+        total_cost:0.00
     }
 
     @Input('existing-cards') existingPaymilCards;  
@@ -48,8 +49,8 @@ export class PopupConfirmPaymentComponent implements OnChanges{
                 }
             }
 
-            console.log("cardsList", this.cardsList );
-            console.log("customerDetails", this.customerDetails );
+            // console.log("cardsList", this.cardsList );
+            // console.log("customerDetails", this.customerDetails );
             
         }
     }
@@ -58,6 +59,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         private params:Params,
         private iab: InAppBrowser,
         public srvOffer: OfferService,
+        public alertCtrl:AlertController,
         public loadingCtrl: LoadingController) {
         console.log('Hello PopupConfirmPaymentComponent Component');
     }
@@ -65,7 +67,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     buyNow(){
         console.log("PopupConfirmPaymentComponent::buyNow", this.cardSelected);
 
-        if (this.cardSelected == 'visa3') {
+        if (this.cardSelected == '-1') {
             let opt:string = "toolbarposition=top";
             let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg&customer_id=1970400&customer_token=818113679640&Offer_ID=1188'
 
@@ -76,17 +78,33 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         }
     }
 
-    makeCardPayment(selectedCardEndDigits){
+    makeCardPayment(selectedCardIndex){
         let loader = this._showLoader();
+        if (!selectedCardIndex) {
+            let alert = this.alertCtrl.create({
+                title: "Error!",
+                subTitle: "Please select any option to make a payment",
+                buttons: ['Dismiss']
+            });
+            alert.present();
+        }
 
-        this.srvOffer.processPaymillCardPayment().subscribe((data) => {
-            console.log("OffersPage::checkCardExists() success", data);
-            loader.dismiss();
-            this.showBuyNowView = true;
-        }, (err) => {
-            console.log("OffersPage::checkCardExists() error", err);
-            loader.dismiss();
-        })
+        let card = this.cardsList[parseInt(selectedCardIndex)]
+
+        console.log("PopupConfirmPaymentComponent::makeCardPayment", selectedCardIndex, card)
+
+        if (card) {
+            this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
+                console.log("OffersPage::checkCardExists() success", data);
+                loader.dismiss();
+                this.showBuyNowView = true;
+            }, (err) => {
+                console.log("OffersPage::checkCardExists() error", err);
+                loader.dismiss();
+                this.params.setIsInternetAvailable(false)
+            })
+        }
+
     }
 
     viewTickets(){
