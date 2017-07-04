@@ -81,6 +81,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { Network } from '@ionic-native/network';
+import { Market } from '@ionic-native/market';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -231,7 +232,7 @@ import { FilterPipe } from '../pipes/filter-pipe';
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   DatabaseService, CommonService, AuthService, HomeService, AccountService, Params, 
   SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService, 
-  Network, OfferService]
+  Network, OfferService, Market]
 
 })
 export class AppModule {}

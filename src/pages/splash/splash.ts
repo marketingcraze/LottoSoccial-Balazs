@@ -30,6 +30,10 @@ export class SplashPage {
 
                 console.log('Your session is', val);
                 setTimeout(()=>{
+                    /*if (CommonService.updateAvailable) {
+                        this.navCtrl.setRoot(HomePage);
+                        return;
+                    }else */
                     if (val) {
                         this.navCtrl.setRoot(HomePage);
                     }else{

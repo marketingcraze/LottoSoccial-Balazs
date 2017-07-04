@@ -25,8 +25,7 @@ export class AccountPage {
 
 	private refreshCache:boolean = false;
 	private unreadCount:number = 0;
-	private homeMessage:any = {
-	};
+	private homeMessage:any = {};
 	private accountDetails:any = {
 		bonus_credit:0.00,
 		message:"",

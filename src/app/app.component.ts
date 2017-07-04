@@ -66,6 +66,7 @@ export class MyApp {
             this.initializeOneSignal();
 
             this.loadCountries();
+            
 
             CommonService.isOnline = (network.type != "none");
 
@@ -108,19 +109,8 @@ export class MyApp {
             Splashscreen.hide();
         },
         err=>{
-            let alert = this.alertCtrl.create({
-                title: 'Error!!!',
-                subTitle: 'Internet disabled or server error.',
-                enableBackdropDismiss:false,
-                buttons: [
-                {
-                    text: 'OK',
-                    handler: (data) => {
-                        this.platform.exitApp();
-                    }
-                }]
-            });
-            // alert.present();
+            // show offline
+            this.params.setIsInternetAvailable(false);
         },
         ()=> {});
     }

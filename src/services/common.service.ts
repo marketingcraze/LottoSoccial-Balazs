@@ -11,6 +11,7 @@ export class CommonService {
     public static sessionId:string = "";
 
     public static isOnline:boolean = false;
+    public static updateAvailable:boolean = false;
 
     public static sitename:string = 'https://nima.lottosocial.com/';
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
@@ -101,6 +102,36 @@ OAuth oauth_consumer_key="NDes1FKC0Kkg", oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",
 
             return response;
         }
+    }
+
+    getNewRelease(){
+        
+        let action = CommonService.apiUrl + CommonService.version + '/login/';
+        let data = {
+            "request": [
+            {
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "1",
+                "screen_id": "1.9",
+                "action": "new_release",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "get_new_release"
+            } ]
+        };
+
+        
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        console.log("get_new_release", action, data);
+        var response = this.http.post(action, data, opt)
+        .map(res => res.json());
+
+        return response;
+    
     }
 }
 

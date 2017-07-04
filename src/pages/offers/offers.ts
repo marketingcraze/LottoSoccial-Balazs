@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -44,7 +44,6 @@ export class OffersPage {
   constructor(
     public params: Params,
     public iab: InAppBrowser,
-    public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
     public authSrv: AuthService,
@@ -106,112 +105,77 @@ export class OffersPage {
   }
 
 
-  wed() {
-    this.fetch_filter_draw = "Wed";
+  wed(drawday) {
+    this.fetch_filter_draw=drawday;
     this.fetch_filter_day = "Wednesday";
     this.drawdaywed = "#f53d3d";
-    this.drawdaysat = "#b7b7b7";
+    this.drawdaysat="#aaaaaa";
   }
 
-  tue() {
-    this.credit_filter_draw = "Tue";
-    this.credit_filter_day = "Tuesday";
-    this.drawdaytue = "#6297dc";
-    this.drawdayfri = "#b7b7b7";
+  tue(drawday){
+    this.credit_filter_draw="Tue";
+    console.log();
+    this.credit_filter_day="Tuesday";
+    this.drawdaytue="#2f76d1";
+    this.drawdayfri="#aaaaaa";
   }
-  fri() {
-    this.credit_filter_draw = "Fri";
-    this.credit_filter_day = "Friday";
-
-    this.drawdayfri = "#6297dc";
-    this.drawdaytue = "#b7b7b7";
+  fri(drawday){
+    this.credit_filter_draw=drawday;
+    this.credit_filter_day="Friday";
+    this.drawdayfri="#2f76d1";
+    this.drawdaytue="#aaaaaa";
   }
-  sat() {
-    this.fetch_filter_draw = "Sat";
+  sat(drawday){
+    this.fetch_filter_draw=drawday;
     this.fetch_filter_day = "Saturday";
     this.drawdaywed = "#b7b7b7";
     this.drawdaysat = "#f53d3d";
   }
 
-  line1() {
-    this.credit_filter_line = 1;
-    this.fetch_filter_line = 1;
+  credit_line(line){
+    this.credit_filter_line=parseInt(line);
   }
-  line2() {
-    this.credit_filter_line = 2;
-    this.fetch_filter_line = 2;
+  fetch_line(line){
+    this.fetch_filter_line=parseInt(line);
+  }
+  
+  ionViewWillEnter() {
+    this.credit_filter_line=1;
+    this.credit_filter_draw="Tue";
+    this.credit_filter_day="Tuesday";
+    this.fetch_filter_line=1;
+    this.fetch_filter_draw="Wed";
+    this.fetch_filter_day="Wednesday";
 
-  }
-  line3() {
-    this.credit_filter_line = 3;
-    this.fetch_filter_line = 3;
-  }
-  line4() {
-    this.credit_filter_line = 4;
-    this.fetch_filter_line = 4;
-  }
-  line5() {
-    this.credit_filter_line = 5;
-    this.fetch_filter_line = 5;
-  }
-  line6() {
-    this.credit_filter_line = 10;
-    this.fetch_filter_line = 10;
-  }
-  line7() {
-    this.credit_filter_line = 20;
-    this.fetch_filter_line = 20;
-  }
-
-
-  ionViewDidLoad() {
-    this.credit_filter_line = 1;
-    this.credit_filter_draw = "Tue";
-    this.credit_filter_day = "Tuesday";
-    this.fetch_filter_line = 1;
-    this.fetch_filter_draw = "Wed";
-    this.fetch_filter_day = "Wednesday";
-
-    this.authSrv.get_credit_offer().subscribe(
-      data => {
-        this.credit_lines = data.response.response.product;
-        this.credit_offer = data.response.response.offers;
-        console.log("get_credit_offer", data);
-
-
-        //    console.log("get_credit_offer",this.credit_offer);
+    this.authSrv.get_credit_offer().subscribe(data=>{
+      this.credit_lines=data.response.response.product[0];
+      this.credit_offer=data.response.response.offers;
+      console.log("get_credit_offer",data);
+    },
+    err=>{
+       console.log("error", err);
       },
-      err => {
+    ()=> console.log("offer dislpay sucesss")
+  );
 
-        console.log("error", err);
+    this.authSrv.get_fetch_offer().subscribe(data=>{
+        this.fetch_lines=data.response.response.product[3];
+        this.fetch_offer=data.response.response.offers;
+        console.log("dd",data)
       },
-      () => console.log("offer dislpay sucesss")
+      err=>{
+              console.log("error", err);
+      },
+      ()=> console.log("offer dislpay sucesss")
     );
 
-    this.authSrv.get_fetch_offer()
-      .subscribe(
-      data => {
-        this.fetch_lines = data.response.response.product;
-
-        this.fetch_offer = data.response.response.offers;
-        console.log("dd", data)
+    this.authSrv.get_Credit_Points().subscribe(data=>{
+        this.Credit_Points=data.response.response.bonus_credit;
       },
-      err => {
-
+      err=>{          
         console.log("error", err);
       },
-      () => console.log("offer dislpay sucesss")
-      );
-
-    this.authSrv.get_Credit_Points().subscribe(data => {
-      this.Credit_Points = data.response.bonus_credit;
-      // console.log(data);
-
-    },
-      err => {
-        console.log("error", err);
-      },
-      () => console.log("offer dislpay sucesss")
+      ()=> console.log("creadit points get successfully")
     );
 
   }

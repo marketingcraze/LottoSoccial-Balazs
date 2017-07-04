@@ -7,6 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CheckWinningsPage } from '../check-winnings/check-winnings'
 import { AccountPage } from '../account/account';
+import { UpdatePage } from '../update/update';
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
@@ -48,9 +49,11 @@ export class HomePage {
         public menu: MenuController,
         private navCtrl:NavController,
         private srvDb:DatabaseService,
+        private commonSrv:CommonService,
         private alertCtrl:AlertController,
         private loadingCtrl:LoadingController) {
 
+        
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
 /*
@@ -75,6 +78,8 @@ export class HomePage {
 
             console.log("HomePage::home data", this.homeMessage, this.messages );
         });
+
+        this.checkForNewRelease()
     }
 
 
@@ -173,6 +178,29 @@ export class HomePage {
         }, (err)=>{
             console.log("onOpenRightMenu error ", err);
         })
+    }
+
+
+    checkForNewRelease(){
+        this.commonSrv.getNewRelease().subscribe(data=>{
+            console.log("checkForNewRelease", data);
+            
+            if(data.response) {
+                let response = data.response[0].get_new_release.response;
+                if (response && response.status == 'success') {
+                    CommonService.updateAvailable = true;
+                    // show update
+                    this.rootPage = UpdatePage
+                }
+            }
+
+            Splashscreen.hide();
+        },
+        err=>{
+            // show offline
+            this.params.setIsInternetAvailable(false);
+        },
+        ()=> {});
     }
 
     onOpenLeftMenu(){

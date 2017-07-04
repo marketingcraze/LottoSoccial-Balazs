@@ -81,6 +81,11 @@
             "resolved": "https://registry.npmjs.org/@ionic-native/in-app-browser/-/in-app-browser-3.12.1.tgz",
             "integrity": "sha512-evLthAiYpVJV0j6pb3wCelOkFAP+Hzeu3/yoEywd8s9hngkq4y3v5JD4I+YSgTPi3+DjXm7ki7U/CWo2yNSb9A=="
         },
+        "@ionic-native/market": {
+            "version": "3.12.1",
+            "resolved": "https://registry.npmjs.org/@ionic-native/market/-/market-3.12.1.tgz",
+            "integrity": "sha512-5tyOrTszlPMpXf4BnRArXz8iSakK5CDxN5LKiPgQUXO3fLFZNc0cEFTTSkg1hwzb9wk2+M3DiJyGDOKXkZH52Q=="
+        },
         "@ionic-native/network": {
             "version": "3.12.1",
             "resolved": "https://registry.npmjs.org/@ionic-native/network/-/network-3.12.1.tgz",
@@ -1231,11 +1236,6 @@
                 }
             }
         },
-        "cordova-plugin-app-version": {
-            "version": "0.1.9",
-            "resolved": "https://registry.npmjs.org/cordova-plugin-app-version/-/cordova-plugin-app-version-0.1.9.tgz",
-            "integrity": "sha1-nbBgeGMzenEEiTAuX1CpBPFEm9s="
-        },
         "cordova-plugin-camera": {
             "version": "2.4.1",
             "resolved": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-2.4.1.tgz",
@@ -1265,6 +1265,11 @@
             "version": "1.7.1",
             "resolved": "https://registry.npmjs.org/cordova-plugin-inappbrowser/-/cordova-plugin-inappbrowser-1.7.1.tgz",
             "integrity": "sha1-Q1tD9ZH+e/qV6pjb4ABIQf5ZulE="
+        },
+        "cordova-plugin-market": {
+            "version": "1.1.3",
+            "resolved": "https://registry.npmjs.org/cordova-plugin-market/-/cordova-plugin-market-1.1.3.tgz",
+            "integrity": "sha1-Gtp/Eb+jlN1IiJAI6+WOsuBzQV8="
         },
         "cordova-plugin-network-information": {
             "version": "1.3.3",
