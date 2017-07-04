@@ -1,32 +1,17 @@
 <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
 
 <ion-content class="card-background-page">
-
-
-    <ion-list no-lines>
-        <div *ngFor="let item of yourGames">
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <ion-img src="{{item.game_icon_url}}"></ion-img>
-                </ion-thumbnail>
-                <h2>{{item.game_name}}</h2>
-                <p ion-text color="orange">{{item.game_description1}}</p>
-                <button ion-button item-right color="secondary" style="width: 80px;">{{item.button_label}}</button>
-            </ion-item>
-            <ion-item-divider style="color:#333333!important;top:-8px!important;">{{item.user_game_target}}</ion-item-divider>
-        </div>
-
-    <!-- 
-       <ion-item>
+    <ion-list no-lines *ngFor="let  game of game_group ; let i=index" class="yourgameslist" >
+       <ion-item *ngIf="i < game_group?.length-1">
             <ion-thumbnail item-left>
-                <img src="assets/img/sample_thumb_05@3x.png">
+                <img src="{{game?.game_iconurl}}">
             </ion-thumbnail>
-            <h2>Spin me a fortune</h2>
-            <p ion-text color="orange">TOP PRIZE: $50</p>
-            <button ion-button item-right color="secondary" style="width: 80px;">PLAY</button>
+            <h2>{{game?.game_title}}</h2>
+            <p ion-text color="orange">{{game?.game_detail_group?.game_details_1 | slice:0:20 }}</p>
+            <button ion-button item-right color="secondary" style="width: 80px;" (click)="play(game?.destination_url)" >PLAY</button>
         </ion-item>
-
-        <ion-item>
+        <ion-item-divider style="color:#333333!important;top:-8px!important;" *ngIf="i < game_group?.length-1">{{game?.game_detail_group?.game_details_2}}</ion-item-divider>
+        <!--<ion-item>
             <ion-thumbnail item-left>
                 <img src="assets/img/sample_thumb_04@3x.png">
             </ion-thumbnail>
@@ -34,15 +19,15 @@
             <p ion-text color="orange">TOP PRIZE: $50</p>
             <button ion-button item-right color="secondary" style="width: 80px;">PLAY</button>
         </ion-item>
-        <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>
-        <ion-item>
+        <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>-->  
+    </ion-list>
+     <ion-item class="moregame">
             <ion-thumbnail item-left>
                 <img src="assets/img/sample_thumb_06@3x.png">
             </ion-thumbnail>
             <h2>Add more games to your account</h2>
-            <button ion-button item-right color="secondary">REDEEM GAMES</button>
-        </ion-item> -->
-    </ion-list>
+            <button ion-button item-right color="secondary" (click)="redeem()">REDEEM GAMES</button>
+    </ion-item>
     <ion-card>
         <img src="assets/img/games_hero_001@3x.png" />
     </ion-card>

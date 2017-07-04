@@ -422,6 +422,54 @@ mobile:"23423423423"
 
     }
 
+    your_games(){
+        let action=CommonService.apiUrl + CommonService.version + "/games/"
+        let body={
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "3",
+                    "screen_id": "3.1",
+                    "action": "your_game",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "get_your_game_list",
+                    "customer_id": CommonService.session.customer_id
+        }
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+       
+        var response = this.http.post(action, body,opt).map(res => res.json());
+        return response;
+
+     } 
+     redeem_game(){
+         let action=CommonService.apiUrl + CommonService.version + "/games/"
+        let body={
+            "session_ID": CommonService.sessionId,
+            "page_ID": "3",
+            "screen_id": "3.2",
+            "action": "buy_game",
+            "website": "Lotto Social",
+            "website_id": "27",
+            "source_site": "mobi.lottosocial.com",
+            "module_name": "get_buy_game_list",
+            "customer_id": CommonService.session.customer_id
+        }
+
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+       
+        var response = this.http.post(action, body,opt).map(res => res.json());
+        return response;
+     }
+
+
 }
 
 
