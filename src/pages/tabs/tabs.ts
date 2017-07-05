@@ -31,7 +31,7 @@ export class TabsPage {
     tab5Root: any = AccountPage;
     tab6Root: any = OffersPage;
 
-    mySelectedIndex: number;
+    mySelectedIndex: number = 2;
 
     homeCardData:any;
     gameData:any;
@@ -55,13 +55,13 @@ export class TabsPage {
         private loadingCtrl:LoadingController,
         private alertCtrl:AlertController) {
 
-        console.log("TabsPage");
+        console.log("TabsPage", navParams.data);
 
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
         this.gameData = "game data";
 
-        this.mySelectedIndex = navParams.data.tabIndex || 0;
+        this.mySelectedIndex = navParams.data.tabIndex || 2;
 
         if (this.params.events) {
             this.params.events.subscribe('go-page', (tab) => {
@@ -85,7 +85,7 @@ export class TabsPage {
 
     ionViewDidLoad(){
         console.log("TabsPage::ionViewDidLoad");
-        this.homeTabs.select(0);
+        this.homeTabs.select( this.mySelectedIndex );
     }
 
     ionViewDidEnter() {
@@ -134,7 +134,7 @@ export class TabsPage {
     }
 
     onSelectTab(tab){
-        // console.log("TabsPage::onSelectTab", tab);
+        console.log("TabsPage::onSelectTab", tab);
         
         switch(tab){
             case 'account':
