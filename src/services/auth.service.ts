@@ -249,7 +249,7 @@ mobile:"23423423423"
                 "source_site": "mobi.lottosocial.com", 
                 "module_name": "register",
 
-                "mobile": user.mobile,
+                "mobile": user.free_reg_msn,
                 "password": user.free_reg_pwd,
                 "country_code": user.country_code, 
                 "first_name": user.first_name, 

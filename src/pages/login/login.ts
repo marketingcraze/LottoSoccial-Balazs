@@ -249,9 +249,7 @@ export class LoginPage {
                 
                 // go to home page
                 if(data && data.status != "error") {
-
                 }else{
-
                 }
                 
             },
