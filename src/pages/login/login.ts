@@ -19,22 +19,23 @@ import { Params } from '../../services/params';
 export class LoginPage {
 
     public countryPopOver:any;
-    public countryNumber:string = "";
     public selectedCountry:any = {
-        country_code: "44",
-        country_flag_url: "flag_url_for_44.png",
-        country_name:"GB"
+        name: "Austria (Österreich)",
+        iso2: "at",
+        dialCode: "43",
+        priority: 0,
+        areaCodes: null
     };
     
     public selectedCountryMobile:any;
-    public countryNumberMobile:number = 0;
+    public countryNumberMobile:string = "";
     public forgotPassPopup = false;
     public forgotPassPopupConfirm = false;
     public warningPhone = false;
     public warningPhonePopup = false;
     public showPass = false;
 
-    public countryes:any[];
+    // public countryes:any[];
     
     private storageReady:boolean = false;
     
@@ -58,13 +59,13 @@ export class LoginPage {
         private popoverCtrl: PopoverController
         ) {
 
-        if (CommonService.countries == null) {
+        /*if (CommonService.countries == null) {
             this.loadCountries();
         }else{
             this.countryes = CommonService.countries
             this.selectedCountry = this.countryes[0]
             this.countryNumber = this.selectedCountry.country_code;
-        }
+        }*/
         storage.ready().then( ()=> this.storageReady = true );
         
     }
@@ -86,10 +87,10 @@ export class LoginPage {
                     && data.response[0].get_country_code_flag.response.country_code_group
                     ) {
 
-                    this.countryes = data.response[0].get_country_code_flag.response.country_code_group
-                    this.selectedCountry = this.countryes[0];
-                    this.countryNumber = this.selectedCountry.country_code;
-                    console.log("countries successful", this.countryes);
+                    // this.countryes = data.response[0].get_country_code_flag.response.country_code_group
+                    // this.selectedCountry = this.countryes[0];
+                    // this.countryNumber = this.selectedCountry.country_code;
+                    // console.log("countries successful", this.countryes);
                 }
             },
             err=>{
@@ -109,21 +110,20 @@ export class LoginPage {
     }
 
     presentPopover(ev) {
-        if (!this.countryes) {
+/*        if (!this.countryes) {
             if (CommonService.countries) {
                 this.countryes = CommonService.countries
             }else{
                 this.loadCountries();
                 return;
             }
-        }
+        }*/
         
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
-            countries: this.countryes,
+            // countries: this.countryes,
             cb: (data) => { 
-                // console.log(data);
+                console.log("on selected country", data);
                 this.selectedCountry = data;
-                this.countryNumber = data.country_code;
             }
         });
         this.countryPopOver.present({ev: ev});
@@ -131,15 +131,16 @@ export class LoginPage {
     }
 
     presentPopoverMobile(ev) {
-        if (!this.countryes) {
+/*        if (!this.countryes) {
             this.loadCountries();
             return;
-        }
+        }*/
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
-            countries: this.countryes,
+            // countries: this.countryes,
             cb: (data) => { 
+                console.log("on selected country", data);
                 this.selectedCountryMobile = data;
-                this.countryNumberMobile = data[2];
+                this.countryNumberMobile = data.dialCode;
             }
         });
         this.countryPopOver.present({ev: ev});
@@ -158,7 +159,7 @@ export class LoginPage {
 
         this.prepareMobile();
 
-        this.login.country_code = this.countryNumber;
+        this.login.country_code = this.selectedCountry.dialCode;
         console.log("submitLogin", this.login );
         if(this.phoneValidator(this.login.free_reg_msn) ) {
             this.warningPhone = true;
@@ -171,7 +172,7 @@ export class LoginPage {
         });
         loader.present();
 
-        this.authSrv.loginUser(this.countryNumber, this.login.free_reg_msn, 
+        this.authSrv.loginUser(this.selectedCountry.dialCode, this.login.free_reg_msn, 
             this.login.free_reg_pwd).subscribe(
 
             data=>{
@@ -226,7 +227,7 @@ export class LoginPage {
     }
 
     submitMobile(){
-        let free_reg_msn = "" + this.countryNumberMobile + this.login.mobile;
+        let free_reg_msn = "" + this.selectedCountry.dialCode + this.login.mobile;
         console.log("submitMobile", free_reg_msn );
         if(this.phoneValidator(free_reg_msn) ) {
             this.warningPhonePopup = true;
@@ -273,7 +274,7 @@ export class LoginPage {
         let msn_len = free_reg_msn.length;
         // var countryData = $('#free_reg_msn').intlTelInput("getSelectedCountryData");/44
 
-        var cc = this.countryNumber.replace('+','');
+        var cc = this.selectedCountry.dialCode.replace('+','');
         if (this.login.mobile.substr(0, 1)=="0") {
             var p = this.login.mobile.substr(1, msn_len);
             free_reg_msn = cc + p;

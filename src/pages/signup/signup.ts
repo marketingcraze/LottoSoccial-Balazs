@@ -21,8 +21,8 @@ import 'rxjs/add/operator/map';
 import { Observable, ObservableInput } from 'rxjs/Observable';
 
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html'
+	selector: 'page-signup',
+	templateUrl: 'signup.html'
 })
 export class SignupPage {
 	@ViewChild('tabs') tabsRef: Tabs;
@@ -30,16 +30,18 @@ export class SignupPage {
 	public showPass = false;
 	public tabs:Tabs;
 	public selectedCountry:any = {
-        country_code: "99",
-        country_flag_url: "flag_url_for_99.png",
-        country_name:"Rollover"
-    };
+		name: "Austria (Österreich)",
+		iso2: "at",
+		dialCode: "43",
+		priority: 0,
+		areaCodes: null
+	};
 	public countryPopOver:any;
 	public warningPassword:boolean = false;
 	public warningPhone:boolean = false;
-	public country_number:string = "";
+	// public country_number:string = "";
 
-	public countries:any[];
+	// public countries:any[];
 
 	public signup = {
 		image:"",
@@ -70,9 +72,10 @@ export class SignupPage {
 		private loadingCtrl: LoadingController,	
 		public authSrv:AuthService) {
 
-		console.log('LoginPage', network);
+		console.log('SignupPage', network);
 
 		this.tabs = navCtrl.parent;
+		/*
 		if (CommonService.countries == null) {
 			this.loadCountries();
 		}else{
@@ -80,7 +83,7 @@ export class SignupPage {
 			this.selectedCountry = this.countries[0]
 			console.log("selectedCountry", this.selectedCountry)
 			this.country_number = this.selectedCountry.country_code;
-		}
+		}*/
 		
 		platform.ready().then(() => {
 			console.log('ready');
@@ -98,9 +101,9 @@ export class SignupPage {
                 loader.dismiss();
                 
                 if(data) {
-                	this.countries = data.response[0].get_country_code_flag.response.country_code_group;
-                	this.selectedCountry = this.countries[0];
-                	console.log("countries successful", this.countries);
+                	// this.countries = data.response[0].get_country_code_flag.response.country_code_group;
+                	// this.selectedCountry = this.countries[0];
+                	// console.log("countries successful", this.countries);
                 }
             },
             err=>{
@@ -149,8 +152,8 @@ export class SignupPage {
 	}
 
 	presentPopover(ev) {
-		console.log('SignupPage::presentPopover	', this.countries);
-
+		console.log('SignupPage::presentPopover	');
+/*
 		if (this.countries == null) {
 			if (CommonService.countries) {
 				this.countries = CommonService.countries
@@ -160,13 +163,14 @@ export class SignupPage {
 				return;
 			}
 		}
-		
+*/		
 		// commented for API being ready
 	    this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
-	    	countries: this.countries,
+	    	// countries: this.countries,
 	    	cb: (data) => { 
+	    		console.log("on selected country", data);
 	    		this.selectedCountry = data; 
-	    		this.country_number = data.country_code;
+	    		// this.country_number = data.country_code;
 	    	}
 	    });
 	    this.countryPopOver.present({ev: ev});
@@ -206,7 +210,7 @@ export class SignupPage {
 		
 		// this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
 		this.prepareMobile();
-		this.signup.country_code = this.country_number;
+		this.signup.country_code = this.selectedCountry.dialCode;
 		console.log("submitSignup", this.signup, form);
 		// console.log("submitSignup", form);
 
@@ -308,7 +312,7 @@ export class SignupPage {
         let msn_len = free_reg_msn.length;
         // var countryData = $('#free_reg_msn').intlTelInput("getSelectedCountryData");/44
 
-        var cc = this.country_number.replace('+','');
+        var cc = this.selectedCountry.dialCode.replace('+','');
         if ( free_reg_msn.substr(0, 1)=="0" ) {
             var p = free_reg_msn.substr(1, msn_len);
             free_reg_msn = cc + p;
@@ -357,7 +361,7 @@ url:""
 		});
 		loader.present();
 		
-		this.authSrv.loginUser( this.country_number, this.signup.mobile, this.signup.free_reg_pwd)
+		this.authSrv.loginUser( this.selectedCountry.dialCode, this.signup.mobile, this.signup.free_reg_pwd)
 		.subscribe(
 			data=>{
 				loader.dismiss();

@@ -24,6 +24,10 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         syndicate_name: "",
         total_cost:0.00
     }
+    public offer = {
+        syndicate_name: "",
+        total_cost:0.00
+    }
 
     @Input('existing-cards') existingPaymilCards;  
     
@@ -43,6 +47,8 @@ export class PopupConfirmPaymentComponent implements OnChanges{
                     this.cardsList = this.cardsValue[i].get_customer_paymill_card_details.response.cards
                 }else if (this.cardsValue[i].get_customer_details) {
                     this.customerDetails = this.cardsValue[i].get_customer_details.response
+                }else if (this.cardsValue[i].offer) {
+                    this.syndicate = this.cardsValue[i].offer
                 }else if (this.cardsValue[i].syndicate) {
                     this.syndicate = this.cardsValue[i].syndicate
 

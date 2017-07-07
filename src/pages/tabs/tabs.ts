@@ -64,10 +64,11 @@ export class TabsPage {
         this.mySelectedIndex = navParams.data.tabIndex || 2;
 
         if (this.params.events) {
-            this.params.events.subscribe('go-page', (tab) => {
-                console.log("go-page", tab, this.homeTabs.getActiveChildNav());
-                if (tab && this.homeTabs.getActiveChildNav().enabled) {
-                    this.homeTabs.getActiveChildNav().push(tab);
+            this.params.events.subscribe('go-page', (page) => {
+                let currentTab = this.homeTabs.getActiveChildNav();
+                console.log("go-page", page, currentTab);
+                if (page && currentTab.enabled) {
+                    currentTab.push( page );
                 }
             });
             this.params.events.subscribe('go-tab', (tab) => {
@@ -78,9 +79,7 @@ export class TabsPage {
                 this.homeTabs.select( tab );
             });
 
-
         }
-
     }
 
     ionViewDidLoad(){

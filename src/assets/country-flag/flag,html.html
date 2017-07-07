@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript" src="https://nima.lottosocial.com/wp-includes/js/jquery/jquery.js"></script>
+  <script src="https://nima.lottosocial.com/wp-content/themes/bishop-child/js/intlTelInput.js"></script>
+  <link rel='stylesheet' href='https://nima.lottosocial.com/wp-content/themes/bishop-child/css/intlTelInput.css' type='text/css' media='all' />
+ </head>
+ <body>
+  <input type="tel" class="form-control" tabindex="1" name="login_mobile" id="login_mobile" value="" placeholder="Enter mobile number" maxlength="15" autocomplete="off">
+ </body>
+ <script>
+$ = jQuery.noConflict(); 
+$('#login_mobile').intlTelInput({
+	preferredCountries: ["gb","ie"]
+});
+ </script>
+</html>

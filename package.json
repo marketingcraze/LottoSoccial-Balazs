@@ -54,7 +54,6 @@
         "cordova-plugin-whitelist": "^1.3.2",
         "cordova-sqlite-storage": "^2.0.4",
         "dargs": "^5.1.0",
-        "flag-icon-css": "^2.8.0",
         "ionic-angular": "^2.2.0",
         "ionic-native": "^2.8.1",
         "ionic-plugin-keyboard": "^2.2.1",

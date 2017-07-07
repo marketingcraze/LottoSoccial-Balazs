@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
@@ -75,25 +76,44 @@ export class OffersPage {
 
   showPaymentOptions() {
     console.log("OffersPage::showPaymentOptions()");
+    let offer = {total_cost:4.99} ;
 
     if (this.customerToken) {
-      let opt:string = "toolbarposition=top";
-      let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
-      str += '&customer_id=1970400&customer_token='+this.customerToken+'&Offer_ID=1188'
-      this.iab.create( str, 'blank', opt);
+      this.goPaymentWebview();
     }else{
       let loader = this._showLoader();
       // get all the cards details
       this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
         console.log("OffersPage::showPaymentOptions() success", data);
-        this.userCards = data.response;
-        loader.dismiss();
-        this.confirmPayment.togglePopup()
+        let token_exists = 0;
+        for (var i = 0; i < data.response.length; ++i) {
+          if (data.response[i].get_customer_paymill_card_details) {
+            token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+          } 
+        }
+
+        if (token_exists > 0) {
+          data.response.push({ offer: offer });
+          this.userCards = data.response;
+          console.log("OffersPage::showPaymentOptions() success", this.userCards);
+          loader.dismiss();
+          this.confirmPayment.togglePopup()
+        }else{
+          this.goPaymentWebview();
+        }
+
       }, (err) => {
         console.log("OffersPage::showPaymentOptions() error", err);
         loader.dismiss();
       })
     }
+  }
+
+  goPaymentWebview(){
+      let opt:string = "toolbarposition=top";
+      let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+      str += '&customer_id='+CommonService.session.customer_id+'&customer_token='+this.customerToken+'&Offer_ID=1188'
+      this.iab.create( str, 'blank', opt);
   }
 
   private _showLoader() {
