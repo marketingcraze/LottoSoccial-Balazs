@@ -27,7 +27,13 @@ export class LoginPage {
         areaCodes: null
     };
     
-    public selectedCountryMobile:any;
+    public selectedCountryMobile:any={
+        name: "Austria (Österreich)",
+        iso2: "at",
+        dialCode: "43",
+        priority: 0,
+        areaCodes: null
+    };
     public countryNumberMobile:string = "";
     public forgotPassPopup = false;
     public forgotPassPopupConfirm = false;
@@ -227,7 +233,7 @@ export class LoginPage {
     }
 
     submitMobile(){
-        let free_reg_msn = "" + this.selectedCountry.dialCode + this.login.mobile;
+        let free_reg_msn = "" + this.selectedCountryMobile.dialCode + this.login.mobile;
         console.log("submitMobile", free_reg_msn );
         if(this.phoneValidator(free_reg_msn) ) {
             this.warningPhonePopup = true;

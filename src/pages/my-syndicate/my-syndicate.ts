@@ -78,7 +78,7 @@ export class MySyndicatePage {
             console.log("OffersPage::getJackpotList() success", data);
             if (data.response && data.response[0].get_big_jackpot_list) {
                 this.jackpotList = data.response[0].get_big_jackpot_list.response;
-                // this.customerToken = this.jackpotList.customer_token;
+                this.customerToken = this.jackpotList.customer_token;
             }
 
             loader.dismiss();
@@ -86,7 +86,7 @@ export class MySyndicatePage {
         }, (err) => {
             console.log("OffersPage::getJackpotList() error", err);
             loader.dismiss();
-        })
+        });
     }
 
     showPaymentOptions(syndicate) {

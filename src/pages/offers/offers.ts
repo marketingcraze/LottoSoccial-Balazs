@@ -61,9 +61,10 @@ export class OffersPage {
     
     this.srvOffer.getJackpotList().subscribe((data) => {
       console.log("OffersPage::getJackpotList() success", data);
-      if (data.response && data.response[0].get_big_jackpot_list) {
+      if (data.response && data.response[0] 
+        && data.response[0].get_big_jackpot_list) {
         this.jackpotList = data.response[0].get_big_jackpot_list.response;
-        // this.customerToken = this.jackpotList.customer_token;
+        this.customerToken = this.jackpotList.customer_token;
       }
 
       loader.dismiss();

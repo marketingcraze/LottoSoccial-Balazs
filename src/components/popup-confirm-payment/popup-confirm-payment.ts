@@ -115,12 +115,14 @@ export class PopupConfirmPaymentComponent implements OnChanges{
 
     viewTickets(){
         this.togglePopup();
-        this.params.goTab(2);
+        this.params.goTab(1);
+        this.showBuyNowView = false;
     }
 
     viewOffers(){
         this.togglePopup();
         this.params.goTab(4);
+        this.showBuyNowView = false;
     }
 
 

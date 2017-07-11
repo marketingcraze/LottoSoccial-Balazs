@@ -67,8 +67,12 @@ export class TabsPage {
             this.params.events.subscribe('go-page', (page) => {
                 let currentTab = this.homeTabs.getActiveChildNav();
                 console.log("go-page", page, currentTab);
-                if (page && currentTab.enabled) {
-                    currentTab.push( page );
+                try{
+                    if (page && currentTab.enabled) {
+                        currentTab.push( page );
+                    }
+                }catch( e ){
+                    console.log("why the hell", e);
                 }
             });
             this.params.events.subscribe('go-tab', (tab) => {
@@ -76,7 +80,12 @@ export class TabsPage {
                 if (!tab) {
                     tab = 0;
                 }
-                this.homeTabs.select( tab );
+                try{
+                    this.homeTabs.select( tab );
+                }catch( e ){
+                    console.log("home tab null", e);
+                }
+                
             });
 
         }
