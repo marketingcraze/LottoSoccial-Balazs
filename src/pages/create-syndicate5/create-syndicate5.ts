@@ -4,6 +4,7 @@ import { CreateSyndicate4Page } from '../create-syndicate4/create-syndicate4';
 import { ChooseNumberPage } from '../choose-number/choose-number';
 import { SyndicateService } from '../../providers/syndicate-service';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 /*
   Generated class for the CreateSyndicate5 page.
 
@@ -16,7 +17,9 @@ import { SyndicateService } from '../../providers/syndicate-service';
 })
 export class CreateSyndicate5Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public appSound:AppSoundProvider,
+    private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateSyndicate5Page');
@@ -27,9 +30,11 @@ export class CreateSyndicate5Page {
     this.viewCtrl.showBackButton(false);
   }
   close() {
+    this.appSound.play('menuClick');
     this.navCtrl.pop(CreateSyndicate4Page);
   }
   next() {
+    this.appSound.play('menuClick');
     let loader = this.loadingCtrl.create({
             content: "Please wait..."
         });
@@ -38,6 +43,7 @@ export class CreateSyndicate5Page {
     loader.dismiss();
   }
   getTerms(id: any) {
+    this.appSound.play('buttonClick');
     let loader = this.loadingCtrl.create({
             content: "Please wait..."
         });

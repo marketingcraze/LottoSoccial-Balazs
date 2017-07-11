@@ -17,6 +17,8 @@ import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 @Component({
     selector: 'page-tabs',
     templateUrl: 'tabs.html'
@@ -51,6 +53,7 @@ export class TabsPage {
         public platform: Platform, 
         private srvDb:DatabaseService,
         private srvHome:HomeService,
+        public appSound:AppSoundProvider,
         public modalCtrl: ModalController,
         private loadingCtrl:LoadingController,
         private alertCtrl:AlertController) {
@@ -143,7 +146,7 @@ export class TabsPage {
 
     onSelectTab(tab){
         console.log("TabsPage::onSelectTab", tab);
-        
+        this.appSound.play('menuClick');
         switch(tab){
             case 'account':
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', false)

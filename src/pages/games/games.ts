@@ -6,6 +6,7 @@ import { RedeemGamesPage } from '../redeem-games/redeem-games';
 
 import { Params } from '../../services/params';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
   selector: 'page-games',
@@ -20,6 +21,7 @@ export class GamesPage {
     constructor(
         private params: Params,
         private navParams:NavParams,
+        public appSound:AppSoundProvider,
         private navCtrl:NavController) {
 
         console.log('GamesPage', this.navParams.data);
@@ -30,5 +32,9 @@ export class GamesPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamesPage', this.navParams.data);
+    }
+
+    tabChange(){
+        this.appSound.play('menuClick');
     }
 }

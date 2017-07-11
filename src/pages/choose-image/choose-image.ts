@@ -12,6 +12,8 @@ import { Observable, ObservableInput } from 'rxjs/Observable';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 @Component({
   selector: 'page-choose-image',
   templateUrl: 'choose-image.html'
@@ -29,6 +31,7 @@ export class ChooseImagePage {
     private imagePicker: ImagePicker,
     private file: File,
     private http: Http, 
+    public appSound:AppSoundProvider,
     private loadingCtrl: LoadingController
     ) {
    
@@ -44,6 +47,7 @@ export class ChooseImagePage {
 
   selectedImage(image) {
     console.log(image);
+    this.appSound.play('buttonClick');
     this.navCtrl.push(CreateSyndicatePage, {'image': image});
   }
 

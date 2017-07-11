@@ -4,6 +4,9 @@ import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 import { CreateSyndicate4Page } from '../create-syndicate4/create-syndicate4';
 import { SyndicateService } from '../../providers/syndicate-service';
+
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 /*
   Generated class for the CreateSyndicate3 page.
 
@@ -22,7 +25,13 @@ export class CreateSyndicate3Page {
   lotteries = [];
   selectCount: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private viewCtrl: ViewController, 
+    public appSound:AppSoundProvider,
+    public _syndService: SyndicateService, 
+    public loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
   }
@@ -47,12 +56,15 @@ export class CreateSyndicate3Page {
     this.viewCtrl.showBackButton(false);
   }
    backTosyndicate1() {
+     this.appSound.play('menuClick');
     this.navCtrl.push(CreateSyndicatePage);
   }
   backTosyndicate2() {
+    this.appSound.play('menuClick');
     this.navCtrl.push(CreateSyndicate2Page);
   }
   selected(index) {
+    this.appSound.play('buttonClick');
     this.lotteries[index].selected = !this.lotteries[index].selected;
     if(this.lotteries[index].selected) {
       this.selectCount += 1

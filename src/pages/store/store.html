@@ -32,7 +32,7 @@
     </ion-row>
   </ion-grid>
   
-  <ion-slides #home_slides loop="true" initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
+  <ion-slides #home_slides loop="true" initialSlide=1 spaceBetween={{spaceBetween}} class="home-slides">
 
 <!-- Slide 0 -->
 
@@ -290,7 +290,7 @@
                         <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
                         <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
                     </div>
-                    <button item-right ion-button color="secondary"> {{ offer.button_text }} </button>
+                    <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
                 </ion-item>
                 
             </div>
@@ -312,7 +312,7 @@
                         <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
                     </div>
                   
-                  <button item-right ion-button color="secondary"> {{ offer.button_text }} </button>
+                  <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
                   
                 </ion-item>
             </div>

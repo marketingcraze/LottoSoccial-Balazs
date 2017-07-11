@@ -4,6 +4,8 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ChooseImagePage } from '../choose-image/choose-image';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 /*
   Generated class for the CreateSyndicate page.
 
@@ -21,7 +23,13 @@ export class CreateSyndicatePage {
   public sImage: string = ''
   public title: string = ''
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private viewCtrl: ViewController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public appSound:AppSoundProvider,
+    private formBuilder: FormBuilder, 
+    private viewCtrl: ViewController) {
+
     this.todo = this.formBuilder.group({
       title: ['', Validators.required],
       image: ['', Validators.required]
@@ -59,6 +67,7 @@ export class CreateSyndicatePage {
   }
 
   chooseImage() {
+    this.appSound.play('buttonClick');
     var data = {
       title: this.todo.value.title,
       image: this.sImage
@@ -68,6 +77,7 @@ export class CreateSyndicatePage {
   }
 
   logForm(){
+    this.appSound.play('buttonClick');
     var data = {
       title: this.todo.value.title,
       image: this.sImage

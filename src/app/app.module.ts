@@ -82,11 +82,13 @@ import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { Network } from '@ionic-native/network';
 import { Market } from '@ionic-native/market';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
+import { AppSoundProvider } from '../providers/app-sound/app-sound';
 
 @NgModule({
     declarations: [
@@ -232,7 +234,7 @@ import { FilterPipe } from '../pipes/filter-pipe';
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
   DatabaseService, CommonService, AuthService, HomeService, AccountService, Params, 
   SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService, 
-  Network, OfferService, Market]
+  Network, OfferService, Market, NativeAudio, AppSoundProvider]
 
 })
 export class AppModule {}

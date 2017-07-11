@@ -5,6 +5,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { Params } from '../../services/params';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 @Component({
   selector: 'page-your-games',
   templateUrl: 'your-games.html'
@@ -22,6 +24,7 @@ export class YourGamesPage {
         public navCtrl: NavController, 
       	public navParams: NavParams, 
         public authSrv:AuthService,
+        public appSound:AppSoundProvider,
         private loadingCtrl: LoadingController,
         private iab: InAppBrowser) {
 
@@ -51,11 +54,13 @@ export class YourGamesPage {
     }
     // play button click call this function
     play(url) {
+      this.appSound.play('buttonClick');
       const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [url] + '&customer_id=1970400&customer_token=818113679640');
       // console.log('https://nima.lottosocial.com/webview-auth/?redirect_to='+[url]+'&customer_id=1970400&customer_token=818113679640');
     }
     // redeem button click call this function
     redeem() {
+      this.appSound.play('menuClick');
       this.navCtrl.parent.select(1);
     }
 

@@ -4,6 +4,9 @@ import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate3Page } from '../create-syndicate3/create-syndicate3';
 import { SyndicateService } from '../../providers/syndicate-service';
 
+
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 /*
   Generated class for the CreateSyndicate2 page.
 
@@ -19,7 +22,12 @@ export class CreateSyndicate2Page {
   public margin_img1: number = 0
   public margin_img2: number = 0
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public _syndService: SyndicateService) {}
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private viewCtrl: ViewController, 
+    public appSound:AppSoundProvider,
+    public _syndService: SyndicateService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateSyndicate2Page');
@@ -36,10 +44,12 @@ export class CreateSyndicate2Page {
     this.navCtrl.push(CreateSyndicatePage)
   }
   next() {
+    this.appSound.play('menuClick');
     localStorage.setItem('cardType', this.selectedCard);
     this.navCtrl.push(CreateSyndicate3Page)
   }
   selected(selected){
+    this.appSound.play('menuClick');
     if(selected == 'ongoing') {
       // this.margin_img1 = -10
       // this.margin_img2 = 10

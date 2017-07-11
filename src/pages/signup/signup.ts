@@ -30,12 +30,12 @@ export class SignupPage {
 	public showPass = false;
 	public tabs:Tabs;
 	public selectedCountry:any = {
-		name: "Austria (Österreich)",
-		iso2: "at",
-		dialCode: "43",
-		priority: 0,
-		areaCodes: null
-	};
+        name: "United Kingdom",
+        iso2: "gb",
+        dialCode: "44",
+        priority: 0,
+        areaCodes: null
+    };
 	public countryPopOver:any;
 	public warningPassword:boolean = false;
 	public warningPhone:boolean = false;

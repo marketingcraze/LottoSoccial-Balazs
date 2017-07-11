@@ -287,7 +287,7 @@ export class CountryListPopPage {
         private params: NavParams,
         public commonSrv: CommonService) {
 
-        console.log("countrys successful", params.data);
+        console.log("countrys successful", this.allCountries.length);
 
         this.callback = this.params.get('cb');
         // this.countries = this.params.get('countries');

@@ -6,7 +6,7 @@
 <cus-header title="Offers" notification-count="0"></cus-header>
     
   </ion-navbar>
-      <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
+      <ion-segment [(ngModel)]="toptab" mode="md" color="primary" (ngModelChange)="tabChanged()">
             <ion-segment-button value="offer"   class="Menu_Tab">
                 OFFER FOR YOU
             </ion-segment-button>

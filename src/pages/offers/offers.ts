@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
@@ -49,6 +51,7 @@ export class OffersPage {
     public navParams: NavParams,
     public authSrv: AuthService,
     public srvOffer: OfferService,
+    public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
@@ -79,6 +82,7 @@ export class OffersPage {
     console.log("OffersPage::showPaymentOptions()");
     let offer = {total_cost:4.99} ;
 
+    this.appSound.play('buttonClick');
     if (this.customerToken) {
       this.goPaymentWebview();
     }else{
@@ -108,6 +112,10 @@ export class OffersPage {
         loader.dismiss();
       })
     }
+  }
+  tabChanged(){
+    // console.log("OffersPage::tabChanged()");
+    this.appSound.play('menuClick');
   }
 
   goPaymentWebview(){

@@ -15,6 +15,8 @@ import { CommonService } from '../../services/common.service';
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'
@@ -46,6 +48,7 @@ export class AccountPage {
 	    private srvDb:DatabaseService,
 	    private srvHome:HomeService,
 	    private navCtrl:NavController,
+	    public appSound:AppSoundProvider,
 	    private srvAccount:AccountService,
 	    public modalCtrl: ModalController,
 	    private loadingCtrl:LoadingController,
@@ -98,6 +101,7 @@ export class AccountPage {
 	}
 
 	updateNickName(){
+		this.appSound.play('buttonClick');
 		let alert = this.alertCtrl.create({
 			title: 'Login',
 			inputs: [
@@ -124,6 +128,7 @@ export class AccountPage {
 
 	logout(){
 		console.log( "AccountPage::logout" );
+		this.appSound.play('buttonClick');
 		
 		this.cache.clearDatabaseOnLogout();
 

@@ -8,6 +8,8 @@ import { EditProfilePassword } from './edit-profile-password/edit-profile-passwo
 import { AccountService } from '../../services/account.service';
 import { Params } from '../../services/params'
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 @Component({
 	selector: 'page-edit-profile',
 	templateUrl: 'edit-profile.html'
@@ -30,6 +32,7 @@ export class EditProfilePage {
 		public viewCtrl:ViewController,
 		public events:Events,
 		private srvAccount:AccountService,
+		public appSound:AppSoundProvider,
 	    private loadingCtrl:LoadingController,
 	    public navParams: NavParams) {
 
@@ -54,7 +57,8 @@ export class EditProfilePage {
 
 	submitDetails(detailsForm){
 		console.log('EditProfilePage::submitDetails', this.accountData);
-		
+		this.appSound.play('buttonClick');
+
 		let loader = this.loadingCtrl.create({
             content: "Please wait..."
         });
@@ -127,6 +131,7 @@ export class EditProfilePage {
 	}
 
 	private closeModal(){
+		this.appSound.play('buttonClick');
 		if (!this.dismissed) {
 			this.dismissed = true;
 			this.viewCtrl.dismiss(this.returnData);

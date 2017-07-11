@@ -6,6 +6,7 @@ import { MySyndicatePage } from '../my-syndicate/my-syndicate';
 import { Params } from '../../services/params';
 
 import { CreateSyndicateTab } from '../create-syndicate-tab/create-syndicate-tab';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
 	selector: 'page-syndicates',
@@ -20,6 +21,7 @@ export class SyndicatesPage {
     constructor(
         public params:Params,
         public navCtrl: NavController, 
+        public appSound:AppSoundProvider,
         public navParams: NavParams) {
         }
 
@@ -33,6 +35,10 @@ export class SyndicatesPage {
 
     goHomePage(){
         this.params.goHomePage();
+    }
+
+    tabChange(){
+        this.appSound.play('menuClick');
     }
 
 }

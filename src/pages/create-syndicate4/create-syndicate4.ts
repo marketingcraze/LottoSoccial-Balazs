@@ -5,6 +5,10 @@ import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 import { CreateSyndicate3Page } from '../create-syndicate3/create-syndicate3';
 import { CreateSyndicate5Page } from '../create-syndicate5/create-syndicate5';
 import { SyndicateService } from '../../providers/syndicate-service';
+
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
+
 /*
   Generated class for the CreateSyndicate4 page.
 
@@ -30,7 +34,9 @@ export class CreateSyndicate4Page {
     sat: false
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public appSound:AppSoundProvider,
+    private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
     var data = JSON.parse(localStorage.getItem('cardDefault'));
@@ -46,12 +52,15 @@ export class CreateSyndicate4Page {
     this.viewCtrl.showBackButton(false);
   }
   backTosyndicate1() {
+    this.appSound.play('menuClick');
     this.navCtrl.push(CreateSyndicatePage);
   }
   backTosyndicate2() {
+    this.appSound.play('menuClick');
     this.navCtrl.push(CreateSyndicate2Page);
   }
   backTosyndicate3() {
+    this.appSound.play('menuClick');
     this.navCtrl.push(CreateSyndicate3Page);
   }
   next() {

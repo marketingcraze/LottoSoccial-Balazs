@@ -8,6 +8,8 @@ import { SyndicateService } from '../../providers/syndicate-service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 declare var $: any;
 
 @Component({
@@ -31,6 +33,7 @@ export class MySyndicatePage {
         public navParams: NavParams,
         public srvOffer: OfferService,
         public navCtrl: NavController,
+        public appSound:AppSoundProvider,
         public _syndService: SyndicateService,
         public loadingCtrl: LoadingController) { 
 
@@ -48,16 +51,20 @@ export class MySyndicatePage {
         $('#sstate').show();
     }
     checkwins() {
+        this.appSound.play('buttonClick');
         var t: Tabs = this.navCtrl.parent;
         t.select(1);
     }
     manage_syndicates() {
+        this.appSound.play('buttonClick');
         this.app.getRootNav().push(ManageSyndicatePage);
     }
     manage_syndicates2() {
+        this.appSound.play('buttonClick');
         this.app.getRootNav().push(ManageSyndicate2Page);
     }
     viewTickets() {
+        this.appSound.play('buttonClick');
         this.app.getRootNav().push(YourTicketsPage);
     }
     loadSyndicate() {
@@ -92,6 +99,8 @@ export class MySyndicatePage {
     showPaymentOptions(syndicate) {
         console.log("OffersPage::showPaymentOptions()", syndicate);
 
+        this.appSound.play('buttonClick');
+
         if (this.customerToken) {
             let opt: string = "toolbarposition=top";
             let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
@@ -111,6 +120,10 @@ export class MySyndicatePage {
                 loader.dismiss();
             })
         }
+    }
+
+    addMembers(){
+        this.appSound.play('buttonClick');
     }
 
     private _showLoader() {

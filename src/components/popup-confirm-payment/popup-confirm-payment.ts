@@ -5,6 +5,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
     selector: 'popup-confirm-payment',
@@ -66,12 +67,14 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         private iab: InAppBrowser,
         public srvOffer: OfferService,
         public alertCtrl:AlertController,
+        public appSound:AppSoundProvider,
         public loadingCtrl: LoadingController) {
         console.log('Hello PopupConfirmPaymentComponent Component');
     }
 
     buyNow(){
         console.log("PopupConfirmPaymentComponent::buyNow", this.cardSelected);
+        this.appSound.play('buttonClick');
 
         if (this.cardSelected == '-1') {
             let opt:string = "toolbarposition=top";
@@ -85,6 +88,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     }
 
     makeCardPayment(selectedCardIndex){
+        this.appSound.play('buttonClick');
         let loader = this._showLoader();
         if (!selectedCardIndex) {
             let alert = this.alertCtrl.create({
@@ -114,12 +118,14 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     }
 
     viewTickets(){
+        this.appSound.play('buttonClick');
         this.togglePopup();
         this.params.goTab(1);
         this.showBuyNowView = false;
     }
 
     viewOffers(){
+        this.appSound.play('buttonClick');
         this.togglePopup();
         this.params.goTab(4);
         this.showBuyNowView = false;

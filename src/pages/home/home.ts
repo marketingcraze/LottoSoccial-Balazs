@@ -15,6 +15,7 @@ import { DatabaseService } from '../../services/db.service';
 import { CommonService } from '../../services/common.service';
 import { CacheController } from '../../services/cache_controller';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 import { TabsPage } from '../tabs/tabs';
 export interface PageInterface {
@@ -49,9 +50,11 @@ export class HomePage {
         public menu: MenuController,
         private navCtrl:NavController,
         private srvDb:DatabaseService,
-        private commonSrv:CommonService,
+        private commonSrv:CommonService, 
+        public appSound:AppSoundProvider,
         private alertCtrl:AlertController,
-        private loadingCtrl:LoadingController) {
+        private loadingCtrl:LoadingController
+        ) {
 
         
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
@@ -118,6 +121,7 @@ export class HomePage {
 
     onLeftMenuSelection(selection){
         console.log("HomePage::onLeftMenuSelection");
+        this.appSound.play('menuClick');
         this.menu.close();
         switch(selection){
             case 'accounts':
@@ -162,6 +166,7 @@ export class HomePage {
 
     // notification menu
     onOpenRightMenu(){
+        this.appSound.play('menuClick');
         this.zone.run(()=>{
             this.messageLoading = true;
         });
@@ -204,7 +209,7 @@ export class HomePage {
     }
 
     onOpenLeftMenu(){
-
+        this.appSound.play('menuClick');
     }
 
     markAsUnread(){

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
+
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
 /*
   Generated class for the RedeemGames page.
 
@@ -15,7 +18,9 @@ export class RedeemGamesPage {
   redeem_products:any;
   private loading : any;
   reward_point:number;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public authSrv:AuthService,private loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public appSound:AppSoundProvider,
+    public authSrv:AuthService,private loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RedeemGamesPage');
@@ -40,6 +45,7 @@ export class RedeemGamesPage {
      });
    }   
    redeem(url){
+     this.appSound.play('buttonClick');
      console.log(url);
     }
 }

@@ -11,6 +11,9 @@ import { Params } from '../../services/params';
 import { CommonService } from '../../services/common.service';
 import { HomeService } from '../../services/service.home';
 
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
+
 @Component({
     selector: 'page-store',
     templateUrl: 'store.html'
@@ -57,6 +60,7 @@ export class StorePage {
         public navCtrl: NavController, 
       	public navParams: NavParams,
         private iab: InAppBrowser,
+        public appSound:AppSoundProvider,
       	public actionSheetCtrl: ActionSheetController) {
 
       
@@ -117,11 +121,13 @@ export class StorePage {
     }
 
     loadLink(url){
+        this.appSound.play('buttonClick');
         let opt:string = "toolbarposition=top";
         this.iab.create(url, '_blank', opt);
     }
 
     gameTargetLink(target){
+      this.appSound.play('buttonClick');
         let url = `https://nima.lottosocial.com/webview-auth/?redirect_to=${target}&customer_id=${CommonService.session.customer_id}&customer_token=${CommonService.session.customer_token}`
 
         console.log("::gameTargetLink to ", url);
@@ -138,6 +144,7 @@ export class StorePage {
 
     showWhatsOn(){
         console.log("showWhatsOn: " + this.slideInUp);
+        this.appSound.play('buttonClick');
 
         if(this.slideInUp) {
 
@@ -160,6 +167,7 @@ export class StorePage {
 
     showLottoSocial(){
       	console.log("showLottoSocial()");
+        this.appSound.play('buttonClick');
       	let actionSheet = this.actionSheetCtrl.create({
           title: 'Modify your album',
           cssClass:'bottom-sheet',
@@ -197,7 +205,7 @@ export class StorePage {
 
     handle(str:string){
         console.log("handle", str);
-
+        this.appSound.play('buttonClick');
         switch (str) {
           case 'invite_firends':
                this.nav.push(JoinSyndicatePage);
@@ -215,6 +223,10 @@ export class StorePage {
               break;
         }
 
+    }
+
+    playFor(){
+        this.appSound.play('buttonClick');
     }
 
     goHomePage(){

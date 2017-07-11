@@ -20,17 +20,17 @@ export class LoginPage {
 
     public countryPopOver:any;
     public selectedCountry:any = {
-        name: "Austria (Österreich)",
-        iso2: "at",
-        dialCode: "43",
+        name: "United Kingdom",
+        iso2: "gb",
+        dialCode: "44",
         priority: 0,
         areaCodes: null
     };
     
-    public selectedCountryMobile:any={
-        name: "Austria (Österreich)",
-        iso2: "at",
-        dialCode: "43",
+    public selectedCountryMobile:any= {
+        name: "United Kingdom",
+        iso2: "gb",
+        dialCode: "44",
         priority: 0,
         areaCodes: null
     };
