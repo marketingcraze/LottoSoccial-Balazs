@@ -4529,6 +4529,15 @@
             "integrity": "sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=",
             "dev": true
         },
+        "ngx-swiper-wrapper": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/ngx-swiper-wrapper/-/ngx-swiper-wrapper-4.0.0.tgz",
+            "integrity": "sha1-eWkGs08wMJvZoKeuigqPSMLdsKI=",
+            "dev": true,
+            "requires": {
+                "swiper": "3.4.2"
+            }
+        },
         "node-gyp": {
             "version": "https://registry.npmjs.org/node-gyp/-/node-gyp-3.6.1.tgz",
             "integrity": "sha1-GVYQZ/8YVGSt7UeCEmgfR/1XjLw=",
@@ -5775,6 +5784,12 @@
                     }
                 }
             }
+        },
+        "swiper": {
+            "version": "3.4.2",
+            "resolved": "https://registry.npmjs.org/swiper/-/swiper-3.4.2.tgz",
+            "integrity": "sha1-Oda0ELGjmDPh9y07cpmd9fXjg5I=",
+            "dev": true
         },
         "symbol-observable": {
             "version": "https://registry.npmjs.org/symbol-observable/-/symbol-observable-1.0.4.tgz",

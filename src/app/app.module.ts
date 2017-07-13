@@ -61,6 +61,7 @@ import { PaymentPage } from '../pages/payment/payment';
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 import { PopupConfirmPaymentComponent } from '../components/popup-confirm-payment/popup-confirm-payment';
+import { Carousel } from '../components/carousel/carousel';
 
 // services
 import { Params } from '../services/params';
@@ -152,8 +153,10 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     CusHeaderComponent,
     CusHeader1Component,
     CusHeader2Component,
+
     NoInternetMessageComponent,
-    PopupConfirmPaymentComponent
+    PopupConfirmPaymentComponent,
+    Carousel
 
   ],
   imports: [

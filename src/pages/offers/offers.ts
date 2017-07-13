@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -37,14 +37,16 @@ export class OffersPage {
   fetch_filter_line: any;
   fetch_filter_draw: any;
   fetch_filter_day: any;
-  drawdaytue: any = "#6297dc";
-  drawdayfri: any = "#b7b7b7";
-  drawdaywed: any = "#f53d3d";
-  drawdaysat: any = "#b7b7b7";
+    drawdaytue:any ="#2F76F1";
+    drawdayfri:any= "#AAAAAA";
+    drawdaywed:any ="#FF0000";
+    drawdaysat:any= "#AAAAAA";
   Credit_Points: any;
 
+spaceBetween:number ;
 
   constructor(
+    public platform: Platform,
     public params: Params,
     public iab: InAppBrowser,
     public navCtrl: NavController,
@@ -53,6 +55,8 @@ export class OffersPage {
     public srvOffer: OfferService,
     public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
+
+        this.spaceBetween = Math.floor(platform.width() * -0.22);
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
       this.checkCardExists();
@@ -134,32 +138,32 @@ export class OffersPage {
   }
 
 
-  wed(drawday) {
-    this.fetch_filter_draw=drawday;
-    this.fetch_filter_day = "Wednesday";
-    this.drawdaywed = "#f53d3d";
-    this.drawdaysat="#aaaaaa";
-  }
+    wed(drawday){
+        this.fetch_filter_draw=drawday;
+        this.fetch_filter_day="Wednesday";
+        this.drawdaywed="#FF0000";
+        this.drawdaysat="#AAAAAA";   
+    }
+    tue(drawday){
+        this.credit_filter_draw="Tue";
+        console.log();
+        this.credit_filter_day="Tuesday";
+        this.drawdaytue="#2F76D1";
+        this.drawdayfri="#AAAAAA";
+    }
+    fri(drawday){
+        this.credit_filter_draw=drawday;
+        this.credit_filter_day="Friday";
+        this.drawdayfri="#2F76D1";
+        this.drawdaytue="#AAAAAA";
+    }
+    sat(drawday){
+        this.fetch_filter_draw=drawday;
+        this.fetch_filter_day="Saturday";
+        this.drawdaywed="#AAAAAA";
+        this.drawdaysat="#FF0000";
+    }
 
-  tue(drawday){
-    this.credit_filter_draw="Tue";
-    console.log();
-    this.credit_filter_day="Tuesday";
-    this.drawdaytue="#2f76d1";
-    this.drawdayfri="#aaaaaa";
-  }
-  fri(drawday){
-    this.credit_filter_draw=drawday;
-    this.credit_filter_day="Friday";
-    this.drawdayfri="#2f76d1";
-    this.drawdaytue="#aaaaaa";
-  }
-  sat(drawday){
-    this.fetch_filter_draw=drawday;
-    this.fetch_filter_day = "Saturday";
-    this.drawdaywed = "#b7b7b7";
-    this.drawdaysat = "#f53d3d";
-  }
 
   credit_line(line){
     this.credit_filter_line=parseInt(line);

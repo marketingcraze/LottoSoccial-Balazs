@@ -19,10 +19,10 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
     templateUrl: 'store.html'
 })
 export class StorePage {
-    // @ViewChild(Slides) home_slides: Slides;
+    @ViewChild(Slides) home_slides: Slides;
 
     public homeCardData:any;
-    public spaceBetween:number = -70;
+    public spaceBetween:number = 0;
     public whatsOn:boolean = false;
     public nav:NavController;
 
@@ -49,6 +49,151 @@ export class StorePage {
     popSlides:any;
 
     homeData:any = {};
+
+    sliderOptions = {
+        loop:'true',
+        initialSlide:2,
+        effect:'coverflow'
+    };
+
+    coverflow = {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows : true
+    };
+
+        private slides = [{
+        id: 0,
+        description: 'Slide',
+        color: '#630460',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 1,
+        description: 'Slide',
+        color: '#0072bc',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 2,
+        description: 'Slide',
+        color: '#39b54a',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 3,
+        description: 'Slide',
+        color: '#f26522',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 4,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 5,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 6,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 7,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 8,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 9,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 10,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 11,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 12,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 13,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 14,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 15,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 16,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    },
+    {
+        id: 17,
+        description: 'Slide',
+        color: '#ed1c24',
+        isSelected: false,
+        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
+    }
+
+    ];
+
+
     
     constructor(
         public app:App,
@@ -112,8 +257,12 @@ export class StorePage {
                 }
             }
 
+            this.home_slides.coverflow.slideShadows = false;
+            this.home_slides.coverflow.modifier = .9;
+            
             console.log("home data", this.homeMessage );
         });        
+
     }
 
     ionViewDidLoad() {
@@ -231,5 +380,8 @@ export class StorePage {
 
     goHomePage(){
         this.params.goHomePage();
+    }
+
+    selectProducer(producer: any) {
     }
 }

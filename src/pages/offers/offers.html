@@ -18,7 +18,10 @@
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
-<ion-content [ngSwitch]="toptab" style="background-color:#e8e8e8;">
+
+
+
+<ion-content [ngSwitch]="toptab" style="background-color:#E8E8E8;">
  
   <ion-card class="Card_Padding" *ngSwitchCase="'offer'"  >
        <div class="card-title">
@@ -49,7 +52,7 @@
           </ion-row>
           <ion-row class="item2">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size: 1.2rem; color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size: 1.2rem; color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement1">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -86,9 +89,9 @@
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
                 <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
           </ion-row>
-          <ion-row class="item2" style="border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
+          <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size:1.2rem;color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement2">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -126,9 +129,9 @@
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
                 <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
           </ion-row>
-          <ion-row class="item2" style="border-top: 1px solid rgb(223, 221, 221);border-bottom: 1px solid rgb(223, 221, 221);">
+          <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
-              <ion-col col-11 ><h2 style="font-size: 1.2rem; color: #6297dc;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem; color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement3">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -146,13 +149,13 @@
           </ion-row>
   </ion-card>
 
-  <div *ngSwitchCase="'bonus'" style="background-color:#e8e8e8" >
+  <div *ngSwitchCase="'bonus'" style="background-color:#E8E8E8" >
       
        <ion-item no-padding no-lines class="creditbox">
         <img class="coins" src="assets/icon/credit_ico.png" height="10px">
         <span class="SlideTitle" >Your Bonus Credit Balance : <span ion-text style="color:#ff3366">£{{Credit_Points}}</span></span>
       </ion-item>
-      <ion-slides initialSlide=0 >
+      <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
           <ion-slide >
               <ion-card class="SlideSpace">
                 <ion-grid>
@@ -196,7 +199,7 @@
                   </ion-row>
                   <ion-row class="SlideContentBorderTop">
                     <ion-col col-12>
-                      <p class="SlideSubTitle" style="color:#d0d0d0">SUMMARY</p>
+                      <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
                     </ion-col>
                   </ion-row>
                   <ion-row>
@@ -262,7 +265,7 @@
                   </ion-row>
                   <ion-row class="SlideContentBorderTop">
                     <ion-col col-12>
-                      <p class="SlideSubTitle" style="color:#d0d0d0">SUMMARY</p>
+                      <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
                     </ion-col>
                   </ion-row>
                   <ion-row>
