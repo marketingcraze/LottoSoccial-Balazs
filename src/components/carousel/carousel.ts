@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, 
   QueryList } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 export interface CourselItem {
   description: string;
@@ -24,13 +25,28 @@ export class Carousel {
   private items: Array<SlideItem> = [];
   private containerWidth: number = 250;
   private tz: number;
+  private itemLength:number = 0;
+  private offersForYou:any = {
+    card_title:''
+  };
+  private gameGroup:any;
+
+  @Input() set offers(values:any){
+    this.offersForYou = values;
+    this.calculateLength();
+  };
+  @Input() set games(values:any){
+    this.gameGroup = values;
+    this.calculateLength();
+  };
 
   @Input() set slides(values: Array<CourselItem>) {
     if (!values.length) return;
 
+    this.calculateLength();
+
     let degree: number = 0;
-    this.tz = 250;//Math.round((this.containerWidth / 2) /
-      //Math.tan(Math.PI / values.length));
+    
     this.items = <Array<SlideItem>>values.map((item: CourselItem, index: number) => {
       let slideItem = {
         idx: index,
@@ -46,7 +62,13 @@ export class Carousel {
 
   @Output() selectSlide = new EventEmitter();
 
-  constructor(private eleRef: ElementRef) {
+  constructor(
+    private eleRef: ElementRef, 
+    private platform:Platform) {
+
+    this.containerWidth = platform.width();
+
+    console.log('platform', platform.width() );
    }
 
   onSwipeLeft() {
@@ -69,6 +91,25 @@ export class Carousel {
 
   selectItem(item:any){
     this.selectSlide.emit(item);
+  }
+
+  calculateLength(){
+    if (this.gameGroup) {
+      this.itemLength = this.gameGroup.length;
+    }
+    if (this.offersForYou) {
+      this.itemLength++;
+    }
+
+    if (this.slides) {
+      this.itemLength = this.slides.length;
+    }
+    
+
+    this.tz = Math.round((this.containerWidth / 2) /
+      Math.cos(Math.PI / this.itemLength)) + 60;
+
+    console.log('tz', this.tz, this.itemLength);
   }
 
 

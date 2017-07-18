@@ -24,119 +24,7 @@ page-store {
 		.slide-zoom{
 			width: 90%;
 		}
-		.card-top{
-			position: relative;
-			min-height: 60px;
-
-			.card-title{
-				position: absolute;
-				z-index: 10;
-				width: 100%;
-				img{
-					width: 100%;
-				}
-				h4{
-					position: absolute;
-					width: 100%;
-					text-align: center;
-					top: 6px;
-					font-weight: bold;
-					color: white;
-				}
-			}
-			.card-image{
-				h4{
-					position: absolute;
-					width: 100%;
-					text-align: center;
-					bottom: 0;
-					color: white;
-					padding: 6px;
-					font-weight: bold;
-					background-color: rgba(0,0,0,.4);
-				}
-			}
-		}
-		.list-md .item-md{
-			border-bottom: 1px solid #dedede;
-		}
-		.list-md .item-md.bottom-item{
-			border: none;
-		}
-		.button{
-			text-transform: none;
-		}
-		.game-play-img{
-			width: 100px;
-			height: 100px;
-		}
-
-		.offer-up{
-			.label-md{
-				margin: 0;
-				padding: 6px;
-			}
-			img{
-				position: absolute;
-			    width: 100%;
-			    top: 0;
-			    left: 0;
-			    z-index: -1;
-			}
-			p{
-				font-size: .8em;
-			}
-			h1{
-				font-weight: bold;
-			}
-		}
-
-		.offer-down{
-			background-color: #333;
-			.col{
-				padding: 0;
-			}	
-			
-			.timer-new{
-				padding: 0 6px;
-				img{
-					width: 16px;
-					height: 16px;
-					display: inline-table;
-				}
-				span{
-					display: block;
-					font-size: .6em;
-					font-weight: normal;
-					text-align: center;
-				}
-				div{
-					font-weight: bold;
-					font-size: .9em;
-					float: left;
-					text-align: center;
-					padding: 1px;
-				}
-			}
-			.time-left{
-				vertical-align: middle;
-				line-height: 2em;
-				padding-left: 0;
-				// position: relative;
-				// top: 50%;
-				// transform: translateY(-50%);
-			}
-
-			.label-md{
-				margin: 0;
-			}
-
-			.item-md [item-right]{
-				margin: 0;
-			}
-
-
-		}
+		
 	}
 	.offer-up.lotto{
 		background-color: #EEBCC5;
@@ -173,6 +61,121 @@ page-store {
 		.col{
 			padding: 0;
 		}
+	}
+	.card-top{
+		position: relative;
+		min-height: 60px;
+
+		.card-title{
+			position: absolute;
+			z-index: 10;
+			width: 100%;
+			img{
+				width: 100%;
+			}
+			h4{
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				top: 6px;
+				font-weight: bold;
+				color: white;
+			}
+		}
+		.card-image{
+			h4{
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				bottom: 0;
+				color: white;
+				padding: 6px;
+				font-weight: bold;
+				background-color: rgba(0,0,0,.4);
+			}
+		}
+	}
+
+
+	.list-md .item-md{
+		border-bottom: 1px solid #dedede;
+	}
+	.list-md .item-md.bottom-item{
+		border: none;
+	}
+	.button{
+		text-transform: none;
+	}
+	.game-play-img{
+		width: 100px;
+		height: 100px;
+	}
+
+	.offer-up{
+		.label-md{
+			margin: 0;
+			padding: 6px;
+		}
+		img{
+			position: absolute;
+		    width: 100%;
+		    top: 0;
+		    left: 0;
+		    z-index: -1;
+		}
+		p{
+			font-size: .8em;
+		}
+		h1{
+			font-weight: bold;
+		}
+	}
+
+	.offer-down{
+		background-color: #333;
+		.col{
+			padding: 0;
+		}	
+		
+		.timer-new{
+			padding: 0 6px;
+			img{
+				width: 16px;
+				height: 16px;
+				display: inline-table;
+			}
+			span{
+				display: block;
+				font-size: .6em;
+				font-weight: normal;
+				text-align: center;
+			}
+			div{
+				font-weight: bold;
+				font-size: .9em;
+				float: left;
+				text-align: center;
+				padding: 1px;
+			}
+		}
+		.time-left{
+			vertical-align: middle;
+			line-height: 2em;
+			padding-left: 0;
+			// position: relative;
+			// top: 50%;
+			// transform: translateY(-50%);
+		}
+
+		.label-md{
+			margin: 0;
+		}
+
+		.item-md [item-right]{
+			margin: 0;
+		}
+
+
 	}
 
 	.card-md{

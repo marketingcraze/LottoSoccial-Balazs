@@ -64,7 +64,8 @@ export class StorePage {
         slideShadows : true
     };
 
-        private slides = [{
+    private slides = [];
+    private mySlides = [{
         id: 0,
         description: 'Slide',
         color: '#630460',
@@ -256,9 +257,10 @@ export class StorePage {
                     this.homeBlog = data[i].get_home_blog.response.blogs;
                 }
             }
+            this.slides = this.mySlides;
 
             this.home_slides.coverflow.slideShadows = false;
-            this.home_slides.coverflow.modifier = .9;
+            
             
             console.log("home data", this.homeMessage );
         });        
