@@ -13,12 +13,12 @@ import { SharedService } from './shared.service';
 
 @Injectable()
 export class AuthService {
-    
+    apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/v2/';
+
     static get parameters() {
         return [[Http]];
     }
     
-
     makeId(){
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -219,6 +219,33 @@ mobile:"23423423423"
             signup, opt).map(res => res.json());
         return response;
     }*/
+
+
+    buy_Credit_Offer(){
+        let action="payment/"
+        let body={ "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                    "action": "buy credit offer",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "page_id": "2",
+                    "screen_id": "2.2",
+                    "module_name": "buy_credit_offer",
+                    "customer_id": "1970400",
+                    "offer_id": "1970400",
+                    "mobile_number": "447712887310",
+                    "email_address": "as@gmail.com"
+
+                  };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+       
+        var response = this.http.post(this.apiUrl + action, body,opt).map(res => res.json());
+        return response;
+
+     }
 
     /**
      * New user registration API call (WP version)

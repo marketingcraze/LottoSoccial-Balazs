@@ -89,6 +89,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
+import { KeysPipe } from '../pipes/keys-pipe';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
 
 @NgModule({
@@ -148,6 +149,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     MyFilterPipe,
     lotsPipe,
     FilterPipe,
+    KeysPipe,
 
     CountryListPopPage,
     CusHeaderComponent,
