@@ -31,10 +31,108 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
-  <!-- <carousel [slides]="slides" [offers]="offersForYou" [games]="gameGroup" (selectSlide)="selectProducer($event);" ></carousel> -->
 
-  <ion-slides #home_slides loop={{sliderOptions.loop}} slidesPerView=1 effect={{sliderOptions.effect}} initialSlide=1 spaceBetween={{spaceBetween}} class="home-slides">
+
+<!-- slider -->
+  <div class="slider-container" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)">
+
+      <div class="slider-content">
+
+        <div class="slider-single" *ngIf="offersForYou.card_title != ''">
+          <ion-card class="slider-single-image">
+            <div class="card-top " >
+              <div class="card-title">
+                <img src="assets/img/home/ch_offers@3x.png">
+                <h4>{{offersForYou.card_title}}</h4>
+              </div>
+            </div>
+            <div class="" *ngFor="let offer of offersForYou.offer_group | slice:0:2">
+              <div *ngIf="offer.name=='lotto'">
+                  <ion-item margin-top class="offer-up lotto">
+                      <img src="{{offer.offer_img}}">
+                      <p>{{offer.offer_title}}</p>
+                      <h1>{{offer.offer_jackpot}}</h1>
+                  </ion-item>
+
+                  <ion-item class="offer-down lotto">
+                      <div class="timer-new">
+                          <div class="time-left"><img src="assets/icon/timer.svg" /></div>
+                          <div class="time-left"><span>TIME LEFT:</span></div>
+                          <div>{{offer.countdown | date:'dd'}}<span>Days</span></div>
+                          <div>{{offer.countdown | date:'hh'}}<span>Hrs</span></div>
+                          <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
+                          <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
+                      </div>
+                      <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
+                  </ion-item>
+                  
+              </div>
+
+              <div *ngIf=" offer.name == 'euro'">
+                  <ion-item margin-top class="offer-up euro">
+                      <img src="{{offer.offer_img}}">
+                      <p>{{offer.offer_title}}</p>
+                      <h1>{{offer.offer_jackpot}}</h1>
+                  </ion-item>
+                  
+                  <ion-item class="offer-down euro">
+                      <div class="timer-new">
+                          <div class="time-left"><img src="assets/icon/timer.svg" /></div>
+                          <div class="time-left"><span>TIME LEFT:</span></div>
+                          <div>{{offer.countdown | date:'dd'}}<span>Days</span></div>
+                          <div>{{offer.countdown | date:'hh'}}<span>Hrs</span></div>
+                          <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
+                          <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
+                      </div>
+                    
+                    <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
+                    
+                  </ion-item>
+              </div>
+              
+            </div>
+            <button class=" center" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button>
+          </ion-card>
+        </div>
+
+
+
+
+        <div class="slider-single" *ngFor="let game of gameGroup">
+          <ion-card class="slider-single-image">
+            <div class="card-top" >
+              <div class="card-title">
+                <img src="assets/img/home/ch_games@3x.png">
+                <h4>YOU HAVE GAMES TO PLAY</h4>
+              </div>
+            </div>
+            <div class="lucky" padding padding-top>
+              <h3 text-center>{{game.game_name}}</h3>
+              <p text-center>{{game.game_description1}}</p>
+            </div>
+            <img class="center game-play-img" *ngIf="!game.game_icon_url" src="assets/icon/account_ico.svg" padding width="100" height="100">
+            <img class="center game-play-img" *ngIf="game.game_icon_url" src="{{game.game_icon_url}}" padding width="100" height="100">
+
+            <p text-center padding-left padding-right>{{game.user_game_target}}</p>
+
+            <div padding>
+              <button class="center" padding ion-button text-center color="secondary" (click)="gameTargetLink(game.target_url)">{{game.button_label}}</button>
+            </div>
+
+          </ion-card>
+        </div>
+
+      </div>
+
+<!--       <a class="slider-left" href="javascript:void(0);"><i class="fa fa-arrow-left"></i></a>
+
+      <a class="slider-right" href="javascript:void(0);"><i class="fa fa-arrow-right"></i></a>
+ -->
+    </div>
+
+<!-- slider end -->
+
+  <!-- <ion-slides #home_slides loop={{sliderOptions.loop}} slidesPerView=1 effect={{sliderOptions.effect}} initialSlide=1 spaceBetween={{spaceBetween}} class="home-slides"> -->
 
 <!-- Slide 0 -->
 
@@ -266,7 +364,7 @@
     </ion-slide> -->
 
 <!-- Slide 9 -->
-    <ion-slide *ngIf="offersForYou.card_title != ''">
+<!--     <ion-slide *ngIf="offersForYou.card_title != ''">
 
       <ion-card>
         <div class="card-top" >
@@ -324,11 +422,11 @@
         <button class="center" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button>
       </ion-card>
 
-    </ion-slide>
+    </ion-slide> -->
 
 
 <!-- Slide 9 -->
-    <ion-slide *ngFor="let game of gameGroup">
+<!--     <ion-slide *ngFor="let game of gameGroup">
 
       <ion-card>
         <div class="card-top" >
@@ -352,7 +450,7 @@
         </div>
       </ion-card>
 
-    </ion-slide>
+    </ion-slide> -->
 
 
 <!-- Slide 10 -->
@@ -387,7 +485,7 @@
     </ion-slide> -->
 
 
-</ion-slides>
+<!-- </ion-slides> -->
 
 
 <div >
