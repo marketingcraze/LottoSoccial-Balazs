@@ -57,6 +57,7 @@ import { ChooseImagePage } from '../pages/choose-image/choose-image';
 import { ChooseNumberPage } from '../pages/choose-number/choose-number';
 import { ConfirmNumberPage } from '../pages/confirm-number/confirm-number';
 import { PaymentPage } from '../pages/payment/payment';
+import { PlayGamePage } from '../pages/play-games/play-games';
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -142,6 +143,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
      YourTicketsPage,
     CheckWinningsPage,
     MySyndicatePage,
+    PlayGamePage,
     // OffersPayment,
 
 // pipes
@@ -227,7 +229,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
      YourTicketsPage,
     CheckWinningsPage,
     MySyndicatePage,
-
+    PlayGamePage,
     // popovers
     // OffersPayment,
 

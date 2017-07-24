@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
+import { App,NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { PlayGamePage } from '../play-games/play-games';
 import { Params } from '../../services/params';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
@@ -18,8 +19,10 @@ export class YourGamesPage {
 	yourGames:any[];
     private unreadCount:number = 0;
     private homeMessage:any = {};
+  	public nav:NavController;
 
     constructor(
+     		public app:App,
         private params: Params,
         public navCtrl: NavController, 
       	public navParams: NavParams, 
@@ -27,6 +30,9 @@ export class YourGamesPage {
         public appSound:AppSoundProvider,
         private loadingCtrl: LoadingController,
         private iab: InAppBrowser) {
+
+     		this.nav = this.app.getRootNav();
+
 
         console.log(typeof(this.yourGames),  typeof(this.navParams.data));
 
@@ -54,9 +60,11 @@ export class YourGamesPage {
     }
     // play button click call this function
     play(url) {
-      this.appSound.play('buttonClick');
-      const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [url] + '&customer_id=1970400&customer_token=818113679640');
+      // this.appSound.play('buttonClick');
+      // const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [url] + '&customer_id=1970400&customer_token=818113679640');
       // console.log('https://nima.lottosocial.com/webview-auth/?redirect_to='+[url]+'&customer_id=1970400&customer_token=818113679640');
+      // this.navCtrl.push(PlayGamePage);
+      this.nav.push(PlayGamePage);
     }
     // redeem button click call this function
     redeem() {
