@@ -62,7 +62,7 @@ export class ApiController {
         return new Promise( (resolve, reject) => {
 
             this.srvHome.getModules( action, pageId, moduleNames ).subscribe(
-            data=>{
+            (data:any)=>{
                 // console.log("fetchModuleDataFromAPI successful", data);
                 if(data) {
                     
