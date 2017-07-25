@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams, ViewController } from 'ionic-angular';
+import { App, NavController, NavParams } from 'ionic-angular';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { PlayGamesThankYou } from '../play-games-thank-you/play-games-thank-you';
+
 
 /*
   Generated class for the PlayGame page.
@@ -26,4 +28,10 @@ export class PlayGamePage {
   close() {
     this.navCtrl.pop();
   }
+
+  openThankyouPage() {
+    this.navCtrl.push(PlayGamesThankYou);
+  }
+
+
 }
