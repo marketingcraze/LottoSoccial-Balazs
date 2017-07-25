@@ -20,10 +20,10 @@ export class OffersPage {
   toptab: string = "offer";
 
   userCards: any;
-  userCardsCount: number = 0;
-  customerToken: string;
-  jackpotList: any
-  jackpotGroup: any
+  userCardsCount:number = 0;
+  customerToken:string;
+  jackpotList:any
+  jackpotGroup:any
 
 
   credit_lines: any;
@@ -37,13 +37,13 @@ export class OffersPage {
   fetch_filter_line: any;
   fetch_filter_draw: any;
   fetch_filter_day: any;
-  drawdaytue: any = "#2F76F1";
-  drawdayfri: any = "#AAAAAA";
-  drawdaywed: any = "#FF0000";
-  drawdaysat: any = "#AAAAAA";
+    drawdaytue:any ="#2F76F1";
+    drawdayfri:any= "#AAAAAA";
+    drawdaywed:any ="#FF0000";
+    drawdaysat:any= "#AAAAAA";
   Credit_Points: any;
 
-  spaceBetween: number;
+spaceBetween:number ;
 
   constructor(
     public platform: Platform,
@@ -53,30 +53,29 @@ export class OffersPage {
     public navParams: NavParams,
     public authSrv: AuthService,
     public srvOffer: OfferService,
-    public commonSrv: CommonService,
-    public appSound: AppSoundProvider,
+    public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
 
-    this.spaceBetween = Math.floor(platform.width() * -0.22);
+        this.spaceBetween = Math.floor(platform.width() * -0.22);
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
-    this.checkCardExists();
+      this.checkCardExists();
   }
 
-  checkCardExists() {
+  checkCardExists(){
     console.log("OffersPage::checkCardExists()");
     let loader = this._showLoader();
-
+    
     this.srvOffer.getJackpotList().subscribe((data) => {
       console.log("OffersPage::getJackpotList() success", data);
-      if (data.response && data.response[0]
+      if (data.response && data.response[0] 
         && data.response[0].get_big_jackpot_list) {
         this.jackpotList = data.response[0].get_big_jackpot_list.response;
         this.customerToken = this.jackpotList.customer_token;
       }
 
       loader.dismiss();
-
+      
     }, (err) => {
       console.log("OffersPage::getJackpotList() error", err);
       loader.dismiss();
@@ -85,12 +84,12 @@ export class OffersPage {
 
   showPaymentOptions() {
     console.log("OffersPage::showPaymentOptions()");
-    let offer = { total_cost: 4.99 };
+    let offer = {total_cost:4.99} ;
 
     this.appSound.play('buttonClick');
     if (this.customerToken) {
       this.goPaymentWebview();
-    } else {
+    }else{
       let loader = this._showLoader();
       // get all the cards details
       this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
@@ -99,7 +98,7 @@ export class OffersPage {
         for (var i = 0; i < data.response.length; ++i) {
           if (data.response[i].get_customer_paymill_card_details) {
             token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-          }
+          } 
         }
 
         if (token_exists > 0) {
@@ -108,7 +107,7 @@ export class OffersPage {
           console.log("OffersPage::showPaymentOptions() success", this.userCards);
           loader.dismiss();
           this.confirmPayment.togglePopup()
-        } else {
+        }else{
           this.goPaymentWebview();
         }
 
@@ -118,16 +117,16 @@ export class OffersPage {
       })
     }
   }
-  tabChanged() {
+  tabChanged(){
     // console.log("OffersPage::tabChanged()");
     this.appSound.play('menuClick');
   }
 
-  goPaymentWebview() {
-    let opt: string = "toolbarposition=top";
-    let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
-    str += '&customer_id=' + CommonService.session.customer_id + '&customer_token=' + this.customerToken + '&Offer_ID=1188'
-    this.iab.create(str, 'blank', opt);
+  goPaymentWebview(){
+      let opt:string = "toolbarposition=top";
+      let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+      str += '&customer_id='+CommonService.session.customer_id+'&customer_token='+this.customerToken+'&Offer_ID=1188'
+      this.iab.create( str, 'blank', opt);
   }
 
   private _showLoader() {
@@ -139,86 +138,77 @@ export class OffersPage {
   }
 
 
-  wed(drawday) {
-    this.fetch_filter_draw = drawday;
-    this.fetch_filter_day = "Wednesday";
-    this.drawdaywed = "#FF0000";
-    this.drawdaysat = "#AAAAAA";
-  }
-  tue(drawday) {
-    this.credit_filter_draw = "Tue";
-    console.log();
-    this.credit_filter_day = "Tuesday";
-    this.drawdaytue = "#2F76D1";
-    this.drawdayfri = "#AAAAAA";
-  }
-  fri(drawday) {
-    this.credit_filter_draw = drawday;
-    this.credit_filter_day = "Friday";
-    this.drawdayfri = "#2F76D1";
-    this.drawdaytue = "#AAAAAA";
-  }
-  sat(drawday) {
-    this.fetch_filter_draw = drawday;
-    this.fetch_filter_day = "Saturday";
-    this.drawdaywed = "#AAAAAA";
-    this.drawdaysat = "#FF0000";
-  }
+    wed(drawday){
+        this.fetch_filter_draw=drawday;
+        this.fetch_filter_day="Wednesday";
+        this.drawdaywed="#FF0000";
+        this.drawdaysat="#AAAAAA";   
+    }
+    tue(drawday){
+        this.credit_filter_draw="Tue";
+        console.log();
+        this.credit_filter_day="Tuesday";
+        this.drawdaytue="#2F76D1";
+        this.drawdayfri="#AAAAAA";
+    }
+    fri(drawday){
+        this.credit_filter_draw=drawday;
+        this.credit_filter_day="Friday";
+        this.drawdayfri="#2F76D1";
+        this.drawdaytue="#AAAAAA";
+    }
+    sat(drawday){
+        this.fetch_filter_draw=drawday;
+        this.fetch_filter_day="Saturday";
+        this.drawdaywed="#AAAAAA";
+        this.drawdaysat="#FF0000";
+    }
 
 
-  credit_line(line) {
-    this.credit_filter_line = parseInt(line);
+  credit_line(line){
+    this.credit_filter_line=parseInt(line);
   }
-  fetch_line(line) {
-    this.fetch_filter_line = parseInt(line);
+  fetch_line(line){
+    this.fetch_filter_line=parseInt(line);
   }
-
+  
   ionViewWillEnter() {
-    this.credit_filter_line = 1;
-    this.credit_filter_draw = "Tue";
-    this.credit_filter_day = "Tuesday";
-    this.fetch_filter_line = 1;
-    this.fetch_filter_draw = "Wed";
-    this.fetch_filter_day = "Wednesday";
+    this.credit_filter_line=1;
+    this.credit_filter_draw="Tue";
+    this.credit_filter_day="Tuesday";
+    this.fetch_filter_line=1;
+    this.fetch_filter_draw="Wed";
+    this.fetch_filter_day="Wednesday";
 
-    this.commonSrv.trackSegmentPage("Offer", "OffersPage").subscribe(
-      data => {
-        console.log("track segment called");
+    this.authSrv.get_credit_offer().subscribe(data=>{
+      this.credit_lines=data.response.response.product[0];
+      this.credit_offer=data.response.response.offers;
+      console.log("get_credit_offer",data);
+    },
+    err=>{
+       console.log("error", err);
       },
-      err => {
+    ()=> console.log("offer dislpay sucesss")
+  );
+
+    this.authSrv.get_fetch_offer().subscribe(data=>{
+        this.fetch_lines=data.response.response.product[3];
+        this.fetch_offer=data.response.response.offers;
+        console.log("dd",data)
       },
-      () => { }
+      err=>{
+              console.log("error", err);
+      },
+      ()=> console.log("offer dislpay sucesss")
     );
 
-    this.authSrv.get_credit_offer().subscribe(data => {
-      this.credit_lines = data.response.response.product[0];
-      this.credit_offer = data.response.response.offers;
-      console.log("get_credit_offer", data);
-    },
-      err => {
+    this.authSrv.get_Credit_Points().subscribe(data=>{
+        this.Credit_Points=data.response.response.bonus_credit;
+      },
+      err=>{          
         console.log("error", err);
       },
-      () => console.log("offer dislpay sucesss")
-    );
-
-    this.authSrv.get_fetch_offer().subscribe(data => {
-      this.fetch_lines = data.response.response.product[3];
-      this.fetch_offer = data.response.response.offers;
-      console.log("dd", data)
-    },
-      err => {
-        console.log("error", err);
-      },
-      () => console.log("offer dislpay sucesss")
-    );
-
-    this.authSrv.get_Credit_Points().subscribe(data => {
-      this.Credit_Points = data.response.response.bonus_credit;
-    },
-      err => {
-        console.log("error", err);
-      },
-      () => console.log("creadit points get successfully")
+      ()=> console.log("creadit points get successfully")
     );
 
   }

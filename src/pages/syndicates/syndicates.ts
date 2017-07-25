@@ -7,11 +7,10 @@ import { Params } from '../../services/params';
 
 import { CreateSyndicateTab } from '../create-syndicate-tab/create-syndicate-tab';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-import { CommonService } from '../../services/common.service';
 
 @Component({
-    selector: 'page-syndicates',
-    templateUrl: 'syndicates.html'
+	selector: 'page-syndicates',
+	templateUrl: 'syndicates.html'
 })
 export class SyndicatesPage {
     tab1child = MySyndicatePage;
@@ -20,12 +19,11 @@ export class SyndicatesPage {
     indexSelected: number;
 
     constructor(
-        public params: Params,
-        public navCtrl: NavController,
-        public appSound: AppSoundProvider,
-        public commonSrv: CommonService,
+        public params:Params,
+        public navCtrl: NavController, 
+        public appSound:AppSoundProvider,
         public navParams: NavParams) {
-    }
+        }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SyndicatePage');
@@ -33,21 +31,13 @@ export class SyndicatesPage {
 
     ionViewWillEnter() {
         this.indexSelected = this.navParams.data.tabIndex || 0;
-        this.commonSrv.trackSegmentPage("Syndicates", "SyndicatesPage").subscribe(
-            data => {
-                console.log("track segment called");
-            },
-            err => {
-            },
-            () => { }
-        );
     }
 
-    goHomePage() {
+    goHomePage(){
         this.params.goHomePage();
     }
 
-    tabChange() {
+    tabChange(){
         this.appSound.play('menuClick');
     }
 
