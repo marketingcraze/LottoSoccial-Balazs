@@ -114,6 +114,16 @@ export class HomePage {
           console.log("TabsPage::ionViewDidEnter", err);
         });*/
     }
+    ionViewWillEnter() {
+        this.commonSrv.trackSegmentPage("Home","HomePage").subscribe(
+            data=>{
+                console.log("track segment called");
+            },
+            err=>{            
+            },
+            ()=> {  }
+            );
+    }
 
     closeMenu1(){
         this.menu.close();

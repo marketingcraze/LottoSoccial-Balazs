@@ -133,6 +133,32 @@ OAuth oauth_consumer_key="NDes1FKC0Kkg", oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",
         return response;
     
     }
+    
+    trackSegmentPage(page_Name: string, page_Url: string)
+    {
+     if(CommonService.session)
+       {   
+            let action = CommonService.version + '/segment_page';
+
+            let data = {
+                "request": [
+                {
+                    "customer_id": CommonService.session.customer_id,
+                    "page_name": page_Name,
+                    "page_url": page_Url
+                } 
+                ]
+            };
+
+            let opt: RequestOptions = new RequestOptions({
+                headers: CommonService.getHeaderJson()
+            });
+            
+            var response = this.http.post(CommonService.apiUrl+ action, data,opt)
+            .map(res => res.json());
+            return response;
+        } 
+    }
 }
 
 

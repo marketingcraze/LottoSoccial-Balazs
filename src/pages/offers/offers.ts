@@ -53,6 +53,7 @@ spaceBetween:number ;
     public navParams: NavParams,
     public authSrv: AuthService,
     public srvOffer: OfferService,
+    public commonSrv:CommonService,
     public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
 
@@ -180,6 +181,13 @@ spaceBetween:number ;
     this.fetch_filter_draw="Wed";
     this.fetch_filter_day="Wednesday";
 
+     this.commonSrv.trackSegmentPage("Offer","OffersPage").subscribe(data=>{
+                console.log("track segment called");
+            },
+            err=>{            
+            },
+            ()=> {  }
+     );
     this.authSrv.get_credit_offer().subscribe(data=>{
       this.credit_lines=data.response.response.product[0];
       this.credit_offer=data.response.response.offers;

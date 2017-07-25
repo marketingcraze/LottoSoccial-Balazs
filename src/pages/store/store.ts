@@ -206,6 +206,7 @@ export class StorePage {
         public navCtrl: NavController, 
       	public navParams: NavParams,
         private iab: InAppBrowser,
+        public commonSrv:CommonService,
         public appSound:AppSoundProvider,
       	public actionSheetCtrl: ActionSheetController) {
 
@@ -271,6 +272,17 @@ export class StorePage {
         console.log('ionViewDidLoad StorePage');
     }
 
+    ionViewWillEnter() {
+        this.commonSrv.trackSegmentPage("Store","StorePage").subscribe(
+            data=>{
+                console.log("track segment called");
+            },
+            err=>{            
+            },
+            ()=> {  }
+            );
+    }
+        
     loadLink(url){
         this.appSound.play('buttonClick');
         let opt:string = "toolbarposition=top";
