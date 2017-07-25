@@ -1,6 +1,8 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Platform, MenuController, Nav, NavController, LoadingController, 
-    AlertController } from 'ionic-angular';
+import {
+    Platform, MenuController, Nav, NavController, LoadingController,
+    AlertController
+} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -35,41 +37,41 @@ export class HomePage {
 
     private cache: CacheController;
 
-    rootPage:any = TabsPage;
+    rootPage: any = TabsPage;
     messageLoading = false;
 
-    private homeMessage:any;
-    public messages:any[] = [];
+    private homeMessage: any;
+    public messages: any[] = [];
 
     constructor(
-        public zone:NgZone,
-        public params:Params,
+        public zone: NgZone,
+        public params: Params,
         private iab: InAppBrowser,
-        public platform: Platform, 
-        private srvHome:HomeService,
+        public platform: Platform,
+        private srvHome: HomeService,
         public menu: MenuController,
-        private navCtrl:NavController,
-        private srvDb:DatabaseService,
-        private commonSrv:CommonService, 
-        public appSound:AppSoundProvider,
-        private alertCtrl:AlertController,
-        private loadingCtrl:LoadingController
-        ) {
+        private navCtrl: NavController,
+        private srvDb: DatabaseService,
+        private commonSrv: CommonService,
+        public appSound: AppSoundProvider,
+        private alertCtrl: AlertController,
+        private loadingCtrl: LoadingController
+    ) {
 
-        
+
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
-/*
-        platform.ready().then(() => {
-            StatusBar.styleDefault();
-            Splashscreen.hide();
-        });
-*/
+        /*
+                platform.ready().then(() => {
+                    StatusBar.styleDefault();
+                    Splashscreen.hide();
+                });
+        */
         this.params.events.subscribe('home-data', data => {
             // console.log("home-data", data);
-            
+
             for (var i = data.length - 1; i >= 0; i--) {
-                if ( data[i].get_home_message ) {
+                if (data[i].get_home_message) {
                     this.homeMessage = data[i].get_home_message.response;
                     if (this.homeMessage.notification) {
                         // this.messages = this.homeMessage.notification;
@@ -79,7 +81,7 @@ export class HomePage {
                 }
             }
 
-            console.log("HomePage::home data", this.homeMessage, this.messages );
+            console.log("HomePage::home data", this.homeMessage, this.messages);
         });
 
         this.checkForNewRelease()
@@ -114,24 +116,34 @@ export class HomePage {
           console.log("TabsPage::ionViewDidEnter", err);
         });*/
     }
+    ionViewWillEnter() {
+        this.commonSrv.trackSegmentPage("Home", "HomePage").subscribe(
+            data => {
+                console.log("track segment called");
+            },
+            err => {
+            },
+            () => { }
+        );
+    }
 
-    closeMenu1(){
+    closeMenu1() {
         this.menu.close();
     }
 
-    onLeftMenuSelection(selection){
+    onLeftMenuSelection(selection) {
         console.log("HomePage::onLeftMenuSelection");
         this.appSound.play('menuClick');
         this.menu.close();
-        switch(selection){
+        switch (selection) {
             case 'accounts':
-                this.params.goPage( AccountPage )
+                this.params.goPage(AccountPage)
                 break
             case 'check_winnings':
-                this.params.goPage( CheckWinningsPage )
+                this.params.goPage(CheckWinningsPage)
                 break
             case 'help':
-                let opt:string = "toolbarposition=top";
+                let opt: string = "toolbarposition=top";
                 this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);
                 break
         }
@@ -149,14 +161,14 @@ export class HomePage {
         }
     }
 
-    goPage(page){
+    goPage(page) {
         this.menu.close();
-        
+
         switch (page) {
             case 'create_syndicate':
                 this.nav.setRoot(CreateSyndicatePage);
                 break;
-            
+
             default:
                 // code...
                 break;
@@ -165,32 +177,32 @@ export class HomePage {
     }
 
     // notification menu
-    onOpenRightMenu(){
+    onOpenRightMenu() {
         this.appSound.play('menuClick');
-        this.zone.run(()=>{
+        this.zone.run(() => {
             this.messageLoading = true;
         });
-        this.srvHome.getHomeMessages().take(1).subscribe( (data)=> {
-            
+        this.srvHome.getHomeMessages().take(1).subscribe((data) => {
+
             console.log("onOpenRightMenu success ", data);
-            this.zone.run(()=>{
+            this.zone.run(() => {
                 this.messageLoading = false;
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;
                 this.params.setUnreadCount(this.homeMessage.count);
             });
-            
-        }, (err)=>{
+
+        }, (err) => {
             console.log("onOpenRightMenu error ", err);
         })
     }
 
 
-    checkForNewRelease(){
-        this.commonSrv.getNewRelease().subscribe(data=>{
+    checkForNewRelease() {
+        this.commonSrv.getNewRelease().subscribe(data => {
             console.log("checkForNewRelease", data);
-            
-            if(data.response) {
+
+            if (data.response) {
                 let response = data.response[0].get_new_release.response;
                 if (response && response.status == 'success') {
                     CommonService.updateAvailable = true;
@@ -201,26 +213,26 @@ export class HomePage {
 
             Splashscreen.hide();
         },
-        err=>{
-            // show offline
-            this.params.setIsInternetAvailable(false);
-        },
-        ()=> {});
+            err => {
+                // show offline
+                this.params.setIsInternetAvailable(false);
+            },
+            () => { });
     }
 
-    onOpenLeftMenu(){
+    onOpenLeftMenu() {
         this.appSound.play('menuClick');
     }
 
-    markAsUnread(){
+    markAsUnread() {
         console.log("markAsUnread()");
     }
 
-    deleteNotification(){
+    deleteNotification() {
         console.log("deleteNotification()");
     }
 
-    saveItem(){
+    saveItem() {
         console.log("saveItem()");
     }
 }
