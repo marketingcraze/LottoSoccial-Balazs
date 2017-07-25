@@ -31,10 +31,10 @@ export class OffersPage   {
   resultshow:boolean=false;
   errorshow:boolean=false;
   slider:any;
-  productdata:any;
-
+ 
   constructor(public navCtrl: NavController,private loadingCtrl: LoadingController,  public platform: Platform,public navParams: NavParams,public authSrv:AuthService ) {
       //  this.spaceBetween = Math.floor(platform.width() * -0.22);
+     
   }
      // draw day click  call this function     
   drawday(day,gamename){
@@ -61,23 +61,29 @@ export class OffersPage   {
   ionViewWillEnter() {
   // get creaditoffer call api
       this.authSrv.get_credit_offer().subscribe(data=>{
-    
-          this.credit_offer=data.response.response.offers;
-          this.credit_product=data.response.response.product;
-          console.log("get_credit_offer",data);
-        },
+        if (data) {
+            this.credit_offer=data.response.response.offers;
+            this.credit_product=data.response.response.product;
+        }
+        console.log("get_credit_offer",data);
+         
+      },
         err=>{
-           console.log("error", err);
-          },
+              console.log("error", err);
+        },
         ()=> console.log("offer dislpay sucesss")
       );
+         
+
       
 
   // get creditpoints call api 
       this.authSrv.get_Credit_Points().subscribe(data=>{
+        if(data){
           this.Credit_Points=data.response.response.bonus_credit;
+          }
           //console.log("get_Credit_Points",data)
-        },
+      },
         err=>{     
           console.log("error", err);
         },
@@ -109,11 +115,16 @@ export class OffersPage   {
   tryagain(){
     this.errorshow=false;
   }
- watchSlider(line){
+ watchSlider(value){
   
         //Converting slider-steps to custom values
-
-     console.log(line);
+   const steps = [];
+    
+    for (let key in value) {
+      steps.push(value[key]);
+    }
+    this.credit_filter_line=parseInt(steps[this.slider]);
+     console.log(steps[this.slider]);
     }
 
 }

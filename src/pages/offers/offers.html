@@ -154,7 +154,8 @@
        <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
         <span class="SlideTitle" >Your Bonus Credit Balance : <span ion-text class="PriceTxt">£{{Credit_Points}}</span></span>
-      </ion-item>
+       </ion-item>
+
       <ion-slides initialSlide=0 >
            <ion-slide *ngFor="let product of credit_product">
               <ion-card class="SlideSpace" *ngIf="!resultshow && !errorshow">
@@ -185,13 +186,17 @@
                       <p class="SlideSubTitle" style="color:#333333">Choose Number Of Lines</p>
                     </ion-col>
                   </ion-row>
-                  <ion-row   > 
-                      <div  *ngFor="let line of  product?.line_group| keys;  let i = index"> 
-                         <p  class="linebadge" [ngStyle]="(line == credit_filter_line )?{'background': product?.product_color, 'color':'#ffffff'}:{'background':  '#ffffff','color':'#AAAAAA'}"  (click)="credit_line(line)" >{{line}}</p> 
-                      
-                        </div>     
-
-                  </ion-row>
+                  <!-- <ion-row>
+                     <div  *ngFor="let line of  product?.line_group| keys;  let i = index">
+                            <p  class="linebadge" [ngStyle]="(line == credit_filter_line )?{'background': product?.product_color, 'color':'#ffffff'}:{'background':  '#ffffff','color':'#AAAAAA'}"  (click)="credit_line(line)" >{{line}}</p> 
+                          </div>   
+                  </ion-row> -->
+                  <ion-item >
+                    <ion-range  class="rangeslider" [style.color]="product?.product_color" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
+                      <ion-label [style.color]="product?.product_color" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                      <ion-label  [style.color]="product?.product_color" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                    </ion-range>
+                  </ion-item>
                   <ion-row class="SlideContentBorderTop">
                     <ion-col col-12>
                       <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
