@@ -106,6 +106,13 @@
       "com.xmartlabs.cordova.market": {},
       "cordova-plugin-nativeaudio": {}
     },
+<<<<<<< HEAD
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  }
+=======
     "dependencies": {
         "@angular/common": "^2.4.8",
         "@angular/compiler": "^2.4.8",
@@ -209,5 +216,5 @@
             "ios"
         ]
     }
-}
+>>>>>>> master
 }
