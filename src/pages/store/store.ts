@@ -13,6 +13,7 @@ import { HomeService } from '../../services/service.home';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
+declare var $:any;
 
 @Component({
     selector: 'page-store',
@@ -92,106 +93,7 @@ export class StorePage {
         color: '#f26522',
         isSelected: false,
         imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 4,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 5,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 6,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 7,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 8,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 9,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 10,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 11,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 12,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 13,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 14,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 15,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 16,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
-    },
-    {
-        id: 17,
-        description: 'Slide',
-        color: '#ed1c24',
-        isSelected: false,
-        imgUrl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=image&w=200&h=200'
     }
-
     ];
 
 
@@ -204,11 +106,11 @@ export class StorePage {
         private alertCtrl:AlertController,
         public platform: Platform, 
         public navCtrl: NavController, 
-      	public navParams: NavParams,
+          public navParams: NavParams,
         private iab: InAppBrowser,
         public commonSrv:CommonService,
         public appSound:AppSoundProvider,
-      	public actionSheetCtrl: ActionSheetController) {
+          public actionSheetCtrl: ActionSheetController) {
 
       
         // this.homeData = this.navParams.data;
@@ -260,8 +162,12 @@ export class StorePage {
             }
             this.slides = this.mySlides;
 
-            this.home_slides.coverflow.slideShadows = false;
+            // this.home_slides.coverflow.slideShadows = false;
             
+            let timeoutId = setTimeout(() => {  
+              this.slideInitial();
+              clearTimeout(timeoutId);
+            }, 1000);
             
             console.log("home data", this.homeMessage );
         });        
@@ -270,6 +176,11 @@ export class StorePage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad StorePage');
+        // initialize slider
+
+        // this.slideInitial();
+        // initialize slider end
+
     }
 
     ionViewWillEnter() {
@@ -329,9 +240,9 @@ export class StorePage {
     }
 
     showLottoSocial(){
-      	console.log("showLottoSocial()");
+          console.log("showLottoSocial()");
         this.appSound.play('buttonClick');
-      	let actionSheet = this.actionSheetCtrl.create({
+          let actionSheet = this.actionSheetCtrl.create({
           title: 'Modify your album',
           cssClass:'bottom-sheet',
           buttons: [
@@ -398,4 +309,95 @@ export class StorePage {
 
     selectProducer(producer: any) {
     }
+
+
+    // -------------------   slider   -----------------------
+    slide = $('.slider-single');
+    slideTotal;
+    slideCurrent = -1;
+    slideInitial() {
+        this.slide = $('.slider-single');
+        this.slideTotal = this.slide.length - 1;
+        this.slideCurrent = -1;
+        
+        this.slide.addClass('proactivede');
+        this.slideRight();
+    }
+
+    slideRight() {
+        if (this.slideCurrent < this.slideTotal) {
+          this.slideCurrent++;
+        } else {
+          this.slideCurrent = 0;
+        }
+
+        if (this.slideCurrent > 0) {
+          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
+        } else {
+          var preactiveSlide = this.slide.eq(this.slideTotal);
+        }
+        var activeSlide = this.slide.eq(this.slideCurrent);
+        if (this.slideCurrent < this.slideTotal) {
+          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
+        } else {
+          var proactiveSlide = this.slide.eq(0);
+        }
+
+        this.slide.each(function() {
+            var thisSlide = $(this);
+            if (thisSlide.hasClass('preactivede')) {
+                thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
+            }
+            if (thisSlide.hasClass('preactive')) {
+                thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
+            }
+        });
+        preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
+        activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
+        proactiveSlide.removeClass('preactivede preactive active proactivede').addClass('proactive');
+        this.appSound.play('cardFlip');
+    }
+
+    slideLeft() {
+        if (this.slideCurrent > 0) {
+          this.slideCurrent--;
+        } else {
+          this.slideCurrent = this.slideTotal;
+        }
+
+        if (this.slideCurrent < this.slideTotal) {
+          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
+        } else {
+          var proactiveSlide = this.slide.eq(0);
+        }
+        var activeSlide = this.slide.eq(this.slideCurrent);
+        if (this.slideCurrent > 0) {
+          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
+        } else {
+          var preactiveSlide = this.slide.eq(this.slideTotal);
+        }
+        this.slide.each(function() {
+          var thisSlide = $(this);
+          if (thisSlide.hasClass('proactivede')) {
+            thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
+          }
+          if (thisSlide.hasClass('proactive')) {
+            thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
+          }
+        });
+        preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
+        activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
+        proactiveSlide.removeClass('preactivede preactive active proactivede').addClass('proactive');
+        this.appSound.play('cardFlip');
+    }
+
+    swipeLeft(ev) {
+        this.slideRight();
+    }
+    swipeRight(ev) {
+        this.slideLeft();
+      }
+
+
+
 }

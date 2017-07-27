@@ -10,6 +10,12 @@ import { Params } from '../../services/params';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
+
+/*
+  Generated class for the Offers page.
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
@@ -41,6 +47,13 @@ export class OffersPage {
     drawdayfri:any= "#AAAAAA";
     drawdaywed:any ="#FF0000";
     drawdaysat:any= "#AAAAAA";
+    buyoffer:any;
+    private loading : any;
+    credit_product:any;
+    credit_game:any;
+    resultshow:boolean=false;
+    errorshow:boolean=false;
+    slider:any;
   Credit_Points: any;
 
 spaceBetween:number ;
@@ -82,8 +95,98 @@ spaceBetween:number ;
       loader.dismiss();
     })
   }
+     // draw day click  call this function     
+  drawday(day,gamename){
+    switch (day) {
+      case "Mon" :  this.credit_filter_day="Monday";     break;
+      case "Tue" :  this.credit_filter_day="Tuesday";    break;
+      case "Wed" :  this.credit_filter_day="Wednesday";  break;
+      case "Thu" :  this.credit_filter_day="Thursday";   break;
+      case "Fri" :  this.credit_filter_day="Friday";     break;
+      case "Sat" :  this.credit_filter_day="Saturday";   break;
+      case "Sun" :  this.credit_filter_day="Sunday";     break;
+      default :     this.credit_filter_day="Not selected";
+    }
+    this.credit_filter_draw=day;
+    var string = gamename;
+    this.credit_game= string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  // line select  call this function   
+  credit_line(line){
+      this.credit_filter_line=parseInt(line);
+  }
+   
+   
+  ionViewWillEnter() {
+  // get creaditoffer call api
+      this.authSrv.get_credit_offer().subscribe(data=>{
+        if (data) {
+            this.credit_offer=data.response.response.offers;
+            this.credit_product=data.response.response.product;
+        }
+        console.log("get_credit_offer",data);
+         
+      },
+        err=>{
+              console.log("error", err);
+        },
+        ()=> console.log("offer dislpay sucesss")
+      );
+         
 
-  showPaymentOptions() {
+      
+
+  // get creditpoints call api 
+      this.authSrv.get_Credit_Points().subscribe(data=>{
+        if(data){
+          this.Credit_Points=data.response.response.bonus_credit;
+          }
+          //console.log("get_Credit_Points",data)
+      },
+        err=>{     
+          console.log("error", err);
+        },
+        ()=> console.log("creadit points get successfully")
+      );
+  }
+ 
+  // buy buton click call this function
+  buyCreditOffer(){
+     this.loading = this.loadingCtrl.create();
+    this.loading.present().then(() => {
+      this.authSrv.buy_Credit_Offer().subscribe(data=>{
+        this.loading.dismiss();
+        this.resultshow=true;
+          this.buyoffer=data;
+          console.log(this.buyoffer);    
+        },
+        err=>{   
+          this.errorshow=true;
+          console.log("error", err);
+        },
+        ()=> console.log("offer buy successfully")
+      );
+    })
+  }
+  getmoreline(){
+    this.resultshow=false;
+  }
+  tryagain(){
+    this.errorshow=false;
+  }
+ watchSlider(value){
+  
+        //Converting slider-steps to custom values
+   const steps = [];
+    
+    for (let key in value) {
+      steps.push(value[key]);
+    }
+    this.credit_filter_line=parseInt(steps[this.slider]);
+     console.log(steps[this.slider]);
+    }
+    
+    showPaymentOptions() {
     console.log("OffersPage::showPaymentOptions()");
     let offer = {total_cost:4.99} ;
 
@@ -139,87 +242,4 @@ spaceBetween:number ;
   }
 
 
-    wed(drawday){
-        this.fetch_filter_draw=drawday;
-        this.fetch_filter_day="Wednesday";
-        this.drawdaywed="#FF0000";
-        this.drawdaysat="#AAAAAA";   
-    }
-    tue(drawday){
-        this.credit_filter_draw="Tue";
-        console.log();
-        this.credit_filter_day="Tuesday";
-        this.drawdaytue="#2F76D1";
-        this.drawdayfri="#AAAAAA";
-    }
-    fri(drawday){
-        this.credit_filter_draw=drawday;
-        this.credit_filter_day="Friday";
-        this.drawdayfri="#2F76D1";
-        this.drawdaytue="#AAAAAA";
-    }
-    sat(drawday){
-        this.fetch_filter_draw=drawday;
-        this.fetch_filter_day="Saturday";
-        this.drawdaywed="#AAAAAA";
-        this.drawdaysat="#FF0000";
-    }
-
-
-  credit_line(line){
-    this.credit_filter_line=parseInt(line);
-  }
-  fetch_line(line){
-    this.fetch_filter_line=parseInt(line);
-  }
-  
-  ionViewWillEnter() {
-    this.credit_filter_line=1;
-    this.credit_filter_draw="Tue";
-    this.credit_filter_day="Tuesday";
-    this.fetch_filter_line=1;
-    this.fetch_filter_draw="Wed";
-    this.fetch_filter_day="Wednesday";
-
-     this.commonSrv.trackSegmentPage("Offer","OffersPage").subscribe(data=>{
-                console.log("track segment called");
-            },
-            err=>{            
-            },
-            ()=> {  }
-     );
-    this.authSrv.get_credit_offer().subscribe(data=>{
-      this.credit_lines=data.response.response.product[0];
-      this.credit_offer=data.response.response.offers;
-      console.log("get_credit_offer",data);
-    },
-    err=>{
-       console.log("error", err);
-      },
-    ()=> console.log("offer dislpay sucesss")
-  );
-
-    this.authSrv.get_fetch_offer().subscribe(data=>{
-        this.fetch_lines=data.response.response.product[3];
-        this.fetch_offer=data.response.response.offers;
-        console.log("dd",data)
-      },
-      err=>{
-              console.log("error", err);
-      },
-      ()=> console.log("offer dislpay sucesss")
-    );
-
-    this.authSrv.get_Credit_Points().subscribe(data=>{
-        this.Credit_Points=data.response.response.bonus_credit;
-      },
-      err=>{          
-        console.log("error", err);
-      },
-      ()=> console.log("creadit points get successfully")
-    );
-
-  }
 }
-
-

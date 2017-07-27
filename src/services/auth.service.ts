@@ -470,6 +470,31 @@ mobile:"23423423423"
      }
 
 
+    buy_Credit_Offer(){
+        let action="payment/"
+        let body={ "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                    "action": "buy credit offer",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "page_id": "2",
+                    "screen_id": "2.2",
+                    "module_name": "buy_credit_offer",
+                    "customer_id": "1970400",
+                    "offer_id": "1970400",
+                    "mobile_number": "447712887310",
+                    "email_address": "as@gmail.com"
+
+                  };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+       
+        var response = this.http.post(CommonService.apiUrl + action, body,opt).map(res => res.json());
+        return response;
+
+    } 
 }
 
 
