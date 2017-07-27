@@ -174,9 +174,8 @@ page-offers {
 
     // segment 2 scss
     
-    .slide-zoom{
-        width: auto;
-    }
+      
+
     .creditbox{
         padding-left: 10px;
         margin-top: 8px;
@@ -197,9 +196,13 @@ page-offers {
         color:#ff3333;
         font-size: 14px;
     }
+    .slide-zoom{
+          width: 90%;
+    }
     .SlideSpace
     {
         padding:10px;
+        min-height: 395px;
         .SlidePrice
         {
             font-size: 28px;
@@ -244,17 +247,17 @@ page-offers {
         background:#00A651;
         width:auto;
         padding:10px;
-        padding-top:50px;
-        padding-bottom: 50px;
-        height:100%;
+        padding-top:100px;
+        padding-bottom: 100px;
+        min-height: 395px;
     }
     .errorcard{
         background:#990033;
         width:auto;
         padding:10px;
-        padding-top:50px;
-        padding-bottom: 50px;
-        height:100%;
+        padding-top:150px;
+        padding-bottom: 150px;
+        min-height: 395px;
     }
     .messagecolor{
         color:#FFFFFF;
@@ -273,7 +276,7 @@ page-offers {
                 text-align: center;
                 top: 45px;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 12px;
                 color: #333333;
             }
         }
