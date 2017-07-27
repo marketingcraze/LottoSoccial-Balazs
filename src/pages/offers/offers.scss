@@ -1,346 +1,283 @@
 page-offers {
- 
-        .Menu_Tab 
-        {
-            color: #F8F8F8 !important;
-            background: #1F4C87 !important;
-            border: 0px !important;
-            font-size: 14px;
-        }
-        .Menu_Tab:hover
-        {
-            border-bottom:4px solid #F8F8F8 !important;
-        }
-        .ion-ios-home, .ion-md-home, .ion-ios-home-outline, .ion-md-home-outline {
-                content: url(../assets/icon/home_ico.svg);
-            }
-        .ion-ios-notification, .ion-md-notification, .ion-ios-notification-outline, .ion-md-notification-outline {
-                content: url(../assets/icon/notification_ico.svg);
-               height: 50%;
-            }
-       
-
-
-        .card-title{
-                padding-top:10px;
-                z-index: 10;
-                width: 100%;
-                img{
-                    width: 100%;
-                }
-                div{
-                    position: absolute;
-                    width: 100%;
-                    text-align: center;
-                    top: 10px;
-                    font-weight: bold;
-                    font-size: 28px;
-                    text-align: center;
-                    color:#F8F8F8;
-                    text-shadow: 2px 0 #2F76d1, 0 2px #2F76d1, 2px 0 #2f76d1, 0 -1px #2f76d1;
-                }
-                h4{
-                    position: absolute;
-                    width: 100%;
-                    text-align: center;
-                    top: 50px;
-                    font-weight: bold;
-                    font-size: 14px;
-                    color: #333333;
-                }
-            }
-            
-.card-image{
-             h4{
-                    position: absolute;
-                    width: 100%;
-                    text-align: center;
-                    bottom: 0;
-                    color:#F8F8F8;
-                    padding: 6px;
-                    font-weight: bold;
-                    background-color: rgba(0,0,0,.4);
-                }
-            }
-    
-.item1
-{
-    background:#333333;
-    color: #F8F8F8;
-    font-size: 10px;
-    width: 100%;
-    height: 20%;
-}
- .item2
-{
-    background:white;
-    color: #2f76d1;
-    font-size: 1.2rem;
-    width: 100%;
-    height: 20%;
-    font-weight: bold;
-    margin-bottom: 2%;
-}
-.itemImg
-{
-    width: 100%;
-}
-.BuyBtn
-{
-   height: 34px;
-    font-size: 12px;
-    background:#00A651;
-    color:#F8F8F8;
-    float: right;
-}
-.BuyBtn:hover
-{
-border-radius: 3px;
-}
-.time
-{
-    font-weight: 100;
-    font-size: 8px;
-}
-.post-content {
-    top:0;
-    left:0;
-    padding: 2%;
-    position: absolute;
-}
-
-.img-overlay{   
-    position:relative;
-    width:100%;
-  height:auto;
-
-}
-.img-overlay > img{   
-     width:100%;
-  height:auto;
-
-}
-p.Price
-{
-    font-size: 25px;
-    line-height: 0.5rem;
-    color: #2f76d1;
-    font-weight: bold;
-}
-p.Title
-{
-font-size: 14px;
-    font-weight: 500;
-    color: #4d4c4c;
-    line-height: 3rem;
-}
-.redClr
-{
-    color: #FF0000;
-}
-p.redClr
-{
-    color:#FF0000;
-}
-
-p.blackClr
-{
-    color:black;
-}
-
-.iconClr
-{
-    color:#F8F8F8;
-}
-.itemCollapse
-{
-    padding-top:2%;
-    background:#F8F8F8;
-    color: #AAAAAA;
-    font-size: 1.2rem;
-    width: 100%;
-
-   border-bottom:1px solid #E8E8E8;
-}
-.firstImageTitle
-{
-
-    line-height: 4rem;
-    font-size: 2.5rem;
-    text-align: center;
-    color:white;
-    text-shadow: 0px 0 #2f76d1, 0 3px #2f76d1, 3px 0 #2f76d1, 0 -2px #2f76d1;
-}
-.content-center
-{
-    padding-top:1rem;
-
-}  
-.content-left
-{
-padding-top: 1.6rem;
-
-}
-.Card_Padding
-{
-    margin: 0px 0px 0px 0px;
-    width: 100%;
-    border-radius: 0px;
-    background: none;
-}
-.Item_img
-{
-    padding:0px;
-}
-.timeBreak
-{
-    font-weight: bold;
-    font-size:12px; 
-    width:16px;
-}
-.MainPanel
-{
-    border-top: 10px solid #D8D8D8;
-}
-.HeaderTitle
-{
-    font-size: 20px;
-}
-// segment 2 scss
-.slide-zoom{
-            width: 70%;
-        }
-.btn:focus{
-    background-color:blue;
-}
-.creditbox{
-    padding-left: 10px;
-    margin-top: 8px;
-    border-top: 1px solid rgb(223, 221, 221);
-    border-bottom: 1px solid rgb(223, 221, 221);
-}
-.coinimg{
-    padding-left: 10px;
-    height:10px;
-}
-.SlideTitle
-    {
-    font-size: 14px;
-    text-align: center;
-    padding-left: 10px;
+    .Menu_Tab {
+        color: #F8F8F8 !important;
+        background: #1F4C87 !important;
+        border: 0px !important;
+        font-size: 14px;
     }
-.SlideSpace
-{
-    padding:10px;
-    .SlidePrice
+    .Menu_Tab:hover {
+        border-bottom:4px solid #F8F8F8 !important;
+    }
+   .ion-ios-home, .ion-md-home, .ion-ios-home-outline, .ion-md-home-outline {
+        content: url(../assets/icon/home_ico.svg);
+    }
+    .ion-ios-notification, .ion-md-notification, .ion-ios-notification-outline, .ion-md-notification-outline {
+        content: url(../assets/icon/notification_ico.svg);
+        height: 50%;
+    }
+    .card-title {
+        padding-top:10px;
+        z-index: 10;
+        width: 100%;
+        img {
+            width: 100%;
+        }
+        div {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 10px;
+            font-weight: bold;
+            font-size: 28px;
+            text-align: center;
+            color:#F8F8F8;
+            text-shadow: 2px 0 #2F76d1, 0 2px #2F76d1, 2px 0 #2f76d1, 0 -1px #2f76d1;
+        }
+        h4 {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333333;
+        }
+    }
+                
+    .card-image {
+        h4 {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            bottom: 0;
+            color:#F8F8F8;
+            padding: 6px;
+            font-weight: bold;
+            background-color: rgba(0,0,0,.4);
+        }
+    }   
+    .item1 {
+        background:#333333;
+        color: #F8F8F8;
+        font-size: 10px;
+        width: 100%;
+        height: 20%;
+    }
+    .item2 {
+        background:white;
+        color: #2f76d1;
+        font-size: 1.2rem;
+        width: 100%;
+        height: 20%;
+        font-weight: bold;
+        margin-bottom: 2%;
+    }
+    .itemImg
     {
-        font-size: 28px;
-        line-height: 1rem;
-        color: #2F76D1;
+        width: 100%;
+    }
+    .BuyBtn
+    {
+        height: 34px;
+        font-size: 12px;
+        background:#00A651;
+        color:#F8F8F8;
+        float: right;
+    }
+    .BuyBtn:hover{
+        border-radius: 3px;
+    }
+    .time{
+        font-weight: 100;
+        font-size: 8px;
+    }
+    .post-content {
+        top:0;
+        left:0;
+        padding: 2%;
+        position: absolute;
+    }
+    .img-overlay {   
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+    .img-overlay > img {   
+        width:100%;
+        height:auto;
+    }
+    p.Price {
+        font-size: 25px;
+        line-height: 0.5rem;
+        color: #2f76d1;
         font-weight: bold;
     }
-    .SlideSubTitle
-    {
-    font-size: 12px;
-    font-weight: bold;
-    color: #333333;
-    text-align: center;
+    p.Title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #4d4c4c;
+        line-height: 3rem;
     }
-    .SlideLastText
-    {
-        font-size: 11px;
-        color:#333333;
+    .redClr {
+        color: #FF0000;
     }
-    .SlideContentBorderTop
-    {
-        border-top: 1px solid #E8E8E8;
+    p.redClr {
+        color:#FF0000;
     }
-    .BadgeRound
-    {
-        border-radius: 50%;
+    p.blackClr {
+        color:black;
     }
-    .SpaceBetweenRow
-    {
-        padding-bottom: 0.8rem;
+    .iconClr {
+        color:#F8F8F8;
     }
-    .slide1FontColor
-    {
-        background-color:#2F76D1;
+    .itemCollapse {
+        padding-top:2%;
+        background:#F8F8F8;
+        color: #333333;
+        font-size: 1.2rem;
+        width: 100%;
+        border-bottom:1px solid #E8E8E8;
+    }
+    .firstImageTitle{
+        line-height: 4rem;
+        font-size: 2.5rem;
+        text-align: center;
         color:white;
+        text-shadow: 0px 0 #2f76d1, 0 3px #2f76d1, 3px 0 #2f76d1, 0 -2px #2f76d1;
     }
-    .slide2FontColor
-    {
-        background-color:#FF0000;
-        color:white;
+    .content-center{
+        padding-top:1rem;
+    }  
+    .content-left{
+        padding-top: 1.6rem;
     }
-    
-   
-    .badge
-    {
-        font-size: 12px;
-        color:#AAAAAA;
+    .Card_Padding{
+        margin: 0px 0px 0px 0px;
+        width: 100%;
+        border-radius: 0px;
+        background: none;
     }
-    .badge:active 
-        {
-            background: #2F76D1;
-            color: white;
-            height: 20px;
-            width: 20px;
-            font-size: 12px;
-            border-radius: 50%;
-        }
-        .badge:hover 
-        {
-            background: #2F76D1;
-            color: white;
-            height: 20px;
-            width: 24px;
-            font-size: 12px;
-            border-radius: 50%;
-        }
-        .badge2:active 
-        {
-            background: #FF0000;
-            color: white;
-            height: 20px;
-            width: 24px;
-            font-size: 12px;
-            border-radius: 50%;
-        }
-        .badge2:hover 
-        {
-            background: #FF0000;
-            color: white;
-            height: 20px;
-            width: 24px;
-            font-size: 12px;
-            border-radius: 50%;
-        }
-        .redClr
-        {
-            color: #FF0000;
-        }
-}
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) { 
+    .Item_img{
+        padding:0px;
+    }
+    .timeBreak{
+        font-weight: bold;
+        font-size:12px; 
+        width:16px;
+    }
+    .MainPanel{
+        border-top: 10px solid #D8D8D8;
+    }
+    .HeaderTitle{
+        font-size: 20px;
+    }
 
-.card-title{
-                h4{
-                    position: absolute;
-                    width: 100%;
-                    text-align: center;
-                    top: 45px;
-                    font-weight: bold;
-                    font-size: 14px;
-                    color: #333333;
-                }
+    // segment 2 scss
+    
+    .slide-zoom{
+        width: auto;
+    }
+    .creditbox{
+        padding-left: 10px;
+        margin-top: 8px;
+        border-top: 1px solid rgb(223, 221, 221);
+        border-bottom: 1px solid rgb(223, 221, 221);
+    }
+    .coinimg{
+        padding-left: 10px;
+        height:10px;
+    }
+    .SlideTitle
+        {
+        font-size: 14px;
+        text-align: center;
+        padding-left: 10px;
+        }
+    .PriceTxt {
+        color:#ff3333;
+        font-size: 14px;
+    }
+    .SlideSpace
+    {
+        padding:10px;
+        .SlidePrice
+        {
+            font-size: 28px;
+            line-height: 1rem;
+            font-weight: bold;
+        }
+        .SlideSubTitle
+        {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333333;
+            text-align: center;
+        }
+        .SlideLastText
+        {
+            font-size: 11px;
+            color:#333333;
+        }
+        .SlideContentBorderTop
+        {
+            border-top: 1px solid #E8E8E8;
+        }
+    
+        .SpaceBetweenRow
+        {
+            padding-bottom: 0.8rem;
+        }
+        .slide1FontColor
+        {
+            background-color:#2F76D1;
+            color:white;
+        }
+        .linebadge{
+            height: 20px;
+            width: 24px;
+            font-size: 12px;
+            border-radius: 50%;
+        }       
+                            
+    }
+    .buycard{
+        background:#00A651;
+        width:auto;
+        padding:10px;
+        padding-top:50px;
+        padding-bottom: 50px;
+        height:100%;
+    }
+    .errorcard{
+        background:#990033;
+        width:auto;
+        padding:10px;
+        padding-top:50px;
+        padding-bottom: 50px;
+        height:100%;
+    }
+    .messagecolor{
+        color:#FFFFFF;
+        font-size: 14px;
+    }
+    .rangeslider{
+        padding: 0px;  
+    }
+
+   
+    @media only screen and (min-device-width : 320px) and (max-device-width : 568px) { 
+        .card-title{
+            h4{
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                top: 45px;
+                font-weight: bold;
+                font-size: 14px;
+                color: #333333;
             }
+        }
+    }   
 }
-.PriceTxt
-{
-color:#ff3333;
-font-size: 14px;
-}
-}
+
 

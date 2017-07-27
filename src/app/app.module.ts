@@ -60,7 +60,6 @@ import { PaymentPage } from '../pages/payment/payment';
 import { PlayGamePage } from '../pages/play-games/play-games';
 import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-thank-you';
 
-
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 import { PopupConfirmPaymentComponent } from '../components/popup-confirm-payment/popup-confirm-payment';
@@ -92,6 +91,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
+import { KeysPipe } from '../pipes/keys-pipe';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
 
 @NgModule({
@@ -148,10 +148,14 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         PlayGamePage,
         PlayGamesThankYou,
         // OffersPayment,
+
         // pipes
         MyFilterPipe,
         lotsPipe,
         FilterPipe,
+        KeysPipe,
+
+        // popups 
         CountryListPopPage,
         CusHeaderComponent,
         CusHeader1Component,
@@ -159,21 +163,20 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
         Carousel
-
     ],
     imports: [
         // BrowserAnimationsModule,
         BrowserModule,
         IonicModule.forRoot(MyApp,
-            {
-                tabsPlacement: 'top',
-                iconMode: 'ios',
-                tabsHighlight: true,
-                mode: 'md',
-                modalEnter: 'modal-slide-in',
-                modalLeave: 'modal-slide-out',
-                statusbarPadding: false
-            }),
+        {
+            tabsPlacement:'top', 
+            iconMode: 'ios',
+            tabsHighlight:true, 
+            mode:'md',
+            modalEnter: 'modal-slide-in',
+            modalLeave: 'modal-slide-out',
+            statusbarPadding: false
+        }),
         IonicStorageModule.forRoot({
             name: '__lottosocialdb',
             driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -231,6 +234,8 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         MySyndicatePage,
         PlayGamePage,
         PlayGamesThankYou,
+        
+
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -240,6 +245,5 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
         Network, OfferService, Market, NativeAudio, AppSoundProvider]
-
 })
 export class AppModule { }
