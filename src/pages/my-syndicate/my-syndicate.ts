@@ -20,7 +20,7 @@ export class MySyndicatePage {
     @ViewChild("confirmPayment") confirmPayment;
 
     private syndArr = [];
-
+    private toggled = [];
     userCards: any;
     userCardsCount:number = 0;
     customerToken:string;
@@ -43,12 +43,8 @@ export class MySyndicatePage {
 
     ionViewDidLoad() {
         this.loadSyndicate();
-        $('#estate').hide();
-        $('#sstate').show();
     }
     ionViewWillEnter() {
-        $('#estate').hide();
-        $('#sstate').show();
     }
     checkwins() {
         this.appSound.play('buttonClick');
@@ -63,19 +59,36 @@ export class MySyndicatePage {
         this.appSound.play('buttonClick');
         this.app.getRootNav().push(ManageSyndicate2Page);
     }
-    viewTickets() {
+    viewTickets(i) {
         this.appSound.play('buttonClick');
-        this.app.getRootNav().push(YourTicketsPage);
+        var grp = this.syndArr[i].product_group;
+        var sid = this.syndArr[i].syndicate_id;
+        var stype = this.syndArr[i].syndicate_type;
+        this.app.getRootNav().push(YourTicketsPage, {'products':grp, 'synd':sid, 'stype':stype});
     }
     loadSyndicate() {
-        this._syndService.syndicateList().subscribe((res) => {
-            console.log('syndicate list');
-            if (res.response.response.status == 'SUCCESS') {
-                this.syndArr = res.response.response.syndicate_group;
-            }
-            console.log(this.syndArr);
-        })
-    }
+    let loader = this.loadingCtrl.create({
+      content:"Please wait..."
+    });
+    loader.present();
+    this._syndService.syndicateList().subscribe((res) => {
+      console.log('syndicate list');
+      loader.dismiss();
+      if(res.response.response.status == 'SUCCESS') {
+        this.syndArr = res.response.response.syndicate_group;
+        for(var i=0; i<this.syndArr.length; i++) {
+          this.toggled.push(false);
+        }
+        this.toggled[0] = true;
+      }
+      console.log(this.syndArr);
+    })
+  }
+
+   toggleAcc(i) {
+    this.appSound.play('buttonClick');
+    this.toggled[i] = !this.toggled[i];
+  }
 
     checkCardExists() {
         console.log("OffersPage::checkCardExists()");

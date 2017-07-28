@@ -1,0 +1,91 @@
+<ion-header>
+    <synd-cus-header1 title="Play games" notification-count="5"></synd-cus-header1>
+</ion-header>
+
+<ion-content>
+    <div text-center>
+        <ion-item class="item item-block item-md orange-bg">
+            <ion-thumbnail item-left>
+                <img src="http://lottosocial.s3.amazonaws.com/cms2/wp-content/uploads/find-the-diff-played.png" />
+            </ion-thumbnail>
+            <ion-label class="label label-md">
+                <div class="game-title">Lotto Wagon</div>
+                <div text-wrap>
+                    This is game description and excerpt that goes on 2 lines
+                </div>
+            </ion-label>
+        </ion-item>
+    </div>
+
+    <div text-center>
+        <ion-item class="item item-block item-md orange-bg">
+            <div>
+                <ol class="progress" data-steps="4">
+                    <li class="done">
+                    </li>
+                    <li class="done">
+                        <span class="step"></span>
+                    </li>
+                    <li class="active">
+                        <span class="step"></span>
+                    </li>
+                    <img src="../assets/icon/star_ico.svg" />
+                    <li>
+                    </li>
+                </ol>
+            </div>
+
+        </ion-item>
+    </div>
+
+    <div class="game-level-bg">
+        <div class="level-target-title" text-center>
+            <span>Your Level 7 Target</span>
+        </div>
+        <div>
+            <ul>
+                <li>Score 2000</li>
+                <li>Finish with in 180 Sec</li>
+                <li>Max 12 words</li>
+            </ul>
+        </div>
+
+        <div text-center>
+            <button ion-button color="light">
+                <img src="../assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
+               <span> Get Booster</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="play-game-btn-container" text-center>
+        <button ion-button color="secondary" (click)="openThankyouPage()"> Play Now</button>
+    </div>
+
+    <div class="pagination">
+        <ul class="step-indicator row">
+            <li class="col-xs-4">
+                <a href="#" class="active">
+                <span class="m-l-20" text-wrap>Recent Winners</span>
+            </a>
+            </li>
+            <li class="col-xs-4"><b><a href="#" class="black padding-left-15">Matt<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
+            <li class="col-xs-4"><b><a href="#" class="black padding-left-15">Jane<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
+        </ul>
+    </div>
+
+    <div text-center>
+        <ion-list>
+            <ion-item href="#" ng-click="goToNextSlide()" detail-push>
+                Recent Winner Tips
+            </ion-item>
+            <ion-item href="#" ng-click="goToNextSlide()" detail-push>
+                How to Play
+            </ion-item>
+            <ion-item href="#" ng-click="goToNextSlide()" detail-push>
+                Game Terms
+            </ion-item>
+        </ion-list>
+    </div>
+
+</ion-content>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -173,6 +173,7 @@ export class SyndicateService {
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_private_syndicate_details",
             "customer_id": CommonService.session.customer_id,
+            
             "private_syndicate_id": id
         }
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
@@ -224,9 +225,35 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_syndicate_list",
-            "customer_id": CommonService.session.customer_id
+            "customer_id": CommonService.session.customer_id,
+            "customer_token":CommonService.session.customer_token
         }
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+            })
+
+    }
+
+    getTickets(pid,sid,stype){
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/ticket/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+            "session_ID": CommonService.sessionId,
+            "page_ID": "6",
+            "screen_id": "6.2",
+            "action": "syndicate_ticket",
+            "website": "Lotto Social",
+            "website_id": "27",
+            "source_site": "mobi.lottosocial.com",
+            "module_name": "get_tickets",
+            "customer_id": CommonService.session.customer_id,
+            "syndicate_id":sid,
+            "product_id":pid,
+            "syndicate_type":stype
+        }
+        return this.http.post(action, data, { headers:headopt })
             .map(res => res.json())
             .map((res) => {
                 return res;
