@@ -19,45 +19,30 @@ import { FilterPipe } from '../../pipes/filter-pipe';
 
 export class OffersPage   {
   toptab:string="offer";
-  credit_filter_line:any;
-  credit_filter_draw:any;
-  credit_filter_day:any;
+  credit_filter_line:any=0;
+  credit_filter_draw:any=0;
   credit_offer : any;
   credit_product:any;
-  credit_game:any;
   Credit_Points:any;
   buyoffer:any;
   private loading : any;
   resultshow:boolean=false;
   errorshow:boolean=false;
   slider:any;
- 
-  constructor(public navCtrl: NavController,private loadingCtrl: LoadingController,  public platform: Platform,public navParams: NavParams,public authSrv:AuthService ) {
-      //  this.spaceBetween = Math.floor(platform.width() * -0.22);
+  parseInt:any=parseInt;
+  position:any=0;
+spaceBetween:any;
+
+  constructor( public navCtrl: NavController,private loadingCtrl: LoadingController,  public platform: Platform,public navParams: NavParams,public authSrv:AuthService ) {
+        this.spaceBetween = Math.floor(platform.width() * -0.10);
      
   }
      // draw day click  call this function     
-  drawday(day,gamename){
-    switch (day) {
-      case "Mon" :  this.credit_filter_day="Monday";     break;
-      case "Tue" :  this.credit_filter_day="Tuesday";    break;
-      case "Wed" :  this.credit_filter_day="Wednesday";  break;
-      case "Thu" :  this.credit_filter_day="Thursday";   break;
-      case "Fri" :  this.credit_filter_day="Friday";     break;
-      case "Sat" :  this.credit_filter_day="Saturday";   break;
-      case "Sun" :  this.credit_filter_day="Sunday";     break;
-      default :     this.credit_filter_day="Not selected";
-    }
-    this.credit_filter_draw=day;
-    var string = gamename;
-    this.credit_game= string.charAt(0).toUpperCase() + string.slice(1);
+  drawday(index){
+    this.position =index;
+    this.credit_filter_draw=index;
   }
-  // line select  call this function   
-  credit_line(line){
-      this.credit_filter_line=parseInt(line);
-  }
-   
-   
+  
   ionViewWillEnter() {
   // get creaditoffer call api
       this.authSrv.get_credit_offer().subscribe(data=>{
@@ -97,8 +82,15 @@ export class OffersPage   {
     this.loading.present().then(() => {
       this.authSrv.buy_Credit_Offer().subscribe(data=>{
         this.loading.dismiss();
-        this.resultshow=true;
-          this.buyoffer=data;
+          this.buyoffer=data.response.response;
+          this.resultshow=true;
+          // if(this.buyoffer.status === "FAIL"){
+          //       this.errorshow=true;
+          // }
+          // else{
+          //        this.resultshow=true;
+          // }
+          
           console.log(this.buyoffer);    
         },
         err=>{   
@@ -115,16 +107,8 @@ export class OffersPage   {
   tryagain(){
     this.errorshow=false;
   }
- watchSlider(value){
-  
-        //Converting slider-steps to custom values
-   const steps = [];
-    
-    for (let key in value) {
-      steps.push(value[key]);
-    }
-    this.credit_filter_line=parseInt(steps[this.slider]);
-     console.log(steps[this.slider]);
-    }
+  watchSlider(){
+    this.credit_filter_line=this.slider;
+  }
 
 }
