@@ -32,6 +32,7 @@ export interface PageInterface {
 })
 export class HomePage {
     @ViewChild(Nav) nav: Nav;
+    @ViewChild("messageDetails") messageDetails;
 
     private cache: CacheController;
 
@@ -88,6 +89,7 @@ export class HomePage {
 
 
     ionViewDidEnter() {
+        this.messageDetails.togglePopup();
         /*
         this.menu.swipeEnable(false, 'menu1');
 
@@ -113,6 +115,16 @@ export class HomePage {
           loader.dismiss();
           console.log("TabsPage::ionViewDidEnter", err);
         });*/
+    }
+    ionViewWillEnter() {
+        this.commonSrv.trackSegmentPage("Home","HomePage").subscribe(
+            data=>{
+                console.log("track segment called");
+            },
+            err=>{            
+            },
+            ()=> {  }
+            );
     }
 
     closeMenu1(){

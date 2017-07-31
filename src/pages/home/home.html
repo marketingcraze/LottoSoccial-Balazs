@@ -1,4 +1,4 @@
-<ion-menu side="right" type="push" [content]="content" id="menu1" (ionOpen)="onOpenRightMenu()">
+<ion-menu side="right" type="push" swipeEnabled=false [content]="content" id="menu1" (ionOpen)="onOpenRightMenu()">
 
   <ion-content>
     
@@ -52,15 +52,18 @@
 
 </ion-menu>
 
-<ion-menu side="left" type="overlay" [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
+<ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
     <ion-content>
         <ion-item class="notification-bar"> </ion-item>
             <ion-list>
                 <ion-item text-wrap (click)="onLeftMenuSelection('accounts')">Accounts </ion-item>
                 <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')">Check My Winnings </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('your_badges')">Your Badges </ion-item>
                 <ion-item text-wrap (click)="onLeftMenuSelection('help')">Help </ion-item>
             </ion-list>
     </ion-content>
 </ion-menu>
+
+<!-- <popup-message-details #messageDetails [existing-cards]="userCards"></popup-message-details> -->
 
 <ion-nav #content [root]="rootPage"></ion-nav>

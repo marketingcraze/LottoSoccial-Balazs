@@ -63,7 +63,7 @@ import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-than
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 import { PopupConfirmPaymentComponent } from '../components/popup-confirm-payment/popup-confirm-payment';
-import { Carousel } from '../components/carousel/carousel';
+import { PopupMessageDetails } from '../components/popup-message-details/popup-message-details';
 
 // services
 import { Params } from '../services/params';
@@ -93,6 +93,9 @@ import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
 import { KeysPipe } from '../pipes/keys-pipe';
+import { DayPipe } from '../pipes/day-pipe';
+import { ValuePipe } from '../pipes/value-pipe';
+import { CapitalizeFirstPipe } from '../pipes/capitalize-first';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
 
 
@@ -156,6 +159,9 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         lotsPipe,
         FilterPipe,
         KeysPipe,
+        DayPipe,
+        ValuePipe,
+        CapitalizeFirstPipe,
 
         // popups 
         CountryListPopPage,
@@ -164,7 +170,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         CusHeader2Component,
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
-        Carousel
+        PopupMessageDetails
     ],
     imports: [
         // BrowserAnimationsModule,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { YourGamesPage } from '../your-games/your-games';
 import { RedeemGamesPage } from '../redeem-games/redeem-games';
-
+import { CommonService } from '../../services/common.service';
 
 import { Params } from '../../services/params';
 
@@ -22,6 +22,7 @@ export class GamesPage {
         private params: Params,
         private navParams:NavParams,
         public appSound:AppSoundProvider,
+        public commonSrv:CommonService,
         private navCtrl:NavController) {
 
         console.log('GamesPage', this.navParams.data);
@@ -32,6 +33,18 @@ export class GamesPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamesPage', this.navParams.data);
+    }
+
+    ionViewWillEnter() {
+        
+        this.commonSrv.trackSegmentPage("Games","GamesPage").subscribe(
+            data=>{
+                console.log("track segment called");
+            },
+            err=>{            
+            },
+            ()=> {  }
+            );
     }
 
     tabChange(){

@@ -5,6 +5,7 @@ import { CheckWinningsPage } from '../check-winnings/check-winnings'
 import { MySyndicatePage } from '../my-syndicate/my-syndicate';
 import { Params } from '../../services/params';
 
+import { CommonService } from '../../services/common.service';
 import { CreateSyndicateTab } from '../create-syndicate-tab/create-syndicate-tab';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -22,7 +23,8 @@ export class SyndicatesPage {
         public params:Params,
         public navCtrl: NavController, 
         public appSound:AppSoundProvider,
-        public navParams: NavParams) {
+        public navParams: NavParams,
+        public commonSrv:CommonService,) {
         }
 
     ionViewDidLoad() {
@@ -31,6 +33,14 @@ export class SyndicatesPage {
 
     ionViewWillEnter() {
         this.indexSelected = this.navParams.data.tabIndex || 0;
+        this.commonSrv.trackSegmentPage("Syndicates","SyndicatesPage").subscribe(
+            data=>{
+                console.log("track segment called");
+            },
+            err=>{            
+            },
+            ()=> {  }
+            );
     }
 
     goHomePage(){
