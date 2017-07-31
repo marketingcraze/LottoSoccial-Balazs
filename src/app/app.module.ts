@@ -74,6 +74,7 @@ import { HomeService } from '../services/service.home';
 import { AccountService } from '../services/account.service';
 import { OfferService } from '../services/offer.service';
 import { SyndicateService } from '../providers/syndicate-service';
+import { PlayGame } from '../services/playgame.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -93,6 +94,7 @@ import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
 import { KeysPipe } from '../pipes/keys-pipe';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
+
 
 @NgModule({
     declarations: [
@@ -244,6 +246,6 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider]
+        Network, OfferService, Market, NativeAudio, AppSoundProvider,PlayGame]
 })
 export class AppModule { }
