@@ -1,9 +1,9 @@
-import { Component, ViewChild, trigger, state, style } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, 
     Slides, LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
-import { InviteFriendsPage } from '../invite_friends/invite_friends';
+declare var $:any;
+//import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { JoinSyndicatePage } from '../join-syndicate/join-syndicate';
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 
@@ -13,7 +13,7 @@ import { HomeService } from '../../services/service.home';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
-declare var $:any;
+
 
 @Component({
     selector: 'page-store',

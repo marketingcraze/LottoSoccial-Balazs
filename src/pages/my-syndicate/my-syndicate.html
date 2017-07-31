@@ -29,7 +29,7 @@
       <ion-grid>
       <ion-row>
           <ion-col col-50 class="left"><span class="date-lbl">Created: {{sd.syndicate_start_date | date: format}}</span></ion-col>
-          <ion-col col-50 class="right"><span class="date-lbl">End date: {{sd.syndicate_end_date}}</span>
+          <ion-col col-50 class="right"><span class="date-lbl" style="margin-right: 30px;">End date: {{sd.syndicate_end_date}}</span>
               <span class="pmic" *ngIf="!toggled[i]"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;"></ion-icon></span>
               <span class="pmic" *ngIf="toggled[i]"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;"></ion-icon></span>
           </ion-col>
@@ -75,7 +75,7 @@
       <ion-item>
         <ion-grid>
           <ion-row>
-            <ion-col col-5 class="left"><span class="date-lbl" style="margin-right: 2px;"><button ion-button class="ctNow chat-btn pulse">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
+            <ion-col col-5 class="left"><span class="date-lbl" style="margin-right: 2px;"><button ion-button class="ctNow chat-btn pulse" (click)="chatNow(i)">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">{{chatcount}}</span></span></ion-col>
             <ion-col col-7 class="left" style="line-height: 34px;"><span class="date-lbl" style="margin-right: 2px;">PLAYING MEMBERS:</span>
             <span>{{sd.member_playing_count}}/{{sd.members_count}}</span>
               <span class="pmic" *ngIf="!toggled[i]"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
