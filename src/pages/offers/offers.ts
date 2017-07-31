@@ -178,11 +178,11 @@ export class OffersPage {
     }
     
     showPaymentOptions() {
-    console.log("OffersPage::showPaymentOptions()");
-    let offer = {total_cost:4.99} ;
+        console.log("OffersPage::showPaymentOptions()");
+        let offer = {total_cost:4.99} ;
 
     this.appSound.play('buttonClick');
-    if (!this.customerToken) {
+    if (this.customerToken) {
       this.goPaymentWebview();
     }else{
       let loader = this._showLoader();
@@ -211,7 +211,8 @@ export class OffersPage {
         loader.dismiss();
       })
     }
-  }
+    }
+
   tabChanged(){
     // console.log("OffersPage::tabChanged()");
     this.appSound.play('menuClick');

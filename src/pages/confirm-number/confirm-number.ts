@@ -107,7 +107,7 @@ export class ConfirmNumberPage {
     this._syndService.buySyndicate(data).subscribe((res) => {
       console.log(res);
       loader.dismiss();
-      this.navCtrl.setRoot(HomePage);
+      
     })
   }
 
@@ -136,6 +136,11 @@ export class ConfirmNumberPage {
             loader.dismiss();
         });
         
+    }
+
+    onPaymentComplete(){
+        console.log("ConfirmNumberPage::onPaymentComplete");
+        this.navCtrl.setRoot(HomePage);
     }
 
 
