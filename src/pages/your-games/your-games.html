@@ -8,7 +8,7 @@
             </ion-thumbnail>
             <h2>{{game?.game_title}}</h2>
             <p ion-text color="orange">{{game?.game_detail_group?.game_details_1 | slice:0:20 }}</p>
-            <button ion-button item-right color="secondary" style="width: 80px;" (click)="play(game?.destination_url)" >PLAY</button>
+            <button ion-button item-right color="secondary" style="width: 80px;" (click)="play(game)" >PLAY</button>
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;" *ngIf="i < game_group?.length-1">{{game?.game_detail_group?.game_details_2}}</ion-item-divider>
         <!--<ion-item>

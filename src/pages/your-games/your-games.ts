@@ -59,12 +59,12 @@ export class YourGamesPage {
       });
     }
     // play button click call this function
-    play(url) {
+    play(game) {
       // this.appSound.play('buttonClick');
       // const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [url] + '&customer_id=1970400&customer_token=818113679640');
       // console.log('https://nima.lottosocial.com/webview-auth/?redirect_to='+[url]+'&customer_id=1970400&customer_token=818113679640');
       // this.navCtrl.push(PlayGamePage);
-      this.nav.push(PlayGamePage);
+      this.nav.push(PlayGamePage,{"game":game});
     }
     // redeem button click call this function
     redeem() {
