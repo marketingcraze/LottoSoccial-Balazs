@@ -58,11 +58,12 @@
             <ion-list>
                 <ion-item text-wrap (click)="onLeftMenuSelection('accounts')">Accounts </ion-item>
                 <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')">Check My Winnings </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('your_badges')">Your Badges </ion-item>
                 <ion-item text-wrap (click)="onLeftMenuSelection('help')">Help </ion-item>
             </ion-list>
     </ion-content>
 </ion-menu>
 
-<popup-message-details #messageDetails [existing-cards]="userCards"></popup-message-details>
+<!-- <popup-message-details #messageDetails [existing-cards]="userCards"></popup-message-details> -->
 
 <ion-nav #content [root]="rootPage"></ion-nav>
