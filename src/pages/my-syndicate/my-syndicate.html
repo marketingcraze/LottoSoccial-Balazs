@@ -95,7 +95,7 @@
       <div *ngIf="toggled[i]">
       <ion-row style="padding: 5px 12px; background: #FEE5E5" *ngIf="sd.purchased_status">
             <ion-col class="left" style="color: #C10A09;">You haven't bought tickets for your syndicate yet</ion-col>
-            <ion-col class="right"><button ion-button class="btn2"> BUY NOW </button></ion-col>
+            <ion-col class="right"><button ion-button class="btn2" (click)="showPaymentOptions(sd)"> BUY NOW </button></ion-col>
       </ion-row>
       <ion-item *ngIf="sd.purchased_status">
         <ion-row style="padding: 0 5px 10px 5px;">

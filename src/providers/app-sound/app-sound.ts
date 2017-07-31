@@ -17,7 +17,8 @@ audioType: string = 'html5';
             this.audioType = 'native';
         }
 
-        this.preload('buttonClick', 'assets/sound/Button-Click-001.wav');
+        // this.preload('buttonClick', 'assets/sound/Button-Click-001.wav');
+        this.preload('buttonClick', 'http://lottosocial.s3.amazonaws.com/app_assets/audio_sounds/button-tap.wav');
         this.preload('cardFlip', 'assets/sound/Card-Flip-003.wav');
         this.preload('gamePlay', 'assets/sound/Game-Play-Button-002.wav');
         this.preload('menuClick', 'assets/sound/Menu-click004.wav');

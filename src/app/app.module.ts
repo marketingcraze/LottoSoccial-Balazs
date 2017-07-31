@@ -63,7 +63,7 @@ import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-than
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 import { PopupConfirmPaymentComponent } from '../components/popup-confirm-payment/popup-confirm-payment';
-import { Carousel } from '../components/carousel/carousel';
+import { PopupMessageDetails } from '../components/popup-message-details/popup-message-details';
 
 // services
 import { Params } from '../services/params';
@@ -168,7 +168,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         CusHeader2Component,
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
-        Carousel
+        PopupMessageDetails
     ],
     imports: [
         // BrowserAnimationsModule,
