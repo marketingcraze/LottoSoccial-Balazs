@@ -1,4 +1,4 @@
-<ion-menu side="right" type="push" [content]="content" id="menu1" (ionOpen)="onOpenRightMenu()">
+<ion-menu side="right" type="push" swipeEnabled=false [content]="content" id="menu1" (ionOpen)="onOpenRightMenu()">
 
   <ion-content>
     
@@ -52,7 +52,7 @@
 
 </ion-menu>
 
-<ion-menu side="left" type="overlay" [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
+<ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
     <ion-content>
         <ion-item class="notification-bar"> </ion-item>
             <ion-list>
