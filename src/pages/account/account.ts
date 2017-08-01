@@ -17,6 +17,8 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
+declare var webengage: any;
+
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'
@@ -88,7 +90,9 @@ export class AccountPage {
             		this.homeMessage = data[i].get_home_message.response;
 		            this.unreadCount = this.homeMessage.unread;
 		        }
-            }
+			}
+			
+		
             console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
 
         }, err => {
@@ -97,9 +101,7 @@ export class AccountPage {
             this.params.setIsInternetAvailable(false);
             console.log("AccountPage::ionViewDidLoad", err);
         });
-
 	}
-
 	updateNickName(){
 		this.appSound.play('buttonClick');
 		let alert = this.alertCtrl.create({
@@ -133,6 +135,12 @@ export class AccountPage {
 		this.cache.clearDatabaseOnLogout();
 
 		this.storage.remove('session_ID');
+      
+		this.platform.ready().then((readySource) => {
+        	 webengage.user.logout();
+               });
+
+
 		this.storage.remove('session')
         .then(
             data => { 
@@ -195,7 +203,6 @@ export class AccountPage {
 	            });
 	            alert.present();
             }
-            
 
         }, err => {
             loader.dismiss();
@@ -204,6 +211,4 @@ export class AccountPage {
             console.log("AccountPage::updateNickname", err);
         });
 	}
-
-
 }

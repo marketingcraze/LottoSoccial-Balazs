@@ -59,7 +59,7 @@
     </div>
 
     <div class="play-game-btn-container" *ngIf="game_Info?.show_play == 'true'" text-center>
-        <button ion-button color="secondary" > Play Now</button>
+        <button ion-button color="secondary" (click)="openThankyouPage()" > Play Now</button>
     </div>
 
     <div class="pagination">

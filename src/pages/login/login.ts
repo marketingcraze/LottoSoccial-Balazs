@@ -11,6 +11,7 @@ import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
 import { Params } from '../../services/params';
 
+declare var webengage: any;
 
 @Component({
   selector: 'page-login',
@@ -73,7 +74,7 @@ export class LoginPage {
             this.countryNumber = this.selectedCountry.country_code;
         }*/
         storage.ready().then( ()=> this.storageReady = true );
-        
+
     }
 
     loadCountries(){
@@ -162,7 +163,6 @@ export class LoginPage {
     submitLogin(){        
         
         // this.login.free_reg_msn = "" + this.countryNumber + this.login.mobile;
-
         this.prepareMobile();
 
         this.login.country_code = this.selectedCountry.dialCode;
@@ -177,13 +177,14 @@ export class LoginPage {
             content: "Please wait..."
         });
         loader.present();
-
+        localStorage.setItem('appCurrentUserid', this.login.free_reg_msn);    
         this.authSrv.loginUser(this.selectedCountry.dialCode, this.login.free_reg_msn, 
             this.login.free_reg_pwd).subscribe(
 
             data=>{
                 loader.dismiss();
                 // this.showSuccess();
+            
                 console.log("user login successful", data);
                 try {
                     data = data.response[0].login.response;
@@ -209,6 +210,10 @@ export class LoginPage {
                         );
                         let nav = this.app.getRootNav();
                         nav.setRoot(HomePage);
+                        
+               
+
+
                     }else{
                         let alert = this.alertCtrl.create({
                             title: 'Failed!',
@@ -229,7 +234,12 @@ export class LoginPage {
             },
             ()=> console.log("user login complete")
             );
-            
+
+              //Used for tracking user login using WebEngage       
+                this.platform.ready().then((readySource) => {
+                 webengage.engage(); 
+                 webengage.user.login(this.login.free_reg_msn);
+               });
     }
 
     submitMobile(){

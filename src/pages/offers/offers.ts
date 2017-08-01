@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,OnInit } from '@angular/core';
 import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -16,11 +16,24 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+declare var webengage: any;
+
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
 })
-export class OffersPage {
+export class OffersPage implements OnInit {
+   ngOnInit(): void {
+     this.platform.ready().then((readySource) => {
+        var CurrentUserid = localStorage.getItem('appCurrentUserid');
+        webengage.engage(); 
+        webengage.track('Offers Page', {
+          "UserId" :CurrentUserid ,
+        });
+     });
+   }
+
   @ViewChild("confirmPayment") confirmPayment;
 
   toptab: string = "offer";
