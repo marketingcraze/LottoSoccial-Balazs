@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar class="mynav">
+    <ion-title>Badges</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+          <span class="icon-cross" style="content: url(./assets/img/close.svg);min-width: 14px"></span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <div class="badges-main">
+        <div class="pad-10 b-border">
+            Hey champ, this is a list of your achivements.<br> tap on each badges to see more info.
+        </div>
+        <div>
+        <ion-grid class="pad-0">
+            <ion-row class="b-border" *ngFor="let d of data; let i = index;">
+                <ion-col col-3 class="">
+                    <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                </ion-col>
+                <ion-col col-6 class="left pad-top-18">
+                    <div class="text-bold">{{d.name}}</div>
+                    <div class="light-font pad-tb">{{d.completed}}% completed</div>
+                    <div>
+                        <span *ngFor="let gr of d.greenC"><img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"/></span>
+                        <span *ngFor="let gn of d.grayC"><img src="http://iconbug.com/data/15/256/3480417b5a330cdbcbf3297477dbe664.png" class="badge-small"/></span>
+                    </div>
+                </ion-col>
+                <ion-col col-3 class="right pad-t-25">
+                    <button ion-button class="btn btn1" (click)="viewTickets(i)"> {{d.points}} pts </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        </div>
+    </div>
+</ion-content>

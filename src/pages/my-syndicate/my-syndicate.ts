@@ -4,7 +4,7 @@ import { ManageSyndicatePage } from '../manage-syndicate/manage-syndicate';
 import { ManageSyndicate2Page } from '../manage-syndicate2/manage-syndicate2';
 import { YourTicketsPage } from '../your-tickets/your-tickets';
 import { SyndicateService } from '../../providers/syndicate-service';
-
+import { BadgesPage } from '../badges/badges';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
 import { CommonService } from '../../services/common.service';
@@ -142,6 +142,7 @@ export class MySyndicatePage {
     }
 
     chatNow(i) {
+        this.app.getRootNav().push(BadgesPage);
          if(this.chatcount > 0 && this.syndArr[i].peepso_group_id !=0) {
             let opt: string = "toolbarposition=top";
             let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url;
