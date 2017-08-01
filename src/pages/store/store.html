@@ -13,6 +13,8 @@
 </ion-header>
 -->
 
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
+
 <ion-content >
 
   <ion-grid class="score-panel">
@@ -63,7 +65,7 @@
                           <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
                           <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
                       </div>
-                      <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
+                      <button item-right ion-button color="secondary" (click)="showPaymentOptions(offer)"> {{ offer.button_text }} </button>
                   </ion-item>
                   
               </div>
@@ -85,7 +87,7 @@
                           <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
                       </div>
                     
-                    <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
+                    <button item-right ion-button color="secondary" (click)="showPaymentOptions(offer)"> {{ offer.button_text }} </button>
                     
                   </ion-item>
               </div>

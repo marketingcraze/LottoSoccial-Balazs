@@ -6,12 +6,12 @@
     <div text-center>
         <ion-item class="item item-block item-md orange-bg">
             <ion-thumbnail item-left>
-                <img src="http://lottosocial.s3.amazonaws.com/cms2/wp-content/uploads/find-the-diff-played.png" />
+                <img src="{{game_Info?.game_imageurl}}" />
             </ion-thumbnail>
-            <ion-label class="label label-md">
-                <div class="game-title">Lotto Wagon</div>
+             <ion-label class="label label-md">
+                <div class="game-title">{{game_Info?.game_title}}</div>
                 <div text-wrap>
-                    This is game description and excerpt that goes on 2 lines
+                    {{game_Info?.game_description}}
                 </div>
             </ion-label>
         </ion-item>
@@ -44,9 +44,9 @@
         </div>
         <div>
             <ul>
-                <li>Score 2000</li>
-                <li>Finish with in 180 Sec</li>
-                <li>Max 12 words</li>
+                <li>Score {{game_Info?.game_targetvalue}}</li>
+                <li>Finish with in {{game_Info?.game_duration}} Sec</li>
+                <li>Max {{game_Info?.game_efficiencytarget}} words</li>
             </ul>
         </div>
 
@@ -58,8 +58,8 @@
         </div>
     </div>
 
-    <div class="play-game-btn-container" text-center>
-        <button ion-button color="secondary" (click)="openThankyouPage()"> Play Now</button>
+    <div class="play-game-btn-container" *ngIf="game_Info?.show_play == 'true'" text-center>
+        <button ion-button color="secondary" > Play Now</button>
     </div>
 
     <div class="pagination">

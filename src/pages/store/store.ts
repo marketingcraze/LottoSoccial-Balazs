@@ -10,6 +10,7 @@ import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 import { Params } from '../../services/params';
 import { CommonService } from '../../services/common.service';
 import { HomeService } from '../../services/service.home';
+import { OfferService } from '../../services/offer.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -21,11 +22,19 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 })
 export class StorePage {
     @ViewChild(Slides) home_slides: Slides;
+    @ViewChild("confirmPayment") confirmPayment;
 
     public homeCardData:any;
     public spaceBetween:number = 0;
     public whatsOn:boolean = false;
     public nav:NavController;
+
+    // payment variables
+    userCards: any;
+    userCardsCount:number = 0;
+    customerToken:string;
+    jackpotList:any
+    jackpotGroup:any
 
     slideInUp:boolean = false;
     flyInOutState: String = 'out';
@@ -106,7 +115,8 @@ export class StorePage {
         private alertCtrl:AlertController,
         public platform: Platform, 
         public navCtrl: NavController, 
-          public navParams: NavParams,
+        public navParams: NavParams,
+        public srvOffer: OfferService,
         private iab: InAppBrowser,
         public commonSrv:CommonService,
         public appSound:AppSoundProvider,
@@ -172,6 +182,8 @@ export class StorePage {
             console.log("home data", this.homeMessage );
         });        
 
+        this.checkCardExists();
+
     }
 
     ionViewDidLoad() {
@@ -193,6 +205,72 @@ export class StorePage {
             ()=> {  }
             );
     }
+
+    checkCardExists(){
+        console.log("StorePage::checkCardExists()");
+        let loader = this._showLoader();
+        
+        this.srvOffer.getJackpotList().subscribe((data) => {
+            console.log("StorePage::getJackpotList() success", data);
+            if (data.response && data.response[0] 
+                && data.response[0].get_big_jackpot_list) {
+                this.jackpotList = data.response[0].get_big_jackpot_list.response;
+                this.customerToken = this.jackpotList.customer_token;
+            }
+            loader.dismiss();
+          
+        }, (err) => {
+            console.log("StorePage::getJackpotList() error", err);
+            loader.dismiss();
+        });
+    }
+
+    showPaymentOptions(offer) {
+        console.log("StorePage::showPaymentOptions()", offer);
+        // let offer = {total_cost:4.99} ;
+
+        this.appSound.play('buttonClick');
+        if (this.customerToken) {
+            this.goPaymentWebview();
+        }else{
+            let loader = this._showLoader();
+
+            // get all the cards details
+            this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
+                console.log("StorePage::showPaymentOptions() success", data);
+                let token_exists = 0;
+                for (var i = 0; i < data.response.length; ++i) {
+                    if (data.response[i].get_customer_paymill_card_details) {
+                        token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                    } 
+                }
+
+                if (token_exists > 0) {
+                    data.response.push({ offer: offer });
+                    this.userCards = data.response;
+
+                    console.log("StorePage::showPaymentOptions() success", this.userCards);
+                    loader.dismiss();
+                    this.confirmPayment.togglePopup()
+                }else{
+                    this.goPaymentWebview();
+                }
+            }, (err) => {
+                console.log("StorePage::showPaymentOptions() error", err);
+                loader.dismiss();
+            });
+        }
+    }
+
+    goPaymentWebview(){
+        let opt:string = "toolbarposition=top";
+        let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+        str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
+        str += this.customerToken+'&Offer_ID=1188'
+        this.iab.create( str, 'blank', opt);
+    }
+
+
         
     loadLink(url){
         this.appSound.play('buttonClick');
@@ -394,9 +472,19 @@ export class StorePage {
     swipeLeft(ev) {
         this.slideRight();
     }
+
     swipeRight(ev) {
         this.slideLeft();
-      }
+    }
+
+    private _showLoader() {
+        let loader = this.loadingCtrl.create({
+            content: "Loading data..."
+        });
+        loader.present()
+        return loader;
+    }
+
 
 
 
