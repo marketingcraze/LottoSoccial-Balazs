@@ -1,14 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
-
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-
-import { CommonService } from '../../services/common.service';
+import { Component, NgZone } from '@angular/core';
+import { Platform,NavController, NavParams,LoadingController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
-import { OfferService } from '../../services/offer.service';
-import { Params } from '../../services/params';
+import { FilterPipe } from '../../pipes/filter-pipe';
 
-import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 
 /*
@@ -19,104 +13,54 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
+
 })
-export class OffersPage {
-  @ViewChild("confirmPayment") confirmPayment;
-
-  toptab: string = "offer";
-
-  userCards: any;
-  userCardsCount:number = 0;
-  customerToken:string;
-  jackpotList:any
-  jackpotGroup:any
 
 
-  credit_lines: any;
-  credit_offer: any;
-  credit_filter_line: any;
-  credit_filter_draw: any;
-  credit_filter_day: any;
+export class OffersPage   {
+  toptab:string="offer";
+  credit_filter_line:any=0;
+  credit_filter_draw:any=0;
+  credit_offer : any;
+  credit_product:any;
+  Credit_Points:any;
+  buyoffer:any;
+  private loading : any;
+  resultshow:boolean=false;
+  errorshow:boolean=false;
+  slider:any;
+  parseInt:any=parseInt;
+  position:any=0;
+spaceBetween:any;
 
-  fetch_lines: any;
-  fetch_offer: any;
-  fetch_filter_line: any;
-  fetch_filter_draw: any;
-  fetch_filter_day: any;
-    drawdaytue:any ="#2F76F1";
-    drawdayfri:any= "#AAAAAA";
-    drawdaywed:any ="#FF0000";
-    drawdaysat:any= "#AAAAAA";
-    buyoffer:any;
-    private loading : any;
-    credit_product:any;
-    credit_game:any;
-    resultshow:boolean=false;
-    errorshow:boolean=false;
-    slider:any;
-    parseInt:any=parseInt;
-    position:any=0;
-  Credit_Points: any;
 
-    spaceBetween:number ;
 
-  constructor(
-    public platform: Platform,
-    public params: Params,
-    public iab: InAppBrowser,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public authSrv: AuthService,
-    public srvOffer: OfferService,
-    public commonSrv:CommonService,
-    public appSound:AppSoundProvider,
-    public loadingCtrl: LoadingController) {
-
-        this.spaceBetween = Math.floor(platform.width() * -0.22);
-
-    //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
-      this.checkCardExists();
-  }
-
-  checkCardExists(){
-    console.log("OffersPage::checkCardExists()");
-    let loader = this._showLoader();
+  constructor( public navCtrl: NavController,private ngZone: NgZone,private loadingCtrl: LoadingController,  public platform: Platform,public navParams: NavParams,public authSrv:AuthService ) {
     
-    this.srvOffer.getJackpotList().subscribe((data) => {
-      console.log("OffersPage::getJackpotList() success", data);
-      if (data.response && data.response[0] 
-        && data.response[0].get_big_jackpot_list) {
-        this.jackpotList = data.response[0].get_big_jackpot_list.response;
-        this.customerToken = this.jackpotList.customer_token;
-      }
-
-      loader.dismiss();
-      
-    }, (err) => {
-      console.log("OffersPage::getJackpotList() error", err);
-      loader.dismiss();
-    })
   }
      // draw day click  call this function     
   drawday(index){
     this.position =index;
     this.credit_filter_draw=index;
   }
-  // line select  call this function   
-  credit_line(line){
-      this.credit_filter_line=parseInt(line);
-  }
-   
-   
+  
   ionViewWillEnter() {
-  // get creaditoffer call api
+     this.spaceBetween = Math.floor(window.innerWidth * -0.10);
+      window.onresize = (e) =>
+          {
+              this.ngZone.run(() => { 
+                  this.spaceBetween = Math.floor(window.innerWidth * -0.10);
+                  console.log(this.spaceBetween);
+              });
+      };
+       // get creaditoffer call api
       this.authSrv.get_credit_offer().subscribe(data=>{
         if (data) {
             this.credit_offer=data.response.response.offers;
             this.credit_product=data.response.response.product;
+            console.log("get_credit_offer",data);
         }
-        console.log("get_credit_offer",data);
-         
+    
       },
         err=>{
               console.log("error", err);
@@ -124,9 +68,6 @@ export class OffersPage {
         ()=> console.log("offer dislpay sucesss")
       );
          
-
-      
-
   // get creditpoints call api 
       this.authSrv.get_Credit_Points().subscribe(data=>{
         if(data){
@@ -139,6 +80,7 @@ export class OffersPage {
         },
         ()=> console.log("creadit points get successfully")
       );
+      
   }
  
   // buy buton click call this function
@@ -147,8 +89,15 @@ export class OffersPage {
     this.loading.present().then(() => {
       this.authSrv.buy_Credit_Offer().subscribe(data=>{
         this.loading.dismiss();
-        this.resultshow=true;
-          this.buyoffer=data;
+          this.buyoffer=data.response.response;
+          this.resultshow=true;
+          // if(this.buyoffer.status === "FAIL"){
+          //       this.errorshow=true;
+          // }
+          // else{
+          //        this.resultshow=true;
+          // }
+          
           console.log(this.buyoffer);    
         },
         err=>{   
@@ -165,72 +114,8 @@ export class OffersPage {
   tryagain(){
     this.errorshow=false;
   }
- watchSlider(value){
-  
-        //Converting slider-steps to custom values
-   const steps = [];
-    
-    for (let key in value) {
-      steps.push(value[key]);
-    }
-    this.credit_filter_line=parseInt(steps[this.slider]);
-     console.log(steps[this.slider]);
-    }
-    
-    showPaymentOptions() {
-    console.log("OffersPage::showPaymentOptions()");
-    let offer = {total_cost:4.99} ;
-
-    this.appSound.play('buttonClick');
-    if (this.customerToken) {
-      this.goPaymentWebview();
-    }else{
-      let loader = this._showLoader();
-      // get all the cards details
-      this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
-        console.log("OffersPage::showPaymentOptions() success", data);
-        let token_exists = 0;
-        for (var i = 0; i < data.response.length; ++i) {
-          if (data.response[i].get_customer_paymill_card_details) {
-            token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-          } 
-        }
-
-        if (token_exists > 0) {
-          data.response.push({ offer: offer });
-          this.userCards = data.response;
-          console.log("OffersPage::showPaymentOptions() success", this.userCards);
-          loader.dismiss();
-          this.confirmPayment.togglePopup()
-        }else{
-          this.goPaymentWebview();
-        }
-
-      }, (err) => {
-        console.log("OffersPage::showPaymentOptions() error", err);
-        loader.dismiss();
-      })
-    }
+  watchSlider(){
+    this.credit_filter_line=this.slider;
   }
-  tabChanged(){
-    // console.log("OffersPage::tabChanged()");
-    this.appSound.play('menuClick');
-  }
-
-  goPaymentWebview(){
-      let opt:string = "toolbarposition=top";
-      let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
-      str += '&customer_id='+CommonService.session.customer_id+'&customer_token='+this.customerToken+'&Offer_ID=1188'
-      this.iab.create( str, 'blank', opt);
-  }
-
-  private _showLoader() {
-    let loader = this.loadingCtrl.create({
-      content: "Loading data..."
-    });
-    loader.present()
-    return loader;
-  }
-
 
 }
