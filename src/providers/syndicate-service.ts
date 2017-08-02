@@ -216,7 +216,7 @@ export class SyndicateService {
     syndicateList() {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
-        var data = {
+        var data ={"request": [{
             "session_ID": CommonService.sessionId,
             "page_ID": "6",
             "screen_id": "6.1",
@@ -226,8 +226,11 @@ export class SyndicateService {
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_syndicate_list",
             "customer_id": CommonService.session.customer_id,
-            "customer_token":CommonService.session.customer_token
-        }
+            // "customer_token":CommonService.session.customer_token
+        }]
+    }
+        console.log('inside console');
+        console.log(CommonService.session)
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
             .map(res => res.json())
             .map((res) => {

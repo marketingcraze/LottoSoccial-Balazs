@@ -7,7 +7,7 @@ import { SyndicateService } from '../../providers/syndicate-service';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
-
+import { CommonService } from '../../services/common.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare var $: any;
@@ -26,6 +26,8 @@ export class MySyndicatePage {
     customerToken:string;
     jackpotList:any
     jackpotGroup:any
+    chatcount: any;
+    customer_id:any;
 
     constructor(
         public app: App,
@@ -42,7 +44,9 @@ export class MySyndicatePage {
     }
 
     ionViewDidLoad() {
+        this.customer_id = CommonService.session.customer_id;
         this.loadSyndicate();
+
     }
     ionViewWillEnter() {
     }
@@ -74,13 +78,15 @@ export class MySyndicatePage {
     this._syndService.syndicateList().subscribe((res) => {
       console.log('syndicate list');
       loader.dismiss();
-      if(res.response.response.status == 'SUCCESS') {
-        this.syndArr = res.response.response.syndicate_group;
+        this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
+        this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
+        if(this.chatcount >0){
+            $(".ctNow").removeClass('pulse');
+        }
         for(var i=0; i<this.syndArr.length; i++) {
           this.toggled.push(false);
         }
         this.toggled[0] = true;
-      }
       console.log(this.syndArr);
     })
   }
@@ -127,12 +133,21 @@ export class MySyndicatePage {
                 data.response.push({ syndicate: syndicate });
                 this.userCards = data.response;
                 loader.dismiss();
-                this.confirmPayment.togglePopup()
+                this.confirmPayment.togglePopup();
             }, (err) => {
                 console.log("OffersPage::showPaymentOptions() error", err);
                 loader.dismiss();
             })
         }
+    }
+
+    chatNow(i) {
+         if(this.chatcount > 0 && this.syndArr[i].peepso_group_id !=0) {
+            let opt: string = "toolbarposition=top";
+            let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url;
+            str += '&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken ;
+            this.iab.create(str, 'blank', opt);
+         }
     }
 
     addMembers(){
