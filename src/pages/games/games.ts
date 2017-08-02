@@ -17,10 +17,12 @@ export class GamesPage implements OnInit {
        ngOnInit(): void {
             var CurrentUserid = localStorage.getItem('appCurrentUserid');
             this.platform.ready().then((readySource) => {
-                 webengage.engage(); 
-                    webengage.track('Syndicates Page', {
-                        "UserId" :CurrentUserid ,
-                    });
+                if (this.platform.is('cordova')) {
+			      webengage.engage(); 
+                  webengage.track('Game Page', {
+                  "UserId" :CurrentUserid ,
+                  });
+                }
             });
         }
 
@@ -42,11 +44,9 @@ export class GamesPage implements OnInit {
             this.gameGroup = this.navParams.data.game.game_group;
         }
     }
-
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamesPage', this.navParams.data);
     }
-
     ionViewWillEnter() {
         
         this.commonSrv.trackSegmentPage("Games","GamesPage").subscribe(
