@@ -1,7 +1,7 @@
 import { Component, ViewChild, NgZone ,OnInit} from '@angular/core';
 import { Platform, MenuController, Nav, NavController, LoadingController, 
     AlertController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
@@ -34,18 +34,18 @@ export interface PageInterface {
 })
 export class HomePage implements OnInit {
 
-ngOnInit(): void {
+    ngOnInit(): void {
 
-    this.platform.ready().then((readySource) => {
-       debugger;
-        var CurrentUserid = localStorage.getItem('appCurrentUserid');
-         if (this.platform.is('cordova')) {
-			      webengage.engage(); 
-            webengage.track('Home Page', {
-            "UserId" :CurrentUserid ,
-            });
-          }
-     });
+        this.platform.ready().then((readySource) => {
+           // debugger;
+            var CurrentUserid = localStorage.getItem('appCurrentUserid');
+             if (this.platform.is('cordova')) {
+    			      webengage.engage(); 
+                webengage.track('Home Page', {
+                "UserId" :CurrentUserid ,
+                });
+              }
+         });
 
    }
 

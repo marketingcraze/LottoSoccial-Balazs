@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler,ViewController } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 // Pages
@@ -10,7 +10,6 @@ import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
 import { AccountPage } from '../pages/account/account';
 import { OffersPage } from '../pages/offers/offers';
-// import { OffersPayment } from '../pages/offers/offers-payment/offers-payment';
 import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { AuthPage } from '../pages/auth/auth';
@@ -257,6 +256,6 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider,GetBooster, PlayGame]
+        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
 })
 export class AppModule { }
