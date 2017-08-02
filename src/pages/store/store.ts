@@ -14,7 +14,8 @@ import { OfferService } from '../../services/offer.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
-declare var $:any;
+import * as $ from 'jquery';
+//declare var $:any;
 
 @Component({
     selector: 'page-store',

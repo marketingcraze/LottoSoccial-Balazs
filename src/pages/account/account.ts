@@ -137,8 +137,13 @@ export class AccountPage {
 		this.storage.remove('session_ID');
       
 		this.platform.ready().then((readySource) => {
-        	 webengage.user.logout();
-               });
+			
+			if (this.platform.is('cordova')) {
+		    webengage.engage(); 
+            webengage.user.logout();
+            }
+
+         });
 
 
 		this.storage.remove('session')

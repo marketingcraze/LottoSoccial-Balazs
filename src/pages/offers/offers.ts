@@ -27,10 +27,12 @@ export class OffersPage implements OnInit {
    ngOnInit(): void {
      this.platform.ready().then((readySource) => {
         var CurrentUserid = localStorage.getItem('appCurrentUserid');
-        webengage.engage(); 
-        webengage.track('Offers Page', {
-          "UserId" :CurrentUserid ,
-        });
+       if (this.platform.is('cordova')) {
+			      webengage.engage(); 
+            webengage.track('Offers Page', {
+            "UserId" :CurrentUserid ,
+            });
+          }
      });
    }
 

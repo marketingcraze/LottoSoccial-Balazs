@@ -40,7 +40,7 @@
 
     <div class="game-level-bg">
         <div class="level-target-title" text-center>
-            <span>Your Level 7 Target</span>
+            <span>Your Level {{game_Info?.game_level}} Target</span>
         </div>
         <div>
             <ul>
@@ -51,7 +51,7 @@
         </div>
 
         <div text-center>
-            <button ion-button color="light">
+            <button ion-button color="light" (click)="showBoosterModal()">
                 <img src="../assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
                <span> Get Booster</span>
             </button>
