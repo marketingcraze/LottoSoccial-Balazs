@@ -49,7 +49,7 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
@@ -88,7 +88,7 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
@@ -128,7 +128,7 @@
                 <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
                 <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
-                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn">BUY FOR £4.99</button></ion-col>
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
@@ -193,10 +193,10 @@
                           </div>   
                   </ion-row> -->
                   <ion-item >
-                    <ion-range   class="rangeslider" [ngStyle]="{'$range-ios-bar-active-background-color': product?.product_color}"  min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
-                      <ion-label [style.color]="product?.product_color" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-                      <ion-label  [style.color]="product?.product_color" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
-                    </ion-range>
+                    <ion-range    class="rangeslider" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
+                      <ion-label [ngStyle]="{'color':'#AAAAAA'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                      <ion-label  [ngStyle]="{'color':'#AAAAAA'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                    </ion-range>                
                   </ion-item>
                   <ion-row class="SlideContentBorderTop">
                     <ion-col col-12>
@@ -205,12 +205,12 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-12>
-                      <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
+                      <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name|capitalizeFirst}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
                     </ion-col>
                   </ion-row>
-                  <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:((product?.draw_group|keys)[credit_filter_draw])|value, game:product?.name|capitalizeFirst};let i=index;" >
+                  <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" >
                     <ion-col col-12 *ngIf="i<1">
-                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Lines : <span ion-text color="danger">£{{item?.prize}}</span></p>
+                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Line : <span ion-text color="danger">£{{item?.prize}}</span></p>
                     </ion-col>
                   </ion-row>
                   <ion-row>
@@ -219,6 +219,7 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
+                 <!-- buynow  button click  if successfully   show this -->
               </ion-card>
                    <ion-card *ngIf="resultshow" class="buycard">
                       <button ion-button icon-only style="background:#F8F8F8; border-radius:50%" >
@@ -239,6 +240,7 @@
                         <button ion-button outline round color="light" (click)="getmoreline()">GETMoreLines</button>
                     </ion-col>
                   </ion-row>
+            <!-- buynow  button click  if error  show this -->
               </ion-card>
                  <ion-card *ngIf="errorshow" class="errorcard">
                       <button ion-button icon-only style="background:#F8F8F8; border-radius:50%" >

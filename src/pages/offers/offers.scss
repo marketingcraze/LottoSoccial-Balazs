@@ -230,18 +230,13 @@ page-offers {
         {
             padding-bottom: 0.8rem;
         }
-        .slide1FontColor
-        {
-            background-color:#2F76D1;
-            color:white;
-        }
+       
         .linebadge{
             height: 20px;
             width: 24px;
             font-size: 12px;
             border-radius: 50%;
-        }       
-                            
+        }                     
     }
     .buycard{
         background:#00A651;
@@ -266,8 +261,13 @@ page-offers {
     .rangeslider{
         padding: 0px;  
     }
+    .range-ios .range-tick {
+        height: 0px;
+    }
+    .range-ios .range-bar {
+        height: 2px;
+    }
 
-   
     @media only screen and (min-device-width : 320px) and (max-device-width : 568px) { 
         .card-title{
             h4{
@@ -282,5 +282,6 @@ page-offers {
         }
     }   
 }
+
 
 
