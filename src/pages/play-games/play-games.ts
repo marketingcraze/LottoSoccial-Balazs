@@ -1,47 +1,26 @@
-import { Component,OnInit } from '@angular/core';
-import { ModalController } from 'ionic-angular';
-import { App, NavController, NavParams, LoadingController,Platform} from 'ionic-angular';
-import {GetBooster} from '../play-games-get-booster/play-games-get-booster'
-
+import { Component } from '@angular/core';
+import { App, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PlayGamesThankYou } from '../play-games-thank-you/play-games-thank-you';
 import { PlayGame } from '../../services/playgame.service';
 
 
-declare var abc;
 /*
   Generated class for the PlayGame page.
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-declare var webengage:any;
-
 @Component({
   selector: 'play-game',
   templateUrl: 'play-games.html'
 })
-export class PlayGamePage implements OnInit {
- ngOnInit(): void {
-     this.platform.ready().then((readySource) => {
-       debugger;
-        var CurrentUserid = localStorage.getItem('appCurrentUserid');
-         if (this.platform.is('cordova')) {
-			      webengage.engage(); 
-            webengage.track('Play Game Page', {
-            "UserId" :CurrentUserid ,
-            });
-          }
-     });
-
-   }
+export class PlayGamePage {
   public nav: NavController;
   private game_Info: any[];
   GameId: any;
   loading: any;
 
   constructor(
-    private _modalController:ModalController,
-    public platform:Platform,
     public app: App,
     public navCtrl: NavController,
     private appSound: AppSoundProvider,
@@ -50,10 +29,7 @@ export class PlayGamePage implements OnInit {
     private loadingCtrl: LoadingController) {
     this.nav = this.app.getRootNav();
     this.GameId = navParams.get('game').game_id;
-    
   }
-
- 
 
   ionViewDidLoad() {
     this.loading = this.loadingCtrl.create();
@@ -70,11 +46,6 @@ export class PlayGamePage implements OnInit {
         }
       );
     });
-     
-  }
-  showBoosterModal(){
-    let myModal = this._modalController.create(GetBooster,{customer_award_log_id: this.game_Info});
-    myModal.present();
   }
   ionViewWillEnter() {
 

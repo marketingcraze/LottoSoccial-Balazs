@@ -1,31 +1,14 @@
-import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,Platform } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
-
-declare var webengage:any;
 
 @Component({
   selector: 'page-new-syndicate',
   templateUrl: 'new-syndicate.html'
 })
-export class NewSyndicatePage implements OnInit {
- ngOnInit(): void {
-  
-     this.platform.ready().then((readySource) => {
-        var CurrentUserid = localStorage.getItem('appCurrentUserid');
-        if (this.platform.is('cordova')) {
-			webengage.engage(); 
-            webengage.track('New Syndicate Page', {
-            "UserId" :CurrentUserid ,
-            });
-          }
-     });
-   }
-
-
-	constructor(public navCtrl: NavController,
-		 public platform:Platform, 
+export class NewSyndicatePage {
+	constructor(public navCtrl: NavController, 
 		public navParams: NavParams) {
 
 	}

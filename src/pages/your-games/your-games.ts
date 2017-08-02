@@ -1,13 +1,12 @@
-import { Component,NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { App,NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { GetBooster } from '../play-games-get-booster/play-games-get-booster';
+
 import { PlayGamePage } from '../play-games/play-games';
 import { Params } from '../../services/params';
+
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-
-
 
 @Component({
   selector: 'page-your-games',

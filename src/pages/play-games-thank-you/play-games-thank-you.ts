@@ -1,24 +1,14 @@
-import { Component,OnInit } from '@angular/core';
-import { NavController,Platform } from 'ionic-angular';
-
-declare var webengage:any;
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'play-games-thank-you',
   templateUrl: 'play-games-thank-you.html'
 })
 
-export class PlayGamesThankYou implements OnInit {
- ngOnInit(): void {
-     this.platform.ready().then((readySource) => {
-        var CurrentUserid = localStorage.getItem('appCurrentUserid');
-        webengage.engage(); 
-        webengage.track('Thanks page Page', {
-          "UserId" :CurrentUserid ,
-        });
-     });
-   }
-  constructor(private nav: NavController,public platform:Platform,) {
+export class PlayGamesThankYou {
+
+  constructor(private nav: NavController) {
 
   }
 

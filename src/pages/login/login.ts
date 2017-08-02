@@ -210,7 +210,10 @@ export class LoginPage {
                         );
                         let nav = this.app.getRootNav();
                         nav.setRoot(HomePage);
+                        
                
+
+
                     }else{
                         let alert = this.alertCtrl.create({
                             title: 'Failed!',
@@ -220,6 +223,7 @@ export class LoginPage {
                         alert.present();
                     }
                 }
+                
                 
             },
             err=>{
@@ -233,11 +237,8 @@ export class LoginPage {
 
               //Used for tracking user login using WebEngage       
                 this.platform.ready().then((readySource) => {
-                 if (this.platform.is('cordova')) {
-			      webengage.engage(); 
-                   webengage.user.login(this.login.free_reg_msn);
-                 }        
-
+                 webengage.engage(); 
+                 webengage.user.login(this.login.free_reg_msn);
                });
     }
 
