@@ -6,15 +6,13 @@ page-tabs{
 	.hide-account.homeTabs > .tabbar .tab-button:nth-child(5){ // HIDE HOME PAGE TAB BUTTON
 		display: none;
 	}
-	.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
-		color: black;
-	}
 	.tabs-md[tabsLayout=icon-top] .has-icon .tab-button-text{
 		color: black;
 		margin: 0;
 		font-size: .8em;
 	}
 	.tabs-md[tabsHighlight=true] .tab-highlight{
+		height: 3px;
 		// display: none;
 	}
 

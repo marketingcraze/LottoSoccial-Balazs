@@ -231,7 +231,7 @@ export class StorePage {
         // let offer = {total_cost:4.99} ;
 
         this.appSound.play('buttonClick');
-        if (!this.customerToken) {
+        if (this.customerToken) {
             this.goPaymentWebview();
         }else{
             let loader = this._showLoader();

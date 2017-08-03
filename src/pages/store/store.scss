@@ -245,7 +245,7 @@ page-store {
 
 	.popup-content{
 		position: absolute;
-		bottom: 50px;
+		bottom: 46px;
 		width: 100%;
 		max-height: 90%;
     	
@@ -301,9 +301,9 @@ page-store {
 		}
 		.big-content{
 			background-color: #333;
-			margin-left: 20px;
-			margin-right: 20px;
-			width: calc( 100% - 40px);
+			margin-left: 10px;
+			margin-right: 10px;
+			width: calc( 100% - 20px);
 		}
 		.popup-main{
 			margin: 10px 0 0 0;
@@ -334,6 +334,10 @@ page-store {
 			vertical-align: top;
 		}
 		
+	}
+
+	popup-confirm-payment .popup-content{
+		bottom: 120px;
 	}
 
 
