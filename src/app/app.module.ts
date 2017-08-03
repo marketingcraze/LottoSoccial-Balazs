@@ -59,7 +59,7 @@ import { PaymentPage } from '../pages/payment/payment';
 import { PlayGamePage } from '../pages/play-games/play-games';
 import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-thank-you';
 import { GetBooster } from '../pages/play-games-get-booster/play-games-get-booster';
-
+import { BadgesPage } from '../pages/badges/badges';
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -154,7 +154,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         GetBooster,
         PlayGamePage,
         PlayGamesThankYou,
-      
+        BadgesPage,
         // OffersPayment,
 
         // pipes
@@ -246,7 +246,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         GetBooster,
         PlayGamePage,
         PlayGamesThankYou,
-       
+        BadgesPage,
 
         // popovers
         // OffersPayment,

@@ -107,7 +107,10 @@ export class HomePage implements OnInit {
 
 
     ionViewDidEnter() {
-        this.messageDetails.togglePopup();
+        if (this.messageDetails) {
+            this.messageDetails.togglePopup();
+        }
+        
         /*
         this.menu.swipeEnable(false, 'menu1');
 
