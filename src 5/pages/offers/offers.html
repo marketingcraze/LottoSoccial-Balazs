@@ -11,10 +11,10 @@
     
   </ion-navbar>
       <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
-            <ion-segment-button value="offer"  (click)="tabChanged()" class="Menu_Tab">
+            <ion-segment-button value="offer"  (click)="tabChanged()"  class="Menu_Tab">
                 OFFER FOR YOU
             </ion-segment-button>
-            <ion-segment-button value="bonus" (click)="tabChanged()" class="Menu_Tab">
+            <ion-segment-button value="bonus"  (click)="tabChanged()" class="Menu_Tab">
                 SPEND BONUS CREDIT
             </ion-segment-button>
       </ion-segment>
@@ -152,7 +152,7 @@
 
  <div *ngSwitchCase="'bonus'" style="background-color:#E8E8E8" >
 
-      <ion-item no-padding no-lines class="creditbox">
+       <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
         <span class="SlideTitle" >Your Bonus Credit Balance : <span ion-text class="PriceTxt">£{{Credit_Points}}</span></span>
        </ion-item>
@@ -258,7 +258,7 @@
                   </ion-row>
               </ion-card> 
           </ion-slide>     
-      </ion-slides>       
+      </ion-slides>      
  </div>
     
 

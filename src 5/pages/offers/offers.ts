@@ -1,4 +1,4 @@
-import { Component, ViewChild , NgZone} from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -47,8 +47,8 @@ export class OffersPage {
 
   constructor(
     public platform: Platform,
-    private ngZone: NgZone,
     public params: Params,
+    private ngZone: NgZone,
     public iab: InAppBrowser,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -80,7 +80,7 @@ export class OffersPage {
       loader.dismiss();
     })
   }
-   
+    
     showPaymentOptions() {
         console.log("OffersPage::showPaymentOptions()");
         let offer = {total_cost:4.99} ;
@@ -136,7 +136,6 @@ export class OffersPage {
     loader.present()
     return loader;
   }
-       // draw day click  call this function     
   drawday(index){
     this.position =index;
     this.credit_filter_draw=index;
