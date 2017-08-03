@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, 
     Slides, LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-declare var $:any;
-//import { InviteFriendsPage } from '../invite_friends/invite_friends';
+
+import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { JoinSyndicatePage } from '../join-syndicate/join-syndicate';
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 
@@ -14,7 +14,8 @@ import { OfferService } from '../../services/offer.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
-
+// import * as $ from 'jquery';
+declare var $:any;
 
 @Component({
     selector: 'page-store',
@@ -120,7 +121,7 @@ export class StorePage {
         private iab: InAppBrowser,
         public commonSrv:CommonService,
         public appSound:AppSoundProvider,
-          public actionSheetCtrl: ActionSheetController) {
+        public actionSheetCtrl: ActionSheetController) {
 
       
         // this.homeData = this.navParams.data;
@@ -230,7 +231,7 @@ export class StorePage {
         // let offer = {total_cost:4.99} ;
 
         this.appSound.play('buttonClick');
-        if (this.customerToken) {
+        if (!this.customerToken) {
             this.goPaymentWebview();
         }else{
             let loader = this._showLoader();
