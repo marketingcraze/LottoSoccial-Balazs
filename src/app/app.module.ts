@@ -63,7 +63,7 @@ import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-than
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
 import { PopupConfirmPaymentComponent } from '../components/popup-confirm-payment/popup-confirm-payment';
-import { Carousel } from '../components/carousel/carousel';
+import { PopupMessageDetails } from '../components/popup-message-details/popup-message-details';
 
 // services
 import { Params } from '../services/params';
@@ -74,6 +74,7 @@ import { HomeService } from '../services/service.home';
 import { AccountService } from '../services/account.service';
 import { OfferService } from '../services/offer.service';
 import { SyndicateService } from '../providers/syndicate-service';
+import { PlayGame } from '../services/playgame.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -96,6 +97,7 @@ import { DayPipe } from '../pipes/day-pipe';
 import { ValuePipe } from '../pipes/value-pipe';
 import { CapitalizeFirstPipe } from '../pipes/capitalize-first';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
+
 
 @NgModule({
     declarations: [
@@ -168,7 +170,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         CusHeader2Component,
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
-        Carousel
+        PopupMessageDetails
     ],
     imports: [
         // BrowserAnimationsModule,
@@ -250,6 +252,6 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider]
+        Network, OfferService, Market, NativeAudio, AppSoundProvider,PlayGame]
 })
 export class AppModule { }

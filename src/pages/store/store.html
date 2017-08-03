@@ -13,6 +13,8 @@
 </ion-header>
 -->
 
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
+
 <ion-content >
 
   <ion-grid class="score-panel">
@@ -63,7 +65,7 @@
                           <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
                           <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
                       </div>
-                      <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
+                      <button item-right ion-button color="secondary" (click)="showPaymentOptions(offer)"> {{ offer.button_text }} </button>
                   </ion-item>
                   
               </div>
@@ -85,7 +87,7 @@
                           <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
                       </div>
                     
-                    <button item-right ion-button color="secondary" (click)="playFor()"> {{ offer.button_text }} </button>
+                    <button item-right ion-button color="secondary" (click)="showPaymentOptions(offer)"> {{ offer.button_text }} </button>
                     
                   </ion-item>
               </div>
@@ -521,57 +523,73 @@
           </button>
           <ion-label text-center>FIND OUT WHAT'S ON LOTTO SOCIAL</ion-label>
         </ion-item>
-        
+
+        <div class="top-slides-wrapper">
+          <ion-slides class="top-slides" slidesPerView="2" spaceBetween=10>
+          
+            <ion-slide *ngFor="let item of homeBlog">
+              <img *ngIf="item.image" src="{{item.image}}">
+              <img *ngIf="!item.image" src="assets/img/150.png">
+              <div class="slide-content">
+                <ion-item >
+                  <p item-content>{{item.content.rendered}}</p>
+                </ion-item>
+                <ion-item>
+                  <button ion-button item-right clear small (click)="loadLink(item.link)">
+                    <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+                  </button>
+                </ion-item>
+              </div>
+            </ion-slide>
+          
+          
+            <!-- 
+            <ion-slide>
+              <img src="assets/img/150.png" width="150" height="100">
+              <div class="slide-content">
+                <ion-item >
+                  <p item-content>This is the event on title.</p>
+                </ion-item>
+                <ion-item>
+                  <button ion-button item-right clear small>
+                    <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+                  </button>
+                </ion-item>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <img src="assets/img/150.png" width="150" height="100">
+              <div class="slide-content">
+                <ion-item >
+                  <p item-content>This is the event is the event.</p>
+                </ion-item>
+                <ion-item>
+                  <button ion-button item-right clear small>
+                    <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+                  </button>
+                </ion-item>
+              </div>
+            </ion-slide> -->
+          </ion-slides>
+        </div>
         <ion-slides slidesPerView="2" spaceBetween=10>
-          <ion-slide *ngFor="let item of homeBlog">
-            <img *ngIf="item.image" src="{{item.image}}">
-            <img *ngIf="!item.image" src="assets/img/150.png">
-            <div class="slide-content">
-              <ion-item >
-                <p item-content>{{item.content.rendered}}</p>
-              </ion-item>
-              <ion-item>
-                <button ion-button item-right clear small (click)="loadLink(item.link)">
-                  <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
-                </button>
-              </ion-item>
-            </div>
-          </ion-slide>
-          <!-- 
           <ion-slide>
-            <img src="assets/img/150.png" width="150" height="100">
-            <div class="slide-content">
-              <ion-item >
-                <p item-content>This is the event on title.</p>
-              </ion-item>
-              <ion-item>
-                <button ion-button item-right clear small>
-                  <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
-                </button>
-              </ion-item>
-            </div>
+            <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
           </ion-slide>
           <ion-slide>
-            <img src="assets/img/150.png" width="150" height="100">
-            <div class="slide-content">
-              <ion-item >
-                <p item-content>This is the event is the event.</p>
-              </ion-item>
-              <ion-item>
-                <button ion-button item-right clear small>
-                  <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
-                </button>
-              </ion-item>
-            </div>
-          </ion-slide> -->
+            <img src="assets/img/badges_blog_thumb.png" width="150" height="100">
+          </ion-slide>
+
         </ion-slides>
 
+
         <ion-card class="popup-main" *ngIf="homeEvents">
-            <h4 text-center>YOUR #MILLIONAIREMOMENTS</h4>
-            <ion-content>
-              <ion-img src="{{homeEvents.event_image}}" width="450" height="200"></ion-img>
-            </ion-content>
-            <ion-item>
+          <img src="assets/img/mgm_blog_thumb.jpg">
+          <ion-card-content text-center>
+            £5 CREDIT FOR YOU AND YOUR FRIEND!
+          </ion-card-content>
+          <!-- <ion-img src="{{homeEvents.event_image}}" width="450" height="200"></ion-img> -->
+          <!--   <ion-item>
               <ion-avatar item-left>
                 <span class="day">{{homeEvents.event_date | date:'dd'}}</span>
                 <span class="year">{{homeEvents.event_date | date:'yy'}}</span>
@@ -580,12 +598,12 @@
               <h2>{{homeEvents.event_title}}</h2>
               <p>{{homeEvents.event_subtitle}}</p>
             </ion-item>
-            <ion-item>
-              <button ion-button item-right clear small (click)="loadLink('')">
-                <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
-              </button>
-            </ion-item>
-
+            <ion-item> 
+              
+            </ion-item>-->
+          <button class="center" ion-button item-right clear small (click)="loadLink('')">
+            <div>Find out more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
+            </button>
         </ion-card>
 
       </ion-card>

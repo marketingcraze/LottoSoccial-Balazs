@@ -1,8 +1,14 @@
-import { Component, NgZone } from '@angular/core';
-import { Platform,NavController, NavParams,LoadingController } from 'ionic-angular';
-import { AuthService } from '../../services/auth.service';
-import { FilterPipe } from '../../pipes/filter-pipe';
+import { Component, ViewChild , NgZone} from '@angular/core';
+import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+import { CommonService } from '../../services/common.service';
+import { AuthService } from '../../services/auth.service';
+import { OfferService } from '../../services/offer.service';
+import { Params } from '../../services/params';
+
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 
 /*
@@ -13,12 +19,18 @@ import { FilterPipe } from '../../pipes/filter-pipe';
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
-
 })
+export class OffersPage {
+  @ViewChild("confirmPayment") confirmPayment;
 
+  toptab: string = "offer";
 
-export class OffersPage   {
-  toptab:string="offer";
+  userCards: any;
+  userCardsCount:number = 0;
+  customerToken:string;
+  jackpotList:any
+  jackpotGroup:any
+
   credit_filter_line:any=0;
   credit_filter_draw:any=0;
   credit_offer : any;
@@ -31,14 +43,100 @@ export class OffersPage   {
   slider:any;
   parseInt:any=parseInt;
   position:any=0;
-spaceBetween:any;
+  spaceBetween:any;
 
-
-
-  constructor( public navCtrl: NavController,private ngZone: NgZone,private loadingCtrl: LoadingController,  public platform: Platform,public navParams: NavParams,public authSrv:AuthService ) {
-    
+  constructor(
+    public platform: Platform,
+    private ngZone: NgZone,
+    public params: Params,
+    public iab: InAppBrowser,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public authSrv: AuthService,
+    public srvOffer: OfferService,
+    public commonSrv:CommonService,
+    public appSound:AppSoundProvider,
+    public loadingCtrl: LoadingController) {
+    //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
+      this.checkCardExists();
   }
-     // draw day click  call this function     
+
+  checkCardExists(){
+    console.log("OffersPage::checkCardExists()");
+    let loader = this._showLoader();
+    
+    this.srvOffer.getJackpotList().subscribe((data) => {
+      console.log("OffersPage::getJackpotList() success", data);
+      if (data.response && data.response[0] 
+        && data.response[0].get_big_jackpot_list) {
+        this.jackpotList = data.response[0].get_big_jackpot_list.response;
+        this.customerToken = this.jackpotList.customer_token;
+      }
+
+      loader.dismiss();
+      
+    }, (err) => {
+      console.log("OffersPage::getJackpotList() error", err);
+      loader.dismiss();
+    })
+  }
+   
+    showPaymentOptions() {
+        console.log("OffersPage::showPaymentOptions()");
+        let offer = {total_cost:4.99} ;
+
+    this.appSound.play('buttonClick');
+    if (this.customerToken) {
+      this.goPaymentWebview();
+    }else{
+      let loader = this._showLoader();
+      // get all the cards details
+      this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
+        console.log("OffersPage::showPaymentOptions() success", data);
+        let token_exists = 0;
+        for (var i = 0; i < data.response.length; ++i) {
+          if (data.response[i].get_customer_paymill_card_details) {
+            token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+          } 
+        }
+
+        if (token_exists > 0) {
+          data.response.push({ offer: offer });
+          this.userCards = data.response;
+          console.log("OffersPage::showPaymentOptions() success", this.userCards);
+          loader.dismiss();
+          this.confirmPayment.togglePopup()
+        }else{
+          this.goPaymentWebview();
+        }
+
+      }, (err) => {
+        console.log("OffersPage::showPaymentOptions() error", err);
+        loader.dismiss();
+      })
+    }
+    }
+
+  tabChanged(){
+    // console.log("OffersPage::tabChanged()");
+    this.appSound.play('menuClick');
+  }
+
+  goPaymentWebview(){
+      let opt:string = "toolbarposition=top";
+      let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+      str += '&customer_id='+CommonService.session.customer_id+'&customer_token='+this.customerToken+'&Offer_ID=1188'
+      this.iab.create( str, 'blank', opt);
+  }
+
+  private _showLoader() {
+    let loader = this.loadingCtrl.create({
+      content: "Loading data..."
+    });
+    loader.present()
+    return loader;
+  }
+       // draw day click  call this function     
   drawday(index){
     this.position =index;
     this.credit_filter_draw=index;
@@ -117,5 +215,6 @@ spaceBetween:any;
   watchSlider(){
     this.credit_filter_line=this.slider;
   }
+
 
 }

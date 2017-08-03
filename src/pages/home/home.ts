@@ -32,6 +32,7 @@ export interface PageInterface {
 })
 export class HomePage {
     @ViewChild(Nav) nav: Nav;
+    @ViewChild("messageDetails") messageDetails;
 
     private cache: CacheController;
 
@@ -88,6 +89,7 @@ export class HomePage {
 
 
     ionViewDidEnter() {
+        this.messageDetails.togglePopup();
         /*
         this.menu.swipeEnable(false, 'menu1');
 

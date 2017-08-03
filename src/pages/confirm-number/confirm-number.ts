@@ -1,7 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PaymentPage } from '../payment/payment';
 import { SyndicateService } from '../../providers/syndicate-service';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { CommonService } from '../../services/common.service';
+import { OfferService } from '../../services/offer.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+
+import { HomePage } from '../home/home';
+
 /*
   Generated class for the ConfirmNumber page.
 
@@ -13,11 +21,23 @@ import { SyndicateService } from '../../providers/syndicate-service';
   templateUrl: 'confirm-number.html'
 })
 export class ConfirmNumberPage {
+    @ViewChild("confirmPayment") confirmPayment;
   
   dataArr = []
   syndId: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
+    userCards: any;
+    userCardsCount:number = 0;
+    customerToken:string;
+
+
+  constructor(public navCtrl: NavController, 
+      public iab: InAppBrowser,
+      public navParams: NavParams, 
+      public srvOffer: OfferService,
+      public appSound:AppSoundProvider,
+      public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
+
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
     this.syndId = localStorage.getItem('synd_id');
     console.log(this.dataArr);
@@ -46,16 +66,16 @@ export class ConfirmNumberPage {
     loader.present();
     this._syndService.getBigJack(id).subscribe((res) => {
       loader.dismiss();
-      console.log(res);
+      console.log("ConfirmNumberPage", res);
     })
   }
 
-  buysyndicate() {
+  showPaymentOptions() {
     let loader = this.loadingCtrl.create({
       content: "Please wait..."
     });
     loader.present();
-    var arr = [];    
+    var arr = [];
     for(var i=0; i<this.dataArr.length; i++) {
       var name = this.dataArr[i].product_name;
       var tickets = {};
@@ -68,7 +88,7 @@ export class ConfirmNumberPage {
       })
     }
     var data = {
-      "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+      "session_ID": CommonService.sessionId,
       "page_ID": "4",
       "screen_id": "4.9",
       "action": "syndicate_buy",
@@ -76,7 +96,7 @@ export class ConfirmNumberPage {
       "website_id": "27",
       "source_site": "mobi.lottosocial.com",
       "module_name": "save_private_syndicate_tickets",
-      "customer_id": "1970400",
+      "customer_id": CommonService.session.customer_id,
       "private_syndicate_id": this.syndId,
       "product_group": arr,
       "trigger_action": "ACTIVATE/DEACTIVATE",
@@ -87,8 +107,51 @@ export class ConfirmNumberPage {
     this._syndService.buySyndicate(data).subscribe((res) => {
       console.log(res);
       loader.dismiss();
-      this.navCtrl.push(PaymentPage);
+      
     })
   }
+
+
+
+    buysyndicate() {
+        console.log("ConfirmNumberPage::showPaymentOptions()");
+        let offer = {total_cost:9.00} ;
+
+        this.appSound.play('buttonClick');
+        
+        let loader = this._showLoader();
+        // get all the cards details
+        this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
+            console.log("ConfirmNumberPage::showPaymentOptions() success", data);
+
+            data.response.push({ offer: offer });
+            this.userCards = data.response;
+
+            console.log("ConfirmNumberPage::showPaymentOptions() success", this.userCards);
+            loader.dismiss();
+            this.confirmPayment.togglePopup()
+            
+        }, (err) => {
+            console.log("ConfirmNumberPage::showPaymentOptions() error", err);
+            loader.dismiss();
+        });
+        
+    }
+
+    onPaymentComplete(){
+        console.log("ConfirmNumberPage::onPaymentComplete");
+        this.navCtrl.setRoot(HomePage);
+    }
+
+
+    private _showLoader() {
+        let loader = this.loadingCtrl.create({
+            content: "Loading data..."
+        });
+        loader.present()
+        return loader;
+    }
+
+
 
 }
