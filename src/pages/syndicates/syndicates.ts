@@ -20,11 +20,12 @@ public static session:any;
     ngOnInit(): void {
         var CurrentUserid = localStorage.getItem('appCurrentUserid');
         this.platform.ready().then((readySource) => {
-            webengage.engage(); 
-            webengage.track('Syndicates Page', {
-                "UserId" :CurrentUserid ,
-
+           if (this.platform.is('cordova')) {
+			webengage.engage(); 
+            webengage.track('Syndicate Page', {
+            "UserId" :CurrentUserid ,
             });
+          }
         });
     }
 
