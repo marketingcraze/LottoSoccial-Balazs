@@ -72,9 +72,6 @@ export class OffersPage implements OnInit {
     public commonSrv:CommonService,
     public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
-
-        this.spaceBetween = Math.floor(platform.width() * -0.22);
-
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
       this.checkCardExists();
   }
