@@ -38,10 +38,9 @@ export class HomePage implements OnInit {
     ngOnInit(): void {
 
         this.platform.ready().then((readySource) => {
-           // debugger;
             var CurrentUserid = localStorage.getItem('appCurrentUserid');
              if (this.platform.is('cordova')) {
-    			      webengage.engage(); 
+    		    webengage.engage(); 
                 webengage.track('Home Page', {
                 "UserId" :CurrentUserid ,
                 });

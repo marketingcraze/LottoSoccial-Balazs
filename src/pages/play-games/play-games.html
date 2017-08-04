@@ -16,37 +16,29 @@
             </ion-label>
         </ion-item>
     </div>
-
-    <div text-center>
-        <ion-item class="item item-block item-md orange-bg">
-            <div>
-                <ol class="progress" data-steps="4">
-                    <li class="done">
-                    </li>
-                    <li class="done">
-                        <span class="step"></span>
-                    </li>
-                    <li class="active">
-                        <span class="step"></span>
-                    </li>
-                    <img src="../assets/icon/star_ico.svg" />
-                    <li>
-                    </li>
-                </ol>
-            </div>
-
-        </ion-item>
+  <div class="ProgressBar-game-play item item-block item-md orange-bg">    
+    <div class="prog">
+    <div id="filler" class="filler">
+        <div class="step" id="step"></div>
+      <div class="step2" id="step2"></div>
+      <div class="imgs"><img src="../assets/icon/star_ico.svg"/></div>
+    </div>
+</div> 
     </div>
 
     <div class="game-level-bg">
         <div class="level-target-title" text-center>
-            <span>Your Level {{game_Info?.game_level}} Target</span>
+            <span *ngIf="game_Info?.game_level">Your Level {{game_Info?.game_level}} Target</span>
+             <span *ngIf="!game_Info?.game_level">Your Level 0 Target</span>
         </div>
-        <div>
+        <div class="game-play-score">
             <ul>
-                <li>Score {{game_Info?.game_targetvalue}}</li>
-                <li>Finish with in {{game_Info?.game_duration}} Sec</li>
-                <li>Max {{game_Info?.game_efficiencytarget}} words</li>
+                <li *ngIf="game_Info?.game_targetvalue">Score {{game_Info?.game_targetvalue}}</li>
+                <li *ngIf="!game_Info?.game_targetvalue">Score 0</li>
+                <li *ngIf="game_Info?.game_duration">Finish with in {{game_Info?.game_duration}} Sec</li>
+                <li *ngIf="!game_Info?.game_duration">Finish with in 0 Sec</li>
+                <li *ngIf="game_Info?.game_efficiencytarget">Max {{game_Info?.game_efficiencytarget}} words</li>
+                <li *ngIf="!game_Info?.game_efficiencytarget">Max 0 words</li>
             </ul>
         </div>
 
@@ -69,8 +61,8 @@
                 <span class="m-l-20" text-wrap>Recent Winners</span>
             </a>
             </li>
-            <li class="col-xs-4"><b><a href="#" class="black padding-left-15">Matt<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
-            <li class="col-xs-4"><b><a href="#" class="black padding-left-15">Jane<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
+            <li class="col-xs-3"><b><a href="#" class="black padding-left-15">Matt<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
+            <li class="col-xs-2"><b><a href="#" class="black padding-left-15">Jane<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
         </ul>
     </div>
 

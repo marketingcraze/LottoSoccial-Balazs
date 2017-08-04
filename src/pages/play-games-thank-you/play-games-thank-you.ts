@@ -12,10 +12,12 @@ export class PlayGamesThankYou implements OnInit {
  ngOnInit(): void {
      this.platform.ready().then((readySource) => {
         var CurrentUserid = localStorage.getItem('appCurrentUserid');
-        webengage.engage(); 
-        webengage.track('Thanks page Page', {
-          "UserId" :CurrentUserid ,
-        });
+         if (this.platform.is('cordova')) {
+			      webengage.engage(); 
+            webengage.track('Play Game Thank you Page', {
+            "UserId" :CurrentUserid ,
+            });
+          }
      });
    }
   constructor(private nav: NavController,public platform:Platform,) {

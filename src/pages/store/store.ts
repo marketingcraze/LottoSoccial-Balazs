@@ -37,6 +37,7 @@ export class StorePage {
     customerToken:string;
     jackpotList:any
     jackpotGroup:any
+    total_cards = 0
 
     slideInUp:boolean = false;
     flyInOutState: String = 'out';
@@ -155,10 +156,11 @@ export class StorePage {
                         && this.homeCard.game.game.game_group ) {
 
                         this.gameGroup = this.homeCard.game.game.game_group;
-
+                        this.total_cards += this.gameGroup.length
                     }
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
+                        this.total_cards++
                     }
                     
                 }else if ( data[i].get_account_details ) {
