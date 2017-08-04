@@ -16,15 +16,18 @@ declare var webengage: any;
 	templateUrl: 'syndicates.html'
 })
 export class SyndicatesPage implements OnInit {
-public static session:any;
+    public static session:any;
+
     ngOnInit(): void {
         var CurrentUserid = localStorage.getItem('appCurrentUserid');
         this.platform.ready().then((readySource) => {
-            webengage.engage(); 
-            webengage.track('Syndicates Page', {
-                "UserId" :CurrentUserid ,
+            if (this.platform.is('cordova')) {
+                webengage.engage(); 
+                webengage.track('Syndicates Page', {
+                    "UserId" :CurrentUserid ,
 
-            });
+                });
+            }
         });
     }
 
