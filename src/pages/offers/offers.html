@@ -53,7 +53,7 @@
           </ion-row>
           <ion-row class="item2">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size: 1.2rem; color: #2F76D1; font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size: 1.2rem; color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement1">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -92,7 +92,7 @@
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1;font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1; font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement2">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -132,7 +132,7 @@
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
-              <ion-col col-11 ><h2 style="font-size: 1.2rem;   color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem; font-family: lato-regular;   color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement3">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -203,7 +203,7 @@
                       <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
                     </ion-col>
                   </ion-row>
-                  <ion-row >
+                  <ion-row>
                     <ion-col col-12>
                       <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name|capitalizeFirst}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
                     </ion-col>
