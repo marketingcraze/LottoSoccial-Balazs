@@ -10,7 +10,6 @@ import { SyndicatesPage } from '../pages/syndicates/syndicates';
 import { GamesPage } from '../pages/games/games';
 import { AccountPage } from '../pages/account/account';
 import { OffersPage } from '../pages/offers/offers';
-// import { OffersPayment } from '../pages/offers/offers-payment/offers-payment';
 import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { AuthPage } from '../pages/auth/auth';
@@ -59,6 +58,8 @@ import { ConfirmNumberPage } from '../pages/confirm-number/confirm-number';
 import { PaymentPage } from '../pages/payment/payment';
 import { PlayGamePage } from '../pages/play-games/play-games';
 import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-thank-you';
+import { GetBooster } from '../pages/play-games-get-booster/play-games-get-booster';
+import { BadgesPage } from '../pages/badges/badges';
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -150,8 +151,10 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         YourTicketsPage,
         CheckWinningsPage,
         MySyndicatePage,
+        GetBooster,
         PlayGamePage,
         PlayGamesThankYou,
+        BadgesPage,
         // OffersPayment,
 
         // pipes
@@ -240,9 +243,10 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         YourTicketsPage,
         CheckWinningsPage,
         MySyndicatePage,
+        GetBooster,
         PlayGamePage,
         PlayGamesThankYou,
-        
+        BadgesPage,
 
         // popovers
         // OffersPayment,
@@ -252,6 +256,6 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider,PlayGame]
+        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
 })
 export class AppModule { }

@@ -53,7 +53,7 @@
           </ion-row>
           <ion-row class="item2">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size: 1.2rem; color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size: 1.2rem; color: #2F76D1; font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement1">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -92,7 +92,7 @@
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1;font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement2">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -194,8 +194,8 @@
                   </ion-row> -->
                   <ion-item >
                     <ion-range    class="rangeslider" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
-                      <ion-label [ngStyle]="{'color':'#AAAAAA'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-                      <ion-label  [ngStyle]="{'color':'#AAAAAA'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                      <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                      <ion-label  [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
                     </ion-range>                
                   </ion-item>
                   <ion-row class="SlideContentBorderTop">
@@ -203,14 +203,14 @@
                       <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
                     </ion-col>
                   </ion-row>
-                  <ion-row>
+                  <ion-row >
                     <ion-col col-12>
                       <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name|capitalizeFirst}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
                     </ion-col>
                   </ion-row>
                   <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" >
                     <ion-col col-12 *ngIf="i<1">
-                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Line : <span ion-text color="danger">£{{item?.prize}}</span></p>
+                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Line : <span ion-text color="bonus">£{{item?.prize}}</span></p>
                     </ion-col>
                   </ion-row>
                   <ion-row>

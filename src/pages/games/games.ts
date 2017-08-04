@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component,OnInit } from '@angular/core';
+import { NavController, NavParams,Platform } from 'ionic-angular';
 import { YourGamesPage } from '../your-games/your-games';
 import { RedeemGamesPage } from '../redeem-games/redeem-games';
 import { CommonService } from '../../services/common.service';
@@ -7,18 +7,32 @@ import { CommonService } from '../../services/common.service';
 import { Params } from '../../services/params';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-
+declare var webengage:any;
 @Component({
   selector: 'page-games',
   templateUrl: 'games.html'
 })
-export class GamesPage {
+export class GamesPage implements OnInit {
+
+       ngOnInit(): void {
+            var CurrentUserid = localStorage.getItem('appCurrentUserid');
+            this.platform.ready().then((readySource) => {
+                if (this.platform.is('cordova')) {
+			      webengage.engage(); 
+                  webengage.track('Game Page', {
+                  "UserId" :CurrentUserid ,
+                  });
+                }
+            });
+        }
+
     tab1Root = YourGamesPage;
     tab2Root = RedeemGamesPage;
 
     gameGroup:any = {};
 
     constructor(
+        public platform:Platform,
         private params: Params,
         private navParams:NavParams,
         public appSound:AppSoundProvider,
@@ -30,11 +44,9 @@ export class GamesPage {
             this.gameGroup = this.navParams.data.game.game_group;
         }
     }
-
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamesPage', this.navParams.data);
     }
-
     ionViewWillEnter() {
         
         this.commonSrv.trackSegmentPage("Games","GamesPage").subscribe(

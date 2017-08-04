@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild, OnInit, NgZone } from '@angular/core';
 import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -16,11 +16,26 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+declare var webengage: any;
+
 @Component({
   selector: 'page-offers',
   templateUrl: 'offers.html',
 })
-export class OffersPage {
+export class OffersPage implements OnInit {
+    ngOnInit(): void {
+        this.platform.ready().then((readySource) => {
+        var CurrentUserid = localStorage.getItem('appCurrentUserid');
+       if (this.platform.is('cordova')) {
+			      webengage.engage(); 
+            webengage.track('Offers Page', {
+            "UserId" :CurrentUserid ,
+            });
+          }
+     });
+   }
+
   @ViewChild("confirmPayment") confirmPayment;
 
   toptab: string = "offer";
@@ -48,7 +63,7 @@ export class OffersPage {
   constructor(
     public platform: Platform,
     public params: Params,
-    private ngZone: NgZone,
+        public ngZone:NgZone,
     public iab: InAppBrowser,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -57,6 +72,7 @@ export class OffersPage {
     public commonSrv:CommonService,
     public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
+
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
       this.checkCardExists();
   }
@@ -79,6 +95,15 @@ export class OffersPage {
       console.log("OffersPage::getJackpotList() error", err);
       loader.dismiss();
     })
+  }
+     // draw day click  call this function     
+  drawday(index){
+    this.position =index;
+    this.credit_filter_draw=index;
+  }
+  // line select  call this function   
+  credit_line(line){
+      this.credit_filter_line=parseInt(line);
   }
     
     showPaymentOptions() {
@@ -136,10 +161,8 @@ export class OffersPage {
     loader.present()
     return loader;
   }
-  drawday(index){
-    this.position =index;
-    this.credit_filter_draw=index;
-  }
+
+
   
   ionViewWillEnter() {
      this.spaceBetween = Math.floor(window.innerWidth * -0.10);
