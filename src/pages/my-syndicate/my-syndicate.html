@@ -18,10 +18,10 @@
   <div *ngFor="let sd of syndArr; let i = index;">
   <div class="synd-card" *ngIf="sd.syndicate_type !='PRIVATE'">
     <ion-card>
-      <div (click)="toggleAcc(i)">
-      <img [src]="sd.image_url">
+      <div >
+      <!--<img [src]="sd.image_url">-->
       <div>
-      <img [src]="sd.image_url">
+      <img [src]="sd.image_url" (click)="toggleAcc(i)">
       <div class="c-title">
         {{sd.syndicate_name}}
       </div>
@@ -30,8 +30,8 @@
       <ion-row>
           <ion-col col-50 class="left"><span class="date-lbl">Created: {{sd.syndicate_start_date | date: format}}</span></ion-col>
           <ion-col col-50 class="right"><span class="date-lbl" style="margin-right: 30px;">End date: {{sd.syndicate_end_date}}</span>
-              <span class="pmic" *ngIf="!toggled[i]"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;"></ion-icon></span>
-              <span class="pmic" *ngIf="toggled[i]"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;"></ion-icon></span>
+              <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;"></ion-icon></span>
+              <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;"></ion-icon></span>
           </ion-col>
       </ion-row>
       </ion-grid>
@@ -65,21 +65,23 @@
 
   <div class="synd-card" *ngIf="sd.syndicate_type =='PRIVATE'">
     <ion-card>
-      <div (click)="toggleAcc(i)">
+      <div>
       <!--<img [src]="sd.image_url">-->
       <div>
-      <img [src]="sd.image_url">
+      <img [src]="sd.image_url" (click)="toggleAcc(i)">
       <div class="c-title">
         {{sd.syndicate_name}}
       </div>
       <ion-item>
         <ion-grid>
           <ion-row>
-            <ion-col col-5 class="left"><span class="date-lbl" style="margin-right: 2px;"><button ion-button class="ctNow chat-btn pulse" (click)="chatNow(i)">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">{{chatcount}}</span></span></ion-col>
-            <ion-col col-7 class="left" style="line-height: 34px;"><span class="date-lbl" style="margin-right: 2px;">PLAYING MEMBERS:</span>
+            <ion-col col-5 class="left"><span class="date-lbl" style="margin-right: 2px;">
+              <button ion-button class="ctNow chat-btn pulse" (click)="chatNow(i)">CHAT NOW</button>
+              <span class="circle"><img src="./assets/img/chat_bubble.png"/><span style="padding: 5px;">{{chatcount}}</span></span></span></ion-col>
+            <ion-col col-7 class="left" style="line-height: 34px;"><span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
             <span>{{sd.member_playing_count}}/{{sd.members_count}}</span>
-              <span class="pmic" *ngIf="!toggled[i]"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
-              <span class="pmic" *ngIf="toggled[i]"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
+              <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
+              <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
             </ion-col>
             <!--<ion-col col-50 class="left"><span class="date-lbl"><button ion-button class="chat-btn">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
             <ion-col col-50 class="right" style="line-height: 34px;"><span class="date-lbl">PLAYING MEMBERS:</span>{{sd.member_playing_count}}/{{sd.members_count}}</ion-col>-->
@@ -99,7 +101,7 @@
       </ion-row>
       <ion-item *ngIf="sd.purchased_status">
         <ion-row style="padding: 0 5px 10px 5px;">
-            <ion-col col-50 class="left"><span class="tkt-lbl">Your tickets</span></ion-col>
+            <ion-col col-50 class="left"><span class="tkt-lbl"></span></ion-col>
             <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()">Manage syndicate</span></ion-col>
         </ion-row>
           <div style="padding:0; text-align: center">
@@ -108,7 +110,7 @@
       </ion-item>
       <ion-item *ngIf="!sd.purchased_status">
         <ion-row style="padding: 0px 5px 5px">
-            <ion-col col-50 class="left"><span class="tkt-lbl">Your tickets</span></ion-col>
+            <ion-col col-50 class="left"><span class="tkt-lbl"></span></ion-col>
             <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()">Manage syndicate</span></ion-col>
         </ion-row>
           <div style="padding:0; text-align: center; float: left;">
@@ -127,7 +129,7 @@
   </div>
   </div>
 
-  <div id="estate" *ngIf="syndArr.length == 0">
+  <div id="estate" *ngIf="syndArr.length == 0 && viewEmpty">
     <div class="danger">
       <div style="font-family: lato-black;">NO TICKETS FOUND</div>
       <div>YOU'VE GOT TO BE IN TO WIN IT</div>

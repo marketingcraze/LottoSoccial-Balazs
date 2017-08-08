@@ -148,9 +148,17 @@ page-my-syndicate {
         text-align: center;
         line-height: 30px;
         font-size: 12px;
-        padding: 5px 8px;
+        //padding: 5px 9px;
         color:#c10a09;
+        img {
+            margin-top: 4px;
+            display: inline-flex;
+            width: 25px;
+            position: absolute;
+            margin-left: -3px;
+        }
     }
+
     .btn2 {
         height: 30px;
         background: #00A651;

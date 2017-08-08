@@ -28,6 +28,7 @@ export class MySyndicatePage {
     jackpotGroup:any
     chatcount: any;
     customer_id:any;
+    viewEmpty: boolean = false;
 
     constructor(
         public app: App,
@@ -82,6 +83,9 @@ export class MySyndicatePage {
         this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
         if(this.chatcount >0){
             $(".ctNow").removeClass('pulse');
+        }
+        if(this.syndArr.length == 0){
+            this.viewEmpty = true;
         }
         for(var i=0; i<this.syndArr.length; i++) {
           this.toggled.push(false);

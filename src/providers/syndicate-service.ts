@@ -263,6 +263,29 @@ export class SyndicateService {
             })
 
     }
+    getBadgeOS() {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/badgeos";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+                    "request": [
+                    {
+                        "session_ID": CommonService.sessionId,
+                        "action": "get_badgeos",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "page_id": "9",
+                        "screen_id": "9.4",
+                        "module_name": "get_badgeos",
+                        "customer_id": CommonService.session.customer_id
+                    }
+                ]}
+            return this.http.post(action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+            })
+    }
 
 }
 

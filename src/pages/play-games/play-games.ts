@@ -37,7 +37,7 @@ export class PlayGamePage {
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
-        responseData => {
+        (responseData:any) => {
           this.game_Info = responseData.response[0].get_game_info.response;
           this.loading.dismiss();
         },
