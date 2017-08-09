@@ -141,7 +141,7 @@ private readFile(file: any) {
 		return this.http.post(server, blob, options)
         .catch( err =>this.handleError(err))
 		.map(response => response.json())
-		.finally(() => console.log('inside finaly'))
+		// .finally(() => console.log('inside finaly'))
 		.subscribe((ok) => {
       loader.dismiss();
       console.log("uploadPhoto:");

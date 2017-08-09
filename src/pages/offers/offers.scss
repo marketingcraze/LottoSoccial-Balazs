@@ -12,6 +12,57 @@ page-offers {
         font-family: lato-bold;
         src: url(../assets/fonts/Lato-Bold.ttf);
     }
+    .offer-of-the-day{
+        .slide-zoom {
+            width: 100%;
+            border: 1px solid #111;
+        }
+        h5{
+            font-weight: bold;
+        }
+        img{
+            min-height: 100px;
+        }
+    }
+    .syndicateRow {
+        margin: 10px 0;
+        >div{
+            padding: 10px;
+        }
+
+        .t-card {
+            background: #FFF;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 100%;
+        }
+        .check-div {
+            height: 50px;
+        }
+        .l-image-div{
+            display: inline;
+            height: 100%;
+        }
+        .pad-5-top {
+            padding: 0;
+            margin: 0;
+            font-size: .8em;
+        }
+        .big-m{
+            padding: 5px 0;
+            margin: 0;
+            font-family: lato-bold;
+        }
+        .tcard-selected {
+            width: 40px;
+            float: right;
+        }
+        .card-img {
+            width: 40%;
+            margin-top: -20%;
+        }
+    }
     .Menu_Tab {
         color: #F8F8F8 !important;
         background: #1F4C87 !important;
@@ -30,6 +81,7 @@ page-offers {
         height: 50%;
     }
     .card-title {
+        position: relative;
         padding-top:10px;
         z-index: 10;
         width: 100%;

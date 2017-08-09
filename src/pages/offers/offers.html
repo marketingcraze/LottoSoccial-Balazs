@@ -11,8 +11,7 @@
     
   </ion-navbar>
       <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
-            <ion-segment-button value="offer"  (click)="tabChanged()"  class="Menu_Tab">
-                OFFER FOR YOU
+            <ion-segment-button value="offer"  (click)="tabChanged()"  class="Menu_Tab">OFFER FOR YOU
             </ion-segment-button>
             <ion-segment-button value="bonus"  (click)="tabChanged()" class="Menu_Tab">
                 SPEND BONUS CREDIT
@@ -23,14 +22,38 @@
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
 <ion-content [ngSwitch]="toptab" style="background-color:#E8E8E8;">
-
-  <ion-card class="Card_Padding"  *ngSwitchCase="'offer'"  >
-       <div class="card-title">
+  <div class="offer-of-the-day">
+    <h5 text-center>OFFERS OF THE DAY!</h5>
+    <ion-slides slidesPerView=3>
+      <ion-slide *ngFor="let product of credit_offer" >
         <img src="assets/image/euro-banner.png" class="img-responsive">
-          <div>£43,000,000 JACKPOT</div>
-          <h4>GET 20 EUROMILLIONS LINES</h4>
-       </div>
-       <div>
+      </ion-slide>     
+    </ion-slides>
+  </div>
+
+  <div class="syndicateRow">
+    <p text-center text-uppercase no-margin >Choose the lottery you want to play</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let c of credit_product; let i=index">
+          <div class="t-card">
+            <div class="check-div"><img src="./assets/img/plus_opt.svg" class="tcard-selected"/></div>
+            <img class="card-img" src="assets/img/lotto_ball.png"/>
+            <p class="pad-5-top">NEXT DRAW IN 45:36:32</p>
+            <h1 class="big-m">£12.5M</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
+  </div>
+
+  <ion-card class="Card_Padding" *ngSwitchCase="'offer'">
+    <div class="card-title">
+      <img src="assets/image/euro-banner.png" class="img-responsive">
+        <div>£43,000,000 JACKPOT</div>
+        <h4>GET 20 EUROMILLIONS LINES</h4>
+    </div>
+    <div>
       <ion-row>
         <ion-col class="Item_img">
             <div class="img-overlay">
