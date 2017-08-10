@@ -7,9 +7,12 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PlayGamesThankYou } from '../play-games-thank-you/play-games-thank-you';
 import { PlayGame } from '../../services/playgame.service';
 import { CommonService } from '../../services/common.service';
+import { howtoplay } from '../game-start-how-to-play/game-start-how-to-play';
+import { recentWinnerTips } from '../recent-winners-tips/recent-winners-tips';
+import { gameTerms } from '../game-start-game-terms/game-start-game-terms';
 
 
-declare var abc;
+
 /*
   Generated class for the PlayGame page.
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -47,6 +50,9 @@ export class PlayGamePage implements OnInit {
   public customerId: any;
   public customerToken: any;
   public totalGameLevel:any;
+  public howToPlayModal:any;
+
+
 
   constructor(
     private _modalController:ModalController,
@@ -122,6 +128,19 @@ export class PlayGamePage implements OnInit {
     }
 
 
+  }
+
+  howToPlay(){
+    this.howToPlayModal=this._modalController.create(howtoplay,{gameInfo:this.gameInfo})
+    this.howToPlayModal.present();
+  }
+    recentWinnerTipsmodal(){
+    this.howToPlayModal=this._modalController.create(recentWinnerTips)
+    this.howToPlayModal.present();
+  }
+    gameTermsModal(){
+    this.howToPlayModal=this._modalController.create(gameTerms)
+    this.howToPlayModal.present();
   }
 
 }

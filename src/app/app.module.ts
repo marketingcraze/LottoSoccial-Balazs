@@ -62,6 +62,9 @@ import { GetBooster } from '../pages/play-games-get-booster/play-games-get-boost
 import { BadgesPage } from '../pages/badges/badges';
 import { GameThankYou} from '../pages/game-Thank-You/game-Thank-You';
 import { GameThankyouSubmittip } from '../pages/game-Thank-You-SubmitTip-modal/game-Thank-You-SubmitTip-modal';
+import { howtoplay } from '../pages/game-start-how-to-play/game-start-how-to-play';
+import { recentWinnerTips } from '../pages/recent-winners-tips/recent-winners-tips';
+import { gameTerms } from '../pages/game-start-game-terms/game-start-game-terms';
 
 
 // components
@@ -160,6 +163,9 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         BadgesPage,
         GameThankYou,
         GameThankyouSubmittip,
+        howtoplay,
+        recentWinnerTips,
+        gameTerms,
         // OffersPayment,
 
         // pipes
@@ -254,6 +260,9 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         BadgesPage,
         GameThankYou,
         GameThankyouSubmittip,
+        howtoplay,
+        recentWinnerTips,
+        gameTerms,
         // popovers
         // OffersPayment,
         CountryListPopPage,

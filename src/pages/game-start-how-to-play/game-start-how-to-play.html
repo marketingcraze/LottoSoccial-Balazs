@@ -1,0 +1,22 @@
+<ion-header>
+    <synd-cus-header1 title="How to play" notification-count="5"></synd-cus-header1>
+</ion-header>
+<ion-content>
+    <div text-center class="item item-block item-md margin">
+     
+            <ion-thumbnail item-left>
+                <img src="{{gameInfo?.game_imageurl}}" />
+            </ion-thumbnail>
+            <ion-label class="label label-md">
+                <div class="howtoplay-game-title">{{gameInfo?.game_title}}</div>
+                <div text-wrap>
+                    {{gameInfo?.game_description}}
+                </div>
+            </ion-label>
+       
+    </div>
+        <div class="content-how-to-play" [innerHTML]="decodedHtml">
+       
+       </div>
+   
+</ion-content>
