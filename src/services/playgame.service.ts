@@ -116,4 +116,46 @@ export class PlayGame {
 
     }
 
+    //Game Thank you page info
+    gameThankyouPage(customerAward_logId: string, action: string = "post", page_id: string = "3", module_names: string = "get_game_info_thankyou_page") {
+        if (!CommonService.session) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+        }
+
+        this.customerId = CommonService.session.customer_id;
+        console.log("getModules", CommonService.session);
+
+        let parameter = { request: [] };
+
+        parameter.request.push({
+            page_id: page_id,
+            action: 'your_game',
+            module_name: module_names,
+            customer_id: this.customerId,
+            customer_award_log_id: customerAward_logId
+        });
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        console.log(CommonService.getHeaderJson());
+        let url = CommonService.apiUrl + "v2/playgamethankyou/";
+
+        var response = this.http.post(url, parameter, opt).map(res => res.json());
+
+        return response; 
+
+    }
+
 }
