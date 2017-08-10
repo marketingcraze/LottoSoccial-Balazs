@@ -40,6 +40,13 @@ page-store {
 	.offer-down.lotto{
 		color: red;
 	}
+	.slider-position{
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		color: #AAA;
+		font-weight: bold;
+	}
 	.score-panel{
 		padding: 42px 0 0 0;
 		background-color: white;
@@ -224,11 +231,13 @@ page-store {
 		}
 
 		div{
+			// position: relative;
+			top: 0px;
 			width: 90%;
 			padding: 4px;
 			color: white;
 			background-color: #333;
-			line-height: 1em;
+			line-height: 1.6em;
 			border-radius: 3px 3px 0 0;
 		}
 

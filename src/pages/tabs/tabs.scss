@@ -30,22 +30,32 @@ page-tabs{
 	.ion-md-home-outline {
 		content: url(../assets/icon/home_ico.svg);
 	}
-	.ion-ios-home-black, .ion-md-home-black, .ion-ios-home-black-outline,
-	.ion-md-home-black-outline {
+	.ion-ios-home-black-outline, .ion-md-home-black-outline {
 		content: url(../assets/icon/home_ico_black.svg);
 	}
-	.ion-ios-store, .ion-md-store, .ion-ios-store-outline,
-	.ion-md-store-outline {
+	
+	.ion-ios-home-black, .ion-md-home-black{
+		content: url(../assets/icon/home_ico_blue.svg);
+	}
+
+	.ion-ios-store, .ion-md-store{
+		content: url(../assets/icon/store_ico_blue.svg);
+	}
+	.ion-ios-store-outline, .ion-md-store-outline {
 		content: url(../assets/icon/store_ico.svg);
 	}
 
-	.ion-ios-syndicates, .ion-md-syndicates, .ion-ios-syndicates-outline,
-	.ion-md-syndicates-outline {
+	.ion-ios-syndicates, .ion-md-syndicates{
+		content: url(../assets/icon/syndicates_ico_blue.svg);
+	}
+	.ion-ios-syndicates-outline, .ion-md-syndicates-outline {
 		content: url(../assets/icon/syndicates_ico.svg);
 	}
 
-	.ion-ios-games, .ion-md-games, .ion-ios-games-outline,
-	.ion-md-games-outline {
+	.ion-ios-games, .ion-md-games{
+		content: url(../assets/icon/games_ico_blue.svg);
+	}
+	.ion-ios-games-outline, .ion-md-games-outline {
 		content: url(../assets/icon/games_ico.svg);
 	}
 
@@ -54,8 +64,10 @@ page-tabs{
 		content: url(../assets/icon/account_ico.svg);
 	}
 
-	.ion-ios-offers, .ion-md-offers, .ion-ios-offers-outline,
-	.ion-md-offers-outline {
+	.ion-ios-offers, .ion-md-offers{
+		content: url(../assets/icon/offers_ico_blue.svg);
+	}
+	.ion-ios-offers-outline, .ion-md-offers-outline {
 		content: url(../assets/icon/offers_ico.svg);
 	}
 

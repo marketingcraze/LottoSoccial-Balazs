@@ -134,6 +134,10 @@
 
 <!-- slider end -->
 
+
+
+
+
   <!-- <ion-slides #home_slides loop={{sliderOptions.loop}} slidesPerView=1 effect={{sliderOptions.effect}} initialSlide=1 spaceBetween={{spaceBetween}} class="home-slides"> -->
 
 <!-- Slide 0 -->
@@ -495,6 +499,8 @@
 
 </div>
 
+  <p class="slider-position" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
+  
 </ion-content>
 
 <!-- Content end -->
@@ -577,7 +583,7 @@
             <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
           </ion-slide>
           <ion-slide>
-            <img src="assets/img/badges_blog_thumb.png" width="150" height="100">
+            <img src="assets/img/badges_blog_thumb.png" width="150" height="100" (click)="handle('your_badges')">
           </ion-slide>
 
         </ion-slides>

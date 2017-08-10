@@ -30,7 +30,7 @@ export class OffersPage implements OnInit {
        if (this.platform.is('cordova')) {
 			      webengage.engage(); 
             webengage.track('Offers Page', {
-            "UserId" :CurrentUserid ,
+              "UserId" :CurrentUserid ,
             });
           }
      });
@@ -73,7 +73,7 @@ export class OffersPage implements OnInit {
     public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
 
-        this.spaceBetween = Math.floor(platform.width() * -0.22);
+    console.log("OffersPage:");
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
       this.checkCardExists();
@@ -180,7 +180,7 @@ export class OffersPage implements OnInit {
         if (data) {
             this.credit_offer=data.response.response.offers;
             this.credit_product=data.response.response.product;
-            console.log("get_credit_offer",data);
+            console.log("OffersPage::get_credit_offer", data);
         }
     
       },

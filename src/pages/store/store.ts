@@ -6,6 +6,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { JoinSyndicatePage } from '../join-syndicate/join-syndicate';
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
+import { BadgesPage } from '../badges/badges';
 
 import { Params } from '../../services/params';
 import { CommonService } from '../../services/common.service';
@@ -36,6 +37,7 @@ export class StorePage {
     customerToken:string;
     jackpotList:any
     jackpotGroup:any
+    total_cards = 0
 
     slideInUp:boolean = false;
     flyInOutState: String = 'out';
@@ -154,10 +156,11 @@ export class StorePage {
                         && this.homeCard.game.game.game_group ) {
 
                         this.gameGroup = this.homeCard.game.game.game_group;
-
+                        this.total_cards += this.gameGroup.length
                     }
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
+                        this.total_cards++
                     }
                     
                 }else if ( data[i].get_account_details ) {
@@ -360,8 +363,8 @@ export class StorePage {
         console.log("handle", str);
         this.appSound.play('buttonClick');
         switch (str) {
-          case 'invite_firends':
-               this.nav.push(JoinSyndicatePage);
+            case 'invite_firends':
+                this.nav.push(JoinSyndicatePage);
                // this.nav.push(InviteFriendsPage);
               break;
           case 'add_syndicate':
@@ -370,6 +373,9 @@ export class StorePage {
           case 'join_syndicate':
                this.nav.push(JoinSyndicatePage);
               break;
+            case 'your_badges':
+                this.params.goPage( BadgesPage )
+                break
           
           default:
               // code...
