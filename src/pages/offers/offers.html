@@ -11,10 +11,9 @@
     
   </ion-navbar>
       <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
-            <ion-segment-button value="offer"   class="Menu_Tab">
-                OFFER FOR YOU
+            <ion-segment-button value="offer"  (click)="tabChanged()"  class="Menu_Tab">OFFER FOR YOU
             </ion-segment-button>
-            <ion-segment-button value="bonus"  class="Menu_Tab">
+            <ion-segment-button value="bonus"  (click)="tabChanged()" class="Menu_Tab">
                 SPEND BONUS CREDIT
             </ion-segment-button>
       </ion-segment>
@@ -23,14 +22,38 @@
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
 <ion-content [ngSwitch]="toptab" style="background-color:#E8E8E8;">
-
-  <ion-card class="Card_Padding"  *ngSwitchCase="'offer'"  >
-       <div class="card-title">
+  <div class="offer-of-the-day">
+    <h5 text-center>OFFERS OF THE DAY!</h5>
+    <ion-slides slidesPerView=3>
+      <ion-slide *ngFor="let product of credit_offer" >
         <img src="assets/image/euro-banner.png" class="img-responsive">
-          <div>£43,000,000 JACKPOT</div>
-          <h4>GET 20 EUROMILLIONS LINES</h4>
-       </div>
-       <div>
+      </ion-slide>     
+    </ion-slides>
+  </div>
+
+  <div class="syndicateRow">
+    <p text-center text-uppercase no-margin >Choose the lottery you want to play</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let c of credit_product; let i=index">
+          <div class="t-card">
+            <div class="check-div"><img src="./assets/img/plus_opt.svg" class="tcard-selected"/></div>
+            <img class="card-img" src="assets/img/lotto_ball.png"/>
+            <p class="pad-5-top">NEXT DRAW IN 45:36:32</p>
+            <h1 class="big-m">£12.5M</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
+  </div>
+
+  <ion-card class="Card_Padding" *ngSwitchCase="'offer'">
+    <div class="card-title">
+      <img src="assets/image/euro-banner.png" class="img-responsive">
+        <div>£43,000,000 JACKPOT</div>
+        <h4>GET 20 EUROMILLIONS LINES</h4>
+    </div>
+    <div>
       <ion-row>
         <ion-col class="Item_img">
             <div class="img-overlay">
@@ -92,7 +115,7 @@
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
-              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1; font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement2">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -132,7 +155,7 @@
           </ion-row>
           <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
               <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
-              <ion-col col-11 ><h2 style="font-size: 1.2rem;   color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem; font-family: lato-regular;   color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
               <div [hidden]="!hideElement3">
                     <div class="itemCollapse" >
                       <ion-row>
@@ -193,10 +216,10 @@
                           </div>   
                   </ion-row> -->
                   <ion-item >
-                    <ion-range   class="rangeslider" [ngStyle]="{'$range-ios-bar-active-background-color': product?.product_color}"  min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
-                      <ion-label [style.color]="product?.product_color" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-                      <ion-label  [style.color]="product?.product_color" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
-                    </ion-range>
+                    <ion-range    class="rangeslider" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
+                      <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                      <ion-label  [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                    </ion-range>                
                   </ion-item>
                   <ion-row class="SlideContentBorderTop">
                     <ion-col col-12>
@@ -205,12 +228,12 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-12>
-                      <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
+                      <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name|capitalizeFirst}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
                     </ion-col>
                   </ion-row>
-                  <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:((product?.draw_group|keys)[credit_filter_draw])|value, game:product?.name|capitalizeFirst};let i=index;" >
+                  <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" >
                     <ion-col col-12 *ngIf="i<1">
-                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Lines : <span ion-text color="danger">£{{item?.prize}}</span></p>
+                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Line : <span ion-text color="bonus">£{{item?.prize}}</span></p>
                     </ion-col>
                   </ion-row>
                   <ion-row>
@@ -219,6 +242,7 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
+                 <!-- buynow  button click  if successfully   show this -->
               </ion-card>
                    <ion-card *ngIf="resultshow" class="buycard">
                       <button ion-button icon-only style="background:#F8F8F8; border-radius:50%" >
@@ -239,6 +263,7 @@
                         <button ion-button outline round color="light" (click)="getmoreline()">GETMoreLines</button>
                     </ion-col>
                   </ion-row>
+            <!-- buynow  button click  if error  show this -->
               </ion-card>
                  <ion-card *ngIf="errorshow" class="errorcard">
                       <button ion-button icon-only style="background:#F8F8F8; border-radius:50%" >
@@ -256,7 +281,7 @@
                   </ion-row>
               </ion-card> 
           </ion-slide>     
-      </ion-slides>     
+      </ion-slides>      
  </div>
     
 

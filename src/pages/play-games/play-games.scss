@@ -22,7 +22,7 @@
 {
     background-color: #ffebb9;
     background-image: url('../assets/icon/games_bg@3x.png');
-    min-height:320px;
+    min-height:210px;
     width:100%;
     background-repeat: repeat-x;
     border-bottom:1px solid #F27A18;
@@ -36,8 +36,8 @@
 .level-target-title
 {
 padding-top:20px;
-padding-bottom:20px;
-color: #c68755;
+padding-bottom:6px;
+color: #B26431;
 font-size: 20px;
 font-weight: 600;
 }
@@ -48,10 +48,14 @@ font-weight: 600;
    margin-bottom:20px;
 }
 
-
-
 .pagination .col-xs-4 {
-    width: 33.33333333%;
+    width: 39.33333333%;
+}
+.pagination .col-xs-3 {
+    width: 30.33333333%;
+}
+.pagination .col-xs-2{
+ width: 30.33333333%;
 }
 .pagination .row:before {
     display: table;
@@ -68,29 +72,31 @@ font-weight: 600;
 .step-indicator li a {
   display:block;
   text-decoration:none;
-  font-size:9px;
-  line-height:28px;
+  font-size:13px;
+  line-height:33px;
   position:relative;
   opacity: inherit !important;
+  text-align: center;
 }
 .step-indicator li:nth-child(1) a::after {
   float:right;
   content:"";
   width:0;
-  height:0;
-  border-top: 14px solid transparent;
-  border-bottom: 15px solid transparent;
+  height:4;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
   border-left: 13px solid #f27a18;
   position:relative;
-  right:-13px;
+  right:-12px;
   z-index:8;
 }
 .step-indicator li a.active{
     background-color:#f27a18;
     color: #fff;
+    height: 34px;
 }
 .m-l-20{
-    margin-left:20px;
+    margin-left:5px;
 }
 .black{
     color: #000;
@@ -105,96 +111,69 @@ font-weight: 600;
     float: right;color: #D9A25A;
 }
 
-// ----------------progress bar style ------------------------//
-    ol.progress[data-steps="4"] li { width: 40%; }
-
-
-    .progress {
-        width: 100%;
-        list-style: none;
-        list-style-image: none;
-        margin: 20px 0 20px 0;
-        padding: 0;
-  
-    }
-.progress img{
-  margin-top: -5px;
-  margin-left: -7px;
-  height: 30px;
-  
+.game-play-score{
+    margin-left: 25px;
+    color: #797261;
+    font-weight: bolder;
 }
-    .progress li {
-        float: left;
-        text-align: center;
-        position: relative;
-    }
+.game-play-score ul li{
+    font-weight: bolder;
+}
+.ProgressBar-game-play{
+    margin-top: -1px;
+    height: 105px;
+}
+    //==progressbar design==//
+.prog {
+    margin-left:10px;
+    width:80%;
+    height:18px;
+    border:3px solid #A54D1A;
+    border-radius:10px;
+    background-color:#A54D1A;
+    font-weight:bold;
+}
+.filler {
+    width:0%;
+    border-radius:10px;
+    height:12px;
+    background-color:#E7D011;
+}
+.step{
+    width: 25px;
+	height: 25px;
+	background: #E7D011;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 12px;
+    border:3px solid #A54D1A;
+    border-left:transparent;
+    border-right:transparent;
+    margin-left:20%;
+    margin-top:-7px;
+    position:absolute;
+}
 
-    
+.step2{
+    width: 25px;
+    height: 25px;
+    background: #E7D011;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 12px;
+    border:3px solid #A54D1A;
+    border-left:transparent;
+    border-right:transparent;
+    margin-left:55%;
+    margin-top:-7px;
+    position:absolute;
+}
 
-    .progress .step {
-        color: black;
-        border: 3px solid silver;
-        background-color: silver;
-        border-radius: 50%;
-        line-height: 1.2;
-        width: 1.2em;
-        height: 1.6em;
-        display: inline-block;
-        z-index: 0;
-    }
+.imgs img{
+    height:32px;
+    margin-left:73%;
+    position:absolute;
+    margin-top:-13px;
+}
 
-    .progress .step span {
-        opacity: 0.3;
-    }
-
-    .progress .active .name,
-    .progress .active .step span {
-        opacity: 1;
-    }
-
-    .progress .step:before {
-        content: "";
-        display: block;
-        background-color: #A54D1A;
-        height: 0.8em;
-        width: 50%;
-        position: absolute;
-        bottom: 0.6em;
-        left: 0;
-        z-index: -1;
-
-    }
-
-    .progress .step:after {
-        content: "";
-        display: block;
-        background-color: #A54D1A;
-        height: 0.8em;
-        width: 50%;
-        position: absolute;
-        bottom: 0.6em;
-        right: 0;
-        z-index: -1;
-    }
-
-    .progress li:first-of-type .step:before {
-        display: none;
-    }
-
-    .progress li:last-of-type .step:after {
-        display: none;
-    }
-
-    .progress .done .step,
-    .progress .done .step:before,
-    .progress .done .step:after,
-    .progress .active .step,
-    .progress .active .step:before {
-        background-color: #E7D011;
-    }
-
-    .progress .done .step,
-    .progress .active .step {
-        border: 3px solid #E7D011;
-    }
-    // ----------------progress bar style End------------------------//
+    //==ends here prgressbar
