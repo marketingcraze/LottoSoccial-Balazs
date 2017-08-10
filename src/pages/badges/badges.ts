@@ -4,6 +4,7 @@ import { NavController, NavParams, App, Tabs, LoadingController, ViewController 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { SyndicateService } from '../../providers/syndicate-service';
 
 declare var $: any;
 
@@ -21,10 +22,12 @@ export class BadgesPage {
         public navCtrl: NavController,
         public appSound:AppSoundProvider,
         public loadingCtrl: LoadingController,
-        public viewCtrl: ViewController) {  }
+        public viewCtrl: ViewController,
+        public _syndService: SyndicateService) {  }
 
     ionViewDidLoad() {
         console.log('inside badges');
+        this.getbadges();
         this.data = [{
             name:'Newbie',
             completed: 100,
@@ -87,5 +90,11 @@ export class BadgesPage {
     }
     close() {
         this.navCtrl.pop();
+    }
+    getbadges() {
+        this._syndService.getBadgeOS()
+        .subscribe((res)=> {
+            console.log(res);
+        })
     }
 }

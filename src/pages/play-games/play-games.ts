@@ -96,6 +96,36 @@ export class PlayGamePage implements OnInit {
       );
     });
 
+
+    var stepSize = 50;
+    setTimeout((function() {
+    var step = document.getElementById("step")
+    var step2 = document.getElementById("step2")
+    var filler = document.getElementById("filler"),
+        percentage = 65;
+    return function progress() {
+        filler.style.width = percentage + "%";
+      if(percentage>=28)
+        {
+        step.style.backgroundColor="#E7D011"
+        }
+      else
+        {
+        step.style.backgroundColor="#A54D1A"  
+        }
+        if(percentage>=72)
+          {
+             step2.style.backgroundColor="#E7D011"
+          }
+         else
+          {
+           step2.style.backgroundColor="#A54D1A"  
+          }
+    }
+}()), stepSize);
+
+
+     
   }
   showBoosterModal() {
     let myModal = this._modalController.create(GetBooster, { customer_award_log_id: this.gameInfo });
