@@ -6,51 +6,51 @@
     <div text-center>
         <ion-item class="item item-block item-md orange-bg">
             <ion-thumbnail item-left>
-                <img src="{{game_Info?.game_imageurl}}" />
+                <img src="{{gameInfo?.game_imageurl}}" />
             </ion-thumbnail>
              <ion-label class="label label-md">
-                <div class="game-title">{{game_Info?.game_title}}</div>
+                <div class="game-title">{{gameInfo?.game_title}}</div>
                 <div text-wrap>
-                    {{game_Info?.game_description}}
+                    {{gameInfo?.game_description}}
                 </div>
             </ion-label>
         </ion-item>
     </div>
   <div class="ProgressBar-game-play item item-block item-md orange-bg">    
     <div class="prog">
-    <div id="filler" class="filler">
-        <div class="step" id="step"></div>
-      <div class="step2" id="step2"></div>
-      <div class="imgs"><img src="../assets/icon/star_ico.svg"/></div>
+    <div id="filler" class="filler" [style.width]="progressPercentage+'%'">
+      <div class="step" id="step" [style.background-color]="step"></div>
+      <div class="step2" id="step2" [style.background-color]="step2"></div>
+      <div class="imgs"><img src="assets/icon/star_ico.svg"/></div>
     </div>
 </div> 
     </div>
 
     <div class="game-level-bg">
         <div class="level-target-title" text-center>
-            <span *ngIf="game_Info?.game_level">Your Level {{game_Info?.game_level}} Target</span>
-             <span *ngIf="!game_Info?.game_level">Your Level 0 Target</span>
+            <span *ngIf="gameInfo?.game_level">Your Level {{gameInfo?.game_level}} Target</span>
+             <span *ngIf="!gameInfo?.game_level">Your Level 0 Target</span>
         </div>
         <div class="game-play-score">
             <ul>
-                <li *ngIf="game_Info?.game_targetvalue">Score {{game_Info?.game_targetvalue}}</li>
-                <li *ngIf="!game_Info?.game_targetvalue">Score 0</li>
-                <li *ngIf="game_Info?.game_duration">Finish with in {{game_Info?.game_duration}} Sec</li>
-                <li *ngIf="!game_Info?.game_duration">Finish with in 0 Sec</li>
-                <li *ngIf="game_Info?.game_efficiencytarget">Max {{game_Info?.game_efficiencytarget}} words</li>
-                <li *ngIf="!game_Info?.game_efficiencytarget">Max 0 words</li>
+                <li *ngIf="gameInfo?.game_targetvalue">Score {{gameInfo?.game_targetvalue}}</li>
+                <li *ngIf="!gameInfo?.game_targetvalue">Score 0</li>
+                <li *ngIf="gameInfo?.game_duration">Finish with in {{gameInfo?.game_duration}} Sec</li>
+                <li *ngIf="!gameInfo?.game_duration">Finish with in 0 Sec</li>
+                <li *ngIf="gameInfo?.game_efficiencytarget">Max {{gameInfo?.game_efficiencytarget}} words</li>
+                <li *ngIf="!gameInfo?.game_efficiencytarget">Max 0 words</li>
             </ul>
         </div>
 
         <div text-center>
             <button ion-button color="light" (click)="showBoosterModal()">
-                <img src="../assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
+                <img src="assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
                <span> Get Booster</span>
             </button>
         </div>
     </div>
 
-    <div class="play-game-btn-container" *ngIf="game_Info?.show_play == 'true'" text-center>
+    <div class="play-game-btn-container" *ngIf="gameInfo?.show_play == 'true'" text-center>
         <button ion-button color="secondary" (click)="openThankyouPage()" > Play Now</button>
     </div>
 
@@ -61,8 +61,8 @@
                 <span class="m-l-20" text-wrap>Recent Winners</span>
             </a>
             </li>
-            <li class="col-xs-3"><b><a href="#" class="black padding-left-15">Matt<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
-            <li class="col-xs-2"><b><a href="#" class="black padding-left-15">Jane<span><img src="../assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
+            <li class="col-xs-3"><b><a href="#" class="black padding-left-15">Matt<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
+            <li class="col-xs-2"><b><a href="#" class="black padding-left-15">Jane<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
         </ul>
     </div>
 

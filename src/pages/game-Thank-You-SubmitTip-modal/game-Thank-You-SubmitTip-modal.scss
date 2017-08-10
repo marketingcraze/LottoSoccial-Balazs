@@ -1,11 +1,10 @@
-get-booster {
-    .sample-modal-page {
+    .game-thanku-modal-page {
     position: absolute;
     overflow: hidden;
     max-width: 330px;
     border-radius: 10px;
     width: 90vw;
-    height: 65vh;
+    height: 40vh;
     top: 0;
     bottom: 0;
     left: 0;
@@ -17,9 +16,11 @@ get-booster {
 
     }
 .popup-img{
+    height: 50px;
+    width: 50px;
     margin-top: 20px;
 }
-.btn-transparent{
+.game-thanku-btn-transparent{
    background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
@@ -27,11 +28,11 @@ get-booster {
     overflow: hidden;
     outline:none;
     color: blue;
-    margin-top: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
     font-size: 16px;
   
 }
 p{
     font-size: large;
-}
 }
