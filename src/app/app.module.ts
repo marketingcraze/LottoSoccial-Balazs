@@ -104,6 +104,8 @@ import { DayPipe } from '../pipes/day-pipe';
 import { ValuePipe } from '../pipes/value-pipe';
 import { CapitalizeFirstPipe } from '../pipes/capitalize-first';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
+import { TimeDifferencePipe } from '../pipes/time-difference';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 
 @NgModule({
@@ -176,6 +178,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         DayPipe,
         ValuePipe,
         CapitalizeFirstPipe,
+        TimeDifferencePipe,
 
         // popups 
         CountryListPopPage,
@@ -184,7 +187,8 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         CusHeader2Component,
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
-        PopupMessageDetails
+        PopupMessageDetails,
+    ProgressBarComponent
     ],
     imports: [
         // BrowserAnimationsModule,

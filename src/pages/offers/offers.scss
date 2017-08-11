@@ -31,6 +31,7 @@ page-offers {
         }
 
         .t-card {
+            position: relative;
             background: #FFF;
             text-align: center;
             border: 1px solid #ccc;
@@ -39,10 +40,8 @@ page-offers {
         }
         .check-div {
             height: 50px;
-        }
-        .l-image-div{
-            display: inline;
-            height: 100%;
+            position: absolute;
+            width: 100%;
         }
         .pad-5-top {
             padding: 0;
@@ -60,7 +59,8 @@ page-offers {
         }
         .card-img {
             width: 40%;
-            margin-top: -20%;
+            min-height: 84px;
+            margin: 5px auto;
         }
     }
     .Menu_Tab {

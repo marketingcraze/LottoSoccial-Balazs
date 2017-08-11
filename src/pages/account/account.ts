@@ -27,6 +27,7 @@ export class AccountPage {
 
 	private cache: CacheController;
 
+	private profileProgress:number = 50;
 	private refreshCache:boolean = false;
 	private unreadCount:number = 0;
 	private homeMessage:any = {};

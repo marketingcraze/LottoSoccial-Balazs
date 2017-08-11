@@ -10,7 +10,9 @@
 			</ion-avatar>
 			<h2>{{(!accountDetails.nick_name || accountDetails.nick_name=='null') ? "Add nickname": accountDetails.nick_name }}<span (click)="updateNickName()"><img class="update-img" item-left width="16" height="16" src="assets/icon/edit-ico.svg"/></span></h2>
 			<p>{{accountDetails.msn}}</p>
-			<p class="account-badge" item-right>{{accountDetails.badge}}</p>
+            <progress-bar [progress]="profileProgress"></progress-bar>
+			<p class="profile-completion">Profile completion {{profileProgress}}%</p>
+            <p class="account-badge" item-right>{{accountDetails.badge}}</p>
         </ion-item>
 
         <ion-row class="info">

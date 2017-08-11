@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, NgZone } from '@angular/core';
-import { Platform, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Platform, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -7,6 +7,9 @@ import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
+import { HomeService } from '../../services/service.home';
+import { DatabaseService } from '../../services/db.service';
+import { CacheController } from '../../services/cache_controller';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -60,10 +63,17 @@ export class OffersPage implements OnInit {
   position:any=0;
   spaceBetween:any;
 
+  private cache: CacheController;
+  private lotteryProductData:any
+  private offersForYou:any
+
   constructor(
     public platform: Platform,
     public params: Params,
         public ngZone:NgZone,
+        private srvDb:DatabaseService,
+        private srvHome:HomeService,
+        private alertCtrl:AlertController,
     public iab: InAppBrowser,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -74,6 +84,7 @@ export class OffersPage implements OnInit {
     public loadingCtrl: LoadingController) {
 
     console.log("OffersPage:");
+    this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
       this.checkCardExists();
@@ -175,6 +186,32 @@ export class OffersPage implements OnInit {
                   console.log(this.spaceBetween);
               });
       };
+
+        this.cache.loadModules("offers", "2", ["fetch_lottery_products"])
+        .then( data => {
+            
+            console.log("OffersPage::ionViewDidEnter", data);
+            // data = data[0].fetch_lottery_products.response
+            
+            for (var i = data.length - 1; i >= 0; i--) {
+                console.log("OffersPage::ionViewDidEnter", i, data[i].fetch_lottery_products);
+                if ( data[i].fetch_lottery_products ) {
+                    this.lotteryProductData = data[i].fetch_lottery_products.response.lottery_product_data
+                    this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
+                    break;
+                }
+            }
+        }, err => {
+            // show offline
+            this.params.setIsInternetAvailable(false);
+            console.log("OffersPage::ionViewDidEnter", err);
+        });
+
+
+
+
+
+
        // get creaditoffer call api
       this.authSrv.get_credit_offer().subscribe(data=>{
         if (data) {

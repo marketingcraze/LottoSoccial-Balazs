@@ -400,7 +400,7 @@ mobile:"23423423423"
             headers: CommonService.getHeaderJson()
         });
 
-       
+        console.log("get_credit_offer", action);
         var response = this.http.post(action, body,opt).map(res => res.json());
         return response;
     }

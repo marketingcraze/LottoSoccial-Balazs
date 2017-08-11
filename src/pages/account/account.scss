@@ -3,6 +3,12 @@ page-account {
 		position: absolute;
 		width: 100%;
 	}
+	progress-bar{
+		width: 60%;
+	}
+	.profile-completion{
+		font-size: .6em;
+	}
 
 	.content{
 		margin-top: $toolbar-md-height;
