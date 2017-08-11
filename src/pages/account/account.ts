@@ -38,7 +38,8 @@ export class AccountPage {
 		nick_name:null,
 		profile_image:"",
 		reward_points:0,
-		winning_balance:0.00
+		winning_balance:0.00,
+		percentage:0
 	};
 
 	constructor(

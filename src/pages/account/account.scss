@@ -41,9 +41,13 @@ page-account {
 	.profile-picture{
 		background: #e3e3e3;
 	}
+	.badge{
+		font-size: 1.4rem;
+		border-radius: 10px;
+	}
 
 	.account-badge{
-		background: brown;
+		background: #33ba97;
 	    color: white;
 	    border-radius: 50%;
 	    height: 4em;
@@ -52,7 +56,34 @@ page-account {
 	    font-size: .8em;
 	}
 
-	.info{
+	.your-achievements{
+		background-color: #33ba97;
+		padding: 8px;
+
+		h3{
+			font-size: 1.2em;
+			font-family: Lato-Bold;
+			color: #FFF;
+		}
+		.slides{
+			min-height: 4em;
+
+			.slide-zoom{
+				padding: 5px;
+			}
+
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			p{
+				font-size: .6em;
+				color: #FFF;
+			}
+		}
+	}
+
+/* 	.info{
 		padding: 10px;
 
 		h1{
@@ -69,22 +100,28 @@ page-account {
 			border:none;
 		}
 	}
-
+ */
 	.options{
 		img{
-			width: 12px;
-			min-width: 12px;
+			width: 14px;
+			min-width: 14px;
 		}
 		.help p{
 			font-weight: bold;
 		}
 	}
 
-	.item .update-img{
-		width: 12px;
-		max-width: 14px;
-		display: inherit;
-	    margin: 0 4px;
+	.item{ 
+		margin: 0;
+		.icon{
+			margin: 0 8px 0 0;
+		}
+		.update-img{
+			width: 12px;
+			max-width: 14px;
+			display: inherit;
+		    margin: 0 4px;
+		}
 	}
 
 	.links{
