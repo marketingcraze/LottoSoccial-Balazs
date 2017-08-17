@@ -13,9 +13,12 @@ page-offers {
         src: url(../assets/fonts/Lato-Bold.ttf);
     }
     .offer-of-the-day{
+        .slides{
+            width: 110vw;
+        }
         .slide-zoom {
             width: 100%;
-            border: 1px solid #111;
+            border: 4px solid #111;
         }
         h5{
             font-weight: bold;
@@ -59,7 +62,6 @@ page-offers {
         }
         .card-img {
             width: 40%;
-            min-height: 84px;
             margin: 5px auto;
         }
     }
