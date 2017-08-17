@@ -10,7 +10,6 @@ export class howtoplay {
     public gameInstriction: any;
     public decodedHtml:any;
     constructor(private _playgameData: NavParams) {
-        debugger;
         this.gameInfo = _playgameData.get('gameInfo');
         this.gameInstriction = _playgameData.get('gameInfo').game_instruction;
         this.decodeHtmlEntity()

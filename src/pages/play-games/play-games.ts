@@ -38,7 +38,7 @@ export class PlayGamePage implements OnInit {
   }
 
   public nav: NavController;
-  progressPercentage: any;
+  progressPercentage: any=0;
   private gameInfo: any[];
   GameId: any;
   loading: any;
@@ -139,7 +139,7 @@ export class PlayGamePage implements OnInit {
     this.howToPlayModal.present();
   }
     gameTermsModal(){
-    this.howToPlayModal=this._modalController.create(gameTerms)
+    this.howToPlayModal=this._modalController.create(gameTerms,{gameTermsdata:this.gameInfo})
     this.howToPlayModal.present();
   }
 

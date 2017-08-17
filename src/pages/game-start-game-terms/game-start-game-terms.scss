@@ -1,0 +1,48 @@
+.mainDiv{
+    background-color: white;
+    font-size: large;
+    padding-bottom: 15px;
+}
+.introduction{
+    padding: 12px;
+    font-size: initial;
+    text-align:left;
+    text-align: left;
+}
+.game-desc{
+    margin-top: 2px;
+    font-size: initial;
+    text-align: left;
+    padding-left: 12px;
+}
+#circle {
+    background:black;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    float:left;
+    margin-top: 5px;
+    
+}
+.description{
+    padding-left: 12px;
+    font-size: initial;
+}
+
+.data-span{
+  padding:4px;
+}
+.scroll-content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 12px;
+    left: 0;
+    z-index: 1;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+  
+}

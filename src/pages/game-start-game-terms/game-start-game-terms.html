@@ -2,7 +2,14 @@
     <synd-cus-header1 title="Game terms" notification-count="5"></synd-cus-header1>
 </ion-header>
 <ion-content>
-    <div style="background-color: white;padding:16px;font-size:large">
-        Under Development
+    <div class="mainDiv">
+
+        <p class="introduction"><span><b>Introduction</b></span><br>{{intro}}</p>
+     
+        <span class="description"><b>Game Details</b></span>
+   
+        <div *ngFor="let description of GameDetails" class="game-desc">
+            <div id="circle"></div> <span class="data-span"> {{description}} </span> 
+        </div>
     </div>
 </ion-content>
