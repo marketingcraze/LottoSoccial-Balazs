@@ -26,6 +26,8 @@ import { YourGamesPage } from '../pages/your-games/your-games';
 import { RedeemGamesPage } from '../pages/redeem-games/redeem-games';
 import { InviteFriendsPage } from '../pages/invite_friends/invite_friends';
 import { OffersForYouPage } from '../pages/offers-for-you/offers-for-you';
+import { YourOffersPage } from '../pages/your-offers/your-offers';
+import { SendBonusPage } from '../pages/send-bonus/send-bonus';
 import { CreateSyndicatePage } from '../pages/create-syndicate/create-syndicate';
 import { CreateSyndicate2Page } from '../pages/create-syndicate2/create-syndicate2';
 import { CreateSyndicate3Page } from '../pages/create-syndicate3/create-syndicate3';
@@ -168,6 +170,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
         howtoplay,
         recentWinnerTips,
         gameTerms,
+        YourOffersPage,
+        SendBonusPage,
         // OffersPayment,
 
         // pipes
@@ -270,7 +274,9 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
         // popovers
         // OffersPayment,
         CountryListPopPage,
-        RedeemGamesPage
+        RedeemGamesPage,
+        YourOffersPage,
+        SendBonusPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,

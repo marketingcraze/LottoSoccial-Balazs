@@ -1,0 +1,114 @@
+<cus-header title="Offers" notification-count="0"></cus-header>
+
+<ion-content >
+	<div style="background-color:#E8E8E8" >
+
+       <ion-item no-padding no-lines class="creditbox">
+        <img src="assets/icon/credit_ico.png"  class="coinimg" >
+        <span class="SlideTitle" >Your Bonus Credit Balance : <span ion-text class="PriceTxt">£{{Credit_Points}}</span></span>
+       </ion-item>
+
+      <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
+           <ion-slide *ngFor="let product of credit_product" >
+              <ion-card class="SlideSpace" *ngIf="!resultshow && !errorshow">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-12>
+                        <p class="SlidePrice" [style.color]="product?.product_color"> £{{product?.jackpot}}</p> 
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SpaceBetweenRow">
+                    <ion-col col-12>
+                       <p class="SlideSubTitle">{{product?.name | uppercase}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#333333">Choose Draw day</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="SpaceBetweenRow"  >
+                    <ion-col *ngFor="let draw of  product?.draw_group|keys ; let i = index">
+                      <button ion-button class="slide1FontColor" [ngStyle]="(i == position  )?{'background-color': product?.product_color}:{'background-color':  '#AAAAAA'}"  (click)="drawday(i)">{{draw}}</button>
+                    </ion-col>
+  
+                  </ion-row>
+                  <ion-row class="SlideContentBorderTop" >
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#333333">Choose Number Of Lines</p>
+                    </ion-col>
+                  </ion-row>
+                  <!-- <ion-row>
+                     <div  *ngFor="let line of  product?.line_group| keys;  let i = index">
+                            <p  class="linebadge" [ngStyle]="(line == credit_filter_line )?{'background': product?.product_color, 'color':'#ffffff'}:{'background':  '#ffffff','color':'#AAAAAA'}"  (click)="credit_line(line)" >{{line}}</p> 
+                          </div>   
+                  </ion-row> -->
+                  <ion-item >
+                    <ion-range    class="rangeslider" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"  (ionChange)="watchSlider(product?.line_group)"  [(ngModel)]="slider">                       
+                      <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                      <ion-label  [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                    </ion-range>                
+                  </ion-item>
+                  <ion-row class="SlideContentBorderTop">
+                    <ion-col col-12>
+                      <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <p class="SlideSubTitle SlideLastText" >{{(product?.line_group| keys)[credit_filter_line]}} {{product?.name|capitalizeFirst}} Lines on {{((product?.draw_group|keys)[credit_filter_draw]|day)}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" >
+                    <ion-col col-12 *ngIf="i<1">
+                      <p class="SlideSubTitle SlideLastText" > Total at 30p per Line : <span ion-text color="bonus">£{{item?.prize}}</span></p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                      <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer()" >BUY NOW</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                 <!-- buynow  button click  if successfully   show this -->
+              </ion-card>
+                   <ion-card *ngIf="resultshow" class="buycard">
+                      <button ion-button icon-only style="background:#F8F8F8; border-radius:50%" >
+                        <ion-icon style="width:50px; "><img src="assets/icon/check_icon.png"> </ion-icon>
+                      </button>
+                  <ion-row text-center>
+                    <ion-col col-12 class="messagecolor">
+                     Syndicate TONY123 created! what you want to do next?
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                       <button ion-button outline round color="light"  >VIEW TICKETS</button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                        <button ion-button outline round color="light" (click)="getmoreline()">GETMoreLines</button>
+                    </ion-col>
+                  </ion-row>
+            <!-- buynow  button click  if error  show this -->
+              </ion-card>
+                 <ion-card *ngIf="errorshow" class="errorcard">
+                      <button ion-button icon-only style="background:#F8F8F8; border-radius:50%" >
+                        <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>
+                      </button>
+                  <ion-row text-center>
+                    <ion-col col-12 class="messagecolor">
+                    An error as occured. please try again 
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12>
+                        <button ion-button outline round color="light" (click)="tryagain()">TRY AGAIN</button>
+                    </ion-col>
+                  </ion-row>
+              </ion-card> 
+          </ion-slide>     
+      </ion-slides>      
+ </div>
+</ion-content>

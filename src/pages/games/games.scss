@@ -24,9 +24,25 @@ page-games {
         white-space: normal !important;
     }
 
-    .tabbar {
-        background-color: #1F4C87 !important;
+    .tabs-ios .tabbar, .tabs-md .tabbar {
+        background-color: #304d85;
+        border-bottom: 1px solid #ccc;
+
+        .tab-highlight{
+          top: auto !important;
+          height: 4px;
+          background-color: #FFFFFF;
+        }
+
+        .tab-button {
+            max-width: 100%;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff !important;
+            min-height: 48px;
+          }
     }
+
 
     .item-md .text-md-calm {
         color: #2F76D1 !important;
@@ -45,6 +61,7 @@ page-games {
     }
 
     .tabs-md-primary[tabsHighlight=true] .tab-highlight {
+        top: auto !important;
         background: #F8F8F8 !important;
         height:4px!important;
     }
