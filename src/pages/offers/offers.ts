@@ -72,9 +72,6 @@ export class OffersPage implements OnInit {
     public commonSrv:CommonService,
     public appSound:AppSoundProvider,
     public loadingCtrl: LoadingController) {
-
-    console.log("OffersPage:");
-
     //   this.spaceBetween = Math.floor( platform.width() * -0.14 );
       this.checkCardExists();
   }
@@ -206,24 +203,22 @@ export class OffersPage implements OnInit {
   }
  
   // buy buton click call this function
-  buyCreditOffer(){
-     this.loading = this.loadingCtrl.create();
+  buyCreditOffer(offerId: any,indexOfCard:any) {
+    this.loading = this.loadingCtrl.create();
     this.loading.present().then(() => {
-      this.authSrv.buy_Credit_Offer().subscribe(data=>{
+      this.authSrv.buy_Credit_Offer(offerId).subscribe(data => {
+       
         this.loading.dismiss();
-          this.buyoffer=data.response.response;
-          this.resultshow=true;
-          // if(this.buyoffer.status === "FAIL"){
-          //       this.errorshow=true;
-          // }
-          // else{
-          //        this.resultshow=true;
-          // }
-          
-          console.log(this.buyoffer);    
-        },
-        err=>{   
-          this.errorshow=true;
+        this.buyoffer = data.response.response.status;
+        if (this.buyoffer === "FAIL") {
+          this.errorshow = true;
+        }
+        else {
+          this.resultshow = true;
+        }
+      },
+        err => {
+          this.errorshow = true;
           console.log("error", err);
         },
         ()=> console.log("offer buy successfully")
