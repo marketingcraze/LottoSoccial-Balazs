@@ -19,8 +19,10 @@ import { OfflinePage } from '../pages/offline/offline';
 
 import { OneSignal } from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
+import { Device } from '@ionic-native/device';
 import { DatabaseService } from '../services/db.service';
 import { CommonService } from '../services/common.service';
+import { AuthService } from '../services/auth.service';
 import { Params } from '../services/params';
 
 import { Constants } from './constants';
@@ -49,6 +51,7 @@ export class MyApp {
     noNetworkModal:Modal;
 
     constructor(
+        public device:Device,
         private params: Params,
         private network: Network,
         private storage: Storage,
@@ -56,16 +59,28 @@ export class MyApp {
         public dbSrv: DatabaseService, 
         private _OneSignal: OneSignal,
         public commonSrv:CommonService, 
+        public authSrv:AuthService, 
         public alertCtrl:AlertController,
         public modalCtrl: ModalController) {
 
-        platform.ready().then(() => {
+        platform.ready().then((value) => {
             // StatusBar.styleDefault();
             StatusBar.hide();
 
             this.initializeOneSignal();
 
             this.loadCountries();
+            
+            // check if it first time
+            storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
+                console.log('firstTimeLoad storage', firstTimeLoad);
+                if (!firstTimeLoad) {
+                    authSrv.updateVisitorLog(device.platform + " " + device.version).subscribe(
+                        value => {
+                            storage.set('firstTimeLoad', value);
+                        })
+                }
+            })
             
 
             CommonService.isOnline = (network.type != "none");

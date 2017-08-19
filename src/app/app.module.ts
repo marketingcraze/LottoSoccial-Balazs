@@ -96,6 +96,7 @@ import { File } from '@ionic-native/file';
 import { Network } from '@ionic-native/network';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Device } from '@ionic-native/device';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -281,6 +282,6 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
+        Network, OfferService, Market, NativeAudio, Device, AppSoundProvider, PlayGame]
 })
 export class AppModule { }

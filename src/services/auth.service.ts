@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Transfer, FileUploadOptions, TransferObject, } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { Storage } from '@ionic/storage';
 
 import { CommonService } from './common.service';
 import { Params } from './params';
@@ -16,7 +17,7 @@ export class AuthService {
     apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/v2/';
 
     static get parameters() {
-        return [[Http]];
+        return [[Http], [Storage]];
     }
     
     makeId(){
@@ -35,6 +36,7 @@ export class AuthService {
         private file: File,
         private params:Params,
         public plt: Platform,
+        public storage: Storage,
         private transfer: Transfer) {
 
         /*
@@ -138,6 +140,80 @@ export class AuthService {
         var response = this.http.post(CommonService.apiUrl + action, data, opt).map(res => res.json());
         return response;
     }
+
+    updateVisitorLog(os:string){
+        console.log("AuthService::updateVisitorLog", CommonService.sessionId, 
+            CommonService.isOnline);
+
+        if ( !CommonService.sessionId || CommonService.sessionId == "") {
+            CommonService.sessionId = this.makeId();
+        }
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return CommonService.nullObserver;
+        }
+        let action = CommonService.apiUrl + CommonService.version + '/visitor/';
+
+        
+        return Observable.create( (observer)=>{
+            let getDetailUrl = 'http://www.ip-api.com/json';
+            this.http.get( getDetailUrl).map(res => res.json()).take(1).subscribe(
+                (value:any) => {
+
+                    console.log("my details: ", value);
+
+                    let login = {
+                        "request": [
+                        {
+                            "session_ID": CommonService.sessionId,
+                            "page_id": "1",
+                            "screen_id": "1.1",
+                            "action": "update visitor log",
+                            "website": "Lotto Social",
+                            "website_id": "27",
+                            "source_site": "mobi.lottosocial.com", 
+                            "module_name": "update_visitor_log",
+
+                            "ip_address": value.query,
+                            "visit_url": "xx.com",
+                            "referer": "xx.com",
+                            "php_sid": "wewewew",
+                            "user_device": "mobile",
+                            "user_os": os,
+                            "user_location": value.regionName,
+                            "user_browser": "",
+                            "user_country": value.country,
+                            "user_browser_version": "xx.com",
+                            "viewport_device_type": ""
+                        } ]
+                    };
+
+                    let opt: RequestOptions = new RequestOptions({
+                        headers: CommonService.getHeaderJson()
+                    });
+
+                    
+                    var response = this.http.post( action, login, opt).map(res => res.json());
+                    response.take(1).subscribe(
+                        (visitorData)=>{
+                            
+                            if (visitorData) {
+                                let visitorId = visitorData.response[0].update_visitor_log.response.visitor_id
+                                observer.next(visitorId);
+                            }
+                            observer.complete();
+                        }, err => {
+                            console.log('firstTimeLoad err', err);
+                        });
+
+                }, err => {} );
+        });
+        
+        
+    }
+
+
+
  /*
 email:"s@w.com",
 first_name:"1",
