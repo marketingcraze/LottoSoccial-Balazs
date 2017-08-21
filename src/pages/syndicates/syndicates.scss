@@ -1,23 +1,14 @@
 page-syndicates {
 	.tabbar{
 		// margin-top: $toolbar-md-height;
+    height: $toolbar-md-height;
 	}
-    
-/* 
-.tabs-md[tabsHighlight=true][tabsPlacement=top] .tab-highlight {
-    top: auto !important;
-}
- */
+
 .marg-top-12{
     margin-top: 12px;
 }
 .syn-tab {
     margin-top: 42px;
-    
-    .tabbar {
-        
-    }
-   
 }
 .marg-top-12{
    margin-top: 12px;
@@ -31,6 +22,7 @@ page-syndicates {
     border-bottom: 1px solid #ccc;
 
     .tab-highlight{
+      top: auto !important;
       height: 4px;
       background-color: #FFFFFF;
     }

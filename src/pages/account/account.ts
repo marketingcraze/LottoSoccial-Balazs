@@ -27,6 +27,7 @@ export class AccountPage {
 
 	private cache: CacheController;
 
+	private profileProgress:number = 50;
 	private refreshCache:boolean = false;
 	private unreadCount:number = 0;
 	private homeMessage:any = {};
@@ -37,7 +38,8 @@ export class AccountPage {
 		nick_name:null,
 		profile_image:"",
 		reward_points:0,
-		winning_balance:0.00
+		winning_balance:0.00,
+		percentage:0
 	};
 
 	constructor(

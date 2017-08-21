@@ -18,6 +18,10 @@ export class CommonService {
     public static version:string = 'v2';
 
     public static apiUrlDF:string = 'http://api.hatchster.com/api/v2/sqllbtnima2016/_proc/';
+    public static nullObserver = new Observable(observer => {
+        observer.next(null);
+        observer.complete();
+    });
     
 
     public static countries:any;

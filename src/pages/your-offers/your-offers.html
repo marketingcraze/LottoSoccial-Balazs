@@ -1,0 +1,170 @@
+<cus-header title="Offers" notification-count="0"></cus-header>
+<!-- 
+<ion-header>
+  <ion-navbar color="primary">
+  </ion-navbar>
+    <ion-segment [(ngModel)]="toptab" mode="md" color="primary" >
+        <ion-segment-button value="offer"  (click)="tabChanged()"  class="Menu_Tab">OFFER FOR YOU</ion-segment-button>
+        <ion-segment-button value="bonus"  (click)="tabChanged()" class="Menu_Tab">SPEND BONUS CREDIT</ion-segment-button>
+    </ion-segment>
+</ion-header>
+ -->
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
+
+<ion-content style="background-color:#E8E8E8;">
+  <ion-card class="Card_Padding">
+
+    <div class="offer-of-the-day">
+      <h5 text-center>OFFERS OF THE DAY!</h5>
+      <ion-slides slidesPerView=3>
+        <ion-slide *ngFor="let product of offersForYou" >
+          <img src="{{product.product_icon}}" class="img-responsive">
+        </ion-slide>     
+      </ion-slides>
+    </div>
+
+    <div class="syndicateRow">
+      <p text-center text-uppercase no-margin>Choose the lottery you want to play</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 *ngFor="let c of lotteryProductData; let i=index">
+            <div class="t-card">
+              <div class="check-div"><img src="./assets/img/plus_opt.svg" class="tcard-selected"/></div>
+              <img class="card-img" src="{{c.image_url}}" (loaded)="c.load = true" [hidden]="c.load"/>
+              <p class="pad-5-top">NEXT DRAW IN {{c.draw_countdown | timeDiffer}}</p>
+              <h1 class="big-m">£{{c.jackpot}}</h1>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>    
+    </div>
+
+
+
+<!-- 
+    <div class="card-title">
+      <img src="assets/image/euro-banner.png" class="img-responsive">
+        <div>£43,000,000 JACKPOT</div>
+        <h4>GET 20 EUROMILLIONS LINES</h4>
+    </div>
+    <div>
+      <ion-row>
+        <ion-col class="Item_img">
+            <div class="img-overlay">
+              <img src="assets/image/euro_offers@3x.png" class="img-responsive" alt="..." />
+              <div class="post-content ">
+                  <p class="Title">EUROMILLIONS 20 LINE </p>
+                  <p class="Price"> £43,000,000</p> 
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        </div>
+          <ion-row class="item1" text-center>
+                 <ion-col  width-30 class="content-left"  ><ion-icon name="md-stopwatch"></ion-icon>    TIMELEFT</ion-col>
+                <ion-col col-1  class="content-center"><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
+          </ion-row>
+          <ion-row class="item2">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement1 = !hideElement1"></ion-icon></ion-col>
+              <ion-col col-11><h2 style="font-size: 1.2rem; color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <div [hidden]="!hideElement1">
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                      </ion-row>
+                    </div>
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                      </ion-row>
+                    </div>
+              </div>
+          </ion-row>
+        <ion-row>
+          <ion-col col-12 class="Item_img">
+            <div class="img-overlay">
+              <img src="assets/image/lotto_offers@3x.png" class="img-responsive" alt="..." />
+              <div class="post-content ">
+                  <p class="Title">LOTTO 20 LINE </p>
+                  <p class="Price redClr"> £43,000,000</p> 
+              </div>
+            </div>
+          
+          </ion-col>
+        </ion-row>
+          
+          <ion-row class="item1 redClr" text-center>
+                <ion-col  width-30 class="content-left"  ><ion-icon name="md-stopwatch"></ion-icon>    TIMELEFT</ion-col>
+                <ion-col col-1  class="content-center"><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
+          </ion-row>
+          <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement2 = !hideElement2" ></ion-icon></ion-col>
+              <ion-col col-11><h2 style="font-size:1.2rem;color: #2F76D1; font-family: lato-regular;">VIEW OTHER OPTIONS</h2></ion-col>
+              <div [hidden]="!hideElement2">
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                      </ion-row>
+                    </div>
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                      </ion-row>
+                    </div>
+              </div>
+          </ion-row>
+          <ion-row>
+          <ion-col col-12 class="Item_img">
+            <div class="img-overlay">
+              <img src="assets/image/power_offers@3x.png" alt="..." class="img-responsive" />
+              <div class="post-content ">
+                  <p class="Title">POWERBALL 10 LINE </p>
+                  <p class="Price blackClr"> £43,000,000</p> 
+              </div>
+            </div>
+          
+          </ion-col>
+        </ion-row>
+
+          <ion-row class="item1" text-center >
+                
+                <ion-col  width-40 class="content-left"  ><ion-icon name="md-stopwatch"></ion-icon>    TIMELEFT</ion-col>
+                <ion-col col-1  class="content-center"><div class="timeBreak">2 <span class="time">day </span></div></ion-col>
+                <ion-col col-1 class="content-center"> <div class="timeBreak">11 <span class="time">hrs </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">48 <span class="time">min </span></div></ion-col>
+                <ion-col col-1 class="content-center"><div class="timeBreak">35 <span class="time">sec </span></div></ion-col>
+                <ion-col width-30><button ion-button class="BuyBtn" (click)="showPaymentOptions()">BUY FOR £4.99</button></ion-col>
+          </ion-row>
+          <ion-row class="item2" style="border-top: 1px solid #D8D8D8;border-bottom: 1px solid #D8D8D8;">
+              <ion-col col-1><ion-icon name="ios-remove-circle-outline" style="font-weight: bold" (click)="hideElement3 = !hideElement3" ></ion-icon></ion-col>
+              <ion-col col-11 ><h2 style="font-size: 1.2rem; font-family: lato-regular;   color: #2F76D1;">VIEW OTHER OPTIONS</h2></ion-col>
+              <div [hidden]="!hideElement3">
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button padding-left class="BuyBtn" >BUY FOR £5</button></ion-col>
+                      </ion-row>
+                    </div>
+                    <div class="itemCollapse" >
+                      <ion-row>
+                        <ion-col col-8>10 lines Tuesday and Friday ONGOING Syndicate</ion-col>
+                        <ion-col col-4><button ion-button class="BuyBtn">BUY FOR £4.00</button></ion-col>
+                      </ion-row>
+                    </div>
+              </div>
+          </ion-row> -->
+
+  </ion-card>
+</ion-content>

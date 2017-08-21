@@ -26,6 +26,8 @@ import { YourGamesPage } from '../pages/your-games/your-games';
 import { RedeemGamesPage } from '../pages/redeem-games/redeem-games';
 import { InviteFriendsPage } from '../pages/invite_friends/invite_friends';
 import { OffersForYouPage } from '../pages/offers-for-you/offers-for-you';
+import { YourOffersPage } from '../pages/your-offers/your-offers';
+import { SendBonusPage } from '../pages/send-bonus/send-bonus';
 import { CreateSyndicatePage } from '../pages/create-syndicate/create-syndicate';
 import { CreateSyndicate2Page } from '../pages/create-syndicate2/create-syndicate2';
 import { CreateSyndicate3Page } from '../pages/create-syndicate3/create-syndicate3';
@@ -94,6 +96,7 @@ import { File } from '@ionic-native/file';
 import { Network } from '@ionic-native/network';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Device } from '@ionic-native/device';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -104,6 +107,8 @@ import { DayPipe } from '../pipes/day-pipe';
 import { ValuePipe } from '../pipes/value-pipe';
 import { CapitalizeFirstPipe } from '../pipes/capitalize-first';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
+import { TimeDifferencePipe } from '../pipes/time-difference';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 
 @NgModule({
@@ -166,6 +171,8 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         howtoplay,
         recentWinnerTips,
         gameTerms,
+        YourOffersPage,
+        SendBonusPage,
         // OffersPayment,
 
         // pipes
@@ -176,6 +183,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         DayPipe,
         ValuePipe,
         CapitalizeFirstPipe,
+        TimeDifferencePipe,
 
         // popups 
         CountryListPopPage,
@@ -184,7 +192,8 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         CusHeader2Component,
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
-        PopupMessageDetails
+        PopupMessageDetails,
+    ProgressBarComponent
     ],
     imports: [
         // BrowserAnimationsModule,
@@ -266,11 +275,13 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         // popovers
         // OffersPayment,
         CountryListPopPage,
-        RedeemGamesPage
+        RedeemGamesPage,
+        YourOffersPage,
+        SendBonusPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
+        Network, OfferService, Market, NativeAudio, Device, AppSoundProvider, PlayGame]
 })
 export class AppModule { }

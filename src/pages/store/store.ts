@@ -235,7 +235,7 @@ export class StorePage {
 
         this.appSound.play('buttonClick');
         if (this.customerToken) {
-            this.goPaymentWebview();
+            this.goPaymentWebview(offer);
         }else{
             let loader = this._showLoader();
 
@@ -257,7 +257,7 @@ export class StorePage {
                     loader.dismiss();
                     this.confirmPayment.togglePopup()
                 }else{
-                    this.goPaymentWebview();
+                    this.goPaymentWebview(offer);
                 }
             }, (err) => {
                 console.log("StorePage::showPaymentOptions() error", err);
@@ -266,11 +266,13 @@ export class StorePage {
         }
     }
 
-    goPaymentWebview(){
+    goPaymentWebview(offer:any){
         let opt:string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
         str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
-        str += this.customerToken+'&Offer_ID=1188'
+        str += this.customerToken+'&offer_id=' + offer.offer_id+'&prosub_id='+offer.prosub_id;
+
+        console.log("goPaymentWebview", str);
         this.iab.create( str, 'blank', opt);
     }
 
@@ -284,7 +286,9 @@ export class StorePage {
 
     gameTargetLink(target){
       this.appSound.play('buttonClick');
-        let url = `https://nima.lottosocial.com/webview-auth/?redirect_to=${target}&customer_id=${CommonService.session.customer_id}&customer_token=${CommonService.session.customer_token}`
+        let url = `https://nima.lottosocial.com/webview-auth/?redirect_to=${target}
+        &customer_id=${CommonService.session.customer_id}
+        &customer_token=${CommonService.session.customer_token}`
 
         console.log("::gameTargetLink to ", url);
         let opt:string = "toolbarposition=top";
