@@ -10,7 +10,7 @@
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
       <ion-slide *ngFor="let product of credit_product let i=index">
-        <ion-card class="SlideSpace" id={{id}} *ngIf="!resultshow && !errorshow">
+        <ion-card class="SlideSpace" id={{id}} *ngIf="!resultshow && !errorshow && check">
           <ion-grid>
             <ion-row>
               <ion-col col-12>
@@ -99,17 +99,17 @@
                       </button>
           <ion-row text-center>
             <ion-col col-12 class="messagecolor">
-              Syndicate TONY123 created! what you want to do next?
+              Syndicate {{buyoffer?.syndicate_name}} created! what you want to do next?
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col col-12>
-              <button ion-button outline round color="light">VIEW TICKETS</button>
+              <button ion-button outline round color="light" (click)="moveToSyndicate()">VIEW TICKETS</button>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col col-12>
-              <button ion-button outline round color="light" (click)="getmoreline()">GETMoreLines</button>
+              <button ion-button outline round color="light" (click)="getmoreline()">GET More Lines</button>
             </ion-col>
           </ion-row>
           
