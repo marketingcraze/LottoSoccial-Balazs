@@ -297,7 +297,7 @@ mobile:"23423423423"
     }*/
 
 
-    buy_Credit_Offer(offerId:any,){
+    buy_Credit_Offer(offerId:any,visitorId:any){
         let action="payment/";
         let body={ "session_ID": CommonService.session.session_ID,
                     "action": "buy credit offer",
@@ -308,7 +308,8 @@ mobile:"23423423423"
                     "screen_id": "2.2",
                     "module_name": "buy_credit_offer",
                     "customer_id":CommonService.session.customer_id,
-                    "offer_id": offerId
+                    "offer_id": offerId,
+                    "visitor_id":visitorId
 
                   };
         let opt: RequestOptions = new RequestOptions({
