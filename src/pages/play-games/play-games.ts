@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,NgModule } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { App, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
 import { GetBooster } from '../play-games-get-booster/play-games-get-booster'
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser,InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PlayGamesThankYou } from '../play-games-thank-you/play-games-thank-you';
 import { PlayGame } from '../../services/playgame.service';
@@ -10,6 +10,9 @@ import { CommonService } from '../../services/common.service';
 import { howtoplay } from '../game-start-how-to-play/game-start-how-to-play';
 import { recentWinnerTips } from '../recent-winners-tips/recent-winners-tips';
 import { gameTerms } from '../game-start-game-terms/game-start-game-terms';
+import { Observable } from "rxjs/Observable";
+import { CordovaInstance } from "@ionic-native/core";
+import { Subscription } from "rxjs/Rx";
 
 
 
@@ -19,11 +22,17 @@ import { gameTerms } from '../game-start-game-terms/game-start-game-terms';
   Ionic pages and navigation.
 */
 declare var webengage: any;
+declare var cordova: any;
+
+@NgModule({
+  providers:[InAppBrowser]
+})
 
 @Component({
   selector: 'play-game',
   templateUrl: 'play-games.html'
 })
+
 export class PlayGamePage implements OnInit {
   ngOnInit(): void {
     this.platform.ready().then((readySource) => {
@@ -51,8 +60,8 @@ export class PlayGamePage implements OnInit {
   public customerToken: any;
   public totalGameLevel:any;
   public howToPlayModal:any;
-
-
+  public event:string;
+  public inAppBrowser: any;
 
   constructor(
     private _modalController:ModalController,
@@ -109,8 +118,31 @@ export class PlayGamePage implements OnInit {
   }
 
   openThankyouPage() {
-    const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '');
-  }
+    this.platform.ready().then(() => {
+      if (typeof cordova !== 'undefined') {
+        var options = {
+          location : "yes",
+          toolbar: "no"
+        };
+          const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank','location=no');
+          browser.addEventListener('loadstart', (event) => {
+              if(event.url.includes("win"))
+                  {
+                     browser.close();
+                     this.nav.push(PlayGamesThankYou,{customer_awardLog_id:this.customerAwardLogId,gameLevel:this.gameLevelThanlyou,game_Id:this.GameId})
+                  }
+          });
+          
+          //If we want to close the page after the page is loaded
+
+        //   browser.addEventListener('loadstop', (event) => {
+        //     alert("loadstop"+event);
+           
+        // });
+
+      }
+  });
+}   
   progressBardesign() {
 
     if (this.progressPercentage >= 72) {
