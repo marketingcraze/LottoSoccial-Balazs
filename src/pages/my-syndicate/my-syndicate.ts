@@ -9,6 +9,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
 import { CommonService } from '../../services/common.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { InviteFriendsPage } from '../invite_friends/invite_friends';
 
 declare var $: any;
 
@@ -165,6 +166,9 @@ export class MySyndicatePage {
         });
         loader.present()
         return loader;
+    }
+    Invite() {
+        this.app.getRootNav().push(InviteFriendsPage);
     }
 
 

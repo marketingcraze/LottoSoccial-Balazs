@@ -12,17 +12,26 @@
 
 <ion-content>
     <div class="badges-main">
-        <div class="pad-10 b-border">
-            Hey champ, this is a list of your achivements.<br> tap on each badges to see more info.
+        <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-bottom: 10px solid #e8e8e8">
+            <!--Hey champ, this is a list of your achivements.<br> tap on each badges to see more info.-->
+            <div style="text-align: center">
+                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 25%;padding: 5px;"/>
+            </div>
+            <span style="position: absolute;top: 20px;right: 10px;">50 Points</span>
+            <div style="font-size:1.2em">Badegs with most progress</div>
+            <div style="padding: 5px;">75% completed</div>
+            <div>
+                <button ion-button class="btn btn1" (click)="viewTickets(i)" style="background: white;color: lightseagreen;"> EARN </button> 
+            </div>
         </div>
         <div>
         <ion-grid class="pad-0">
             <ion-row class="b-border" *ngFor="let d of data; let i = index;">
-                <ion-col col-3 class="">
-                    <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                <ion-col col-3 class="" [innerHTML]="d.achievement_thumb">
+                    <!--<img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>-->
                 </ion-col>
                 <ion-col col-6 class="left pad-top-18">
-                    <div class="text-bold">{{d.name}}</div>
+                    <div class="text-bold" [innerHTML]="d.achievement_title"></div>
                     <div class="light-font pad-tb">{{d.completed}}% completed</div>
                     <div>
                         <span *ngFor="let gr of d.greenC"><img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"/></span>
@@ -30,10 +39,35 @@
                     </div>
                 </ion-col>
                 <ion-col col-3 class="right pad-t-25">
-                    <button ion-button class="btn btn1" (click)="viewTickets(i)"> {{d.points}} pts </button>
+                    <button ion-button class="btn btn1" (click)="viewTickets(i)" *ngIf="d.achievement_points_markup"> {{d.achievement_points_markup}} </button>
                 </ion-col>
             </ion-row>
         </ion-grid>
+        </div>
+        <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-top: 10px solid #e8e8e8">
+            <div style="font-size:1.2em; font-weight: bold;">YOUR ACHIEVEMENTS</div>
+            <ion-grid style="padding: 0;">
+                <ion-row>
+                    <ion-col col-2 class="right pad-t-25" style="text-align: center;padding: 0;">
+                        <div>
+                            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                        </div>
+                        <div style="font-size: 10px;">Bruice Bonus</div>
+                    </ion-col>
+                    <ion-col col-2 class="right pad-t-25" style="text-align: center;padding: 0;">
+                        <div>
+                            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                        </div>
+                        <div style="font-size: 10px;">Subscribers</div>
+                    </ion-col>
+                    <ion-col col-2 class="right pad-t-25" style="text-align: center ;padding: 0;">
+                        <div>
+                            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                        </div>
+                        <div style="font-size: 10px;">Get more!</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </div>
     </div>
 </ion-content>
