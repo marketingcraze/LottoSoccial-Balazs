@@ -28,7 +28,7 @@ export class BadgesPage {
     ionViewDidLoad() {
         console.log('inside badges');
         this.getbadges();
-        this.data = [{
+        /*this.data = [{
             name:'Newbie',
             completed: 100,
             points: 100,
@@ -76,14 +76,14 @@ export class BadgesPage {
             points: 500,
             total:1,
             count: 1
-        }]
+        }]*/
 
-        for(var i=0; i<this.data.length; i++) {
+        /*for(var i=0; i<this.data.length; i++) {
             var grarr = Array(this.data[i].total - this.data[i].count).fill('whatever');
             var gnarr = Array(this.data[i].count).fill('whatever');
             this.data[i].greenC = gnarr;
             this.data[i].grayC = grarr;
-        }
+        }*/
     }
     ionViewWillEnter() {
         this.viewCtrl.showBackButton(false);
@@ -94,7 +94,8 @@ export class BadgesPage {
     getbadges() {
         this._syndService.getBadgeOS()
         .subscribe((res)=> {
-            console.log(res);
+            this.data = res.response[0].get_badgeos.response.data.achievements;
+            console.log(this.data);
         })
     }
 }

@@ -4,7 +4,7 @@ import { Leave2Page } from '../leave2/leave2';
 import { TandcPage } from '../tandc/tandc';
 import { RecentDrawPage } from '../recent-draw/recent-draw';
 import { YourTicketsPage } from '../your-tickets/your-tickets';
-
+import { InviteFriendsPage } from '../invite_friends/invite_friends';
 /*
   Generated class for the ManageSyndicate2 page.
 
@@ -43,6 +43,9 @@ export class ManageSyndicate2Page {
     }
     viewTicket() {
       this.navCtrl.push(YourTicketsPage);
+    }
+    Invite() {
+      this.navCtrl.push(InviteFriendsPage);
     }
 
 }
