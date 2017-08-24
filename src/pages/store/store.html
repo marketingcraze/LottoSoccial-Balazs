@@ -13,7 +13,7 @@
 </ion-header>
 -->
 
-<popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
 
 <ion-content >
 
