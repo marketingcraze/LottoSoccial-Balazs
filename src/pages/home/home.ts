@@ -164,14 +164,8 @@ export class HomePage implements OnInit {
                 this.params.goPage( CheckWinningsPage )
                 break
             case 'your_badges':
-<<<<<<< HEAD
                 this.params.goPage(BadgesPage)
-                //this.app.getRootNav().push(BadgesPage);
-                break;
-=======
-                this.params.goPage( BadgesPage )
                 break
->>>>>>> ff1ee3e0cac39ed20352063cc7d75094fa6179a1
             case 'help':
                 let opt:string = "toolbarposition=top";
                 this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);
