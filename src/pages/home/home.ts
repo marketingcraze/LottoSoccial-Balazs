@@ -8,6 +8,7 @@ import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CheckWinningsPage } from '../check-winnings/check-winnings'
 import { AccountPage } from '../account/account';
 import { UpdatePage } from '../update/update';
+import { BadgesPage } from '../badges/badges';
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
@@ -131,7 +132,7 @@ export class HomePage {
         this.menu.close();
     }
 
-    onLeftMenuSelection(selection){
+    onLeftMenuSelection(selection){ 
         console.log("HomePage::onLeftMenuSelection");
         this.appSound.play('menuClick');
         this.menu.close();
@@ -142,6 +143,10 @@ export class HomePage {
             case 'check_winnings':
                 this.params.goPage( CheckWinningsPage )
                 break
+            case 'your_badges':
+                this.params.goPage(BadgesPage)
+                //this.app.getRootNav().push(BadgesPage);
+                break;
             case 'help':
                 let opt:string = "toolbarposition=top";
                 this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);
