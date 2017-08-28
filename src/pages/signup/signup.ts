@@ -11,14 +11,14 @@ import { SignupInvitedPage } from '../signup-invited/signup-invited';
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
 
-import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { Transfer } from '@ionic-native/transfer';
 import { File, FileEntry } from '@ionic-native/file';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Observable, ObservableInput } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
 	selector: 'page-signup',

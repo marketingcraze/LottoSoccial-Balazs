@@ -1,0 +1,37 @@
+get-booster {
+    .sample-modal-page {
+    position: absolute;
+    overflow: hidden;
+    max-width: 330px;
+    border-radius: 10px;
+    width: 90vw;
+    height: 65vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    box-shadow: 0 16px 20px rgba(0,0,0,.4);
+    background-color: #fafafa;
+
+    }
+.popup-img{
+    margin-top: 20px;
+}
+.btn-transparent{
+   background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: blue;
+    margin-top: auto;
+    font-size: 16px;
+  
+}
+p{
+    font-size: large;
+}
+}

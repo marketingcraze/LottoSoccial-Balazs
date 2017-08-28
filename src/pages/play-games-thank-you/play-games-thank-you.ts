@@ -1,16 +1,48 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, Platform, NavParams } from 'ionic-angular';
+import { GameThankYou } from '../game-Thank-You/game-Thank-You';
+
+declare var webengage:any;
 
 @Component({
   selector: 'play-games-thank-you',
   templateUrl: 'play-games-thank-you.html'
 })
 
-export class PlayGamesThankYou {
+export class PlayGamesThankYou implements OnInit {
+  customerAwardId: string;
+  game_level: any;
+  GameId:any;
 
-  constructor(private nav: NavController) {
+  ngOnInit(): void {
+    this.platform.ready().then((readySource) => {
+      var CurrentUserid = localStorage.getItem('appCurrentUserid');
+      if (this.platform.is('cordova')) {
+        webengage.engage();
+        webengage.track('Play Game Thank you Page', {
+          "UserId": CurrentUserid,
+        });
+      }
+    });
+
+    //Redriecting after  seconds
+    setTimeout(() => {
+      this.navToThankyou2page()
+    }, 3000);  //3s
 
   }
+  constructor(private nav: NavController, public platform: Platform, private navParams: NavParams) {
+   
+    this.customerAwardId = navParams.get('customer_awardLog_id');
+    this.game_level = navParams.get('gameLevel');
+    this.GameId = navParams.get('game_Id');
+  }
+
+  navToThankyou2page() {
+ 
+    this.nav.push(GameThankYou, { customerAwardLogId: this.customerAwardId,GameIdThanku:this.GameId });
+  }
+
 
   ionViewDidLoad() {
     var Point = function (x, y) {

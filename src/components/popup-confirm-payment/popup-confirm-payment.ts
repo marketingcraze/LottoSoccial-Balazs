@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChange, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChange, OnChanges } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -29,6 +29,8 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         syndicate_name: "",
         total_cost:0.00
     }
+
+    @Output() onPaymentComplete = new EventEmitter();
 
     @Input('existing-cards') existingPaymilCards;  
     
@@ -105,11 +107,17 @@ export class PopupConfirmPaymentComponent implements OnChanges{
 
         if (card) {
             this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
-                console.log("OffersPage::checkCardExists() success", data);
+                console.log("PopupConfirmPaymentComponent::checkCardExists() success", data);
                 loader.dismiss();
-                this.showBuyNowView = true;
+                if (this.onPaymentComplete) {
+                    this.togglePopup();
+                    this.onPaymentComplete.emit();
+                }else{
+                    this.showBuyNowView = true;
+                }
+                
             }, (err) => {
-                console.log("OffersPage::checkCardExists() error", err);
+                console.log("PopupConfirmPaymentComponent::checkCardExists() error", err);
                 loader.dismiss();
                 this.params.setIsInternetAvailable(false)
             })

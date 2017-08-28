@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,Platform } from 'ionic-angular';
 import { CheckWinningsPage } from '../check-winnings/check-winnings'
 import { MySyndicatePage } from '../my-syndicate/my-syndicate';
 import { Params } from '../../services/params';
@@ -9,11 +9,28 @@ import { CommonService } from '../../services/common.service';
 import { CreateSyndicateTab } from '../create-syndicate-tab/create-syndicate-tab';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
+declare var webengage: any;
+
 @Component({
 	selector: 'page-syndicates',
 	templateUrl: 'syndicates.html'
 })
-export class SyndicatesPage {
+export class SyndicatesPage implements OnInit {
+    public static session:any;
+
+    ngOnInit(): void {
+        var CurrentUserid = localStorage.getItem('appCurrentUserid');
+        this.platform.ready().then((readySource) => {
+            if (this.platform.is('cordova')) {
+                webengage.engage(); 
+                webengage.track('Syndicates Page', {
+                    "UserId" :CurrentUserid ,
+
+                });
+            }
+        });
+    }
+
     tab1child = MySyndicatePage;
     tab2child = CreateSyndicateTab;
 
@@ -24,6 +41,7 @@ export class SyndicatesPage {
         public navCtrl: NavController, 
         public appSound:AppSoundProvider,
         public navParams: NavParams,
+        public platform:Platform,
         public commonSrv:CommonService,) {
         }
 

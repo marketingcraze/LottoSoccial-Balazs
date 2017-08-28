@@ -1,7 +1,7 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild, NgZone ,OnInit} from '@angular/core';
 import { Platform, MenuController, Nav, NavController, LoadingController, 
     AlertController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
@@ -19,6 +19,9 @@ import { CacheController } from '../../services/cache_controller';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 import { TabsPage } from '../tabs/tabs';
+
+declare var webengage:any;
+
 export interface PageInterface {
     title: string;
     component: any;
@@ -26,12 +29,26 @@ export interface PageInterface {
     index?: number;
 }
 
-
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
+
+    ngOnInit(): void {
+
+        this.platform.ready().then((readySource) => {
+            var CurrentUserid = localStorage.getItem('appCurrentUserid');
+             if (this.platform.is('cordova')) {
+    		    webengage.engage(); 
+                webengage.track('Home Page', {
+                "UserId" :CurrentUserid ,
+                });
+              }
+         });
+
+   }
+
     @ViewChild(Nav) nav: Nav;
     @ViewChild("messageDetails") messageDetails;
 
@@ -90,7 +107,10 @@ export class HomePage {
 
 
     ionViewDidEnter() {
-        this.messageDetails.togglePopup();
+        if (this.messageDetails) {
+            this.messageDetails.togglePopup();
+        }
+        
         /*
         this.menu.swipeEnable(false, 'menu1');
 
@@ -144,9 +164,14 @@ export class HomePage {
                 this.params.goPage( CheckWinningsPage )
                 break
             case 'your_badges':
+<<<<<<< HEAD
                 this.params.goPage(BadgesPage)
                 //this.app.getRootNav().push(BadgesPage);
                 break;
+=======
+                this.params.goPage( BadgesPage )
+                break
+>>>>>>> ff1ee3e0cac39ed20352063cc7d75094fa6179a1
             case 'help':
                 let opt:string = "toolbarposition=top";
                 this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);

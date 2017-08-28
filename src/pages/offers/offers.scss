@@ -1,11 +1,76 @@
+
 page-offers {
+     @font-face {
+        font-family: lato-black;
+        src: url(../assets/fonts/Lato-Black.ttf);
+    }
+    @font-face {
+        font-family: lato-regular;
+        src: url(../assets/fonts/Lato-Regular.ttf);
+    }
+    @font-face {
+        font-family: lato-bold;
+        src: url(../assets/fonts/Lato-Bold.ttf);
+    }
+    .offer-of-the-day{
+        .slide-zoom {
+            width: 100%;
+            border: 1px solid #111;
+        }
+        h5{
+            font-weight: bold;
+        }
+        img{
+            min-height: 100px;
+        }
+    }
+    .syndicateRow {
+        margin: 10px 0;
+        >div{
+            padding: 10px;
+        }
+
+        .t-card {
+            background: #FFF;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 100%;
+        }
+        .check-div {
+            height: 50px;
+        }
+        .l-image-div{
+            display: inline;
+            height: 100%;
+        }
+        .pad-5-top {
+            padding: 0;
+            margin: 0;
+            font-size: .8em;
+        }
+        .big-m{
+            padding: 5px 0;
+            margin: 0;
+            font-family: lato-bold;
+        }
+        .tcard-selected {
+            width: 40px;
+            float: right;
+        }
+        .card-img {
+            width: 40%;
+            margin-top: -20%;
+        }
+    }
     .Menu_Tab {
         color: #F8F8F8 !important;
         background: #1F4C87 !important;
         border: 0px !important;
         font-size: 14px;
+        font-family: lato-regular;
     }
-    .Menu_Tab:hover {
+    .segment-md .segment-button.segment-activated{
         border-bottom:4px solid #F8F8F8 !important;
     }
    .ion-ios-home, .ion-md-home, .ion-ios-home-outline, .ion-md-home-outline {
@@ -16,6 +81,7 @@ page-offers {
         height: 50%;
     }
     .card-title {
+        position: relative;
         padding-top:10px;
         z-index: 10;
         width: 100%;
@@ -27,20 +93,21 @@ page-offers {
             width: 100%;
             text-align: center;
             top: 10px;
-            font-weight: bold;
             font-size: 28px;
             text-align: center;
             color:#F8F8F8;
             text-shadow: 2px 0 #2F76d1, 0 2px #2F76d1, 2px 0 #2f76d1, 0 -1px #2f76d1;
+            font-family: lato-bold;
         }
         h4 {
             position: absolute;
             width: 100%;
             text-align: center;
             top: 50px;
-            font-weight: bold;
             font-size: 14px;
             color: #333333;
+             font-family: lato-bold;
+
         }
     }
                 
@@ -52,7 +119,7 @@ page-offers {
             bottom: 0;
             color:#F8F8F8;
             padding: 6px;
-            font-weight: bold;
+            font-family: lato-bold;
             background-color: rgba(0,0,0,.4);
         }
     }   
@@ -62,6 +129,7 @@ page-offers {
         font-size: 10px;
         width: 100%;
         height: 20%;
+        font-family: lato-regular;
     }
     .item2 {
         background:white;
@@ -69,7 +137,7 @@ page-offers {
         font-size: 1.2rem;
         width: 100%;
         height: 20%;
-        font-weight: bold;
+        font-family: lato-regular;
         margin-bottom: 2%;
     }
     .itemImg
@@ -88,8 +156,9 @@ page-offers {
         border-radius: 3px;
     }
     .time{
-        font-weight: 100;
+        
         font-size: 8px;
+         font-family: lato-regular;
     }
     .post-content {
         top:0;
@@ -110,13 +179,13 @@ page-offers {
         font-size: 25px;
         line-height: 0.5rem;
         color: #2f76d1;
-        font-weight: bold;
+        font-family: lato-bold;
     }
     p.Title {
         font-size: 14px;
-        font-weight: 500;
         color: #4d4c4c;
         line-height: 3rem;
+        font-family: lato-regular;
     }
     .redClr {
         color: #FF0000;
@@ -137,6 +206,7 @@ page-offers {
         font-size: 1.2rem;
         width: 100%;
         border-bottom:1px solid #E8E8E8;
+         font-family: lato-regular;
     }
     .firstImageTitle{
         line-height: 4rem;
@@ -150,6 +220,7 @@ page-offers {
     }  
     .content-left{
         padding-top: 1.6rem;
+         font-family: lato-regular;
     }
     .Card_Padding{
         margin: 0px 0px 0px 0px;
@@ -161,9 +232,9 @@ page-offers {
         padding:0px;
     }
     .timeBreak{
-        font-weight: bold;
         font-size:12px; 
         width:16px;
+         font-family: lato-bold;
     }
     .MainPanel{
         border-top: 10px solid #D8D8D8;
@@ -191,10 +262,12 @@ page-offers {
         font-size: 14px;
         text-align: center;
         padding-left: 10px;
+        font-family:lato-regular;
         }
     .PriceTxt {
         color:#ff3333;
         font-size: 14px;
+        font-family:lato-regular;
     }
     .slide-zoom{
           width: 90%;
@@ -202,23 +275,24 @@ page-offers {
     .SlideSpace
     {
         padding:10px;
-        min-height: 395px;
+        min-height: 405px;
         .SlidePrice
         {
             font-size: 28px;
             line-height: 1rem;
-            font-weight: bold;
+            font-family:lato-bold;
         }
         .SlideSubTitle
         {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             color: #333333;
             text-align: center;
+            font-family:lato-regular;
         }
         .SlideLastText
         {
-            font-size: 11px;
+            font-size: 12px;
             color:#333333;
         }
         .SlideContentBorderTop
@@ -228,20 +302,15 @@ page-offers {
     
         .SpaceBetweenRow
         {
-            padding-bottom: 0.8rem;
+            padding-bottom: 0.4rem;
         }
-        .slide1FontColor
-        {
-            background-color:#2F76D1;
-            color:white;
-        }
+       
         .linebadge{
             height: 20px;
             width: 24px;
             font-size: 12px;
             border-radius: 50%;
-        }       
-                            
+        }                     
     }
     .buycard{
         background:#00A651;
@@ -249,7 +318,7 @@ page-offers {
         padding:10px;
         padding-top:100px;
         padding-bottom: 100px;
-        min-height: 395px;
+        min-height: 405px;   
     }
     .errorcard{
         background:#990033;
@@ -257,17 +326,27 @@ page-offers {
         padding:10px;
         padding-top:150px;
         padding-bottom: 150px;
-        min-height: 395px;
+        min-height: 405px;
     }
     .messagecolor{
         color:#FFFFFF;
         font-size: 14px;
+        font-family:lato-regular;
     }
     .rangeslider{
         padding: 0px;  
     }
+    .range-ios .range-tick {
+        height: 0px;
+    }
+    .range-ios .range-bar {
+        height: 2px;
+    }
+    .slide1FontColor{
+        color:#FFFFFF;
+        font-family: lato-regular;
+    }
 
-   
     @media only screen and (min-device-width : 320px) and (max-device-width : 568px) { 
         .card-title{
             h4{
@@ -282,5 +361,6 @@ page-offers {
         }
     }   
 }
+
 
 

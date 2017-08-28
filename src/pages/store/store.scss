@@ -40,6 +40,13 @@ page-store {
 	.offer-down.lotto{
 		color: red;
 	}
+	.slider-position{
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		color: #AAA;
+		font-weight: bold;
+	}
 	.score-panel{
 		padding: 42px 0 0 0;
 		background-color: white;
@@ -224,11 +231,13 @@ page-store {
 		}
 
 		div{
+			// position: relative;
+			top: 0px;
 			width: 90%;
 			padding: 4px;
 			color: white;
 			background-color: #333;
-			line-height: 1em;
+			line-height: 1.6em;
 			border-radius: 3px 3px 0 0;
 		}
 
@@ -245,7 +254,7 @@ page-store {
 
 	.popup-content{
 		position: absolute;
-		bottom: 90px;
+		bottom: 46px;
 		width: 100%;
 		max-height: 90%;
     	
@@ -262,11 +271,19 @@ page-store {
 			background: none;
 			color: white;
 			padding: 0;
-			margin: 0 0 10px 0;
+			margin: 0;
 		}
 		.label-md{
 			margin: 0;
 			font-size: .8em;
+		}
+		.top-slides-wrapper{
+			margin: 0;
+			overflow: hidden;
+		}
+		.top-slides{
+			width: 100vw;
+			margin: 0 0 10px 0;
 		}
 
 		ion-slide{
@@ -285,20 +302,29 @@ page-store {
 			}
 			.slide-content{
 				padding: 6px;
+
+				p{
+					max-height: 45px;
+				}
 			}
 		}
 		.big-content{
 			background-color: #333;
-			margin-left: 20px;
-			margin-right: 20px;
-			width: calc( 100% - 40px);
+			margin-left: 10px;
+			margin-right: 10px;
+			width: calc( 100% - 20px);
 		}
 		.popup-main{
-			margin: 10px 0;
+			margin: 10px 0 0 0;
+			padding: 0;
 			width: 100%;
 			max-height: 40vh;
 			img{
 				max-height: 100px;
+			}
+			.card-content{
+				font-weight: bold;
+				padding: 10px 0 0 0;
 			}
 		}
 		.day{
@@ -317,6 +343,10 @@ page-store {
 			vertical-align: top;
 		}
 		
+	}
+
+	popup-confirm-payment .popup-content{
+		bottom: 120px;
 	}
 
 

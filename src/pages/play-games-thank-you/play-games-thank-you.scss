@@ -7,35 +7,42 @@
     bottom: 0;
     left: 0;
     right: 0;
-    margin-top: 50px
+    margin-top: 50px;
 }
 
 .thanks-page-heading
 {
-    font-size:25px;
+    font-size:32px;
     font-weight: bolder;
-    margin-bottom:15px; 
 }
 
 .orange-text
 {
-    color:#F27A18;
+    color:#EE6D24;
 }
 
 .thanks-page-img
 {
-    margin-top:30px;
-    margin-bottom: 30px;
+    margin-top:60px;
+    margin-bottom: 60px;
 }
 
 .btn-transparent{
-   background-color: Transparent;
+    background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
     cursor:pointer;
     overflow: hidden;
     outline:none;
     color: blue;
-    margin-top: 100px;
     font-size: 16px;
+}
+#celebration{
+    background-color: white;
+    height: 100%;
+    width: 100%;
+}
+.thanku-page-footer{
+    background-color: white;
+      margin-top: 250px;
 }

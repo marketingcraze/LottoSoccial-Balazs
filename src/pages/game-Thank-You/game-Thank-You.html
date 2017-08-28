@@ -1,0 +1,51 @@
+<ion-header>
+    <synd-cus-header1 title="Game Thank You Page" notification-count="5"></synd-cus-header1>
+</ion-header>
+<ion-content>
+    <div text-center>
+        <ion-item class="item item-block item-md orange-bg">
+            <ion-thumbnail item-left>
+                 <img src="{{get_game_info_thankyou_page?.image_url}}" /> 
+            </ion-thumbnail>
+            <ion-label class="label label-md">
+                 <div class="game-title">{{get_game_info_thankyou_page?.title}}</div> 
+                <div text-wrap>
+                     {{get_game_info_thankyou_page?.description}}      
+                </div>
+            </ion-label>
+        </ion-item>
+    </div>
+
+    <div class="thankYou-game-level-bg">
+        <div class="level-target-title" text-center>
+            <span class="you-have-won">YOU HAVE WON</span>
+            <br>
+            <span class="blue-label" *ngIf="get_game_info_thankyou_page?.win_reward=='Reward Points'">{{get_game_info_thankyou_page?.award_value}} Points</span>
+            <span class="blue-label" *ngIf="get_game_info_thankyou_page?.win_reward=='Cash Amount'">{{get_game_info_thankyou_page?.award_value}} Cash Amount</span>
+            <span class="blue-label" *ngIf="get_game_info_thankyou_page?.win_reward=='Free Game Play'">{{get_game_info_thankyou_page?.award_value}} Free Game Play</span>
+            <span class="blue-label" *ngIf="get_game_info_thankyou_page?.win_reward=='Free Game Product'">{{get_game_info_thankyou_page?.award_value}} Free Game Product</span>
+            <span class="blue-label" *ngIf="get_game_info_thankyou_page?.win_reward=='Free Issuing Credit'">{{get_game_info_thankyou_page?.win_reward}} Free Issuing Credit</span> 
+        </div>
+    </div>
+    <div text-center class="game-thankyou-lowerdiv">
+        <span text-center class="game-thanku-static-txt">Get an extra 50 points by giving a tip for<br> your fellow woggler</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <ion-item>
+            <ion-label color="primary" stacked>Enter your tip here</ion-label>
+            <ion-input type="text"></ion-input>
+        </ion-item>
+        <br>
+        <br>
+        <button ion-button color="secondary" class="btn-tip" (click)="OpenSubmitTipModal()">
+              SUBMIT TIP
+            </button>
+        <br>
+        <button class="btn-transparent btn-no" (click)="OpenSubmitTipModal()" >No, thanks</button>
+    </div>
+
+
+
+</ion-content>
