@@ -9,8 +9,8 @@
        </ion-item>
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
-      <ion-slide *ngFor="let product of credit_product let i=index">
-        <ion-card class="SlideSpace" id={{id}} *ngIf="!resultshow && !errorshow && check">
+      <ion-slide *ngFor="let product of credit_product let id=index">
+        <ion-card class="SlideSpace" id={{id}} *ngIf="!product.resultshow && !product.erroeshow && check">
           <ion-grid>
             <ion-row>
               <ion-col col-12>
@@ -47,11 +47,17 @@
           </ion-row> -->
 
             <ion-item>
-              <ion-range class="rangeslider" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true" (ionChange)="watchSlider(product?.line_group)"
-                [(ngModel)]="slider">
-                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
-              </ion-range>
+              <ion-range class="rangeslider" *ngIf="!sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true" (ionChange)="watchSlider(product,id,product?.index)"
+              [(ngModel)]="slider">
+              <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+              <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+            </ion-range>
+
+            <ion-range class="rangeslider" *ngIf="sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true" (ionChange)="watchSlider(product,id,product?.index)"
+            [(ngModel)]="product.sliderrange">
+            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+            </ion-range>
             </ion-item>
             <ion-row class="SlideContentBorderTop">
               <ion-col col-12>
@@ -82,18 +88,14 @@
                </ion-row>
             <ion-row *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;"> 
               <ion-col col-12  *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer(items?.offer_id)">BUY NOW</button>
+                <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
               </ion-col>
             </ion-row>
           </ion-grid>
 
-
-
-
-
           <!-- buynow  button click  if successfully   show this -->
         </ion-card>
-        <ion-card *ngIf="resultshow" id={{id}} class="buycard">
+        <ion-card *ngIf="product.resultshow" id={{id}} class="buycard">
           <button ion-button icon-only style="background:#F8F8F8; border-radius:50%">
                         <ion-icon style="width:50px; "><img src="assets/icon/check_icon.png"> </ion-icon>
                       </button>
@@ -109,12 +111,12 @@
           </ion-row>
           <ion-row>
             <ion-col col-12>
-              <button ion-button outline round color="light" (click)="getmoreline()">GET More Lines</button>
+              <button ion-button outline round color="light" (click)="getmoreline(id)">GET More Lines</button>
             </ion-col>
           </ion-row>
           
         </ion-card>
-        <ion-card *ngIf="errorshow" class="errorcard">
+        <ion-card *ngIf="product.erroeshow" id={{id}} class="errorcard">
           <button ion-button icon-only style="background:#F8F8F8; border-radius:50%">
                         <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>
                       </button>
@@ -125,7 +127,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-12>
-                        <button ion-button outline round color="light" (click)="tryagain()">TRY AGAIN</button>
+                        <button ion-button outline round color="light" (click)="tryagain(id)">TRY AGAIN</button>
                     </ion-col>
                   </ion-row>
               </ion-card> 

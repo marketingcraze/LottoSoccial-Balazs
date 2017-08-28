@@ -46,6 +46,8 @@ export class SendBonusPage {
 	visitorId:any;
 	check:boolean=true;
 	syndicate:any;
+	rangeSlider: any;
+	sliders: boolean = false;
 
 	private lotteryProductData:any
 	private offersForYou:any
@@ -96,7 +98,16 @@ export class SendBonusPage {
 			if (data) {
 				this.credit_offer=data.response.response.offers;
 				this.credit_product=data.response.response.product;
+				for (var i in this.credit_product) // for acts as a foreach  
+					{  
+						this.credit_product[i]['resultshow']=false;
+						this.credit_product[i]['erroeshow']=false;
+						this.credit_product[i]['sliderrange'] = null;
+						this.credit_product[i]['index'] = i;
+					} 
+			
 				console.log("OffersPage::get_credit_offer", data);
+				console.log(this.credit_product);
 
 				if (this.Credit_Points) {
 					loader.dismiss();
@@ -128,7 +139,7 @@ export class SendBonusPage {
 
 	}
 
-	buyCreditOffer(offerId: any,indexOfCard:any) {
+	buyCreditOffer(offerId: any,openSuccessModal:any) {
 		this.loading = this.loadingCtrl.create();
 		this.loading.present().then(() => {
 			this.offerService.buy_Credit_Offer(offerId,this.visitorId).subscribe(data => {
@@ -136,10 +147,10 @@ export class SendBonusPage {
 				this.buyoffer = data.response.response;
 				this.buyOfferStatus = data.response.response.status;
 				if (this.buyOfferStatus === "FAIL") {
-					this.errorshow = true;
+					openSuccessModal['errorshow']=true;
 				}
 				else {
-					this.resultshow = true;
+					openSuccessModal['resultshow']=true;
 				}
 			},
 			err => {
@@ -151,11 +162,11 @@ export class SendBonusPage {
 		})
 	}
 
-	getmoreline(){
-		this.resultshow=false;
+	getmoreline(Index:any){
+		this.credit_product[Index]['resultshow']=false;
 	}
-	tryagain(){
-		this.errorshow=false;
+	tryagain(Index:any){
+		this.credit_product[Index]['errorshow']=false;
 	}
 
 	 // draw day click  call this function     
@@ -169,8 +180,14 @@ export class SendBonusPage {
 		this.credit_filter_line=parseInt(line);
 	}
 
-    watchSlider(){
-		this.credit_filter_line=this.slider;
+    watchSlider(currentProduct: any, Index: any, proIndex: any){
+		if (Index >= 0 && proIndex == Index) {
+			this.sliders = true;
+			this.credit_product[Index]['sliderrange'] = this.slider;
+		}
+		else {
+			this.sliders = false;
+		}
 	}
 
 	private _showLoader() {
