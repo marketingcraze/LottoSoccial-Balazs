@@ -589,7 +589,7 @@
         </ion-slides>
 
 
-        <ion-card class="popup-main" *ngIf="homeEvents">
+        <ion-card class="popup-main" *ngIf="homeEvents"  (click)="loadLink()">
           <img src="assets/img/mgm_blog_thumb.jpg">
           <ion-card-content text-center>
             £5 CREDIT FOR YOU AND YOUR FRIEND!
@@ -607,7 +607,7 @@
             <ion-item> 
               
             </ion-item>-->
-          <button class="center" ion-button item-right clear small (click)="loadLink('')">
+          <button class="center" ion-button item-right clear small>
             <div>Find out more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
             </button>
         </ion-card>

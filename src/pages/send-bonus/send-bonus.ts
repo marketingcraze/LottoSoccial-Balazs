@@ -1,7 +1,8 @@
 import { Component, NgZone } from '@angular/core';
-import {App, Platform, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import {App, Platform, NavController, Tabs, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth.service';
+import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
@@ -22,7 +23,6 @@ import { SyndicatesPage } from '../syndicates/syndicates';
 export class SendBonusPage {
 
 	private cache: CacheController;
-
 	userCards: any;
 	userCardsCount:number = 0;
 	customerToken:string;
@@ -60,8 +60,10 @@ export class SendBonusPage {
 		private srvHome:HomeService,
 		private alertCtrl:AlertController,
 		public ngZone:NgZone,
+		public offerService:OfferService,
 		public authSrv: AuthService,
 		public navCtrl: NavController, 
+		public menu:MenuController,
 		public navParams: NavParams,
 		public loadingCtrl: LoadingController) {
 		this.nav = this.app.getRootNav();
@@ -129,7 +131,7 @@ export class SendBonusPage {
 	buyCreditOffer(offerId: any,indexOfCard:any) {
 		this.loading = this.loadingCtrl.create();
 		this.loading.present().then(() => {
-			this.authSrv.buy_Credit_Offer(offerId,this.visitorId).subscribe(data => {
+			this.offerService.buy_Credit_Offer(offerId,this.visitorId).subscribe(data => {
 				this.loading.dismiss();
 				this.buyoffer = data.response.response;
 				this.buyOfferStatus = data.response.response.status;
@@ -179,7 +181,9 @@ export class SendBonusPage {
 		return loader;
 	}
 	moveToSyndicate(){
-		this.nav.push(SyndicatesPage);
+		var tabs: Tabs = this.navCtrl.parent.parent.parent;
+		tabs.select(1);
+		
 	}
-
+	
 }

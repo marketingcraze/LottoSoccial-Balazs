@@ -160,6 +160,29 @@ export class OfferService {
         return response;
     }
     
+    buy_Credit_Offer(offerId:any,visitorId:any){
+        let apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/v2/payment/';
+        let body={ "session_ID": CommonService.session.session_ID,
+                    "action": "buy credit offer",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "page_id": "2",
+                    "screen_id": "2.2",
+                    "module_name": "buy_credit_offer",
+                    "customer_id":CommonService.session.customer_id,
+                    "offer_id": offerId,
+                    "visitor_id":visitorId
+
+                  };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        var response = this.http.post(apiUrl, body,opt).map(res => res.json());
+        return response;
+
+     }
     
 }
 

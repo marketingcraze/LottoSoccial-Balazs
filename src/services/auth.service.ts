@@ -297,30 +297,6 @@ mobile:"23423423423"
     }*/
 
 
-    buy_Credit_Offer(offerId:any,visitorId:any){
-        let action="payment/";
-        let body={ "session_ID": CommonService.session.session_ID,
-                    "action": "buy credit offer",
-                    "website": "Lotto Social",
-                    "website_id": "27",
-                    "source_site": "mobi.lottosocial.com",
-                    "page_id": "2",
-                    "screen_id": "2.2",
-                    "module_name": "buy_credit_offer",
-                    "customer_id":CommonService.session.customer_id,
-                    "offer_id": offerId,
-                    "visitor_id":visitorId
-
-                  };
-        let opt: RequestOptions = new RequestOptions({
-            headers: CommonService.getHeaderJson()
-        });
-
-        var response = this.http.post(this.apiUrl + action, body,opt).map(res => res.json());
-        return response;
-
-     }
-
     /**
      * New user registration API call (WP version)
      * 

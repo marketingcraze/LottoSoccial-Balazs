@@ -67,6 +67,7 @@ import { GameThankyouSubmittip } from '../pages/game-Thank-You-SubmitTip-modal/g
 import { howtoplay } from '../pages/game-start-how-to-play/game-start-how-to-play';
 import { recentWinnerTips } from '../pages/recent-winners-tips/recent-winners-tips';
 import { gameTerms } from '../pages/game-start-game-terms/game-start-game-terms';
+import { referFriend } from '../pages/refer-friend-page/refer-friend-page';
 
 
 // components
@@ -84,6 +85,7 @@ import { AccountService } from '../services/account.service';
 import { OfferService } from '../services/offer.service';
 import { SyndicateService } from '../providers/syndicate-service';
 import { PlayGame } from '../services/playgame.service';
+import { ReferFriend } from '../services/referfriend.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -97,6 +99,7 @@ import { Network } from '@ionic-native/network';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Device } from '@ionic-native/device';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -173,6 +176,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
         gameTerms,
         YourOffersPage,
         SendBonusPage,
+        referFriend,
         // OffersPayment,
 
         // pipes
@@ -272,6 +276,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
         howtoplay,
         recentWinnerTips,
         gameTerms,
+        referFriend,
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -282,6 +287,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, Device, AppSoundProvider, PlayGame]
+        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame, ReferFriend, SocialSharing,Device]
+
 })
 export class AppModule { }

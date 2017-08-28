@@ -1,0 +1,42 @@
+<ion-header>
+    <synd-cus-header1 title="Refer a friend" notification-count="5"></synd-cus-header1>
+</ion-header>
+
+<ion-content>
+
+    <div text-center class="headding">
+        <img src="{{getReferfriendData?.mgm_image}}">
+        <div class="redrow" text-center>
+           {{getReferfriendData?.mgm_title}}
+        </div>
+    </div>
+
+    <div class="shareContent">
+        <p>{{getReferfriendData?.mgm_description}}</p>
+        <span class="bold-large"> SHARE NOW! </span>
+    </div>
+
+    <div class="social-share" center>
+        <span class="left" (click)="emailShare()">
+        <img src="assets/img/mail.svg" class="social-image">
+        <p class="social-share-name">Email</p>
+        </span>
+        <span class="left" (click)="twitterShare()">
+        <img src="assets/img/twitter.svg" class="social-image">
+        <p class="social-share-name">Twitter</p>
+        </span>
+        <span class="left" (click)="whatsappShare()">
+        <img src="assets/img/whatsapp.svg" class="social-image">
+        <p class="social-share-name">WhatsApp</p>
+        </span>
+        <span class="left" (click)="facebookShare()">
+        <img src="assets/img/facebook.svg" class="social-image" >
+        <p class="social-share-name">Facebook</p>
+        </span>
+    </div>
+  
+    <div class="footer">
+        <p>To qualify the £5 credit, your friend must be register and verify their age.</p>
+    </div>
+
+</ion-content>

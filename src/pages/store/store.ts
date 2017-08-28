@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, 
-    Slides, LoadingController, AlertController } from 'ionic-angular';
+    Slides, LoadingController, AlertController ,ModalController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
@@ -12,7 +12,7 @@ import { Params } from '../../services/params';
 import { CommonService } from '../../services/common.service';
 import { HomeService } from '../../services/service.home';
 import { OfferService } from '../../services/offer.service';
-
+import { referFriend } from '../refer-friend-page/refer-friend-page';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 // import * as $ from 'jquery';
@@ -123,6 +123,7 @@ export class StorePage {
         private iab: InAppBrowser,
         public commonSrv:CommonService,
         public appSound:AppSoundProvider,
+        public modalCtrlr:ModalController,
         public actionSheetCtrl: ActionSheetController) {
 
       
@@ -279,9 +280,8 @@ export class StorePage {
 
         
     loadLink(url){
-        this.appSound.play('buttonClick');
-        let opt:string = "toolbarposition=top";
-        this.iab.create(url, '_blank', opt);
+        let modal=this.modalCtrlr.create(referFriend);
+        modal.present()
     }
 
     gameTargetLink(target){
