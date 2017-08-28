@@ -99,7 +99,7 @@ export class OfferService {
                 "p_type": "10",
                 "offer_id": offer.offer_id,
                 "status": "olu.testerr@gmail.com",
-                "prosub_id": "2279",
+                "prosub_id": offer.prosub_id,
                 "payment_currency": "GBP",
                 "payment_type": "payment",
                 "award_id": "",

@@ -235,7 +235,7 @@ export class StorePage {
         // let offer = {total_cost:4.99} ;
 
         this.appSound.play('buttonClick');
-        if (this.customerToken) {
+        if (!this.customerToken) {
             this.goPaymentWebview(offer);
         }else{
             let loader = this._showLoader();
@@ -277,7 +277,14 @@ export class StorePage {
         this.iab.create( str, 'blank', opt);
     }
 
-
+    paymentDone(){
+        let alert = this.alertCtrl.create({
+            title: 'Success!',
+            subTitle: 'Successfully transaction completed.',
+            buttons: ['OK']
+        });
+        alert.present();
+    }
         
     loadLink(url){
         let modal=this.modalCtrlr.create(referFriend);
