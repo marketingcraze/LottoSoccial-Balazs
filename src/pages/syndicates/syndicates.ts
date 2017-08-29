@@ -32,7 +32,7 @@ export class SyndicatesPage implements OnInit {
     }
 
     tab1child = MySyndicatePage;
-    tab2child = CreateSyndicateTab;
+    tab2child = CheckWinningsPage;
 
     indexSelected: number;
 
