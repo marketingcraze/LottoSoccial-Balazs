@@ -88,7 +88,7 @@ export class PlayGamePage implements OnInit {
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
-        responseData => {
+        (responseData:any) => {
           this.gameInfo = responseData.response[0].get_game_info.response;
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
           this.totalGameLevel=responseData.response[0].get_game_info.response.total_game_level;

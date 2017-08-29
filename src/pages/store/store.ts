@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, 
     Slides, LoadingController, AlertController ,ModalController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -30,6 +30,8 @@ export class StorePage {
     public spaceBetween:number = 0;
     public whatsOn:boolean = false;
     public nav:NavController;
+
+    private currentTime:Date = new Date();
 
     // payment variables
     userCards: any;
@@ -113,6 +115,7 @@ export class StorePage {
     constructor(
         public app:App,
         public params:Params,
+        private ref: ChangeDetectorRef,
         private srvHome:HomeService,
         private loadingCtrl:LoadingController,
         private alertCtrl:AlertController,
@@ -162,6 +165,11 @@ export class StorePage {
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
                         this.total_cards++
+                        
+                        // updates every seconds
+                        setInterval(() => {
+                            this.currentTime = new Date();
+                        }, 1000);
                     }
                     
                 }else if ( data[i].get_account_details ) {

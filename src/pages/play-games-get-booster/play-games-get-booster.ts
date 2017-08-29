@@ -40,7 +40,7 @@ export class GetBooster implements OnInit {
     this.loading.present().then(() => {
       this.playgameServiceForBooster.getGameBooster(this.customerAward_logId)
         .subscribe(
-        responseData => {
+        (responseData:any) => {
           this.boosterdetail = responseData.response[0].activate_game_booster.response;
           if(this.boosterdetail.status=="FAIL")
             {

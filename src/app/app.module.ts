@@ -112,6 +112,7 @@ import { CapitalizeFirstPipe } from '../pipes/capitalize-first';
 import { AppSoundProvider } from '../providers/app-sound/app-sound';
 import { TimeDifferencePipe } from '../pipes/time-difference';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { DateLeftPipe } from '../pipes/date-left/date-left';
 
 
 @NgModule({
@@ -197,7 +198,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
         PopupMessageDetails,
-    ProgressBarComponent
+    ProgressBarComponent,
+    DateLeftPipe
     ],
     imports: [
         // BrowserAnimationsModule,

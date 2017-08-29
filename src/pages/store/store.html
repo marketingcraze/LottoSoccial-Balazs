@@ -60,10 +60,10 @@
                       <div class="timer-new">
                           <div class="time-left"><img src="assets/icon/timer.svg" /></div>
                           <div class="time-left"><span>TIME LEFT:</span></div>
-                          <div>{{offer.countdown | date:'dd'}}<span>Days</span></div>
-                          <div>{{offer.countdown | date:'hh'}}<span>Hrs</span></div>
-                          <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
-                          <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
+                          <div>{{offer.countdown | dateLeft:'dd':currentTime}}<span>Days</span></div>
+                          <div>{{offer.countdown | dateLeft:'hh':currentTime}}<span>Hrs</span></div>
+                          <div>{{offer.countdown | dateLeft:'mm':currentTime}}<span>Mins</span></div>
+                          <div>{{offer.countdown | dateLeft:'ss':currentTime}}<span>Secs</span></div>
                       </div>
                       <button item-right ion-button color="secondary" (click)="showPaymentOptions(offer)"> {{ offer.button_text }} </button>
                   </ion-item>
@@ -81,10 +81,10 @@
                       <div class="timer-new">
                           <div class="time-left"><img src="assets/icon/timer.svg" /></div>
                           <div class="time-left"><span>TIME LEFT:</span></div>
-                          <div>{{offer.countdown | date:'dd'}}<span>Days</span></div>
-                          <div>{{offer.countdown | date:'hh'}}<span>Hrs</span></div>
-                          <div>{{offer.countdown | date:'mm'}}<span>Mins</span></div>
-                          <div>{{offer.countdown | date:'ss'}}<span>Secs</span></div>
+                          <div>{{offer.countdown | dateLeft:'dd':currentTime}}<span>Days</span></div>
+                          <div>{{offer.countdown | dateLeft:'hh':currentTime}}<span>Hrs</span></div>
+                          <div>{{offer.countdown | dateLeft:'mm':currentTime}}<span>Mins</span></div>
+                          <div>{{offer.countdown | dateLeft:'ss':currentTime}}<span>Secs</span></div>
                       </div>
                     
                     <button item-right ion-button color="secondary" (click)="showPaymentOptions(offer)"> {{ offer.button_text }} </button>

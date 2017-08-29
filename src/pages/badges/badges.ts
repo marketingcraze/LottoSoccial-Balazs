@@ -86,7 +86,7 @@ export class BadgesPage {
         }*/
     }
     ionViewWillEnter() {
-        this.viewCtrl.showBackButton(false);
+       // this.viewCtrl.showBackButton(false);
     }
     close() {
         this.navCtrl.pop();

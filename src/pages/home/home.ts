@@ -152,7 +152,7 @@ export class HomePage implements OnInit {
         this.menu.close();
     }
 
-    onLeftMenuSelection(selection){
+    onLeftMenuSelection(selection){ 
         console.log("HomePage::onLeftMenuSelection");
         this.appSound.play('menuClick');
         this.menu.close();
@@ -164,7 +164,7 @@ export class HomePage implements OnInit {
                 this.params.goPage( CheckWinningsPage )
                 break
             case 'your_badges':
-                this.params.goPage( BadgesPage )
+                this.params.goPage(BadgesPage)
                 break
             case 'help':
                 let opt:string = "toolbarposition=top";

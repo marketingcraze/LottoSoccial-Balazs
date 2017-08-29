@@ -19,11 +19,12 @@ export class TimeDifferencePipe implements PipeTransform {
         }
         
         // time since message was sent in seconds
-        let delta = (now - value.getTime()) / 1000;
+        let delta = Math.floor( (now - value.getTime()) / 1000 ); 
         if (delta < 0) {
             result = "-"
             delta = Math.abs(delta);
         }
+        // console.log("difference", value, delta);
         
         // format string
         let day = Math.floor(delta / 86400);

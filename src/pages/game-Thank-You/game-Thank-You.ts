@@ -35,7 +35,7 @@ export class GameThankYou {
     this.loading.present().then(() => {
       this.playgameService.gameThankyouPage(this.Customer_award_log_id)
         .subscribe(
-        responseData => {
+        (responseData:any )=> {
           this.get_game_info_thankyou_page = responseData.response[0].get_game_info_thankyou_page.response;
           this.loading.dismiss();
         },
