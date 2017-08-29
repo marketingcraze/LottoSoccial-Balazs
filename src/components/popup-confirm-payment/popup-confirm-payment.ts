@@ -109,13 +109,11 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() success", data);
                 loader.dismiss();
+                this.showBuyNowView = true;
+
                 if (this.onPaymentComplete) {
-                    this.togglePopup();
                     this.onPaymentComplete.emit();
-                }else{
-                    this.showBuyNowView = true;
                 }
-                
             }, (err) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() error", err);
                 loader.dismiss();

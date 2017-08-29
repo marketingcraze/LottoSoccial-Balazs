@@ -278,12 +278,14 @@ export class StorePage {
     }
 
     paymentDone(){
+        /*
         let alert = this.alertCtrl.create({
             title: 'Success!',
             subTitle: 'Successfully transaction completed.',
             buttons: ['OK']
         });
         alert.present();
+        */
     }
         
     loadLink(url){
