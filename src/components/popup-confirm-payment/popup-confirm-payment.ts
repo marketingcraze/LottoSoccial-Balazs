@@ -15,6 +15,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     slideInUp:boolean = false;
     confirmPayment:boolean = false;
     showBuyNowView:boolean = false;
+    confirmPaymentSuccess:boolean = true;
 
     public cardSelected:any
     public cardsValue:any
@@ -109,18 +110,30 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() success", data);
                 loader.dismiss();
+                
                 this.showBuyNowView = true;
+                data = data.response[0];
+                if (data.process_paymill_card_payment) {
+                    data = data.process_paymill_card_payment.response
+                    this.confirmPaymentSuccess = (data.status == "SUCCESS")
+                }
 
                 if (this.onPaymentComplete) {
                     this.onPaymentComplete.emit();
                 }
             }, (err) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() error", err);
-                loader.dismiss();
+                this.confirmPaymentSuccess = false
                 this.params.setIsInternetAvailable(false)
             })
         }
+    }
 
+    private try_again(){
+        this.appSound.play('buttonClick');
+        this.togglePopup();
+        this.confirmPaymentSuccess = true
+        this.showBuyNowView = false;
     }
 
     viewTickets(){

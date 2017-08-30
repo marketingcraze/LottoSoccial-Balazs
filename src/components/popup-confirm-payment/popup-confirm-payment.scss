@@ -59,7 +59,6 @@ popup-confirm-payment {
                 position: absolute;
                 width: calc(100% - 40px);
                 height: 100%;
-                background-color: #00A651;
                 top: 0;
                 margin-top: 16px;
                 border-radius: 6px;
@@ -75,6 +74,13 @@ popup-confirm-payment {
             .middle {
                 display: table-cell;
                 vertical-align: middle;
+            }
+
+            .buy-success{
+                background-color: #00A651;
+            }
+            .buy-fail{
+                background-color: #C10A09;
             }
         }
     }
