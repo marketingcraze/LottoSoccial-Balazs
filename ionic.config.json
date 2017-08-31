@@ -1,5 +1,8 @@
 {
   "name": "LottoSocial",
   "app_id": "09c27756",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
