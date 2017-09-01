@@ -28,7 +28,7 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6 *ngFor="let c of lotteryProductData; let i=index">
-            <div class="t-card" (click)="opneBuyPage(i)">
+            <div class="t-card" (click)="openBuyPage(i)">
               <div class="check-div"><img src="./assets/img/plus_opt.svg" class="tcard-selected"/></div>
               <img class="card-img" src="{{c.image_url}}" (loaded)="c.load = true" [hidden]="c.load"/>
               <p class="pad-5-top" id="countDown">NEXT DRAW IN {{c.draw_countdown | timeDiffer}}</p>
