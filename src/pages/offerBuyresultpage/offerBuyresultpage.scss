@@ -1,0 +1,45 @@
+.buycard{
+    background:#00A651;
+    width:auto;
+    padding:10px;
+    padding-top:100px;
+    padding-bottom: 100px;
+    min-height: 405px; 
+    bottom: 53px;
+    position: relative;  
+}
+.messagecolor{
+    color:#FFFFFF;
+    font-size: 14px;
+    font-family:Lato;
+}
+.errorcard{
+    background:#990033;
+    width:auto;
+    padding:10px;
+    padding-top:150px;
+    padding-bottom: 150px;
+    min-height: 405px;
+    position: relative;
+    bottom: 70px;
+}
+
+.modal-page {
+    position: absolute;
+    overflow: hidden;
+    max-width: 330px;
+    border-radius: 10px;
+    width: 85vw;
+    height: 45vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    box-shadow: 0 16px 20px rgba(0,0,0,.4);
+    background-color: #fafafa;
+
+    }
+
+

@@ -1,6 +1,6 @@
 page-redeem-games {
 	.content{
-		margin-top: $toolbar-md-height;
+		margin-top: 18px;
 		height: calc(100% - #{$toolbar-md-height});
 	}
 
@@ -12,5 +12,11 @@ page-redeem-games {
 	.redeemgameslist{
 	    margin-bottom:-8px;
 	}
-
+	.header-widthGetGame{
+		width: 100%;
+		background-color: #E9E9E9;
+	}
+	.bottom-contentGtagme{
+		margin-top: 221px;
+	}
 }

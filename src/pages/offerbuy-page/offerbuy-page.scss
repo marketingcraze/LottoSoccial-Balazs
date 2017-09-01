@@ -1,0 +1,80 @@
+.container-header{
+   padding-top:20px; 
+}
+.time-left{
+    background-color: black;
+    height: 50px;
+}
+.header-img{
+    float: left;
+    height: 66px;
+    margin-left: 75px;
+    margin-top: 11.5px;
+}
+.white-bg{
+    padding: 6px 0;
+    margin-top: 20px;
+}
+.offer-title {
+    margin-left: 12px;
+    color: #fff;
+    font-size: 20px;
+    
+}
+.margin-headerdata{
+    margin-left: 10px;
+}
+.amount{
+    font-size: 32px; 
+    font-weight: 800; 
+}
+.label-md-offer{
+    margin: 13px 8px 8px 0;
+}
+.mainContainer{
+    background-color: white;
+    height: 370px;
+}
+.SlideSubTitleOffer{
+    font-size:15px;
+    font-weight: bolder;
+}
+.SpaceBetweenRowOffer{
+    display: flow-root;
+}
+.SlideContentBorderTopOffer{
+    margin-top: -5px;
+} 
+.drawDayMargin{
+    margin-top: -30px;
+}
+.font-size{
+    font-size: 14px;
+}
+.BuyBtn
+{
+    height: 34px;
+    font-size: 12px;
+    background:#00A651;
+    color:#F8F8F8;
+    float: right;
+}
+.offer-of-the-day{
+    .slides{
+        width: 110vw;
+    }
+    .slide-zoom {
+        width: 100%;
+        border: 4px solid #111;
+    }
+    h5{
+        font-weight: bold;
+    }
+    img{
+        min-height: 100px;
+    }
+}
+.rangesliderOffer{
+    max-width: 78%;
+    margin-top: -20px;
+}

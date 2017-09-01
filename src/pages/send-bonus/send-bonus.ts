@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {App, Platform, NavController, Tabs, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
+import {App, Platform, NavController, Tabs, NavParams, LoadingController, AlertController, MenuController, ModalController } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth.service';
 import { OfferService } from '../../services/offer.service';
@@ -9,6 +9,7 @@ import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 import { Storage } from '@ionic/storage';
 import { SyndicatesPage } from '../syndicates/syndicates';
+import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 
 /*
   Generated class for the SendBonusPage page.
@@ -48,6 +49,7 @@ export class SendBonusPage {
 	syndicate:any;
 	rangeSlider: any;
 	sliders: boolean = false;
+	offerStatus:boolean;
 
 	private lotteryProductData:any
 	private offersForYou:any
@@ -65,6 +67,7 @@ export class SendBonusPage {
 		public offerService:OfferService,
 		public authSrv: AuthService,
 		public navCtrl: NavController, 
+		public modalCtrlr:ModalController,
 		public menu:MenuController,
 		public navParams: NavParams,
 		public loadingCtrl: LoadingController) {
@@ -100,8 +103,6 @@ export class SendBonusPage {
 				this.credit_product=data.response.response.product;
 				for (var i in this.credit_product) // for acts as a foreach  
 					{  
-						this.credit_product[i]['resultshow']=false;
-						this.credit_product[i]['erroeshow']=false;
 						this.credit_product[i]['sliderrange'] = null;
 						this.credit_product[i]['index'] = i;
 					} 
@@ -147,10 +148,12 @@ export class SendBonusPage {
 				this.buyoffer = data.response.response;
 				this.buyOfferStatus = data.response.response.status;
 				if (this.buyOfferStatus === "FAIL") {
-					openSuccessModal['errorshow']=true;
+					this.offerStatus=false;
+					this.showModalForcreditoffer();
 				}
 				else {
-					openSuccessModal['resultshow']=true;
+					this.offerStatus=true;
+					this.showModalForcreditoffer();
 				}
 			},
 			err => {
@@ -160,13 +163,6 @@ export class SendBonusPage {
 			()=> console.log("offer buy successfully")
 			);
 		})
-	}
-
-	getmoreline(Index:any){
-		this.credit_product[Index]['resultshow']=false;
-	}
-	tryagain(Index:any){
-		this.credit_product[Index]['errorshow']=false;
 	}
 
 	 // draw day click  call this function     
@@ -181,9 +177,16 @@ export class SendBonusPage {
 	}
 
     watchSlider(currentProduct: any, Index: any, proIndex: any){
-		if (Index >= 0 && proIndex == Index) {
+		if (Index >= 0 && proIndex == Index && currentProduct.sliderrange!=null) {
+			this.sliders = true;
+			this.credit_product[Index]['sliderrange'] = currentProduct.sliderrange;
+			console.log(this.credit_product);
+		}
+		else if(Index >= 0 && proIndex == Index && currentProduct.sliderrange==null) {
 			this.sliders = true;
 			this.credit_product[Index]['sliderrange'] = this.slider;
+			console.log(this.credit_product);
+			
 		}
 		else {
 			this.sliders = false;
@@ -197,10 +200,14 @@ export class SendBonusPage {
 		loader.present()
 		return loader;
 	}
-	moveToSyndicate(){
-		var tabs: Tabs = this.navCtrl.parent.parent.parent;
-		tabs.select(1);
-		
+	showModalForcreditoffer(){
+		let resultModal=this.modalCtrlr.create(offerBuyResultPage,{syndicateName:this.buyoffer,status:this.offerStatus});
+		resultModal.present();
+		resultModal.onDidDismiss((data: any[]) => {
+			if (data) {
+			  var tabs:Tabs=this.navCtrl.parent.parent.parent;
+              tabs.select(1);
+			}
+		})
 	}
-	
 }

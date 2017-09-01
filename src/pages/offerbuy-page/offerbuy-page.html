@@ -1,0 +1,109 @@
+<ion-header>
+    <synd-cus-header1 title="Play" notification-count="5"></synd-cus-header1>
+</ion-header>
+
+<ion-content>
+    <div class="container-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
+        <img src={{product?.image}} class="header-img" />
+
+        <ion-label class="label-md-offer">
+            <div class="offer-title">{{product?.name | capitalizeFirst}}</div>
+
+            <div class="amount offer-title">
+                £{{product?.jackpot}}
+            </div>
+        </ion-label>
+    </div>
+    <div class="time-left" text-center >
+        <span *ngIf="check"><img style="height: 33px;top: 7px;position: relative;" src="https://images.vexels.com/media/users/3/136994/isolated/lists/aa3216bc8664471a5f75363fd74c728a-timer-clock-icon.png"/><span style="color:white;position:relative;bottom:4px;margin-left: 14px;">TIME LEFT: </span></span>
+        
+       <div style="display: -webkit-inline-box;color: #fff;    top: 5px; position: relative;" *ngIf="check">
+        <div style="margin-right: 10px; margin-left: 15px;"><b style="font-size:18px">{{day}}</b> <br><span>Days</span></div>
+        <div style="margin-right: 10px;"><b style="font-size:18px">{{hrs}}</b> <br><span>Hrs</span></div>
+        <div style="margin-right: 10px;"><b style="font-size:18px">{{mins}}</b> <br><span>Mins</span></div>
+        <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
+    </div>
+    </div>
+
+    
+
+<div class="mainContainer" text-center>
+    <ion-row >
+        <ion-col col-12>
+            <p class="SlideSubTitleOffer" style="color:#333333">Choose Draw day</p>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="SpaceBetweenRowOffer">
+        <ion-col *ngFor="let draw of  product?.draw_group|keys ; let i = index">
+            <button ion-button class="slide1FontColor" [ngStyle]="(i == position  )?{'background-color': product?.product_color}:{'background-color':  '#AAAAAA'}"
+                (click)="drawday(i)">{{draw}}</button>
+        </ion-col>
+        
+
+    </ion-row>
+    <ion-row class="SlideContentBorderTopOffer">
+        <ion-col col-12>
+            <p class="SlideSubTitleOffer" style="color:#333333">Choose Number Of Lines</p>
+        </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+           <div  *ngFor="let line of  product?.line_group| keys;  let i = index">
+                  <p  class="linebadge" [ngStyle]="(line == credit_filter_line )?{'background': product?.product_color, 'color':'#ffffff'}:{'background':  '#ffffff','color':'#AAAAAA'}"  (click)="credit_line(line)" >{{line}}</p> 
+                </div>   
+        </ion-row> -->
+
+    <ion-item>
+        <ion-range class="rangesliderOffer" *ngIf="!sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"
+            (ionChange)="watchSlider()" [(ngModel)]="slider">
+            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+        </ion-range>
+    </ion-item>
+    <ion-row class="SlideContentBorderTopOffer">
+        <ion-col col-12>
+            <p class="SlideSubTitleOffer" style="color:#D8D8D8">SUMMARY</p>
+        </ion-col>
+    </ion-row>
+    <ion-row class="drawDayMargin">
+        <ion-col col-12>
+
+            <p class="font-size">
+                <span id="lineGroup">
+                         {{(product?.line_group| keys)[credit_filter_line]}}
+                      </span>
+                <span id="gameName">
+                         {{product?.name|capitalizeFirst}}
+                          </span> Lines on
+                <span id="dayGroup">
+                       {{((product?.draw_group|keys)[credit_filter_draw]|day)}}
+                      </span>
+            </p>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" class="drawDayMargin">
+        <ion-col col-12 *ngIf="i<1">
+            <p class="font-size"> Total: <span ion-text color="bonus">£{{item?.prize}}</span></p>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;">
+        <ion-col col-12 *ngIf="j<1">
+            <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
+        </ion-col>
+    </ion-row>
+
+
+</div>
+<div class="offer-of-the-day">
+    <h5 text-center>OFFERS OF THE DAY!</h5>
+    <ion-slides slidesPerView=3>
+      <ion-slide *ngFor="let productOffer of offersForYou" >
+        <img src="{{productOffer.product_icon}}" class="img-responsive">
+      </ion-slide>     
+    </ion-slides>
+  </div>
+
+</ion-content>

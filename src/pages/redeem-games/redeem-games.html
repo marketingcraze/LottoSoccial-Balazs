@@ -1,6 +1,7 @@
 <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
 
 <ion-content class="card-background-page">
+    <div  ion-fixed class="header-widthGetGame">
     <ion-card>
         <img src="assets/img/games_hero_001@3x.png" />
     </ion-card>
@@ -10,6 +11,8 @@
          <span style="color:#333333!important">Your Reward Points Balance:</span><span ion-text color="primary">{{reward_point}}</span>
         </ion-item>
     </ion-list>
+    </div>
+    <div class="bottom-contentGtagme">
     <ion-list no-lines *ngFor="let redeem_product of redeem_products" class="redeemgameslist" >
         <ion-item>
             <ion-thumbnail item-left>
@@ -42,4 +45,5 @@
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>
     </ion-list>
+</div>
 </ion-content>

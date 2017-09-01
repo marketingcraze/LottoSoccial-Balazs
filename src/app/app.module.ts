@@ -68,7 +68,8 @@ import { howtoplay } from '../pages/game-start-how-to-play/game-start-how-to-pla
 import { recentWinnerTips } from '../pages/recent-winners-tips/recent-winners-tips';
 import { gameTerms } from '../pages/game-start-game-terms/game-start-game-terms';
 import { referFriend } from '../pages/refer-friend-page/refer-friend-page';
-
+import { offerBuy } from '../pages/offerbuy-page/offerbuy-page';
+import { offerBuyResultPage } from '../pages/offerBuyresultpage/offerBuyresultpage';
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -86,6 +87,7 @@ import { OfferService } from '../services/offer.service';
 import { SyndicateService } from '../providers/syndicate-service';
 import { PlayGame } from '../services/playgame.service';
 import { ReferFriend } from '../services/referfriend.service';
+import { productOffer } from '../services/productoffer.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -178,6 +180,8 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         YourOffersPage,
         SendBonusPage,
         referFriend,
+        offerBuy,
+        offerBuyResultPage,
         // OffersPayment,
 
         // pipes
@@ -281,6 +285,8 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         recentWinnerTips,
         gameTerms,
         referFriend,
+        offerBuy,
+        offerBuyResultPage,
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -291,7 +297,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame, ReferFriend, SocialSharing,Device]
+        Network, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device]
 
 })
 export class AppModule { }

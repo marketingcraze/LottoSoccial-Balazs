@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Platform, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -10,6 +10,8 @@ import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
+
+import { offerBuy } from '../offerbuy-page/offerbuy-page';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -58,6 +60,7 @@ export class YourOffersPage {
 		public authSrv: AuthService,
 		public srvOffer: OfferService,
 		public commonSrv:CommonService,
+		public modalController:ModalController,
 		public appSound:AppSoundProvider,
 		public loadingCtrl: LoadingController) {
 
@@ -163,6 +166,13 @@ export class YourOffersPage {
 		});
 		loader.present()
 		return loader;
+	}
+
+	//Offer Buy page
+	openBuyPage(index){
+		var TimeLeft=document.getElementById("countDown").innerText;
+		let buyPageModal=this.modalController.create(offerBuy,{offersData:this.lotteryProductData[index],Time:TimeLeft});
+		buyPageModal.present();
 	}
 
 }

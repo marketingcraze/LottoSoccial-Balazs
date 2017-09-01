@@ -69,7 +69,7 @@
 
                 <p class="SlideSubTitle SlideLastText">
                   <span id="lineGroup">
-                           {{(product?.line_group| keys)[credit_filter_line]}}
+                           {{(product?.line_group| keys)[product.sliderrange?product.sliderrange:credit_filter_line]}}
                         </span>
                   <span id="gameName">
                            {{product?.name|capitalizeFirst}}
@@ -81,11 +81,20 @@
                 </p>
               </ion-col>
             </ion-row>
-            <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
+            
+            <ion-row  *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[product.sliderrange ? product.sliderrange : credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
               <ion-col col-12 *ngIf="i<1">
                 <p class="SlideSubTitle SlideLastText"> Total at 30p per Line : <span ion-text color="bonus">£{{item?.prize}}</span></p>
               </ion-col>
                </ion-row>
+
+               <!-- <ion-row *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
+                <ion-col col-12 *ngIf="i<1 && !sliders">
+                  <p class="SlideSubTitle SlideLastText"> Total at 30p per Line : <span ion-text color="bonus">£{{item?.prize}}</span></p>
+                </ion-col>
+                 </ion-row> -->
+
+
             <ion-row *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;"> 
               <ion-col col-12  *ngIf="j<1">
                 <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
@@ -95,7 +104,7 @@
 
           <!-- buynow  button click  if successfully   show this -->
         </ion-card>
-        <ion-card *ngIf="product.resultshow" id={{id}} class="buycard">
+        <!-- <ion-card *ngIf="product.resultshow" id={{id}} class="buycard">
           <button ion-button icon-only style="background:#F8F8F8; border-radius:50%">
                         <ion-icon style="width:50px; "><img src="assets/icon/check_icon.png"> </ion-icon>
                       </button>
@@ -130,7 +139,7 @@
                         <button ion-button outline round color="light" (click)="tryagain(id)">TRY AGAIN</button>
                     </ion-col>
                   </ion-row>
-              </ion-card> 
+              </ion-card>  -->
           </ion-slide>     
       </ion-slides>      
  </div>
