@@ -206,6 +206,8 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         BrowserModule,
         IonicModule.forRoot(MyApp,
         {
+            autoFocusAssist: false,
+            scrollAssist: false,
             tabsPlacement:'top', 
             iconMode: 'ios',
             tabsHighlight:true, 

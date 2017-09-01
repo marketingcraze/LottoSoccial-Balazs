@@ -29,7 +29,7 @@
         </div>
 
         <div class="buy-now" *ngIf="showBuyNowView">
-          <div class="outer">
+          <div class="outer buy-success" *ngIf="confirmPaymentSuccess">
             <ion-grid class="middle">
               <ion-row>
                 <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
@@ -45,6 +45,22 @@
               </ion-row>
             </ion-grid>
           </div>
+
+          <div class="outer buy-fail" *ngIf="!confirmPaymentSuccess">
+            <ion-grid class="middle">
+              <ion-row>
+                <img class="center" src="./assets/icon/cross.svg" width="80" height="80" />
+              </ion-row>
+              <ion-row >
+                <p class="center" text-center color="light">An error as occurred,<br>please try again</p>
+              </ion-row>
+              <ion-row>
+                <button class="center" ion-button padding outline round color="light" (click)="try_again()">TRY AGAIN</button>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+
         </div>
         
       </div>
