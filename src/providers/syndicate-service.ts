@@ -287,6 +287,76 @@ export class SyndicateService {
             })
     }
 
+    loadWinnings() {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/checkmywin/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+            "request": 
+            [{
+                "session_ID": CommonService.sessionId,
+                "page_ID": "6",
+                "screen_id": "6.1",
+                "action": "get_prev_check_list",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "module_name": "get_previous_check_list",
+                "customer_id": CommonService.session.customer_id
+            }]
+        }
+        return this.http.post(action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+        })
+    }
+
+    checkWinnings() {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/checkmywin/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+            "request": [{
+                "session_ID": CommonService.sessionId,
+                "page_ID": "9",
+                "screen_id": "9.1",
+                "action": "profile_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "module_name": "cliamable_syndicates",
+                "customer_id":CommonService.session.customer_id
+            }]
+        }
+        return this.http.post(action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+        })
+    }
+
+    checkwinFinal() {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/checkmywin/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+            "request": [{
+                "session_ID": CommonService.sessionId,
+                "page_ID": "9",
+                "screen_id": "9.2",
+                "action": "get_win",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "module_name": "check_mywinnings",
+                "customer_id":CommonService.session.customer_id
+            }]
+        }
+        return this.http.post(action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+        })
+    }
+
 }
 
 

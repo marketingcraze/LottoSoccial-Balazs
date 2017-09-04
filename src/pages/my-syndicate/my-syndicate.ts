@@ -146,10 +146,10 @@ export class MySyndicatePage {
     }
 
     chatNow(i) {
-         if(this.chatcount > 0 && this.syndArr[i].peepso_group_id !=0) {
+         if(this.syndArr[i].peepso_group_id !=0) {
             let opt: string = "toolbarposition=top";
             let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url;
-            str += '&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken ;
+            str += '/&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken ;
             this.iab.create(str, 'blank', opt);
          }
     }

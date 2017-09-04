@@ -12,6 +12,6 @@
     <span style="content: url('./assets/icon/user2.svg'); width:40px;"></span>
   </div>
   <div style="padding:30px;">Munching numbers...</div>
-  <div style="padding:30px;">Check TONY123</div>
-  <div>Check Hatchster Syndicate</div>
+  <div class="move1" style="padding-top:30px;" *ngIf="errorMsg != ''">{{errorMsg}}</div>
+  <div class="move1" style="padding-top:30px;" *ngFor="let l of sList2">chaecking {{l?.syndicate_name}}</div>
 </ion-content>
