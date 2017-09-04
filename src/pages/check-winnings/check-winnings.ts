@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App, ViewController } from 'ionic-angular';
+import { NavController, NavParams, App, ViewController,LoadingController } from 'ionic-angular';
 import { CheckWinningsNextPage } from '../check-winnings-next/check-winnings-next';
 import { SyndicateService } from '../../providers/syndicate-service';
 /*
@@ -13,8 +13,20 @@ import { SyndicateService } from '../../providers/syndicate-service';
   templateUrl: 'check-winnings.html'
 })
 export class CheckWinningsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public app: App, public viewCtrl: ViewController,public _syndService: SyndicateService) {}
+  private myWinnings:any = [];
+  loader:any; 
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams, 
+    public app: App, 
+    public viewCtrl: ViewController,
+    public _syndService: SyndicateService,
+    public loadingCtrl: LoadingController
+    ) {
+      this.loader = this.loadingCtrl.create({
+      content:"Please wait..."
+    });
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckWinningsPage');
@@ -25,9 +37,12 @@ export class CheckWinningsPage {
   }
 
   loadWinnings() {
+    this.loader.present();
     this._syndService.loadWinnings()
     .subscribe((res)=> {
       console.log(res);
+      this.loader.dismiss();
+      this.myWinnings = res.response["0"].get_previous_check_list.response.previous_check_group;
     });
   }
   
