@@ -20,6 +20,8 @@ outline: none !important;}
     font-size: 20px;
     text-transform: capitalize;
     font-family:'lato';
+    text-align: center;
+
 }
 
 .header
@@ -192,7 +194,8 @@ outline: none !important;}
 
 
 .btn {
-  display: inline-block;
+  display:block;
+  margin: auto;
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 12px;
@@ -214,6 +217,11 @@ outline: none !important;}
   border: 1px solid transparent;
   border-radius: 3px;
 }
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
 
 .btn-login {
     color: #fff;

@@ -2,10 +2,10 @@
 <ion-content>	
 	<img class="lotto-logo center" src="assets/img/logo@3x.png" alt="Logo" >
 	
-	<h3 text-center>Welcome back</h3>
+	<h3 class="headline">Welcome back</h3>
 	
 	<form #loginForm="ngForm" (ngSubmit)="submitLogin()">
-
+ 
 	<ion-grid>
 		<ion-row >
 		<ion-col col-2>
@@ -40,7 +40,7 @@
 	<p *ngIf="warningPhone" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 
 		<div padding>
-			<button class="center auth-button" type="submit" ion-button text-center large full color="secondary" round>LOGIN</button>
+			<button class="btn btn-login " type="submit" >LOGIN</button>
 			
 		</div>
 		<p><a text-center class="center" (click)="forgotPassPopup=true;" >Forgot your password?</a></p>
@@ -90,7 +90,7 @@
 				<p *ngIf="warningPhonePopup" class="warning"><ion-icon name="ios-warning-outline"> </ion-icon> Please enter a valid mobile number</p>
 
 				<div padding>
-					<button class="center" type="submit" ion-button text-center padding color="secondary">RECOVER PASSWORD</button>
+					<button class="btn btn-positive" type="submit">RECOVER PASSWORD</button>
 					<p><a text-center class="center" (click)="forgotPassPopup=false;"><ion-icon name="ios-arrow-round-back"></ion-icon> Back to login.</a></p>
 				</div>
 			</form>
