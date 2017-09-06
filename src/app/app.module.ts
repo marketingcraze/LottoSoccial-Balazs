@@ -70,6 +70,7 @@ import { gameTerms } from '../pages/game-start-game-terms/game-start-game-terms'
 import { referFriend } from '../pages/refer-friend-page/refer-friend-page';
 import { offerBuy } from '../pages/offerbuy-page/offerbuy-page';
 import { offerBuyResultPage } from '../pages/offerBuyresultpage/offerBuyresultpage';
+import { offerOfTheDayModal } from '../pages/offer-of-the-day-modal/offer-of-the-day-modal';
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -182,6 +183,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         referFriend,
         offerBuy,
         offerBuyResultPage,
+        offerOfTheDayModal,
         // OffersPayment,
 
         // pipes
@@ -287,6 +289,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         referFriend,
         offerBuy,
         offerBuyResultPage,
+        offerOfTheDayModal,
         // popovers
         // OffersPayment,
         CountryListPopPage,

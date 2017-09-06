@@ -14,6 +14,7 @@ import { CacheController } from '../../services/cache_controller';
 import { offerBuy } from '../offerbuy-page/offerbuy-page';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { offerOfTheDayModal } from '../../pages/offer-of-the-day-modal/offer-of-the-day-modal'
 
 
 @Component({
@@ -173,6 +174,14 @@ export class YourOffersPage {
 		var TimeLeft=document.getElementById("countDown").innerText;
 		let buyPageModal=this.modalController.create(offerBuy,{offersData:this.lotteryProductData[index],Time:TimeLeft});
 		buyPageModal.present();
+	}
+
+	offerOfTheDayModal(index:any)
+	{
+		let modal = this.modalController.create(offerOfTheDayModal,{
+			offerOfTheDay: this.offersForYou[index]
+		})
+		modal.present();
 	}
 
 }

@@ -2,16 +2,20 @@
 
 <ion-content class="card-background-page">
     <div  ion-fixed class="header-widthGetGame">
-    <ion-card>
-        <img src="assets/img/games_hero_001@3x.png" />
-    </ion-card>
-    <ion-list>
+        <ion-slides>
+            <ion-slide>
+                    <ion-card>
+                        <img src="assets/img/games_hero_001@3x.png" style="margin-top: 1px;width: 100%" />
+                    </ion-card>
+            </ion-slide>
+        </ion-slides>
         <ion-item>
             <ion-icon><img src="assets/icon/rwp_icon.svg" alt="" width="24" height="24" style="margin:0 5px -5px 0px;" /></ion-icon>
          <span style="color:#333333!important">Your Reward Points Balance:</span><span ion-text color="primary">{{reward_point}}</span>
         </ion-item>
-    </ion-list>
+  
     </div>
+   
     <div class="bottom-contentGtagme">
     <ion-list no-lines *ngFor="let redeem_product of redeem_products" class="redeemgameslist" >
         <ion-item>
@@ -21,7 +25,7 @@
             <h2>{{redeem_product?.product_title}}</h2>
             <p ion-text color="orange">TOP PRIZE: $50</p>
             <p ion-text color="calm">PRICE: {{redeem_product?.product_price}} {{redeem_product?.product_price_after}}</p>
-            <button ion-button item-right color="secondary" style="width: 80px;"(click)="redeem(redeem_product?.product_link)">REDEEM</button>
+            <button ion-button item-right color="secondary" style="width: 71px;height: 34px;"(click)="redeem(redeem_product?.product_link)">GET</button>
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;">{{redeem_product?.product_details}}</ion-item-divider>
         <!--<ion-item>
@@ -41,7 +45,7 @@
             <h2>Lucky colors</h2>
             <p ion-text color="orange">TOP PRIZE: $50</p>
             <p ion-text color="calm">PRICE: 70 POINTS</p>
-            <button ion-button item-right color="secondary" style="width: 80px;">REDEEM</button>
+            <button ion-button item-right color="secondary" style="width: 71px;height: 34px">GET</button>
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>
     </ion-list>

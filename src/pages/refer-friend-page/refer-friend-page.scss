@@ -44,7 +44,7 @@ refer-friend{
     // padding: 18px;
     // margin-left: 2%;
     text-align: center;
-    margin-left: 8%;
+    margin-left: 8.5px;
 }
 .footer{
     padding: 2%;
@@ -58,4 +58,49 @@ refer-friend{
 .social-share hr{
     color: black
 }
+}
+
+//media 
+@media screen and (max-width:414px) {
+    refer-friend .left {
+        float: left;
+        text-align: center;
+        margin-left: 9.5%;
+    }
+    refer-friend .headding {
+        height: 200px;
+        width: auto;
+        margin-top: 13px;
+        background-color: red;
+    }
+}
+
+@media screen and (max-width:375px) {
+    refer-friend .left {
+        float: left;
+        text-align: center;
+        margin-left: 8.5%;
+    }
+    refer-friend .headding {
+        height: 190px;
+        width: auto;
+        margin-top: 13px;
+        background-color: red;
+        font-size: smaller;
+    }
+}
+
+@media screen and (max-width:320px) {
+    refer-friend .left {
+        float: left;
+        text-align: center;
+        margin-left: 6.5%;
+    }
+    refer-friend .headding {
+        height: 168px;
+        width: auto;
+        margin-top: 13px;
+        background-color: red;
+        font-size: smaller;
+    }
 }
