@@ -2,10 +2,10 @@
 
 <ion-content class="card-background-page">
     <div  ion-fixed class="header-widthGetGame">
-        <ion-slides>
-            <ion-slide>
+        <ion-slides autoplay="5000" loop="true" speed="500" pager="true">
+            <ion-slide *ngFor="let image of sliderImage">
                     <ion-card>
-                        <img src="assets/img/games_hero_001@3x.png" style="margin-top: 1px;width: 100%" />
+                        <img src="{{image?.slider_medium}}" style="margin-top: 1px;width: 100%" />
                     </ion-card>
             </ion-slide>
         </ion-slides>

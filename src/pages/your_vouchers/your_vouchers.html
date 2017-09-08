@@ -1,0 +1,84 @@
+<!-- <ion-header>
+    <div class="row" style="background-color: #255FC7; font-size: 20px">
+        <div class="col" style="color: white;margin-top: 10px;">Vouchers</div>
+        <div class="col" style="text-align: center; color: #C3BC2D;"(click)="headerBtnClick()">View Empty <br> State</div>
+        <div class="col"></div>
+      </div>
+</ion-header> -->
+<cus-header title="Vouchers" notification-count="0"></cus-header>
+
+<ion-content scroll="true" class="mainContent">
+  
+  <ion-list class="firstList">
+
+    <ion-item text-wrap text-center no-lines>
+      <div class="voucherCodeHeadingDiv">
+        <span><b class="voucherCodeHeading">REDEEM YOUR VOUCHER CODE</b></span><br>
+        <p class="voucherCodeSubHeading">Enter your voucher code here below to claim your offer</p>
+
+      </div>
+    </ion-item>
+    <ion-item class="voucherCodeTextItem">
+      <ion-label stacked class="voucherCodeInputHeading">Enter your Voucher here</ion-label>
+      <ion-input type="text" placeholder="VOUCHERCODE" [(ngModel)] = "voucher_code" class="voucherCodeText"></ion-input>
+    </ion-item>
+
+    <ion-item text-wrap text-center no-lines>
+      <div class="redeemButtonDiv">
+        <input type="button" value="CLAIM" class="redeemButton" (click)="voucherCodeClaimButton()"/>
+      </div>
+    </ion-item>
+<ion-list>
+    <div *ngIf="count>0">
+      <ion-item text-wrap text-center class="yourVoucherList">
+        <span><b class="yourVoucherListHeading">YOUR VOUCHER LIST</b></span><br>
+        <p class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</p>
+      </ion-item>
+    </div>
+
+    <div *ngIf="!count>0">
+      <ion-item no-lines text-wrap text-center class="yourVoucherList">
+        <span><b class="yourVoucherListHeading">YOUR VOUCHER LIST</b></span><br>
+        <span class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</span>
+      </ion-item>
+    </div>
+
+    <div *ngFor='let lst of appList let i = index;'>
+
+      <ion-item no-lines *ngIf="count>0" id="voucherListItem">
+        <ion-thumbnail item-left class="thumbnalTag">
+          <img src='{{lst.url}}' class="thumbnailListImage">
+        </ion-thumbnail>
+
+        <div item-center text-wrap>
+          <p class="thumbnailListContent">{{lst.content}}</p>
+        </div>
+
+        <div item-right class="listItemButtonDiv">
+          <input type="button" value="CLAIM" class="voucherListButton" (click)="selectedButtonID(i)"/>
+        </div>
+
+      </ion-item>
+    </div>
+    <!-- 
+    <ion-item text-wrap align-left no-lines>
+        <div>
+          <table style="width: 100%"  *ngFor='let lst of appList'>
+            <tr style="border-bottom: 0.2px solid lightgrey">
+              <td style="width: 15%; padding-left: 0px;margin-left: 0px">  <img src='{{lst.url}}' style="width: 80%" > </td>
+              <td style="width: 65%"> <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 3px">{{lst.content}}</p></td>
+              <td style="width: 20%"> <input type="button" value="CLAIM" class="voucherListButton" /></td><br>
+            </tr>
+          </table>
+        </div> -->
+<ion-item>
+      <div style="text-align: center" >
+        <a href="" class="allOfersLink">View all offers available</a>
+      </div>
+    </ion-item>
+</ion-list>
+
+
+  </ion-list>
+
+</ion-content>

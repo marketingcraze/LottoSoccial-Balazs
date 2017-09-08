@@ -16,6 +16,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 })
 export class RedeemGamesPage {
   redeem_products:any;
+  sliderImage:any;
   private loading : any;
   reward_point:number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -32,6 +33,7 @@ export class RedeemGamesPage {
          this.authSrv.redeem_game().subscribe(
             data=>{
                    this.redeem_products=data.response[1].get_buy_game_list.response.redeem_products;
+                   this.sliderImage=data.response[0].get_your_game_list.response.game_slider;
                    this.reward_point=data.response.response.reward_points_balance;
                   console.log("redeem game",data.response);
                    this.loading.dismiss();   // Hide the message when the data is ready 

@@ -71,6 +71,8 @@ import { referFriend } from '../pages/refer-friend-page/refer-friend-page';
 import { offerBuy } from '../pages/offerbuy-page/offerbuy-page';
 import { offerBuyResultPage } from '../pages/offerBuyresultpage/offerBuyresultpage';
 import { offerOfTheDayModal } from '../pages/offer-of-the-day-modal/offer-of-the-day-modal';
+import { your_vouchers } from '../pages/your_vouchers/your_vouchers'
+import { your_vouchers_popups } from '../pages/your_vouchers_popups/your_vouchers_popups'
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -184,6 +186,8 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         offerBuy,
         offerBuyResultPage,
         offerOfTheDayModal,
+        your_vouchers,
+        your_vouchers_popups,
         // OffersPayment,
 
         // pipes
@@ -290,12 +294,14 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         offerBuy,
         offerBuyResultPage,
         offerOfTheDayModal,
+        your_vouchers,
         // popovers
         // OffersPayment,
         CountryListPopPage,
         RedeemGamesPage,
         YourOffersPage,
-        SendBonusPage
+        SendBonusPage,
+        your_vouchers_popups
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
