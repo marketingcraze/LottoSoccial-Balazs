@@ -35,7 +35,7 @@ export class RedeemGamesPage {
                    this.redeem_products=data.response[1].get_buy_game_list.response.redeem_products;
                    this.sliderImage=data.response[0].get_your_game_list.response.game_slider;
                    this.reward_point=data.response.response.reward_points_balance;
-                  console.log("redeem game",data.response);
+                   console.log("redeem game",data.response);
                    this.loading.dismiss();   // Hide the message when the data is ready 
              },
              err=>{ 
