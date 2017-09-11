@@ -14,7 +14,7 @@ import { Observable } from "rxjs/Observable";
 import { CordovaInstance } from "@ionic-native/core";
 import { Subscription } from "rxjs/Rx";
 
-
+declare var $:any;
 
 /*
   Generated class for the PlayGame page.
@@ -62,6 +62,7 @@ export class PlayGamePage implements OnInit {
   public howToPlayModal:any;
   public event:string;
   public inAppBrowser: any;
+  public gameLoss:boolean=false;
 
   constructor(
     private _modalController:ModalController,
@@ -80,6 +81,7 @@ export class PlayGamePage implements OnInit {
     }
     this.customerId = CommonService.session.customer_id;
     this.customerToken = CommonService.session.customer_token;
+   // this.slider();
   }
 
   ionViewDidLoad() {
@@ -93,7 +95,7 @@ export class PlayGamePage implements OnInit {
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
           this.totalGameLevel=responseData.response[0].get_game_info.response.total_game_level;
           this.progressPercentage = (this.gameLevelThanlyou/this.totalGameLevel*100);
-          this.progressBardesign();
+          this.slider();
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
           
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
@@ -131,6 +133,11 @@ export class PlayGamePage implements OnInit {
                      browser.close();
                      this.nav.push(PlayGamesThankYou,{customer_awardLog_id:this.customerAwardLogId,gameLevel:this.gameLevelThanlyou,game_Id:this.GameId})
                   }
+                  else if(event.url.includes("loss"))
+                    {
+                      browser.close();
+                      this.gameLoss=false;
+                    }
           });
           
           //If we want to close the page after the page is loaded
@@ -143,25 +150,6 @@ export class PlayGamePage implements OnInit {
       }
   });
 }   
-  progressBardesign() {
-
-    if (this.progressPercentage >= 72) {
-      this.step = "#E7D011";
-      this.step2 = "#E7D011";
-    }
-    else {
-      this.step2 = "#A54D1A";
-      if (this.progressPercentage >= 28) {
-        this.step = "#E7D011";
-      }
-      else {
-        this.step = "#A54D1A";
-      }
-    }
-
-
-  }
-
   howToPlay(){
     this.howToPlayModal=this._modalController.create(howtoplay,{gameInfo:this.gameInfo})
     this.howToPlayModal.present();
@@ -175,4 +163,26 @@ export class PlayGamePage implements OnInit {
     this.howToPlayModal.present();
   }
 
+  slider() {
+    setTimeout(function () {
+      $('.progressbarPlayGame').each(function () {
+        debugger;
+        var t = $(this);
+        var dataperc = t.attr('data-perc'),
+          barperc = Math.round(dataperc * 2.5);
+        t.find('.barPlayGame').animate({ width: barperc }, dataperc * 25);
+        t.find('.labelPlayGame').append('<div class="perc"></div>');
+
+        function perc() {
+          var length = t.find('.barPlayGame').css('width'),
+            perc = Math.round(parseInt(length) / 2.5),
+            labelpos = (parseInt(length) - 2);
+          t.find('.labelPlayGame').css('left', labelpos);
+          t.find('.perc').text(perc + '%');
+        }
+        perc();
+        setInterval(perc, 0);
+      });
+    }, 1000);
+  }
 }

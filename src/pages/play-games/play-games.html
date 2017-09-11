@@ -3,42 +3,56 @@
 </ion-header>
 
 <ion-content>
-    <div text-center>
-        <ion-item class="item item-block item-md orange-bg">
-            <ion-thumbnail item-left>
-                <img src="{{gameInfo?.game_imageurl}}" />
-            </ion-thumbnail>
-             <ion-label class="label label-md">
-                <div class="game-title">{{gameInfo?.game_title}}</div>
-                <div text-wrap>
-                    {{gameInfo?.game_description}}
-                </div>
-            </ion-label>
-        </ion-item>
+    <div text-center class="orange-bg">
+        <div >
+            <img src="{{gameInfo?.game_imageurl}}" class="headerImage" />
+        </div>
+        <ion-list>
+            <div class="game-title" *ngIf="!gameLoss">{{gameInfo?.game_title}}</div>
+            <div text-wrap *ngIf="!gameLoss">
+                {{gameInfo?.game_description}}
+            </div>
+            <div text-wrap *ngIf="gameLoss">
+                <br> Game Message
+            </div>
+        </ion-list>
     </div>
-  <div class="ProgressBar-game-play item item-block item-md orange-bg">    
-    <div class="prog">
-    <div id="filler" class="filler" [style.width]="progressPercentage+'%'">
-      <div class="step" id="step" [style.background-color]="step"></div>
-      <div class="step2" id="step2" [style.background-color]="step2"></div>
-      <div class="imgs"><img src="assets/icon/star_ico.svg"/></div>
+
+    <div class="ProgressBar-game-play item item-block item-md orange-bg" *ngIf="!gameLoss">
+        <div class="progressbarPlayGame" attr.data-perc="{{progressPercentage}}">
+            <div class="barPlayGame color2"><span></span></div>
+            <div class="labelPlayGame"><span></span></div>
+          </div>
     </div>
-</div> 
+    <br>
+    <div class="badgesContainer" *ngIf="!gameLoss">
+            <div class="badgesMain">
+                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Scholar</div></div>
+                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Teacher</div></div>
+                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Professor</div></div>
+                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Guru</div></div>
+            </div>
     </div>
 
     <div class="game-level-bg">
         <div class="level-target-title" text-center>
-            <span *ngIf="gameInfo?.game_level">Your Level {{gameInfo?.game_level}} Target</span>
-             <span *ngIf="!gameInfo?.game_level">Your Level 0 Target</span>
+            <span *ngIf="gameInfo?.game_level && !gameLoss">Your Level {{gameInfo?.game_level}} Target</span>
+            <span *ngIf="gameLoss">NOT QUITE THERE...</span>
+            <span *ngIf="!gameInfo?.game_level && !gameLoss">Your Level 0 Target</span>
         </div>
         <div class="game-play-score">
             <ul>
-                <li *ngIf="gameInfo?.game_targetvalue">Score {{gameInfo?.game_targetvalue}}</li>
-                <li *ngIf="!gameInfo?.game_targetvalue">Score 0</li>
-                <li *ngIf="gameInfo?.game_duration">Finish with in {{gameInfo?.game_duration}} Sec</li>
-                <li *ngIf="!gameInfo?.game_duration">Finish with in 0 Sec</li>
-                <li *ngIf="gameInfo?.game_efficiencytarget">Max {{gameInfo?.game_efficiencytarget}} words</li>
-                <li *ngIf="!gameInfo?.game_efficiencytarget">Max 0 words</li>
+                <li *ngIf="gameInfo?.game_targetvalue && !gameLoss">Score {{gameInfo?.game_targetvalue}}</li>
+                <li *ngIf="gameInfo?.game_targetvalue && gameLoss">Score {{gameInfo?.game_targetvalue}}</li>
+                <li *ngIf="!gameInfo?.game_targetvalue && !gameLoss">Score 0</li>
+
+                <li *ngIf="gameInfo?.game_duration && !gameLoss">Finish with in {{gameInfo?.game_duration}} Sec</li>
+                <li *ngIf="gameInfo?.game_duration && gameLoss">Finish with in {{gameInfo?.game_duration}} Sec</li>
+                <li *ngIf="!gameInfo?.game_duration && !gameLoss">Finish with in 0 Sec</li>
+
+                <li *ngIf="gameInfo?.game_efficiencytarget && !gameLoss">Max {{gameInfo?.game_efficiencytarget}} words</li>
+                <li *ngIf="gameInfo?.game_efficiencytarget && gameLoss">Max {{gameInfo?.game_efficiencytarget}} words</li>
+                <li *ngIf="!gameInfo?.game_efficiencytarget && !gameLoss">Max 0 words</li>
             </ul>
         </div>
 
@@ -47,11 +61,25 @@
                 <img src="assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
                <span> Get Booster</span>
             </button>
+            <button ion-button color="secondary" (click)="openThankyouPage()"> Play Now</button>
         </div>
     </div>
 
-    <div class="play-game-btn-container" *ngIf="gameInfo?.show_play == 'true'" text-center>
-        <button ion-button color="secondary" (click)="openThankyouPage()" > Play Now</button>
+    <div class="play-game-loss" *ngIf="gameLoss" text-center>
+        <span class="spanlossCase">Tips from Lotto Woggle conquerors</span>
+        <div class="talk-bubble tri-right round btm-left">
+            <div class="talktext">
+                <p>bkdsjfkljcxvlkjhxcvx ZDKjfhsA ZDLKfjhsDIAK klughjDZXLfgha jihkgSDLFGiy.</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <span style="color:#D8D8D8">
+            <span>Matt </span><span> <img src="assets/icon/arw_feed_ico.svg" class="image-setting" /></span><span> Conqueror of level 2</span>
+        </span>
+        <br>
+        <br>
+        <button class="btn-transparent-moreTips btn-moreTips" (click)="recentWinnerTipsmodal()">View more tips</button>
     </div>
 
     <div class="pagination">
@@ -66,7 +94,7 @@
         </ul>
     </div>
 
-    <div text-center>
+    <div text-center *ngIf="!gameLoss">
         <ion-list>
             <ion-item href="#" (click)="recentWinnerTipsmodal()" detail-push>
                 Recent Winner Tips
