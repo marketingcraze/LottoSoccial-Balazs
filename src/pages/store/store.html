@@ -22,13 +22,19 @@
       <ion-col width-50 >
         <div text-center>
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span style="">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span></span>
+          <span style="" class="tooltip t1">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span>
+            <span class="tooltiptext t-left">Use your points to get <strong>games</strong> from the <a href="">games area</a>. You acquire points every time you check your tickets, by playing game, share with friends and in many other ways.</span>
+          </span>
         </div>        
       </ion-col>
       <ion-col width-50>
         <div text-center>
-          <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span >POINTS <span class="points">{{accountDetails.reward_points}}</span></span>
+          <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
+          <span class="tooltip t2" >POINTS <span class="points">{{accountDetails.reward_points}}</span>
+            <span class="tooltiptext t-right">
+              Use your points to get <strong>games</strong> from the <a href="">games area</a>. You acquire points every time you check your tickets, by playing game, share with friends and in many other ways.
+            </span>
+          </span>
         </div>
       </ion-col>
     </ion-row>
@@ -531,7 +537,7 @@
         </ion-item>
 
         <div class="top-slides-wrapper">
-          <ion-slides class="top-slides" slidesPerView="2" spaceBetween=10>
+          <ion-slides class="top-slides" slidesPerView="2" spaceBetween=8>
           
             <ion-slide *ngFor="let item of homeBlog">
               <img *ngIf="item.image" src="{{item.image}}">
@@ -578,7 +584,7 @@
             </ion-slide> -->
           </ion-slides>
         </div>
-        <ion-slides slidesPerView="2" spaceBetween=10>
+        <ion-slides slidesPerView="2" spaceBetween=8>
           <ion-slide>
             <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
           </ion-slide>
