@@ -2,7 +2,7 @@
 
 <ion-content class="card-background-page">
     <div  ion-fixed class="header-widthGetGame">
-        <ion-slides autoplay="5000" loop="true" speed="500" pager="true">
+        <ion-slides autoplay="5000" loop="true" speed="500" pager="true" *ngIf="sliderImage">
             <ion-slide *ngFor="let image of sliderImage">
                     <ion-card>
                         <img src="{{image?.slider_medium}}" style="margin-top: 1px;width: 100%" />
