@@ -1,5 +1,6 @@
 .container-header{
    padding-top:20px; 
+   
 }
 .time-left{
     background-color: black;
@@ -8,7 +9,7 @@
 .header-img{
     float: left;
     height: 66px;
-    margin-left: 75px;
+    margin-left: 10%;
     margin-top: 11.5px;
 }
 .white-bg{
@@ -40,13 +41,13 @@
     font-weight: bolder;
 }
 .SpaceBetweenRowOffer{
-    display: flow-root;
+    display: -webkit-inline-box;
 }
 .SlideContentBorderTopOffer{
     margin-top: -5px;
 } 
 .drawDayMargin{
-    margin-top: -30px;
+    
 }
 .font-size{
     font-size: 14px;
