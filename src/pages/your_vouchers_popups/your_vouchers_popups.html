@@ -1,0 +1,37 @@
+<ion-content class="modal-page" text-center>
+  <ion-list>
+    <ion-label style="margin-top: 10%; font-size: 16px" text-center>Confirm you want to claim your voucher</ion-label>
+    <ion-item text-wrap align-left no-lines>
+      <div>
+        <table style="width: 100%">
+          <tr>
+            <td style="width: 15%; padding-left: 0px;margin-left: 0px"> <img src='assets/img/voucher_ico.png' style="width: 90%"> </td>
+            <td style="width: 85%">
+              <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px"><b>{{VCODE}}</b></p>
+              <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px">{{VoucherCode}}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </ion-item>
+    <ion-item no-lines text-wrap>
+      <div>
+        <ul style="font-size: 14px">
+          <li>5 Lotto Tickets Wednesday +</li>
+          <li>5 Lotto Tickets Saturday +</li>
+          <li>£1.50 Credit to buy any other lottary of your choice</li>
+        </ul>
+      </div>
+    </ion-item>
+    <ion-item text-center no-lines>
+      <div style="text-align: center">
+        <input type="button" value="CLAIM NOW" style="background-color:#249040; color: white;text-align: center;border: 0px;
+                      width: 50%; height:35px;border-radius: 5px; " >
+      </div>
+        <div style="text-align: center; padding-top: 5%" >
+          <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;" (click)="dismissPopUp()">Maybe Later </p>
+        </div>
+      </ion-item>
+
+  </ion-list>
+</ion-content>

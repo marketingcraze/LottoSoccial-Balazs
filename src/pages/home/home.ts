@@ -20,6 +20,8 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 import { TabsPage } from '../tabs/tabs';
 
+import { your_vouchers } from '../your_vouchers/your_vouchers';
+
 declare var webengage:any;
 
 export interface PageInterface {
@@ -165,6 +167,9 @@ export class HomePage implements OnInit {
                 break
             case 'your_badges':
                 this.params.goPage(BadgesPage)
+                break
+            case 'your_vouchers':
+                this.params.goPage(your_vouchers)
                 break
             case 'help':
                 let opt:string = "toolbarposition=top";

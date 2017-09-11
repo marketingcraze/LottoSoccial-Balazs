@@ -17,8 +17,8 @@
     <div class="offer-of-the-day">
       <h5 text-center>OFFERS OF THE DAY!</h5>
       <ion-slides slidesPerView=3>
-        <ion-slide *ngFor="let product of offersForYou" >
-          <img src="{{product.product_icon}}" class="img-responsive">
+        <ion-slide *ngFor="let product of offersForYou let i = index" >
+          <img src="{{product.product_icon}}" class="img-responsive" (click)="offerOfTheDayModal(i)">
         </ion-slide>     
       </ion-slides>
     </div>

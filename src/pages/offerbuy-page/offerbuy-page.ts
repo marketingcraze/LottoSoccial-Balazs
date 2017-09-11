@@ -44,23 +44,23 @@ export class offerBuy {
             this.mins = this.TimeLeft.substring(20, 22);
             this.sec = this.TimeLeft.substring(23, 25);
         }
-        else if (this.TimeLeft.length == 21) {
+        else if (this.TimeLeft.length == 22) {
             this.day = '00';
-            this.hrs = this.TimeLeft.substring(13, 15);
-            this.mins = this.TimeLeft.substring(16, 18);
-            this.sec = this.TimeLeft.substring(19, 21);
+            this.hrs = this.TimeLeft.substring(14, 16);
+            this.mins = this.TimeLeft.substring(17, 19);
+            this.sec = this.TimeLeft.substring(20, 22);
         }
-        else if (this.TimeLeft.length == 17) {
+        else if (this.TimeLeft.length == 18) {
             this.day = '00';
             this.hrs = '00';
-            this.mins = this.TimeLeft.substring(12, 14);
-            this.sec = this.TimeLeft.substring(15, 17);
+            this.mins = this.TimeLeft.substring(13, 15);
+            this.sec = this.TimeLeft.substring(14, 18);
         }
-        else if (this.TimeLeft.length == 13) {
+        else if (this.TimeLeft.length == 14) {
             this.day = '00';
             this.hrs = '00';
             this.mins = '00';
-            this.sec = this.TimeLeft.substring(11, 13);
+            this.sec = this.TimeLeft.substring(12, 14);
         }
 
 

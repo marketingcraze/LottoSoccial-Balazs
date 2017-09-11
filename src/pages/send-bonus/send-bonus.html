@@ -36,7 +36,7 @@
             </ion-row>
             <ion-row class="SlideContentBorderTop">
               <ion-col col-12>
-                <p class="SlideSubTitle" style="color:#333333">Choose Number Of Lines</p>
+                <p class="SlideSubTitle" style="color:#333333">Number Of Lines {{(product?.line_group| keys)[product.sliderrange?product.sliderrange:credit_filter_line]}}</p>
               </ion-col>
             </ion-row>
 
@@ -59,32 +59,9 @@
             <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
             </ion-range>
             </ion-item>
-            <ion-row class="SlideContentBorderTop">
-              <ion-col col-12>
-                <p class="SlideSubTitle" style="color:#D8D8D8">SUMMARY</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-12>
-
-                <p class="SlideSubTitle SlideLastText">
-                  <span id="lineGroup">
-                           {{(product?.line_group| keys)[product.sliderrange?product.sliderrange:credit_filter_line]}}
-                        </span>
-                  <span id="gameName">
-                           {{product?.name|capitalizeFirst}}
-                            </span> Lines on
-                  <span id="dayGroup">
-                         {{((product?.draw_group|keys)[credit_filter_draw]|day)}}
-                        </span>
-
-                </p>
-              </ion-col>
-            </ion-row>
-            
             <ion-row  *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[product.sliderrange ? product.sliderrange : credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
               <ion-col col-12 *ngIf="i<1">
-                <p class="SlideSubTitle SlideLastText"> Total at 30p per Line : <span ion-text color="bonus">£{{item?.prize}}</span></p>
+                <p class="SlideSubTitle SlideLastText"> for <span ion-text color="bonus">£{{item?.prize}} </span> credit</p>
               </ion-col>
                </ion-row>
 

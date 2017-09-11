@@ -1,0 +1,129 @@
+
+page-yourvouchers {
+
+.headerBotton{
+  width: 60%; 
+  font-size: 21px; 
+  background-color: #255FC7; 
+  color: #D9C51B;
+  
+  padding-top: 0px;
+}
+.voucherCodeTextItem{
+  padding-right: 16px
+}
+.voucherCodeText{
+  font-size: 20px;
+  margin-top: -10px; 
+  color: black;
+}
+.redeemButtonDiv{
+  margin-top: 4%;
+  margin-bottom: 4%;
+  text-align: center;
+  
+}
+.redeemButton{
+  background-color: #249040;
+  text-align: center; 
+  border: 0px; 
+  width: 35%; 
+  height: 35px;
+  color: white; 
+  border-radius: 5%;
+}
+.voucherListButton{
+  background-color: #249040;
+  text-align: center; 
+  border: 0px;
+  height: 35px;
+  color: white; 
+  border-radius: 8%; 
+  width: 120%; 
+  font-size: 16px; 
+  padding:8px
+}
+#voucherListItem{
+  border-bottom: 1px solid lightgray;
+  padding-left: 10px;
+}
+.thumbnalTag{
+  margin: 0px
+}
+.mainContent{
+  background-color: #E2E2E2;
+  margin-top: 10%;
+  margin-bottom: 15%;
+  
+}
+.firstList{
+  margin-top: 10px;
+  height: 100%;
+}
+.listItemButtonDiv{
+  padding-right: 15px
+}
+.voucherCodeHeadingDiv{
+  margin-top: 5%;
+  text-align: center;
+
+}
+.voucherCodeHeading{
+  font-size: 20px;
+  
+}
+.voucherCodeSubHeading{
+  font-size: 15px;
+  margin-top: 10px;
+  color: black;
+}
+.voucherCodeInputHeading{
+  margin-top: 30px;
+  color: gray;
+}
+.yourVoucherList{
+
+  margin-top: 4%;
+  padding-right: 16px;
+  text-align: center;
+}
+.yourVoucherListHeading{
+  font-size: 20px;
+  margin-top: 15%;
+  padding-top: 15%;
+  
+}
+.yourVoucherListSubHeading{
+
+  //border-bottom: 0px solid;
+  margin-top: 4px;
+  color: black;
+  font-size: 15px;
+  padding-top: 4px;
+  
+}
+.thumbnailListImage{
+  border-radius:50%;
+  padding: 20%;
+  text-align: justify;
+}
+.thumbnailListContent{
+  color: black; 
+  font-size: 18px;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  float: left;
+  text-align: left;
+}
+.allOfersLink{
+  text-decoration: none !important;
+  color: #4E85D4; 
+  text-align: center;
+}
+.item-md ion-thumbnail[item-left] {
+  margin: 8px -9px 8px -7px;
+}
+
+}
+
