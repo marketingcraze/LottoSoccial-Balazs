@@ -415,15 +415,7 @@ font-weight: 600;
 
 
 //@media query
-@media only screen and (max-width: 320px) {
-    .badgesInnerText {
-        font-size: 11px;
-        background: white;
-        padding: 17px 5px;
-        color: #F27A18;
-        border-radius: 100px;
-    }
-}
+
 
 @media only screen and (max-width: 375px) {
     .badgesMain{
@@ -432,8 +424,32 @@ font-weight: 600;
         top: 25px;
         margin-left: -1%;
         position: relative;
-    } 
+	} 
+	.badgesInnerText {
+		font-size: 11px;
+		background: white;
+		padding: 21px 8px;
+		margin-left: 8px;
+		color: #F27A18;
+		border-radius: 100px;
+    }
 }
+
+@media only screen and (max-width: 320px) {
+	.badgesInnerText {
+		font-size: 11px;
+		background: white;
+		padding: 17px 5px;
+		margin-left: 15px;
+		color: #F27A18;
+		border-radius: 100px;
+	}
+	.badgesCircle {
+		margin-right: 10px;
+		margin-left: 3px;
+	}
+}
+
 .circle_inside{
 	border: 1px solid orange;
     width: 105px;
