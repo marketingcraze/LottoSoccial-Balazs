@@ -1,0 +1,61 @@
+page-prize-summary-win{
+    .main-bg {
+        background: #e3e3e3;
+        position: relative;
+        text-align: center;
+        .scroll-content{
+            padding-bottom: 100px;
+        }
+    }
+    .top-head-congo {
+        background: #e8e8e8;
+        text-align: center;
+        font-family: lato-black;
+        color: #333333;
+        padding: 15px;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+    .mar-b-10 {
+        margin-bottom: 16px;
+    }
+    .red {
+        background: red;
+        color: red;
+    }
+    .green {
+        background: green;
+        color: green;
+    }
+    .blue{
+        background: darkblue;
+        color: darkblue;
+    }
+    .pink {
+        background: deeppink;
+        color: deeppink;
+    }
+    .white {
+        background: white;
+        padding: 10px;
+        margin: 0 10px;
+    }
+    .lbl1 {
+        font-size: 20px;
+        font-family: lato-black;
+    }
+    .lbl2 {
+        color: #333333;
+    }
+    .darkD {
+        color: white;
+        background: black;
+        padding: 2px;
+    }
+    .btn-cc{
+        background: deeppink;
+    }
+    .btn-ccg {
+        background: green;
+    }
+}

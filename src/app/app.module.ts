@@ -43,6 +43,9 @@ import { CheckWinningsPage } from '../pages/check-winnings/check-winnings';
 import { ManageSyndicatePage } from '../pages/manage-syndicate/manage-syndicate';
 import { LeavePage } from '../pages/leave/leave';
 import { Leave2Page } from '../pages/leave2/leave2';
+import { ChooseCreditcashPage } from '../pages/ChooseCreditcash/ChooseCreditcash';
+import { CashModalPage } from '../pages/chooseCash-modal/chooseCash-modal';
+import { CreditModalPage } from '../pages/chooseCredit-modal/chooseCredit-modal';
 import { TandcPage } from '../pages/tandc/tandc';
 import { ConfirmModalPage } from '../pages/confirm-modal/confirm-modal';
 import { ManageSyndicate2Page } from '../pages/manage-syndicate2/manage-syndicate2';
@@ -73,6 +76,9 @@ import { offerBuyResultPage } from '../pages/offerBuyresultpage/offerBuyresultpa
 import { offerOfTheDayModal } from '../pages/offer-of-the-day-modal/offer-of-the-day-modal';
 import { your_vouchers } from '../pages/your_vouchers/your_vouchers'
 import { your_vouchers_popups } from '../pages/your_vouchers_popups/your_vouchers_popups'
+import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
+
+
 
 // components
 import { NoInternetMessageComponent } from '../components/no-internet-message/no-internet-message';
@@ -162,6 +168,9 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         ManageSyndicatePage,
         LeavePage,
         Leave2Page,
+        ChooseCreditcashPage,
+        CashModalPage,
+        CreditModalPage,
         TandcPage,
         ManageSyndicate2Page,
         ConfirmModalPage,
@@ -173,6 +182,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         MySyndicatePage,
         GetBooster,
         PlayGamePage,
+        PrizeSummaryWinPage,
         PlayGamesThankYou,
         BadgesPage,
         GameThankYou,
@@ -272,6 +282,9 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         ManageSyndicatePage,
         LeavePage,
         Leave2Page,
+        ChooseCreditcashPage,
+        CashModalPage,
+        CreditModalPage,
         TandcPage,
         ManageSyndicate2Page,
         ConfirmModalPage,
@@ -283,6 +296,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         MySyndicatePage,
         GetBooster,
         PlayGamePage,
+        PrizeSummaryWinPage,
         PlayGamesThankYou,
         BadgesPage,
         GameThankYou,

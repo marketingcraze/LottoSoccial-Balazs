@@ -357,6 +357,53 @@ export class SyndicateService {
         })
     }
 
+    prizeBreakDown() {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/checkmywin/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+                    "request": [ {
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "9",
+                        "screen_id": "9.2",
+                        "action": "get_win",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "check_mywinnings",
+                        "customer_id":CommonService.session.customer_id
+                    }]
+                }
+
+        return this.http.post(action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+        })
+    }
+    convertCash(claimevent_id:any) {
+       let action = "https://nima.lottosocial.com/wp-json/mobi/v2/checkmywin/";
+       let headopt = SyndicateService.getHeader();
+        var data = {
+                    "request": [ {
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "9",
+                        "screen_id": "9.3",
+                        "action": "convert_cash",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "convert_credit_to_cash",
+                        "claimevent_id":claimevent_id,
+                        "customer_id":CommonService.session.customer_id
+                    }]
+                }
+
+        return this.http.post(action, data, { headers:headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+        })
+    }
 }
 
 

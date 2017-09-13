@@ -16,6 +16,7 @@ import { AuthPage } from '../pages/auth/auth';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { UpdatePage } from '../pages/update/update';
 import { OfflinePage } from '../pages/offline/offline';
+import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
 
 import { OneSignal } from '@ionic-native/onesignal';
 import { Storage } from '@ionic/storage';
