@@ -9,6 +9,7 @@ import { NavController, NavParams, ViewController, LoadingController, AlertContr
 })
 export class your_vouchers_popups {
   VoucherCode:any;
+  value: boolean = false
   VCODE:String = "VOUCHERCODER"
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
@@ -26,6 +27,12 @@ export class your_vouchers_popups {
 
   dismissPopUp(data) {
     this.viewctrl.dismiss(data);
+}
+done() {
+  this.value = true
+}
+moveToVouchers() {
+  this.navCtrl.popAll()
 }
 }
 

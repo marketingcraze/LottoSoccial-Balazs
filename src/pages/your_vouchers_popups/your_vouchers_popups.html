@@ -1,5 +1,5 @@
 <ion-content class="modal-page" text-center>
-  <ion-list>
+  <ion-list *ngIf="value==false">
     <ion-label style="margin-top: 10%; font-size: 16px" text-center>Confirm you want to claim your voucher</ion-label>
     <ion-item text-wrap align-left no-lines>
       <div>
@@ -7,7 +7,7 @@
           <tr>
             <td style="width: 15%; padding-left: 0px;margin-left: 0px"> <img src='assets/img/voucher_ico.png' style="width: 90%"> </td>
             <td style="width: 85%">
-              <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px"><b>{{VCODE}}</b></p>
+              <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px"><b>VOUCHER CODE</b></p>
               <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px">{{VoucherCode}}</p>
             </td>
           </tr>
@@ -26,7 +26,7 @@
     <ion-item text-center no-lines>
       <div style="text-align: center">
         <input type="button" value="CLAIM NOW" style="background-color:#249040; color: white;text-align: center;border: 0px;
-                      width: 50%; height:35px;border-radius: 5px; " >
+                      width: 50%; height:35px;border-radius: 5px; " (click) = "done()" >
       </div>
         <div style="text-align: center; padding-top: 5%" >
           <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;" (click)="dismissPopUp()">Maybe Later </p>
@@ -34,4 +34,21 @@
       </ion-item>
 
   </ion-list>
+    <div class="buycard" *ngIf="!value==false">
+        <button ion-button icon-only style="background:#F8F8F8; border-radius:50%; height: 70px">
+                  <ion-icon style="width:70px; "><img src="assets/icon/check_icon.png"> </ion-icon>
+                </button>
+        <ion-row text-center>
+            <ion-col col-12 class="messagecolor">
+                Voucher Claimed Successfully
+            </ion-col>
+        </ion-row>
+        <ion-row style="padding-top: 5%; height: 45px">
+            <ion-col col-12>
+                <button ion-button outline round style="height: 45px; font-size: 18px" color="light" (click)="moveToVouchers()">BACK TO VOUCHERS</button>
+            </ion-col>
+        </ion-row>
+    
+</div>
+
 </ion-content>

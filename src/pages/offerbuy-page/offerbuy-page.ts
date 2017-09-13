@@ -37,7 +37,8 @@ export class offerBuy {
         private storage: Storage,
         private offerService: OfferService,
         private navprms: NavParams, ) {
-            this.TimeLeft = localStorage.getItem("timeDate");
+            this.TimeLeft = "";
+            this.TimeLeft = this.navprms.get("Time");
             console.log("timeleft is " + this.TimeLeft)
     
             if (this.TimeLeft.length == 25) {
@@ -65,16 +66,16 @@ export class offerBuy {
                 this.sec = this.TimeLeft.substring(12, 14);
             }
      
-       console.log("hello entered")
-
-
         this.productName = navprms.get("offersData").product_name;
         storage.get('firstTimeLoad').then((firstTimeLoad: any) => {
             this.visitorId = firstTimeLoad;
             console.log('firstTimeLoad storage', firstTimeLoad);
         });
     }
-
+ionViewWillUnload(){
+    console.log("view is unload ")
+    this.TimeLeft = "";
+}
     ionViewWillEnter() {
         this.loading = this.loadingCtrl.create({
             content: 'Loading data...'
@@ -86,42 +87,11 @@ export class offerBuy {
 
                     this.credit_offer = responseData.response[0].get_credit_offer.response.offers;
                     this.product = responseData.response[0].get_credit_offer.response.product[0];
-                    this.countDown = responseData.response[0].get_credit_offer.response.product[0];
+          //          this.countDown = responseData.response[0].get_credit_offer.response.product[0];
                     this.offersForYou = responseData.response[0].fetch_lottery_products.response.offers_for_you;
-                    this.lotteryProductData = this.product
+           //         this.lotteryProductData = this.product
                   
-                    this.TimeLeft = localStorage.getItem("timeDate");
-                    if(this.TimeLeft == "" || this.TimeLeft ==undefined)
-                    {
-                        this.TimeLeft = this.navprms.get("Time");
-                    
-                    console.log("timeleft is " + this.TimeLeft)
-            
-                    if (this.TimeLeft.length == 25) {
-                        this.day = this.TimeLeft.substring(14, 16);
-                        this.hrs = this.TimeLeft.substring(17, 19);
-                        this.mins = this.TimeLeft.substring(20, 22);
-                        this.sec = this.TimeLeft.substring(23, 25);
-                    }
-                    else if (this.TimeLeft.length == 22) {
-                        this.day = '00';
-                        this.hrs = this.TimeLeft.substring(14, 16);
-                        this.mins = this.TimeLeft.substring(17, 19);
-                        this.sec = this.TimeLeft.substring(20, 22);
-                    }
-                    else if (this.TimeLeft.length == 18) {
-                        this.day = '00';
-                        this.hrs = '00';
-                        this.mins = this.TimeLeft.substring(13, 15);
-                        this.sec = this.TimeLeft.substring(14, 18);
-                    }
-                    else if (this.TimeLeft.length == 14) {
-                        this.day = '00';
-                        this.hrs = '00';
-                        this.mins = '00';
-                        this.sec = this.TimeLeft.substring(12, 14);
-                    }
-                }
+               
                     this.check = true;
                     this.loading.dismiss();
 

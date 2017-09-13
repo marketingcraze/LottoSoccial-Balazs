@@ -72,9 +72,7 @@ export class YourOffersPage {
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad YourOffersPage');
 	}
-	ionViewDidEnter(){
-console.log("11111111111111111111111111111111")
-	}
+
 
 
 	checkCardExists(){
@@ -134,7 +132,7 @@ console.log("11111111111111111111111111111111")
 		}
 	}
 
-	ionViewWillEnter() {
+	ngOnInit(){
 
 		this.cache.loadModules("offers", "2", ["fetch_lottery_products"])
 		.then( data => {
@@ -145,8 +143,6 @@ console.log("11111111111111111111111111111111")
 			for (var i = data.length - 1; i >= 0; i--) {
 				console.log("OffersPage::ionViewDidEnter", i, data[i].fetch_lottery_products);
 				if ( data[i].fetch_lottery_products ) {
-				
-
 					this.lotteryProductData = data[i].fetch_lottery_products.response.lottery_product_data
 					this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
 					break;
@@ -179,7 +175,6 @@ console.log("11111111111111111111111111111111")
 	openBuyPage(index){
 		var TimeLeft=document.getElementById("countDown").innerText;
 		var buyPageModal=this.modalController.create(offerBuy,{offersData:this.lotteryProductData[index],Time:TimeLeft});
-		var data = localStorage.setItem("timeDate", TimeLeft);
 		buyPageModal.present();
 	}
 

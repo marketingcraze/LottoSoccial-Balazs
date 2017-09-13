@@ -2,7 +2,7 @@
     <synd-cus-header1 title="Play games" notification-count="5"></synd-cus-header1>
 </ion-header>
 
-<ion-content>
+<ion-content style="bottom: -32px">
     <div text-center class="orange-bg">
         <div >
             <img src="{{gameInfo?.game_imageurl}}" class="headerImage" />
@@ -54,10 +54,11 @@
                 <li *ngIf="gameInfo?.game_efficiencytarget && gameLoss">Max {{gameInfo?.game_efficiencytarget}} words</li>
                 <li *ngIf="!gameInfo?.game_efficiencytarget && !gameLoss">Max 0 words</li>
             </ul>
+            <span  class="circle_inside" (click)="showBoosterModal()" *ngIf="!gameLoss"> <img src="assets/icon/booster_btn_ico@3x.png" class="circle_inside_Img" ></span>
         </div>
 
         <div text-center>
-            <button ion-button color="light" (click)="showBoosterModal()">
+            <button ion-button color="light" (click)="showBoosterModal()" *ngIf="gameLoss">
                 <img src="assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
                <span> Get Booster</span>
             </button>
@@ -94,7 +95,7 @@
         </ul>
     </div>
 
-    <div text-center *ngIf="!gameLoss">
+    <div text-center *ngIf="!gameLoss" style="position: relative;bottom: 16px;">
         <ion-list>
             <ion-item href="#" (click)="recentWinnerTipsmodal()" detail-push>
                 Recent Winner Tips
@@ -102,7 +103,7 @@
             <ion-item href="#" (click)="howToPlay()" detail-push>
                 How to Play
             </ion-item>
-            <ion-item href="#" (click)="gameTermsModal()" detail-push>
+            <ion-item href="#" (click)="gameTermsModal()" detail-push hidden>
                 Game Terms
             </ion-item>
         </ion-list>

@@ -43,9 +43,11 @@
       </ion-item>
     </div>
 
-    <div *ngFor='let lst of appList let i = index;'>
+    <ion-scroll [ngStyle]="{height: height+ 'px'}" scrollX="true" scrollY="true" *ngIf="count>0">
+      <ion-list style="height: 30px">
+    <div *ngFor='let lst of appList let i = index;' >
 
-      <ion-item no-lines *ngIf="count>0" id="voucherListItem">
+      <ion-item no-lines  id="voucherListItem">
         <ion-thumbnail item-left class="thumbnalTag">
           <img src='{{lst.url}}' class="thumbnailListImage">
         </ion-thumbnail>
@@ -55,11 +57,13 @@
         </div>
 
         <div item-right class="listItemButtonDiv">
-          <input type="button" value="CLAIM" class="voucherListButton" (click)="selectedButtonID(i)"/>
+          <input type="button" value="CLAIM" class="voucherListButton" (click)="selectedButtonID(i)" />
         </div>
 
       </ion-item>
     </div>
+  </ion-list>
+    </ion-scroll>
     <!-- 
     <ion-item text-wrap align-left no-lines>
         <div>
@@ -73,7 +77,7 @@
         </div> -->
 <ion-item>
       <div style="text-align: center" >
-        <a href="" class="allOfersLink">View all offers available</a>
+        <a  class="allOfersLink">View all offers available</a>
       </div>
     </ion-item>
 </ion-list>

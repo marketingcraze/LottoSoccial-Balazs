@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController , ModalController} from 'ionic-angular';
 import { your_vouchers_popups } from '../../pages/your_vouchers_popups/your_vouchers_popups';
+import { YourOffersPage } from '../../pages/your-offers/your-offers'
 
 
 
@@ -14,25 +15,39 @@ export class your_vouchers {
   h_1 = "VIEW EMPTY";
   h_2 = "STATE";
   voucher_code:String;
-  VCODE:String;
-
+  height:any;
   appList: any[] = [
     {
       "ID": "1",
       "url": 'assets/img/voucher_ico.png',
       "content": "Lottary Taps, play all week long for a reduced price",
-    },
+    
+},
     {
       "ID": "2",
       "url": 'assets/img/voucher_ico.png',
       "content": "50 Reward Points, sorry for the inconvenience",
     },
     {
-      "ID": "2",
+      "ID": "3",
       "url": 'assets/img/voucher_ico.png',
       "content": "Enjoy 5 FREE lines in superenalotto",
-    }
-
+    },
+    {
+      "ID": "4",
+      "url": 'assets/img/voucher_ico.png',
+      "content": "Lottary Taps, play all week long for a reduced price",
+    },
+    {
+      "ID": "5",
+      "url": 'assets/img/voucher_ico.png',
+      "content": "50 Reward Points, sorry for the inconvenience",
+    },
+    {
+      "ID": "6",
+      "url": 'assets/img/voucher_ico.png',
+      "content": "Enjoy 5 FREE lines in superenalotto",
+    },
   ];
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private modalController:ModalController) {
     this.voucher_code = ""
@@ -40,7 +55,16 @@ export class your_vouchers {
   }
   ionViewDidEnter() {
     this.count = this.appList.length
-    console.log("entered" + this.appList.length)
+    
+    if(this.appList.length >3)
+    {
+      this.height = 210;
+    }
+    else{
+      this.height = this.appList.length * 70;
+    }
+    console.log("entered" + this.height)
+  
   }
 
   headerBtnClick() {
@@ -51,10 +75,8 @@ export class your_vouchers {
   voucherCodeClaimButton()
 	{
     console.log("Voucher entered code is "+ this.voucher_code)
-		let modal = this.modalController.create(your_vouchers_popups ,{
-      VoucherCode: "Lottary Taps, play all week long for a reduced price",
-      VCODE: this.voucher_code
-      //VoucherCode: this.voucher_code
+		let modal = this.modalController.create(your_vouchers_popups,{
+			VoucherCode: this.voucher_code
 		})
 		modal.present();
 	}
@@ -64,6 +86,12 @@ export class your_vouchers {
       })
       modal.present();
   
+  }
+  openOffersOfTheDay(){
+    
+   this.navCtrl.setRoot(YourOffersPage)
+  }
+  date(){
   }
   
 }
