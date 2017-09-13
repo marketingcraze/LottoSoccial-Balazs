@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { PrizeSummaryWinPage } from '../prize-summary-win/prize-summary-win';
 /*
   Generated class for the CheckWinningsNext page.
 
@@ -22,7 +23,7 @@ export class CheckWinningsNextPage {
     public navParams: NavParams,  
     public viewCtrl: ViewController,
     public _syndService: SyndicateService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
     ) {
         this.loader = this.loadingCtrl.create({
           content:"Please wait..."
@@ -30,6 +31,7 @@ export class CheckWinningsNextPage {
     }
 
   ionViewDidLoad() {
+    
     this.checkWinnings();
     console.log('ionViewDidLoad CheckWinningsNextPage');
   }
@@ -69,6 +71,7 @@ export class CheckWinningsNextPage {
         }, 2000); 
     } else {
       if(this.movetype){
+        this.navCtrl.push(PrizeSummaryWinPage);
         if(this.movetype.response_type == '10.1'){
           
         }else if(this.movetype.response_type == '10.2') {

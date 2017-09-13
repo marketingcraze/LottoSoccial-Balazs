@@ -1,0 +1,54 @@
+<cus-header title="Prize Summary"></cus-header>
+<ion-content class="main-bg">
+    <div class="top-head-congo">
+        {{prizeData?.title}}
+    </div>
+
+    <div class="mar-b-10" [style.background]="prizeData?.reward_points.color" [style.color]="prizeData?.reward_points.color" *ngIf="prizeData?.reward_points.show == '1'">
+        <div class="white">
+            <div class="lbl1">{{prizeData?.reward_points.value}}</div>
+            <div class="lbl2">{{prizeData?.reward_points.sub_heading}}</div>
+        </div>
+        <div class="darkD" (click)="goto()">{{prizeData?.reward_points.tab_text}}</div>
+    </div>
+    <div class="mar-b-10" [style.background]="prizeData?.lotto_lucky_dip.color" [style.color]="prizeData?.lotto_lucky_dip.color" *ngIf="prizeData?.lotto_lucky_dip.show == '1'">
+        <div class="white">
+            <div class="lbl1">&#x20A4;{{prizeData?.lotto_lucky_dip.value}} credit</div>
+            <div class="lbl2">{{prizeData?.lotto_lucky_dip.sub_heading}}</div>
+        </div>
+        <div class="darkD" (click)="goto()">{{prizeData?.lotto_lucky_dip.tab_text}}</div>
+    </div>
+    <div class="green mar-b-10" [style.background]="prizeData?.winning_value.color" [style.color]="prizeData?.winning_value.color" *ngIf="prizeData?.winning_value.show == '1'">
+        <div class="white">
+            <div class="lbl1">&#x20A4;{{prizeData?.winning_value.value}}</div>
+            <div class="lbl2">{{prizeData?.winning_value.sub_heading}}</div>
+        </div>
+        <div class="darkD" (click)="goto()">{{prizeData?.winning_value.tab_text}}</div>
+    </div>
+    <div class="green mar-b-10" [style.background]="prizeData?.monthly_prizr_draw.color" [style.color]="prizeData?.monthly_prizr_draw.color" *ngIf="prizeData?.monthly_prizr_draw.show == '1'">
+        <div class="white">
+            <div class="lbl1">&#x20A4;{{prizeData?.monthly_prizr_draw.value}}</div>
+            <div class="lbl2">{{prizeData?.monthly_prizr_draw.sub_heading}}</div>
+        </div>
+        <div class="darkD" (click)="goto()">{{prizeData?.monthly_prizr_draw.tab_text}}</div>
+    </div>
+    <div class="green mar-b-10" [style.background]="prizeData?.voucher.color" [style.color]="prizeData?.voucher.color" *ngIf="prizeData?.voucher.show == '1'">
+        <div class="white">
+            <div class="lbl1">&#x20A4;{{prizeData?.voucher.value}}</div>
+            <div class="lbl2">{{prizeData?.voucher.sub_heading}}</div>
+        </div>
+        <div class="darkD" (click)="goto()">{{prizeData?.voucher.tab_text}}</div>
+    </div>
+    <div class="pink mar-b-10" [style.background]="prizeData?.credit_win.color" [style.color]="prizeData?.credit_win.color" *ngIf="prizeData?.credit_win.show == '1'" >
+        <div class="white">
+            <div class="lbl1">&#x20A4;{{prizeData?.credit_win.value}}</div>
+            <div class="lbl2">{{prizeData?.credit_win.sub_heading}}</div>
+            <button ion-button class="btn-cc" (click)="chooseCreditcash()">
+             <ion-icon ios="md-sync" md="md-sync"  style="margin-right: 6px;"></ion-icon>Convert to cash </button>
+        </div>
+        <div class="darkD" (click)="goto()">{{prizeData?.credit_win.tab_text}}</div>
+    </div>
+
+    <button ion-button class="btn-ccg" (click)="chooseCreditcash()">VIEW WINNING BREAKDOWN</button>
+    
+</ion-content>

@@ -41,6 +41,9 @@ import { CheckWinningsPage } from '../pages/check-winnings/check-winnings';
 import { ManageSyndicatePage } from '../pages/manage-syndicate/manage-syndicate';
 import { LeavePage } from '../pages/leave/leave';
 import { Leave2Page } from '../pages/leave2/leave2';
+import { ChooseCreditcashPage } from '../pages/ChooseCreditcash/ChooseCreditcash';
+import { CashModalPage } from '../pages/chooseCash-modal/chooseCash-modal';
+import { CreditModalPage } from '../pages/chooseCredit-modal/chooseCredit-modal';
 import { TandcPage } from '../pages/tandc/tandc';
 import { ConfirmModalPage } from '../pages/confirm-modal/confirm-modal';
 import { ManageSyndicate2Page } from '../pages/manage-syndicate2/manage-syndicate2';
@@ -62,6 +65,7 @@ import { GetBooster } from '../pages/play-games-get-booster/play-games-get-boost
 import { BadgesPage } from '../pages/badges/badges';
 import { GameThankYou} from '../pages/game-Thank-You/game-Thank-You';
 import { GameThankyouSubmittip } from '../pages/game-Thank-You-SubmitTip-modal/game-Thank-You-SubmitTip-modal';
+import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
 
 
 // components
@@ -145,6 +149,9 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         ManageSyndicatePage,
         LeavePage,
         Leave2Page,
+        ChooseCreditcashPage,
+        CashModalPage,
+        CreditModalPage,
         TandcPage,
         ManageSyndicate2Page,
         ConfirmModalPage,
@@ -156,6 +163,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         MySyndicatePage,
         GetBooster,
         PlayGamePage,
+        PrizeSummaryWinPage,
         PlayGamesThankYou,
         BadgesPage,
         GameThankYou,
@@ -239,6 +247,9 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         ManageSyndicatePage,
         LeavePage,
         Leave2Page,
+        ChooseCreditcashPage,
+        CashModalPage,
+        CreditModalPage,
         TandcPage,
         ManageSyndicate2Page,
         ConfirmModalPage,
@@ -250,6 +261,7 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
         MySyndicatePage,
         GetBooster,
         PlayGamePage,
+        PrizeSummaryWinPage,
         PlayGamesThankYou,
         BadgesPage,
         GameThankYou,

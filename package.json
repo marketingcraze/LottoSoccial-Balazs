@@ -113,7 +113,6 @@
             "cordova-plugin-webengage": {}
         },
         "platforms": [
-            "android",
             "ios"
         ]
     }
