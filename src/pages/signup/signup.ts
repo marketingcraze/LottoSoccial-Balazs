@@ -26,6 +26,7 @@ import { Observable } from 'rxjs/Rx';
 })
 export class SignupPage {
 	@ViewChild('tabs') tabsRef: Tabs;
+	@ViewChild('animation') input;
 
 	public showPass = false;
 	public tabs:Tabs;
@@ -247,9 +248,10 @@ export class SignupPage {
 					// registration failed
 					this.toastCtrl.create({
 						message: 'Registration FAILED!',
-						duration: 3000
+						duration: 3000,
+						
 					}).present()
-					
+					this.animateButton();
 				}else{
 					this.onRegistrationSuccess(data)
 				}
@@ -472,6 +474,10 @@ url:""
 		this.error = errMsg;
 		return Observable.throw(errMsg);
 	}
+	animateButton(){
+        this.input.start({ type: 'bounce', duration: '5000' })
+    }
+   
 
 
 }

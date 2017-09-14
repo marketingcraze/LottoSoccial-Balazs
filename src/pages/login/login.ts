@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { App, NavController, Platform, NavParams, PopoverController, 
-    LoadingController, AlertController } from 'ionic-angular';
+    LoadingController, AlertController,  } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
@@ -17,8 +17,9 @@ declare var webengage: any;
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
 
+export class LoginPage {
+    @ViewChild('animation') input;
     public countryPopOver:any;
     public selectedCountry:any = {
         name: "United Kingdom",
@@ -160,7 +161,7 @@ export class LoginPage {
     }
 
 
-    submitLogin(){        
+    submitLogin(animation){        
         
         // this.login.free_reg_msn = "" + this.countryNumber + this.login.mobile;
         this.prepareMobile();
@@ -201,6 +202,7 @@ export class LoginPage {
                 // go to home page
                 if(data) {
                     if(data.status != "FAIL" ) {
+                        this.animateButton()
                         CommonService.session = data;
                         this.storage.set('session_ID', CommonService.sessionId);
                         this.storage.set('session', JSON.stringify(data))
@@ -215,9 +217,17 @@ export class LoginPage {
                         let alert = this.alertCtrl.create({
                             title: 'Failed!',
                             subTitle: data.message,
-                            buttons: ['OK']
+                            buttons: [
+                                {
+                                    text: 'Ok',
+                                    handler: () => {
+                                        this.animateWobble();
+                                    }
+                                  }    
+                            ]
                         });
                         alert.present();
+                       
                     }
                 }
                 
@@ -309,6 +319,12 @@ export class LoginPage {
             }
         }
         return false;
+    }
+    animateButton(){
+        this.input.start({ type: 'bounce', duration: '5000' })
+    }
+    animateWobble(){
+        this.input.start({ type: 'wobble', duration: '5000' })
     }
 
 }

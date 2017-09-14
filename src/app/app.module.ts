@@ -111,6 +111,7 @@ import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Device } from '@ionic-native/device';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { AnimationService, AnimatesDirective } from 'css-animator';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -130,6 +131,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
     declarations: [
         MyApp,
         SplashPage,
+        AnimatesDirective,
         WelcomePage,
         AuthPage,
         SignupPage,
@@ -198,6 +200,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         offerOfTheDayModal,
         your_vouchers,
         your_vouchers_popups,
+        AnimatesDirective,
         // OffersPayment,
 
         // pipes
@@ -318,7 +321,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         your_vouchers_popups
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
-        DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
+        AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
         Network, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device]
 
