@@ -112,6 +112,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { Device } from '@ionic-native/device';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnimationService, AnimatesDirective } from 'css-animator';
+import { SimpleTimer } from 'ng2-simple-timer';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -323,7 +324,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device]
 
 })
 export class AppModule { }

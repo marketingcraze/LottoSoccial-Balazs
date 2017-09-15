@@ -95,7 +95,7 @@ export class PlayGamePage implements OnInit {
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
           this.totalGameLevel=responseData.response[0].get_game_info.response.total_game_level;
           this.progressPercentage = (this.gameLevelThanlyou/this.totalGameLevel*100);
-          this.slider();
+          this.slider(this.gameLevelThanlyou);
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
           
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
@@ -163,7 +163,7 @@ export class PlayGamePage implements OnInit {
     this.howToPlayModal.present();
   }
 
-  slider() {
+  slider(level:any) {
     setTimeout(function () {
       $('.progressbarPlayGame').each(function () {
         debugger;
@@ -178,7 +178,7 @@ export class PlayGamePage implements OnInit {
             perc = Math.round(parseInt(length) / 2.5),
             labelpos = (parseInt(length) - 2);
           t.find('.labelPlayGame').css('left', labelpos);
-          t.find('.perc').text(perc + '%');
+          t.find('.perc').text("Level "+level);
         }
         perc();
         setInterval(perc, 0);

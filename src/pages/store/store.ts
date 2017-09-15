@@ -42,6 +42,9 @@ export class StorePage {
     total_cards = 0
 
     slideInUp:boolean = false;
+    tip11:boolean = false;
+    tip22:boolean = false;
+    
     flyInOutState: String = 'out';
 
     homeCard:any;
@@ -514,6 +517,40 @@ export class StorePage {
     }
 
 
-
+    tip(){
+        console.log("clicked1")
+        if( this.tip11 == true )
+        {
+            
+            this.tip11 = false   
+            
+            
+        }
+        else{
+            this.tip22 = false  
+            this.delay(300);
+            this.tip11 = true   
+            
+            
+        }
+    }
+    delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    tip2(){
+        console.log("clicked2")
+        if( this.tip22 == true )
+        {
+            this.tip22 = false   
+        }
+        else{
+            this.tip11 = false  
+            this.delay(300);
+            this.tip22 = true   
+            
+            
+        }
+    }
+   
 
 }

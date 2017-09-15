@@ -47,6 +47,7 @@ page-store {
 		color: #AAA;
 		font-weight: bold;
 		font-size:16px;
+		height: 5%;
 	}
 	.score-panel{
 		padding: 42px 0 0 0;
@@ -382,15 +383,22 @@ page-store {
     .slider-container {
       // position: absolute;
       width: 100%;
-      height: 100%;
-      margin: 0 auto;  
+      height: 80%;
+			margin: 0 auto;  
+			.scroll-content {
+				
+				height: 80%;
+				overflow: visible;
+			}
 
       .slider-content {
-        position: relative;
+				position: relative;
+				
+				bottom: 20%;
         left: 47%;
-        top: 50%;
+        top: 39%;
         width: 86%;
-        height: 60%;
+        height: 40%;
         transform: translate(-50%, -50%);
         .slider-single {
           position: absolute;
@@ -610,8 +618,10 @@ page-store {
 
 /* Tooltip text */
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 300px;
+    visibility: visible;
+    max-width: 250% !important;
+		width: 200%;
+		top:110%;
     background-color:#fff;
     color:#000;
     text-align: center;
@@ -626,14 +636,19 @@ page-store {
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
-    visibility: visible;
+		visibility: visible;
+		max-width: 250% !important;
+		width: 200%;
+		
+		
 }
 
 .tooltip .tooltiptext::after {
-     content: " ";
+		 content: " ";
+		 z-index: 1;
     position: absolute;
     top: -15px;
-   
+		max-width: 250% !important;
     margin-right: -5px;
     border-width: 7px;
     border-style: solid;
@@ -642,12 +657,14 @@ page-store {
     transform: rotate(180deg);
 }
 	.t1 .tooltiptext::after {
-		left: 14%;
+		left: 25%;
 	}
 	.t2 .tooltiptext::after {
-		right: 18%;
+		right: 25%;
 	}
-
+	ul{
+	-webkit-padding-start: 25px;
+	}
 .t-left {
 	left:0;
 }

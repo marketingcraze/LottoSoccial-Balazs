@@ -31,7 +31,7 @@
             <div class="t-card" (click)="openBuyPage(i)">
               <div class="check-div"><img src="./assets/img/plus_opt.svg" class="tcard-selected"/></div>
               <img class="card-img" src="{{c.image_url}}" (loaded)="c.load = true" [hidden]="c.load"/>
-              <p class="pad-5-top" id="countDown">NEXT DRAW IN {{c.draw_countdown | timeDiffer}}</p>
+              <p class="pad-5-top" id="countDown">NEXT DRAW IN {{resultDate[i]}}</p>
               <!-- <p class="pad-5-top">{{c.draw_countdown}}</p> -->
               <h1 class="big-m">£{{c.jackpot}}</h1>
             </div>

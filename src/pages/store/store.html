@@ -15,25 +15,35 @@
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
 
-<ion-content >
+<ion-content style="top: 0.5%">
 
   <ion-grid class="score-panel">
     <ion-row>
-      <ion-col width-50 >
-        <div text-center>
+      <ion-col width-50 style="width: 100%" >
+        <div text-center style="width: 100%" (click)="tip()">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span style="" class="tooltip t1">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span>
-            <span class="tooltiptext t-left">Use your points to get <strong>games</strong> from the <a href="">games area</a>. You acquire points every time you check your tickets, by playing game, share with friends and in many other ways.</span>
+          <span class="tooltip t1">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span>
+          <div  *ngIf ="tip11==true" >
+          <span class="tooltiptext t-left">
+                <ul style="margin: 0px; text-align: left">
+                    <li>Bonus credit can be used to <a href="">Buy MORE lottery Lines</a> </li>
+                    <li>If you will win less than 60p you can boost the win to <strong>4x</strong> bonus credit</li>
+                    <li>Bonus credit cannot be converted back into cash</li>
+                 </ul>  
+            </span>
+          </div> 
           </span>
         </div>        
       </ion-col>
-      <ion-col width-50>
-        <div text-center>
+      <ion-col width-50 style="width: 100%">
+        <div text-center style="width: 100%" (click)="tip2()">
           <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
           <span class="tooltip t2" >POINTS <span class="points">{{accountDetails.reward_points}}</span>
-            <span class="tooltiptext t-right">
+          <div  *ngIf ="tip22==true">
+            <span class="tooltiptext t-right" style="text-align: justify;padding: 5px">
               Use your points to get <strong>games</strong> from the <a href="">games area</a>. You acquire points every time you check your tickets, by playing game, share with friends and in many other ways.
             </span>
+            </div>
           </span>
         </div>
       </ion-col>
@@ -136,8 +146,15 @@
 
       <a class="slider-right" href="javascript:void(0);"><i class="fa fa-arrow-right"></i></a>
  -->
-    </div>
+</div>
 
+<div style="text-align: cente; width: 100%;">
+  <p style="position: absolute; height: 8%;bottom: -7%; text-align: center; width: 100%; color: gray" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
+</div>
+ 
+    
+     
+    
 <!-- slider end -->
 
 
@@ -500,12 +517,9 @@
 <!-- </ion-slides> -->
 
 
-<div >
 
 
-</div>
-
-  <p class="slider-position" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
+  
   
 </ion-content>
 
