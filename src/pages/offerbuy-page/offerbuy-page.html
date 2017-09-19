@@ -39,7 +39,7 @@
         <ion-row class="SpaceBetweenRowOffer" style=" display: flow-root;">
             <ion-col *ngFor="let draw of  product?.draw_group|keys ; let i = index">
                 <button ion-button class="slide1FontColor" [ngStyle]="(i == position  )?{'background-color': product?.product_color}:{'background-color':  '#AAAAAA'}"
-                    (click)="drawday(i)">{{draw}}</button>
+                (click)="drawday(i)">{{draw}}</button>
             </ion-col>
 
             

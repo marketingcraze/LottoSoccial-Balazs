@@ -6,6 +6,24 @@ page-account {
 	progress-bar{
 		width: 60%;
 	}
+	.pulsateButton{
+		animation-name: example;
+		animation-duration: 3s;
+		animation-timing-function: linear;
+		animation-delay: 1s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		border-radius: 50%
+	  
+	  
+	  }
+	  @keyframes example {
+		0%   {background-color: #2BB085; left:0px; top:0px;}
+		25%  {background-color: green; left:200px; top:0px;}
+		50%  {background-color: #2BB085; left:200px; top:200px;}
+		75%  {background-color: green; left:0px; top:200px;}
+		100% {background-color:#2BB085; left:0px; top:0px;}
+	  }
 	.profile-completion{
 		font-size: .6em;
 	}

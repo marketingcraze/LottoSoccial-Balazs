@@ -77,6 +77,7 @@ import { offerOfTheDayModal } from '../pages/offer-of-the-day-modal/offer-of-the
 import { your_vouchers } from '../pages/your_vouchers/your_vouchers'
 import { your_vouchers_popups } from '../pages/your_vouchers_popups/your_vouchers_popups'
 import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
+import { getGamesModal } from '../pages/get-games-modal/get-games-modal'
 
 
 
@@ -202,6 +203,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         your_vouchers,
         your_vouchers_popups,
         AnimatesDirective,
+        getGamesModal,
         // OffersPayment,
 
         // pipes
@@ -313,6 +315,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         offerBuyResultPage,
         offerOfTheDayModal,
         your_vouchers,
+        getGamesModal,
         // popovers
         // OffersPayment,
         CountryListPopPage,

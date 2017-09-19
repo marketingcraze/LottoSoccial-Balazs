@@ -17,7 +17,7 @@
     </div>
    
     <div class="bottom-contentGtagme">
-    <ion-list no-lines *ngFor="let redeem_product of redeem_products" class="redeemgameslist" >
+    <ion-list no-lines *ngFor="let redeem_product of redeem_products; let i=index" class="redeemgameslist" >
         <ion-item>
             <ion-thumbnail item-left>
                 <img src="{{redeem_product?.product_image}}">
@@ -25,7 +25,7 @@
             <h2>{{redeem_product?.product_title}}</h2>
             <p ion-text color="orange">TOP PRIZE: $50</p>
             <p ion-text color="calm">PRICE: {{redeem_product?.product_price}} {{redeem_product?.product_price_after}}</p>
-            <button ion-button item-right color="secondary" style="width: 71px;height: 34px;"(click)="redeem(redeem_product?.product_link)">GET</button>
+            <button ion-button item-right color="secondary" style="width: 71px;height: 34px;"(click)="redeem(redeem_product?.product_link,i)">GET</button>
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;">{{redeem_product?.product_details}}</ion-item-divider>
         <!--<ion-item>
@@ -45,7 +45,7 @@
             <h2>Lucky colors</h2>
             <p ion-text color="orange">TOP PRIZE: $50</p>
             <p ion-text color="calm">PRICE: 70 POINTS</p>
-            <button ion-button item-right color="secondary" style="width: 71px;height: 34px">GET</button>
+            <button (click)="confirmSelectionPage(i)"ion-button item-right color="secondary" style="width: 71px;height: 34px">GET</button>
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>
     </ion-list>

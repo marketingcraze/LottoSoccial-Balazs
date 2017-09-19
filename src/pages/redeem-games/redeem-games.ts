@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { getGamesModal } from '../../pages/get-games-modal/get-games-modal'
 
 /*
   Generated class for the RedeemGames page.
@@ -19,9 +20,10 @@ export class RedeemGamesPage {
   sliderImage:any;
   private loading : any;
   reward_point:number;
+  point_status:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public appSound:AppSoundProvider,
-    public authSrv:AuthService,private loadingCtrl: LoadingController) {}
+    public authSrv:AuthService,private loadingCtrl: LoadingController,public modalController:ModalController ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RedeemGamesPage');
@@ -46,8 +48,48 @@ export class RedeemGamesPage {
    
      });
    }   
-   redeem(url){
+   redeem(url,index){
      this.appSound.play('buttonClick');
      console.log(url);
+     console.log("first index is " + index)
+     if(this.reward_point < this.redeem_products[index].product_price){
+      this.point_status = "Failed"
+     }
+     else{
+      this.point_status = "Passed"
+     }
+         let modal = this.modalController.create(getGamesModal, {
+      VoucherCode: this.redeem_products[index].product_image,
+      title: this.redeem_products[index].product_title,
+      price: this.redeem_products[index].product_price,
+      price_after: this.redeem_products[index].product_price_after,
+      p_staus: this.point_status
+      
+
+    })
+    
+    modal.present();
+
+    }
+    confirmSelectionPage(index){
+     
+      if(this.reward_point < this.redeem_products[index].product_price){
+        this.point_status = "Failed"
+       }
+       else{
+        this.point_status = "Passed"
+       }
+       
+      console.log("index is " + index)
+       let modal = this.modalController.create(getGamesModal, {
+      VoucherCode: "assets/img/sample_thumb_03@3x.png",
+      title: "Lucky colors",
+      price:"70",
+      price_after: "POINTS",
+      p_staus: this.point_status
+
+    })
+    modal.present();
+
     }
 }

@@ -1,0 +1,120 @@
+<ion-content class="modal-page" text-center>
+    
+      <ion-list *ngIf="value==false && status=='Passed'">
+        <div>
+        <ion-item text-center style="font-size: 20px;height: 10%; text-align: center">
+          Confirm Your Selection
+        </ion-item>
+      </div>
+          <div style="border-bottom: 1px solid gray;height: 30%">
+    
+            <ion-item no-lines style="height: 30%">
+              <ion-thumbnail item-left style="margin: 8px 9px 8px 0" >
+                <img src='{{VoucherCode}}'>
+              </ion-thumbnail>
+    
+              <div item-center text-wrap>
+                  <span style="font-size: 15px">{{title}}</span><br>
+                  <span style="color: #E97442;font-size: 13px">TOP PRIZE $50</span><br>
+                  <span style="color: #5086D4;font-size: 12px">Get for {{price}} {{price_after}}</span>
+              </div>
+    
+              <div item-center item-right style="border: 1px solid #255FC7;width: 40%;text-align: center;border-radius: 200px 200px 200px 200px;">
+                  <input (click)="minusCounter()" type='button' value='-' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 3px; margin: 0px;border-radius: 50%">
+                  <input type='text' value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none">
+                  <input (click)="plusCounter()" type='button' value='+' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 3px; margin: 0px;border-radius: 50%">
+              </div>
+            </ion-item>
+          </div>
+          <div style="border-bottom: 1px solid gray; vertical-align: middle;height: 20%">
+            <ion-item no-lines  text-wrap  style="height: 30%">
+                <ion-row style="height: 10%">
+                    <ion-col col-10 style="text-align: left; font-size: 15px">
+                       Total Points Needed: 
+                    </ion-col>
+                    <ion-col col-2 style="text-align: right; color: #5086D4;">
+                        {{price}}
+                     </ion-col>
+                </ion-row>
+                <ion-row text-center style="height: 10%; vertical-align: middle">
+                    <ion-col col-10 style="text-align: left;font-size: 15px">
+                       Remaining Reward Points Balance:
+                    </ion-col>
+                    <ion-col col-2 style="text-align: right; color: #5086D4; height: 100%; display: block;">
+                        300
+                     </ion-col>
+                </ion-row>
+              
+        
+            </ion-item>
+          </div>
+          <ion-item text-center no-lines  style="height: 30%">
+              <div style="text-align: center; padding-top: 5%;height: 10%">
+                <input type="button" value="CONFIRM" style="background-color:#249040; color: white;text-align: center;border: 0px;
+                              width: 40%; height:38px;border-radius: 5px; " (click) = "done()">
+              </div>
+              <div style="text-align: center; padding-top: 5%;height: 10%" >
+                  <p (click)="dismissPopUp()"style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;">Not Now</p>
+                </div>
+          </ion-item>
+          
+            
+      </ion-list>
+    
+      <div class="buycard" *ngIf="!value==false && status=='Passed'">
+          <button ion-button icon-only style="background:#F8F8F8; border-radius:50%; height: 70px">
+                    <ion-icon style="width:70px; "><img src="assets/icon/check_icon.png"> </ion-icon>
+                  </button>
+          <ion-row text-center>
+              <ion-col col-12 class="messagecolor">
+                  Ace! Good luck with lucky colors
+              </ion-col>
+          </ion-row>
+          <ion-row style="padding-top: 4%">
+              <ion-col col-12 style="height: 30%">
+                  <button ion-button outline round color="light" (click)="moveToVouchers()">  PLAY NOW  </button>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col col-12>
+                  <button ion-button outline round color="light" (click)="moveToVouchers()">  GET MORE GAMES  </button>
+              </ion-col>
+          </ion-row>
+    
+      
+    </div> 
+ <div *ngIf="status=='Failed'">
+    <div>
+        <ion-item no-lines text-wrap style="text-align: center; background-color: red;color: white">
+          <span style="font-size: 16px"><b> INSUFFICIENT POINTS</b></span>
+          <br>
+          <span>TO REDEEM THIS GAME</span>
+  
+        </ion-item>
+  
+      </div>
+
+      <div >
+        <ion-item no-lines text-wrap style="text-align: center;padding-top: 4%">
+            <span style="text-align: center"><b> Why don't you double up your chances?</b></span>
+            <br>
+            <span style="text-align: center">Get this offer which includes lottery tickets AND games!</span>
+            
+        </ion-item>
+      </div>
+      <div>
+        <ion-item no-lines text-wrap style="text-align: center;padding-top: 4%">
+          <img src="assets/img/not_sucess.png">
+        </ion-item>
+      </div>
+      <div>
+          <ion-item no-lines text-wrap style="text-align: center;">
+              <input type="button" value="BUY NOW FOR £2" class="voucherListButton" (click)="selectedButtonID(i)" />
+              <p (click)="dismissPopUp()" style="text-decoration: none !important;color: #4E85D4; text-align: center; 
+              font-size: 15px; padding-top: 5%">Not Now</p>
+            </ion-item>
+      </div>
+    </div>
+    
+    
+    </ion-content>
