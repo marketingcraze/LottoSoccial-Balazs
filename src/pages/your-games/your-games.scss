@@ -13,5 +13,40 @@ page-your-games {
     .moregame{
         margin-top:10px;
         margin-bottom:10px;
-    }
+	}
+	.buttonStart{
+		width: 71px;
+		height: 34px;
+	}
+	
+	@-webkit-keyframes glowing {
+		0% { background-color:red; -moz-box-shadow: 0 0 3px red; }
+		50% { background-color:lightcoral; -moz-box-shadow: 0 0 10px lightcoral; }
+		100% { background-color: red; -moz-box-shadow: 0 0 3px red; }
+	  }
+	  
+	  @-moz-keyframes glowing {
+		0% { background-color:red; -moz-box-shadow: 0 0 3px red; }
+		50% { background-color:lightcoral; -moz-box-shadow: 0 0 10px lightcoral; }
+		100% { background-color: red; -moz-box-shadow: 0 0 3px red; }
+	  }
+	  
+	  @-o-keyframes glowing {
+		0% { background-color:red; -moz-box-shadow: 0 0 3px red; }
+		50% { background-color:lightcoral; -moz-box-shadow: 0 0 10px lightcoral; }
+		100% { background-color: red; -moz-box-shadow: 0 0 3px red; }
+	  }
+	  
+	  @keyframes glowing {
+		0% { background-color:red; -moz-box-shadow: 0 0 3px red; }
+		50% { background-color:lightcoral; -moz-box-shadow: 0 0 10px lightcoral; }
+		100% { background-color: red; -moz-box-shadow: 0 0 3px red; }
+	  }
+	  .buttonStart{
+		-webkit-animation: glowing 1500ms infinite;
+		-moz-animation: glowing 1500ms infinite;
+		-o-animation: glowing 1500ms infinite;
+		animation: glowing 1500ms infinite;
+	}
+
 }

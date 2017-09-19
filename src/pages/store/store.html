@@ -149,7 +149,7 @@
 </div>
 
 <div style="text-align: cente; width: 100%;">
-  <p style="position: absolute; height: 8%;bottom: -7%; text-align: center; width: 100%; color: gray" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
+  <p style="position: absolute; height: 8%;bottom: -7%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
 </div>
  
     
@@ -532,7 +532,7 @@
 <ion-footer class="footer-button">
   <div (click)="showWhatsOn()" class="center">
     <ion-icon item-left name="md-arrow-round-up"></ion-icon>
-    <p item-content text-center class="center">Find out what's on lotto social</p>
+    <p item-content text-center class="center" style="font-size: initial">FIND OUT WHAT'S ON LOTTO SOCIAL</p>
   </div>
 </ion-footer>
 
@@ -551,9 +551,8 @@
         </ion-item>
 
         <div class="top-slides-wrapper">
-          <ion-slides class="top-slides" slidesPerView="2" spaceBetween=8>
-          
-            <ion-slide *ngFor="let item of homeBlog">
+          <ion-slides class="top-slides"  spaceBetween="5">
+            <ion-slide *ngFor="let item of homeBlog" >
               <img *ngIf="item.image" src="{{item.image}}">
               <img *ngIf="!item.image" src="assets/img/150.png">
               <div class="slide-content">

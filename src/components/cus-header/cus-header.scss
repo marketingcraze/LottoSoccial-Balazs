@@ -26,10 +26,12 @@ cus-header {
     .badge-ios-badge{
         position: absolute;
         color: #FF0000;
+        font-family: cursive;
+        font-size: smaller;
         background-color: #E7D011;
         top: 16px;
         left: 24px;
-        padding: 2px 4px;
+        padding: 3px 5px;
     }
     .toolbar-title{
         padding: 0;

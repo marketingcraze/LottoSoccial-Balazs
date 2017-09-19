@@ -53,66 +53,66 @@
     </ion-card>
 
     <ion-card class="options">
-        <ion-item class="line" (click)="openWebView('cashout/')">
+        <ion-item class="line" >
             <img item-left width="16" height="16" src="assets/icon/cash_ico2.svg" alt="Update"/>
             <p>Cash balance</p>
             <ion-badge item-right color="secondary">&pound;{{accountDetails.winning_balance}}</ion-badge>
-            <ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+            <ion-icon ios="ios-arrow-forward" item-right (click)="openWebView('cashout/')"></ion-icon>
         </ion-item>
-        <ion-item class="line" (click)="openUrl('https://help.lotto-social.com/hc/en-us')">
+        <ion-item class="line" >
             <img item-left width="16" height="16" src="assets/icon/bc_ico.svg" alt="Update"/>
             <p>Bonus credit</p>
             <ion-badge item-right color="bonus">&pound;{{accountDetails.bonus_credit}}</ion-badge>
-            <ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+            <ion-icon ios="ios-arrow-forward" (click)="openUrl('https://help.lotto-social.com/hc/en-us')" item-right></ion-icon>
         </ion-item>
-        <ion-item (click)="openUrl('https://help.lotto-social.com/hc/en-us')">
+        <ion-item >
             <img item-left width="16" height="16" src="assets/icon/rwp_icon.svg" alt="Update"/>
             <p>Reward points</p>
             <ion-badge item-right>{{accountDetails.reward_points}}</ion-badge>
-            <ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+            <ion-icon ios="ios-arrow-forward" (click)="openUrl('https://help.lotto-social.com/hc/en-us')" item-right></ion-icon>
         </ion-item>
     </ion-card>
 
 	<ion-card>
-        <ion-item (click)="openWebView('blog/')">
+        <ion-item >
 			<p>What's on</p>
-			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+			<ion-icon ios="ios-arrow-forward" item-right (click)="openWebView('blog/')"></ion-icon>
         </ion-item>
     </ion-card>
 
 	<ion-card class="options">
-        <ion-item class="line" (click)="showUpdateDetailsModal()">
+        <ion-item class="line" >
         	<img item-left width="16" height="16" src="assets/icon/edit-ico.svg" alt="Update"/>
 			<p>Update your details</p>
-			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+			<ion-icon ios="ios-arrow-forward" (click)="showUpdateDetailsModal()" item-right></ion-icon>
         </ion-item>
-        <ion-item class="help" (click)="openUrl('https://help.lotto-social.com/hc/en-us')">
+        <ion-item class="help" >
         	<img item-left width="16" height="16" src="assets/icon/help-ico.svg" alt="Update"/>
 			<p>Need help?</p>
-			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+			<ion-icon ios="ios-arrow-forward" (click)="openUrl('https://help.lotto-social.com/hc/en-us')" item-right></ion-icon>
         </ion-item>
     </ion-card>
 
 
 	<ion-card class="options">
-        <ion-item class="line" (click)="openUrl('https://www.facebook.com/LottoSocial/')">
+        <ion-item class="line" >
         	<img item-left width="16" height="16" src="assets/icon/fb-ico.svg" alt="Update"/>
 			<p>Lotto Social on Facebook</p>
-			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+			<ion-icon ios="ios-arrow-forward" (click)="openUrl('https://www.facebook.com/LottoSocial/')" item-right></ion-icon>
         </ion-item>
-        <ion-item (click)="openUrl('https://twitter.com/lotto_social?lang=en')">
+        <ion-item >
         	<img item-left width="16" height="16" src="assets/icon/tw-ico.svg" alt="Update"/>
 			<p>Lotto Social on Twitter</p>
-			<ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+			<ion-icon ios="ios-arrow-forward" (click)="openUrl('https://twitter.com/lotto_social?lang=en')" item-right></ion-icon>
         </ion-item>
     </ion-card>
 
 
     <ion-card class="options">
-        <ion-item (click)="logout()">
+        <ion-item >
             <img item-left width="16" height="16" src="assets/icon/logout.svg" alt="Update"/>
             <p>Logout</p>
-            <ion-icon ios="ios-arrow-forward" item-right></ion-icon>
+            <ion-icon ios="ios-arrow-forward" (click)="logout()" item-right></ion-icon>
         </ion-item>
     </ion-card>
     
