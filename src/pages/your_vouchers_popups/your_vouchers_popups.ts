@@ -9,6 +9,8 @@ import { NavController, NavParams, ViewController, LoadingController, AlertContr
 })
 export class your_vouchers_popups {
   VoucherCode:any;
+  VoucherCodeDescription:any;
+  
   value: boolean = false
   VCODE:String = "VOUCHERCODER"
   constructor(public navCtrl: NavController,
@@ -16,12 +18,13 @@ export class your_vouchers_popups {
               private viewctrl:ViewController,
               private navParms: NavParams,) {
     this.VoucherCode = this.navParms.get("VoucherCode")
+    this.VoucherCodeDescription = this.navParms.get("VoucherDetail")
     this.VCODE = this.navParms.get("VCODE")
-    if(this.VCODE == undefined)
-      {
-        this.VCODE = "VOUCHERCODER"
-      }
-    console.log("VCODE value is " + this.VCODE)
+    // if(this.VCODE == undefined)
+    //   {
+    //     this.VCODE = "VOUCHERCODER"
+    //   }
+    // console.log("VCODE value is " + this.VCODE)
    
   }
 

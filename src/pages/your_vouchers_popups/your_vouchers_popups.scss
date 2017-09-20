@@ -12,9 +12,9 @@
       right: 0;
       margin: auto;
       border: 0;
-      box-shadow: 0 16px 20px rgba(0,0,0,.4);
+      box-shadow: 0 16px 150px rgba(0,0,0,1.4);
       background-color: #fafafa;
-      border-radius: 5px;
+      border-radius: 10px;
     
       }
     .popup-img{
@@ -59,7 +59,7 @@
       border: 0;
       padding-top: 25%;
       border: 0;
-      box-shadow: 0 16px 20px rgba(0,0,0,.4);
+      box-shadow: 0 16px 150px rgba(0,0,0,1.4);
       border-radius: 10px;
     
   }
@@ -73,5 +73,8 @@ padding-top: 5%;
 .scroll-content {
  z-index: 0; 
  bottom: 0px;
+}
+.label-md {
+  margin: 1px 8px 13px 0;
 }
     }

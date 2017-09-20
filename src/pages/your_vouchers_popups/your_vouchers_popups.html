@@ -1,14 +1,14 @@
 <ion-content class="modal-page" text-center>
   <ion-list *ngIf="value==false">
     <ion-label style="margin-top: 10%; font-size: 16px" text-center>Confirm you want to claim your voucher</ion-label>
-    <ion-item text-wrap align-left no-lines>
+    <ion-item text-wrap align-left no-lines style="padding-top: 10px">
       <div>
         <table style="width: 100%">
           <tr>
-            <td style="width: 15%; padding-left: 0px;margin-left: 0px"> <img src='assets/img/voucher_ico.png' style="width: 90%"> </td>
-            <td style="width: 85%">
-              <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px"><b>VOUCHER CODE</b></p>
-              <p style="text-align: left; font-size: 16px; color: black;padding-right: 5px; padding-left: 5px">{{VoucherCode}}</p>
+            <td style="width: 17%; padding-left: 0px;margin-left: 0px"> <img src='assets/img/voucher_ico.png' style="width: 100%"> </td>
+            <td style="width: 85%; padding-left: 5px">
+              <p style="text-align: left; font-size: 17px; color: black;padding-right: 5px; padding-left: 5px"><b>{{VoucherCode}}</b></p>
+              <p style="text-align: left; font-size: 15px; color: black;padding-right: 5px; padding-left: 5px">{{VoucherCodeDescription}}</p>
             </td>
           </tr>
         </table>

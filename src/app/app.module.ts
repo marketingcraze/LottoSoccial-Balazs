@@ -99,6 +99,7 @@ import { SyndicateService } from '../providers/syndicate-service';
 import { PlayGame } from '../services/playgame.service';
 import { ReferFriend } from '../services/referfriend.service';
 import { productOffer } from '../services/productoffer.service';
+import { VoucherService } from '../services/voucherList_service'
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -330,7 +331,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
-        SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
+        SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device]
 
 })

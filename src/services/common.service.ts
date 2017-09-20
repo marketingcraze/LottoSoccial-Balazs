@@ -15,6 +15,7 @@ export class CommonService {
 
     public static sitename:string = 'https://nima.lottosocial.com/';
     public static apiUrl:string = 'https://nima.lottosocial.com/wp-json/mobi/';
+    
     public static version:string = 'v2';
 
     public static apiUrlDF:string = 'http://api.hatchster.com/api/v2/sqllbtnima2016/_proc/';

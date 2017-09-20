@@ -19,7 +19,7 @@ declare var webengage: any;
 })
 
 export class LoginPage {
-    @ViewChild('animation') input;
+    @ViewChild('animation') input;    
     public countryPopOver:any;
     public selectedCountry:any = {
         name: "United Kingdom",
@@ -29,7 +29,7 @@ export class LoginPage {
         areaCodes: null
     };
     
-    public selectedCountryMobile:any= {
+    public selectedCountryMobile:any= {           
         name: "United Kingdom",
         iso2: "gb",
         dialCode: "44",
@@ -128,14 +128,22 @@ export class LoginPage {
         }*/
         
         this.countryPopOver = this.popoverCtrl.create(CountryListPopPage, {
-            // countries: this.countryes,
+            // countries: this.countryes,             
             cb: (data) => { 
                 console.log("on selected country", data);
                 this.selectedCountry = data;
             }
+
         });
-        this.countryPopOver.present({ev: ev});
         
+        this.countryPopOver.present({ev: ev});   
+        this.countryPopOver.onDidDismiss((data) => {
+            if (data) {                
+                this.selectedCountryMobile.name=data.name;
+                this.selectedCountryMobile.dialCode=data.dialCode; 
+                this.selectedCountryMobile.iso2=data.iso2;
+            }
+           })
     }
 
     presentPopoverMobile(ev) {
@@ -147,14 +155,22 @@ export class LoginPage {
             // countries: this.countryes,
             cb: (data) => { 
                 console.log("on selected country", data);
-                this.selectedCountryMobile = data;
+                this.selectedCountryMobile = data;    
                 this.countryNumberMobile = data.dialCode;
             }
         });
         this.countryPopOver.present({ev: ev});
         
     }
+ 
+    backButtonPopupClose(){
+        this.forgotPassPopup=false;  
+        this.selectedCountryMobile.name=this.selectedCountry.name;
+        this.selectedCountryMobile.dialCode=this.selectedCountry.dialCode;
+        this.selectedCountryMobile.iso2=this.selectedCountry.iso2;
+    }
 
+    
     showPassword(input: any): any {
         this.showPass = !this.showPass;
         input.type = input.type === 'password' ? 'text' : 'password';
@@ -251,7 +267,7 @@ export class LoginPage {
                });
     }
 
-    submitMobile(){
+    submitMobile(){ 
         let free_reg_msn = "" + this.selectedCountryMobile.dialCode + this.login.mobile;
         console.log("submitMobile", free_reg_msn );
         if(this.phoneValidator(free_reg_msn) ) {
@@ -287,7 +303,7 @@ export class LoginPage {
             },
             ()=>{
                 console.log("complete");
-                this.forgotPassPopup = false;
+                this.forgotPassPopup = false; 
             } 
             );
 

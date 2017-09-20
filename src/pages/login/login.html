@@ -10,7 +10,7 @@
 		<ion-row >
 		<ion-col col-2>
 			<ion-item *ngIf="selectedCountry" class="remove-inner" (click)="presentPopover($event)">
-				<span item-right ion-button clear icon-right class="{{'flag-icon flag-icon-' + selectedCountry.iso2 }}" width="16" height="16" ></span> 
+				<span item-right ion-button clear icon-right class="{{'flag-icon flag-icon-' + selectedCountry.iso2 }}" width="16" height="16"></span> 
 				<!-- <span item-right ion-button clear width="16" height="16" > {{selectedCountry.iso2 | uppercase}}</span> -->
 				<ion-icon item-right name="arrow-down" class="small-icon"></ion-icon>
 			</ion-item>
@@ -91,7 +91,7 @@
 
 				<div padding>
 					<button class="btn btn-positive" type="submit">RECOVER PASSWORD</button>
-					<p><a text-center class="center" (click)="forgotPassPopup=false;"><ion-icon name="ios-arrow-round-back"></ion-icon> Back to login.</a></p>
+					<p><a text-center class="center" (click)="backButtonPopupClose()"><ion-icon name="ios-arrow-round-back"></ion-icon> Back to login.</a></p>
 				</div>
 			</form>
     		</div>

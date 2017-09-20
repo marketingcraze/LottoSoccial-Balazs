@@ -5,15 +5,13 @@ page-get-games-modal{
         max-width: 90%;
         max-height: 100%;
         width: 100vw;
-        height: 50%;
+        height: 55%;
         top: 20%;
         bottom: 0;
         left: 0;
         right: 0;
         margin: auto;
-        border: 0;
-        box-shadow:  0 0 50px  rgba(0,0,0,0.60);
-        
+        box-shadow:  0 0 150px  rgba(0,0,0,1.60);
         border-radius: 15px;
       
         }
@@ -33,11 +31,12 @@ page-get-games-modal{
         margin-top: 8px;
         margin-bottom: 8px;
         font-size: 16px;
-      
       }
+
       p{
         font-size: large;
       }
+      
       ion-app.ios [padding] .scroll-content {
         padding: 0px;
       }
@@ -56,13 +55,9 @@ page-get-games-modal{
         bottom: 0;
         left: 0;
         right: 0;
-       
-        border: 0;
-       
         padding-top: 15%;
-        border: 0;
-        box-shadow: 0 16px 20px rgba(0,0,0,.4);
-        border-radius: 5px;
+        box-shadow: 0 16px 20px rgba(184, 68, 68, 0.4);
+        border-radius: 15px;
       
     }
 
@@ -90,6 +85,11 @@ page-get-games-modal{
   width: 50%; 
   font-size: 16px; 
   padding:8px
+}
+img, .item-md ion-thumbnail img {
+  margin-top: 6px;
+  width: 65px;
+  height: 65px;
 }
       
     }
