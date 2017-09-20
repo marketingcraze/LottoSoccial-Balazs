@@ -13,8 +13,8 @@
           <ion-spinner class="center" name="bubbles"></ion-spinner>
       </ion-item>
       
-      <ion-item-sliding *ngFor="let message of messages">
-        <ion-item text-wrap>
+      <ion-item-sliding *ngFor="let message of messages let i=index">
+        <ion-item text-wrap (click)="alert(i)">
           <span item-left class="">
             <img *ngIf="message.icon_url" src="{{message.icon_url}}" alt="" width="24" height="24" />
             <img *ngIf="!message.icon_url" src="assets/icon/notification_ico.svg" alt="" width="16" height="16" />

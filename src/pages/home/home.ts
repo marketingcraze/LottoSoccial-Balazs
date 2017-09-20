@@ -1,6 +1,6 @@
 import { Component, ViewChild, NgZone ,OnInit} from '@angular/core';
 import { Platform, MenuController, Nav, NavController, LoadingController, 
-    AlertController } from 'ionic-angular';
+    AlertController, ModalController } from 'ionic-angular';
 import { Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -9,6 +9,7 @@ import { CheckWinningsPage } from '../check-winnings/check-winnings'
 import { AccountPage } from '../account/account';
 import { UpdatePage } from '../update/update';
 import { BadgesPage } from '../badges/badges';
+import { inboxModal } from '../inbox-popup/inbox-popup';
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
@@ -74,7 +75,8 @@ export class HomePage implements OnInit {
         private commonSrv:CommonService, 
         public appSound:AppSoundProvider,
         private alertCtrl:AlertController,
-        private loadingCtrl:LoadingController
+        private loadingCtrl:LoadingController,
+        private _modalCtrl:ModalController
         ) {
 
         
@@ -212,7 +214,6 @@ export class HomePage implements OnInit {
             this.messageLoading = true;
         });
         this.srvHome.getHomeMessages().take(1).subscribe( (data)=> {
-            
             console.log("onOpenRightMenu success ", data);
             this.zone.run(()=>{
                 this.messageLoading = false;
@@ -263,6 +264,10 @@ export class HomePage implements OnInit {
 
     saveItem(){
         console.log("saveItem()");
+    }
+    alert(i:any){
+     let inboxPopup=this._modalCtrl.create(inboxModal,{CurrentMessage: this.messages[i]});
+     inboxPopup.present();
     }
 }
 

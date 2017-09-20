@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { IonPullupModule } from 'ionic-pullup';
 
 // Pages
 import { SplashPage } from '../pages/splash/splash';
@@ -78,7 +79,7 @@ import { your_vouchers } from '../pages/your_vouchers/your_vouchers'
 import { your_vouchers_popups } from '../pages/your_vouchers_popups/your_vouchers_popups'
 import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
 import { getGamesModal } from '../pages/get-games-modal/get-games-modal'
-
+import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 
 
 // components
@@ -204,6 +205,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         your_vouchers_popups,
         AnimatesDirective,
         getGamesModal,
+        inboxModal,
         // OffersPayment,
 
         // pipes
@@ -245,7 +247,8 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         IonicStorageModule.forRoot({
             name: '__lottosocialdb',
             driverOrder: ['indexeddb', 'sqlite', 'websql']
-        })
+        }),
+        IonPullupModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -316,6 +319,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         offerOfTheDayModal,
         your_vouchers,
         getGamesModal,
+        inboxModal,
         // popovers
         // OffersPayment,
         CountryListPopPage,

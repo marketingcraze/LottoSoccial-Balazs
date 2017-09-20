@@ -14,6 +14,7 @@ import { HomeService } from '../../services/service.home';
 import { OfferService } from '../../services/offer.service';
 import { referFriend } from '../refer-friend-page/refer-friend-page';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { IonPullUpFooterState } from 'ionic-pullup';
 
 // import * as $ from 'jquery';
 declare var $:any;
@@ -25,7 +26,7 @@ declare var $:any;
 export class StorePage {
     @ViewChild(Slides) home_slides: Slides;
     @ViewChild("confirmPayment") confirmPayment;
-
+    public footerState: IonPullUpFooterState;
     public homeCardData:any;
     public spaceBetween:number = 0;
     public whatsOn:boolean = false;
@@ -132,7 +133,7 @@ export class StorePage {
         public modalCtrlr:ModalController,
         public actionSheetCtrl: ActionSheetController) {
 
-      
+        this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
 
@@ -551,6 +552,23 @@ export class StorePage {
             
         }
     }
+
+    //pull up code here
+    footerExpanded() {
+        console.log('Footer expanded!');
+      }
+
+      footerCollapsed() {
+        console.log('Footer collapsed!');
+      }
+
+      toggleFooter() {
+        this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
+      }
+      getMaximumHeight() {
+        return window.innerHeight / 1.1;
+    }
+
    
 
 }

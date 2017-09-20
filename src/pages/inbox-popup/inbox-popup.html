@@ -1,0 +1,12 @@
+<ion-navbar class="modal-wrapper" *navbar>
+        <ion-title>Inbox Modal</ion-title>
+      </ion-navbar>
+      <ion-content padding class="inbox-modal-page" text-center>
+        <h3>{{PageData?.card_title}}</h3>
+          <img class="popup-img" src="{{PageData?.icon_url}}"/>
+          <p>{{PageData?.description}}</p>
+               <button ion-button color="secondary" (click)="openWebView(PageData?.button_url)" >
+                {{PageData?.button_label}}
+              </button> 
+              
+      </ion-content>
