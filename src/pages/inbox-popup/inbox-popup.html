@@ -2,11 +2,12 @@
         <ion-title>Inbox Modal</ion-title>
       </ion-navbar>
       <ion-content padding class="inbox-modal-page" text-center>
-        <h3>{{PageData?.card_title}}</h3>
+        <h3 style="padding-top: 5%">{{PageData?.card_title}}</h3>
           <img class="popup-img" src="{{PageData?.icon_url}}"/>
           <p>{{PageData?.description}}</p>
                <button ion-button color="secondary" (click)="openWebView(PageData?.button_url)" >
                 {{PageData?.button_label}}
               </button> 
               
+              <p (click)="dismissPopUp()"style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;">Not Now</p>
       </ion-content>

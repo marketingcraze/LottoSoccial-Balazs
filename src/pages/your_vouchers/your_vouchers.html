@@ -29,7 +29,7 @@
       </div>
     </ion-item>
 <ion-list>
-    <div *ngIf="count>0">
+    <div *ngIf="count>0" style="margin-top: 4px">
       <ion-item text-wrap text-center class="yourVoucherList">
         <span><b class="yourVoucherListHeading">YOUR VOUCHER LIST</b></span><br>
         <p class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</p>
@@ -45,7 +45,7 @@
 
     <ion-scroll no-padding [ngStyle]="{height: height+ 'px'}" scrollX="true" scrollY="true" *ngIf="count>0">
      
-    <div *ngFor='let lst of appList let i = index;' >
+    <div *ngFor='let lst of appList let i=index;' >
 
       <ion-item no-lines  id="voucherListItem">
         <ion-thumbnail item-left class="thumbnalTag">
@@ -55,7 +55,7 @@
         <div item-center text-wrap>
           <p class="thumbnailListContent">{{lst.voucher_description}}</p><br>
           <p style="padding-left:10px; color: red; font-size: 14px; padding-top: 3px">
-            Expires: {{lst.expiry_date}}
+            Expires <span style="padding-left: 5px; padding-top: 3px">{{resultDate[i]}}</span>
           </p>
         </div>
 
@@ -80,7 +80,7 @@
         </div> -->
 <ion-item>
       <div style="text-align: center" >
-        <a  class="allOfersLink">View all offers available</a>
+        <a  class="allOfersLink" (click) = "openOffersOfTheDay()">View all offers available</a>
       </div>
     </ion-item>
 </ion-list>

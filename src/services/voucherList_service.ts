@@ -36,22 +36,35 @@ export class VoucherService {
 
 
 
-        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/ticketscanner/"
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/voucher/ "
         let parameter = {
             "request": [
-                {
-                    "session_ID": CommonService.session,
-                    "page_ID": "20",
-                    "screen_id": "20.2",
-                    "action": "get_voucher",
-                    "website": "Lotto Social",
-                    "website_id": "27",
-                    "source_site": "mobi.lottosocial.com",
-                    "module_name": "get_issued_voucher_code",
-                    "customer_id": this.customerId
-                }
+          {
+                "session_ID": CommonService.sessionId,
+                "page_ID": "7",
+                "screen_id": "7.2",
+                "action": "profile_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "module_name": "get_customer_details",
+                "customer_id":this.customerId
+              },
+          
+              {
+                 "session_ID": CommonService.sessionId,
+                "page_ID": "20",
+                "screen_id": "20.2",
+                "action": "get_voucher",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "module_name": "get_issued_voucher_code",
+                "customer_id":this.customerId
+          
+              }
             ]
-        }
+          }
 
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()

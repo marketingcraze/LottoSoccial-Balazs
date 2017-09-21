@@ -79,7 +79,7 @@
               <button ion-button class="ctNow chat-btn pulse" (click)="chatNow(i)">CHAT NOW</button>
               <span class="circle"><img src="./assets/img/chat_bubble.png"/><span style="padding: 5px;">{{chatcount}}</span></span></span></ion-col>
             <ion-col col-7 class="left" style="line-height: 34px;"><span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
-            <span>{{sd.member_playing_count}}/{{sd.members_count}}</span>
+            <span style="font-size: 12px; color: #B7B7B7;">{{sd.member_playing_count}}/{{sd.members_count}}</span>
               <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
               <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
             </ion-col>

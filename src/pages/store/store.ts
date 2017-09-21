@@ -15,6 +15,7 @@ import { OfferService } from '../../services/offer.service';
 import { referFriend } from '../refer-friend-page/refer-friend-page';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { IonPullUpFooterState } from 'ionic-pullup';
+import { SimpleTimer } from 'ng2-simple-timer';
 
 // import * as $ from 'jquery';
 declare var $:any;
@@ -34,6 +35,16 @@ export class StorePage {
 
     private currentTime:Date = new Date();
 
+    result: any = [];
+    resultDate: any = [];
+    counter0 = 0;
+	timer0Id: string;
+	timer0button = 'Subscribe';
+    count:number;
+    day:any;
+    hrs:any;
+    min:any;
+    sec:any;
     // payment variables
     userCards: any;
     userCardsCount:number = 0;
@@ -118,6 +129,7 @@ export class StorePage {
     
     constructor(
         public app:App,
+        private st: SimpleTimer,
         public params:Params,
         private ref: ChangeDetectorRef,
         private srvHome:HomeService,
@@ -132,6 +144,7 @@ export class StorePage {
         public appSound:AppSoundProvider,
         public modalCtrlr:ModalController,
         public actionSheetCtrl: ActionSheetController) {
+           
 
         this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
@@ -140,6 +153,7 @@ export class StorePage {
         this.srvHome.getCreditOffers().subscribe((data:any)=> {
             console.log("StorePage->getCreditOffers() success", data);
             if (data && data.response) {
+              
                 // let res = JSON.parse( data.response );
                 // console.log("StorePage->getCreditOffers() success", res);
             }
@@ -168,6 +182,9 @@ export class StorePage {
                     }
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
+                      
+                        this.st.newTimer('1sec', 1);
+                        this.subscribeTimer0();
                         this.total_cards++
                         
                         // updates every seconds
@@ -233,6 +250,7 @@ export class StorePage {
                 && data.response[0].get_big_jackpot_list) {
                 this.jackpotList = data.response[0].get_big_jackpot_list.response;
                 this.customerToken = this.jackpotList.customer_token;
+               
             }
             loader.dismiss();
           
@@ -301,6 +319,16 @@ export class StorePage {
     }
         
     loadLink(url){
+        this.appSound.play('buttonClick');
+        let urlRedirect = url;
+        console.log("::gameTargetLink to ", url);
+        let opt:string = "toolbarposition=top";
+        this.iab.create(urlRedirect, '_blank', opt);
+        
+    }
+
+    mgmPageOpen(){
+     
         let modal=this.modalCtrlr.create(referFriend);
         modal.present()
     }
@@ -555,6 +583,8 @@ export class StorePage {
 
     //pull up code here
     footerExpanded() {
+       
+        this.count=1;
         console.log('Footer expanded!');
       }
 
@@ -566,9 +596,70 @@ export class StorePage {
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
       }
       getMaximumHeight() {
-        return window.innerHeight / 1.1;
+        return window.innerHeight / 1.02 ;
     }
-
    
+//countDown timer
+
+subscribeTimer0() {
+
+    if (this.timer0Id) {
+
+        // Unsubscribe if timer Id is defined
+        this.st.unsubscribe(this.timer0Id);
+        this.timer0Id = undefined;
+        this.timer0button = 'Subscribe';
+        console.log('timer 0 Unsubscribed.');
+    } else {
+
+        // Subscribe if timer Id is undefined
+        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offersForYou.offer_group));
+        this.timer0button = 'Unsubscribe';
+        console.log('timer 0 Subscribed.');
+    }
+    console.log(this.st.getSubscription());
+}
+
+
+timer0callback(data) {
+
+        var value: any = data[0].countdown
+        this.result = "";
+
+
+        let now = new Date().getTime();
+        if (!value) {
+            return this.result;
+        }
+        if (typeof (value) === "string") {
+            value = new Date(value);
+        }
+
+        let delta = Math.floor((now - value.getTime()) / 1000);
+        if (delta < 0) {
+            delta = Math.abs(delta);
+        }
+
+        let day = Math.floor(delta / 86400);
+        delta %= 86400
+        let hour = Math.floor(delta / 3600);
+        delta %= 3600
+        let minute = Math.floor(delta / 60);
+        delta %= 60
+        let seconds = Math.floor(delta)
+        this.day = (day <= 9) ? '0' + day + '' : day + '';
+        this.hrs = (hour <= 9) ? '0' + hour + '' : hour + '';
+        this.min = (minute <= 9) ? '0' + minute + '' : minute + '';
+        this.sec = (seconds <= 9) ? '0' + seconds : seconds;
+
+       
+
+}
+clicked(){
+    this.tip11 = false;
+    this.tip22 = false;
+    
+}
+
 
 }

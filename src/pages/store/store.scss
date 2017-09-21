@@ -679,6 +679,51 @@ width: 62%!important;
 }
 .swiper-container{
 	background-color: black;
-}
+ }
+ .bottom-slide .swiper-slide{
+ width: 50%!important;
+ }
+ .homeContainer-header{
+	padding-top:20px; 
+ }
+ .homeWhite-bg{
+	padding: 6px 0;
+	margin-top: 20px;
+ }
+ .homeHeader-img{
+	float: left;
+	height: 66px;
+	 
+	bottom: 64px;
+	position: relative;
+ }
+ .homeLabel-md-offer{
+	margin: 13px 8px 8px 0;
+ }
+ .homeOffer-title {
+	margin-left: 12px;
+	color: black;
+	font-size: 20px;
+	position: relative;
+	bottom: 119px;
+	
+ }
+ .HomeAmount{
+	font-size: 28px; 
+	font-weight: 800; 
+ }
+ .homeTime-left{
+	background-color: black;
+	height: 50px;
+	position: relative;
+	bottom: 118px;
+ }
+ .lines-type{
+	height: 7vh;
+	bottom: 22px;
+	position: relative;
+ }
+
+
 
 }

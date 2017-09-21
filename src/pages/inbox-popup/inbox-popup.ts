@@ -13,7 +13,7 @@ export class inboxModal {
     public PageData: any;
     customerId:any;
     customerToken:any;
-    constructor(private _navParams: NavParams, private platform:Platform) {
+    constructor(private _navParams: NavParams, private platform:Platform,private viewctrl: ViewController,) {
         debugger;
         this.customerId = CommonService.session.customer_id;
         this.customerToken = CommonService.session.customer_token;
@@ -27,4 +27,7 @@ export class inboxModal {
         });
        // const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [url] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank','location=no');
     }
+    dismissPopUp(data) {
+        this.viewctrl.dismiss(data);
+      }
 }
