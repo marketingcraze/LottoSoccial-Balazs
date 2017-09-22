@@ -165,8 +165,9 @@ export class MySyndicatePage {
         loader.present()
         return loader;
     }
-    Invite() {
-        this.app.getRootNav().push(InviteFriendsPage);
+    Invite(sid:any) {
+        console.log(sid);
+        this.app.getRootNav().push(InviteFriendsPage,{sid:sid});
     }
 
 

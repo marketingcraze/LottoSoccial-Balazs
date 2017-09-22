@@ -93,6 +93,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { Network } from '@ionic-native/network';
+import { Contacts } from '@ionic-native/contacts';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
 
@@ -274,6 +275,6 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
+        Network,Contacts, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
 })
 export class AppModule { }
