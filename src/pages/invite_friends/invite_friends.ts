@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform, LoadingController } from 'ionic-angular';
 import { ElementRef, ViewChild } from '@angular/core';
+import { Contacts } from '@ionic-native/contacts';
 import { FormControl } from '@angular/forms';
+import { SyndicateService } from '../../providers/syndicate-service';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 
@@ -24,10 +26,19 @@ export class InviteFriendsPage {
   public clistheight: number
   public cfoothide: boolean = true
   public listPadding: number = 0
+  public sid: any;
+  private mDeatils: any;
+  private loader:any 
 
   @ViewChild('contactListHeader') elementView: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private contacts: Contacts, public platform: Platform, public _syndService: SyndicateService,
+        public loadingCtrl: LoadingController) {
+    this.sid = this.navParams.get('sid');
+    console.log(this.sid);
+    this.loader = this.loadingCtrl.create({
+      content:"Please wait..."
+    });
     this.searchControl = new FormControl();
     this.searchControl.valueChanges.debounceTime(100).subscribe(search => {
  
@@ -35,22 +46,38 @@ export class InviteFriendsPage {
             this.setFilteredItems();
  
         });
-    this.items = [
-            {title: 'Benjamin Evalent', number:'+447448962353', selected:false},
-            {title: 'I am me', number:'+447448962353', selected:false},
-            {title: 'Somewhat somewhere', number:'+447448962353', selected:false},
-            {title: 'john Papa', number:'+447448962353', selected:false},
-            {title: 'Angular 2', number:'+447448962353', selected:false},
-            {title: 'Ionic 2', number:'+447448962353', selected:false},
-            {title: 'Node Evalent', number:'+447448962353', selected:false},
-            {title: 'Ninja Bedi', number:'+447448962353', selected:false},
-            {title: 'Dev Geek', number:'+447448962353', selected:false},
-            {title: 'john Charter', number:'+447448962353', selected:false},
-            {title: 'Google contacts', number:'+447448962353', selected:false},
-            {title: 'Demo Contacts', number:'+447448962353', selected:false}
-        ]
+        this.platform.ready().then(() => {
+          var opts = {   
+            filter : "M",                                
+            multiple: true,        
+            hasPhoneNumber:true,                             
+            fields:  [ 'displayName', 'name' ]
+          };
+          contacts.find([ 'displayName', 'name' ],opts).then((contacts) => {
+            for(var i=0; i<contacts.length; i++) {
+              this.items.push(contacts[i]["_objectInstance"])
+              this.items[i].selected = false;
+            }
+            this.fItems = this.items;
+          }, (error) => {
+            console.log(error);
+          })
+      })
 
-        this.fItems = this.items;
+    // this.items = [
+            // {displayName: 'Benjamin Evalent', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'I am me', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Somewhat somewhere', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'john Papa', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Angular 2', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Ionic 2', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Node Evalent', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Ninja Bedi', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Dev Geek', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'john Charter', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Google contacts', phoneNumbers:[{value:'+447448962353'}], selected:false},
+            // {displayName: 'Demo Contacts', phoneNumbers:[{value:'+447448962353'}], selected:false}
+        // ]
   }
 
   onSearchInput(){
@@ -59,12 +86,16 @@ export class InviteFriendsPage {
 
   ionViewDidLoad() {
     this.clistheight = window.innerHeight - this.elementView.nativeElement.offsetHeight;
+    this.getSyndicateMeembers();
     this.setFilteredItems();
   }
    setFilteredItems() {
-        this.fItems = this.items.filter((item) => {
-            return item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-        }); 
+     if(this.items) {
+      this.fItems = this.items.filter((item) => {
+            return item.name.formatted.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        });
+     }
+         
     }
 
    toggle() {
@@ -85,15 +116,17 @@ export class InviteFriendsPage {
     this.cclose = 'cclose'
     this.cfoothide = true;
     this.listPadding = 0;
+    if(this.items){
     var arrlen = this.items.length;
       for(var j = 0; j < arrlen; j++){
         this.items[j].selected = false
       }
+    }
   }
 
   addContact(item, i) {
     for(var j=0; j<this.items.length; j++) {
-      if(this.items[j].title == item.title) {
+      if(this.items[j].name.formatted == item.name.formatted) {
         if(this.items[j].selected == true) {
           this.items[j].selected = false
         }else {
@@ -124,7 +157,7 @@ export class InviteFriendsPage {
   removeContact(item, i) {
     var count: number = 0;
     for(var j=0; j<this.items.length; j++) {
-      if(this.items[j].title == item.title) {
+      if(this.items[j].name.formatted == item.name.formatted) {
         this.items[j].selected = false
       }
       if(this.items[j].selected == true) {
@@ -160,6 +193,18 @@ export class InviteFriendsPage {
   });
 
   toast.present();
+}
+
+getSyndicateMeembers() {
+  this.loader.present();
+  this._syndService.getSyndicateMeembers(this.sid)
+  .subscribe((res)=> {
+    this.loader.dismiss();
+    console.log(res);
+    this.mDeatils = res.response["0"].get_private_syndicate_members.response;
+    console.log(this.mDeatils);
+  })
+
 }
 
 }

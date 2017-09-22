@@ -110,6 +110,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { Network } from '@ionic-native/network';
+import { Contacts } from '@ionic-native/contacts';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Device } from '@ionic-native/device';

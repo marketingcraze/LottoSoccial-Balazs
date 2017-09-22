@@ -105,13 +105,13 @@
             <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()"><ion-icon ios="ios-settings" md="md-settings"></ion-icon></span></ion-col>
         </ion-row>
           <div style="padding:0; text-align: center">
-            <button ion-button class="btn" (click)="Invite()"> ADD MEMBERS </button>
+            <button ion-button class="btn" (click)="Invite(sd.syndicate_id)"> ADD MEMBERS </button>
           </div>
       </ion-item>
       <ion-item *ngIf="!sd.purchased_status">
         
           <div style="padding:0; text-align: center; float: left;">
-            <button ion-button class="btn" (click)="Invite()"> ADD MEMBERS </button>
+            <button ion-button class="btn" (click)="Invite(sd.syndicate_id)"> ADD MEMBERS </button>
           </div>
           <div style="padding:0; text-align: center;float: right;">
             <button ion-button class="btn" (click)="viewTickets(i)"> VIEW TICKETS </button>

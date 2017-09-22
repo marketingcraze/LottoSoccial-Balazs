@@ -114,4 +114,7 @@
     <plugin name="cordova-sqlite-storage" spec="^2.0.4" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="onesignal-cordova-plugin" spec="^2.1.2" />
+    <plugin name="cordova-plugin-contacts" spec="^2.3.1">
+        <variable name="CONTACTS_USAGE_DESCRIPTION" value=" " />
+    </plugin>
 </widget>

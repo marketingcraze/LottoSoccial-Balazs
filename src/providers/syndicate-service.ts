@@ -404,6 +404,56 @@ export class SyndicateService {
                 return res;
         })
     }
+
+    getSyndicateMeembers(sid:any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/member/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+                    "request": [{
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "5",
+                        "screen_id": "5.1",
+                        "action": "get syndicate meembers",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "get_private_syndicate_members",
+                        "customer_id": CommonService.session.customer_id,
+                        "private_syndicate_id":sid
+                        }]
+                    }
+                return this.http.post(action, data, { headers:headopt })
+                    .map(res => res.json())
+                    .map((res) => {
+                        return res;
+                })
+
+    }
+
+    insertContact(sid:any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/member/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+                    "request": [{
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "5",
+                        "screen_id": "5.1",
+                        "action": "get syndicate meembers",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "get_private_syndicate_members",
+                        "customer_id": CommonService.session.customer_id,
+                        "private_syndicate_id":sid
+                        }]
+                    }
+                return this.http.post(action, data, { headers:headopt })
+                    .map(res => res.json())
+                    .map((res) => {
+                        return res;
+                })
+    }
+    
 }
 
 

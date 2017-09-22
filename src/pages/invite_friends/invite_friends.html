@@ -16,21 +16,22 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar class="my-sub-head">
-    <span class="sp1">Syndicate: Hatchster syndicate</span><br>
-    <span class="sp2">Members invited to this syndicate: 1</span>
+    <span class="sp1">Syndicate: {{mDeatils?.syndicate_name}}</span><br>
+    <span class="sp2">Members invited to this syndicate: {{mDeatils?.total_invited}}</span>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-list class="c-list">
+  <ion-list class="c-list" *ngFor="let m of mDeatils?.member_group">
     <ion-item>
       <ion-thumbnail item-left>
-        <img src="./assets/img/contacts.svg">
+        <img onerror="this.src='./assets/img/contacts.svg'" [src]="m.profile_image">
       </ion-thumbnail>
-      <h2>Fig Nelson</h2>
+      <h2>{{m?.first_name}} {{m?.last_name}}</h2>
       <p>SYNDICATE MANAGER</p>
-      <button ion-button clear item-right>PLAYING</button>
+      <button ion-button clear item-right *ngIf="m?.next_draw_status == 'PAID'">PLAYING</button>
+      <button ion-button clear item-right *ngIf="m?.next_draw_status != 'PAID'" style="background: yellow">PENDING</button>
     </ion-item>
   </ion-list>
 
@@ -111,19 +112,19 @@
         <img src="./assets/img/user.svg" class="ct-list-icon" *ngIf="item.selected == false">
         <img src="./assets/img/check.svg" class="ct-list-icon" *ngIf="item.selected == true">
       </ion-thumbnail>
-      <h2>{{item.title}}</h2>
-      <p>{{item.number}}</p>
+      <h2>{{item?.name?.formatted}}</h2>
+      <p>{{item.phoneNumbers[0].value}}</p>
       <p clear item-right>home</p>
     </ion-item>
   </ion-list>
   </div>
    <ion-footer [hidden]="cfoothide">
-     <div style="height: 50px; width: 100%; background: white; max-width: 100%; padding: 5px; overflow: auto; white-space: nowrap;">
+     <div style="height: 50px; width: 100%; background: white; max-width: 100%; padding: 5px; overflow: auto; white-space: nowrap;" *ngIf="items">
         <ion-chip *ngFor="let item of items | myfilter; let i = index" >
           <ion-avatar>
             <img src="./assets/img/user.svg" style="border: 0.5px solid #ccc;">
           </ion-avatar>
-          <ion-label>{{item.title}}</ion-label>
+          <ion-label>{{item?.name?.formatted}}</ion-label>
           <button ion-button clear color="dark" (click)="removeContact(item, i)">
           <ion-icon name="close-circle" style="color: #999;"></ion-icon>
           </button>
