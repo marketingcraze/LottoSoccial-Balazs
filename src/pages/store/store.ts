@@ -1,12 +1,14 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { App, Platform, NavController, NavParams, ActionSheetController, 
-    Slides, LoadingController, AlertController ,ModalController} from 'ionic-angular';
+    Slides, LoadingController, AlertController, ModalController, Loading, Tabs
+} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { JoinSyndicatePage } from '../join-syndicate/join-syndicate';
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
 import { BadgesPage } from '../badges/badges';
+import { Storage } from '@ionic/storage';
 
 import { Params } from '../../services/params';
 import { CommonService } from '../../services/common.service';
@@ -16,6 +18,8 @@ import { referFriend } from '../refer-friend-page/refer-friend-page';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { IonPullUpFooterState } from 'ionic-pullup';
 import { SimpleTimer } from 'ng2-simple-timer';
+import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
+import { PlayGamePage } from '../play-games/play-games';
 
 // import * as $ from 'jquery';
 declare var $:any;
@@ -25,6 +29,7 @@ declare var $:any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    buyoffer: any;
     @ViewChild(Slides) home_slides: Slides;
     @ViewChild("confirmPayment") confirmPayment;
     public footerState: IonPullUpFooterState;
@@ -52,6 +57,13 @@ export class StorePage {
     jackpotList:any
     jackpotGroup:any
     total_cards = 0
+
+    //buy credit
+    loading:Loading;
+    buyOfferStatus:any;
+    offerStatus:boolean=false;
+    errorshow:boolean=false;
+    visitorId:any;
 
     slideInUp:boolean = false;
     tip11:boolean = false;
@@ -138,14 +150,18 @@ export class StorePage {
         public platform: Platform, 
         public navCtrl: NavController, 
         public navParams: NavParams,
+        private storage: Storage,
         public srvOffer: OfferService,
         private iab: InAppBrowser,
         public commonSrv:CommonService,
         public appSound:AppSoundProvider,
+        public offerService:OfferService,
         public modalCtrlr:ModalController,
         public actionSheetCtrl: ActionSheetController) {
            
-
+        storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
+            this.visitorId=firstTimeLoad;
+            });
         this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
@@ -334,14 +350,11 @@ export class StorePage {
     }
 
     gameTargetLink(target){
+        debugger;
       this.appSound.play('buttonClick');
-        let url = `https://nima.lottosocial.com/webview-auth/?redirect_to=${target}
-        &customer_id=${CommonService.session.customer_id}
-        &customer_token=${CommonService.session.customer_token}`
-
-        console.log("::gameTargetLink to ", url);
-        let opt:string = "toolbarposition=top";
-        this.iab.create(url, '_blank', opt);
+      var parts=target.split('/');  
+      var gameId=parts[1].slice(8);
+      this.nav.push(PlayGamePage,{"game":gameId});
     }
 
     ngAfterViewInit() {
@@ -577,7 +590,6 @@ export class StorePage {
             this.delay(300);
             this.tip22 = true   
             
-            
         }
     }
 
@@ -659,6 +671,44 @@ clicked(){
     this.tip11 = false;
     this.tip22 = false;
     
+}
+
+buyCreditOffer(offerId: any) {
+    this.loading = this.loadingCtrl.create();
+    this.loading.present().then(() => {
+        this.offerService.buy_Credit_Offer(offerId,this.visitorId).subscribe(data => {
+            this.loading.dismiss();
+            this.buyoffer = data.response.response;
+            this.buyOfferStatus = data.response.response.status;
+            if (this.buyOfferStatus === "FAIL") {
+                this.offerStatus=false;
+                debugger;
+                this.showModalForcreditoffer();
+
+            }
+            else {
+                this.offerStatus=true;
+                this.showModalForcreditoffer();
+            }
+        },
+        err => {
+            this.errorshow = true;
+            console.log("error", err);
+        },
+        ()=> console.log("offer buy successfully")
+        );
+    })
+}
+showModalForcreditoffer(){
+    let homeCard:boolean=true;
+    let resultModal=this.modalCtrlr.create(offerBuyResultPage,{syndicateName:this.buyoffer,status:this.offerStatus,homeCard});
+    resultModal.present();
+    resultModal.onDidDismiss((data: any[]) => {
+        if (data) {
+          var tabs:Tabs=this.navCtrl.parent.parent.parent;
+          tabs.select(1);
+        }
+    })
 }
 
 

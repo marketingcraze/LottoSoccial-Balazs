@@ -14,8 +14,11 @@
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col col-12>
+            <ion-col col-12 *ngIf="!homeOffer">
                 <button ion-button outline round color="light" (click)="getmoreline()">GET More Lines</button>
+            </ion-col>
+            <ion-col col-12 *ngIf="homeOffer">
+                <button ion-button outline round color="light" (click)="getmoreline()">Not now</button>
             </ion-col>
         </ion-row>
 

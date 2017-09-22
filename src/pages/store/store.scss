@@ -512,7 +512,7 @@ page-store {
           &.preactive {
             z-index: 1;
             .slider-single-image {
-              opacity: .3;
+              opacity: 0;
               transform: translateX(-25%) scale(.8);
             }
             .slider-single-download {
@@ -528,7 +528,7 @@ page-store {
           &.proactive {
             z-index: 1;
             .slider-single-image {
-              opacity: .3;
+              opacity: 0;
               transform: translateX(25%) scale(.8);
             }
             .slider-single-download {
@@ -702,10 +702,10 @@ width: 62%!important;
  }
  .homeOffer-title {
 	margin-left: 12px;
-	color: black;
+	color: white;
 	font-size: 20px;
 	position: relative;
-	bottom: 119px;
+	bottom: 125px;
 	
  }
  .HomeAmount{
@@ -716,7 +716,7 @@ width: 62%!important;
 	background-color: black;
 	height: 50px;
 	position: relative;
-	bottom: 118px;
+	bottom: 124px;
  }
  .lines-type{
 	height: 7vh;
