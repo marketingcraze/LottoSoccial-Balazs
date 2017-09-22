@@ -1,6 +1,6 @@
 <ion-content class="modal-page" text-center>
-  <ion-list *ngIf="value==false">
-    <ion-label style="margin-top: 10%; font-size: 16px" text-center>Confirm you want to claim your voucher</ion-label>
+  <ion-list *ngIf="value=='0'">
+    <ion-label style="margin-top: 6%; font-size: 16px" text-center>Confirm you want to claim your voucher</ion-label>
     <ion-item text-wrap align-left no-lines style="padding-top: 10px">
       <div>
         <table style="width: 100%">
@@ -15,11 +15,13 @@
       </div>
     </ion-item>
     <ion-item no-lines text-wrap>
-      <div>
-        <ul style="font-size: 14px">
-          <li>5 Lotto Tickets Wednesday +</li>
-          <li>5 Lotto Tickets Saturday +</li>
-          <li>£1.50 Credit to buy any other lottary of your choice</li>
+      <div style="margin-top: -4px">
+        <ul style="font-size: 14px" *ngFor='let lst of lottoMiddleJson;let i=index;'>
+          <li  *ngIf="lst" style="font-size: 15px; margin-top: -10px">{{lottoMiddleJson[i]}}</li>
+          <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
+          <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
+          <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
+          
         </ul>
       </div>
     </ion-item>
@@ -34,7 +36,7 @@
       </ion-item>
 
   </ion-list>
-    <div class="buycard" *ngIf="!value==false">
+    <div class="buycard" *ngIf="value=='1'">
         <button ion-button icon-only style="background:#F8F8F8; border-radius:50%; height: 70px">
                   <ion-icon style="width:70px; "><img src="assets/icon/check_icon.png"> </ion-icon>
                 </button>
@@ -49,6 +51,21 @@
             </ion-col>
         </ion-row>
     
+</div>
+<div *ngIf="value=='2'" class="errorcard">
+  <button ion-button icon-only style="background:#F8F8F8; border-radius:50%;width:25%;height: 70px">
+            <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>
+          </button>
+  <ion-row text-center>
+      <ion-col col-12 class="messagecolor">
+        Voucher Claimed Failed <br> please try again
+      </ion-col>
+  </ion-row>
+  <ion-row style="margin-top: 20px">
+      <ion-col col-12>
+          <button style="font-size: 18px;width:50%; height: 45px" ion-button outline round color="light" (click)="moveToVouchers()">TRY AGAIN</button>
+      </ion-col>
+  </ion-row>
 </div>
 
 </ion-content>

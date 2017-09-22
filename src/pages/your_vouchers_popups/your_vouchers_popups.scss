@@ -5,7 +5,7 @@
       overflow: hidden;
       max-width: 90%;
       width: 100vw;
-      height: 60vh;
+      height: 56vh;
       top: 0;
       bottom: 0;
       left: 0;
@@ -76,5 +76,17 @@ padding-top: 5%;
 }
 .label-md {
   margin: 1px 8px 13px 0;
+}
+.errorcard{
+  background:#990033;
+  width:auto;
+  padding:10px;
+  padding-top:40%;
+  padding-bottom: 150px;
+  min-height: 405px;
+  position: relative;
+  bottom: 70px;
+  border-radius: 10px;
+
 }
     }

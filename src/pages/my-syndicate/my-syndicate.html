@@ -109,10 +109,7 @@
           </div>
       </ion-item>
       <ion-item *ngIf="!sd.purchased_status">
-        <ion-row style="padding: 0px 5px 5px">
-            <ion-col col-50 class="left"><span class="tkt-lbl"></span></ion-col>
-            <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()"><ion-icon ios="ios-settings" md="md-settings"></ion-icon></span></ion-col>
-        </ion-row>
+        
           <div style="padding:0; text-align: center; float: left;">
             <button ion-button class="btn" (click)="Invite()"> ADD MEMBERS </button>
           </div>
@@ -120,8 +117,14 @@
             <button ion-button class="btn" (click)="viewTickets(i)"> VIEW TICKETS </button>
           </div>
       </ion-item>
-      <ion-item (click)="checkwins()" style="font-size: 14px;">
-        <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span>
+      <ion-item style="font-size: 14px;">
+        <ion-row style="padding: 0px 5px 5px">
+          <ion-col col-50 class="left" (click)="checkwins()"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></ion-col>
+          <ion-col col-50 class="right" ><span class="tkt-a" ><ion-icon (click)="manage_syndicates2()" ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(2,2);"></ion-icon></span></ion-col>
+          </ion-row>
+          <ion-row style="padding: 0px 5px 5px; bottom: 10px; position: relative;"> 
+              <ion-col class="right"><span class="tkt-a" (click)="manage_syndicates2()">Settings</span></ion-col>
+          </ion-row>
       </ion-item>
       </div>
     </ion-card>

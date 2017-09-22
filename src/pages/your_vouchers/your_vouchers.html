@@ -45,7 +45,7 @@
 
     <ion-scroll no-padding [ngStyle]="{height: height+ 'px'}" scrollX="true" scrollY="true" *ngIf="count>0">
      
-    <div *ngFor='let lst of appList let i=index;' >
+    <div *ngFor='let lst of appList;let i=index;' >
 
       <ion-item no-lines  id="voucherListItem">
         <ion-thumbnail item-left class="thumbnalTag">

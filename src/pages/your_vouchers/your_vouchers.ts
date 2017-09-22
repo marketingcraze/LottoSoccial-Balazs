@@ -19,14 +19,15 @@ export class your_vouchers {
   height: any;
   service_data: any;
   result: any = [];
-	resultDate: any = [];
+  resultDate: any = [];
+  mobileNumber:any;
 
 
   appList: any;
     
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
     private modalController: ModalController, public voucher_service: VoucherService,
-    private loadingCtrl: LoadingController,public timerInstance: SimpleTimer,) {
+    private loadingCtrl: LoadingController,private timerInstance: SimpleTimer,) {
     this.voucher_code = ""
     
 
@@ -38,6 +39,8 @@ export class your_vouchers {
     this.voucher_service.getVoucherList().subscribe(
       data => {
         this.appList = data.response[1].get_issued_voucher_code.response.voucher_code_details
+        this.mobileNumber = data.response[0].get_customer_details.response.mobile_number
+        console.log("mobile number is ", this.mobileNumber )
         this.adjustListCount()
         this.timerInstance.newTimer('1sec', 1);
         
@@ -91,7 +94,8 @@ export class your_vouchers {
     }
     else {
       let modal = this.modalController.create(your_vouchers_popups, {
-        VoucherCode: this.voucher_code
+        VoucherCode: this.voucher_code,
+        mobileNumbr:this.mobileNumber
       })
       modal.present();
     }
@@ -99,7 +103,8 @@ export class your_vouchers {
   selectedButtonID(index) {
       let modal = this.modalController.create(your_vouchers_popups, {
       VoucherDetail: this.appList[index].voucher_description,
-      VoucherCode: this.appList[index].voucher_code
+      VoucherCode: this.appList[index].voucher_code,
+      mobileNumbr:this.mobileNumber
  })
     modal.present();
 }
@@ -111,6 +116,24 @@ export class your_vouchers {
 
   date() {
   }
+  subscribeTimer0() {
+    
+		if (this.timer0Id) {
+
+			// Unsubscribe if timer Id is defined
+			this.timerInstance.unsubscribe(this.timer0Id);
+			this.timer0Id = undefined;
+			this.timer0button = 'Subscribe';
+			console.log('timer 0 Unsubscribed.');
+		} else {
+
+			// Subscribe if timer Id is undefined
+			this.timer0Id = this.timerInstance.subscribe('1sec', () => this.timercallback(this.appList));
+			this.timer0button = 'Unsubscribe';
+			console.log('timer 0 Subscribed.');
+		}
+		console.log(this.timerInstance.getSubscription());
+	}
   counter0 = 0;
 	timer0Id: string;
 	timer0button = 'Subscribe';
@@ -132,7 +155,8 @@ export class your_vouchers {
 			let now = new Date().getTime();
 			if (!value) {
 				return this.result;
-			}
+      }
+      //value = "Tue 12 sep 17 9:00:00"
 			if (typeof (value) === "string") {
 				value = new Date(value);
 			}
@@ -155,11 +179,11 @@ export class your_vouchers {
 
 
 
-			this.result += (day < 9) ? '0' + day + ' : ' : day + ' : ';
+			this.result += (day <= 9) ? '0' + day + ' : ' : day + ' : ';
 
-			this.result += (hour < 9) ? '0' + hour + ' : ' : hour + ' : ';
-			this.result += (minute < 9) ? '0' + minute + ' : ' : minute + ' : ';
-			this.result += (seconds < 9) ? '0' + seconds : seconds;
+			this.result += (hour <= 9) ? '0' + hour + ' : ' : hour + ' : ';
+			this.result += (minute <= 9) ? '0' + minute + ' : ' : minute + ' : ';
+			this.result += (seconds <= 9) ? '0' + seconds : seconds;
 
 			this.resultDate.push(this.result)
 
@@ -170,24 +194,7 @@ export class your_vouchers {
 		return this.resultDate
   }
 
-  subscribeTimer0() {
-    
-		if (this.timer0Id) {
-
-			// Unsubscribe if timer Id is defined
-			this.timerInstance.unsubscribe(this.timer0Id);
-			this.timer0Id = undefined;
-			this.timer0button = 'Subscribe';
-			console.log('timer 0 Unsubscribed.');
-		} else {
-
-			// Subscribe if timer Id is undefined
-			this.timer0Id = this.timerInstance.subscribe('1sec', () => this.timercallback(this.appList));
-			this.timer0button = 'Unsubscribe';
-			console.log('timer 0 Subscribed.');
-		}
-		console.log(this.timerInstance.getSubscription());
-	}
+ 
 
 
 }
