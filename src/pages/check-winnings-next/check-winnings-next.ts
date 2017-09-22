@@ -70,8 +70,9 @@ export class CheckWinningsNextPage {
           this.animateSyndicate();
         }, 2000); 
     } else {
+      this.navCtrl.push(PrizeSummaryWinPage);
       if(this.movetype){
-        this.navCtrl.push(PrizeSummaryWinPage);
+        
         if(this.movetype.response_type == '10.1'){
           
         }else if(this.movetype.response_type == '10.2') {
