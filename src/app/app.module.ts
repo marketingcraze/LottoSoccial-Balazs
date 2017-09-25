@@ -81,6 +81,7 @@ import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-wi
 import { getGamesModal } from '../pages/get-games-modal/get-games-modal'
 import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
+import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase'
 
 
 // components
@@ -209,6 +210,7 @@ import { Device } from '@ionic-native/device';
         getGamesModal,
         inboxModal,
         gameLoss,
+        confirmOfferPurchasePage,
         // OffersPayment,
 
         // pipes
@@ -324,6 +326,7 @@ import { Device } from '@ionic-native/device';
         getGamesModal,
         inboxModal,
         gameLoss,
+        confirmOfferPurchasePage,
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -336,5 +339,6 @@ import { Device } from '@ionic-native/device';
         AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts]
+
 })
 export class AppModule { }

@@ -22,6 +22,7 @@
         "@angular/tsc-wrapped": "^4.3.3",
         "@ionic-native/app-version": "^3.14.0",
         "@ionic-native/camera": "^3.14.0",
+        "@ionic-native/contacts": "^4.2.1",
         "@ionic-native/core": "^3.14.0",
         "@ionic-native/device": "^4.1.0",
         "@ionic-native/file": "^3.14.0",
@@ -46,6 +47,7 @@
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.7",
+        "cordova-plugin-contacts": "^2.3.1",
         "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
@@ -66,6 +68,7 @@
         "ionic-angular": "^2.3.0",
         "ionic-native": "^2.9.0",
         "ionic-plugin-keyboard": "^2.2.1",
+        "ionic-pullup": "^3.0.1",
         "ionicons": "^3.0.0",
         "onesignal-cordova-plugin": "^2.1.2",
         "rxjs": "^5.4.2",
@@ -113,9 +116,13 @@
             "cordova-plugin-nativeaudio": {},
             "onesignal-cordova-plugin": {},
             "cordova-plugin-webengage": {},
-            "cordova-plugin-x-socialsharing": {}
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-contacts": {
+                "CONTACTS_USAGE_DESCRIPTION": " "
+            }
         },
         "platforms": [
+            "android",
             "ios"
         ]
     }

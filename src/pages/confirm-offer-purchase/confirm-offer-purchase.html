@@ -1,0 +1,50 @@
+<ion-content class="modal-page" text-center style="text-align: center">
+    <div style="text-align: center;border-bottom: 1px solid #A7A2A2;">
+        <ion-item no-lines text-center text-wrap item-center>
+            <p style="font-size: 17px;text-align: center;color: black">Confirm your purchase</p>
+        </ion-item>
+    </div>
+    <div style="text-align: center">
+        <ion-item no-lines text-center text-wrap>
+            <p style="font-size: 16px;text-align: center">This is a description for the offer which goes on two lines</p>
+        </ion-item>
+    </div>
+    <div style="margin: 2% 5% 2% 5%; border: 1px solid lightgray; border-radius: 10px">
+        <div style="text-align: center;border: none">
+
+            <ion-item no-lines text-center text-wrap style="text-align: center; background-color: lightgrey;border-top-left-radius: 10px;border-top-right-radius: 10px">
+                <ion-icon ios="ios-lock" md="md-lock"></ion-icon>
+                <span style="font-size:16px;padding-left: 10px">Secure payment details</span>
+            </ion-item>
+        </div>
+        <div style="border-bottom: 1px solid lightgray;margin: 5px">
+            <ion-item no-lines text-wrap  >
+                <ion-label (click)="select('first')"><span style="font-size: 13px">Use preffered card:</span> <br><span style="font-size: 15px"> VISA Ending with 1294 </span></ion-label>
+                <ion-checkbox (click)="select('first')" checked="{{check1}}" style="background-color: green;border-radius: 50px" ></ion-checkbox>
+            </ion-item>
+        </div>
+        <div style="border-bottom: 1px solid lightgray;margin: 5px" >
+            <ion-item no-lines text-wrap >
+                <ion-label (click)="select('second')"><span style="font-size: 13px">Use preffered card:</span> <br><span style="font-size: 15px">MASTERCARD Ending with 1294</span></ion-label>
+                <ion-checkbox (click)="select('second')" checked="{{check2}}" ></ion-checkbox>
+            </ion-item>
+        </div>
+        <div style="margin: 5px" >
+            <ion-item no-lines text-wrap >
+                <ion-label (click)="select('third')"><span style="font-size: 15px">Use a different card</span></ion-label>
+                <ion-checkbox (click)="select('third')" checked="{{check3}}"></ion-checkbox>
+            </ion-item>
+        </div>
+ 
+    </div>
+    <div style="margin-top: 5%;text-align: center">
+        
+            <input type="button" value="BUY NOW FOR £4.99" style="width: 60%; height: 40px;
+            color: white;background-color: #249040;border-radius: 10px;border: none;text-align: center" />
+        
+    </div>
+    <div style="text-align: center; margin-top: 5%;height: 10%" >
+            <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;" (click)="dismissPopUp()">Not Now</p>
+          </div>
+
+</ion-content>

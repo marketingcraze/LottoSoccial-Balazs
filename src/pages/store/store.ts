@@ -20,7 +20,7 @@ import { IonPullUpFooterState } from 'ionic-pullup';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { PlayGamePage } from '../play-games/play-games';
-
+import { confirmOfferPurchasePage } from '../confirm-offer-purchase/confirm-offer-purchase'
 // import * as $ from 'jquery';
 declare var $:any;
 
@@ -696,8 +696,9 @@ buyCreditOffer(offerId: any) {
                 } 
             }
             if (token_exists > 0) {
-                data.response.push({ offer: offerId });
-                this.userCards = data.response;
+                let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
+                })
+                modal.present();
 
                 console.log("StorePage::showPaymentOptions() success", this.userCards);
                 loader.dismiss();
@@ -710,6 +711,8 @@ buyCreditOffer(offerId: any) {
             loader.dismiss();
         });
     }
+   
+   
 }
 showModalForcreditoffer(){
     let homeCard:boolean=true;

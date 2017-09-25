@@ -2,4 +2,10 @@ page-your-offers {
 .grid{
     margin-bottom: 45px;
 }
+.scroll-content {
+    margin-top: 40px;
+    -webkit-overflow-scrolling: auto;
+    scroll-behavior: auto;
+}
+
 }

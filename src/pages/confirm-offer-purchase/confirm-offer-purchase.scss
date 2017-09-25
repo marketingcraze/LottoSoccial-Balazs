@@ -1,0 +1,52 @@
+page-confirm-offer-purchase{
+    .modal-page {
+        position: absolute;
+        overflow: hidden;
+        max-width: 100%;
+        width: 90vw;
+        height: 76%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0;
+        box-shadow:  0 0 50px  rgba(0,0,0,0.60);
+        
+        border-radius: initial;
+      
+        }
+        ion-icon {
+            display: inline-block;
+            font-size: 1.3em;
+            color: green;
+        }
+        .checkbox-ios .checkbox-checked .checkbox-md .checkbox-inner {
+            border-color: gray;
+            background-color: #2B994A;
+            border-radius: 20px;
+            border-width: 0px;
+        }
+       
+        .scroll-content {
+            border-radius: inherit;
+        }
+        .checkbox-md .checkbox-checked {
+            border-color: gray;
+            border-radius: 20px;
+            border-width: 0px;
+            color: green;
+            background-color: #2B994A;
+        }
+        .checkbox-md .checkbox-icon {
+            border-radius: 20px;
+            position: initial;
+            
+        }
+        .item.item-md .checkbox-md {
+            position: static;
+            display: inherit;
+            margin: 9px 16px 9px 0px;
+        }
+        
+    }
