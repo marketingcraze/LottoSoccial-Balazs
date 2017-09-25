@@ -1,0 +1,87 @@
+<ion-header>
+        <cus-header title="Game Loss" notification-count="5"></cus-header>
+    </ion-header>
+<ion-content style="bottom: -32px">
+        <div text-center class="orange-bgLoss">
+            <div >
+                <img src="{{gameInfo?.game_imageurl}}" class="headerImageLoss" />
+            </div>
+            <ion-list>
+                <div class="game-title" >{{gameInfo?.game_title}}</div>
+                <div text-wrap >
+                    {{gameInfo?.game_description}}
+                </div>
+                <div text-wrap>
+                    <br> Game Message
+                </div>
+            </ion-list>
+        </div>
+        <br>
+        <div class="game-level-bgLoss">
+            <div class="level-target-titleLoss" text-center>
+                <span>NOT QUITE THERE...</span>
+            </div>
+            <div class="game-play-scoreLoss">
+                <table >
+                    <tr>
+                        <td>TARGET</td>
+                        <td></td>
+                        <td>RESULT</td>
+                    </tr>
+                    <tr>
+                        <td>{{gameInfo?.game_targetvalue}}</td>
+                        <td>Score</td>
+                        <td><b>00</b></td>
+                    </tr>
+                     <tr>
+                        <td>{{gameInfo?.game_duration}}</td>
+                        <td>Time (Sec)</td>
+                        <td><b>00</b></td>
+                    </tr>
+                    <tr>
+                        <td>{{gameInfo?.game_efficiencytarget?gameInfo?.game_efficiencytarget:0}}</td>
+                        <td>Words used</td>
+                        <td style="color:red"><b>00</b></td>
+                    </tr>
+                </table>
+            </div>
+    
+            <div text-center style="position: relative;top: 10px;">
+                <button ion-button style="background-color: white" (click)="showBoosterModal()">
+                    <img src="assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
+                   <span style="color:black"> Get Booster</span>
+                </button>
+                <button ion-button color="secondary" (click)="openThankyouPage()"> Play Now</button>
+            </div>
+        </div>
+    
+        <div class="play-game-loss" text-center>
+            <span class="spanlossCase">Tips from Lotto Woggle conquerors</span>
+            <div class="talk-bubbleLoss tri-rightLoss roundLoss btm-leftLoss">
+                <div class="talktextLoss">
+                    <p>bkdsjfkljcxvlkjhxcvx ZDKjfhsA ZDLKfjhsDIAK klughjDZXLfgha jihkgSDLFGiy.</p>
+                </div>
+            </div>
+            <br>
+            <br>
+            <span style="color:#D8D8D8">
+                <span>Matt </span><span> <img src="assets/icon/arw_feed_ico.svg" class="image-settingLoss" /></span><span> Conqueror of level 2</span>
+            </span>
+            <br>
+            <br>
+            <button class="btn-transparent-moreTipsLoss btn-moreTipsLoss" (click)="recentWinnerTipsmodal()">View more tips</button>
+        </div>
+    
+        <div class="pagination">
+                <ul class="step-indicator row">
+                    <li class="col-xs-4">
+                        <a href="#" class="active">
+                        <span class="m-l-20" text-wrap>Recent Winners</span>
+                    </a>
+                    </li>
+                    <li class="col-xs-3"><b><a href="#" class="black">Matt<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
+                    <li class="col-xs-2"><b><a href="#" class="black">Jane<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
+                </ul>
+            </div>
+    </ion-content>
+    

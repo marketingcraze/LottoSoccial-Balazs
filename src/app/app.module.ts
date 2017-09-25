@@ -80,6 +80,7 @@ import { your_vouchers_popups } from '../pages/your_vouchers_popups/your_voucher
 import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
 import { getGamesModal } from '../pages/get-games-modal/get-games-modal'
 import { inboxModal } from '../pages/inbox-popup/inbox-popup';
+import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
 
 
 // components
@@ -113,11 +114,8 @@ import { Network } from '@ionic-native/network';
 import { Contacts } from '@ionic-native/contacts';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { Device } from '@ionic-native/device';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnimationService, AnimatesDirective } from 'css-animator';
-import { SimpleTimer } from 'ng2-simple-timer';
-
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
@@ -130,6 +128,8 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
 import { TimeDifferencePipe } from '../pipes/time-difference';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { DateLeftPipe } from '../pipes/date-left/date-left';
+import { SimpleTimer } from 'ng2-simple-timer';
+import { Device } from '@ionic-native/device';
 
 
 @NgModule({
@@ -208,6 +208,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         AnimatesDirective,
         getGamesModal,
         inboxModal,
+        gameLoss,
         // OffersPayment,
 
         // pipes
@@ -322,6 +323,7 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
         your_vouchers,
         getGamesModal,
         inboxModal,
+        gameLoss,
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -333,7 +335,6 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device]
-
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts]
 })
 export class AppModule { }

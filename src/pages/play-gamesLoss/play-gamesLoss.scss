@@ -1,0 +1,277 @@
+game-loss{
+.orange-bgLoss{
+    background-color: #F27A18;
+    height: 185px;
+  }
+  
+  .game-titleLoss
+  {
+      font-size: 22px;
+      font-weight: 800;
+      color:#fff;
+  }
+  .item-md.item-block.orange-bg .item-inner
+  {
+      border-bottom: none;
+  }
+  
+  .orange-bgLoss .label-md
+  {
+      margin: 0px;
+  }
+  
+  .game-level-bgLoss
+  {
+      background-color: #ffebb9;
+      background-image: url('../assets/icon/games_bg@3x.png');
+      min-height:195px;
+      width:100%;
+      background-repeat: repeat-x;
+      bottom: 30px;
+      position: relative;
+      height: 220px;
+  }
+  .play-game-btn-containerLoss
+  {
+      margin-top:20px;
+      margin-bottom:20px;
+  }
+  
+  .level-target-titleLoss
+  {
+  padding-top:20px;
+  padding-bottom:6px;
+  color: #B26431;
+  font-size: 20px;
+  font-weight: 600;
+  }
+  
+  .pagination{
+    background: #FBD984;
+    margin-top:-43px;
+    margin-bottom:20px;
+ }
+ 
+ .pagination .col-xs-4 {
+     width: 38.3%;
+ }
+ .pagination .col-xs-3 {
+     width: 30.3%;
+ }
+ .pagination .col-xs-2{
+  width: 30.3%;
+ }
+ .pagination .row:before {
+     display: table;
+     content: " ";
+ }
+ .no-margin{
+     margin: 0;
+ }
+ 
+ .step-indicator {
+   padding:0;
+   list-style:none;
+ }
+ .step-indicator li a {
+   display:block;
+   text-decoration:none;
+   font-size:13px;
+   line-height:33px;
+   position:relative;
+   opacity: inherit !important;
+   text-align: center;
+ }
+ .step-indicator li:nth-child(1) a::after {
+   float:right;
+   content:"";
+   width:0;
+   height:4;
+   border-top: 17px solid transparent;
+   border-bottom: 17px solid transparent;
+   border-left: 13px solid #f27a18;
+   position:relative;
+   right:-12px;
+   z-index:8;
+ }
+ .step-indicator li a.active{
+     background-color:#f27a18;
+     color: #fff;
+     height: 34px;
+ }
+ .m-l-20{
+     margin-left:5px;
+ }
+
+
+
+  .blackLoss{
+      color: #000;
+  }
+  .padding-left-15Loss{
+          padding: 0 0px 0 15px;
+  }
+  .image-settingLoss{
+      width:9px;height:9px;
+  }
+  .border-lineLoss{
+      float: right;color: #D9A25A;
+  }
+  
+  .game-play-scoreLoss{
+      margin-left: 25px;
+      color: #797261;
+      font-weight: bolder;
+      height: 104px;
+  }
+  .game-play-scoreLoss ul li{
+      font-weight: bolder;
+  }
+  .ProgressBar-game-playLoss{
+      margin-top: -1px;
+      height: 90px;
+  }
+  
+      //===new design
+  
+  .headerImageLoss{
+      max-width: 100%;
+      border: 0;
+      height: 108px;
+      width: 80%;
+      margin-top: 4%;
+      border: 2px solid #FFEBB9;
+  }
+  .play-game-loss{
+      height: 240px;
+      background-color: white;
+      position: relative;
+      bottom: 31px;
+  }
+   
+  //recent winners tips chat bubble
+  
+  .talk-bubbleLoss {
+      margin: 30px 0px 0px -30px;
+      display: inline-block;
+      position: relative;
+      width: 85%;
+      height: auto;
+      background-color: #E6E7EC;
+  }
+  .roundLoss{
+      border-radius: 30px;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px;
+  }
+  .tri-rightLoss.btm-leftLoss:after{
+      content: ' ';
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 0px;
+      right: auto;
+      top: auto;
+      bottom: -20px;
+      border: 22px solid;
+      border-color: transparent transparent transparent #E6E7EC;;
+  }
+  .talktextLoss{
+    padding: 1em;
+    text-align: left;
+    line-height: 1.5em;
+  }
+  .talktextLoss p{
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+  
+  .spanlossCase{
+      font-size: medium;
+      top: 15px;
+      position: relative;
+  }
+  .btn-moreTips{
+      margin-top: 8px;
+      margin-bottom: 8px;
+  }
+  .btn-transparent-moreTips{
+      background-color: Transparent;
+      background-repeat:no-repeat;
+      border: none;
+      cursor:pointer;
+      overflow: hidden;
+      outline:none;
+      color: #89B1E5;
+      margin-top: auto;
+      font-size: 16px;
+  }
+  
+  
+  .circle_inside{
+      border: 1px solid orange;
+      width: 64px;
+      border-radius: 8%;
+      background: #fff;
+      padding: 8px;
+      position: relative;
+      bottom: 70px;
+      margin-left: 70%;
+    }
+    .circle_inside_ImgLoss{
+      width: 23px;
+      position: relative;
+      left: 10px;
+    }
+
+      .scroll-content{
+          bottom: -18px;
+      }
+      .score-ulLoss{
+          list-style: none;
+          text-align: center;
+          float: left;
+          position: relative;
+          top: 3px;
+          font-size: large;
+      }
+      .scoreText-ulLoss{
+          list-style: none;
+          top: 8px;
+          position: relative;
+          margin-right: 33%;
+          font-size: large;
+          text-align: center;
+      }
+      .useboosterTextLoss{
+          position: relative;
+          font-size: 1.1em;
+          bottom: 163px;
+          margin-left: 8%;
+          font-weight: 800;
+      }
+      .targetLoss{
+          position: relative;
+          font-size: 1.1em;
+          bottom: 163px;
+          margin-left: 44%;
+          font-weight: 800;
+      }
+      .gameResultLoss{
+          list-style: none;
+          margin-left: 66%;
+          bottom: 68px;
+          position: relative;
+          font-size: large;
+      }
+      table {
+        width: 94% ;
+    }
+    
+    th, td {
+        padding: 2px;
+        font-size: large;
+        text-align: center;
+    }
+    
+}

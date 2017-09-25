@@ -10,9 +10,11 @@ import { CommonService } from '../../services/common.service';
 import { howtoplay } from '../game-start-how-to-play/game-start-how-to-play';
 import { recentWinnerTips } from '../recent-winners-tips/recent-winners-tips';
 import { gameTerms } from '../game-start-game-terms/game-start-game-terms';
+import { gameLoss } from '../play-gamesLoss/play-gamesLoss';
 import { Observable } from "rxjs/Observable";
 import { CordovaInstance } from "@ionic-native/core";
 import { Subscription } from "rxjs/Rx";
+
 
 declare var $:any;
 
@@ -62,7 +64,8 @@ export class PlayGamePage implements OnInit {
   public howToPlayModal:any;
   public event:string;
   public inAppBrowser: any;
-  public gameLoss:boolean=false;
+  public gameLoss:boolean=true;
+  pageLoaded:boolean=false;
 
   constructor(
     private _modalController:ModalController,
@@ -100,6 +103,7 @@ export class PlayGamePage implements OnInit {
           
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
           this.loading.dismiss();
+          this.pageLoaded=true;
         },
         err => {
             console.log("error", err);
@@ -136,7 +140,7 @@ export class PlayGamePage implements OnInit {
                   else if(event.url.includes("loss"))
                     {
                       browser.close();
-                      this.gameLoss=false;
+                      this.navCtrl.push(gameLoss,{gameId:this.GameId})
                     }
           });
           
@@ -149,6 +153,7 @@ export class PlayGamePage implements OnInit {
 
       }
   });
+ 
 }   
   howToPlay(){
     this.howToPlayModal=this._modalController.create(howtoplay,{gameInfo:this.gameInfo})

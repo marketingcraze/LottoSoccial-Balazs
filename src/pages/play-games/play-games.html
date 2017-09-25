@@ -8,24 +8,21 @@
             <img src="{{gameInfo?.game_imageurl}}" class="headerImage" />
         </div>
         <ion-list>
-            <div class="game-title" *ngIf="!gameLoss">{{gameInfo?.game_title}}</div>
-            <div text-wrap *ngIf="!gameLoss">
+            <div class="game-title" >{{gameInfo?.game_title}}</div>
+            <div text-wrap >
                 {{gameInfo?.game_description}}
-            </div>
-            <div text-wrap *ngIf="gameLoss">
-                <br> Game Message
             </div>
         </ion-list>
     </div>
 
-    <div class="ProgressBar-game-play item item-block item-md orange-bg" *ngIf="!gameLoss">
+    <div class="ProgressBar-game-play item item-block item-md orange-bg" >
         <div class="progressbarPlayGame" attr.data-perc="{{progressPercentage}}">
             <div class="barPlayGame color2"><span></span></div>
             <div class="labelPlayGame"><span></span></div>
           </div>
     </div>
     <br>
-    <div class="badgesContainer" *ngIf="!gameLoss">
+    <div class="badgesContainer" >
             <div class="badgesMain">
                     <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Scholar</div></div>
                     <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Teacher</div></div>
@@ -36,51 +33,42 @@
 
     <div class="game-level-bg">
         <div class="level-target-title" text-center>
-            <span *ngIf="gameInfo?.game_level && !gameLoss">Your Level {{gameInfo?.game_level}} Target</span>
-            <span *ngIf="gameLoss">NOT QUITE THERE...</span>
-            <span *ngIf="!gameInfo?.game_level && !gameLoss">Your Level 0 Target</span>
+            <span *ngIf="gameInfo?.game_level ">Your Level {{gameInfo?.game_level}} Target</span>
+          
+            <span *ngIf="!gameInfo?.game_level ">Your Level 0 Target</span>
         </div>
         <div class="game-play-score">
-            <ul>
-                <li *ngIf="gameInfo?.game_targetvalue && !gameLoss">Score {{gameInfo?.game_targetvalue}}</li>
-                <li *ngIf="gameInfo?.game_targetvalue && gameLoss">Score {{gameInfo?.game_targetvalue}}</li>
-                <li *ngIf="!gameInfo?.game_targetvalue && !gameLoss">Score 0</li>
 
-                <li *ngIf="gameInfo?.game_duration && !gameLoss">Finish with in {{gameInfo?.game_duration}} Sec</li>
-                <li *ngIf="gameInfo?.game_duration && gameLoss">Finish with in {{gameInfo?.game_duration}} Sec</li>
-                <li *ngIf="!gameInfo?.game_duration && !gameLoss">Finish with in 0 Sec</li>
-
-                <li *ngIf="gameInfo?.game_efficiencytarget && !gameLoss">Max {{gameInfo?.game_efficiencytarget}} words</li>
-                <li *ngIf="gameInfo?.game_efficiencytarget && gameLoss">Max {{gameInfo?.game_efficiencytarget}} words</li>
-                <li *ngIf="!gameInfo?.game_efficiencytarget && !gameLoss">Max 0 words</li>
+             <ul class="score-ul" >
+                <li *ngIf="gameInfo?.game_targetvalue"> {{gameInfo?.game_targetvalue}} </li>
+                <li *ngIf="!gameInfo?.game_targetvalue ">0</li>
+        
+                <li *ngIf="gameInfo?.game_duration  ">{{gameInfo?.game_duration}}</li>
+                <li *ngIf="!gameInfo?.game_duration">0</li>
+        
+                <li *ngIf="gameInfo?.game_efficiencytarget ">{{gameInfo?.game_efficiencytarget}}</li>
+                <li *ngIf="!gameInfo?.game_efficiencytarget">0</li>
             </ul>
-            <span  class="circle_inside" (click)="showBoosterModal()" *ngIf="!gameLoss"> <img src="assets/icon/booster_btn_ico@3x.png" class="circle_inside_Img" ></span>
+
+            <ul class="scoreText-ul" >
+                <li *ngIf="gameInfo?.game_targetvalue ">Score </li>
+                <li *ngIf="!gameInfo?.game_targetvalue ">Score</li>
+
+                <li *ngIf="gameInfo?.game_duration ">Time (Sec)</li>
+                <li *ngIf="!gameInfo?.game_duration ">Time (Sec)</li>
+
+                <li *ngIf="gameInfo?.game_efficiencytarget ">Words used</li>
+                <li *ngIf="!gameInfo?.game_efficiencytarget">Words used</li>
+            </ul>
+
+            <span *ngIf="pageLoaded" text-wrap class="useboosterText">USE BOOSTER</span>
+            <div  class="circle_inside" (click)="showBoosterModal()"> <img src="assets/icon/booster_btn_ico@3x.png" class="circle_inside_Img" ></div>
         </div>
 
         <div text-center>
-            <button ion-button color="light" (click)="showBoosterModal()" *ngIf="gameLoss">
-                <img src="assets/icon/booster_btn_ico@3x.png" style="margin-right: 5px"> 
-               <span> Get Booster</span>
-            </button>
-            <button ion-button color="secondary" (click)="openThankyouPage()"> Play Now</button>
+            <button ion-button color="secondary" style="bottom: 14px" (click)="openThankyouPage()" > Play Now</button>
+         
         </div>
-    </div>
-
-    <div class="play-game-loss" *ngIf="gameLoss" text-center>
-        <span class="spanlossCase">Tips from Lotto Woggle conquerors</span>
-        <div class="talk-bubble tri-right round btm-left">
-            <div class="talktext">
-                <p>bkdsjfkljcxvlkjhxcvx ZDKjfhsA ZDLKfjhsDIAK klughjDZXLfgha jihkgSDLFGiy.</p>
-            </div>
-        </div>
-        <br>
-        <br>
-        <span style="color:#D8D8D8">
-            <span>Matt </span><span> <img src="assets/icon/arw_feed_ico.svg" class="image-setting" /></span><span> Conqueror of level 2</span>
-        </span>
-        <br>
-        <br>
-        <button class="btn-transparent-moreTips btn-moreTips" (click)="recentWinnerTipsmodal()">View more tips</button>
     </div>
 
     <div class="pagination">
@@ -95,7 +83,7 @@
         </ul>
     </div>
 
-    <div text-center *ngIf="!gameLoss" style="position: relative;bottom: 16px;">
+    <div text-center  style="position: relative;bottom: 16px;">
         <ion-list>
             <ion-item href="#" (click)="recentWinnerTipsmodal()" detail-push>
                 Recent Winner Tips
@@ -110,3 +98,7 @@
     </div>
 
 </ion-content>
+
+
+
+

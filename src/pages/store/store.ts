@@ -277,9 +277,7 @@ export class StorePage {
     }
 
     showPaymentOptions(offer) {
-        console.log("StorePage::showPaymentOptions()", offer);
-        // let offer = {total_cost:4.99} ;
-
+     debugger;
         this.appSound.play('buttonClick');
         if (!this.customerToken) {
             this.goPaymentWebview(offer);
@@ -289,6 +287,7 @@ export class StorePage {
             // get all the cards details
             this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
                 console.log("StorePage::showPaymentOptions() success", data);
+                debugger;
                 let token_exists = 0;
                 for (var i = 0; i < data.response.length; ++i) {
                     if (data.response[i].get_customer_paymill_card_details) {
@@ -297,6 +296,7 @@ export class StorePage {
                 }
 
                 if (token_exists > 0) {
+                    debugger;
                     data.response.push({ offer: offer });
                     this.userCards = data.response;
 
@@ -305,6 +305,7 @@ export class StorePage {
                     this.confirmPayment.togglePopup()
                 }else{
                     this.goPaymentWebview(offer);
+                    loader.dismiss();
                 }
             }, (err) => {
                 console.log("StorePage::showPaymentOptions() error", err);
@@ -314,15 +315,15 @@ export class StorePage {
     }
 
     goPaymentWebview(offer:any){
+        debugger;
         let opt:string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
         str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
-        str += this.customerToken+'&offer_id=' + offer.offer_id+'&prosub_id='+offer.prosub_id;
-
+        str += this.customerToken+'&offer_id=' + offer;
         console.log("goPaymentWebview", str);
         this.iab.create( str, 'blank', opt);
+       
     }
-
     paymentDone(){
         /*
         let alert = this.alertCtrl.create({
@@ -674,30 +675,41 @@ clicked(){
 }
 
 buyCreditOffer(offerId: any) {
-    this.loading = this.loadingCtrl.create();
-    this.loading.present().then(() => {
-        this.offerService.buy_Credit_Offer(offerId,this.visitorId).subscribe(data => {
-            this.loading.dismiss();
-            this.buyoffer = data.response.response;
-            this.buyOfferStatus = data.response.response.status;
-            if (this.buyOfferStatus === "FAIL") {
-                this.offerStatus=false;
-                debugger;
-                this.showModalForcreditoffer();
+    debugger;
+    console.log("StorePage::showPaymentOptions()", offerId);
+    // let offer = {total_cost:4.99} ;
 
+    this.appSound.play('buttonClick');
+    if (!this.customerToken) {
+        this.goPaymentWebview(offerId);
+    }else{
+        let loader = this._showLoader();
+
+        // get all the cards details
+        this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
+            console.log("StorePage::showPaymentOptions() success", data);
+            let token_exists = 0;
+            debugger;
+            for (var i = 0; i < data.response.length; ++i) {
+                if (data.response[i].get_customer_paymill_card_details) {
+                    token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                } 
             }
-            else {
-                this.offerStatus=true;
-                this.showModalForcreditoffer();
+            if (token_exists > 0) {
+                data.response.push({ offer: offerId });
+                this.userCards = data.response;
+
+                console.log("StorePage::showPaymentOptions() success", this.userCards);
+                loader.dismiss();
+                this.confirmPayment.togglePopup()
+            }else{
+                this.goPaymentWebview(offerId);
             }
-        },
-        err => {
-            this.errorshow = true;
-            console.log("error", err);
-        },
-        ()=> console.log("offer buy successfully")
-        );
-    })
+        }, (err) => {
+            console.log("StorePage::showPaymentOptions() error", err);
+            loader.dismiss();
+        });
+    }
 }
 showModalForcreditoffer(){
     let homeCard:boolean=true;
