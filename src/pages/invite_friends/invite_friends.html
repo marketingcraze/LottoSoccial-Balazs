@@ -67,8 +67,8 @@
         <ion-grid>
           <ion-row>
             <ion-col col-3>
-              <img class="s-image" src="./assets/img/mail.svg"/>
-              <span>Email</span>
+              <img class="s-image" src="./assets/img/mail.svg" (click)="shareInfo()"/>
+              <span (click)="shareInfo()">Email</span>
               </ion-col>
             <ion-col col-3>
               <img class="s-image" src="./assets/img/facebook.svg" />
@@ -112,7 +112,7 @@
         <img src="./assets/img/user.svg" class="ct-list-icon" *ngIf="item.selected == false">
         <img src="./assets/img/check.svg" class="ct-list-icon" *ngIf="item.selected == true">
       </ion-thumbnail>
-      <h2>{{item?.name?.formatted}}</h2>
+      <h2>{{item?.displayName}}</h2>
       <p>{{item.phoneNumbers[0].value}}</p>
       <p clear item-right>home</p>
     </ion-item>
@@ -124,7 +124,7 @@
           <ion-avatar>
             <img src="./assets/img/user.svg" style="border: 0.5px solid #ccc;">
           </ion-avatar>
-          <ion-label>{{item?.name?.formatted}}</ion-label>
+          <ion-label>{{item?.displayName}}</ion-label>
           <button ion-button clear color="dark" (click)="removeContact(item, i)">
           <ion-icon name="close-circle" style="color: #999;"></ion-icon>
           </button>

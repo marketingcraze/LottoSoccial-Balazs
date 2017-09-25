@@ -32,6 +32,7 @@
     "@ionic-native/network": "^3.14.0",
     "@ionic-native/onesignal": "^3.14.0",
     "@ionic-native/secure-storage": "^3.14.0",
+    "@ionic-native/social-sharing": "^4.2.1",
     "@ionic-native/sqlite": "^3.14.0",
     "@ionic-native/transfer": "^3.14.0",
     "@ionic/storage": "^2.0.1",

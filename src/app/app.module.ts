@@ -96,6 +96,7 @@ import { Network } from '@ionic-native/network';
 import { Contacts } from '@ionic-native/contacts';
 import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -275,6 +276,6 @@ import { AppSoundProvider } from '../providers/app-sound/app-sound';
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,
-        Network,Contacts, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
+        Network,Contacts, SocialSharing, OfferService, Market, NativeAudio, AppSoundProvider, PlayGame]
 })
 export class AppModule { }
