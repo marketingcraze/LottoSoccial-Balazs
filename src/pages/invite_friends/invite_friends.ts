@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Platform, LoadingController } from 'ionic-angular';
 import { ElementRef, ViewChild } from '@angular/core';
-import { Contacts } from '@ionic-native/contacts';
+import { Contacts, Contact, ContactFieldType, ContactFindOptions } from '@ionic-native/contacts';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { FormControl } from '@angular/forms';
 import { SyndicateService } from '../../providers/syndicate-service';
 import 'rxjs/add/operator/debounceTime';
@@ -34,10 +35,15 @@ export class InviteFriendsPage {
   @ViewChild('contactListHeader') elementView: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private contacts: Contacts, public platform: Platform, public _syndService: SyndicateService,
-        public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController, private socialSharing: SocialSharing) {
+    this.items = []
+    this.fItems = []
     this.sid = this.navParams.get('sid');
     console.log(this.sid);
     this.loader = this.loadingCtrl.create({
+      content:"Please wait..."
+    });
+    let loader2 = this.loadingCtrl.create({
       content:"Please wait..."
     });
     this.searchControl = new FormControl();
@@ -47,23 +53,29 @@ export class InviteFriendsPage {
             this.setFilteredItems();
  
         });
-        this.platform.ready().then(() => {
-          var opts = {   
-            filter : "M",                                
-            multiple: true,        
-            hasPhoneNumber:true,                             
-            fields:  [ 'displayName', 'name' ]
-          };
-          contacts.find([ 'displayName', 'name' ],opts).then((contacts) => {
-            for(var i=0; i<contacts.length; i++) {
-              this.items.push(contacts[i]["_objectInstance"])
-              this.items[i].selected = false;
-            }
-            this.fItems = this.items;
-          }, (error) => {
-            console.log(error);
-          })
-      })
+    loader2.present()
+    this.platform.ready().then(() => {
+      contacts.find(['displayName', 'phoneNumbers'], {multiple: true}).then((gcontacts:Array<Contact>) => {
+          var len = gcontacts.length;
+          for(var i=0; i<len; i++) {
+             var name = '';
+              if(gcontacts[i].displayName != null){
+                name = gcontacts[i].displayName;
+              }else {
+                name = gcontacts[i].name.formatted;
+              }
+              if(gcontacts[i].phoneNumbers) {
+                this.items.push({
+                    displayName: name,
+                    phoneNumbers: [{value: gcontacts[i].phoneNumbers[0].value}],
+                    selected: false
+                })
+              }
+          }
+           this.fItems = this.items;
+           loader2.dismiss();
+        })
+        })
 
     // this.items = [
             // {displayName: 'Benjamin Evalent', phoneNumbers:[{value:'+447448962353'}], selected:false},
@@ -93,7 +105,7 @@ export class InviteFriendsPage {
    setFilteredItems() {
      if(this.items) {
       this.fItems = this.items.filter((item) => {
-            return item.name.formatted.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+            return item.displayName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
         });
      }
          
@@ -127,7 +139,7 @@ export class InviteFriendsPage {
 
   addContact(item, i) {
     for(var j=0; j<this.items.length; j++) {
-      if(this.items[j].name.formatted == item.name.formatted) {
+      if(this.items[j].displayName == item.displayName) {
         if(this.items[j].selected == true) {
           this.items[j].selected = false
         }else {
@@ -158,7 +170,7 @@ export class InviteFriendsPage {
   removeContact(item, i) {
     var count: number = 0;
     for(var j=0; j<this.items.length; j++) {
-      if(this.items[j].name.formatted == item.name.formatted) {
+      if(this.items[j].displayName == item.displayName) {
         this.items[j].selected = false
       }
       if(this.items[j].selected == true) {
@@ -176,9 +188,49 @@ export class InviteFriendsPage {
   }
 
   inviteSelected(){
-    this.cCancle()
-    this.closed()
-    this.presentToast()
+    this.loader.present();
+    var arr:any = [];
+    for(var i=0; i<this.fItems.length; i++) {
+      var inv = "0";
+      if(this.fItems[i].selected) {
+        inv = "1";
+      }else {
+        inv = "0";
+      }
+      arr.push({
+          "member_invited": inv,
+          "first_name": this.fItems[i].displayName,
+          "surname": "nn",
+          "msn": this.fItems[i].phoneNumbers[0].value,
+          "gender": "nn",
+          "title": "Mr",
+          "email": "nn",
+          "address": "nn",
+          "town": "nn",
+          "postal_code": "nn",
+          "date_of_birth": "nn",
+          "company_name": "nn",
+          "work_phone": "nn",
+          "home_phone": "nn",
+          "notes": "nn",
+          "birthday": "nn",
+          "url": "nn",
+          "additional_msn": "nn",
+          "company": "nn"
+
+      })
+    }
+    
+    this._syndService.insertContact(arr, this.sid)
+    .subscribe((res:any) => {
+      console.log('inisde api response')
+      console.log(JSON.stringify(res));
+      this.loader.dismiss();
+      this.cCancle()
+      this.closed()
+      this.presentToast()
+    })
+    
   }
 
   presentToast() {
@@ -197,15 +249,25 @@ export class InviteFriendsPage {
 }
 
 getSyndicateMeembers() {
-  this.loader.present();
   this._syndService.getSyndicateMeembers(this.sid)
   .subscribe((res)=> {
-    this.loader.dismiss();
     console.log(res);
     this.mDeatils = res.response["0"].get_private_syndicate_members.response;
     console.log(this.mDeatils);
   })
 
+}
+
+shareInfo()
+{
+this.socialSharing.share("demo message", "Demo subject", "", "https://ampersandacademy.com").
+then(() => {
+alert("Sharing success");
+// Success!
+}).catch(() => {
+// Error!
+alert("Share failed");
+});
 }
 
 }
