@@ -10,7 +10,6 @@ import 'rxjs/add/operator/map';
 
 
 
-
 @Component({
   selector: 'page-invite_friends',
   templateUrl: 'invite_friends.html'
@@ -260,14 +259,18 @@ getSyndicateMeembers() {
 
 shareInfo()
 {
-this.socialSharing.share("demo message", "Demo subject", "", "https://ampersandacademy.com").
-then(() => {
-alert("Sharing success");
-// Success!
-}).catch(() => {
-// Error!
-alert("Share failed");
-});
-}
+ this.platform.ready().then(() =>
+      {
+         this.socialSharing.share("message to be shared", "subject", null, null)
+         .then((data) =>
+         {
+            console.log('Shared via SharePicker');
+         })
+         .catch((err) =>
+         {
+            console.log('Was not shared via SharePicker');
+         });
 
+      });
+}
 }
