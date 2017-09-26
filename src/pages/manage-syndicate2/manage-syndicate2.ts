@@ -5,6 +5,7 @@ import { TandcPage } from '../tandc/tandc';
 import { RecentDrawPage } from '../recent-draw/recent-draw';
 import { YourTicketsPage } from '../your-tickets/your-tickets';
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 /*
   Generated class for the ManageSyndicate2 page.
 
@@ -17,7 +18,7 @@ import { InviteFriendsPage } from '../invite_friends/invite_friends';
 })
 export class ManageSyndicate2Page {
 
- constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {}
+ constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ManageSyndicatePage');
@@ -46,6 +47,10 @@ export class ManageSyndicate2Page {
     }
     Invite() {
       this.navCtrl.push(InviteFriendsPage);
+    }
+    openUrl(url:string){
+      let opt:string = "toolbarposition=top";
+      this.iab.create(url, "_blank", opt);
     }
 
 }

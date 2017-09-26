@@ -5,10 +5,10 @@
       <div>
         <table style="width: 100%">
           <tr>
-            <td style="width: 17%; padding-left: 0px;margin-left: 0px"> <img src='assets/img/voucher_ico.png' style="width: 100%"> </td>
-            <td style="width: 85%; padding-left: 5px">
-              <p style="text-align: left; font-size: 17px; color: black;padding-right: 5px; padding-left: 5px"><b>{{VoucherCode}}</b></p>
-              <p style="text-align: left; font-size: 15px; color: black;padding-right: 5px; padding-left: 5px">{{VoucherCodeDescription}}</p>
+            <td class="imgleftIcon"> <img src='assets/img/voucher_ico.png' style="width: 100%"> </td>
+            <td class="imgleftIconTD">
+              <p class="voucherCode"><b>{{VoucherCode}}</b></p>
+              <p class="voucherCodeDesc">{{VoucherCodeDescription}}</p>
             </td>
           </tr>
         </table>
@@ -17,7 +17,7 @@
     <ion-item no-lines text-wrap>
       <div style="margin-top: -4px">
         <ul style="font-size: 14px" *ngFor='let lst of lottoMiddleJson;let i=index;'>
-          <li  *ngIf="lst" style="font-size: 15px; margin-top: -10px">{{lottoMiddleJson[i]}}</li>
+          <li  *ngIf="lst" class="middleDescription">{{lottoMiddleJson[i]}}</li>
           <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
           <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
           <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
@@ -27,17 +27,16 @@
     </ion-item>
     <ion-item text-center no-lines>
       <div style="text-align: center">
-        <input type="button" value="CLAIM NOW" style="background-color:#249040; color: white;text-align: center;border: 0px;
-                      width: 50%; height:35px;border-radius: 5px; " (click) = "done()" >
+        <input type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
       </div>
-        <div style="text-align: center; padding-top: 5%" >
-          <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;" (click)="dismissPopUp()">Maybe Later </p>
+        <div class="dismissLinkDiv" >
+          <p class="dismissLink" (click)="dismissPopUp()">Maybe Later </p>
         </div>
       </ion-item>
 
   </ion-list>
     <div class="buycard" *ngIf="value=='1'">
-        <button ion-button icon-only style="background:#F8F8F8; border-radius:50%; height: 70px">
+        <button ion-button icon-only class="successIcon">
                   <ion-icon style="width:70px; "><img src="assets/icon/check_icon.png"> </ion-icon>
                 </button>
         <ion-row text-center>
@@ -47,13 +46,13 @@
         </ion-row>
         <ion-row style="padding-top: 5%; height: 45px">
             <ion-col col-12>
-                <button ion-button outline round style="height: 45px; font-size: 18px" color="light" (click)="moveToVouchers()">BACK TO VOUCHERS</button>
+                <button ion-button outline round class="moveToVoucher" color="light" (click)="moveToVouchers()">BACK TO VOUCHERS</button>
             </ion-col>
         </ion-row>
     
 </div>
 <div *ngIf="value=='2'" class="errorcard">
-  <button ion-button icon-only style="background:#F8F8F8; border-radius:50%;width:25%;height: 70px">
+  <button ion-button icon-only class="failedBackground">
             <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>
           </button>
   <ion-row text-center>
@@ -63,7 +62,7 @@
   </ion-row>
   <ion-row style="margin-top: 20px">
       <ion-col col-12>
-          <button style="font-size: 18px;width:50%; height: 45px" ion-button outline round color="light" (click)="moveToVouchers()">TRY AGAIN</button>
+          <button class="failedMoveToVoucherButton" ion-button outline round color="light" (click)="moveToVouchers()">TRY AGAIN</button>
       </ion-col>
   </ion-row>
 </div>

@@ -278,7 +278,7 @@ export class StorePage {
     }
 
     showPaymentOptions(offer) {
-     debugger;
+    
         this.appSound.play('buttonClick');
         if (!this.customerToken) {
             this.goPaymentWebview(offer);
@@ -288,7 +288,7 @@ export class StorePage {
             // get all the cards details
             this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
                 console.log("StorePage::showPaymentOptions() success", data);
-                debugger;
+              
                 let token_exists = 0;
                 for (var i = 0; i < data.response.length; ++i) {
                     if (data.response[i].get_customer_paymill_card_details) {
@@ -297,7 +297,7 @@ export class StorePage {
                 }
 
                 if (token_exists > 0) {
-                    debugger;
+                   
                     data.response.push({ offer: offer });
                     this.userCards = data.response;
 
@@ -316,7 +316,7 @@ export class StorePage {
     }
 
     goPaymentWebview(offer:any){
-        debugger;
+     
         let opt:string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
         str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
@@ -352,7 +352,7 @@ export class StorePage {
     }
 
     gameTargetLink(target){
-        debugger;
+       
       this.appSound.play('buttonClick');
       var parts=target.split('/');  
       var gameId=parts[1].slice(8);
@@ -676,7 +676,7 @@ clicked(){
 }
 
 buyCreditOffer(offerId: any) {
-    debugger;
+    
     console.log("StorePage::showPaymentOptions()", offerId);
     // let offer = {total_cost:4.99} ;
 
@@ -690,7 +690,7 @@ buyCreditOffer(offerId: any) {
         this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
-            debugger;
+            
             for (var i = 0; i < data.response.length; ++i) {
                 if (data.response[i].get_customer_paymill_card_details) {
                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
