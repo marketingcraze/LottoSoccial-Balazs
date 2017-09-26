@@ -157,7 +157,8 @@ export class StorePage {
         public appSound:AppSoundProvider,
         public offerService:OfferService,
         public modalCtrlr:ModalController,
-        public actionSheetCtrl: ActionSheetController) {
+        public actionSheetCtrl: ActionSheetController) 
+        {
            
         storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
             this.visitorId=firstTimeLoad;
@@ -683,9 +684,9 @@ buyCreditOffer(offerId: any) {
     if (!this.customerToken) {
         this.goPaymentWebview(offerId);
     }else{
-        let loader = this._showLoader();
 
-        // get all the cards details
+       let loader=this.loadingCtrl.create();
+       loader.present().then(()=>{
         this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
@@ -696,22 +697,24 @@ buyCreditOffer(offerId: any) {
                 } 
             }
             if (token_exists > 0) {
+                loader.dismiss()
                 let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
                 })
                 modal.present();
 
                 console.log("StorePage::showPaymentOptions() success", this.userCards);
-                loader.dismiss();
                 this.confirmPayment.togglePopup()
             }else{
+                loader.dismiss()
                 this.goPaymentWebview(offerId);
             }
         }, (err) => {
+            loader.dismiss()
             console.log("StorePage::showPaymentOptions() error", err);
-            loader.dismiss();
         });
+       })
+        
     }
-   
    
 }
 showModalForcreditoffer(){
