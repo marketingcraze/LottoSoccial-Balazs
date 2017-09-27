@@ -8,7 +8,7 @@
 
     </div>
     <div class="get-section">
-        <div class="get-text">GET 10 LINES</div>
+        <div class="get-text">GET {{affilateModelBinding?.line_count}} LINES</div>
         <div class="plus-text">PLUS 5 GAMES</div>
     </div>
 
@@ -17,14 +17,14 @@
 
             <ion-item no-lines id="voucherListItem" style="background-color: #5486C0" no-padding>
                 <ion-thumbnail item-left class="thumbnalTag">
-                    <img src='assets/img/euromillions_ball.png' class="thumbnailListImage">
+                    <img src='{{affilateModelBinding?.product_image}}' class="thumbnailListImage">
                 </ion-thumbnail>
 
                 <div item-center text-wrap>
-                    <p class="thumbnailListContent">EURO<br> 19 September</p>
+                    <p class="thumbnailListContent">{{affilateModelBinding?.name | uppercase}}<br> {{luckyDipDate}} {{luckyDipMonth}}</p>
                 </div>
                 <div item-right text-wrap>
-                    <p class="thumbnailListContent1">£40M</p>
+                    <p class="thumbnailListContent1">{{affilateModelBinding?.offer_jackpot}}</p>
                 </div>
 
 
@@ -41,10 +41,10 @@
 
             <div style="display: -webkit-inline-box;color: #fff;top: 3px; position: relative;">
 
-                <div style="margin-right: 6px; margin-left: 8px;"><b style="font-size:22px">1</b> <br><span style="font-size:12px;position: relative;top:-6px">Days</span></div>
-                <div style="margin-right: 6px;"><b style="font-size:22px">2</b> <br><span style="font-size:12px;position: relative;top:-6px">Hrs</span></div>
-                <div style="margin-right: 6px;"><b style="font-size:22px">2</b> <br><span style="font-size:12px;position: relative;top:-6px">Mins</span></div>
-                <div style="margin-right: 6px;"><b style="font-size:22px">4</b> <br><span style="font-size:12px;position: relative;top:-6px">Secs</span></div>
+                <div style="margin-right: 6px; margin-left: 8px;"><b style="font-size:22px">{{day}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Days</span></div>
+                <div style="margin-right: 6px;"><b style="font-size:22px">{{hrs}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Hrs</span></div>
+                <div style="margin-right: 6px;"><b style="font-size:22px">{{mins}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Mins</span></div>
+                <div style="margin-right: 6px;"><b style="font-size:22px">{{sec}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Secs</span></div>
             </div>
             <div></div>
         </div>
@@ -52,27 +52,27 @@
 
     <ion-label class="label-md-offer" style="text-align: center;margin-top: 8px; margin-bottom: 8px">
         <div class="offer-title" style="color: black;font-weight: bold;font-size: 27px;">
-            Play now for £40
+            Play now for £1
         </div>
         <div class="offer-title" style="color: black;font-size: 16px;">
             for a limited time only
         </div>
     </ion-label>
-    <div *ngFor="let number of [0,1,2,3,4,5,6,7,8,9] let i=index" style="text-align: center">
+    <div *ngFor="let luckyDip of luckyDips; let j = index" style="text-align: center">
         <ion-item no-lines text-center style="position: relative;background: transparent; text-align: center;">
-            <div style="font-size: 15px; padding-right: 10px;color: gray; display: inline-block; position: relative;bottom: 5px" (click)="genrateRanNumber(i)">Lucky Dip</div>
-            <div class="circle">{{d1}}</div>
-            <div class="circle">{{d2}}</div>
-            <div class="circle">{{d3}}</div>
-            <div class="circle">{{d4}}</div>
-            <div class="circle">{{d5}}</div>
+            <div style="font-size: 15px; padding-right: 10px;color: gray; display: inline-block; position: relative;bottom: 5px" (click)="genrateRanNumberUpdate(dataTest, j)">Lucky Dip</div>
+            <div class="circle">{{luckyDip[0]}}</div>
+            <div class="circle">{{luckyDip[1]}}</div>
+            <div class="circle">{{luckyDip[2]}}</div>
+            <div class="circle">{{luckyDip[3]}}</div>
+            <div class="circle">{{luckyDip[4]}}</div>
             <span>
                   <img src="assets/img/star-icon.png" style="position: relative; top:4px;width: 32px">
-                  <span style="position: absolute;top: 16px;margin-left: -22px;font-size: 12px;color: white">{{d6}}</span>
+                  <span style="position: absolute;top: 16px;margin-left: -22px;font-size: 12px;color: white">{{luckyDip[5]}}</span>
             </span>
             <span>
                    <img src="assets/img/star-icon.png" style="position: relative; top:4px;width: 32px">
-                   <span style="position: absolute;top: 16px;margin-left: -22px;font-size: 12px;color: white">{{d7}}</span>
+                   <span style="position: absolute;top: 16px;margin-left: -22px;font-size: 12px;color: white">{{luckyDip[6]}}</span>
             </span>
 
 
@@ -86,7 +86,7 @@
         <div style="text-align: center">
             <input type="button" value="PLAY NOW" style="width: 80%; height: 45px;
              color: white;background-color: #249040;border-radius: 30px;border: none; font-size: 23px; font-weight: bold;
-           " />
+           " (click)="Popup()" />
         </div>
         <div style="text-align: center;width: 100%;margin-top: 3%;color: #262626">
             <p>ƒ the number above may be replaced during checkout</p>

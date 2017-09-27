@@ -314,13 +314,23 @@ export class StorePage {
             });
         }
     }
+    goPaymentWebviewHomeoffer(offer:any,prosub_id){
+        
+           let opt:string = "toolbarposition=top";
+           let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+           str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
+           str += this.customerToken+'&offer_id=' + offer+ '&prosub_id='+prosub_id;
+           console.log("goPaymentWebview", str);
+           this.iab.create( str, 'blank', opt);
+          
+       }
 
     goPaymentWebview(offer:any){
      
         let opt:string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
         str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
-        str += this.customerToken+'&offer_id=' + offer;
+        str += this.customerToken+'&offer_id=' + offer+ '&prosub_id=1111';
         console.log("goPaymentWebview", str);
         this.iab.create( str, 'blank', opt);
        
@@ -675,14 +685,14 @@ clicked(){
     
 }
 
-buyCreditOffer(offerId: any) {
+buyCreditOffer(offerId: any,prosub_id:any) {
     
     console.log("StorePage::showPaymentOptions()", offerId);
     // let offer = {total_cost:4.99} ;
 
     this.appSound.play('buttonClick');
     if (!this.customerToken) {
-        this.goPaymentWebview(offerId);
+        this.goPaymentWebviewHomeoffer(offerId,prosub_id);
     }else{
 
        let loader=this.loadingCtrl.create();
@@ -690,7 +700,7 @@ buyCreditOffer(offerId: any) {
         this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
-            
+            debugger;
             for (var i = 0; i < data.response.length; ++i) {
                 if (data.response[i].get_customer_paymill_card_details) {
                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
@@ -706,7 +716,7 @@ buyCreditOffer(offerId: any) {
                 this.confirmPayment.togglePopup()
             }else{
                 loader.dismiss()
-                this.goPaymentWebview(offerId);
+                this.goPaymentWebviewHomeoffer(offerId,prosub_id);
             }
         }, (err) => {
             loader.dismiss()
@@ -715,7 +725,6 @@ buyCreditOffer(offerId: any) {
        })
         
     }
-   
 }
 showModalForcreditoffer(){
     let homeCard:boolean=true;
@@ -728,6 +737,5 @@ showModalForcreditoffer(){
         }
     })
 }
-
 
 }

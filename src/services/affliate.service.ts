@@ -53,22 +53,23 @@ export class AffiliateServices {
         let parameter = { request: [] };
 
         parameter.request.push({
-          session_ID: CommonService.sessionId,
-                screen_id: "1.4",
-                page_id: "1",
-                action: "login_mobile_app",
+                session_ID: CommonService.sessionId,
+                page_id: "22",
+                screen_id: "22.1",
+                action: "affiliate_page",
                 website: "Lotto Social",
                 website_id: "27",
                 source_site: "mobi.lottosocial.com",
-                module_name: "get_home_card",
-                customer_id: CommonService.session.customer_id
+                module_name: "get_affiliate_page_details",
+                customer_id: CommonService.session.customer_id,
+                product_id :"32",  
+                offer_id:"1079" 
         });
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
         });
-
         console.log(CommonService.getHeaderJson());
-        let url = CommonService.apiUrl + "v2/home/";
+        let url = CommonService.apiUrl + "v2/affiliate/";
 
         var response = this.http.post(url, parameter, opt).map(res => res.json());
 

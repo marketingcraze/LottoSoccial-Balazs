@@ -14,6 +14,7 @@ import { CommonService } from '../../services/common.service';
 
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { BadgesPage } from '../badges/badges';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -217,5 +218,8 @@ export class AccountPage {
             this.params.setIsInternetAvailable(false);
             console.log("AccountPage::updateNickname", err);
         });
+	}
+	moveToBadgeOs(){
+		this.navCtrl.push(BadgesPage)
 	}
 }

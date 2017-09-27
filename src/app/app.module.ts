@@ -81,7 +81,8 @@ import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-wi
 import { getGamesModal } from '../pages/get-games-modal/get-games-modal'
 import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
-import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase'
+import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase';
+import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
 
 
 // components
@@ -214,6 +215,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         gameLoss,
         confirmOfferPurchasePage,
         AffiliatePage,
+        AffiliatePopup,
         // OffersPayment,
 
         // pipes
@@ -330,6 +332,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         inboxModal,
         gameLoss,
         confirmOfferPurchasePage,
+        AffiliatePopup,
         // popovers
         // OffersPayment,
         CountryListPopPage,

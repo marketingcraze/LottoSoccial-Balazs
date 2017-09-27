@@ -12,16 +12,17 @@
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
 <ion-content style="background-color:#E8E8E8;margin-top: 27px">
-  <ion-card class="Card_Padding">
-
-    <div class="offer-of-the-day">
-      <h5 text-center style="margin-top: 5px; padding: 5px">OFFERS OF THE DAY!</h5>
+   <div class="offer-of-the-day"  ion-fixed>
+      <h5 text-center style="margin-top: 1px; padding: 0px">OFFERS OF THE DAY!</h5>
       <ion-slides slidesPerView=3>
         <ion-slide *ngFor="let product of offersForYou let i = index" >
           <img src="{{product.product_icon}}" class="img-responsive" (click)="offerOfTheDayModal(i)">
         </ion-slide>     
       </ion-slides>
     </div>
+  <ion-card class="Card_Padding">
+
+   
 
     <div class="syndicateRow">
       <p text-center text-uppercase no-margin>Choose the lottery you want to play</p>

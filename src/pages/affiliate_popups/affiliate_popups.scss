@@ -1,0 +1,111 @@
+
+   affiliate-popup {
+    .modal-page {
+      position: absolute;
+      overflow: hidden;
+      max-width: 90%;
+      width: 100vw;
+      height: 54vh;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      border: 0;
+      box-shadow: 0 16px 150px rgba(0,0,0,1.4);
+      background-color: #fafafa;
+      border-radius: 10px;
+    
+      }
+    .popup-img{
+      height: 50px;
+      width: 50px;
+      margin-top: 20px;
+    }
+    .game-thanku-btn-transparent{
+     background-color: Transparent;
+      background-repeat:no-repeat;
+      border: none;
+      cursor:pointer;
+      overflow: hidden;
+      outline:none;
+      color: blue;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      font-size: 16px;
+    
+    }
+    p{
+      font-size: large;
+    }
+    ion-app.ios [padding] .scroll-content {
+      padding: 0px;
+    }
+    ul{
+      -webkit-padding-start: 20px;
+    }
+    .buycard{
+      background:#00A651;
+      overflow: hidden;
+      position: absolute;  
+      max-width: 100%;
+      width: 100%;
+      height: 60vh;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      border: 0;
+      padding-top: 25%;
+      border: 0;
+      box-shadow: 0 16px 150px rgba(0,0,0,1.4);
+      border-radius: 10px;
+    
+  }
+
+.messagecolor{
+color:#FFFFFF;
+font-size: 16px;
+font-family:Lato;
+padding-top: 5%;
+}
+.scroll-content {
+ z-index: 0; 
+ bottom: 0px;
+}
+.label-md {
+  margin: 1px 8px 13px 0;
+}
+.errorcard{
+  background:#990033;
+  width:auto;
+  padding:10px;
+  padding-top:40%;
+  padding-bottom: 150px;
+  min-height: 405px;
+  position: relative;
+  bottom: 70px;
+  border-radius: 10px;
+
+}
+.expButton{
+ 
+  width:50px; 
+  display :inline-block;
+  background-color: #1f4c87;
+  border-radius: 5px;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  margin: 3px;
+}
+.getMy10Line{
+     background-color:#249040; 
+     color: white;
+     text-align: center;
+     border: 0px;
+     height:35px;
+     border-radius: 5px; 
+ }
+}
