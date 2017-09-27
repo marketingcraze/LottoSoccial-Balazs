@@ -22,6 +22,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { TabsPage } from '../tabs/tabs';
 
 import { your_vouchers } from '../your_vouchers/your_vouchers';
+import { AffiliatePage } from '../affiliate/affiliate'
 
 declare var webengage:any;
 
@@ -173,6 +174,10 @@ export class HomePage implements OnInit {
             case 'your_vouchers':
                 this.params.goPage(your_vouchers)
                 break
+            case 'affiliate':
+                this.params.goPage(AffiliatePage)
+                break
+        
             case 'help':
                 let opt:string = "toolbarposition=top";
                 this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);

@@ -89,4 +89,41 @@ padding-top: 5%;
   border-radius: 10px;
 
 }
+.imgleftIcon{
+  width: 17%; padding-left: 0px;margin-left: 0px
+}
+.imgleftIconTD{
+  width: 85%; padding-left: 5px
+}
+.voucherCode{
+  text-align: left; font-size: 17px; color: black;padding-right: 5px; padding-left: 5px
+}
+.voucherCodeDesc{
+  text-align: left; font-size: 15px; color: black;padding-right: 5px; padding-left: 5px
+}
+.middleDescription{
+  font-size: 15px; margin-top: -10px
+}
+.claimButton{
+  background-color:#249040; color: white;text-align: center;border: 0px;
+  width: 50%; height:35px;border-radius: 5px; 
+}
+.dismissLinkDiv{
+  text-align: center; padding-top: 5%
+}
+.dismissLink{
+  text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;
+}
+.successIcon{
+  background:#F8F8F8; border-radius:50%; height: 70px;
+}
+.moveToVoucher{
+  height: 45px; font-size: 18px
+}
+.failedBackground{
+  background:#F8F8F8; border-radius:50%;width:25%;height: 70px
+}
+.failedMoveToVoucherButton{
+  font-size: 18px;width:50%; height: 45px
+}
     }

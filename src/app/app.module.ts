@@ -102,6 +102,7 @@ import { PlayGame } from '../services/playgame.service';
 import { ReferFriend } from '../services/referfriend.service';
 import { productOffer } from '../services/productoffer.service';
 import { VoucherService } from '../services/voucherList_service'
+import { AffiliateServices } from '../services/affliate.service'
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -131,6 +132,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { DateLeftPipe } from '../pipes/date-left/date-left';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { Device } from '@ionic-native/device';
+import { AffiliatePage } from '../pages/affiliate/affiliate'
 
 
 @NgModule({
@@ -211,6 +213,7 @@ import { Device } from '@ionic-native/device';
         inboxModal,
         gameLoss,
         confirmOfferPurchasePage,
+        AffiliatePage,
         // OffersPayment,
 
         // pipes
@@ -333,10 +336,11 @@ import { Device } from '@ionic-native/device';
         RedeemGamesPage,
         YourOffersPage,
         SendBonusPage,
-        your_vouchers_popups
+        your_vouchers_popups,
+        AffiliatePage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
-        AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,
+        AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts]
 
