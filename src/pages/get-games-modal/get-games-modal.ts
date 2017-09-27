@@ -31,6 +31,7 @@ export class getGamesModal {
   }
 
   dismissPopUp(data) {
+  
     this.viewctrl.dismiss(data);
   }
   done() {

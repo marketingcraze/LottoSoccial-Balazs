@@ -23,6 +23,7 @@ import { TabsPage } from '../tabs/tabs';
 
 import { your_vouchers } from '../your_vouchers/your_vouchers';
 import { AffiliatePage } from '../affiliate/affiliate'
+import{ HelpPage } from '../Help/Help'
 
 declare var webengage:any;
 
@@ -179,8 +180,10 @@ export class HomePage implements OnInit {
                 break
         
             case 'help':
-                let opt:string = "toolbarposition=top";
-                this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);
+            this.params.goPage(HelpPage)
+            
+             //   let opt:string = "toolbarposition=top";
+               // this.iab.create('https://help.lotto-social.com/hc/en-us', 'blank', opt);
                 break
         }
     }

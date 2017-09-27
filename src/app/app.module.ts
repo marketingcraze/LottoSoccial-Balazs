@@ -83,6 +83,7 @@ import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
 import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase';
 import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
+import { HelpPage } from '../pages/Help/Help'
 
 
 // components
@@ -216,6 +217,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         confirmOfferPurchasePage,
         AffiliatePage,
         AffiliatePopup,
+        HelpPage,
         // OffersPayment,
 
         // pipes
@@ -333,6 +335,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         gameLoss,
         confirmOfferPurchasePage,
         AffiliatePopup,
+        HelpPage,
         // popovers
         // OffersPayment,
         CountryListPopPage,
