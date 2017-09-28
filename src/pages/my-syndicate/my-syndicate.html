@@ -13,7 +13,7 @@
 </ion-header>-->
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
-<ion-content class="marg-top-12 main-bg" id="asynd">
+<ion-content class="marg-top-12 main-bg" id="asynd" style="margin-top: -8%">
   <div id="sstate" *ngIf="syndArr.length > 0">
   <div *ngFor="let sd of syndArr; let i = index;">
   <div class="synd-card" *ngIf="sd.syndicate_type !='PRIVATE'">
@@ -78,10 +78,10 @@
             <ion-col col-5 class="left"><span class="date-lbl" style="margin-right: 2px;">
               <button ion-button class="ctNow chat-btn pulse" (click)="chatNow(i)">CHAT NOW</button>
               <span class="circle"><img src="./assets/img/chat_bubble.png"/><span style="padding: 5px;">{{chatcount}}</span></span></span></ion-col>
-            <ion-col col-7 class="left" style="line-height: 34px;"><span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
+            <ion-col col-7 class="left" style="line-height: 25px;"><span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
             <span style="font-size: 12px; color: #B7B7B7;">{{sd.member_playing_count}}/{{sd.members_count}}</span>
-              <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
-              <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 5px;"></ion-icon></span>
+              <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 2px;"></ion-icon></span>
+              <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 2px;"></ion-icon></span>
             </ion-col>
             <!--<ion-col col-50 class="left"><span class="date-lbl"><button ion-button class="chat-btn">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
             <ion-col col-50 class="right" style="line-height: 34px;"><span class="date-lbl">PLAYING MEMBERS:</span>{{sd.member_playing_count}}/{{sd.members_count}}</ion-col>-->
@@ -92,6 +92,32 @@
           </ion-row>-->
         </ion-grid>
       </ion-item>
+      </div>
+      <div *ngIf="toggled[i]">
+        <ion-item text-wrap text-center>
+          <ion-grid text-center>
+            <ion-row text-center>
+              <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
+                <input type="button" value="EURO TUE" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
+                font-size: 13px;padding: 5px;height: 30px">
+              </ion-col>
+              <ion-col col-9>
+                <p style="display:inline-block;;font-size: 15px;color: #2C2C2C;padding-top: 2.5%;text-align: center;margin-left: 5% ">   X 10 tickets Valid for 11 Feb 2017</p>
+              </ion-col>
+            </ion-row>
+    
+            <ion-row>
+              <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
+                <input type="button" value="EURO TUE" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
+                font-size: 13px;padding: 5px;height: 30px">
+              </ion-col>
+              <ion-col col-9>
+                <p style="display:inline-block;;font-size: 15px;color: #2C2C2C;padding-top: 2.5%;text-align: center;margin-left: 5% ">   X 10 tickets Valid for 11 Feb 2017</p>
+              </ion-col>
+            </ion-row>
+    
+          </ion-grid>
+        </ion-item>
       </div>
       </div>
       <div *ngIf="toggled[i]">

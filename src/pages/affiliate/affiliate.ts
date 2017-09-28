@@ -41,6 +41,7 @@ export class AffiliatePage implements OnInit {
     bonus_to: any;
     regular_duplicate: any;
     bonus_duplicate: any;
+    dummy:any;
 
     ngOnInit() {
         this.getRanMethod();
@@ -54,6 +55,7 @@ export class AffiliatePage implements OnInit {
         loading.present().then(() => {
             this._affiliateServices.loadAffiliateData()
                 .subscribe(data => {
+                    
                     this.affilateModelBinding = data.response[0].get_affiliate_page_details.response.product_group[0];
                     this.getDateAndMonth(this.affilateModelBinding.countdown);
                     this.regular_from = this.affilateModelBinding.regular_from
@@ -63,6 +65,7 @@ export class AffiliatePage implements OnInit {
                     this.regular_duplicate = this.affilateModelBinding.regular_duplicate;
                     this.bonus_duplicate = this.affilateModelBinding.bonus_duplicate;
                     Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.affilateModelBinding.countdown));
+                    this.dummy = (String(this.affilateModelBinding.offer_jackpot).substr(0,4))
                     loading.dismiss();
                 })
         })

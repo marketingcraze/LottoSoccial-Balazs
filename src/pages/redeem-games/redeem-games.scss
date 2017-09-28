@@ -20,4 +20,10 @@ page-redeem-games {
 		margin-top: 51%;
 		
 	}
+	.scroll-content {
+		z-index: 0; 
+	
+	   -webkit-overflow-scrolling: auto;
+	   scroll-behavior: auto;
+	 }
 }

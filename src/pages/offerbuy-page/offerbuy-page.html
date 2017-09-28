@@ -2,7 +2,7 @@
     <synd-cus-header1 title="Play" notification-count="5"></synd-cus-header1>
 </ion-header>
 
-<ion-content>
+<ion-content style="margin-top: -20px;height: 105%">
     <div class="container-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
         <img src={{product?.image}} class="header-img" />
 
@@ -32,7 +32,7 @@
     <div class="mainContainer" text-center>
         <ion-row>
             <ion-col col-12>
-                <p class="SlideSubTitleOffer" style="color:#333333">Choose Draw day</p>
+                <p class="SlideSubTitleOffer" style="color:#333333;margin-top: 8px">Choose Draw day</p>
             </ion-col>
         </ion-row>
 
@@ -77,7 +77,7 @@
 
         <ion-row *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;">
             <ion-col col-12 *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
+                <button ion-button class="BuyBtn" style="float: none;margin-top: 10px" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
             </ion-col>
         </ion-row>
 

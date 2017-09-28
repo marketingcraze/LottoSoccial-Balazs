@@ -5,7 +5,7 @@ page-get-games-modal{
         max-width: 90%;
         max-height: 100vh;
         width: 100vw;
-        height: 57vh;
+        height: 53vh;
         top: 20%;
         bottom: 0;
         left: 0;
@@ -68,9 +68,11 @@ page-get-games-modal{
   padding-top: 5%;
 }
 .scroll-content {
-   z-index: 0; 
-   border-radius: 0.5px;
-   bottom: 0px;
+  
+  
+  -webkit-overflow-scrolling: auto;
+  scroll-behavior: auto;
+  bottom: 0px;
 }
 .button-ios {
   height: 2.4em;
@@ -91,5 +93,6 @@ img, .item-md ion-thumbnail img {
   width: 65px;
   height: 65px;
 }
+
       
     }

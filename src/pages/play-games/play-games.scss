@@ -469,6 +469,10 @@ font-weight: 600;
   play-game{
 	.scroll-content{
 		bottom: -18px;
+			z-index: 0; 
+		  -webkit-overflow-scrolling: auto;
+		   scroll-behavior: auto;
+		 
 	}
 	.score-ul{
 		list-style: none;

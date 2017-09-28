@@ -204,4 +204,10 @@ overflow: visible;
 }
 .item-md.item-block .item-inner {
     padding-right: 0px;}
+    .scroll-content {
+      z-index: 0; 
+    
+       -webkit-overflow-scrolling: auto;
+       scroll-behavior: auto;
+     }
 }

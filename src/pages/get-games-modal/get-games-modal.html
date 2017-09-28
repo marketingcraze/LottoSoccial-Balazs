@@ -1,8 +1,8 @@
-<ion-content class="modal-page" text-center ion-fixed>
+<ion-content class="modal-page" text-center>
     
-      <ion-list *ngIf="value==false && status=='Passed'">
-        <div style="border-bottom: 0.5px solid lightgray;font-size: 18px;">
-        <ion-item no-lines text-center style="font-size: 18px;height: 10%; text-align: center">
+      <ion-list *ngIf="value==false && status=='Passed'" ion-fixed style=" border-radius:25px;">
+        <div style="border-bottom: 0.5px solid lightgray;font-size: 18px;border-top-left-radius: 25px;border-top-right-radius: 25px; ">
+        <ion-item no-lines text-center style="font-size: 18px;height: 10%; text-align: center;border-top-left-radius: 25px;border-top-right-radius: 25px;">
           Confirm Your Selection
         </ion-item>
       </div>
@@ -48,12 +48,12 @@
         
             </ion-item>
           </div>
-          <ion-item text-center no-lines  style="height: 30%">
-              <div style="text-align: center; padding-top: 5%;height: 10%">
+          <ion-item text-center no-lines  style="height: 30%;border-radius:20px ">
+              <div style="text-align: center; padding-top: 5%;height: 10%;border-radius: 20px">
                 <input type="button" value="CONFIRM" style="background-color:#249040; color: white;text-align: center;border: 0px;
                               width: 40%; height:38px;border-radius: 5px; " (click) = "done()">
               </div>
-              <div style="text-align: center; padding-top: 5%;height: 10%" >
+              <div style="text-align: center; padding-top: 5%;height: 10%;border-radius: 20px" >
                   <p (click)="dismissPopUp()"style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;">Not Now</p>
                 </div>
           </ion-item>
@@ -61,7 +61,7 @@
             
       </ion-list>
     
-      <div class="buycard" *ngIf="!value==false && status=='Passed'">
+      <div class="buycard" *ngIf="!value==false && status=='Passed'" ion-fixed>
           <button ion-button icon-only style="background:#F8F8F8; border-radius:50%; height: 60px">
                     <ion-icon ><img style="width:36px;height: 40px " src="assets/icon/check_icon.png"> </ion-icon>
                   </button>
@@ -83,7 +83,7 @@
     
       
     </div> 
- <div *ngIf="status=='Failed'">
+ <div *ngIf="status=='Failed'" style=" border-radius:25px;" ion-fixed>
     <div>
         <ion-item no-lines text-wrap style="text-align: center; background-color: red;color: white">
           <span style="font-size: 16px"><b> INSUFFICIENT POINTS</b></span>
@@ -94,7 +94,7 @@
   
       </div>
 
-      <div >
+      <div style=" border-radius:25px;">
         <ion-item no-lines text-wrap style="text-align: center;padding-top: 4%">
             <span style="text-align: center"><b> Why don't you double up your chances?</b></span>
             <br>
@@ -107,8 +107,8 @@
           <img src="assets/img/not_sucess.png">
         </ion-item>
       </div>
-      <div>
-          <ion-item no-lines text-wrap style="text-align: center;">
+      <div style=" border-radius:25px;">
+          <ion-item no-lines text-wrap style="text-align: center; border-radius:25px;">
               <input type="button" value="BUY NOW FOR £2" class="voucherListButton" (click)="selectedButtonID(i)" />
               <p (click)="dismissPopUp()" style="text-decoration: none !important;color: #4E85D4; text-align: center; 
               font-size: 15px; padding-top: 5%">Not Now</p>
