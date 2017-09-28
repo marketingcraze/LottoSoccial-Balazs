@@ -77,7 +77,11 @@ export class AffiliatePage implements OnInit {
         this.luckyDipDate = dates.getDate();
     }
     dismissPopUp(data) {
-        this.viewctrl.dismiss(data);
+        let modal=this.modalController.create(AffiliatePopup);
+        modal.present();
+        modal.onDidDismiss((data: any[]) => {
+             this.viewctrl.dismiss();
+        })
     }
 
     genrateRanNumberUpdate(luckyDips: any, index: any) {
@@ -153,9 +157,4 @@ export class AffiliatePage implements OnInit {
         this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
-    Popup(){
-        let modal=this.modalController.create(AffiliatePopup);
-        modal.present();
-    }
-
 }
