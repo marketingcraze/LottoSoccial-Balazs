@@ -26,9 +26,15 @@
     <div class="section-top">
       <div class="pad-10-tlr">Every member equally contribue as follows:</div>
       <div class="pad-10-lr">
-        <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> 1x EuroMillions line on Tuesday</p>
-        <p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> 1x EuroMillions line on Friday</p>
-        <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> 2x EuroMillions line on Wednesday</p>
+        <ion-grid>
+          <ion-row *ngFor="let t of termsData?.product_group">
+            <ion-col col-2 class="text-center pad-2"><img [src]="t?.product_image" class="lot-img"/></ion-col>
+            <ion-col col-10 class="pad-top pad-2 lh-23" style="font-size: large">{{t?.line_count}}x {{t?.product_name}} line on <span *ngFor="let d of t?.draw_day">{{d?.long}} </span></ion-col>
+          </ion-row>
+        </ion-grid>
+        <!--<p class="desc-p" *ngFor="let t of termsData?.product_group"><img src="./assets/img/euroball@3x.png" class="lot-img"/> {{t?.line_count}}x {{t?.product_name}} line on <span *ngFor="let d of t?.draw_day">{{d?.long}} </span></p>-->
+        <!--<p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> 1x EuroMillions line on Friday</p>
+        <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> 2x EuroMillions line on Wednesday</p>-->
         <p >and receives an equal share of all the winnings!</p>
       </div>
     </div>
@@ -55,8 +61,8 @@
   </div>
   <div>
     <ion-list>
-      <ion-item >View Syndicate agreement<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>
-      <ion-item >View Terms & Conditions<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>
+      <ion-item (click)="aggreement()">View Syndicate agreement<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>
+      <!--<ion-item (click)="tandc()">View Terms & Conditions<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>-->
     </ion-list>
   </div>
 </ion-content>

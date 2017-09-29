@@ -3,8 +3,8 @@ import { NavController, NavParams, ViewController, LoadingController } from 'ion
 import { CreateSyndicate4Page } from '../create-syndicate4/create-syndicate4';
 import { ChooseNumberPage } from '../choose-number/choose-number';
 import { SyndicateService } from '../../providers/syndicate-service';
-
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { AgreementPage } from '../agreement/agreement';
 /*
   Generated class for the CreateSyndicate5 page.
 
@@ -16,17 +16,16 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
   templateUrl: 'create-syndicate5.html'
 })
 export class CreateSyndicate5Page {
-
+  private termsData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public appSound:AppSoundProvider,
     private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateSyndicate5Page');
-  }
-  ionViewWillEnter() {
     var id = localStorage.getItem('synd_id');
     this.getTerms(id);
+  }
+  ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
   close() {
@@ -42,6 +41,9 @@ export class CreateSyndicate5Page {
     this.navCtrl.push(ChooseNumberPage);
     loader.dismiss();
   }
+  aggreement(){
+    this.navCtrl.push(AgreementPage, {'tandc':this.termsData.terms_contents, 'agree':this.termsData.agreement});
+  }
   getTerms(id: any) {
     this.appSound.play('buttonClick');
     let loader = this.loadingCtrl.create({
@@ -50,6 +52,7 @@ export class CreateSyndicate5Page {
         loader.present();
     this._syndService.getTerms(id).subscribe((res) => {
       loader.dismiss();
+      this.termsData = res.response.response;
       console.log(res);
     })
 

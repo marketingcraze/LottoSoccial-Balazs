@@ -84,6 +84,7 @@ import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
 import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase';
 import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
 import { HelpPage } from '../pages/Help/Help'
+import { AgreementPage } from '../pages/agreement/agreement'
 
 
 // components
@@ -218,6 +219,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         AffiliatePage,
         AffiliatePopup,
         HelpPage,
+        AgreementPage,
         // OffersPayment,
 
         // pipes
@@ -343,7 +345,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         YourOffersPage,
         SendBonusPage,
         your_vouchers_popups,
-        AffiliatePage
+        AffiliatePage,
+        AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,

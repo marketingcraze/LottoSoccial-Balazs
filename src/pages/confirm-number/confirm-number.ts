@@ -9,7 +9,7 @@ import { OfferService } from '../../services/offer.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 import { HomePage } from '../home/home';
-
+declare var $: any;
 /*
   Generated class for the ConfirmNumber page.
 
@@ -23,8 +23,9 @@ import { HomePage } from '../home/home';
 export class ConfirmNumberPage {
     @ViewChild("confirmPayment") confirmPayment;
   
-  dataArr = []
+  dataArr = [];
   syndId: any;
+  offerArr = [];
 
     userCards: any;
     userCardsCount:number = 0;
@@ -67,6 +68,9 @@ export class ConfirmNumberPage {
     this._syndService.getBigJack(id).subscribe((res) => {
       loader.dismiss();
       console.log("ConfirmNumberPage", res);
+      this.offerArr = res.response[0].get_big_jackpot_list.response.rollover_jackpot_group;
+      this.offerArr = this.offerArr.concat(res.response[1].get_special_offer_details.response.product_group);
+      console.log(this.offerArr);
     })
   }
 
@@ -152,6 +156,92 @@ export class ConfirmNumberPage {
         return loader;
     }
 
+    // -------------------   slider   -----------------------
+    slide = $('.slider-single');
+    slideTotal;
+    slideCurrent = -1;
+    slideInitial() {
+        this.slide = $('.slider-single');
+        this.slideTotal = this.slide.length - 1;
+        this.slideCurrent = -1;
+        
+        this.slide.addClass('proactivede');
+        this.slideRight();
+    }
 
+    slideRight() {
+        if (this.slideCurrent < this.slideTotal) {
+          this.slideCurrent++;
+        } else {
+          this.slideCurrent = 0;
+        }
+
+        if (this.slideCurrent > 0) {
+          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
+        } else {
+          var preactiveSlide = this.slide.eq(this.slideTotal);
+        }
+        var activeSlide = this.slide.eq(this.slideCurrent);
+        if (this.slideCurrent < this.slideTotal) {
+          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
+        } else {
+          var proactiveSlide = this.slide.eq(0);
+        }
+
+        this.slide.each(function() {
+            var thisSlide = $(this);
+            if (thisSlide.hasClass('preactivede')) {
+                thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
+            }
+            if (thisSlide.hasClass('preactive')) {
+                thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
+            }
+        });
+        preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
+        activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
+        proactiveSlide.removeClass('preactivede preactive active proactivede').addClass('proactive');
+        this.appSound.play('cardFlip');
+    }
+
+    slideLeft() {
+        if (this.slideCurrent > 0) {
+          this.slideCurrent--;
+        } else {
+          this.slideCurrent = this.slideTotal;
+        }
+
+        if (this.slideCurrent < this.slideTotal) {
+          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
+        } else {
+          var proactiveSlide = this.slide.eq(0);
+        }
+        var activeSlide = this.slide.eq(this.slideCurrent);
+        if (this.slideCurrent > 0) {
+          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
+        } else {
+          var preactiveSlide = this.slide.eq(this.slideTotal);
+        }
+        this.slide.each(function() {
+          var thisSlide = $(this);
+          if (thisSlide.hasClass('proactivede')) {
+            thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
+          }
+          if (thisSlide.hasClass('proactive')) {
+            thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
+          }
+        });
+        preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
+        activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
+        proactiveSlide.removeClass('preactivede preactive active proactivede').addClass('proactive');
+        this.appSound.play('cardFlip');
+    }
+
+    swipeLeft(ev) {
+        this.slideRight();
+    }
+
+    swipeRight(ev) {
+        this.slideLeft();
+    }
 
 }
