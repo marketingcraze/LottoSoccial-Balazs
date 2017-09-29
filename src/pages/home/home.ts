@@ -24,6 +24,7 @@ import { TabsPage } from '../tabs/tabs';
 import { your_vouchers } from '../your_vouchers/your_vouchers';
 import { AffiliatePage } from '../affiliate/affiliate'
 import{ HelpPage } from '../Help/Help'
+import { NewSyndicatePage } from '../new-syndicate/new-syndicate'
 
 declare var webengage:any;
 
@@ -178,7 +179,10 @@ export class HomePage implements OnInit {
             case 'affiliate':
                 this.params.goPage(AffiliatePage)
                 break
-        
+                case 'pSyndicate':
+                this.params.goPage(NewSyndicatePage)
+                break
+                
             case 'help':
             this.params.goPage(HelpPage)
             

@@ -700,7 +700,7 @@ buyCreditOffer(offerId: any,prosub_id:any) {
         this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
-            debugger;
+      
             for (var i = 0; i < data.response.length; ++i) {
                 if (data.response[i].get_customer_paymill_card_details) {
                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
@@ -712,8 +712,8 @@ buyCreditOffer(offerId: any,prosub_id:any) {
                 })
                 modal.present();
 
-                console.log("StorePage::showPaymentOptions() success", this.userCards);
-                this.confirmPayment.togglePopup()
+              //  console.log("StorePage::showPaymentOptions() success", this.userCards);
+               // this.confirmPayment.togglePopup()
             }else{
                 loader.dismiss()
                 this.goPaymentWebviewHomeoffer(offerId,prosub_id);
