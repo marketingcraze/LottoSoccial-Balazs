@@ -175,7 +175,7 @@ export class TabsPage {
         .then(
             data => {
               let session:any = JSON.parse(data);
-              let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store&customer_id=';
+              let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=';
               url += session.customer_id + '&customer_token=' + session.customer_token;
               // console.log("session data", data, url);
               

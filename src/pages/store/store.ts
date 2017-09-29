@@ -737,5 +737,8 @@ showModalForcreditoffer(){
         }
     })
 }
+mgmOpenPage(){
+    this.navCtrl.push(referFriend);
+}
 
 }

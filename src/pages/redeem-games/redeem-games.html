@@ -1,34 +1,43 @@
 <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
 
 <ion-content class="card-background-page">
-    <div  ion-fixed class="header-widthGetGame">
+    <div ion-fixed class="header-widthGetGame">
         <ion-slides autoplay="5000" loop="true" speed="500" pager="true" *ngIf="sliderImage">
             <ion-slide *ngFor="let image of sliderImage">
-                    <ion-card>
-                        <img src="{{image?.slider_medium}}" style="margin-top: 1px;width: 100%" />
-                    </ion-card>
+                <ion-card>
+                    <img src="{{image?.slider_medium}}" style="margin-top: 1px;width: 100%" />
+                </ion-card>
             </ion-slide>
         </ion-slides>
         <ion-item>
             <ion-icon><img src="assets/icon/rwp_icon.svg" alt="" width="24" height="24" style="margin:0 5px -5px 0px;" /></ion-icon>
-         <span style="color:#333333!important">Your Reward Points Balance:</span><span ion-text color="primary">{{reward_point}}</span>
+            <span style="color:#333333!important">Your Reward Points Balance:</span><span ion-text color="primary">{{reward_point}}</span>
         </ion-item>
-  
+
     </div>
-   
+
     <div class="bottom-contentGtagme">
-    <ion-list no-lines *ngFor="let redeem_product of redeem_products; let i=index" class="redeemgameslist" >
-        <ion-item>
-            <ion-thumbnail item-left>
-                <img src="{{redeem_product?.product_image}}">
-            </ion-thumbnail>
-            <h2>{{redeem_product?.product_title}}</h2>
-            <p ion-text color="orange">TOP PRIZE: $50</p>
-            <p ion-text color="calm">PRICE: {{redeem_product?.product_price}} {{redeem_product?.product_price_after}}</p>
-            <button ion-button item-right color="secondary" style="width: 71px;height: 34px;"(click)="redeem(redeem_product?.product_link,i)">GET</button>
-        </ion-item>
-        <ion-item-divider style="color:#333333!important;top:-8px!important;">{{redeem_product?.product_details}}</ion-item-divider>
-        <!--<ion-item>
+        <ion-list no-lines *ngFor="let redeem_product of redeem_products; let i=index" class="redeemgameslist">
+            <ion-item>
+                <ion-col col-3 item-left>
+                    <ion-thumbnail item-left>
+                        <img src="{{redeem_product?.product_image}}" style="height:68px">
+                    </ion-thumbnail>
+                </ion-col>
+                <ion-col col-3 item-center>
+                    <h2>{{redeem_product?.product_title}}</h2>
+                    <p ion-text color="orange" style="margin-left: 18px;font-size: larger;font-weight: 900;">$50</p>
+                    <p ion-text color="orange">TOP PRIZE</p>
+                </ion-col>
+
+                <ion-col col-4 item-right text-center>
+                    <button ion-button item-right color="secondary" style="width: 71px;height: 34px;" (click)="redeem(redeem_product?.product_link,i)">GET</button>
+                    <p color="calm" >{{redeem_product?.product_price}}</p>
+                    <p ion-text color="calm" >{{redeem_product?.product_price_after | uppercase}}</p>
+                </ion-col>
+            </ion-item>
+            <ion-item-divider style="color:#333333!important;top:-33px!important;">{{redeem_product?.product_details}}</ion-item-divider>
+            <!--<ion-item>
             <ion-thumbnail item-left>
                 <img src="assets/img/sample_thumb_02@3x.png">
             </ion-thumbnail>
@@ -38,16 +47,24 @@
             <button ion-button item-right color="secondary" style="width: 80px;">REDEEM</button>
         </ion-item>
         <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>-->
-        <ion-item>
-            <ion-thumbnail item-left>
-                <img src="assets/img/sample_thumb_03@3x.png">
-            </ion-thumbnail>
-            <h2>Lucky colors</h2>
-            <p ion-text color="orange">TOP PRIZE: $50</p>
-            <p ion-text color="calm">PRICE: 70 POINTS</p>
-            <button (click)="confirmSelectionPage(i)"ion-button item-right color="secondary" style="width: 71px;height: 34px">GET</button>
+            <ion-item style="margin-top: -22px;">
+                <ion-col col-3 item-left>
+                    <ion-thumbnail item-left>
+                        <img src="assets/img/sample_thumb_03@3x.png" style="height:68px">
+                    </ion-thumbnail>
+                </ion-col>
+                <ion-col col-3 item-center>
+                    <h2>Lucky colors</h2>
+                    <p ion-text color="orange" style="margin-left: 18px;font-size: larger;font-weight: 900;">$50</p>
+                    <p ion-text color="orange">TOP PRIZE</p>
+                </ion-col>
+                <ion-col col-4 item-right text-center>
+                    <button (click)="confirmSelectionPage(i)" ion-button item-right color="secondary" style="width: 71px;height: 34px">GET</button>
+                    <p ion-text color="calm" >70</p>
+                    <p ion-text color="calm">POINTS</p>
+            </ion-col>
         </ion-item>
-        <ion-item-divider style="color:#333333!important;top:-8px!important;">This is the game description and excerpt</ion-item-divider>
-    </ion-list>
-</div>
+            <ion-item-divider style="color:#333333!important;top:-22px!important;">This is the game description and excerpt</ion-item-divider>
+        </ion-list>
+    </div>
 </ion-content>

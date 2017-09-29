@@ -1,4 +1,4 @@
-<cus-header title="CHECK MY WINNINGS"></cus-header>
+<cus-header title="Syndicates"></cus-header>
 <ion-content class="marg-top-12 main-bg">
   <div class="main-div">
     <ion-row>
@@ -29,32 +29,24 @@
       <ion-col> Log of activities for the last 60 days </ion-col>
     </ion-row>
     <ion-row class="border-b" style="padding-top: 10px;">
-      <ion-col col-3 > Check Date </ion-col> <ion-col col-2> Cash</ion-col> <ion-col col-2> Credit</ion-col> <ion-col col-2> Points </ion-col> <ion-col col-3> View </ion-col>
+      <ion-col col-3 > Check Date </ion-col> <ion-col col-2> Lottery</ion-col> <ion-col col-2> Points</ion-col> <ion-col col-2> Prizes </ion-col> <ion-col col-3> View </ion-col>
     </ion-row>
     <div style="padding: 0 10px">
     <ion-row class="border-b list-d" *ngFor="let v of myWinnings;">
       <ion-col col-3> {{v.check_date}} </ion-col>
-      <ion-col col-2 *ngIf="v.check_type != 'cash'"> <span class="icon-s" style="content: url(./assets/icon/cash_ico.svg);min-width: 14px"></span> </ion-col> 
-      <ion-col col-2 *ngIf="v.check_type == 'cash'"> <span class="icon-s" style="content: url(./assets/icon/cash_ico2.svg);min-width: 14px"></span> </ion-col>
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/bc_ico2.svg);min-width: 14px"></span></ion-col> 
-      <!--<ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/bc_ico.svg);min-width: 14px"></span></ion-col>-->
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/rwp_icon.svg);min-width: 14px"></span> </ion-col> 
+    
+      <ion-col col-2 *ngIf="v.check_type == 'cash'"> <span class="icon-s" style="content: url(./assets/icon/lottery-check.svg);min-width: 14px"></span> </ion-col> 
+      <ion-col col-2 *ngIf="v.check_type != 'cash'"> <span class="icon-s" style="content: url(./assets/icon/lottery-check-gray.svg);min-width: 14px"></span> </ion-col>
+     
+     
+       <ion-col col-2 *ngIf="v.check_type == 'reward'"> <span class="icon-s" style="content: url(./assets/icon/rwp_icon.svg);min-width: 14px"></span></ion-col> 
+      <ion-col col-2 *ngIf="v.check_type != 'reward'"> <span class="icon-s" style="content: url(./assets/icon/rwp_icon-gray.svg);min-width: 14px"></span></ion-col> 
+
+      <ion-col col-2 *ngIf="v.check_type == 'award'"> <span class="icon-s" style="content: url(./assets/icon/other_prizes_ico.svg);min-width: 14px"></span> </ion-col> 
+      <ion-col col-2 *ngIf="v.check_type != 'award'"> <span class="icon-s" style="content: url(./assets/icon/other_prizes_gray_ico.svg);min-width: 14px"></span> </ion-col>  
+
       <ion-col col-3> <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px"></span> </ion-col>
     </ion-row>
-    <!--<ion-row class="border-b list-d">
-      <ion-col col-3> 12 Jan </ion-col>
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/cash_ico.svg);min-width: 14px"></span> </ion-col> 
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/bc_ico.svg);min-width: 14px"></span></ion-col> 
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/rwp_icon.svg);min-width: 14px"></span> </ion-col> 
-      <ion-col col-3> <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px"></span> </ion-col>
-    </ion-row>
-    <ion-row class="list-d">
-      <ion-col col-3> 18 Jan </ion-col>
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/cash_ico2.svg);min-width: 14px"></span> </ion-col> 
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/bc_ico2.svg);min-width: 14px"></span></ion-col> 
-      <ion-col col-2> <span class="icon-s" style="content: url(./assets/icon/rwp_icon.svg);min-width: 14px"></span> </ion-col> 
-      <ion-col col-3> <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px"></span> </ion-col>
-    </ion-row>-->
     </div>
   </div>
 </ion-content>

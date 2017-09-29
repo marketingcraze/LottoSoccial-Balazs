@@ -545,11 +545,10 @@
           </ion-item>
   
           <div class="top-slides-wrapper">
-            <ion-slides class="top-slides"  spaceBetween=8>
-            
+            <ion-slides class="top-slides" slidesPerView=2  spaceBetween="10" >
               <ion-slide *ngFor="let item of homeBlog">
-                <img *ngIf="item.image" src="{{item.image}}">
-                <img *ngIf="!item.image" src="assets/img/150.png">
+                //<img *ngIf="item.image" src="{{item.image}}" style="width: 60%;">
+                <img *ngIf="!item.image" src="assets/img/150.png" style="width: 72%;height: 157px;">
                 <div class="slide-content">
                   <ion-item >
                     <p item-content>{{item.content.rendered}}</p>
@@ -560,6 +559,9 @@
                     </button>
                   </ion-item>
                 </div>
+              </ion-slide>
+              <ion-slide style="background-color: red;height: 200px;">
+
               </ion-slide>
             
             
@@ -592,7 +594,7 @@
               </ion-slide> -->
             </ion-slides>
           </div>
-          <ion-slides  spaceBetween=8>
+          <ion-slides  spaceBetween=8 slidesPerView=2>
             <ion-slide>
               <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
             </ion-slide>
