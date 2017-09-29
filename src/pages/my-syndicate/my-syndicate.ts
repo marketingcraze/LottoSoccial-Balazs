@@ -21,6 +21,8 @@ export class MySyndicatePage {
 
     private syndArr = [];
     private toggled = [];
+    
+    
     userCards: any;
     userCardsCount:number = 0;
     customerToken:string;
@@ -65,12 +67,18 @@ export class MySyndicatePage {
         this.app.getRootNav().push(ManageSyndicate2Page);
     }
     viewTickets(i) {
+       
         this.appSound.play('buttonClick');
         var grp = this.syndArr[i].product_group;
         var sid = this.syndArr[i].syndicate_id;
         var stype = this.syndArr[i].syndicate_type;
         this.app.getRootNav().push(YourTicketsPage, {'products':grp, 'synd':sid, 'stype':stype});
     }
+    viewPrivateTickets(productGroup:any,syndicate_id:any,syndicate_type:any) {
+         this.appSound.play('buttonClick');
+         this.app.getRootNav().push(YourTicketsPage, {'products':productGroup, 'synd':syndicate_id, 'stype':syndicate_type});
+     }
+     
     loadSyndicate() {
     let loader = this.loadingCtrl.create({
       content:"Please wait..."
@@ -78,8 +86,10 @@ export class MySyndicatePage {
     loader.present();
     this._syndService.syndicateList().subscribe((res) => {
       console.log('syndicate list');
+
       loader.dismiss();
         this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
+        
         this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
         if(this.chatcount >0){
             $(".ctNow").removeClass('pulse');

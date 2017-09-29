@@ -96,23 +96,13 @@
       <div *ngIf="toggled[i]">
         <ion-item text-wrap text-center>
           <ion-grid text-center>
-            <ion-row text-center>
+            <ion-row text-center *ngFor="let pd of sd.product_group; let j = index;">
               <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
-                <input type="button" value="EURO TUE" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
-                font-size: 13px;padding: 5px;height: 30px">
+                <input type="button" value="{{sd.product_group[j]?.product_name}}" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
+                font-size: 13px;padding: 5px;height: 30px" (click)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
               </ion-col>
               <ion-col col-9>
-                <p style="display:inline-block;;font-size: 15px;color: #2C2C2C;padding-top: 2.5%;text-align: center;margin-left: 5% ">   X 10 tickets Valid for 11 Feb 2017</p>
-              </ion-col>
-            </ion-row>
-    
-            <ion-row>
-              <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
-                <input type="button" value="EURO TUE" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
-                font-size: 13px;padding: 5px;height: 30px">
-              </ion-col>
-              <ion-col col-9>
-                <p style="display:inline-block;;font-size: 15px;color: #2C2C2C;padding-top: 2.5%;text-align: center;margin-left: 5% ">   X 10 tickets Valid for 11 Feb 2017</p>
+                <p class="ticketsInfoP">   x {{sd?.product_group[j]?.ticket_count}} tickets Valid for {{sd?.product_group[j]?.ticket_valid_date}}</p>
               </ion-col>
             </ion-row>
     

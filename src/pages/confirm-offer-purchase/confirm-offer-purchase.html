@@ -1,5 +1,5 @@
-<ion-content class="modal-page" text-center style="text-align: center">
-    <ion-list ion-fixed style="height: 100%">
+<ion-content class="modal-page" text-center style="text-align: center" >
+    <ion-list style="height: 100%" ion-fixed>
     <div style="text-align: center;border-bottom: 1px solid #A7A2A2;">
         <ion-item no-lines text-center text-wrap item-center>
             <p style="font-size: 17px;text-align: center;color: black">Confirm your purchase</p>
@@ -18,22 +18,18 @@
                 <span style="font-size:16px;padding-left: 10px">Secure payment details</span>
             </ion-item>
         </div>
-        <div style="border-bottom: 1px solid lightgray;margin: 5px">
+        <div style="border-bottom: 1px solid lightgray;margin: 5px" *ngFor="let card of testCards let i=index">
             <ion-item no-lines text-wrap  >
-                <ion-label (click)="select('first')"><span style="font-size: 13px">Use preffered card:</span> <br><span style="font-size: 15px"> VISA Ending with 1294 </span></ion-label>
-                <ion-checkbox (click)="select('first')" checked="{{check1}}" style="background-color: green;border-radius: 50px" ></ion-checkbox>
+                <ion-label (click)="select(i)"><span style="font-size: 13px">Use preffered card:</span> <br><span style="font-size: 15px"> {{card[0]?.card_type}} Ending with {{card[0]?.last4_digit}} </span></ion-label>
+                <!-- <ion- #chk (click)="select(i,testCards)" checked="{{card[1]}}" style="background-color: green;border-radius: 50px" ></ion-checkbox> -->
+                <ion-radio value="{{i}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio>
             </ion-item>
         </div>
-        <div style="border-bottom: 1px solid lightgray;margin: 5px" >
-            <ion-item no-lines text-wrap >
-                <ion-label (click)="select('second')"><span style="font-size: 13px">Use preffered card:</span> <br><span style="font-size: 15px">MASTERCARD Ending with 1294</span></ion-label>
-                <ion-checkbox (click)="select('second')" checked="{{check2}}" ></ion-checkbox>
-            </ion-item>
-        </div>
+        
         <div style="margin: 5px" >
             <ion-item no-lines text-wrap >
-                <ion-label (click)="select('third')"><span style="font-size: 15px">Use a different card</span></ion-label>
-                <ion-checkbox (click)="select('third')" checked="{{check3}}"></ion-checkbox>
+                <ion-label (click)="select('last')"><span style="font-size: 15px">Use a different card</span></ion-label>
+                <ion-checkbox  (click)="select('last')" checked="{{check3}}"></ion-checkbox>
             </ion-item>
         </div>
  

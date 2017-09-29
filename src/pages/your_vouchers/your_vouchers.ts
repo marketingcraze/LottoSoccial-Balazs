@@ -22,8 +22,8 @@ export class your_vouchers {
   resultDate: any = [];
   mobileNumber:any;
 
-
-  appList: any;
+  countVoucher:any;
+  appList: any = [];
     
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
     private modalController: ModalController, public voucher_service: VoucherService,
@@ -38,13 +38,17 @@ export class your_vouchers {
     let loader = this._showLoader();
     this.voucher_service.getVoucherList().subscribe(
       data => {
-        this.appList = data.response[1].get_issued_voucher_code.response.voucher_code_details
-        this.mobileNumber = data.response[0].get_customer_details.response.mobile_number
-        console.log("mobile number is ", this.mobileNumber )
-        this.adjustListCount()
-        this.timerInstance.newTimer('1sec', 1);
+       if(data.response[1].get_issued_voucher_code)
+       {
+          this.appList = data.response[1].get_issued_voucher_code.response.voucher_code_details
+          this.mobileNumber = data.response[0].get_customer_details.response.mobile_number
+          
+          console.log("mobile number is ", this.mobileNumber )
+          this.adjustListCount()
+          this.timerInstance.newTimer('1sec', 1);
+          this.subscribeTimer0()
+       }
         
-        this.subscribeTimer0()
         loader.dismiss()
       },
       err => {
@@ -66,10 +70,10 @@ export class your_vouchers {
     this.count = this.appList.length
 
     if (this.appList.length >= 3) {
-      this.height = 240;
+      this.height = 250;
     }
     else {
-      this.height = this.appList.length * 70;
+      this.height = this.appList.length * 72;
     }
     console.log("entered" + this.height)
 

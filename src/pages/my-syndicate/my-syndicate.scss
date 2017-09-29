@@ -204,4 +204,23 @@ page-my-syndicate {
     ion-icon{
         
     }
+    .ticketsInfoP{
+        display:inline-block;
+        font-size: 15px;
+        color: #2C2C2C;
+        padding-top: 2.5%;
+        text-align: center;
+        margin-left: 10%;
+    }
+
+@media only screen and (max-width: 320px) {
+    .ticketsInfoP{
+        display:inline-block;
+        font-size: 15px;
+        color: #2C2C2C;
+        padding-top: 2.5%;
+        text-align: center;
+        margin-left: 14%;
+    }
+}
 }

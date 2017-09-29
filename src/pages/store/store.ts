@@ -707,13 +707,18 @@ buyCreditOffer(offerId: any,prosub_id:any) {
                 } 
             }
             if (token_exists > 0) {
-                loader.dismiss()
-                let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
-                })
-                modal.present();
+                //data.response.push({ offer: offerId });
+                this.userCards = data.response;
+
+                console.log("StorePage::showPaymentOptions() success", this.userCards);
+                loader.dismiss();
+                // loader.dismiss()
+                // let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
+                // })
+                // modal.present();
 
               //  console.log("StorePage::showPaymentOptions() success", this.userCards);
-               // this.confirmPayment.togglePopup()
+                this.confirmPayment.togglePopup()
             }else{
                 loader.dismiss()
                 this.goPaymentWebviewHomeoffer(offerId,prosub_id);

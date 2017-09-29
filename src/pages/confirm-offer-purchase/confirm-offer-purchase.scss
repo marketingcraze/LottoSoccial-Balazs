@@ -4,7 +4,7 @@ page-confirm-offer-purchase{
         overflow: hidden;
         max-width: 100%;
         width: 90vw;
-        height: 76%;
+        height: 66%;
         top: 0;
         bottom: 0;
         left: 0;
@@ -15,6 +15,9 @@ page-confirm-offer-purchase{
         
         border-radius: 15px;
       
+        }
+        .label-md {
+            margin: 4px 8px 10px 0;
         }
         ion-icon {
             display: inline-block;
@@ -48,5 +51,25 @@ page-confirm-offer-purchase{
             display: inherit;
             margin: 9px 16px 9px 0px;
         }
+    
+        @media only screen and (max-width: 320px) {
+            .modal-page {
+                position: absolute;
+                overflow: hidden;
+                max-width: 100%;
+                width: 90vw;
+                height: 80%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                border: 0;
+                box-shadow:  0 0 50px  rgba(0,0,0,0.60);
+                border-radius: 15px;
+               }
+        }
+
+       
         
     }
