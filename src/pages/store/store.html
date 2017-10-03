@@ -547,7 +547,7 @@
           <div class="top-slides-wrapper">
             <ion-slides class="top-slides" slidesPerView=2  spaceBetween="10" >
               <ion-slide *ngFor="let item of homeBlog">
-                //<img *ngIf="item.image" src="{{item.image}}" style="width: 60%;">
+                <img *ngIf="item.image" src="{{item.image}}" style="width: 60%;">
                 <img *ngIf="!item.image" src="assets/img/150.png" style="width: 72%;height: 157px;">
                 <div class="slide-content">
                   <ion-item >

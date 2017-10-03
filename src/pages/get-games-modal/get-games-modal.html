@@ -21,7 +21,7 @@
     
               <div item-center item-right style="border: 1px solid #255FC7;width: 40%;text-align: center;border-radius: 200px 200px 200px 200px;z-index: 1">
                 <input (click)="minusCounter()" type='button' value='-' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
-                <input type='text' value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0">
+                <input type='number' disabled="disabled" value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0;background-color: white">
                 <input (click)="plusCounter()" type='button' value='+' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;left: 4px">
             </div>
             </ion-item>
