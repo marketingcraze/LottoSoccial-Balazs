@@ -1,5 +1,8 @@
+
+
 <ion-content class="modal-page" text-center>
-  <ion-list *ngIf="value=='0'">
+
+  <ion-list *ngIf="value=='0'" ion-fixed style="width: 100%">
     <ion-label style="margin-top: 6%; font-size: 16px" text-center>Confirm you want to claim your voucher</ion-label>
     <ion-item text-wrap align-left no-lines style="padding-top: 10px">
       <div>
@@ -18,14 +21,11 @@
       <div style="margin-top: -4px">
         <ul style="font-size: 14px" *ngFor='let lst of lottoMiddleJson;let i=index;'>
           <li  *ngIf="lst" class="middleDescription">{{lottoMiddleJson[i]}}</li>
-          <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
-          <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
-          <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
-          
+         <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
         </ul>
       </div>
     </ion-item>
-    <ion-item text-center no-lines>
+    <ion-item text-center no-lines style="border-radius: 0px 0px 10px 10px">
       <div style="text-align: center">
         <input type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
       </div>
@@ -35,7 +35,8 @@
       </ion-item>
 
   </ion-list>
-    <div class="buycard" *ngIf="value=='1'">
+  <ion-list class="buycard" *ngIf="value=='1'" ion-fixed>
+    
         <button ion-button icon-only class="successIcon">
                   <ion-icon style="width:70px; "><img src="assets/icon/check_icon.png"> </ion-icon>
                 </button>
@@ -50,7 +51,8 @@
             </ion-col>
         </ion-row>
     
-</div>
+
+</ion-list>
 <div *ngIf="value=='2'" class="errorcard">
   <button ion-button icon-only class="failedBackground">
             <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>

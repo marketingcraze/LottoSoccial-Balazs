@@ -16,10 +16,12 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     confirmPayment:boolean = false;
     showBuyNowView:boolean = false;
     confirmPaymentSuccess:boolean = true;
+    buttonValu="";
 
     public cardSelected:any
     public cardsValue:any
     public cardsList:any[]
+    public offer_detail = "";
 
     public customerDetails
     public syndicate = {
@@ -36,6 +38,8 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     @Input('existing-cards') existingPaymilCards;  
     
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
+       
+       // this.buttonValu = localStorage.getItem("buttonText").substr(9,13);
         // console.log('Change detected:', changes["existingPaymilCards"]);
         
         if (changes["existingPaymilCards"] && changes["existingPaymilCards"].currentValue) {
@@ -49,6 +53,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
 
                 if (this.cardsValue[i].get_customer_paymill_card_details) {
                     this.cardsList = this.cardsValue[i].get_customer_paymill_card_details.response.cards
+                    this.offer_detail = this.cardsValue[i].get_customer_paymill_card_details.response.offer_name
                 }else if (this.cardsValue[i].get_customer_details) {
                     this.customerDetails = this.cardsValue[i].get_customer_details.response
                 }else if (this.cardsValue[i].offer) {
@@ -84,6 +89,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg&customer_id=1970400&customer_token=818113679640&Offer_ID=1188'
 
             // this.showBuyNowView = !this.showBuyNowView
+
             this.iab.create( str, 'blank', opt);
         }else{
             this.makeCardPayment(this.cardSelected);
@@ -109,7 +115,9 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         if (card) {
             this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() success", data);
+               
                 loader.dismiss();
+                
                 
                 this.showBuyNowView = true;
                 data = data.response[0];

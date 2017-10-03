@@ -685,8 +685,8 @@ clicked(){
     
 }
 
-buyCreditOffer(offerId: any,prosub_id:any) {
-    
+buyCreditOffer(offerId: any,prosub_id:any,buttonText:any) {
+  
     console.log("StorePage::showPaymentOptions()", offerId);
     // let offer = {total_cost:4.99} ;
 
@@ -700,13 +700,17 @@ buyCreditOffer(offerId: any,prosub_id:any) {
         this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
-      
+            
+            
             for (var i = 0; i < data.response.length; ++i) {
                 if (data.response[i].get_customer_paymill_card_details) {
                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
                 } 
             }
             if (token_exists > 0) {
+                
+              //  localStorage.setItem("buttonText",buttonText);
+
                 //data.response.push({ offer: offerId });
                 this.userCards = data.response;
 
@@ -717,7 +721,7 @@ buyCreditOffer(offerId: any,prosub_id:any) {
                 // })
                 // modal.present();
 
-              //  console.log("StorePage::showPaymentOptions() success", this.userCards);
+               console.log("StorePage::showPaymentOptions() success", this.userCards);
                 this.confirmPayment.togglePopup()
             }else{
                 loader.dismiss()

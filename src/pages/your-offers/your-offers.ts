@@ -239,7 +239,7 @@ export class YourOffersPage {
 
 			let delta = Math.floor((now - value.getTime()) / 1000);
 			if (delta < 0) {
-				this.result = "-"
+				
 				delta = Math.abs(delta);
 			}
 

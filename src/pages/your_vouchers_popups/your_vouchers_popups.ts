@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { VoucherService } from '../../services/voucherList_service'
+declare var $:any;
 
 
 @Component({
@@ -18,6 +19,7 @@ export class your_vouchers_popups {
   lottoMiddleJson:any = "";
   sucessState:any = "";
   gift_status:any = "";
+  contentHeight:any = "";
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
@@ -41,6 +43,24 @@ export class your_vouchers_popups {
    
     
   }
+  ionEnter(){
+    
+  //  this.contentHeight = $("#list").height + 80; //50 added for top and bottom margin
+    // console.log("main height is ", this.contentHeight)
+    // console.log("height is ", document.getElementById('list').getBoundingClientRect().height + 40)   
+    // console.log("height is ", document.getElementById('list').scrollHeight + 40)   
+    // console.log("height is ",document.getElementById('list').offsetHeight + 40)   
+    // console.log($("#list").height());
+    // console.log($("#list").innerHeight());
+    // console.log($("#list").outerHeight());
+  
+  }
+  ionViewWillUnload(){
+    this.contentHeight = 0;
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
   ionViewWillEnter()  {
     let loader = this._showLoader();
     this.voucher_service.getPopUpVoucherData(this.mobileNumber,this.VoucherCode).subscribe(
@@ -48,8 +68,11 @@ export class your_vouchers_popups {
        this.middleData = data.response[0].voucher_validation.response.Voucher_description;
        this.gift_status = data.response[0].voucher_validation.response.gift_status;
         this.lottoMiddleJson = this.middleData.split("#");
-      loader.dismiss()
-
+        this.delay(300);
+      this.ionEnter();
+        loader.dismiss()
+     
+    
       },
       err => {
         console.log("error", err);
