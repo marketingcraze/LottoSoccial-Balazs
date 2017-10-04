@@ -1,0 +1,34 @@
+buyOffer-Tips{
+.modal-page {
+    position: absolute;
+    overflow: hidden;
+    max-width: 330px;
+    border-radius: 10px;
+    width: 90vw;
+    height: 60vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    box-shadow: 0 16px 20px rgba(0,0,0,.4);
+    background-color: #fafafa;
+
+    }
+    .game-thanku-btn-transparent{
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+        color: blue;
+        margin-top: 31px;
+        margin-bottom: 8px;
+        font-size: 16px;
+        text-align: center;
+        margin-left: 35%;
+       
+     }
+}

@@ -83,7 +83,9 @@ import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
 import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase';
 import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
-import { HelpPage } from '../pages/Help/Help'
+import { HelpPage } from '../pages/Help/Help';
+import { newArrowHeader } from '../components/newArrowHeader/newArrowHeader';
+import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
 
 
 // components
@@ -219,6 +221,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         AffiliatePage,
         AffiliatePopup,
         HelpPage,
+        newArrowHeader,
+        buyOfferTips,
         // OffersPayment,
 
         // pipes
@@ -337,6 +341,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         confirmOfferPurchasePage,
         AffiliatePopup,
         HelpPage,
+        newArrowHeader,
+        buyOfferTips,
         // popovers
         // OffersPayment,
         CountryListPopPage,

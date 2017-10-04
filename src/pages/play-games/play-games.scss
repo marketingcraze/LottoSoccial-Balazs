@@ -115,7 +115,7 @@ font-weight: 600;
 }
 
 .game-play-score{
-    margin-left: 25px;
+    margin-left: 26px;
     color: #797261;
     font-weight: bolder;
     height: 104px;
@@ -253,7 +253,7 @@ font-weight: 600;
     display: block;
     content: "";
     width: 254px;
-    height: 18px;
+    height: 9px;
     top: 2px;
     left: 20px;
     border-radius: 20px;
@@ -266,7 +266,7 @@ font-weight: 600;
 	position:absolute;
 	display:block;
 	width:0px;
-	height:16px;
+	height:8px;
 	top:13.5px;
 	left:22px;
     margin-left: 3px;
@@ -354,7 +354,7 @@ font-weight: 600;
 	width:57px;
 	height:30px;
 	line-height:30px;
-	top:40px;
+	top:36px;
 	left:10px;
 	font-weight:bold;
 	font-size:12px;
@@ -458,13 +458,13 @@ font-weight: 600;
     background: #fff;
     padding: 8px;
     position: relative;
-	bottom: 70px;
-    margin-left: 70%;
+	bottom: 59px;
+    margin-left: 75%;
   }
   .circle_inside_Img{
-    width: 23px;
+	width: 30px;
     position: relative;
-    left: 10px;
+    left: 8px;
   }
   play-game{
 	.scroll-content{
@@ -502,7 +502,7 @@ font-weight: 600;
 		position: relative;
 		font-size: 1em;
 		bottom: 81px;
-		margin-left: 42%;
+		margin-left: 73%;
 		font-weight: 800;
 		font-family: sans-serif;
 	}
@@ -526,5 +526,21 @@ font-weight: 600;
 		bottom: 68px;
 		position: relative;
 		font-size: large;
+	}
+	
+	table {
+		position: relative;
+		left: 5%;
+    }
+    
+    th, td {
+		padding: 2px;
+		padding-left: 31px;
+		font-size: large;
+		text-align: center;
+		margin-left: 4px;
+	}
+	tr{
+		border-bottom: 2px solid;
 	}
   }

@@ -4,6 +4,7 @@ import { productOffer } from '../../services/productoffer.service';
 import { OfferService } from '../../services/offer.service';
 import { Storage } from '@ionic/storage';
 import { Observable } from "rxjs/Rx";
+import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
 
 @Component({
     selector: 'offer-buy',
@@ -38,6 +39,7 @@ export class offerBuy {
     constructor(private offerBuyData: productOffer,
         private loadingCtrl: LoadingController,
         private storage: Storage,
+        private modalCtrl:ModalController,
         private offerService: OfferService,
         private navprms: NavParams, ) {
 
@@ -158,6 +160,10 @@ export class offerBuy {
     }
     openSuccessModal() {
 
+    }
+    openTipsModal(){
+        let modalTips=this.modalCtrl.create(buyOfferTips);
+        modalTips.present();
     }
 
 }

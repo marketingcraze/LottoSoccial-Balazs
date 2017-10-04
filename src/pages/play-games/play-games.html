@@ -1,73 +1,92 @@
 <ion-header>
-    <cus-header title="Play games" notification-count="5"></cus-header>
+    <newArrow-Header title="Play games" notification-count="5"></newArrow-Header>
 </ion-header>
 
 <ion-content style="bottom: -32px">
     <div text-center class="orange-bg">
-        <div >
+        <div>
             <img src="{{gameInfo?.game_imageurl}}" class="headerImage" />
         </div>
         <ion-list>
-            <div class="game-title" >{{gameInfo?.game_title}}</div>
-            <div text-wrap >
+            <div class="game-title">{{gameInfo?.game_title}}</div>
+            <div text-wrap>
                 {{gameInfo?.game_description}}
             </div>
         </ion-list>
     </div>
 
-    <div class="ProgressBar-game-play item item-block item-md orange-bg" >
+    <div class="ProgressBar-game-play item item-block item-md orange-bg">
         <div class="progressbarPlayGame" attr.data-perc="{{progressPercentage}}">
             <div class="barPlayGame color2"><span></span></div>
             <div class="labelPlayGame"><span></span></div>
-          </div>
+        </div>
     </div>
     <br>
-    <div class="badgesContainer" >
-            <div class="badgesMain">
-                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Scholar</div></div>
-                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Teacher</div></div>
-                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Professor</div></div>
-                    <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br><div class="badgesOuterText">Guru</div></div>
+    <div class="badgesContainer">
+        <div class="badgesMain">
+            <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br>
+                <div class="badgesOuterText">Scholar</div>
             </div>
+            <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br>
+                <div class="badgesOuterText">Teacher</div>
+            </div>
+            <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br>
+                <div class="badgesOuterText">Professor</div>
+            </div>
+            <div class="badgesCircle"><b class="badgesInnerText">BADGE</b> <br>
+                <div class="badgesOuterText">Guru</div>
+            </div>
+        </div>
     </div>
 
     <div class="game-level-bg">
         <div class="level-target-title" text-center>
             <span *ngIf="gameInfo?.game_level ">Your Level {{gameInfo?.game_level}} Target</span>
-          
+
             <span *ngIf="!gameInfo?.game_level ">Your Level 0 Target</span>
         </div>
         <div class="game-play-score">
+            <ion-row style="position: relative;left: 0px">
+                <ion-col col-4 style="border-bottom: 1px solid;" text-center>
+                    <span style="font-weight: 700;font-family: sans-serif">{{gameInfo?.game_targetvalue}}</span>
+                </ion-col>
+                <ion-col col-4 style="border-bottom: 1px solid" text-center>
+                    <span style="font-weight: 700;font-family: sans-serif"> Score</span>
+                </ion-col>
+                <ion-col text-center>
+                    <span style="font-weight: 700;font-family: sans-serif">GET</span>
+                </ion-col>
+            </ion-row>
 
-             <ul class="score-ul" >
-                <li *ngIf="gameInfo?.game_targetvalue"> {{gameInfo?.game_targetvalue}} </li>
-                <li *ngIf="!gameInfo?.game_targetvalue ">0</li>
-        
-                <li *ngIf="gameInfo?.game_duration  ">{{gameInfo?.game_duration}}</li>
-                <li *ngIf="!gameInfo?.game_duration">0</li>
-        
-                <li *ngIf="gameInfo?.game_efficiencytarget ">{{gameInfo?.game_efficiencytarget}}</li>
-                <li *ngIf="!gameInfo?.game_efficiencytarget">0</li>
-            </ul>
+            <ion-row style="position: relative;left: 0px">
+                <ion-col col-4 style="border-bottom: 1px solid" text-center>
+                    <span style="font-weight: 700;font-family: sans-serif">{{gameInfo?.game_duration}}</span>
+                </ion-col>
+                <ion-col col-4 style="border-bottom: 1px solid" text-center>
+                    <span style="font-weight: 700;font-family: sans-serif">Time (Sec)</span>
+                </ion-col>
+                <ion-col col-4 text-center>
+                    <span style="position: relative;bottom: 10px;font-weight: 700;font-family: sans-serif;">BOOSTER</span>
+                </ion-col>
+            </ion-row>
 
-            <ul class="scoreText-ul" >
-                <li *ngIf="gameInfo?.game_targetvalue ">Score </li>
-                <li *ngIf="!gameInfo?.game_targetvalue ">Score</li>
-
-                <li *ngIf="gameInfo?.game_duration ">Time (Sec)</li>
-                <li *ngIf="!gameInfo?.game_duration ">Time (Sec)</li>
-
-                <li *ngIf="gameInfo?.game_efficiencytarget ">Words used</li>
-                <li *ngIf="!gameInfo?.game_efficiencytarget">Words used</li>
-            </ul>
-
-            <span *ngIf="pageLoaded" text-wrap class="useboosterText">USE BOOSTER</span>
-            <div  class="circle_inside" (click)="showBoosterModal()"> <img src="assets/icon/booster_btn_ico@3x.png" class="circle_inside_Img" ></div>
+            <ion-row style="position: relative;left: 0px">
+                <ion-col col-4 style="border-bottom: 1px solid" text-center>
+                  <span style="font-weight: 700;font-family: sans-serif">  {{gameInfo?.game_efficiencytarget?gameInfo?.game_efficiencytarget:0}}</span>
+                </ion-col>
+                <ion-col col-4 style="border-bottom: 1px solid" text-center>
+                   <span style="font-weight: 700;font-family: sans-serif"> Words used</span>
+                </ion-col>
+               
+            </ion-row >
+            <ion-col col-4>
+                    <div class="circle_inside" (click)="showBoosterModal()"> <img src="assets/icon/booster_btn_ico@3x.png" class="circle_inside_Img"></div>
+                </ion-col>
         </div>
 
         <div text-center>
-            <button ion-button color="secondary" style="bottom: 14px" (click)="openThankyouPage()" > Play Now</button>
-         
+            <button ion-button color="secondary" style="bottom: 14px" (click)="openThankyouPage()"> Play Now</button>
+
         </div>
     </div>
 
@@ -83,7 +102,7 @@
         </ul>
     </div>
 
-    <div text-center  style="position: relative;bottom: 16px;">
+    <div text-center style="position: relative;bottom: 16px;">
         <ion-list>
             <ion-item href="#" (click)="recentWinnerTipsmodal()" detail-push>
                 Recent Winner Tips
@@ -98,7 +117,3 @@
     </div>
 
 </ion-content>
-
-
-
-
