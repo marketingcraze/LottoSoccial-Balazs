@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, SimpleChange, OnChanges } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { Storage } from '@ionic/storage';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
 
@@ -38,9 +38,10 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     @Input('existing-cards') existingPaymilCards;  
     
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
-       
-       // this.buttonValu = localStorage.getItem("buttonText").substr(9,13);
-        // console.log('Change detected:', changes["existingPaymilCards"]);
+      
+        if(localStorage.getItem("buttonText")){
+            this.buttonValu = localStorage.getItem("buttonText").substr(9,13);
+        }
         
         if (changes["existingPaymilCards"] && changes["existingPaymilCards"].currentValue) {
             this.cardsValue = changes["existingPaymilCards"].currentValue;
@@ -70,14 +71,25 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         }
     }
     
+    ngOnInit(){
+       
+    }
     constructor(
         private params:Params,
         private iab: InAppBrowser,
         public srvOffer: OfferService,
         public alertCtrl:AlertController,
         public appSound:AppSoundProvider,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController,
+        public storage:Storage) {
         console.log('Hello PopupConfirmPaymentComponent Component');
+        // this.storage.get('btnValue').then( (btnValue:any) => {
+        //     if(btnValue){
+        //     console.log('firstTimeLoad storage', btnValue);
+        //     this.buttonValu = btnValue.substr(9,13);
+                
+        //     }
+        // })
     }
 
     buyNow(){

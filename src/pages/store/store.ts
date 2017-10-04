@@ -708,8 +708,9 @@ buyCreditOffer(offerId: any,prosub_id:any,buttonText:any) {
                 } 
             }
             if (token_exists > 0) {
-                
-              //  localStorage.setItem("buttonText",buttonText);
+             //   this.storage.set('btnValue', bu);
+             localStorage.removeItem("buttonText");
+                localStorage.setItem("buttonText",buttonText);
 
                 //data.response.push({ offer: offerId });
                 this.userCards = data.response;

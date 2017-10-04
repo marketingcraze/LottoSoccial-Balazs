@@ -16,7 +16,7 @@ import { offerBuy } from '../offerbuy-page/offerbuy-page';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { offerOfTheDayModal } from '../../pages/offer-of-the-day-modal/offer-of-the-day-modal'
 import { SimpleTimer } from 'ng2-simple-timer';
-
+import { Observable } from "rxjs/Rx";
 
 @Component({
 	selector: 'page-your-offers',
@@ -46,6 +46,10 @@ export class YourOffersPage {
 	spaceBetween: any;
 	result: any = [];
 	resultDate: any = [];
+	day: any = [];
+    hrs: any = [];
+    mins: any = [];
+    sec: any = [];
 
 
 	private lotteryProductData: any
@@ -138,6 +142,7 @@ export class YourOffersPage {
 
 	ngOnInit() {
 
+
 		this.cache.loadModules("offers", "2", ["fetch_lottery_products"])
 			.then(data => {
 
@@ -151,7 +156,7 @@ export class YourOffersPage {
 						this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
 						this.st.newTimer('1sec', 1);
 						this.subscribeTimer0();
-
+ 						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime("Wed 05 oct 17 23:59:59"));
 						break;
 					}
 				}
@@ -170,7 +175,7 @@ export class YourOffersPage {
 		this.iab.create(str, 'blank', opt);
 	}
 
-	private _showLoader() {
+	private _showLoader(){
 		let loader = this.loadingCtrl.create({
 			content: "Loading data..."
 		});
@@ -267,6 +272,35 @@ export class YourOffersPage {
 		
 
 		return this.resultDate
+	}
+	calTime(NewLeft:any){
+
+		let now = new Date().getTime();
+		if (!NewLeft) {
+			return this.result;
+		}
+		if (typeof (NewLeft) === "string") {
+			NewLeft = new Date(NewLeft);
+		}
+	
+		let delta = Math.floor((now - NewLeft.getTime()) / 1000);
+		if (delta < 0) {
+			this.result = "-"
+			delta = Math.abs(delta);
+		}
+	
+		let dayCal = Math.floor(delta / 86400);
+		delta %= 86400
+		let hourCal = Math.floor(delta / 3600);
+		delta %= 3600
+		let minuteCal = Math.floor(delta / 60);
+		delta %= 60
+		let secondsCal = Math.floor(delta)
+	
+		this.day = (dayCal <= 9) ? '0' + dayCal: dayCal;
+		this.hrs = (hourCal <= 9) ? '0' + hourCal  + " :"  : hourCal + " :";
+		this.mins = (minuteCal <= 9) ? '0' + minuteCal  + " :"  : minuteCal + " :";
+		this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
 	}
 
 }

@@ -14,7 +14,7 @@ export class getGamesModal {
   price_after:any;
   status:any= "Passed";
   value: boolean = false;
-  counter = 0;
+  counter = 1;
 
   constructor(public navCtrl: NavController,
     private viewctrl: ViewController,
@@ -41,12 +41,14 @@ export class getGamesModal {
     this.navCtrl.popAll()
   }
   minusCounter(){
-    if(this.counter != 0){
+    if(this.counter != 1){
     this.counter--;
     }
   }
   plusCounter(){
-    this.counter++;
+    if(this.counter < 5)
+    { this.counter++;}
+   
   }
 }
 

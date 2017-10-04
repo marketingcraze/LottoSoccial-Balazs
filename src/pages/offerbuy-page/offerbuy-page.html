@@ -1,5 +1,5 @@
 <ion-header>
-    <synd-cus-header1 title="Play" notification-count="5"></synd-cus-header1>
+    <synd-cus-header1 title="Offer Product Page" notification-count="5"></synd-cus-header1>
 </ion-header>
 
 <ion-content style="margin-top: -20px;height: 105%">
@@ -71,7 +71,7 @@
         <div *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;"
             class="drawDayMargin">
             <div col-12 *ngIf="i<1">
-                <p class="font-size"> for <span ion-text color="bonus"> £{{item?.prize}} </span>credit</p>
+                <p class="font-size"> Total: <span ion-text color="bonus"> £{{item?.prize}} </span></p>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
     </div>
    
     <div class="offer-of-the-day">
-        <h5 text-center style="height: 13px;margin-top: 7px;">OFFERS OF THE DAY!</h5>
+        <h5 text-center style="height: 13px;margin-top: 7px;">DEAL OF THE DAY! <span style="margin-left: 15px">{{Nhrs}} {{Nmins}} {{Nsec}}</span></h5>
         <ion-slides slidesPerView=3>
             <ion-slide *ngFor="let productOffer of offersForYou">
                 <img src="{{productOffer.product_icon}}" class="img-responsive">

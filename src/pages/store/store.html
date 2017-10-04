@@ -22,7 +22,7 @@
       <ion-col width-50 style="width: 100%" >
         <div text-center style="width: 100%" (click)="tip()">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span class="tooltip t1">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span>
+          <span class="tooltip t1">CREDIT <span class="credit">{{accountDetails.bonus_credit}}</span>
           <div  *ngIf ="tip11==true" >
           <span class="tooltiptext t-left">
                 <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
@@ -97,7 +97,7 @@
                 {{offer?.button_text}}  
                 </span></button>
             </div>
-              <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button>
+              <!-- <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button> -->
             </ion-card>
           </div>
   

@@ -89,7 +89,7 @@ export class MySyndicatePage {
 
       loader.dismiss();
         this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
-        
+        console.log("syndSrr is ", this.syndArr)
         this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
         if(this.chatcount >0){
             $(".ctNow").removeClass('pulse');

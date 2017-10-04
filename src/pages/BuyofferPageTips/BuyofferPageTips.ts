@@ -5,7 +5,10 @@ import { NavController, NavParams, ViewController, LoadingController, AlertContr
     templateUrl:'BuyofferPageTips.html'
 })
 export class buyOfferTips{
-    constructor(){
+    constructor(public viewCtr:ViewController){
 
+    }
+    close(data){
+        this.viewCtr.dismiss(data);
     }
 }

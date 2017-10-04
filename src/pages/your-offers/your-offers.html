@@ -13,7 +13,7 @@
 
 <ion-content style="background-color:#E8E8E8;margin-top: 27px">
    <div class="offer-of-the-day"  ion-fixed>
-      <p text-center style="margin-top: 5px; padding: 0px;font-size: 15px;margin-bottom: 5px;margin-left: -7%">OFFERS OF THE DAY!</p>
+      <p text-center style="margin-top: 5px; padding: 0px;font-size: 15px;margin-bottom: 5px;margin-left: -7%">DEAL OF THE DAY! <span style="margin-left: 15px">{{hrs}} {{mins}} {{sec}}</span></p>
       <ion-slides slidesPerView=3>
         <ion-slide *ngFor="let product of offersForYou let i = index" >
           <img src="{{product.product_icon}}" class="img-responsive" (click)="offerOfTheDayModal(i)">

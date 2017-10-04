@@ -16,14 +16,14 @@
               <ion-label>Use preferred card:<br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
               <ion-radio value="{{i}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
             </ion-item>
-            <ion-item>
+            <ion-item style="border-bottom: 0px">
               <ion-label>Use a different card</ion-label>
               <ion-radio value="-1" item-left color="secondary"></ion-radio>
             </ion-item>
 
           </ion-list>
         </ion-scroll>
-        <div><button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for £4.99</button>
+        <div><button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for {{buttonValu}}</button>
         </div>
 
         <div>
