@@ -21,6 +21,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { PlayGamePage } from '../play-games/play-games';
 import { confirmOfferPurchasePage } from '../confirm-offer-purchase/confirm-offer-purchase'
+import { OverlayPage } from '../overlaypage/overlay-page'
 // import * as $ from 'jquery';
 declare var $:any;
 
@@ -159,7 +160,19 @@ export class StorePage {
         public modalCtrlr:ModalController,
         public actionSheetCtrl: ActionSheetController) 
         {
-           
+            
+
+            if(localStorage.getItem('isInstall')==null)
+            {
+                this.onPopUp();
+            }
+
+            if(localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall"){
+                localStorage.setItem('isInstall', "moreThanFirst");
+                this.onPopUp();
+            }
+          
+            //this.onPopUp();
         storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
             this.visitorId=firstTimeLoad;
             });
@@ -236,7 +249,10 @@ export class StorePage {
         this.checkCardExists();
 
     }
-
+    onPopUp() {
+        let modal = this.modalCtrlr.create(OverlayPage);
+        modal.present();
+    }
     ionViewDidLoad() {
         console.log('ionViewDidLoad StorePage');
         // initialize slider
@@ -244,6 +260,10 @@ export class StorePage {
         // this.slideInitial();
         // initialize slider end
 
+    }
+    
+    ionViewDidEnter(){
+        localStorage.setItem('isInstall',"empty")
     }
 
     ionViewWillEnter() {

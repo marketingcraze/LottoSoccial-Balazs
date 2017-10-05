@@ -86,6 +86,8 @@ import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
 import { HelpPage } from '../pages/Help/Help';
 import { newArrowHeader } from '../components/newArrowHeader/newArrowHeader';
 import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
+import  { OverlayPage } from '../pages/overlaypage/overlay-page'
+
 
 
 // components
@@ -223,6 +225,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         HelpPage,
         newArrowHeader,
         buyOfferTips,
+        OverlayPage,
+     
         // OffersPayment,
 
         // pipes
@@ -343,6 +347,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         HelpPage,
         newArrowHeader,
         buyOfferTips,
+        OverlayPage,
+  
         // popovers
         // OffersPayment,
         CountryListPopPage,

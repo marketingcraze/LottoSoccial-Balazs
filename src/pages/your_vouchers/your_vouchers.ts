@@ -67,16 +67,19 @@ export class your_vouchers {
   }
 
   adjustListCount() {
-    this.count = this.appList.length
-
-    if (this.appList.length >= 3) {
-      this.height = 250;
+    if(this.appList){
+      this.count = this.appList.length
+      
+          if (this.appList.length >= 3) {
+            this.height = 250;
+          }
+          else {
+            this.height = this.appList.length * 72;
+          }
+          console.log("entered" + this.height)
+      
     }
-    else {
-      this.height = this.appList.length * 72;
-    }
-    console.log("entered" + this.height)
-
+    
   }
 
 
@@ -131,8 +134,10 @@ export class your_vouchers {
 			console.log('timer 0 Unsubscribed.');
 		} else {
 
-			// Subscribe if timer Id is undefined
-			this.timer0Id = this.timerInstance.subscribe('1sec', () => this.timercallback(this.appList));
+      // Subscribe if timer Id is undefined
+      if(this.appList){
+        this.timer0Id = this.timerInstance.subscribe('1sec', () => this.timercallback(this.appList));
+      }
 			this.timer0button = 'Unsubscribe';
 			console.log('timer 0 Subscribed.');
 		}
@@ -183,11 +188,11 @@ export class your_vouchers {
 
 
 
-			this.result += (day <= 9) ? '0' + day + ' : ' : day + ' : ';
+			this.result += (day <= 9) ? '0' + day + 'd ' + ' ' : day + 'd ' + ' ';
 
-			this.result += (hour <= 9) ? '0' + hour + ' : ' : hour + ' : ';
-			this.result += (minute <= 9) ? '0' + minute + ' : ' : minute + ' : ';
-			this.result += (seconds <= 9) ? '0' + seconds : seconds;
+			this.result += (hour <= 9) ? '0' + hour + 'h ' + ' ' : hour + 'h ' + ' ';
+			this.result += (minute <= 9) ? '0' + minute + 'm' : minute + 'm';
+			//this.result += (seconds <= 9) ? '0' + seconds : seconds;
 
 			this.resultDate.push(this.result)
 

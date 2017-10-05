@@ -206,6 +206,8 @@ export class SignupPage {
 	}
 
 	submitSignup(form:any){
+
+		localStorage.setItem('isInstall', "firstTimeInstall");
 		// let nav = this.app.getRootNav();
         // nav.setRoot(NewSyndicatePage);
 		
