@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController,Platform } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-import { getGamesModal } from '../../pages/get-games-modal/get-games-modal'
+import { getGamesModal } from '../../pages/get-games-modal/get-games-modal';
+import { referFriend } from '../refer-friend-page/refer-friend-page';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /*
   Generated class for the RedeemGames page.
@@ -22,6 +24,8 @@ export class RedeemGamesPage {
   reward_point:number;
   point_status:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
+    private share: SocialSharing,
+    private platform:Platform,
     public appSound:AppSoundProvider,
     public authSrv:AuthService,private loadingCtrl: LoadingController,public modalController:ModalController ) {}
 
@@ -93,4 +97,18 @@ export class RedeemGamesPage {
     modal.present();
 
     }
+    mgmPage(){
+      let mgmModal=this.modalController.create(referFriend);
+      mgmModal.present();
+    }
+    openShare(){
+      if (this.platform.is('cordova')) {
+      this.share.share("demo message", "Demo subject", "", "Demo data").
+      then(() => {
+      // Success!
+      }).catch(() => {
+      // Error!
+      });
+    }
+  }
 }

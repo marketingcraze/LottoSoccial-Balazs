@@ -211,4 +211,8 @@ export class SendBonusPage {
 			}
 		})
 	}
+	goToOffers(){
+		var tabs:Tabs=this.navCtrl.parent;
+		tabs.select(0)
+	}
 }

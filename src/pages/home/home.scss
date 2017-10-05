@@ -116,6 +116,49 @@ page-home {
 		color: #333;
 		background-color: #FFEB92;
 	}
-
+	.account-avatar {
+	  
+	    img{
+			margin-top: 6px;
+			width: 75px;
+			height: 75px;
+			margin-left: 38%;
+			border-radius: 50%;
+			margin-bottom: 6px;
+	    }
+	    
+	}
+	.profile-picture{
+		background: #e3e3e3;
+		border: 3px solid #E6D011;
+	}
+	.UpperPart{
+		text-align: center;
+		margin-top: 20px;
+	}
+	.avatar{
+		margin: auto;
+	 }
+	 .color{
+		 color: #E6D011;
+	 }
+	 .sidemenuCoupon{
+		background: white;
+		padding: 0px;
+		width: 90%;
+		margin-left: 12px;
+		margin-top: 10px;
+		margin-bottom: 30px;
+		height: 38px;
+		border-radius: 5px;
+	 }
+	 .shareBucketicon{
+		color: #2F76D1;
+		font-size: xx-large;
+		background-color: transparent !important;
+		position: relative;
+		bottom: 5px;
+		left: 16px;
+	 }
 
 }

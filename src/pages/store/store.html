@@ -547,7 +547,8 @@
           <div class="top-slides-wrapper">
             <ion-slides class="top-slides" slidesPerView=2  spaceBetween="10" >
               <ion-slide *ngFor="let item of homeBlog">
-                <img *ngIf="item.image" src="{{item.image}}" style="width: 60%;">
+                <div style="height: 30vh;max-height: 30vh;min-height: 30vh">
+                <img *ngIf="item.image" src="{{item.image}}" style="width: 100%;">
                 <img *ngIf="!item.image" src="assets/img/150.png" style="width: 72%;height: 157px;">
                 <div class="slide-content">
                   <ion-item >
@@ -559,6 +560,7 @@
                     </button>
                   </ion-item>
                 </div>
+              </div>
               </ion-slide>
               <ion-slide style="background-color: red;height: 200px;">
 

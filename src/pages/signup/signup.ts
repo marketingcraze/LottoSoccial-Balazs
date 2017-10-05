@@ -251,7 +251,6 @@ export class SignupPage {
 						duration: 3000,
 						
 					}).present()
-					this.animateButton();
 				}else{
 					this.onRegistrationSuccess(data)
 				}
@@ -474,10 +473,5 @@ url:""
 		this.error = errMsg;
 		return Observable.throw(errMsg);
 	}
-	animateButton(){
-        this.input.start({ type: 'bounce', duration: '5000' })
-    }
-   
-
 
 }
