@@ -5,8 +5,8 @@
 
        <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
-        <span class="SlideTitle" *ngIf="Credit_Points2>0" >Your Bonus Credit Balance : <span ion-text class="PriceTxt">{{Credit_Points}}</span></span>
-        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (click)="goToOffers()">GET CREDIT</span>
+        <span class="SlideTitle" *ngIf="Credit_Points>0" >Your Bonus Credit Balance : <span ion-text class="PriceTxt">{{Credit_Points}}</span></span>
+        <span class="SlideTitle" *ngIf="Credit_Points==0" style="color:#2F76D1 !important" (click)="goToOffers()">GET CREDIT</span>
        </ion-item>
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
@@ -50,14 +50,14 @@
             <ion-item>
               <ion-range class="rangeslider" *ngIf="!sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true" (ionChange)="watchSlider(product,id,product?.index)"
               [(ngModel)]="slider">
-              <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-              <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+              <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+              <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
             </ion-range>
 
             <ion-range class="rangeslider" *ngIf="sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true" (ionChange)="watchSlider(product,id,product?.index)"
             [(ngModel)]="product.sliderrange">
-            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+            <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
             </ion-range>
             </ion-item>
             <ion-row  *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[product.sliderrange ? product.sliderrange : credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">

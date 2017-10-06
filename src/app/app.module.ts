@@ -108,7 +108,8 @@ import { PlayGame } from '../services/playgame.service';
 import { ReferFriend } from '../services/referfriend.service';
 import { productOffer } from '../services/productoffer.service';
 import { VoucherService } from '../services/voucherList_service'
-import { AffiliateServices } from '../services/affliate.service'
+import { AffiliateServices } from '../services/affliate.service';
+import { forkOffersSyndicate } from '../services/syndicateForkOffer.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -361,7 +362,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService,paymentService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate]
 
 })
 export class AppModule { }

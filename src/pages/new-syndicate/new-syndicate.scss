@@ -5,9 +5,13 @@ page-new-syndicate {
 	.content{
 		background-color: #E8E8E8;
 	}
+	.fontstyle{
+		text-align: center;
+		font-size: inherit;
+	}
 
 	.join{
-		margin: 20vw 0 0 0;
+		margin: 9vw 0 0 0;
 		width: 100%;
 		background-color: white;
 		overflow: visible;
@@ -15,8 +19,7 @@ page-new-syndicate {
 			width: 100%;
 		}
 		img{
-			max-width: 60vw;
-			height: 60vw;
+			max-width: 58vw;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
@@ -27,10 +30,12 @@ page-new-syndicate {
 		}
 
 		.img-right{
-			right: -12vw;
+			height: 105%!important;
+			left: -5px;
 		}
 		.img-left{
 			left: -12vw;
+			height: 133% !important;
 		}
 	}
 

@@ -1,4 +1,4 @@
-page-offers-for-you {
+offersfor-you {
 	.toolbar-content p{
 		color: white;
 	}
@@ -55,11 +55,10 @@ page-offers-for-you {
 		.card-top{
 			position: relative;
 			min-height: 60px;
-			background-color: #18a455;
 			
 			.bkg{
 				width: 100%;
-				padding-bottom: 42px;
+				height: 88px;
 			}
 			.title-image{
 				width: 50px;
@@ -187,6 +186,7 @@ page-offers-for-you {
 				vertical-align: middle;
 				line-height: 1.2em;
 				padding-left: 0;
+				background-color: #333
 				// position: relative;
 				// top: 50%;
 				// transform: translateY(-50%);
@@ -272,6 +272,22 @@ page-offers-for-you {
 			border: none;
 		}
 	}
+	.tabbar .show-tabbar{
+		display: none;
+	}
+	.tabs-md .tabbar {
+		display: none!important;
+	}
+	tabbar show-tabbar{
+		display: none !important;
+	}
+	.tab-button{
+		display: none;
+	} 
+}
+offersfor-you{
+	.tabs-md .tabbar{
+		display: none;
+	}
 	
-
 }
