@@ -5,8 +5,8 @@
 
        <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
-        <span class="SlideTitle" *ngIf="Credit_Points>0" >Your Bonus Credit Balance : <span ion-text class="PriceTxt">{{Credit_Points}}</span></span>
-        <span class="SlideTitle" *ngIf="Credit_Points==0" style="color:#2F76D1 !important" (click)="goToOffers()">GET CREDIT</span>
+        <span class="SlideTitle"  >Your Bonus Credit Balance : <span ion-text class="PriceTxt">{{Credit_Points}}</span></span>
+        <!-- <span class="SlideTitle" *ngIf="Credit_Points==0" style="color:#2F76D1 !important" (click)="goToOffers()">GET CREDIT</span> -->
        </ion-item>
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
@@ -37,7 +37,7 @@
             </ion-row>
             <ion-row class="SlideContentBorderTop">
               <ion-col col-12>
-                <p class="SlideSubTitle" style="color:#333333">Number Of Lines {{(product?.line_group| keys)[product.sliderrange?product.sliderrange:credit_filter_line]}}</p>
+                <p class="SlideSubTitle" style="color:#333333">Number Of Lines <span style="font-size: x-large">{{(product?.line_group| keys)[product.sliderrange?product.sliderrange:credit_filter_line]}}</span></p>
               </ion-col>
             </ion-row>
 

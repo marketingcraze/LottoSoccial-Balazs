@@ -1,7 +1,11 @@
 <cus-header title="Personal Guid" notification-count="0"></cus-header>
 
-<ion-content class="ionContentDesign" scroll="true">
+<ion-content (ionScroll)="scrollHandler($event)" class="ionContentDesign"  id="contents" >
     
+    <div id="inner">
+         <span *ngIf="downShowing==0">
+             <div class="arrow" style="border: none" id="newDiv"></div>
+        </span>
       <ion-card text-center text-wrap class="cardMainDesign">
        <div class="cardMainDiv">
          <ion-badge class="badgeDesing"> NEW</ion-badge>
@@ -11,44 +15,61 @@
            <iframe style="border-radius: 3px;background-color: black;width: 92%;height: 25%" src="https://www.youtube.com/embed/bjBXap_4lzk" frameborder="0" allowfullscreen></iframe>  
         </div>
          <p style="font-size: 13px;padding: 8px;text-align: center;color: #2C2C2C"><i>Watch video to find out more about checking winnings</i></p>
-         <input type="button" value="MARK AS READ" style="width: 35%;height: 35px;font-size: 1em;text-align: center;background-color: green;
+         <input type="button" value="GOT IT" style="width: 35%;height: 35px;font-size: 1em;text-align: center;background-color: green;
          border: none;color: white;border-radius: 5px;margin-top: 10px" (click)="openSlider()">
        </div>
       </ion-card>
     
       <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 15px">
           <div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
-              <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> READ </ion-badge>
+              <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> DONE </ion-badge>
             <p style="font-size: 18px; font-weight: bold;color: #2C2C2C">LOTTO SOCIAL GAMES</p>
-            <p style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: center;color: #2C2C2C">You can play and get more games from the
-               <span style="color: #316BCB" (click)="openGamesPage()">game page</span>.
-               The games are split between Instant win games and Story games. 
-               Instant win games operates like scratchcards: 
-               in every play you have a chance to hit the £7,000 prize! 
-               The story games are divided in chapters and levels. 
-               Beat each level in a chapter to receive a special prize and all the chapter in the game to win the top prize. 
-               <span style="color: #316BCB">Test your skills now!</span>
-              </p>
+            <p *ngIf="lottoSocialGamesHalf=='halfLotto'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
+                You can play and get more games from the
+                 <span style="color: #316BCB">game page</span>.
+                 The games are split between instant win games and story games. 
+                 Instant win games operates like .... <span style="color: #316BCB" (click)="changeVal('fullLotto')">read more</span>
+                </p>
+                <p *ngIf="lottoSocialGamesHalf=='fullLotto'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
+                    You can play and get more games from the
+                     <span style="color: #316BCB">game page</span>.
+                     The games are split between instant win games and story games. 
+                     Instant win games operates like scratchcards: 
+                     in every play you have a chance to hit the £7,000 prize! 
+                     The story games are divided in chapters and levels. 
+                     Beat each level in a chapter to receive a special prize and all the chapter in the game to win the top prize. 
+                     <span style="color: #316BCB">Test your skills know </span>.
+                     <span style="color: #316BCB;padding-left: 10px" (click)="changeVal('halfLotto')">  show less..</span> 
+                    </p>
             
           </div>
          </ion-card>
          <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 15px;margin-bottom: 10%">
             <div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
-                <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> READ </ion-badge>
+                <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> DONE </ion-badge>
                  <p style="font-size: 18px; font-weight: bold;color: #2C2C2C">BONUS CREDIT</p>
-              <p style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: center;color: #2C2C2C">
-                You can spend your bonus credit in the 
-                 <span style="color: #316BCB" (click)="openOfferPage()">offer page</span>
-                 by clicking on "SPEND BONUS CREDIT" and chossing from any lottery available! 
-                 Accumulate bounus credit by converting your small cash wins (60p or less) 
-                 into bonus credit worth <b>4 times</b> its cash value! That's right, if you convert your £1 cash win into bonus credit you'll instantly get £4 to
-                 spend towards otther lotteries. That's 4 time more chances to win any jackpot!
-               
-                </p>
+                 <p *ngIf="lottoSocialBonusHalf=='halfBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
+                    You can spend your bonus credit in the 
+                     <span style="color: #316BCB">offer page</span>.
+                     by clicking on "SPEND BONUS CREDIT" and chossing from any lottery available! 
+                     Accumulate bounus credit by converting your small cash wins.. <span style="color: #316BCB" (click)="changeValBonus('fullBonus')">read more</span>
+                   
+                    </p>
+                    <p *ngIf="lottoSocialBonusHalf=='fullBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
+                        You can spend your bonus credit in the 
+                         <span style="color: #316BCB">offer page</span>.
+                         by clicking on "SPEND BONUS CREDIT" and chossing from any lottery available! 
+                         Accumulate bounus credit by converting your small cash wins (60p or less) 
+                         into bonus credit worth 4 times its cash value! That's right, if you convert your £1 cash win into bonus credit you 'll instantly get £4 to
+                         spend towards otther lotteries. That's 4 time more chances to win any jackpot!
+                         <span style="color: #316BCB;padding-left: 10px" (click)="changeValBonus('halfBonus')"> show less</span> 
+                       
+                        </p>
               
             </div>
            </ion-card>
+          
     
-    
-    
+        </div>
+   
     </ion-content>
