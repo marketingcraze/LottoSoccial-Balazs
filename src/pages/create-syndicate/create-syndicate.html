@@ -34,7 +34,7 @@
           <ion-icon ios="md-sync" md="md-sync" class="reload" (click)="chooseImage()" [hidden]="!hideimagebtn"></ion-icon>
       </div>
       <div style="text-align: center;">
-        <ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" pattern="^[a-zA-Z][a-zA-Z0-9_.-]+$"></ion-input>
+        <ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" maxlength="25"></ion-input>
         <div *ngIf="!todo.valid">
             <p *ngIf="!imagechosed" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a cover for your syndicate</p>
             <p *ngIf="imagechosed && !todo.valid" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a name for your syndicate</p>

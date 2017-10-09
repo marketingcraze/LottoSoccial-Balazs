@@ -35,11 +35,65 @@
   <div class="like-div">
       <div>
         <div class="divider"></div>
-        <p>You might also like</p>
+        <p>SPECIAL OFFERS FOR YOU</p>
       </div>
   </div>
+  <div style="padding:0 25px;margin-bottom: 125px;">
+     <ion-slides style="height: auto;" (ionSlideDidChange)="slideChanged($event)">
+        <ion-slide *ngFor="let d of offerArr; let mi = index;" style="background: white;">
+          <div>
+            <div class="baner-img">
+              <img src="./assets/img/managed-syndicate-upsell.png" />
+            </div>
+            <div style="background: red;margin-top: -3px;">
+              <ion-grid>
+                <ion-row class="offerRow">
+                  <ion-col col-2> <img [src]="d?.jackpot_details?.product_img" /> </ion-col>
+                  <ion-col col-6 class="text-center"> 
+                    <div>{{d?.jackpot_details?.product_name}}</div>
+                    <div>{{d?.jackpot_details?.count_down | date}}</div>
+                  </ion-col>
+                  <ion-col col-4 class="jprice"> &#x20A4;{{d?.jackpot_details?.jackpot_amount}} </ion-col>
+                </ion-row>  
+              </ion-grid> 
+            </div>
+            <div class="homeTime-left" text-center>
+                <span  text-center style="text-align: center"><img style="height: 33px;width: 14%" src="assets/icon/timer.svg"/><span style="color:white;vertical-align: super;">TIME LEFT: </span></span>
+                <div style="display: -webkit-inline-box;color: #fff;">
+                    <div style="margin-right: 10px; margin-left: 15px;"><b style="font-size:18px">{{day}}</b> <br><span>Days</span></div>
+                    <div style="margin-right: 10px;"><b style="font-size:18px">{{hrs}}</b> <br><span>Hrs</span></div>
+                    <div style="margin-right: 10px;"><b style="font-size:18px">{{min}}</b> <br><span>Mins</span></div>
+                    <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
+                </div>
+              <div class="lines-type">
+                <div style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
+                    <div style="margin-top: 6px"><b style="font-size:18px">{{d?.no_of_lines}}</b> <br><span>LINES</span></div>
+                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+                </div>
+                <div  style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;height: 8vh;border-right: 1px solid lightgrey;height: 8vh">
+                    <div style="margin-top: 6px"><b style="font-size:18px">{{d?.offer_type | uppercase}}</b> <br><span>TYPE</span></div>
+                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+                </div>
+                <div  style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;height: 8vh">
+                    <div style="margin-top: 6px"><b style="font-size:18px">&#x20A4;{{d?.rollover_jackpot | uppercase}}</b> <br><span>TRIGGER</span></div>
+                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+                </div>
+              </div>
+            </div>
+            <div text-center style="clear: both;padding: 15px;">
+              <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;margin-bottom: 15px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id)">
+                <span style="font-size: 17px;font-weight: lighter;">
+                ADD FOR &#x20A4;{{d?.package_price}}  
+                </span>
+              </button>
 
-  <div class="syndicateRow">
+              <a (click)="nextSlide()">No, Thanks</a>
+            </div>
+          </div>
+        </ion-slide>
+     </ion-slides>
+  </div>
+  <div class="syndicateRow" style="display: none;">
       <div class="baner-img">
         <img src="./assets/img/jkp_trigger_bnr@3x.png" />
       </div>

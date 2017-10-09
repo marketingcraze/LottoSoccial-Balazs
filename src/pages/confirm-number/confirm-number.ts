@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Slides } from 'ionic-angular';
 import { PaymentPage } from '../payment/payment';
 import { SyndicateService } from '../../providers/syndicate-service';
 
@@ -7,9 +7,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CommonService } from '../../services/common.service';
 import { OfferService } from '../../services/offer.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { SimpleTimer } from 'ng2-simple-timer';
 
 import { HomePage } from '../home/home';
-
+declare var $: any;
 /*
   Generated class for the ConfirmNumber page.
 
@@ -22,13 +23,28 @@ import { HomePage } from '../home/home';
 })
 export class ConfirmNumberPage {
     @ViewChild("confirmPayment") confirmPayment;
+    @ViewChild(Slides) slides: Slides;
   
-  dataArr = []
+  dataArr = [];
   syndId: any;
+  offerArr = [];
 
     userCards: any;
     userCardsCount:number = 0;
     customerToken:string;
+
+    private currentTime:Date = new Date();
+
+    result: any = [];
+    resultDate: any = [];
+    counter0 = 0;
+	timer0Id: string;
+	timer0button = 'Subscribe';
+    count:number;
+    day:any;
+    hrs:any;
+    min:any;
+    sec:any;
 
 
   constructor(public navCtrl: NavController, 
@@ -36,7 +52,9 @@ export class ConfirmNumberPage {
       public navParams: NavParams, 
       public srvOffer: OfferService,
       public appSound:AppSoundProvider,
-      public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
+      public _syndService: SyndicateService,
+      public loadingCtrl: LoadingController,
+      private st: SimpleTimer) {
 
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
     this.syndId = localStorage.getItem('synd_id');
@@ -67,6 +85,16 @@ export class ConfirmNumberPage {
     this._syndService.getBigJack(id).subscribe((res) => {
       loader.dismiss();
       console.log("ConfirmNumberPage", res);
+      this.offerArr = res.response["0"].get_private_syndicate_tkt_confirmation_special_offers.response.offer_details;
+      // this.offerArr = this.offerArr.concat(res.response[0].get_big_jackpot_list.response.rollover_jackpot_group);
+      console.log(this.offerArr);
+      this.st.newTimer('1sec', 1);
+      this.subscribeTimer0();
+                        
+      // updates every seconds
+      setInterval(() => {
+          this.currentTime = new Date();
+      }, 1000);
     })
   }
 
@@ -152,6 +180,67 @@ export class ConfirmNumberPage {
         return loader;
     }
 
+    //countDown timer
 
+subscribeTimer0() {
+
+    if (this.timer0Id) {
+
+        // Unsubscribe if timer Id is defined
+        this.st.unsubscribe(this.timer0Id);
+        this.timer0Id = undefined;
+        this.timer0button = 'Subscribe';
+        console.log('timer 0 Unsubscribed.');
+    } else {
+
+        // Subscribe if timer Id is undefined
+        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offerArr));
+        this.timer0button = 'Unsubscribe';
+        console.log('timer 0 Subscribed.');
+    }
+    console.log(this.st.getSubscription());
+}
+
+
+timer0callback(data) {
+
+        var value: any = data[0].jackpot_details.count_down
+        this.result = "";
+
+
+        let now = new Date().getTime();
+        if (!value) {
+            return this.result;
+        }
+        if (typeof (value) === "string") {
+            value = new Date(value);
+        }
+
+        let delta = Math.floor((now - value.getTime()) / 1000);
+        if (delta < 0) {
+            delta = Math.abs(delta);
+        }
+
+        let day = Math.floor(delta / 86400);
+        delta %= 86400
+        let hour = Math.floor(delta / 3600);
+        delta %= 3600
+        let minute = Math.floor(delta / 60);
+        delta %= 60
+        let seconds = Math.floor(delta)
+        this.day = (day <= 9) ? '0' + day + '' : day + '';
+        this.hrs = (hour <= 9) ? '0' + hour + '' : hour + '';
+        this.min = (minute <= 9) ? '0' + minute + '' : minute + '';
+        this.sec = (seconds <= 9) ? '0' + seconds : seconds;
+
+}
+
+  slideChanged(ev:any) {
+    console.log('active slide', ev);
+    this.appSound.play('cardFlip');
+  }
+  nextSlide() {
+    this.slides.slideNext()
+  }
 
 }

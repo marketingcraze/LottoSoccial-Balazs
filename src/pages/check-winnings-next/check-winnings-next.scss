@@ -1,4 +1,5 @@
 page-check-winnings-next {
+    $duration: 30s;
     .green-div {
         background:#00A651;
         color:white;
@@ -7,18 +8,80 @@ page-check-winnings-next {
     .head-text {
         font-size: 30px;
         font-weight: bold;
-        padding-top: 100px;
+        padding-top: 50px;
         padding-bottom: 50px;
     }
-.move1{
-    margin-top: 0px;
+// .move1{
+//     margin-top: 0px;
+//     opacity: 1;
+//     -webkit-animation: expand 2s;
+// }
+
+// @-webkit-keyframes expand{
+//     0%{margin-top:1000px; opacity:0;}
+//     100%{margin-top: 0px; opacity: 1;}
+// }
+.swiper-pagination-bullet {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 100%;
+    background: transparent;
     opacity: 1;
-    -webkit-animation: expand 2s;
+    pointer-events: auto;
+    border: 1px solid white;
+}
+button.swiper-pagination-bullet {
+    border: none;
+    border: 2px solid white;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #f8f8f8;
+}
+.h-ticker {
+    -webkit-animation-iteration-count: infinite; 
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+ -webkit-animation-name: tickera;
+         animation-name: tickera;
+  -webkit-animation-duration: $duration;
+          animation-duration: $duration;
 }
 
-@-webkit-keyframes expand{
-    0%{margin-top:1000px; opacity:0;}
-    100%{margin-top: 0px; opacity: 1;}
+@-webkit-keyframes tickera {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
 }
+
+@keyframes tickera {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
 
 }

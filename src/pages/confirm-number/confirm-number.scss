@@ -11,6 +11,7 @@ page-confirm-number {
         font-family: lato-bold;
         src: url(../assets/fonts/Lato-Bold.ttf);
     }
+    
     .toolbar-background-md {
         background: rgb(37, 95, 199);
     }
@@ -141,13 +142,14 @@ page-confirm-number {
     .bottom_bar {
         background: rgb(25, 57, 116);
         padding: 10px;
-        margin-bottom: 12px;
-        // position: fixed;
+        // margin-bottom: 12px;
+        position: fixed;
         text-align: center;
-        // left: 0;
-        // bottom: 0;
+        left: 0;
+        bottom: 0;
         width: 100%;
-        // right: 0;
+        right: 0;
+        z-index: 999999;
 
         .button-md {
             height: 4.5rem;
@@ -241,6 +243,32 @@ page-confirm-number {
         -webkit-transform: translate3d(16px, 0, 0);
         transform: translate3d(16px, 0, 0);
     }
-    
+    .offerRow {
+        color: white;
+
+        ion-col {
+            div {
+                padding: 0;
+                text-align: left;
+            }
+        }
+        .jprice {
+            font-size: 28px;
+            padding: 10px 0;
+            text-align: right;
+        } 
+    }
+    .homeTime-left{
+	background-color: black;
+	height: 50px;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px;
+ }
+ .lines-type{
+	height: 7vh;
+    margin-top: 8px;
+    color: #444;
+ }
 
 }

@@ -83,11 +83,11 @@ import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
 import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confirm-offer-purchase';
 import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
-import { HelpPage } from '../pages/Help/Help';
+import { HelpPage } from '../pages/Help/Help'
+import { AgreementPage } from '../pages/agreement/agreement'
 import { newArrowHeader } from '../components/newArrowHeader/newArrowHeader';
 import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
 import  { OverlayPage } from '../pages/overlaypage/overlay-page'
-
 
 
 // components
@@ -224,10 +224,14 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         AffiliatePage,
         AffiliatePopup,
         HelpPage,
+
+        AgreementPage,
+
         newArrowHeader,
         buyOfferTips,
         OverlayPage,
      
+        // master,
         // OffersPayment,
 
         // pipes
@@ -357,7 +361,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         YourOffersPage,
         SendBonusPage,
         your_vouchers_popups,
-        AffiliatePage
+        AffiliatePage,
+        AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService,paymentService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,
