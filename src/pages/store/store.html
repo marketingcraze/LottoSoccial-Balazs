@@ -53,7 +53,7 @@
 
   <!-- slider -->
   <!-- Dharam new slider -->
-  <ion-slides class="newSlide"  initialSlide="0"   effect="flip ">
+  <ion-slides class="newSlide"  initialSlide="0"  #mySlide (swipe)="countSlider()" >
     <ion-slide *ngFor="let offer of offersForYou.offer_group">
         <ion-card style="max-height:60vh;width: 80%;margin-left: 10%;margin-top: 10%;">
             <div class="card-top " >
@@ -132,7 +132,7 @@
   <!-- </div> -->
 
   <div style="text-align: center; width: 100%;">
-    <p style="position: absolute; height: 8%;bottom: 0%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
+    <p style="position: absolute; height: 8%;bottom: 0%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{currentSliderCount+1}} / {{total_cards}} CARDS</p>
   </div>
 
 

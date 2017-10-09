@@ -32,6 +32,7 @@ declare var $:any;
 export class StorePage {
     buyoffer: any;
     @ViewChild(Slides) home_slides: Slides;
+    @ViewChild('mySlide') carouselSlide: Slides;
     @ViewChild("confirmPayment") confirmPayment;
     public footerState: IonPullUpFooterState;
     public homeCardData:any;
@@ -40,6 +41,7 @@ export class StorePage {
     public nav:NavController;
 
     private currentTime:Date = new Date();
+    currentSliderCount:any=0;
 
     result: any = [];
     resultDate: any = [];
@@ -51,6 +53,7 @@ export class StorePage {
     hrs:any;
     min:any;
     sec:any;
+    counts:any=0;
     // payment variables
     userCards: any;
     userCardsCount:number = 0;
@@ -769,6 +772,21 @@ showModalForcreditoffer(){
 }
 mgmOpenPage(){
     this.navCtrl.push(referFriend);
+}
+
+countSlider(ev:any){
+//    let lastIndex=this.carouselSlide.length(); 
+   this.currentSliderCount= this.carouselSlide.getActiveIndex();
+ 
+//    this.count++;
+//    if(this.count==1&& this.currentSliderCount==0 && this.currentSliderCount< lastIndex)
+//    {
+//     this.currentSliderCount=this.count;
+//    }
+//    else{
+//     this.currentSliderCount++; 
+//    }
+ 
 }
 
 }
