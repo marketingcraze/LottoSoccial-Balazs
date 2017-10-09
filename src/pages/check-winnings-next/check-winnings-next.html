@@ -6,12 +6,38 @@
 -->
 <ion-content class="green-div">
   <div class="head-text">Check your winnings</div>
-  <div>
+  <div *ngIf="!loading">
     <span style="content: url('./assets/icon/user2.svg'); width:40px;"></span>
     <span style="content: url('./assets/icon/user2.svg'); width:40px;"></span>
     <span style="content: url('./assets/icon/user2.svg'); width:40px;"></span>
   </div>
-  <div style="padding:30px;">Munching numbers...</div>
+  <div *ngIf="loading">
+    <span style="content: url('./assets/vid/blue_bg.gif'); width:140px;"></span>
+  </div>
+  <div>
+      <div style="padding:30px;">Munching numbers...</div>
+  </div>
   <div class="move1" style="padding-top:30px;" *ngIf="errorMsg != ''">{{errorMsg}}</div>
-  <div class="move1" style="padding-top:30px;" *ngFor="let l of sList2">checking {{l?.syndicate_name}}</div>
+  <div style="height: 50px;overflow: hidden;" id="tickerMain">
+    <div id="ticker">
+      <div class="move1" style="padding: 10px 0;" *ngFor="let l of sList2">
+        <div>Syndicate {{l?.syndicate_name}}</div>
+        <div class="h-ticker">checking EuroMillions Tue tickets</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 0 20px;">
+  <ion-slides pager style="height: 275px;;">
+        <ion-slide *ngFor="let d of sList2; let mi = index;">
+          <div style="border:2px solid white; padding: 10px;">
+            <div style="padding-bottom: 10px;">BONUS CREDIT</div>
+            <div>Bonus credit is a type of currency you can use on Lotto Social to buy tickets 
+              on any lottery you like! you aquire bonus credit by checkeing your winnings and 
+              converting your low value winnings in 4x their cash value
+            </div>
+          </div>
+        </ion-slide>
+  </ion-slides>
+  </div>
 </ion-content>

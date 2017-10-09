@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Slides } from 'ionic-angular';
 import { PaymentPage } from '../payment/payment';
 import { SyndicateService } from '../../providers/syndicate-service';
 
@@ -7,6 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CommonService } from '../../services/common.service';
 import { OfferService } from '../../services/offer.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { SimpleTimer } from 'ng2-simple-timer';
 
 import { HomePage } from '../home/home';
 declare var $: any;
@@ -22,6 +23,7 @@ declare var $: any;
 })
 export class ConfirmNumberPage {
     @ViewChild("confirmPayment") confirmPayment;
+    @ViewChild(Slides) slides: Slides;
   
   dataArr = [];
   syndId: any;
@@ -31,13 +33,28 @@ export class ConfirmNumberPage {
     userCardsCount:number = 0;
     customerToken:string;
 
+    private currentTime:Date = new Date();
+
+    result: any = [];
+    resultDate: any = [];
+    counter0 = 0;
+	timer0Id: string;
+	timer0button = 'Subscribe';
+    count:number;
+    day:any;
+    hrs:any;
+    min:any;
+    sec:any;
+
 
   constructor(public navCtrl: NavController, 
       public iab: InAppBrowser,
       public navParams: NavParams, 
       public srvOffer: OfferService,
       public appSound:AppSoundProvider,
-      public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
+      public _syndService: SyndicateService,
+      public loadingCtrl: LoadingController,
+      private st: SimpleTimer) {
 
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
     this.syndId = localStorage.getItem('synd_id');
@@ -68,9 +85,16 @@ export class ConfirmNumberPage {
     this._syndService.getBigJack(id).subscribe((res) => {
       loader.dismiss();
       console.log("ConfirmNumberPage", res);
-      this.offerArr = res.response[0].get_big_jackpot_list.response.rollover_jackpot_group;
-      this.offerArr = this.offerArr.concat(res.response[1].get_special_offer_details.response.product_group);
+      this.offerArr = res.response["0"].get_private_syndicate_tkt_confirmation_special_offers.response.offer_details;
+      // this.offerArr = this.offerArr.concat(res.response[0].get_big_jackpot_list.response.rollover_jackpot_group);
       console.log(this.offerArr);
+      this.st.newTimer('1sec', 1);
+      this.subscribeTimer0();
+                        
+      // updates every seconds
+      setInterval(() => {
+          this.currentTime = new Date();
+      }, 1000);
     })
   }
 
@@ -156,92 +180,67 @@ export class ConfirmNumberPage {
         return loader;
     }
 
-    // -------------------   slider   -----------------------
-    slide = $('.slider-single');
-    slideTotal;
-    slideCurrent = -1;
-    slideInitial() {
-        this.slide = $('.slider-single');
-        this.slideTotal = this.slide.length - 1;
-        this.slideCurrent = -1;
-        
-        this.slide.addClass('proactivede');
-        this.slideRight();
+    //countDown timer
+
+subscribeTimer0() {
+
+    if (this.timer0Id) {
+
+        // Unsubscribe if timer Id is defined
+        this.st.unsubscribe(this.timer0Id);
+        this.timer0Id = undefined;
+        this.timer0button = 'Subscribe';
+        console.log('timer 0 Unsubscribed.');
+    } else {
+
+        // Subscribe if timer Id is undefined
+        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offerArr));
+        this.timer0button = 'Unsubscribe';
+        console.log('timer 0 Subscribed.');
     }
+    console.log(this.st.getSubscription());
+}
 
-    slideRight() {
-        if (this.slideCurrent < this.slideTotal) {
-          this.slideCurrent++;
-        } else {
-          this.slideCurrent = 0;
+
+timer0callback(data) {
+
+        var value: any = data[0].jackpot_details.count_down
+        this.result = "";
+
+
+        let now = new Date().getTime();
+        if (!value) {
+            return this.result;
+        }
+        if (typeof (value) === "string") {
+            value = new Date(value);
         }
 
-        if (this.slideCurrent > 0) {
-          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
-        } else {
-          var preactiveSlide = this.slide.eq(this.slideTotal);
-        }
-        var activeSlide = this.slide.eq(this.slideCurrent);
-        if (this.slideCurrent < this.slideTotal) {
-          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
-        } else {
-          var proactiveSlide = this.slide.eq(0);
+        let delta = Math.floor((now - value.getTime()) / 1000);
+        if (delta < 0) {
+            delta = Math.abs(delta);
         }
 
-        this.slide.each(function() {
-            var thisSlide = $(this);
-            if (thisSlide.hasClass('preactivede')) {
-                thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
-            }
-            if (thisSlide.hasClass('preactive')) {
-                thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
-            }
-        });
-        preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
-        activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
-        proactiveSlide.removeClass('preactivede preactive active proactivede').addClass('proactive');
-        this.appSound.play('cardFlip');
-    }
+        let day = Math.floor(delta / 86400);
+        delta %= 86400
+        let hour = Math.floor(delta / 3600);
+        delta %= 3600
+        let minute = Math.floor(delta / 60);
+        delta %= 60
+        let seconds = Math.floor(delta)
+        this.day = (day <= 9) ? '0' + day + '' : day + '';
+        this.hrs = (hour <= 9) ? '0' + hour + '' : hour + '';
+        this.min = (minute <= 9) ? '0' + minute + '' : minute + '';
+        this.sec = (seconds <= 9) ? '0' + seconds : seconds;
 
-    slideLeft() {
-        if (this.slideCurrent > 0) {
-          this.slideCurrent--;
-        } else {
-          this.slideCurrent = this.slideTotal;
-        }
+}
 
-        if (this.slideCurrent < this.slideTotal) {
-          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
-        } else {
-          var proactiveSlide = this.slide.eq(0);
-        }
-        var activeSlide = this.slide.eq(this.slideCurrent);
-        if (this.slideCurrent > 0) {
-          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
-        } else {
-          var preactiveSlide = this.slide.eq(this.slideTotal);
-        }
-        this.slide.each(function() {
-          var thisSlide = $(this);
-          if (thisSlide.hasClass('proactivede')) {
-            thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
-          }
-          if (thisSlide.hasClass('proactive')) {
-            thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
-          }
-        });
-        preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
-        activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
-        proactiveSlide.removeClass('preactivede preactive active proactivede').addClass('proactive');
-        this.appSound.play('cardFlip');
-    }
-
-    swipeLeft(ev) {
-        this.slideRight();
-    }
-
-    swipeRight(ev) {
-        this.slideLeft();
-    }
+  slideChanged(ev:any) {
+    console.log('active slide', ev);
+    this.appSound.play('cardFlip');
+  }
+  nextSlide() {
+    this.slides.slideNext()
+  }
 
 }

@@ -35,65 +35,65 @@
   <div class="like-div">
       <div>
         <div class="divider"></div>
-        <p>You might also like</p>
+        <p>SPECIAL OFFERS FOR YOU</p>
       </div>
   </div>
-  <div class="syndicateRow">
-      <!-- slider -->
-          <div class="slider-container" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)" (click)="clicked()">
-
-              <div class="slider-content">
-                  <div class="slider-single" *ngFor="let offer of offerArr">
-                    <ion-card class="slider-single-image" style="height:353px">
-                      <!--<div class="card-top " >
-                        <div class="card-title">
-                          <img src="assets/img/home/ch_offers@3x.png">
-                          <h4>{{offersForYou.card_title}}</h4>
-                        </div>
-                      </div>-->
-                      
-                      <div class="homeContainer-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
-                        <img src="{{offer?.offer_img}}" class="homeHeader-img" />
-                            <div class="homeOffer-title" style="color:white;font-weight: lighter" text-center>{{offer?.product_name |  uppercase}}</div>
-                            <div class="homeAmount homeOffer-title" style="color:white;font-weight: 900;font-size: x-large" text-center>
-                              {{offer?.jackpot_value}}
-                            </div>
-                    </div>
-                    <div class="homeTime-left" text-center style="text-align: center">
-                        <span  text-center style="text-align: center"><img style="height: 33px;top: 7px;position: relative;width: 14%" src="assets/icon/timer.svg"/><span style="color:white;position:relative;bottom:40px;margin-left: 14px;">TIME LEFT: </span></span>
-                        <div style="display: -webkit-inline-box;color: #fff;bottom: 25px; position: relative;">
-                            <div style="margin-right: 10px; margin-left: 15px;"><b style="font-size:18px">{{day}}</b> <br><span>Days</span></div>
-                            <div style="margin-right: 10px;"><b style="font-size:18px">{{hrs}}</b> <br><span>Hrs</span></div>
-                            <div style="margin-right: 10px;"><b style="font-size:18px">{{min}}</b> <br><span>Mins</span></div>
-                            <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
-                        </div>
-                      <div class="lines-type">
-                        <div style="float: left;width: 50%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
-                            <div style="margin-right: 10px;margin-top: 6px"><b style="font-size:18px"></b>{{offer?.line_group?.line1}} <br><span style="color: lightgray">LINES</span></div>
-                            <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
-                        </div>
-                        <div  style="float: left;width: 50%;border-bottom: 1px solid lightgrey;height: 8vh">
-                            <div style="margin-right: 10px;margin-top: 6px"><b style="font-size:18px">{{offer?.type | uppercase}}</b> <br><span style="color: lightgray">TYPE</span></div>
-                            <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
-                        </div>
-                      </div>
-                    <div style="height:40px" >
-                        <span>{{offer?.offer_title}}</span>
-                      </div>
-                      <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id)">
-                        <span style="font-size: 17px;font-weight: lighter;">
-                        {{offer?.button_text}}  
-                        </span></button>
-                    </div>
-                      <!--<button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button>-->
-                    </ion-card>
-                  </div>
+  <div style="padding:0 25px;margin-bottom: 125px;">
+     <ion-slides style="height: auto;" (ionSlideDidChange)="slideChanged($event)">
+        <ion-slide *ngFor="let d of offerArr; let mi = index;" style="background: white;">
+          <div>
+            <div class="baner-img">
+              <img src="./assets/img/managed-syndicate-upsell.png" />
+            </div>
+            <div style="background: red;margin-top: -3px;">
+              <ion-grid>
+                <ion-row class="offerRow">
+                  <ion-col col-2> <img [src]="d?.jackpot_details?.product_img" /> </ion-col>
+                  <ion-col col-6 class="text-center"> 
+                    <div>{{d?.jackpot_details?.product_name}}</div>
+                    <div>{{d?.jackpot_details?.count_down | date}}</div>
+                  </ion-col>
+                  <ion-col col-4 class="jprice"> &#x20A4;{{d?.jackpot_details?.jackpot_amount}} </ion-col>
+                </ion-row>  
+              </ion-grid> 
+            </div>
+            <div class="homeTime-left" text-center>
+                <span  text-center style="text-align: center"><img style="height: 33px;width: 14%" src="assets/icon/timer.svg"/><span style="color:white;vertical-align: super;">TIME LEFT: </span></span>
+                <div style="display: -webkit-inline-box;color: #fff;">
+                    <div style="margin-right: 10px; margin-left: 15px;"><b style="font-size:18px">{{day}}</b> <br><span>Days</span></div>
+                    <div style="margin-right: 10px;"><b style="font-size:18px">{{hrs}}</b> <br><span>Hrs</span></div>
+                    <div style="margin-right: 10px;"><b style="font-size:18px">{{min}}</b> <br><span>Mins</span></div>
+                    <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
                 </div>
-        </div>
-            
-        <!-- slider end -->
+              <div class="lines-type">
+                <div style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
+                    <div style="margin-top: 6px"><b style="font-size:18px">{{d?.no_of_lines}}</b> <br><span>LINES</span></div>
+                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+                </div>
+                <div  style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;height: 8vh;border-right: 1px solid lightgrey;height: 8vh">
+                    <div style="margin-top: 6px"><b style="font-size:18px">{{d?.offer_type | uppercase}}</b> <br><span>TYPE</span></div>
+                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+                </div>
+                <div  style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;height: 8vh">
+                    <div style="margin-top: 6px"><b style="font-size:18px">&#x20A4;{{d?.rollover_jackpot | uppercase}}</b> <br><span>TRIGGER</span></div>
+                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+                </div>
+              </div>
+            </div>
+            <div text-center style="clear: both;padding: 15px;">
+              <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;margin-bottom: 15px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id)">
+                <span style="font-size: 17px;font-weight: lighter;">
+                ADD FOR &#x20A4;{{d?.package_price}}  
+                </span>
+              </button>
+
+              <a (click)="nextSlide()">No, Thanks</a>
+            </div>
+          </div>
+        </ion-slide>
+     </ion-slides>
   </div>
-  <div class="syndicateRow">
+  <div class="syndicateRow" style="display: none;">
       <div class="baner-img">
         <img src="./assets/img/jkp_trigger_bnr@3x.png" />
       </div>

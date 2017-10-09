@@ -131,13 +131,13 @@ page-choose-number {
     .bottom_bar {
         background: rgb(25, 57, 116);
         padding: 10px;
-        margin-bottom: 12px;
-        // position: fixed;
+        //margin-bottom: 12px;
+        position: fixed;
         text-align: center;
-        // left: 0;
-        // bottom: 0;
+        left: 0;
+        bottom: 0;
         width: 100%;
-        // right: 0;
+        right: 0;
 
         .button-md {
             height: 4.5rem;
@@ -158,5 +158,8 @@ page-choose-number {
     }
     .derror {
         border: 1px solid red !important;
+    }
+    .mbottom {
+        margin-bottom: 120px;
     }
 }
