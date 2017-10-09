@@ -21,6 +21,7 @@ export class RedeemGamesPage {
   redeem_products:any;
   sliderImage:any;
   private loading : any;
+  scrollContent:any;
   reward_point:number;
   point_status:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -53,6 +54,9 @@ export class RedeemGamesPage {
      });
    }   
    redeem(url,index){
+    this.scrollContent=document.querySelector('.scroll-content');
+    this.scrollContent.style['overflow']='auto';
+
      this.appSound.play('buttonClick');
      console.log(url);
      console.log("first index is " + index)
@@ -62,22 +66,27 @@ export class RedeemGamesPage {
      else{
       this.point_status = "Passed"
      }
-         let modal = this.modalController.create(getGamesModal, {
+      let modal = this.modalController.create(getGamesModal, {
       VoucherCode: this.redeem_products[index].product_image,
       title: this.redeem_products[index].product_title,
       price: this.redeem_products[index].product_price,
       price_after: this.redeem_products[index].product_price_after,
       p_staus: this.point_status
-      
-
     })
     
     modal.present();
-   
+    modal.onDidDismiss((data: any[]) => {
+			if (data) {
+			 this.scrollContent=document.querySelector('.scroll-content');
+			 this.scrollContent.style['overflow']='hidden';
+			}
+		})
 
     }
     confirmSelectionPage(index){
-     
+      this.scrollContent=document.querySelector('.scroll-content');
+      this.scrollContent.style['-webkit-overflow-scrolling']='auto';
+
       if(this.reward_point < this.redeem_products[index].product_price){
         this.point_status = "Failed"
        }
@@ -95,6 +104,12 @@ export class RedeemGamesPage {
 
     })
     modal.present();
+    modal.onDidDismiss((data: any[]) => {
+			if (data) {
+			 this.scrollContent=document.querySelector('.scroll-content');
+			 this.scrollContent.style['-webkit-overflow-scrolling']='initial';
+			}
+		})
 
     }
     mgmPage(){

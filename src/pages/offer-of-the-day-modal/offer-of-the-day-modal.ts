@@ -44,7 +44,7 @@ export class offerOfTheDayModal {
             })
     }
 
-    dismiss(data) {
+    dismiss(data:any=1) {
         this.viewctrl.dismiss(data);
     }
 }

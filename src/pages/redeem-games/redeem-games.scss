@@ -23,7 +23,7 @@ page-redeem-games {
 	.scroll-content {
 		z-index: 0; 
 	
-	   -webkit-overflow-scrolling: auto;
+	   -webkit-overflow-scrolling: auto !important;
 	   scroll-behavior: auto;
 	 }
 }

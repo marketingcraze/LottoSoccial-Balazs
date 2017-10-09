@@ -23,6 +23,7 @@ import { Observable } from "rxjs/Rx";
 	templateUrl: 'your-offers.html'
 })
 export class YourOffersPage {
+	scrollContent: any;
 	@ViewChild("confirmPayment") confirmPayment;
 
 	private cache: CacheController;
@@ -185,19 +186,25 @@ export class YourOffersPage {
 
 	//Offer Buy page
 	openBuyPage(index) {
-
 		var TimeLeft = document.getElementById("countDown").innerText;
 		var timer2 = this.lotteryProductData[index].draw_countdown
-	
-		var buyPageModal = this.modalController.create(offerBuy, { offersData: this.lotteryProductData[index], Time: timer2 });
+		let buyPageModal = this.modalController.create(offerBuy, { offersData: this.lotteryProductData[index], Time: timer2 });
 		buyPageModal.present();
 	}
 
 	offerOfTheDayModal(index: any) {
+		this.scrollContent=document.querySelector('.scroll-content');
+		this.scrollContent.style['overflow']='auto';
 		let modal = this.modalController.create(offerOfTheDayModal, {
 			offerOfTheDay: this.offersForYou[index]
 		})
 		modal.present();
+		modal.onDidDismiss((data: any[]) => {
+			if (data) {
+			 this.scrollContent=document.querySelector('.scroll-content');
+			 this.scrollContent.style['overflow']='hidden';
+			}
+		})
 	}
 
 	counter0 = 0;
