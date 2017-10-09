@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild ,ChangeDetectorRef} from '@angular/core';
 import { NavController, NavParams, App, Tabs, LoadingController } from 'ionic-angular';
 import { ManageSyndicatePage } from '../manage-syndicate/manage-syndicate';
 import { ManageSyndicate2Page } from '../manage-syndicate2/manage-syndicate2';
@@ -9,7 +9,7 @@ import { OfferService } from '../../services/offer.service';
 import { CommonService } from '../../services/common.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
-
+import { Content } from 'ionic-angular'
 declare var $: any;
 
 @Component({
@@ -17,6 +17,7 @@ declare var $: any;
     templateUrl: 'my-syndicate.html'
 })
 export class MySyndicatePage {
+    @ViewChild(Content) content: Content;
     @ViewChild("confirmPayment") confirmPayment;
 
     private syndArr = [];
@@ -31,6 +32,8 @@ export class MySyndicatePage {
     chatcount: any;
     customer_id:any;
     viewEmpty: boolean = false;
+    downShowing = 0;
+    
 
     constructor(
         public app: App,
@@ -40,7 +43,8 @@ export class MySyndicatePage {
         public navCtrl: NavController,
         public appSound:AppSoundProvider,
         public _syndService: SyndicateService,
-        public loadingCtrl: LoadingController) { 
+        public loadingCtrl: LoadingController, 
+        public cdRef: ChangeDetectorRef) { 
 
 
         this.checkCardExists()
@@ -49,10 +53,38 @@ export class MySyndicatePage {
     ionViewDidLoad() {
         this.customer_id = CommonService.session.customer_id;
         this.loadSyndicate();
-
+      
+      
     }
     ionViewWillEnter() {
+        this.delay(4000);
+        this.content.enableScrollListener();
     }
+    scrollHandlerSyndicate(event){
+        
+          var innerDiv = document.getElementById('innerMySyndicate').scrollHeight;
+          var scrollDiv = document.getElementById('asynd').clientHeight;
+          
+          var valu = scrollDiv + this.content.scrollTop
+          console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
+          if (valu > innerDiv) 
+          {
+            console.log("botom")
+            this.downShowing = 1
+            this.cdRef.detectChanges();
+        }
+        else
+        {
+          this.downShowing = 0
+          this.cdRef.detectChanges();
+        }
+        }
+        delay(ms: number) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      ionViewDidEnter(){
+  
+      }
     checkwins() {
         this.appSound.play('buttonClick');
         var t: Tabs = this.navCtrl.parent;
@@ -128,6 +160,7 @@ export class MySyndicatePage {
             loader.dismiss();
         });
     }
+
 
     showPaymentOptions(syndicate) {
         console.log("OffersPage::showPaymentOptions()", syndicate);

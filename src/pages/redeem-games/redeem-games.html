@@ -1,6 +1,7 @@
 <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
 
-<ion-content class="card-background-page">
+<ion-content class="card-background-page"  (ionScroll)="scrollHandlerListGames($event)" id="reddemReGamesContent">
+       
     <div ion-fixed class="header-widthGetGame">
         <ion-slides autoplay="5000" loop="true" speed="500" pager="true" *ngIf="sliderImage">
             <ion-slide *ngFor="let image of sliderImage">
@@ -28,8 +29,8 @@
         </ion-item>
 
     </div>
-
-    <div class="bottom-contentGtagme">
+    
+    <div class="bottom-contentGtagme" id="innerReddemGames1">
         <ion-list no-lines *ngFor="let redeem_product of redeem_products; let i=index" class="redeemgameslist">
             <ion-item *ngIf="redeem_product">
                 <ion-col col-3 item-left>
@@ -81,4 +82,11 @@
             <ion-item-divider *ngIf="!redeem_product" style="color:#333333!important;top:-22px!important;">This is the game description and excerpt</ion-item-divider>
         </ion-list>
     </div>
+   
 </ion-content>
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+    </div>
+    

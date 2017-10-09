@@ -13,7 +13,8 @@
 </ion-header>-->
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
-<ion-content class="marg-top-12 main-bg" id="asynd" style="margin-top: -8%">
+<ion-content class="marg-top-12 main-bg" id="asynd" style="margin-top: -8%" (ionScroll)="scrollHandlerSyndicate($event)"   >
+    <div id="innerMySyndicate" >
   <div id="sstate" *ngIf="syndArr.length > 0">
   <div *ngFor="let sd of syndArr; let i = index;">
   <div class="synd-card" *ngIf="sd.syndicate_type !='PRIVATE'">
@@ -192,8 +193,13 @@
     <button ion-button (click)="next()" class="btn">JOIN A SYNDICATE</button>
   </div>
   </div>
+</div>
 </ion-content>
 
-
+<div >
+    <span *ngIf="downShowing==0"  >
+        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+   </span>
+</div>
 
 

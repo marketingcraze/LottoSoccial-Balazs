@@ -1,6 +1,7 @@
 <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
 
-<ion-content class="card-background-page">
+<ion-content class="card-background-page" (ionScroll)="scrollHandlerGame($event)"  id="contentsGames">
+    <div id="innerGames">
     <ion-list no-lines *ngFor="let  game of game_group ; let i=index" class="yourgameslist" >
        <ion-item *ngIf="i < game_group?.length-1">
             <ion-thumbnail item-left>
@@ -33,4 +34,10 @@
     <ion-card>
         <img src="assets/img/games_hero_001@3x.png" />
     </ion-card><nav></nav>
+</div>
 </ion-content>
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+   </div>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { App, NavController, NavParams, Platform, LoadingController, AlertController, 
-	ModalController } from 'ionic-angular';
+	ModalController, Content } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -25,12 +25,13 @@ declare var webengage: any;
   templateUrl: 'account.html'
 })
 export class AccountPage {
-
+	@ViewChild(Content) content:Content;
 	private cache: CacheController;
 
 	private profileProgress:number = 50;
 	private refreshCache:boolean = false;
 	private unreadCount:number = 0;
+	downShowing = 0;
 	private homeMessage:any = {};
 	private accountDetails:any = {
 		bonus_credit:0.00,
@@ -57,7 +58,8 @@ export class AccountPage {
 	    private srvAccount:AccountService,
 	    public modalCtrl: ModalController,
 	    private loadingCtrl:LoadingController,
-	    private alertCtrl:AlertController) {
+		private alertCtrl:AlertController,
+		public cdRef:ChangeDetectorRef ) {
 
 		console.log('AccountPage');
 
@@ -67,10 +69,32 @@ export class AccountPage {
 	}
 
 	ionViewDidLoad() {
-    	console.log('ionViewDidLoad AccountPage');
+		console.log('ionViewDidLoad AccountPage');
+		this.delay(4000);
+		this.content.enableScrollListener();
 
 	}
 
+	scrollHandlerAccount(event){
+		var scrollDiv = document.getElementById('accountContent').clientHeight;
+		var innerDiv = document.getElementById('innerAccount').scrollHeight;
+			
+			var valu = scrollDiv + this.content.scrollTop
+			console.log("data is " , valu, innerDiv, scrollDiv)
+			if (valu > innerDiv) 
+			{
+			  this.downShowing = 1
+			  this.cdRef.detectChanges();
+		  }
+		  else
+		  {
+			this.downShowing = 0
+			this.cdRef.detectChanges();
+		  }
+		  }
+		  delay(ms: number) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
 	loadAccountData(){
 		// show loading screen
     	let loader = this.loadingCtrl.create({

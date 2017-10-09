@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { Platform, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
+import { Component, ViewChild, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Platform, NavController, NavParams, LoadingController, AlertController, ModalController,Content } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -25,7 +25,7 @@ import { Observable } from "rxjs/Rx";
 export class YourOffersPage {
 	scrollContent: any;
 	@ViewChild("confirmPayment") confirmPayment;
-
+	@ViewChild(Content) content:Content;
 	private cache: CacheController;
 
 	userCards: any;
@@ -55,7 +55,7 @@ export class YourOffersPage {
 
 	private lotteryProductData: any
 	private offersForYou: any
-
+	downShowing  = 0;
 
 	constructor(
 		private st: SimpleTimer,
@@ -72,7 +72,8 @@ export class YourOffersPage {
 		public commonSrv: CommonService,
 		public modalController: ModalController,
 		public appSound: AppSoundProvider,
-		public loadingCtrl: LoadingController) {
+		public loadingCtrl: LoadingController,
+		public cdRef:ChangeDetectorRef ) {
 
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 		this.checkCardExists();
@@ -140,6 +141,26 @@ export class YourOffersPage {
 			})
 		}
 	}
+	scrollHandlerYourOffers(event){
+		var scrollDiv = document.getElementById('reddemOffersContent').clientHeight;
+		var innerDiv = document.getElementById('innerYourOffers').scrollHeight;
+			
+			var valu = scrollDiv + this.content.scrollTop
+			console.log("data is " , valu, innerDiv, scrollDiv)
+			if (valu > innerDiv + 200) 
+			{
+			  this.downShowing = 1
+			  this.cdRef.detectChanges();
+		  }
+		  else
+		  {
+			this.downShowing = 0
+			this.cdRef.detectChanges();
+		  }
+		  }
+		  delay(ms: number) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
 
 	ngOnInit() {
 
@@ -157,6 +178,8 @@ export class YourOffersPage {
 						this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
 						this.st.newTimer('1sec', 1);
 						this.subscribeTimer0();
+						this.delay(4000);
+						this.content.enableScrollListener();
  						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime("Wed 05 oct 17 23:59:59"));
 						break;
 					}

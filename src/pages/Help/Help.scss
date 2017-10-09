@@ -10,7 +10,7 @@ page-Help{
         margin: 0px;width: 100%;margin-top: 5px
     }
     .cardMainDiv{
-        text-align: center;margin-top: 20px;margin-bottom: 20px
+        text-align: center;margin-top: 20px;margin-bottom: 10%;
     }
     .badgeDesing{
         background-color: green;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px
@@ -31,13 +31,18 @@ page-Help{
     
     .arrow {
       position: fixed;
-   margin-top: 148%;
+     
+     
+   
+      
+   
       left: 52%;
       margin-left:-20px;
       width: 30px;
       height: 30px;
-      bottom: 32px;
-      background-image: url('/assets/img/down_arrow_pulsate.png');
+      bottom: 20px;
+      margin-top: 140%;
+      
       background-size: contain;
       animation-name: bounce;
     
@@ -47,5 +52,11 @@ page-Help{
       animation-iteration-count: infinite;
       animation-direction: alternate;
       
+      
     }
+    .scroll-content{
+       margin-bottom: 10% !important;
+       bottom: 10% !important;
+    }
+   
     }

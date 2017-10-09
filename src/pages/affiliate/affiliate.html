@@ -2,7 +2,8 @@
 
 </ion-header>
 
-<ion-content scroll="false" class="mainContent">
+<ion-content scroll="false" class="mainContent" (ionScroll)="scrollHandlerAffiliate($event)" id="affiliateContent" >
+        <div id="innerAffiliate" >
     <div>
         <img src="assets/img/landing-page-header@3x.png" width="100%" height="150" class="" />
 
@@ -104,5 +105,12 @@
             <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 17px;" (click)="dismissPopUp()">No, thanks</p>
         </div>
     </ion-item>
-
+        </div>
 </ion-content>
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+    </div>
+    
+    

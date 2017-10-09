@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ChangeDetectorRef } from '@angular/core';
 import { NavController, LoadingController, ViewController, ModalController } from 'ionic-angular';
 import { AffiliateServices } from '../../services/affliate.service';
 import { Observable } from "rxjs/Rx";
 import { AffiliatePopup } from '../affiliate_popups/affiliate_popups'
+import { Content } from 'ionic-angular'
 
 @Component({
     selector: 'page-affliate',
     templateUrl: 'affiliate.html'
 })
 export class AffiliatePage implements OnInit {
+    @ViewChild(Content) content:Content;
 
     tabBarElement:any;
     constructor(
         private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
         private viewctrl: ViewController,
         private navCtrl:NavController,
-        private modalController: ModalController
+        private modalController: ModalController,
+        public cdRef: ChangeDetectorRef
     ) {
         this.tabBarElement = document.querySelector('#tabs ion-tabbar-section')
     }
@@ -42,6 +45,7 @@ export class AffiliatePage implements OnInit {
     regular_duplicate: any;
     bonus_duplicate: any;
     dummy:any;
+    downShowing = 0;
 
     ngOnInit() {
         this.getRanMethod();
@@ -49,7 +53,7 @@ export class AffiliatePage implements OnInit {
     }
 
     getAffiliateData() {
-        debugger;
+      
         let loading = this.loadingCtrl.create();
         console.log('ionViewDidLoad PlayGamePage');
         loading.present().then(() => {
@@ -70,8 +74,34 @@ export class AffiliatePage implements OnInit {
                 })
         })
     }
+    ionViewWillEnter() {
+        this.delay(4000);
+        this.content.enableScrollListener();
+    }
+    scrollHandlerAffiliate(event){
+        
+          var innerDiv = document.getElementById('innerAffiliate').scrollHeight;
+          var scrollDiv = document.getElementById('affiliateContent').clientHeight;
+          
+          var valu = scrollDiv + this.content.scrollTop
+          console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
+          if (valu > innerDiv) 
+          {
+            console.log("botom")
+            this.downShowing = 1
+            this.cdRef.detectChanges();
+        }
+        else
+        {
+          this.downShowing = 0
+          this.cdRef.detectChanges();
+        }
+        }
+        delay(ms: number) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+      }
     getDateAndMonth(date: any) {
-        debugger;
+       
         var dates = new Date(date);
         var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var months = ["January ", "February", "March", "April", "May", "June ", "July", "August ", "September", "October", "November", "December",];
@@ -88,7 +118,7 @@ export class AffiliatePage implements OnInit {
     }
 
     genrateRanNumberUpdate(luckyDips: any, index: any) {
-        debugger;
+
         let j = 0;
         let d: any = [];
         d[j++] = this.getRandomInt(this.regular_from, this.regular_to);
@@ -106,7 +136,7 @@ export class AffiliatePage implements OnInit {
     }
 
     getRanMethod() {
-        debugger;
+        
         for (let i = 0; i < 10; i++) {
             let j = 0;
             let d: any = [];
@@ -132,7 +162,7 @@ export class AffiliatePage implements OnInit {
     // }
 
     calTime(date: any) {
-        debugger;
+   
         let now = new Date().getTime();
         if (!date) {
             return this.result;

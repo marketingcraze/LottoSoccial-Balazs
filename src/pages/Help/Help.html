@@ -1,11 +1,10 @@
 <cus-header title="Personal Guid" notification-count="0"></cus-header>
 
+
 <ion-content (ionScroll)="scrollHandler($event)" class="ionContentDesign"  id="contents" >
     
-    <div id="inner">
-         <span *ngIf="downShowing==0">
-             <div class="arrow" style="border: none" id="newDiv"></div>
-        </span>
+    <div id="inner" >
+        
       <ion-card text-center text-wrap class="cardMainDesign">
        <div class="cardMainDiv">
          <ion-badge class="badgeDesing"> NEW</ion-badge>
@@ -44,8 +43,8 @@
             
           </div>
          </ion-card>
-         <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 15px;margin-bottom: 10%">
-            <div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
+         <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 15px;margin-bottom: 18%">
+            <div style="text-align: center;margin-top: 20px;margin-bottom: 20%">
                 <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> DONE </ion-badge>
                  <p style="font-size: 18px; font-weight: bold;color: #2C2C2C">BONUS CREDIT</p>
                  <p *ngIf="lottoSocialBonusHalf=='halfBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
@@ -73,3 +72,8 @@
         </div>
    
     </ion-content>
+    <div >
+            <span *ngIf="downShowing==0"  >
+                <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+           </span>
+       </div>
