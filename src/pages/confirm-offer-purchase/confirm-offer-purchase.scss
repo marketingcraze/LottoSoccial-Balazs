@@ -1,52 +1,90 @@
 page-confirm-offer-purchase{
-    .modal-page {
-        position: absolute;
-        overflow: hidden;
-        max-width: 100%;
-        width: 90vw;
-        height: 76%;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        border: 0;
-        box-shadow:  0 0 50px  rgba(0,0,0,0.60);
-        
-        border-radius: 15px;
-      
-        }
-        ion-icon {
-            display: inline-block;
-            font-size: 1.3em;
-            color: green;
-        }
-        .checkbox-ios .checkbox-checked .checkbox-md .checkbox-inner {
-            border-color: gray;
-            background-color: #2B994A;
-            border-radius: 20px;
-            border-width: 0px;
-        }
-       
-        .scroll-content {
-            border-radius: inherit;
-        }
-        .checkbox-md .checkbox-checked {
-            border-color: gray;
-            border-radius: 20px;
-            border-width: 0px;
-            color: green;
-            background-color: #2B994A;
-        }
-        .checkbox-md .checkbox-icon {
-            border-radius: 20px;
-            position: initial;
+   
+        .popup-content{
+            position: absolute;
+            bottom: 120px;
+            width: 100%;
+            max-height: 70%;
+            z-index: 100;
+            padding: 0 20px;
+    
+            .header{
+                font-size: 1.2em;
+                padding: 10px;
+                border-bottom: 1px solid #dedede;
+            }
+    
+            .button{
+                text-transform: none;
+            }
+    
             
+    
+            .payment-popover{
+                background-color: white;
+                max-height: 70vh;
+                border-radius: 6px;
+    
+                .scroll-content{
+                    border: 1px solid #dedede;
+                    margin: 0 20px 10px 20px;
+                    
+                }
+                .list{
+                    height: 40%;
+    
+                    .item {
+                        border-top: 1px solid #dedede;
+                        min-height: 6rem;
+    
+                        .item-inner{
+                            border:none;
+                        }
+                        .radio[item-left] {
+                            margin: 0 16px 0 0;
+                        }
+                    }
+                    .list-header{
+                        margin: 0;
+                        padding: 0;
+                        background-color: #dedede;
+                        min-height: 3rem;
+                        .label{
+                            margin: 0;
+                            line-height: 2rem;
+                        }
+                    }
+                }
+    
+                .buy-now{
+                    position: absolute;
+                    width: calc(100% - 40px);
+                    height: 100%;
+                    top: 0;
+                    margin-top: 16px;
+                    border-radius: 6px;
+                    z-index: 1;
+                }
+                .outer {
+                    display: table;
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                }
+    
+                .middle {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+    
+                .buy-success{
+                    background-color: #00A651;
+                }
+                .buy-fail{
+                    background-color: #C10A09;
+                }
+            }
         }
-        .item.item-md .checkbox-md {
-            position: static;
-            display: inherit;
-            margin: 9px 16px 9px 0px;
-        }
-        
+
+    
     }

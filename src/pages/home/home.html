@@ -54,17 +54,48 @@
 
 <ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
     <ion-content>
-        <ion-item class="notification-bar"> </ion-item>
+      <ion-item text-center>
+        <div class="UpperPart">
+        <span style="color: #E6D011;font-size: medium">Dharamveer M</span>
+          <ion-avatar class="account-avatar">
+              <img class="profile-picture" src="http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png" width="72" height="72" alt="Profile" />
+            </ion-avatar>
+            <p style="font-size: medium">
+              Share your code with your<br> friends and get £5!
+            </p>
+          </div>
+          <div class="sidemenuCoupon" (click)="mgmPage()">
+          <ion-row >
+            <ion-col col-9>
+            <span style="color: #2F76D1;vertical-align:sub;">  Dharam93</span>
+            </ion-col>
+            <ion-col col3>
+                <ion-icon ios="ios-share-outline" md="ios-share-outline" class="shareBucketicon"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-item>
+        <!-- <ion-item class="notification-bar"> </ion-item> -->
             <ion-list>
-                <ion-item text-wrap (click)="onLeftMenuSelection('accounts')">Accounts </ion-item>
-                <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')">Check My Winnings </ion-item>
-                <ion-item text-wrap (click)="onLeftMenuSelection('your_badges')">Your Badges </ion-item>
-                <ion-item text-wrap (click)="onLeftMenuSelection('your_vouchers')">Your Vouchers </ion-item>
-                <ion-item text-wrap (click)="onLeftMenuSelection('affiliate')">Affiliate </ion-item>
-                <ion-item text-wrap (click)="onLeftMenuSelection('pSyndicate')">Private Syndicate </ion-item>
-                <ion-item text-wrap (click)="onLeftMenuSelection('help')">Help </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('accounts')"><span class="color">Accounts </span></ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')"><span class="color"> My Winnings</span> </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('your_badges')"><span class="color"> Badges </span></ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('your_vouchers')"><span class="color"> Vouchers</span> </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('affiliate')"><span class="color"> Affiliate </span></ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('pSyndicate')"><span class="color">Private Syndicate</span> </ion-item>
+              
             </ion-list>
     </ion-content>
+    <ion-footer>
+        <ion-item text-wrap style="border-top: 1px solid" (click)="onLeftMenuSelection('help')"><span class="color">Help</span> </ion-item>
+
+        <ion-item>
+          <div text-center>
+          <img src="assets/icon/logo_icoFooter.svg" height="20px" width="20px" style="margin-bottom: 1px;margin-right: 10px;">
+          <span style="font-family: cursive;font-size:0.8em;color: gray;vertical-align: super;">Lotto Social app version 2.6.1</span>
+        </div>
+        </ion-item>
+    </ion-footer>
 </ion-menu>
 
 <!-- <popup-message-details #messageDetails [existing-cards]="userCards"></popup-message-details> -->

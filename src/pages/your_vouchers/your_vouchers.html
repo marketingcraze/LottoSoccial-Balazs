@@ -25,7 +25,7 @@
 
     <ion-item text-wrap text-center no-lines>
       <div class="redeemButtonDiv">
-        <input type="button" value="CLAIM" class="redeemButton" (click)="voucherCodeClaimButton()"/>
+        <input type="button" value="VIEW" class="redeemButton" (click)="voucherCodeClaimButton()"/>
       </div>
     </ion-item>
 <ion-list>
@@ -54,13 +54,13 @@
 
         <div item-center text-wrap>
           <p class="thumbnailListContent">{{lst.voucher_description}}</p><br>
-          <p class="expire_inner">
+          <p class="expire_inner" style="padding-top: 25px">
             Expires <span class="expires">{{resultDate[i]}}</span>
           </p>
         </div>
 
         <div item-right class="listItemButtonDiv">
-          <input type="button" value="CLAIM" class="voucherListButton" (click)="selectedButtonID(i)" />
+          <input type="button" value="VIEW" class="voucherListButton" (click)="selectedButtonID(i)" />
         </div>
 
       </ion-item>

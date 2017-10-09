@@ -80,8 +80,8 @@
               <span class="circle"><img src="./assets/img/chat_bubble.png"/><span style="padding: 5px;">{{chatcount}}</span></span></span></ion-col>
             <ion-col col-7 class="left" style="line-height: 25px;"><span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
             <span style="font-size: 12px; color: #B7B7B7;">{{sd.member_playing_count}}/{{sd.members_count}}</span>
-              <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 2px;"></ion-icon></span>
-              <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 2px;"></ion-icon></span>
+              <span class="pmic" *ngIf="!toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 2px;font-size: 1em;color: #B7B7B7"></ion-icon></span>
+              <span class="pmic" *ngIf="toggled[i]" (click)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 2px;font-size: 1em;color: #B7B7B7"></ion-icon></span>
             </ion-col>
             <!--<ion-col col-50 class="left"><span class="date-lbl"><button ion-button class="chat-btn">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
             <ion-col col-50 class="right" style="line-height: 34px;"><span class="date-lbl">PLAYING MEMBERS:</span>{{sd.member_playing_count}}/{{sd.members_count}}</ion-col>-->
@@ -96,23 +96,13 @@
       <div *ngIf="toggled[i]">
         <ion-item text-wrap text-center>
           <ion-grid text-center>
-            <ion-row text-center>
+            <ion-row text-center *ngFor="let pd of sd.product_group; let j = index;">
               <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
-                <input type="button" value="EURO TUE" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
-                font-size: 13px;padding: 5px;height: 30px">
+                <input type="button" value="{{sd.product_group[j]?.product_name}}" [style.backgroundColor]="sd.product_group[j].product_color? sd.product_group[j].product_color :'#316BCB' " style="color: white;border: none;border-radius: 2px;
+                font-size: 13px;padding: 5px;height: 30px" (click)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
               </ion-col>
               <ion-col col-9>
-                <p style="display:inline-block;;font-size: 15px;color: #2C2C2C;padding-top: 2.5%;text-align: center;margin-left: 5% ">   X 10 tickets Valid for 11 Feb 2017</p>
-              </ion-col>
-            </ion-row>
-    
-            <ion-row>
-              <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
-                <input type="button" value="EURO TUE" style="background-color: #316BCB;color: white;border: none;border-radius: 2px;
-                font-size: 13px;padding: 5px;height: 30px">
-              </ion-col>
-              <ion-col col-9>
-                <p style="display:inline-block;;font-size: 15px;color: #2C2C2C;padding-top: 2.5%;text-align: center;margin-left: 5% ">   X 10 tickets Valid for 11 Feb 2017</p>
+                <p class="ticketsInfoP">   x {{sd?.product_group[j]?.ticket_count}} tickets Valid for {{sd?.product_group[j]?.ticket_valid_date}}</p>
               </ion-col>
             </ion-row>
     

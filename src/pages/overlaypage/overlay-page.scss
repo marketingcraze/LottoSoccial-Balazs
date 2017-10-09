@@ -1,0 +1,268 @@
+overlay-page{
+ .overlay{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        top: 0;
+        left: 0;
+    }
+
+    .test {
+			border: 1px solid;
+			float: left;
+			border-radius: 50%;
+			height: 70px;
+			width: 55%;
+		}
+
+		.font-size-p {
+			text-align: center;
+      word-wrap: break-word;
+      padding: 10px;
+      position:relative;
+      top:20px
+    }
+    
+    .rotetDiv{
+       -ms-transform: rotate(0deg); /* IE 9 */
+       -webkit-transform: rotate(0deg); /* Safari */
+       transform: rotate(0deg); 
+    }
+      .button-got-it{
+        left: 40%;
+        background-color: green;
+        border-radius: 50%;
+        font-size: large;
+        color: white;
+        height: 7%;
+        position: absolute;
+        top: 0%;
+    }
+    .homeDiv{
+      color: white;
+      border: 2px solid;
+      border-radius: 40%;
+      height: 13.5vh;
+      width: 46%;
+      text-align: center;
+      vertical-align: middle;
+     
+      position: absolute;
+      top: 12vh;
+      left: 10px;
+
+    }
+    .homeCardDiv{
+      color: white;
+      border: 2px solid;
+      border-radius: 40%;
+      
+      width: 46%;
+      text-align: center;
+      vertical-align: middle;
+     
+      position: absolute;
+      top: 75vh;
+      right: 10px;
+    }
+      .fstDiv{
+          color: white;
+          border: 2px solid;
+          border-radius: 40%;
+          height: 86px;
+          width: 46%;
+          text-align: center;
+          vertical-align: middle;
+         
+          position: absolute;
+          top: 67vh;
+          left: 10px;
+          
+      }
+      .fstDiv11{
+            color: white;
+            border: 2px solid;
+            border-radius: 25%;
+            height: 90px;
+            width: 35%;
+            text-align: center;
+            vertical-align: middle;
+            
+            position: absolute;
+            top: 12vh;
+            left: 10px;
+            -ms-transform: rotate(0deg); /* IE 9 */
+            -webkit-transform: rotate(0deg); /* Safari */
+            transform: rotate(0deg); 
+        }
+        .fstDiv12{
+            color: white;
+            border: 2px solid;
+            border-radius: 25%;
+            height: 100px;
+            width: 35%;
+            text-align: center;
+            vertical-align: middle;
+           
+            position: absolute;
+            top: 12vh;
+            right: 22%;
+            -ms-transform: rotate(0deg); /* IE 9 */
+            -webkit-transform: rotate(0deg); /* Safari */
+            transform: rotate(0deg); 
+        }
+          .sndDiv{
+                color: white;
+                border: 2px solid;
+                border-radius: 40%;
+                height: 86px ;
+                width: 46%;
+                text-align: center;
+                vertical-align: middle;
+              
+                position: absolute;
+                top: 67vh;
+                left: 20%;
+
+               
+          }
+          .thrdDiv{
+                color: white;
+                border: 2px solid;
+                border-radius:40%;
+                height: 86px;
+                width: 46%;
+                text-align: center;
+                vertical-align: middle;
+                
+                position: absolute;
+                top: 67vh;
+                right: 20%;
+          }
+          .pullUpDiv{
+            color: white;
+            border: 2px solid;
+            border-radius: 40%;
+            height: 86px;
+            width: 46%;
+            text-align: center;
+            vertical-align: middle;
+            
+            position: absolute;
+            top: 62vh;
+            right: 32%;
+          }
+          .fourthDiv{
+                color: white;
+                border: 2px solid;
+                border-radius: 40%;
+                height: 86px;
+                width: 46%;
+                text-align: center;
+                vertical-align: middle;
+                
+                position: absolute;
+                top: 67vh;
+                right: 10px;
+                
+         }
+         .fourthDivRight{
+            color: white;
+            border: 2px solid;
+            border-radius: 20%;
+            height: 78px;
+            width: 46%;
+            text-align: center;
+            vertical-align: middle;
+            
+            position: absolute;
+            top: 15vh;
+            right: 10px;
+         }
+         .messageCountIcon{
+                    width: 54px;
+                    top: 0;
+                    position: absolute;
+                    right: 0;
+                    float: right;
+                    border: 5px solid red;
+              }
+    .messageCountIcon-div{
+        color: white;
+        border: 2px solid;
+        border-radius: 40%;
+        height: 55px;
+        width: 46%;
+        text-align: center;
+        vertical-align: middle;
+      
+        position: absolute;
+        top: 22vh;
+        right: 0;
+        margin-right: -45px;
+        transform: rotate(90deg)
+
+  }   
+.message_count_icon-arrow{
+      transform: rotate(0deg);
+      height: 57px;
+      top: 40px;
+      position: absolute;
+      right: 17px;
+}  
+.scroll-content{
+  padding: 0 !important;
+  height: 100% !important;
+  -webkit-overflow-scrolling: auto;
+  scroll-behavior: auto;
+  overflow-y: hidden;
+}
+
+.overlayDiv{
+      color: white;  height: 79px; position: relative; top: 73vh;
+}
+.overlayDiv1{
+      color: white;  height: 79px; position: relative; top: 79vh;
+}
+@media only screen and (max-width: 320px) {
+      .overlayDiv{
+            color: white;  height: 79px; position: relative; top: 70vh;
+      }
+      .overlayDiv1{
+            color: white;  height: 79px; position: relative; top: 76vh;
+      }
+      .fstDiv12{
+            color: white;
+            border: 2px solid;
+            border-radius: 25%;
+            height: 107px;
+            width: 35%;
+            text-align: center;
+            vertical-align: middle;
+           
+            position: absolute;
+            top: 12vh;
+            right: 22%;
+            -ms-transform: rotate(0deg); /* IE 9 */
+            -webkit-transform: rotate(0deg); /* Safari */
+            transform: rotate(0deg); 
+      }
+
+                
+}
+@media only screen 
+and (min-device-width: 414px) 
+and (max-device-width: 736px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 3)
+{
+      .overlayDiv1{
+            color: white;  height: 79px; position: relative; top: 80vh;
+      }
+      .overlayDiv{
+            color: white;  height: 79px; position: relative; top: 75vh;
+      }
+
+ }
+}

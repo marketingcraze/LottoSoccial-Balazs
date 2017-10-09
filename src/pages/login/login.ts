@@ -218,7 +218,6 @@ export class LoginPage {
                 // go to home page
                 if(data) {
                     if(data.status != "FAIL" ) {
-                        this.animateButton()
                         CommonService.session = data;
                         this.storage.set('session_ID', CommonService.sessionId);
                         this.storage.set('session', JSON.stringify(data))
@@ -237,7 +236,6 @@ export class LoginPage {
                                 {
                                     text: 'Ok',
                                     handler: () => {
-                                        this.animateWobble();
                                     }
                                   }    
                             ]
@@ -336,13 +334,6 @@ export class LoginPage {
         }
         return false;
     }
-    animateButton(){
-        this.input.start({ type: 'bounce', duration: '5000' })
-    }
-    animateWobble(){
-        this.input.start({ type: 'wobble', duration: '5000' })
-    }
-
 }
 
 

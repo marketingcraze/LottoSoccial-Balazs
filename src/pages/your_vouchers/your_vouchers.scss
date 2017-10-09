@@ -147,6 +147,23 @@ page-yourvouchers {
 .expires{
   padding-left: 5px; padding-top: 3px
 }
+@media only screen and (max-width: 320px) {
+  .expire_inner {
+    padding-left: 10px;
+    color: red;
+    font-size: 11px;
+    padding-top: 3px;
+}
+.thumbnailListContent {
+  color: black;
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  float: left;
+  text-align: left;
+}}
 
 }
 

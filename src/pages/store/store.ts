@@ -21,6 +21,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { PlayGamePage } from '../play-games/play-games';
 import { confirmOfferPurchasePage } from '../confirm-offer-purchase/confirm-offer-purchase'
+import { OverlayPage } from '../overlaypage/overlay-page'
 // import * as $ from 'jquery';
 declare var $:any;
 
@@ -159,7 +160,19 @@ export class StorePage {
         public modalCtrlr:ModalController,
         public actionSheetCtrl: ActionSheetController) 
         {
-           
+            
+
+            if(localStorage.getItem('isInstall')==null)
+            {
+                this.onPopUp();
+            }
+
+            if(localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall"){
+                localStorage.setItem('isInstall', "moreThanFirst");
+                this.onPopUp();
+            }
+          
+            //this.onPopUp();
         storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
             this.visitorId=firstTimeLoad;
             });
@@ -236,7 +249,10 @@ export class StorePage {
         this.checkCardExists();
 
     }
-
+    onPopUp() {
+        let modal = this.modalCtrlr.create(OverlayPage);
+        modal.present();
+    }
     ionViewDidLoad() {
         console.log('ionViewDidLoad StorePage');
         // initialize slider
@@ -244,6 +260,10 @@ export class StorePage {
         // this.slideInitial();
         // initialize slider end
 
+    }
+    
+    ionViewDidEnter(){
+        localStorage.setItem('isInstall',"empty")
     }
 
     ionViewWillEnter() {
@@ -685,8 +705,8 @@ clicked(){
     
 }
 
-buyCreditOffer(offerId: any,prosub_id:any) {
-    
+buyCreditOffer(offerId: any,prosub_id:any,buttonText:any) {
+  
     console.log("StorePage::showPaymentOptions()", offerId);
     // let offer = {total_cost:4.99} ;
 
@@ -700,20 +720,30 @@ buyCreditOffer(offerId: any,prosub_id:any) {
         this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
-      
+            
+            
             for (var i = 0; i < data.response.length; ++i) {
                 if (data.response[i].get_customer_paymill_card_details) {
                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
                 } 
             }
             if (token_exists > 0) {
-                loader.dismiss()
-                let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
-                })
-                modal.present();
+             //   this.storage.set('btnValue', bu);
+             localStorage.removeItem("buttonText");
+                localStorage.setItem("buttonText",buttonText);
 
-              //  console.log("StorePage::showPaymentOptions() success", this.userCards);
-               // this.confirmPayment.togglePopup()
+                //data.response.push({ offer: offerId });
+                this.userCards = data.response;
+
+                console.log("StorePage::showPaymentOptions() success", this.userCards);
+                loader.dismiss();
+                // loader.dismiss()
+                // let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
+                // })
+                // modal.present();
+
+               console.log("StorePage::showPaymentOptions() success", this.userCards);
+                this.confirmPayment.togglePopup()
             }else{
                 loader.dismiss()
                 this.goPaymentWebviewHomeoffer(offerId,prosub_id);
@@ -736,6 +766,9 @@ showModalForcreditoffer(){
           tabs.select(1);
         }
     })
+}
+mgmOpenPage(){
+    this.navCtrl.push(referFriend);
 }
 
 }

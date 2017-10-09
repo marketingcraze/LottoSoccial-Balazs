@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, SimpleChange, OnChanges } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { Storage } from '@ionic/storage';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
 
@@ -16,10 +16,12 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     confirmPayment:boolean = false;
     showBuyNowView:boolean = false;
     confirmPaymentSuccess:boolean = true;
+    buttonValu="";
 
     public cardSelected:any
     public cardsValue:any
     public cardsList:any[]
+    public offer_detail = "";
 
     public customerDetails
     public syndicate = {
@@ -36,7 +38,10 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     @Input('existing-cards') existingPaymilCards;  
     
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
-        // console.log('Change detected:', changes["existingPaymilCards"]);
+      
+        if(localStorage.getItem("buttonText")){
+            this.buttonValu = localStorage.getItem("buttonText").substr(9,13);
+        }
         
         if (changes["existingPaymilCards"] && changes["existingPaymilCards"].currentValue) {
             this.cardsValue = changes["existingPaymilCards"].currentValue;
@@ -49,6 +54,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
 
                 if (this.cardsValue[i].get_customer_paymill_card_details) {
                     this.cardsList = this.cardsValue[i].get_customer_paymill_card_details.response.cards
+                    this.offer_detail = this.cardsValue[i].get_customer_paymill_card_details.response.offer_name
                 }else if (this.cardsValue[i].get_customer_details) {
                     this.customerDetails = this.cardsValue[i].get_customer_details.response
                 }else if (this.cardsValue[i].offer) {
@@ -65,14 +71,25 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         }
     }
     
+    ngOnInit(){
+       
+    }
     constructor(
         private params:Params,
         private iab: InAppBrowser,
         public srvOffer: OfferService,
         public alertCtrl:AlertController,
         public appSound:AppSoundProvider,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController,
+        public storage:Storage) {
         console.log('Hello PopupConfirmPaymentComponent Component');
+        // this.storage.get('btnValue').then( (btnValue:any) => {
+        //     if(btnValue){
+        //     console.log('firstTimeLoad storage', btnValue);
+        //     this.buttonValu = btnValue.substr(9,13);
+                
+        //     }
+        // })
     }
 
     buyNow(){
@@ -84,6 +101,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg&customer_id=1970400&customer_token=818113679640&Offer_ID=1188'
 
             // this.showBuyNowView = !this.showBuyNowView
+
             this.iab.create( str, 'blank', opt);
         }else{
             this.makeCardPayment(this.cardSelected);
@@ -109,7 +127,9 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         if (card) {
             this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() success", data);
+               
                 loader.dismiss();
+                
                 
                 this.showBuyNowView = true;
                 data = data.response[0];

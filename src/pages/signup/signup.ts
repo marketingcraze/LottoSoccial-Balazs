@@ -206,6 +206,8 @@ export class SignupPage {
 	}
 
 	submitSignup(form:any){
+
+		localStorage.setItem('isInstall', "firstTimeInstall");
 		// let nav = this.app.getRootNav();
         // nav.setRoot(NewSyndicatePage);
 		
@@ -251,7 +253,6 @@ export class SignupPage {
 						duration: 3000,
 						
 					}).present()
-					this.animateButton();
 				}else{
 					this.onRegistrationSuccess(data)
 				}
@@ -474,10 +475,5 @@ url:""
 		this.error = errMsg;
 		return Observable.throw(errMsg);
 	}
-	animateButton(){
-        this.input.start({ type: 'bounce', duration: '5000' })
-    }
-   
-
 
 }

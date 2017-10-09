@@ -1,135 +1,72 @@
 <ion-header>
-	<ion-navbar>
-    	<p padding-left>Join a syndicate to start!</p>
-      <ion-buttons end>
-          <button ion-button clear (click)="goBack()">SKIP</button>
-      </ion-buttons>	
-    </ion-navbar>
-</ion-header>
-
+    <ion-navbar>
+        <p padding-left>Join a syndicate to start!</p>
+         <ion-buttons end>
+             <button ion-button clear (click)="goBack()">SKIP</button>
+         </ion-buttons> 
+       </ion-navbar>
+   </ion-header>
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
 
 <ion-content >
   <ion-slides #offer_for_you_slides initialSlide=0 spaceBetween={{spaceBetween}} class="home-slides">
 
-<!-- Slide 0 -->
     <ion-slide class="home-slide">
 
-      <ion-card>
-        
+      <ion-card style="max-height: 72vh;height: 70vh;min-height: 70vh">
         <div class="card-top" >
-          <img class="title-image" src="assets/img/euromillions_ball.png">
-          <img class="bkg" src="assets/img/home/ch_check_winnings@3x.png">
+          <img class="title-image" src="{{forkOfferPage?.product_image}}">
+          <img class="bkg" src="{{forkOfferPage?.offer_img}}">
             <div class="card-title">
-              <h4>EUROMILLIONS</h4>
-              <h1>&pound;43,000,000</h1>
+              <h4>{{forkOfferPage?.name | uppercase}}</h4>
+              <h1>{{forkOfferPage?.offer_jackpot }}</h1>
           </div>
         </div>
-
         <ion-item class="offer-down euro">
           <div class="timer-new center">
               <div class="time-left"><img src="assets/icon/timer.svg" /></div>
-              <div class="time-left"><span>TIME LEFT:</span></div>
-              <div>0 <span>Days</span></div>
-              <div>21 <span>Hrs</span></div>
-              <div>48 <span>Mins</span></div>
-              <div>35 <span>Secs</span></div>
+              <div class="time-left"><span style="position: relative;top: 12px;font-size: 0.9em;">TIME LEFT:</span></div>
+              <div>{{day}}<span>Days</span></div>
+              <div>{{hrs}} <span>Hrs</span></div>
+              <div>{{min}}<span>Mins</span></div>
+              <div>{{sec}}<span>Secs</span></div>
           </div>
-         
         </ion-item>
 
         <ion-grid class="lines-ongoing">
-          <ion-row>
-              <ion-col padding>
+          <ion-row style="border-bottom: 0.1px solid;">
+              <ion-col >
               <img src="assets/icon/information-button.svg"/>
-              <h2>20<p>LINES</p></h2></ion-col>
-              <ion-col padding>
+              <h2>{{forkOfferPage?.line_group?.line1}}<p>LINES</p></h2></ion-col>
+              <ion-col >
               <img src="assets/icon/information-button.svg" />
-              <h2>ONGOING<p>TYPE</p></h2></ion-col>
+              <h2>{{forkOfferPage?.type | uppercase}}<p>TYPE</p></h2></ion-col>
           </ion-row>
         </ion-grid>
 
-      <ion-item padding class="long-name">
-        <p item-content text-center>Every long offer name that should fit in two lines</p>
+      <ion-item no-padding class="long-name">
+        <p text-center>{{forkOfferPage?.offer_title}}</p>
         </ion-item>
 
       <ion-item class="description">
-        <p item-content>This is an offer description which is so long that goes on two lines, however for safety reason I'll add some gibberish to go on three lines; nice. </p>
+        <p item-content>{{forkOfferPage?.offer_description}}</p>
         </ion-item>
         
     <ion-grid class="draws-payment">
       <ion-row>
-              <ion-col>DRAWS INCLUDED<p><span class="text-rounded-back">TUE</span><span class="text-rounded-back">FRI</span></p></ion-col>
-              <ion-col>PAYMENT METHOD<p><span class="text-rounded-back">TUE</span><span>DIRECT DEBIT</span></p></ion-col>
+              <ion-col col-6>DRAWS INCLUDED<p><span  *ngFor="let draw of  forkOfferPage?.draw_day|keys"><span class="text-rounded-back">{{draw}}</span></span></p></ion-col>
+              <ion-col col-6>PAYMENT METHOD<p><img src="assets/icon/direct-debit-ico.svg" style="height: 17px;float: left;margin-right: 5px;margin-top: 3px;"><span>{{forkOfferPage?.payment_method}}</span></p></ion-col>
           </ion-row>
         </ion-grid>
 
         <div padding>
-          <button item-right ion-button icon-left color="secondary">
-          <ion-icon name="md-lock"></ion-icon> PLAY FOR &pound;4.99 </button>
+          <button item-right ion-button icon-left color="secondary" (click)="buyCreditOffer(forkOfferPage?.offer_id,forkOfferPage?.prosub_id,forkOfferPage?.button_text)">
+          <ion-icon name="md-lock"></ion-icon> {{forkOfferPage?.button_text}} </button>
         </div>
       </ion-card>
 
     </ion-slide>
 
-<!-- Slide 1 -->
-    <ion-slide class="home-slide">
-
-      <ion-card>
-        
-        <div class="card-top" style="background-color: #fc2029">
-        	<img class="title-image" src="assets/img/euromillions_ball.png">
-        	<img class="bkg" src="assets/img/home/ch_check_winnings@3x.png">
-          	<div class="card-title">
-	            <h4>EUROMILLIONS</h4>
-	            <h1>&pound;43,000,000</h1>
-	        </div>
-        </div>
-
-        <ion-item class="offer-down euro">
-          <div class="timer-new center">
-              <div class="time-left"><img src="assets/icon/timer.svg" /></div>
-              <div class="time-left"><span>TIME LEFT:</span></div>
-              <div>0 <span>Days</span></div>
-              <div>21 <span>Hrs</span></div>
-              <div>48 <span>Mins</span></div>
-              <div>35 <span>Secs</span></div>
-          </div>
-         
-        </ion-item>
-
-        <ion-grid class="lines-ongoing">
-          <ion-row>
-            	<ion-col padding>
-              <img src="assets/icon/information-button.svg"/>
-              <h2>20<p>LINES</p></h2></ion-col>
-            	<ion-col padding>
-              <img src="assets/icon/information-button.svg" />
-              <h2>ONGOING<p>TYPE</p></h2></ion-col>
-        	</ion-row>
-        </ion-grid>
-
-    	<ion-item padding class="long-name">
-    		<p item-content text-center>Every long offer name that should fit in two lines</p>
-        </ion-item>
-
-    	<ion-item class="description">
-    		<p item-content>This is an offer description which is so long that goes on two lines, however for safety reason I'll add some gibberish to go on three lines; nice. </p>
-        </ion-item>
-        
-		<ion-grid class="draws-payment">
-			<ion-row>
-            	<ion-col>DRAWS INCLUDED<p><span class="text-rounded-back">TUE</span><span class="text-rounded-back">FRI</span></p></ion-col>
-            	<ion-col>PAYMENT METHOD<p><span class="text-rounded-back">TUE</span><span>DIRECT DEBIT</span></p></ion-col>
-        	</ion-row>
-        </ion-grid>
-
-        <div padding>
-        	<button item-right ion-button icon-left color="secondary">
-        	<ion-icon name="md-lock"></ion-icon> PLAY FOR &pound;4.99 </button>
-        </div>
-      </ion-card>
-
-    </ion-slide>
 
 	</ion-slides>
 

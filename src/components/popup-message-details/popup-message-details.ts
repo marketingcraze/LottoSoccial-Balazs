@@ -34,10 +34,10 @@ export class PopupMessageDetails implements OnChanges{
     
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
         // console.log('Change detected:', changes["existingPaymilCards"]);
-        
+      
         if (changes["existingPaymilCards"] && changes["existingPaymilCards"].currentValue) {
             this.cardsValue = changes["existingPaymilCards"].currentValue;
-            
+           
             console.log("existingPaymilCards", this.cardsValue);
 
             for (var i = 0; i < this.cardsValue.length; ++i) {
@@ -107,6 +107,7 @@ export class PopupMessageDetails implements OnChanges{
             this.srvOffer.processPaymillCardPayment(this.syndicate, this.customerDetails, card).subscribe((data) => {
                 console.log("OffersPage::checkCardExists() success", data);
                 loader.dismiss();
+              
                 this.showBuyNowView = true;
             }, (err) => {
                 console.log("OffersPage::checkCardExists() error", err);

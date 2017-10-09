@@ -10,6 +10,7 @@ import { AccountPage } from '../account/account';
 import { UpdatePage } from '../update/update';
 import { BadgesPage } from '../badges/badges';
 import { inboxModal } from '../inbox-popup/inbox-popup';
+import { referFriend } from '../refer-friend-page/refer-friend-page';
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
@@ -280,6 +281,10 @@ export class HomePage implements OnInit {
     alert(i:any){
      let inboxPopup=this._modalCtrl.create(inboxModal,{CurrentMessage: this.messages[i]});
      inboxPopup.present();
+    }
+    mgmPage(){
+       let mgmModal=this._modalCtrl.create(referFriend);
+       mgmModal.present();
     }
 }
 

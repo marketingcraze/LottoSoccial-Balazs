@@ -4,6 +4,7 @@ import { productOffer } from '../../services/productoffer.service';
 import { OfferService } from '../../services/offer.service';
 import { Storage } from '@ionic/storage';
 import { Observable } from "rxjs/Rx";
+import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
 
 @Component({
     selector: 'offer-buy',
@@ -27,7 +28,11 @@ export class offerBuy {
     day: any = [];
     hrs: any = [];
     mins: any = [];
-    sec: any = [];
+    sec: any = []; 
+    Nday: any = [];
+    Nhrs: any = [];
+    Nmins: any = [];
+    Nsec: any = [];
     check: boolean = false;
     visitorId: any;
     buyoffer: any;
@@ -38,6 +43,7 @@ export class offerBuy {
     constructor(private offerBuyData: productOffer,
         private loadingCtrl: LoadingController,
         private storage: Storage,
+        private modalCtrl:ModalController,
         private offerService: OfferService,
         private navprms: NavParams, ) {
 
@@ -60,6 +66,7 @@ export class offerBuy {
     }
 
     calTime(){
+
         let now = new Date().getTime();
         if (!this.NewTimeLeft) {
             return this.result;
@@ -91,8 +98,40 @@ export class offerBuy {
         this.mins = (minuteCal <= 9) ? '0' + minuteCal  : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
+
+    NewcalTime(NewLeft:any){
+        
+                let now = new Date().getTime();
+                if (!NewLeft) {
+                    return this.result;
+                }
+                if (typeof (NewLeft) === "string") {
+                    NewLeft = new Date(NewLeft);
+                }
+            
+                let delta = Math.floor((now - NewLeft.getTime()) / 1000);
+                if (delta < 0) {
+                    this.result = "-"
+                    delta = Math.abs(delta);
+                }
+            
+                let dayCal = Math.floor(delta / 86400);
+                delta %= 86400
+                let hourCal = Math.floor(delta / 3600);
+                delta %= 3600
+                let minuteCal = Math.floor(delta / 60);
+                delta %= 60
+                let secondsCal = Math.floor(delta)
+            
+                this.Nday = (dayCal <= 9) ? '0' + dayCal: dayCal;
+                this.Nhrs = (hourCal <= 9) ? '0' + hourCal  + " :"  : hourCal + " :";
+                this.Nmins = (minuteCal <= 9) ? '0' + minuteCal  + " :"  : minuteCal + " :";
+                this.Nsec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
+            }
+
     ngOnInit() {
         Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime());
+        Observable.interval(1000).takeWhile(() => true).subscribe(() => this.NewcalTime("Wed 05 oct 17 23:59:59"));
     }
 
     ionViewWillEnter() {
@@ -158,6 +197,10 @@ export class offerBuy {
     }
     openSuccessModal() {
 
+    }
+    openTipsModal(){
+        let modalTips=this.modalCtrl.create(buyOfferTips);
+        modalTips.present();
     }
 
 }

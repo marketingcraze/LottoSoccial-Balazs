@@ -22,7 +22,7 @@
       <ion-col width-50 style="width: 100%" >
         <div text-center style="width: 100%" (click)="tip()">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span class="tooltip t1">CREDIT <span class="credit">&pound;{{accountDetails.bonus_credit}}</span>
+          <span class="tooltip t1">CREDIT <span class="credit">{{accountDetails.bonus_credit}}</span>
           <div  *ngIf ="tip11==true" >
           <span class="tooltiptext t-left">
                 <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
@@ -92,12 +92,12 @@
              <div style="height:40px" >
                 <span>{{offer?.offer_title}}</span>
               </div>
-              <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id)">
+              <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id,offer?.button_text)">
                 <span style="font-size: 17px;font-weight: lighter;">
                 {{offer?.button_text}}  
                 </span></button>
             </div>
-              <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button>
+              <!-- <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button> -->
             </ion-card>
           </div>
   
@@ -545,11 +545,11 @@
           </ion-item>
   
           <div class="top-slides-wrapper">
-            <ion-slides class="top-slides"  spaceBetween=8>
-            
+            <ion-slides class="top-slides" slidesPerView=2  spaceBetween="10" >
               <ion-slide *ngFor="let item of homeBlog">
-                <img *ngIf="item.image" src="{{item.image}}">
-                <img *ngIf="!item.image" src="assets/img/150.png">
+                <div style="height: 30vh;max-height: 30vh;min-height: 30vh">
+                <img *ngIf="item.image" src="{{item.image}}" style="width: 100%;">
+                <img *ngIf="!item.image" src="assets/img/150.png" style="width: 72%;height: 157px;">
                 <div class="slide-content">
                   <ion-item >
                     <p item-content>{{item.content.rendered}}</p>
@@ -560,6 +560,10 @@
                     </button>
                   </ion-item>
                 </div>
+              </div>
+              </ion-slide>
+              <ion-slide style="background-color: red;height: 200px;">
+
               </ion-slide>
             
             
@@ -592,7 +596,7 @@
               </ion-slide> -->
             </ion-slides>
           </div>
-          <ion-slides  spaceBetween=8>
+          <ion-slides  spaceBetween=8 slidesPerView=2>
             <ion-slide>
               <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
             </ion-slide>

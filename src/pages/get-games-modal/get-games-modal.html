@@ -1,3 +1,4 @@
+
 <ion-content class="modal-page" text-center>
     
       <ion-list *ngIf="value==false && status=='Passed'" ion-fixed style=" border-radius:25px;">
@@ -21,7 +22,7 @@
     
               <div item-center item-right style="border: 1px solid #255FC7;width: 40%;text-align: center;border-radius: 200px 200px 200px 200px;z-index: 1">
                 <input (click)="minusCounter()" type='button' value='-' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
-                <input type='text' value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0">
+                <input type='number' disabled="disabled" minlength="1" maxlength="5" value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0;background-color: white;color: black">
                 <input (click)="plusCounter()" type='button' value='+' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;left: 4px">
             </div>
             </ion-item>
@@ -48,8 +49,8 @@
         
             </ion-item>
           </div>
-          <ion-item text-center no-lines  style="height: 30%;border-radius:20px ">
-              <div style="text-align: center; padding-top: 5%;height: 10%;border-radius: 20px">
+          <ion-item text-center no-lines  style="height: 30%; border-radius:0px 0px 20px 20px">
+              <div style="text-align: center; padding-top: 5%;height: 10%; border-radius:0px 0px 20px 20px">
                 <input type="button" value="CONFIRM" style="background-color:#249040; color: white;text-align: center;border: 0px;
                               width: 40%; height:38px;border-radius: 5px; " (click) = "done()">
               </div>
@@ -85,7 +86,7 @@
     </div> 
  <div *ngIf="status=='Failed'" style=" border-radius:25px;" ion-fixed>
     <div>
-        <ion-item no-lines text-wrap style="text-align: center; background-color: red;color: white">
+        <ion-item no-lines text-wrap style="text-align: center; background-color: red;color: white;border-radius:15px 15px 0px 0px;">
           <span style="font-size: 16px"><b> INSUFFICIENT POINTS</b></span>
           <br>
           <span>TO REDEEM THIS GAME</span>
@@ -95,7 +96,7 @@
       </div>
 
       <div style=" border-radius:25px;">
-        <ion-item no-lines text-wrap style="text-align: center;padding-top: 4%">
+        <ion-item no-lines text-wrap style="text-align: center;">
             <span style="text-align: center"><b> Why don't you double up your chances?</b></span>
             <br>
             <span style="text-align: center">Get this offer which includes lottery tickets AND games!</span>
@@ -103,12 +104,12 @@
         </ion-item>
       </div>
       <div>
-        <ion-item no-lines text-wrap style="text-align: center;padding-top: 4%">
-          <img src="assets/img/not_sucess.png">
+        <ion-item no-lines text-wrap style="text-align: center;">
+          <img src="assets/img/not_sucess.png" style="width: 80%;margin: 10px">
         </ion-item>
       </div>
-      <div style=" border-radius:25px;">
-          <ion-item no-lines text-wrap style="text-align: center; border-radius:25px;">
+      <div style=" border-radius:0px 0px 25px 25px;position: relative;margin-top: -25px">
+          <ion-item no-lines text-wrap style="text-align: center;  border-radius:0px 0px 25px 25px">
               <input type="button" value="BUY NOW FOR £2" class="voucherListButton" (click)="selectedButtonID(i)" />
               <p (click)="dismissPopUp()" style="text-decoration: none !important;color: #4E85D4; text-align: center; 
               font-size: 15px; padding-top: 5%">Not Now</p>

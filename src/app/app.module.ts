@@ -85,6 +85,9 @@ import { confirmOfferPurchasePage } from '../pages/confirm-offer-purchase/confir
 import { AffiliatePopup } from '../pages/affiliate_popups/affiliate_popups';
 import { HelpPage } from '../pages/Help/Help'
 import { AgreementPage } from '../pages/agreement/agreement'
+import { newArrowHeader } from '../components/newArrowHeader/newArrowHeader';
+import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
+import  { OverlayPage } from '../pages/overlaypage/overlay-page'
 
 
 // components
@@ -105,7 +108,8 @@ import { PlayGame } from '../services/playgame.service';
 import { ReferFriend } from '../services/referfriend.service';
 import { productOffer } from '../services/productoffer.service';
 import { VoucherService } from '../services/voucherList_service'
-import { AffiliateServices } from '../services/affliate.service'
+import { AffiliateServices } from '../services/affliate.service';
+import { forkOffersSyndicate } from '../services/syndicateForkOffer.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -121,6 +125,7 @@ import { Market } from '@ionic-native/market';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnimationService, AnimatesDirective } from 'css-animator';
+import { paymentService } from '../services/paymentService'
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
@@ -219,7 +224,14 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         AffiliatePage,
         AffiliatePopup,
         HelpPage,
+
         AgreementPage,
+
+        newArrowHeader,
+        buyOfferTips,
+        OverlayPage,
+     
+        // master,
         // OffersPayment,
 
         // pipes
@@ -338,6 +350,10 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         confirmOfferPurchasePage,
         AffiliatePopup,
         HelpPage,
+        newArrowHeader,
+        buyOfferTips,
+        OverlayPage,
+  
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -349,9 +365,9 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
-        AnimationService, DatabaseService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,
+        AnimationService, DatabaseService,paymentService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate]
 
 })
 export class AppModule { }

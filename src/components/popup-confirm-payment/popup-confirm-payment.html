@@ -5,23 +5,25 @@
 
       <div class="payment-popover">
         <p class="header" text-center>Confirm Purchase</p>
-        <p text-center><!-- This is 2 line description for payment --></p>
+        <ion-item text-center text-wrap no-lines>
+          <p text-center style="margin-bottom: 10px">{{offer_detail}}</p>
+        </ion-item>
         <ion-scroll style="width:100%;height:40vh" scrollY="true">
           <ion-list radio-group class="windows" [(ngModel)]="cardSelected" scroll="true">
-            <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> Secure payment details</ion-list-header>
+            <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> <span style="font-size: 15px">Secure payment details</span> </ion-list-header>
             
             <ion-item *ngFor="let card of cardsList; let i = index">
               <ion-label>Use preferred card:<br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
               <ion-radio value="{{i}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
             </ion-item>
-            <ion-item>
+            <ion-item style="border-bottom: 0px">
               <ion-label>Use a different card</ion-label>
               <ion-radio value="-1" item-left color="secondary"></ion-radio>
             </ion-item>
 
           </ion-list>
         </ion-scroll>
-        <div><button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for &pound;{{syndicate.total_cost}}</button>
+        <div><button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for {{buttonValu}}</button>
         </div>
 
         <div>

@@ -2,10 +2,10 @@
    page-yourvoucherspopups {
     .modal-page {
       position: absolute;
-      overflow: hidden;
+      overflow: visible;
       max-width: 90%;
       width: 100vw;
-      height: 56vh;
+      max-height: 90vh;
       top: 0;
       bottom: 0;
       left: 0;
@@ -16,6 +16,10 @@
       background-color: #fafafa;
       border-radius: 10px;
     
+      }
+      .fixed-content {
+        background-color: white;
+        border-radius: 10px
       }
     .popup-img{
       height: 50px;
@@ -47,17 +51,20 @@
     .buycard{
       background:#00A651;
       overflow: hidden;
-      position: absolute;  
+      position: relative;  
       max-width: 100%;
       width: 100%;
-      height: 60vh;
+     min-height: 335px !important;
+     padding-top: 13% !important;
+     padding-bottom: 13% !important;
+     
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       margin: auto;
       border: 0;
-      padding-top: 25%;
+     
       border: 0;
       box-shadow: 0 16px 150px rgba(0,0,0,1.4);
       border-radius: 10px;
@@ -79,15 +86,25 @@ padding-top: 5%;
 }
 .errorcard{
   background:#990033;
-  width:auto;
   padding:10px;
   padding-top:40%;
   padding-bottom: 150px;
-  min-height: 405px;
-  position: relative;
+ 
   bottom: 70px;
   border-radius: 10px;
-
+  overflow: visible;
+  position: relative;  
+  max-width: 100%;
+  width: 100%;
+ min-height: 200px !important;
+ padding-top: 13% !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  box-shadow: 0 16px 150px rgba(0,0,0,1.4);
+ 
 }
 .imgleftIcon{
   width: 17%; padding-left: 0px;margin-left: 0px
@@ -125,5 +142,8 @@ padding-top: 5%;
 }
 .failedMoveToVoucherButton{
   font-size: 18px;width:50%; height: 45px
+}
+.label-md {
+  margin: 2px 0px 13px 0;
 }
     }
