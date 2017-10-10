@@ -22,7 +22,9 @@
       <ion-col width-50 style="width: 100%">
         <div text-center style="width: 100%" (click)="tip()">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span class="tooltip t1">CREDIT <span class="credit">{{accountDetails.bonus_credit}}</span>
+          <span class="tooltip t1" *ngIf="creditPoints>0" (click)="redirectToOfferPage()">CREDIT <span class="credit">{{accountDetails.bonus_credit}}</span>
+          <span class="tooltip t1" *ngIf="creditPoints==0" (click)="redirectToOfferPage()" >GET CREDIT </span>
+       
           <div *ngIf="tip11==true">
             <span class="tooltiptext t-left">
                 <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
@@ -53,7 +55,7 @@
 
   <!-- slider -->
   <!-- Dharam new slider -->
-  <ion-slides class="newSlide"  initialSlide="0"  #mySlide (swipe)="countSlider()" >
+  <ion-slides class="newSlide"  initialSlide="0"  #mySlide (swipe)="countSlider($event)" >
     <ion-slide *ngFor="let offer of offersForYou.offer_group">
         <ion-card style="max-height:60vh;width: 80%;margin-left: 10%;margin-top: 10%;">
             <div class="card-top " >

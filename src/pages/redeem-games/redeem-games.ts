@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, LoadingController, ModalController,Platform, Content } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController, Platform, Content, Tabs } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
@@ -156,4 +156,5 @@ scrollHandlerListGames(event){
       });
     }
   }
+ 
 }

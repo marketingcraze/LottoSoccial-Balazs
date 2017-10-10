@@ -50,7 +50,7 @@
        
         <ion-row class="SlideContentBorderTopOffer">
             <ion-col col-12>
-                <p class="SlideSubTitleOffer" style="color:#333333">Number Of Lines {{(product?.line_group| keys)[credit_filter_line]}}</p>
+                <p class="SlideSubTitleOffer" style="color:#333333">Number Of Lines <span style="font-size: x-large"> {{(product?.line_group| keys)[credit_filter_line]}}</span></p>
             </ion-col>
         </ion-row>
 
@@ -60,11 +60,11 @@
                 </div>   
         </ion-row> -->
 
-        <ion-item no-lines>
+        <ion-item no-lines style="background-color: transparent">
             <ion-range class="rangesliderOffer" *ngIf="!sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"
                 (ionChange)="watchSlider()" [(ngModel)]="slider">
-                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
             </ion-range>
         </ion-item>
 

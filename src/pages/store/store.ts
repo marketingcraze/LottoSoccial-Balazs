@@ -30,6 +30,7 @@ declare var $:any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    creditPoints: any;
     buyoffer: any;
     @ViewChild(Slides) home_slides: Slides;
     @ViewChild('mySlide') carouselSlide: Slides;
@@ -228,6 +229,7 @@ export class StorePage {
                     
                 }else if ( data[i].get_account_details ) {
                     this.accountDetails = data[i].get_account_details.response;
+                    this.creditPoints=this.accountDetails.bonus_credit.slice(1)
                 }else if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
                     params.setUnreadCount(this.homeMessage.count);
@@ -775,10 +777,37 @@ mgmOpenPage(){
 }
 
 countSlider(ev:any){
+    let direction=ev.direction;
+    if(direction==2 && this.counts<this.carouselSlide.length())
+    {
+      this.counts++;  
+      this.currentSliderCount=this.counts;
+    }
+    else if(direction==4 && this.counts>0)
+    {
+        this.counts--;  
+        this.currentSliderCount=this.counts;
+    }
+}
+redirectToOfferPage(){
+    var tabs:Tabs=this.navCtrl.parent;
+    tabs.select(4);
+  }
+}
+    
 //    let lastIndex=this.carouselSlide.length(); 
-   this.currentSliderCount= this.carouselSlide.getActiveIndex();
- 
-//    this.count++;
+//    = this.carouselSlide.getActiveIndex();
+
+//    this.currentSliderCount--; 
+//    this.counts++;
+//    if(this.counts==1&&this.currentSliderCount==-1)
+//    {
+//     this.currentSliderCount=this.counts;
+//    }
+//    else{
+//     this.currentSliderCount=this.counts-1;
+   
+
 //    if(this.count==1&& this.currentSliderCount==0 && this.currentSliderCount< lastIndex)
 //    {
 //     this.currentSliderCount=this.count;
@@ -787,6 +816,5 @@ countSlider(ev:any){
 //     this.currentSliderCount++; 
 //    }
  
-}
 
-}
+

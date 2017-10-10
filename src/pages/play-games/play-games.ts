@@ -160,7 +160,7 @@ export class PlayGamePage implements OnInit {
     this.howToPlayModal.present();
   }
     recentWinnerTipsmodal(){
-    this.howToPlayModal=this._modalController.create(recentWinnerTips)
+    this.howToPlayModal=this._modalController.create(recentWinnerTips,{gameInfo:this.gameInfo})
     this.howToPlayModal.present();
   }
     gameTermsModal(){
