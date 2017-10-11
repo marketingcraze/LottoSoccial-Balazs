@@ -41,6 +41,7 @@ export interface PageInterface {
     templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
+    accountDetails: any;
 
     ngOnInit(): void {
 
@@ -83,10 +84,7 @@ export class HomePage implements OnInit {
         private loadingCtrl:LoadingController,
         private _modalCtrl:ModalController
         ) {
-
-        
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
-
 /*
         platform.ready().then(() => {
             StatusBar.styleDefault();
@@ -94,8 +92,6 @@ export class HomePage implements OnInit {
         });
 */
         this.params.events.subscribe('home-data', data => {
-            // console.log("home-data", data);
-            
             for (var i = data.length - 1; i >= 0; i--) {
                 if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
@@ -103,18 +99,16 @@ export class HomePage implements OnInit {
                         // this.messages = this.homeMessage.notification;
                     }
                     params.setUnreadCount(this.homeMessage.count);
-                    break;
+                }
+                else if(data[i].get_account_details){
+                    this.accountDetails = data[i].get_account_details.response;
                 }
             }
-
             console.log("HomePage::home data", this.homeMessage, this.messages );
         });
 
         this.checkForNewRelease()
     }
-
-
-
     ionViewDidEnter() {
         if (this.messageDetails) {
             this.messageDetails.togglePopup();

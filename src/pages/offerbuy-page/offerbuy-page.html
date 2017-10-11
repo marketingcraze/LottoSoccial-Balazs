@@ -30,9 +30,16 @@
 
 
     <div class="mainContainer" text-center>
+      
         <ion-row>
-            <ion-col col-12>
-                <p class="SlideSubTitleOffer" style="color:#333333;margin-top: 8px">Choose Draw day</p>
+            <ion-col col-4>
+               <div class="arrow-right">
+                 
+               </div>
+               <span  (click)="openTipsModal()" class="HowtpText">HOW TO <br>PLAY</span>
+            </ion-col>
+               <ion-col col-8>
+                <p class="SlideSubTitleOffer" style="color:#333333;margin-top: 8px;text-align: left;margin-left: 10%;">Draw day</p>
             </ion-col>
         </ion-row>
 
@@ -80,10 +87,10 @@
                 <button ion-button class="BuyBtn" style="float: none;margin-top: 10px" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
             </ion-col>
         </ion-row>
-
+<!-- 
         <div right class="tipsCorner" (click)="openTipsModal()">
                 <span style="position: relative;color: white;top: 14px;">How<br>To Play</span>
-            </div>
+            </div> -->
     </div>
    
     <div class="offer-of-the-day">

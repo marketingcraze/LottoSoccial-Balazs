@@ -11,7 +11,7 @@ export class winnerTips {
     constructor(private http: Http, private params: Params) {
 
     }
-    getRecentWinnerTips(pruductName:string) {
+    getRecentWinnerTips(pruductName: string) {
         if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
@@ -35,10 +35,10 @@ export class winnerTips {
                     "session_ID": CommonService.sessionId,
                     "customer_id": this.customerId,
                     "page_id": "3",
-                    "screen_id": "3..7",
+                    "screen_id": "3.7",
                     "module_name": "get_game_tips",
                     "product_name": pruductName
-                   
+
                 }
             ]
         }

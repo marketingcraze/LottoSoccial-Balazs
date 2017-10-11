@@ -22,7 +22,7 @@
       <div >
       <!--<img [src]="sd.image_url">-->
       <div>
-      <img [src]="sd.image_url" (click)="toggleAcc(i)">
+      <img [src]="sd.image_url">
       <div class="c-title">
         {{sd.syndicate_name}}
       </div>
@@ -69,7 +69,7 @@
       <div>
       <!--<img [src]="sd.image_url">-->
       <div>
-      <img [src]="sd.image_url" (click)="toggleAcc(i)">
+      <img [src]="sd.image_url">
       <div class="c-title">
         {{sd.syndicate_name}}
       </div>
@@ -134,13 +134,12 @@
             <button ion-button class="btn" (click)="viewTickets(i)"> VIEW TICKETS </button>
           </div>
       </ion-item>
-      <ion-item style="font-size: 14px;">
+      <ion-item style="height: 30px">
         <ion-row style="padding: 0px 5px 5px">
           <ion-col col-50 class="left" (click)="checkwins()"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></ion-col>
           <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()">
             <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(2,2);"></ion-icon>
             <ion-col><span class="synd-f" style="color:#000000">SETTINGS</span></ion-col>
-              
           </span></ion-col>
         </ion-row>
       </ion-item>

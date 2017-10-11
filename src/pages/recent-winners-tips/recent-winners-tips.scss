@@ -1,4 +1,7 @@
 recentwinner-tips{
+    .scroll-content{
+        margin-top: 34px !important;
+    }
     .play-game-tips{
         height: 240px;
         background-color: white;
@@ -19,9 +22,9 @@ recentwinner-tips{
         background-color: #E6E7EC;
     }
     .roundTips{
-        border-radius: 30px;
-        -webkit-border-radius: 30px;
-        -moz-border-radius: 30px;
+        border-radius: 18px;
+        -webkit-border-radius: 18px;
+        -moz-border-radius: 18px;
     }
     .tri-rightTips.btm-leftTips:after{
         content: ' ';
@@ -94,5 +97,11 @@ recentwinner-tips{
     }
     .image-settingTipsNext{
         width:9px;height:9px;
+    }
+    .redHeart{
+        height: 25px;
+        width: 25px;
+        position: relative;
+        top: 20%;
     }
 }

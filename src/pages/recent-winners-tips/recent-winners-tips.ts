@@ -7,22 +7,27 @@ import { winnerTips } from '../../services/recentWinnerTips.service'
     templateUrl: 'recent-winners-tips.html'
 })
 export class recentWinnerTips {
+    tipsData: any;
     gameInfo: any;
     constructor(private _recentWinnerTips: NavParams, private _recentTips: winnerTips, private _loadingCtrl: LoadingController) {
-        debugger;
         this.gameInfo = _recentWinnerTips.get('gameInfo');
-        //game_imageurl
     }
     ionViewWillEnter() {
-        // let loader = this._loadingCtrl.create();
-        // loader.present().then(() => {
-        //     this._recentTips.getRecentWinnerTips(this.gameInfo.product_name).subscribe(data => {
-        //         if (data) {
-        //             debugger;
-        //             let alldata=data.response.get_game_tipss
-        //         }
-        //     })
-        // })
+        let loader = this._loadingCtrl.create();
+        loader.present().then(() => {
+            this._recentTips.getRecentWinnerTips(this.gameInfo.game_name).subscribe(
+                data => {
+                    if (data) {
+                        this.tipsData = data.response[0].get_game_tipss.response.tips;
+                        loader.dismiss();
+                    }
+                },
+                err => {
+                    loader.dismiss();
+                    console.log("error", err);
+                }
+            )
+        })
     }
 
 }

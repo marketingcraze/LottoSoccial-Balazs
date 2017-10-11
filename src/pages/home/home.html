@@ -56,9 +56,9 @@
     <ion-content>
       <ion-item text-center>
         <div class="UpperPart">
-        <span style="color: #E6D011;font-size: medium">Dharamveer M</span>
+        <span style="color: #E6D011;font-size: medium">{{accountDetails?.nick_name}}</span>
           <ion-avatar class="account-avatarSlide">
-              <img class="profile-pictureSlide" src="http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png" width="72" height="72" alt="Profile" />
+              <img class="profile-pictureSlide" src="{{accountDetails?.profile_image ? accountDetails?.profile_image : 'assets/icon/user.svg'}}" width="72" height="72" alt="Profile" />
             </ion-avatar>
             <p style="font-size: medium">
               Share your code with your<br> friends and get £5!

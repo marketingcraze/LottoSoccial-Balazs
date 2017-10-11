@@ -103,7 +103,7 @@ export class SendBonusPage {
 				this.credit_offer=data.response.response.offers;
 				this.credit_product=data.response.response.product;
 				for (var i in this.credit_product) // for acts as a foreach  
-					{  debugger;
+					{ 
 						this.credit_product[i]['sliderrange'] = null;
 						this.credit_product[i]['index'] = i;
 					} 
