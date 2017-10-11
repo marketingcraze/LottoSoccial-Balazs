@@ -15,34 +15,35 @@
    <div class="offer-of-the-day"  ion-fixed>
       <p text-center style="margin-top: 5px; padding: 0px;font-size: 15px;margin-bottom: 5px;margin-left: -7%">DEAL OF THE DAY! <span style="margin-left: 15px">{{hrs}} {{mins}} {{sec}}</span></p>
       <ion-slides slidesPerView=3>
-        <ion-slide *ngFor="let product of offersForYou let i = index" >
+        <ion-slide *ngFor="let product of offersForYou let i = index" style="background-color: #E2E2E2">
           <img src="{{product.product_icon}}" class="img-responsive" (click)="offerOfTheDayModal(i)">
         </ion-slide>     
       </ion-slides>
     </div>
-    <div id="innerYourOffers" >
-  <ion-card class="Card_Padding">
-
    
 
-    <div class="syndicateRow">
-      <p text-center text-uppercase no-margin>Choose the lottery you want to play</p>
+
+   <ion-list style="margin-bottom: 10%;position: absolute;margin-top: 42%">
+
+    <div id="innerYourOffers" style="padding: 0px;margin:0px;width: 100%;margin-top: 10%;height: 100vh">
+      <p text-center text-uppercase no-margin style="font-size: 14px">Choose the lottery you want to play</p>
       <ion-grid>
         <ion-row>
           <ion-col col-6 *ngFor="let c of lotteryProductData; let i=index">
-            <div class="t-card" (click)="openBuyPage(i)">
-              <div class="check-div"><img src="assets/img/plus_opt.svg" class="tcard-selected"/></div>
-              <img class="card-img" src="{{c.image_url}}" (loaded)="c.load = true" [hidden]="c.load"/>
-              <p class="pad-5-top" id="countDown">NEXT DRAW IN {{resultDate[i]}}</p>
+            <div style=" position: relative;background: #FFF;text-align: center;border: 1px solid #ccc; border-radius: 5px;
+            height: 100%;" (click)="openBuyPage(i)">
+              <div style=" height: 50px;position: absolute;width: 100%;"><img src="assets/img/plus_opt.svg" class="tcard-selected"/></div>
+              <img style=" width: 40%;margin: 5px auto;" src="{{c.image_url}}" (loaded)="c.load = true" [hidden]="c.load"/>
+              <p style="padding: 0;margin: 0;font-size: .8em;" id="countDown">NEXT DRAW IN {{resultDate[i]}}</p>
               <!-- <p class="pad-5-top">{{c.draw_countdown}}</p> -->
-              <h1 class="big-m">£{{c.jackpot}}</h1>
+              <h1 style=" padding: 5px 0;margin: 0;font-family: Lato-Bold;">£{{c.jackpot}}</h1>
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>    
     </div>
 
-
+  </ion-list>
 
 <!-- 
     <div class="card-title">
@@ -169,8 +170,8 @@
               </div>
           </ion-row> -->
 
-  </ion-card>
-</div>
+ 
+
 </ion-content>
 <div >
     <span *ngIf="downShowing==0"  >

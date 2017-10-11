@@ -217,7 +217,7 @@ export class YourOffersPage {
 
 	offerOfTheDayModal(index: any) {
 		this.scrollContent=document.querySelector('.scroll-content');
-		this.scrollContent.style['overflow']='auto';
+		this.scrollContent.style['overflow']='hidden';
 		let modal = this.modalController.create(offerOfTheDayModal, {
 			offerOfTheDay: this.offersForYou[index]
 		})
@@ -225,7 +225,7 @@ export class YourOffersPage {
 		modal.onDidDismiss((data: any[]) => {
 			if (data) {
 			 this.scrollContent=document.querySelector('.scroll-content');
-			 this.scrollContent.style['overflow']='hidden';
+			 this.scrollContent.style['overflow']='none';
 			}
 		})
 	}

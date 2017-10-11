@@ -1,6 +1,9 @@
 
 page-offers {
     .offer-of-the-day{
+        background-color: #ccc;
+        height: 28%;
+        position: absolute;
         .slides{
             width: 110vw;
         }
@@ -17,8 +20,15 @@ page-offers {
     }
     .syndicateRow {
         margin: 10px 0;
-        >div{
-            padding: 10px;
+        max-height: 100vh;
+        position: absolute;
+        height: 100vh;
+
+        
+
+        div{
+          
+            height: 100vh;
         }
 
         .t-card {

@@ -127,6 +127,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnimationService, AnimatesDirective } from 'css-animator';
 import { paymentService } from '../services/paymentService'
+import { Badge } from '@ionic-native/badge'
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
@@ -366,7 +367,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
-        AnimationService, DatabaseService,paymentService, CommonService, AuthService, HomeService, AccountService, Params,AffiliateServices,
+        AnimationService, DatabaseService,paymentService, CommonService, Badge,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips]
 

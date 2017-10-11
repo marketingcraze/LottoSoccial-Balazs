@@ -23,7 +23,9 @@ page-my-syndicate {
     }
     .scroll-content {
         
-        margin-top:0px;
+        margin-top:0px !important;
+       
+        
     }
     @keyframes bounce {
         0%   {top:0px;}
@@ -39,7 +41,8 @@ page-my-syndicate {
       width: 35px;
       height: 35px;
       bottom: 20px;
-      margin-top: 130%;
+      margin-top: 150%;
+      opacity: 0.6;
       background-size: contain;
       animation-name: bounce;
       animation-duration: 1s;
@@ -229,7 +232,7 @@ page-my-syndicate {
     }
     .ticketsInfoP{
         display:inline-block;
-        font-size: 15px;
+        font-size: 13px;
         color: #3E3E3E;
         padding-top: 2.5%;
         text-align: center;
@@ -245,5 +248,22 @@ page-my-syndicate {
         text-align: center;
         margin-left: 14%;
     }
+    .arrow {
+        position: fixed;
+        left: 52%;
+        margin-left:-20px;
+        width: 35px;
+        height: 35px;
+        bottom: 20px;
+        opacity: 0.5;
+        margin-top: 131%;
+        background-size: contain;
+        animation-name: bounce;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-delay: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
 }
 }

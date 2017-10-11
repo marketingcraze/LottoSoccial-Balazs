@@ -1,11 +1,14 @@
 page-your-offers {
 .grid{
-    margin-bottom: 45px;
+   // margin-bottom: 45px;
+  //  height: 140vh;
 }
 .scroll-content {
-    margin-top: 238px !important;
+   
     -webkit-overflow-scrolling: initial;
     scroll-behavior: auto;
+    
+  
 }
 @keyframes pulse_animation {
     0% { transform: scale(1); }
@@ -26,12 +29,13 @@ page-your-offers {
 }
 .arrow {
   position: fixed;
-  left: 52%;
+  left: 51%;
   margin-left:-20px;
   width: 35px;
   height: 35px;
   bottom: 20px;
-  margin-top: 140%;
+  margin-top: 150%;
+  opacity: 0.5;
   background-size: contain;
   animation-name: bounce;
   animation-duration: 1s;
@@ -52,5 +56,25 @@ page-your-offers {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
+@media only screen and (max-width: 320px) {
+    
+       .arrow {
+           position: fixed;
+           left: 52%;
+           margin-left:-20px;
+           width: 35px;
+           height: 35px;
+           bottom: 20px;
+           opacity: 0.5;
+           margin-top: 145%;
+           background-size: contain;
+           animation-name: bounce;
+           animation-duration: 1s;
+           animation-timing-function: linear;
+           animation-delay: 1s;
+           animation-iteration-count: infinite;
+           animation-direction: alternate;
+         }
+   }
 
 }

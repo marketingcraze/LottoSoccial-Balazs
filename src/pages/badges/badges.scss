@@ -49,7 +49,7 @@ page-badges {
     }
   
     .scroll-content {
-        
+        margin-bottom: 40px!important;
       
     }
     @keyframes bounce {
@@ -66,13 +66,34 @@ page-badges {
 	  width: 35px;
 	  height: 35px;
 	  bottom: 20px;
-	  margin-top: 140%;
+	  margin-top: 150%;
 	  background-size: contain;
 	  animation-name: bounce;
-	  animation-duration: 1s;
+      animation-duration: 1s;
+      opacity: 0.5;
 	  animation-timing-function: linear;
 	  animation-delay: 1s;
 	  animation-iteration-count: infinite;
 	  animation-direction: alternate;
-	}
+    }
+    @media only screen and (max-width: 320px) {
+        
+           .arrow {
+               position: fixed;
+               left: 52%;
+               margin-left:-20px;
+               width: 35px;
+               height: 35px;
+               bottom: 20px;
+               opacity: 0.5;
+               margin-top: 145%;
+               background-size: contain;
+               animation-name: bounce;
+               animation-duration: 1s;
+               animation-timing-function: linear;
+               animation-delay: 1s;
+               animation-iteration-count: infinite;
+               animation-direction: alternate;
+             }
+       }
 }

@@ -1,5 +1,8 @@
 
 page-yourvouchers {
+  .scroll-content{
+    overflow-y: hidden;
+  }
 
 .headerBotton{
   width: 60%; 
@@ -61,7 +64,7 @@ page-yourvouchers {
 .mainContent{
   background-color: #E2E2E2;
   margin-top: 10%;
-  margin-bottom: 15%;
+  margin-bottom: 12%;
   height: 95%;
 }
 .firstList{
@@ -142,7 +145,7 @@ page-yourvouchers {
   margin: 4px 8px 13px 0;
 }
 .expire_inner{
-  padding-left:10px; color: red; font-size: 14px; padding-top: 3px
+  padding-left:10px; color: red; font-size: 12px; padding-top: 3px
 }
 .expires{
   padding-left: 5px; padding-top: 3px

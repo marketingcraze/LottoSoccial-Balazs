@@ -46,6 +46,7 @@ export class AffiliatePage implements OnInit {
     bonus_duplicate: any;
     dummy:any;
     downShowing = 0;
+    scrollContent:any;
 
     ngOnInit() {
         this.getRanMethod();
@@ -110,11 +111,16 @@ export class AffiliatePage implements OnInit {
         this.luckyDipDate = dates.getDate();
     }
     dismissPopUp(data) {
+        this.scrollContent=document.querySelector('.scroll-content');
+		this.scrollContent.style['overflow']='hidden';
         let modal=this.modalController.create(AffiliatePopup);
         modal.present();
         modal.onDidDismiss((data: any[]) => {
+            this.scrollContent=document.querySelector('.scroll-content');
+            this.scrollContent.style['overflow']='none';
              this.viewctrl.dismiss();
         })
+      
     }
 
     genrateRanNumberUpdate(luckyDips: any, index: any) {
