@@ -46,7 +46,7 @@ page-account {
 	  animation-duration: 1s;
 	  animation-timing-function: linear;
 	  animation-delay: 1s;
-	  animation-iteration-count: infinite;
+	  animation-iteration-count: 10;
 	  animation-direction: alternate;
 	}
 	.profile-completion{
@@ -202,7 +202,7 @@ page-account {
         animation-duration: 1s;
         animation-timing-function: linear;
         animation-delay: 1s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: 10;
         animation-direction: alternate;
       }
 }

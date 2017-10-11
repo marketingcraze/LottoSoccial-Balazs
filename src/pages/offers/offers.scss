@@ -1,21 +1,23 @@
 
 page-offers {
     .offer-of-the-day{
-        background-color: #ccc;
+       
         height: 28%;
-        position: absolute;
+        position: relative;
         .slides{
             width: 110vw;
         }
         .slide-zoom {
             width: 100%;
-            border: 4px solid #111;
+            border: 4px solid #249940;
+            background-color: #249940;
         }
         h5{
             font-weight: bold;
         }
         img{
             min-height: 100px;
+          
         }
     }
     .syndicateRow {

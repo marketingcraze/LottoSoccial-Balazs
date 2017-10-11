@@ -48,7 +48,7 @@ page-my-syndicate {
       animation-duration: 1s;
       animation-timing-function: linear;
       animation-delay: 1s;
-      animation-iteration-count: infinite;
+      animation-iteration-count: 10;
       animation-direction: alternate;
     }
     
@@ -263,7 +263,7 @@ page-my-syndicate {
         animation-duration: 1s;
         animation-timing-function: linear;
         animation-delay: 1s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: 10;
         animation-direction: alternate;
       }
 }

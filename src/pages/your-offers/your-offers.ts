@@ -175,9 +175,10 @@ export class YourOffersPage {
 					console.log("OffersPage::ionViewDidEnter", i, data[i].fetch_lottery_products);
 					if (data[i].fetch_lottery_products) {
 						this.lotteryProductData = data[i].fetch_lottery_products.response.lottery_product_data
+						
 						this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
 						this.st.newTimer('1sec', 1);
-						this.subscribeTimer0();
+					//	this.subscribeTimer0();
 						this.delay(4000);
 						this.content.enableScrollListener();
  						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime("Wed 05 oct 17 23:59:59"));

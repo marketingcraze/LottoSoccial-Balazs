@@ -165,7 +165,6 @@ export class StorePage {
         public actionSheetCtrl: ActionSheetController) 
         {
             
-
             if(localStorage.getItem('isInstall')==null)
             {
                 this.onPopUp();
