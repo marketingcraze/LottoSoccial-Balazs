@@ -11,6 +11,7 @@ tab-create-syndicate {
 	}
 	.bottom-button{
 		background-color: white;
+		text-align: center;
 		.button-md{
 			margin-top: 0;
 		}
@@ -28,5 +29,65 @@ tab-create-syndicate {
 	}
 	.bold{
 		font-weight: bold;
+	}
+	.circle{
+		margin-top: 10px;
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+		background-color: #1F4C87;
+		margin-left: 33.3%;
+	}
+	.circle span{
+		color: white;
+		font-size: 1.5em;
+		padding: 6px 12px;
+		position: absolute;
+	}
+	.col p{
+		text-align: center;
+		font-size: initial;
+		margin-top: 5px;
+	}
+	.btnClass{
+		height: 40px;
+		width: 60%;
+		background-color: #2F76D1;
+	}
+	.scroll-content{
+		margin-top:18%!important;
+		height: 100%;
+	}
+	.list-md {
+		margin: 12px 0 16px 0;
+	}
+	.joincreate{
+		margin: 9vw 0 0 0;
+		width: 100%;
+		background-color: white;
+		overflow: visible;
+		p{
+			width: 82%;
+			margin-left: 7%;
+			font-size: larger;
+		}
+		img{
+			max-width: 58vw;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		h4{
+			font-size: 1.2em;
+			font-weight: bold;
+		}
+		.img-left{
+			left: -20vw;
+			height: 110% !important;
+		}
+	}
+	.fontstyle{
+		text-align: center;
+		font-size: inherit;
 	}
 }
