@@ -13,6 +13,30 @@ page-affliate{
   border-radius: 5%;
   
 }
+@keyframes bounce {
+  0%   {top:0px;}
+  25%  {top:5px;}
+  50%  {top:10px;}
+  75%  {top:15px;}
+  100% {top:20px;}
+}
+.arrow {
+position: fixed;
+left: 52%;
+margin-left:-20px;
+width: 35px;
+height: 35px;
+bottom: 20px;
+opacity: 0.5;
+margin-top: 147%;
+background-size: contain;
+animation-name: bounce;
+animation-duration: 1s;
+animation-timing-function: linear;
+animation-delay: 1s;
+animation-iteration-count: 10;
+animation-direction: alternate;
+}
 #voucherListItem{
   border-bottom: 1px solid lightgray;
   padding-left: 10px;
@@ -138,19 +162,43 @@ page-affliate{
   font-weight: normal;
 }
 .circle {
-  border-radius: 50%;
-  background: #4679BD;
-  color: white;
-  font-size: 17px;
-  padding: 5px;
-  top: -4px;
+  border-radius: 4px;
+  
+  color: #474747;
+  font-size: 15px;
+  padding: 4px;
+  
   position: relative;
   margin: 2px;
-  width: 30px;
-  height: 30px;
+  width: 29.5px;
+  height: 29.5px;
   margin-right: 0px;
   display: inline-block;
+  border: 0.5px solid gray;
+}
+.label-md {
+  overflow: initial!important;
+}
+.label-ios {
+  overflow: initial!important;
+}
+
+
+.circle1 {
+  border-radius: 4px;
   
+  color: #474747;
+  font-size: 15px;
+  padding: 4px;
+  
+  position: relative;
+  margin: 2px;
+  width: 29.5px;
+  height: 29.5px;
+  margin-right: 0px;
+  display: inline-block;
+  border: 0.5px solid gray;
+  margin-left: -11px;
 }
 .circle_inside{
   width: 100px;
@@ -210,4 +258,24 @@ overflow: visible;
        -webkit-overflow-scrolling: auto;
        scroll-behavior: auto;
      }
+     @media only screen and (max-width: 320px) {
+   
+      .arrow {
+          position: fixed;
+          left: 52%;
+          margin-left:-20px;
+          width: 35px;
+          height: 35px;
+          bottom: 20px;
+          opacity: 0.5;
+          margin-top: 141%;
+          background-size: contain;
+          animation-name: bounce;
+          animation-duration: 1s;
+          animation-timing-function: linear;
+          animation-delay: 1s;
+          animation-iteration-count: 10;
+          animation-direction: alternate;
+        }
+  }
 }

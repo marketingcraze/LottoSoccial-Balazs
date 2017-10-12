@@ -1,6 +1,7 @@
 <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
 
-<ion-content class="card-background-page">
+<ion-content class="card-background-page" style="height: 90%"  (ionScroll)="scrollHandlerListGames($event)" id="reddemReGamesContent">
+       
     <div ion-fixed class="header-widthGetGame">
         <ion-slides autoplay="5000" loop="true" speed="500" pager="true" *ngIf="sliderImage">
             <ion-slide *ngFor="let image of sliderImage">
@@ -16,10 +17,10 @@
                         <span style="color:#333333!important" *ngIf="reward_point>0" >Points : </span><span ion-text color="primary"> {{reward_point}}</span>
                         <span style="color:#2F76D1!important" *ngIf="reward_point==0" (click)="mgmPage()" >GET POINTS</span>
                 </ion-col>
-                <ion-col col-6>
-                    <div (click)="openShare()">
-                        <ion-icon ios="ios-share-outline" md="ios-share-outline" style="color: #2F76D1;font-size: 1.3em"></ion-icon><span style="margin-left: 8px;color: #2F76D1;" ion-text >SHARE</span>
-                        <span style="font-size: 0.7em;color: #2F76D1">get free points</span>
+                <ion-col col-6 >
+                    <div (click)="openShare()" style="text-align: right" >
+                        <ion-icon ios="ios-share-outline" md="ios-share-outline" style="color: #2F76D1;font-size: 1.3em"></ion-icon><span style="margin-left: 8px;color: #2F76D1;font-size: 0.9em" ion-text >share</span>
+                        <span style="font-size: 0.9em;color: #2F76D1">get free points</span>
                     </div>
                 </ion-col>
             </ion-row>
@@ -28,8 +29,8 @@
         </ion-item>
 
     </div>
-
-    <div class="bottom-contentGtagme">
+    
+    <div class="bottom-contentGtagme" id="innerReddemGames1">
         <ion-list no-lines *ngFor="let redeem_product of redeem_products; let i=index" class="redeemgameslist">
             <ion-item *ngIf="redeem_product">
                 <ion-col col-3 item-left>
@@ -81,4 +82,11 @@
             <ion-item-divider *ngIf="!redeem_product" style="color:#333333!important;top:-22px!important;">This is the game description and excerpt</ion-item-divider>
         </ion-list>
     </div>
+   
 </ion-content>
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+    </div>
+    

@@ -26,7 +26,9 @@ import { CommonService } from '../services/common.service';
 import { AuthService } from '../services/auth.service';
 import { Params } from '../services/params';
 
+
 import { Constants } from './constants';
+
 
 import { Network } from '@ionic-native/network';
 
@@ -62,10 +64,12 @@ export class MyApp {
         public commonSrv:CommonService, 
         public authSrv:AuthService, 
         public alertCtrl:AlertController,
-        public modalCtrl: ModalController) {
+        public modalCtrl: ModalController,
+       ) {
 
         platform.ready().then((value) => {
-            // StatusBar.styleDefault();
+         
+         // StatusBar.styleDefault();
             StatusBar.hide();
 
             this.initializeOneSignal();

@@ -30,9 +30,16 @@
 
 
     <div class="mainContainer" text-center>
+      
         <ion-row>
-            <ion-col col-12>
-                <p class="SlideSubTitleOffer" style="color:#333333;margin-top: 8px">Choose Draw day</p>
+            <ion-col col-4>
+               <div class="arrow-right">
+                 
+               </div>
+               <span  (click)="openTipsModal()" class="HowtpText">HOW TO <br>PLAY</span>
+            </ion-col>
+               <ion-col col-8>
+                <p class="SlideSubTitleOffer" style="color:#333333;margin-top: 8px;text-align: left;margin-left: 10%;">Draw day</p>
             </ion-col>
         </ion-row>
 
@@ -50,7 +57,7 @@
        
         <ion-row class="SlideContentBorderTopOffer">
             <ion-col col-12>
-                <p class="SlideSubTitleOffer" style="color:#333333">Number Of Lines {{(product?.line_group| keys)[credit_filter_line]}}</p>
+                <p class="SlideSubTitleOffer" style="color:#333333">Number Of Lines <span style="font-size: x-large"> {{(product?.line_group| keys)[credit_filter_line]}}</span></p>
             </ion-col>
         </ion-row>
 
@@ -60,11 +67,11 @@
                 </div>   
         </ion-row> -->
 
-        <ion-item no-lines>
+        <ion-item no-lines style="background-color: transparent">
             <ion-range class="rangesliderOffer" *ngIf="!sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"
                 (ionChange)="watchSlider()" [(ngModel)]="slider">
-                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
-                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
+                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
+                <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-right>{{(product?.line_group| keys)[(product?.line_group| keys).length-1]}}</ion-label>
             </ion-range>
         </ion-item>
 
@@ -80,10 +87,10 @@
                 <button ion-button class="BuyBtn" style="float: none;margin-top: 10px" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
             </ion-col>
         </ion-row>
-
+<!-- 
         <div right class="tipsCorner" (click)="openTipsModal()">
                 <span style="position: relative;color: white;top: 14px;">How<br>To Play</span>
-            </div>
+            </div> -->
     </div>
    
     <div class="offer-of-the-day">

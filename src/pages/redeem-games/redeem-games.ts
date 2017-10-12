@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ModalController,Platform } from 'ionic-angular';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { NavController, NavParams, LoadingController, ModalController, Platform, Content, Tabs } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
@@ -18,19 +18,47 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   templateUrl: 'redeem-games.html'
 })
 export class RedeemGamesPage {
+  @ViewChild(Content) content:Content;
   redeem_products:any;
   sliderImage:any;
   private loading : any;
+  scrollContent:any;
   reward_point:number;
   point_status:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  downShowing  = 0;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     private share: SocialSharing,
     private platform:Platform,
     public appSound:AppSoundProvider,
-    public authSrv:AuthService,private loadingCtrl: LoadingController,public modalController:ModalController ) {}
+    public authSrv:AuthService,
+    private loadingCtrl: LoadingController,
+    public modalController:ModalController,
+  public cdRef:ChangeDetectorRef ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RedeemGamesPage');
+  }
+ 
+scrollHandlerListGames(event){
+  var scrollDiv = document.getElementById('reddemReGamesContent').clientHeight;
+  var innerDiv = document.getElementById('innerReddemGames1').scrollHeight;
+      
+      var valu = scrollDiv + this.content.scrollTop
+      console.log("data is " , valu, innerDiv, scrollDiv)
+      if (valu > innerDiv + 200) 
+      {
+        this.downShowing = 1
+        this.cdRef.detectChanges();
+    }
+    else
+    {
+      this.downShowing = 0
+      this.cdRef.detectChanges();
+    }
+    }
+    delay(ms: number) {
+      return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   ionViewWillEnter() {
@@ -43,6 +71,8 @@ export class RedeemGamesPage {
                    this.reward_point=data.response.response.reward_points_balance;
                    console.log("redeem game",data.response);
                    this.loading.dismiss();   // Hide the message when the data is ready 
+                   this.delay(4000);
+                   this.content.enableScrollListener();
              },
              err=>{ 
                      console.log("error", err);
@@ -53,6 +83,9 @@ export class RedeemGamesPage {
      });
    }   
    redeem(url,index){
+    this.scrollContent=document.querySelector('.scroll-content');
+    this.scrollContent.style['overflow']='hidden';
+
      this.appSound.play('buttonClick');
      console.log(url);
      console.log("first index is " + index)
@@ -62,22 +95,28 @@ export class RedeemGamesPage {
      else{
       this.point_status = "Passed"
      }
-         let modal = this.modalController.create(getGamesModal, {
+      let modal = this.modalController.create(getGamesModal, {
       VoucherCode: this.redeem_products[index].product_image,
       title: this.redeem_products[index].product_title,
       price: this.redeem_products[index].product_price,
       price_after: this.redeem_products[index].product_price_after,
       p_staus: this.point_status
-      
-
     })
     
     modal.present();
-   
+    modal.onDidDismiss((data: any[]) => {
+   if (data) {
+    debugger;
+    this.scrollContent=document.querySelector('.scroll-content');
+    this.scrollContent.style['overflow']='none';
+   }
+  })
 
     }
     confirmSelectionPage(index){
-     
+      this.scrollContent=document.querySelector('.scroll-content');
+      this.scrollContent.style['-webkit-overflow-scrolling']='auto';
+
       if(this.reward_point < this.redeem_products[index].product_price){
         this.point_status = "Failed"
        }
@@ -95,6 +134,12 @@ export class RedeemGamesPage {
 
     })
     modal.present();
+    modal.onDidDismiss((data: any[]) => {
+			if (data) {
+			 this.scrollContent=document.querySelector('.scroll-content');
+			 this.scrollContent.style['-webkit-overflow-scrolling']='initial';
+			}
+		})
 
     }
     mgmPage(){
@@ -111,4 +156,5 @@ export class RedeemGamesPage {
       });
     }
   }
+ 
 }

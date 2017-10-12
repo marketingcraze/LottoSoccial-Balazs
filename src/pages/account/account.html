@@ -1,5 +1,6 @@
 <cus-header title="Account" (homeClicked)="goHomePage()"></cus-header>
-<ion-content>
+<ion-content (ionScroll)="scrollHandlerAccount($event)" id="accountContent">
+        <div id="innerAccount" >
 	<ion-card>
         
         <ion-item class="line">
@@ -123,12 +124,17 @@
             <a (click)="openWebView('privacy-policy-for-lottery-syndicate-members/')">Privacy policy</a>
         </div>
     </ion-card>
-	
+	</div>
 </ion-content>
 
 
 
-
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+    </div>
+    
 
 
 

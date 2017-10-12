@@ -23,7 +23,33 @@ page-my-syndicate {
     }
     .scroll-content {
         
-        margin-top:0px;
+        margin-top:0px !important;
+       
+        
+    }
+    @keyframes bounce {
+        0%   {top:0px;}
+        25%  {top:5px;}
+        50%  {top:10px;}
+        75%  {top:15px;}
+        100% {top:20px;}
+    }
+    .arrow {
+      position: fixed;
+      left: 52%;
+      margin-left:-20px;
+      width: 35px;
+      height: 35px;
+      bottom: 20px;
+      margin-top: 150%;
+      opacity: 0.6;
+      background-size: contain;
+      animation-name: bounce;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-delay: 1s;
+      animation-iteration-count: 10;
+      animation-direction: alternate;
     }
     
     ion-label {
@@ -136,6 +162,7 @@ page-my-syndicate {
     .synd-f {
         line-height: 25px;
         margin-left: 10px;
+        font-size: 12px;
     }
     .chat-btn {
         height: 23px;
@@ -206,7 +233,7 @@ page-my-syndicate {
     }
     .ticketsInfoP{
         display:inline-block;
-        font-size: 15px;
+        font-size: 13px;
         color: #3E3E3E;
         padding-top: 2.5%;
         text-align: center;
@@ -222,5 +249,22 @@ page-my-syndicate {
         text-align: center;
         margin-left: 14%;
     }
+    .arrow {
+        position: fixed;
+        left: 52%;
+        margin-left:-20px;
+        width: 35px;
+        height: 35px;
+        bottom: 20px;
+        opacity: 0.5;
+        margin-top: 131%;
+        background-size: contain;
+        animation-name: bounce;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-delay: 1s;
+        animation-iteration-count: 10;
+        animation-direction: alternate;
+      }
 }
 }

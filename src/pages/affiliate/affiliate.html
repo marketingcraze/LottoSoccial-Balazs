@@ -2,7 +2,8 @@
 
 </ion-header>
 
-<ion-content scroll="false" class="mainContent">
+<ion-content scroll="false" class="mainContent" (ionScroll)="scrollHandlerAffiliate($event)" id="affiliateContent" >
+        <div id="innerAffiliate" >
     <div>
         <img src="assets/img/landing-page-header@3x.png" width="100%" height="150" class="" />
 
@@ -60,20 +61,29 @@
     </ion-label>
     <div *ngFor="let luckyDip of luckyDips; let j = index" style="text-align: center">
         <ion-item no-lines text-center style="position: relative;background: transparent; text-align: center;">
-            <div style="font-size: 15px; padding-right: 10px;color: gray; display: inline-block; position: relative;bottom: 5px" (click)="genrateRanNumberUpdate(dataTest, j)">Lucky Dip</div>
+            <div style="font-size: 15px; padding-right: 10px;color: gray; display: inline-block; position: relative;bottom: 2px" (click)="genrateRanNumberUpdate(dataTest, j)">Lucky Dip</div>
             <div class="circle">{{luckyDip[0]}}</div>
             <div class="circle">{{luckyDip[1]}}</div>
             <div class="circle">{{luckyDip[2]}}</div>
             <div class="circle">{{luckyDip[3]}}</div>
             <div class="circle">{{luckyDip[4]}}</div>
-            <span>
+            <div class="circle">{{luckyDip[5]}}</div>
+            <img src="assets/img/gold_star.png" style="position: relative; top:-12px;width: 14px;left:-12px">
+            <div class="circle1">{{luckyDip[6]}}</div>
+            <img src="assets/img/gold_star.png" style="position: relative; top:-12px;width: 14px;left:-12px">
+            
+         
+            <!-- <img src="assets/img/star-icon.png" style="position: relative; top:4px;width: 32px">
+            <div class="circle1">{{luckyDip[6]}}</div>
+             -->
+            <!-- <span>
                   <img src="assets/img/star-icon.png" style="position: relative; top:4px;width: 32px">
                   <span style="position: absolute;top: 16px;margin-left: -22px;font-size: 12px;color: white">{{luckyDip[5]}}</span>
             </span>
             <span>
                    <img src="assets/img/star-icon.png" style="position: relative; top:4px;width: 32px">
                    <span style="position: absolute;top: 16px;margin-left: -22px;font-size: 12px;color: white">{{luckyDip[6]}}</span>
-            </span>
+            </span> -->
 
 
 
@@ -99,10 +109,17 @@
                 of a syndicate of 49 or less. 1 in 5 jackpots are won by Syndicate!</p>
         </div>
     </ion-item>
-    <ion-item style="background-color: lightgray; height: 10%">
+    <ion-item style="background-color: lightgray; height: 10%;margin-bottom: 2%">
         <div>
             <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 17px;" (click)="dismissPopUp()">No, thanks</p>
         </div>
     </ion-item>
-
+        </div>
 </ion-content>
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+    </div>
+    
+    

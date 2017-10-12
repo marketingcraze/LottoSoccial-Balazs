@@ -45,7 +45,7 @@ export class your_vouchers {
           
           console.log("mobile number is ", this.mobileNumber )
           this.adjustListCount()
-          this.timerInstance.newTimer('1sec', 1);
+          this.timerInstance.newTimer('1min', 1);
           this.subscribeTimer0()
        }
         
@@ -68,16 +68,8 @@ export class your_vouchers {
 
   adjustListCount() {
     if(this.appList){
-      this.count = this.appList.length
-      
-          if (this.appList.length >= 3) {
-            this.height = 250;
-          }
-          else {
-            this.height = this.appList.length * 72;
-          }
-          console.log("entered" + this.height)
-      
+      this.count = this.appList.length 
+            this.height = this.appList.length * 78;
     }
     
   }
@@ -85,6 +77,7 @@ export class your_vouchers {
 
 
   headerBtnClick() {
+
     this.h_1 = ""
     this.h_2 = ""
     this.count = 0;

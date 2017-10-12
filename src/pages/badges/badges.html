@@ -10,7 +10,8 @@
 </ion-header>
 
 
-<ion-content  >
+<ion-content  (ionScroll)="scrollHandlerBadges($event)" id="badgesContent" style="margin-bottom: 40px;">
+        <div id="innerBadges" >
     <div class="badges-main">
         <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-bottom: 10px solid #e8e8e8">
             <!--Hey champ, this is a list of your achivements.<br> tap on each badges to see more info.-->
@@ -88,4 +89,13 @@
             </div>
         </div>
     </div>
+        </div>
 </ion-content>
+<div >
+        <span *ngIf="downShowing==0"  >
+            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+       </span>
+    </div>
+    
+
+

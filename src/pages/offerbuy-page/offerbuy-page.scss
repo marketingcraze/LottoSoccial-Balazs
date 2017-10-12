@@ -103,4 +103,22 @@ offer-buy{
             border-right: none;
             border-top-left-radius: 3em;
         }
+        .arrow-right {
+            bottom: 85px;
+            width: 0;
+            height: 0;
+            border-top: 42px solid transparent;
+            border-bottom: 139px solid transparent;
+            border-left: 80px solid #00A651;
+            -webkit-transform: rotate(240deg);
+            transform: rotate(240deg);
+            position: relative;
+        }
+        .HowtpText{
+            position: relative;
+            bottom: 180PX;
+            right: 23%;
+            color: white;
+            font-size: 1.25em;
+        }
 }

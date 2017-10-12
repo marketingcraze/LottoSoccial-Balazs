@@ -13,7 +13,8 @@
 </ion-header>-->
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
-<ion-content class="marg-top-12 main-bg" id="asynd" style="margin-top: -8%">
+<ion-content class="marg-top-12 main-bg" id="asynd" style="height: 88%" (ionScroll)="scrollHandlerSyndicate($event)"   >
+    <div id="innerMySyndicate" >
   <div id="sstate" *ngIf="syndArr.length > 0">
   <div *ngFor="let sd of syndArr; let i = index;">
   <div class="synd-card" *ngIf="sd.syndicate_type !='PRIVATE'">
@@ -21,7 +22,7 @@
       <div >
       <!--<img [src]="sd.image_url">-->
       <div>
-      <img [src]="sd.image_url" (click)="toggleAcc(i)">
+      <img [src]="sd.image_url">
       <div class="c-title">
         {{sd.syndicate_name}}
       </div>
@@ -68,7 +69,7 @@
       <div>
       <!--<img [src]="sd.image_url">-->
       <div>
-      <img [src]="sd.image_url" (click)="toggleAcc(i)">
+      <img [src]="sd.image_url">
       <div class="c-title">
         {{sd.syndicate_name}}
       </div>
@@ -99,7 +100,7 @@
             <ion-row text-center *ngFor="let pd of sd.product_group; let j = index;">
               <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
                 <input type="button" value="{{sd.product_group[j]?.product_name}}" [style.backgroundColor]="sd.product_group[j].product_color? sd.product_group[j].product_color :'#316BCB' " style="color: white;border: none;border-radius: 2px;
-                font-size: 13px;padding: 5px;height: 30px" (click)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
+                font-size: 12px;padding: 5px;height: 30px;max-width:100%;overflow: hidden;white-space: nowrap;text-overflow:ellipsis" (click)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
               </ion-col>
               <ion-col col-9>
                 <p class="ticketsInfoP">   x {{sd?.product_group[j]?.ticket_count}} tickets Valid for {{sd?.product_group[j]?.ticket_valid_date}}</p>
@@ -133,13 +134,12 @@
             <button ion-button class="btn" (click)="viewTickets(i)"> VIEW TICKETS </button>
           </div>
       </ion-item>
-      <ion-item style="font-size: 14px;">
+      <ion-item style="height: 30px">
         <ion-row style="padding: 0px 5px 5px">
           <ion-col col-50 class="left" (click)="checkwins()"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></ion-col>
           <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()">
             <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(2,2);"></ion-icon>
             <ion-col><span class="synd-f" style="color:#000000">SETTINGS</span></ion-col>
-              
           </span></ion-col>
         </ion-row>
       </ion-item>
@@ -192,8 +192,13 @@
     <button ion-button (click)="next()" class="btn">JOIN A SYNDICATE</button>
   </div>
   </div>
+</div>
 </ion-content>
 
-
+<div >
+    <span *ngIf="downShowing==0"  >
+        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+   </span>
+</div>
 
 

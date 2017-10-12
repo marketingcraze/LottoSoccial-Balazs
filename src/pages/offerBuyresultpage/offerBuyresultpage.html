@@ -1,7 +1,7 @@
 <div class="modal-page" text-center>
     <div *ngIf="status" class="buycard">
-        <button ion-button icon-only style="background:#F8F8F8; border-radius:50%">
-                  <ion-icon style="width:50px; "><img src="assets/icon/check_icon.png"> </ion-icon>
+        <button ion-button icon-only style="background:#F8F8F8; border-radius:50%;height: 8vh">
+                  <ion-icon style="width:60px; "><img src="assets/icon/check_icon.png"> </ion-icon>
                 </button>
         <ion-row text-center>
             <ion-col col-12 class="messagecolor">
@@ -24,17 +24,17 @@
 
     </div>
     <div *ngIf="!status" class="errorcard">
-        <button ion-button icon-only style="background:#F8F8F8; border-radius:50%">
+        <button ion-button icon-only style="background:#F8F8F8; border-radius:50%;height: 10vh;width: 18vw">
                   <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>
                 </button>
-        <ion-row text-center>
+        <ion-row text-center style="margin-top: 5%;margin-bottom: 5%">
             <ion-col col-12 class="messagecolor">
                 An error has occured. please try again
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-12>
-                <button ion-button outline round color="light" (click)="tryAgain()">TRY AGAIN</button>
+                <button ion-button outline round color="light" (click)="tryAgain()" style="font-size: 1em;padding: 18px">TRY AGAIN</button>
             </ion-col>
         </ion-row>
     </div>

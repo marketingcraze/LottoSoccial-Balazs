@@ -30,8 +30,10 @@ declare var $:any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    creditPoints: any;
     buyoffer: any;
     @ViewChild(Slides) home_slides: Slides;
+    @ViewChild('mySlide') carouselSlide: Slides;
     @ViewChild("confirmPayment") confirmPayment;
     public footerState: IonPullUpFooterState;
     public homeCardData:any;
@@ -40,6 +42,7 @@ export class StorePage {
     public nav:NavController;
 
     private currentTime:Date = new Date();
+    currentSliderCount:any=0;
 
     result: any = [];
     resultDate: any = [];
@@ -51,6 +54,7 @@ export class StorePage {
     hrs:any;
     min:any;
     sec:any;
+    counts:any=0;
     // payment variables
     userCards: any;
     userCardsCount:number = 0;
@@ -161,7 +165,6 @@ export class StorePage {
         public actionSheetCtrl: ActionSheetController) 
         {
             
-
             if(localStorage.getItem('isInstall')==null)
             {
                 this.onPopUp();
@@ -225,6 +228,7 @@ export class StorePage {
                     
                 }else if ( data[i].get_account_details ) {
                     this.accountDetails = data[i].get_account_details.response;
+                    this.creditPoints=this.accountDetails.bonus_credit.slice(1)
                 }else if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
                     params.setUnreadCount(this.homeMessage.count);
@@ -771,4 +775,45 @@ mgmOpenPage(){
     this.navCtrl.push(referFriend);
 }
 
+countSlider(ev:any){
+    let direction=ev.direction;
+    if(direction==2 && this.counts<this.carouselSlide.length())
+    {
+      this.counts++;  
+      this.currentSliderCount=this.counts;
+    }
+    else if(direction==4 && this.counts>0)
+    {
+        this.counts--;  
+        this.currentSliderCount=this.counts;
+    }
 }
+redirectToOfferPage(){
+    var tabs:Tabs=this.navCtrl.parent;
+    tabs.select(4);
+  }
+}
+    
+//    let lastIndex=this.carouselSlide.length(); 
+//    = this.carouselSlide.getActiveIndex();
+
+//    this.currentSliderCount--; 
+//    this.counts++;
+//    if(this.counts==1&&this.currentSliderCount==-1)
+//    {
+//     this.currentSliderCount=this.counts;
+//    }
+//    else{
+//     this.currentSliderCount=this.counts-1;
+   
+
+//    if(this.count==1&& this.currentSliderCount==0 && this.currentSliderCount< lastIndex)
+//    {
+//     this.currentSliderCount=this.count;
+//    }
+//    else{
+//     this.currentSliderCount++; 
+//    }
+ 
+
+

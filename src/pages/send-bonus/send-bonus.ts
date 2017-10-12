@@ -22,6 +22,7 @@ import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
   templateUrl: 'send-bonus.html'
 })
 export class SendBonusPage {
+	Credit_Points2: any;
 
 	private cache: CacheController;
 	userCards: any;
@@ -99,11 +100,10 @@ export class SendBonusPage {
 		// get creaditoffer call api
 		this.authSrv.get_credit_offer().subscribe(data=>{
 			if (data) {
-				debugger;
 				this.credit_offer=data.response.response.offers;
 				this.credit_product=data.response.response.product;
 				for (var i in this.credit_product) // for acts as a foreach  
-					{  debugger;
+					{ 
 						this.credit_product[i]['sliderrange'] = null;
 						this.credit_product[i]['index'] = i;
 					} 
@@ -126,6 +126,7 @@ export class SendBonusPage {
 		this.authSrv.get_Credit_Points().subscribe(data=>{
 			if(data){
 				this.Credit_Points=data.response.response.bonus_credit;
+				this.Credit_Points2=this.Credit_Points.slice(1);
 
 				if (this.credit_product) {
 					loader.dismiss();

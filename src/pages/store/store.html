@@ -19,128 +19,136 @@
 
   <ion-grid class="score-panel">
     <ion-row>
-      <ion-col width-50 style="width: 100%" >
-        <div text-center style="width: 100%" (click)="tip()">
+      <ion-col width-50 style="width: 100%">
+        <div text-center style="width: 100%" *ngIf="creditPoints>0" (click)="tip()">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
           <span class="tooltip t1">CREDIT <span class="credit">{{accountDetails.bonus_credit}}</span>
-          <div  *ngIf ="tip11==true" >
-          <span class="tooltiptext t-left">
+          <div *ngIf="tip11==true">
+            <span class="tooltiptext t-left">
                 <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
                     <li>Bonus credit can be used to <a href="">Buy MORE lottery Lines</a> </li>
                     <li>If you will win less than 60p you can boost the win to <strong>4x</strong> bonus credit</li>
                     <li>Bonus credit cannot be converted back into cash</li>
                  </ul>  
             </span>
-          </div> 
+          </div>
           </span>
-        </div>        
+        </div>
+
+        <div text-center style="width: 100%" *ngIf="creditPoints==0" >
+            <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+            <span class="tooltip t1" *ngIf="creditPoints>0"  (click)="redirectToOfferPage()" >GET CREDIT </span>
+          </div>
       </ion-col>
       <ion-col width-50 style="width: 100%">
-        <div text-center style="width: 100%" (click)="tip2()">
+        <div text-center style="width: 100%" *ngIf="accountDetails.reward_points>0" (click)="tip2()">
           <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
-          <span class="tooltip t2" >POINTS <span class="points">{{accountDetails.reward_points}}</span>
-          <div  *ngIf ="tip22==true">
+          <span class="tooltip t2">POINTS <span class="points">{{accountDetails.reward_points}}</span>
+          <div *ngIf="tip22==true">
             <span class="tooltiptext t-right" style="text-align: justify;padding: 10px; color: gray">
               Use your points to get <strong>games</strong> from the <a href="">games area</a>. You acquire points every time you check your tickets, by playing game, share with friends and in many other ways.
             </span>
-            </div>
+          </div>
           </span>
         </div>
+
+        <div text-center style="width: 100%" *ngIf="accountDetails.reward_points==0"   >
+            <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
+            <span class="tooltip t2" *ngIf="accountDetails.reward_points>0" (click)="mgmPageOpen()">GET POINTS  </span>
+          </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
 
-<!-- slider -->
-  <div class="slider-container" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)" (click)="clicked()">
+  <!-- slider -->
+  <!-- Dharam new slider -->
+  <ion-slides class="newSlide"  initialSlide="0"  #mySlide (swipe)="countSlider($event)"  (click)="clicked()">
+    <ion-slide *ngFor="let offer of offersForYou.offer_group">
+        <ion-card style="max-height:60vh;width: 80%;margin-left: 10%;margin-top: 10%;">
+            <div class="card-top " >
+              <div class="card-title">
+                <img src="assets/img/home/ch_offers@3x.png">
+                <h4>{{offersForYou.card_title}}</h4>
+              </div>
+            </div>
+            
+            <div class="homeContainer-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
+              <img src="{{offer?.offer_img}}" class="homeHeader-img" />
+                  <div class="homeOffer-title" style="color:white;font-weight: lighter" text-center>{{offer?.name |  uppercase}}</div>
+                  <div class="homeAmount homeOffer-title" style="color:white;font-weight: 900;font-size: x-large" text-center>
+                    {{offer?.offer_jackpot}}
+                  </div>
+          </div>
+          <div class="homeTime-left" text-center style="text-align: center">
+              <span  text-center style="text-align: center"><img style="height: 33px;top: 7px;position: relative;width: 14%" src="assets/icon/timer.svg"/><span style="color:white;position:relative;bottom:40px;margin-left: 14px;">TIME LEFT: </span></span>
+              <div style="display: -webkit-inline-box;color: #fff;bottom: 25px; position: relative;">
+                  <div style="margin-right: 10px; margin-left: 15px;"><b style="font-size:18px">{{day}}</b> <br><span>Days</span></div>
+                  <div style="margin-right: 10px;"><b style="font-size:18px">{{hrs}}</b> <br><span>Hrs</span></div>
+                  <div style="margin-right: 10px;"><b style="font-size:18px">{{min}}</b> <br><span>Mins</span></div>
+                  <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
+              </div>
+            <div class="lines-type">
+              <div style="float: left;width: 50%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
+                  <div style="margin-right: 10px;margin-top: 6px"><b style="font-size:18px"></b>{{offer?.line_group?.line1}} <br><span style="color: lightgray">LINES</span></div>
+                  <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+              </div>
+              <div  style="float: left;width: 50%;border-bottom: 1px solid lightgrey;height: 8vh">
+                  <div style="margin-right: 10px;margin-top: 6px"><b style="font-size:18px">{{offer?.type | uppercase}}</b> <br><span style="color: lightgray">TYPE</span></div>
+                  <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
+              </div>
+            </div>
+           <div style="height:40px" >
+              <span>{{offer?.offer_title}}</span>
+            </div>
+            <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id,offer?.button_text)">
+              <span style="font-size: 17px;font-weight: lighter;">
+              {{offer?.button_text}}  
+              </span></button>
+          </div>
+            <!-- <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button> -->
+          </ion-card>
+    </ion-slide>
+    <ion-slide *ngFor="let game of gameGroup" >
+      <ion-card style="max-height:60vh;width: 80%;margin-left: 10%;margin-top: 10%;">
+        <div class="card-top" >
+          <div class="card-title">
+            <img src="assets/img/home/ch_games@3x.png">
+            <h4>YOU HAVE GAMES TO PLAY</h4>
+          </div>
+        </div>
+        <img class="center game-play-img" *ngIf="!game.game_icon_url" src="assets/icon/account_ico.svg" style="width: 232px;height: 100px;border: 1px solid;">
+        <img class="center game-play-img" *ngIf="game.game_icon_url" src="{{game.game_icon_url}}" style="width: 232px;height: 100px;border: 1px solid;">
+        <p text-center style="color: orange;font-size: 16px;font-weight: lighter;margin-top: 4px; ">{{game?.game_description1}}</p>
+        <br>
+        <p text-center padding-left padding-right>{{game.user_game_target}}</p>
 
-      <div class="slider-content">
-          <div class="slider-single" *ngFor="let offer of offersForYou.offer_group">
-            <ion-card class="slider-single-image" style="height:353px">
-              <div class="card-top " >
-                <div class="card-title">
-                  <img src="assets/img/home/ch_offers@3x.png">
-                  <h4>{{offersForYou.card_title}}</h4>
-                </div>
-              </div>
-              
-              <div class="homeContainer-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
-                <img src="{{offer?.offer_img}}" class="homeHeader-img" />
-                    <div class="homeOffer-title" style="color:white;font-weight: lighter" text-center>{{offer?.name |  uppercase}}</div>
-                    <div class="homeAmount homeOffer-title" style="color:white;font-weight: 900;font-size: x-large" text-center>
-                      {{offer?.offer_jackpot}}
-                    </div>
-            </div>
-            <div class="homeTime-left" text-center style="text-align: center">
-                <span  text-center style="text-align: center"><img style="height: 33px;top: 7px;position: relative;width: 14%" src="assets/icon/timer.svg"/><span style="color:white;position:relative;bottom:40px;margin-left: 14px;">TIME LEFT: </span></span>
-                <div style="display: -webkit-inline-box;color: #fff;bottom: 25px; position: relative;">
-                    <div style="margin-right: 10px; margin-left: 15px;"><b style="font-size:18px">{{day}}</b> <br><span>Days</span></div>
-                    <div style="margin-right: 10px;"><b style="font-size:18px">{{hrs}}</b> <br><span>Hrs</span></div>
-                    <div style="margin-right: 10px;"><b style="font-size:18px">{{min}}</b> <br><span>Mins</span></div>
-                    <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
-                </div>
-              <div class="lines-type">
-                <div style="float: left;width: 50%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
-                    <div style="margin-right: 10px;margin-top: 6px"><b style="font-size:18px"></b>{{offer?.line_group?.line1}} <br><span style="color: lightgray">LINES</span></div>
-                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
-                </div>
-                <div  style="float: left;width: 50%;border-bottom: 1px solid lightgrey;height: 8vh">
-                    <div style="margin-right: 10px;margin-top: 6px"><b style="font-size:18px">{{offer?.type | uppercase}}</b> <br><span style="color: lightgray">TYPE</span></div>
-                    <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
-                </div>
-              </div>
-             <div style="height:40px" >
-                <span>{{offer?.offer_title}}</span>
-              </div>
-              <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id,offer?.button_text)">
-                <span style="font-size: 17px;font-weight: lighter;">
-                {{offer?.button_text}}  
-                </span></button>
-            </div>
-              <!-- <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button> -->
-            </ion-card>
-          </div>
-  
-  
-  <!-- game looping -->
-  
-          <div class="slider-single" *ngFor="let game of gameGroup">
-            <ion-card class="slider-single-image">
-              <div class="card-top" >
-                <div class="card-title">
-                  <img src="assets/img/home/ch_games@3x.png">
-                  <h4>YOU HAVE GAMES TO PLAY</h4>
-                </div>
-              </div>
-              <img class="center game-play-img" *ngIf="!game.game_icon_url" src="assets/icon/account_ico.svg" style="width: 232px;height: 100px;border: 1px solid;">
-              <img class="center game-play-img" *ngIf="game.game_icon_url" src="{{game.game_icon_url}}" style="width: 232px;height: 100px;border: 1px solid;">
-              <p text-center style="color: orange;font-size: 16px;font-weight: lighter;margin-top: 4px; ">{{game?.game_description1}}</p>
-              <br>
-              <p text-center padding-left padding-right>{{game.user_game_target}}</p>
-  
-              <div padding>
-                <button class="center" padding ion-button text-center color="secondary" (click)="gameTargetLink(game.target_url)">{{game.button_label}}</button>
-              </div>
-  
-            </ion-card>
-          </div>
-  
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" (click)="gameTargetLink(game.target_url)">{{game.button_label}}</button>
         </div>
 
-<!--       <a class="slider-left" href="javascript:void(0);"><i class="fa fa-arrow-left"></i></a>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+
+
+
+
+  <!--       <a class="slider-left" href="javascript:void(0);"><i class="fa fa-arrow-left"></i></a>
 
       <a class="slider-right" href="javascript:void(0);"><i class="fa fa-arrow-right"></i></a>
  -->
-</div>
+  <!-- </div> -->
 
-<div style="text-align: cente; width: 100%;">
-  <p style="position: absolute; height: 8%;bottom: 4%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{slideCurrent+1}} / {{total_cards}} CARDS</p>
-</div>
- 
-    
-     
-    
-<!-- slider end -->
+  <div style="text-align: center; width: 100%;" (click)="clicked()">
+    <p style="position: absolute; height: 8%;bottom: 0%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{currentSliderCount+1}} / {{total_cards}} CARDS</p>
+  </div>
+
+
+
+
+  <!-- slider end -->
 
 
 
@@ -148,9 +156,9 @@
 
   <!-- <ion-slides #home_slides loop={{sliderOptions.loop}} slidesPerView=1 effect={{sliderOptions.effect}} initialSlide=1 spaceBetween={{spaceBetween}} class="home-slides"> -->
 
-<!-- Slide 0 -->
+  <!-- Slide 0 -->
 
-    <!-- <ion-slide>
+  <!-- <ion-slide>
 
       <ion-card>
         <div class="card-top" >
@@ -172,9 +180,9 @@
 
     </ion-slide> -->
 
-<!-- Slide 1 -->
- 
-    <!-- <ion-slide class="home-slide">
+  <!-- Slide 1 -->
+
+  <!-- <ion-slide class="home-slide">
 
       <ion-card>
         
@@ -215,9 +223,9 @@
 
     </ion-slide> -->
 
-<!-- Slide 2 -->
+  <!-- Slide 2 -->
 
-    <!-- <ion-slide>
+  <!-- <ion-slide>
 
       <ion-card>
         
@@ -247,9 +255,9 @@
 
     </ion-slide> -->
 
-<!-- Slide 2 -->
+  <!-- Slide 2 -->
 
-    <!-- <ion-slide>
+  <!-- <ion-slide>
 
       <ion-card>
         
@@ -282,9 +290,9 @@
         </ion-grid>
       </ion-card>
     </ion-slide> -->
- 
-<!-- Slide 3 -->
-    <!-- <ion-slide>
+
+  <!-- Slide 3 -->
+  <!-- <ion-slide>
 
       <ion-card>
         <div class="card-top" >
@@ -306,9 +314,9 @@
 
     </ion-slide> -->
 
-<!-- Slide 5 -->
+  <!-- Slide 5 -->
 
-    <!-- <ion-slide>
+  <!-- <ion-slide>
 
       <ion-card>
         <div class="card-top" >
@@ -331,8 +339,8 @@
     </ion-slide> -->
 
 
-<!-- Slide 6 -->
-    <!-- <ion-slide>
+  <!-- Slide 6 -->
+  <!-- <ion-slide>
 
       <ion-card>
         <div class="card-top" >
@@ -354,8 +362,8 @@
 
     </ion-slide> -->
 
-<!-- Slide 8 -->
-    <!-- <ion-slide>
+  <!-- Slide 8 -->
+  <!-- <ion-slide>
 
       <ion-card>
         <div class="card-top" >
@@ -377,8 +385,8 @@
 
     </ion-slide> -->
 
-<!-- Slide 9 -->
-<!--     <ion-slide *ngIf="offersForYou.card_title != ''">
+  <!-- Slide 9 -->
+  <!--     <ion-slide *ngIf="offersForYou.card_title != ''">
 
       <ion-card>
         <div class="card-top" >
@@ -439,8 +447,8 @@
     </ion-slide> -->
 
 
-<!-- Slide 9 -->
-<!--     <ion-slide *ngFor="let game of gameGroup">
+  <!-- Slide 9 -->
+  <!--     <ion-slide *ngFor="let game of gameGroup">
 
       <ion-card>
         <div class="card-top" >
@@ -467,8 +475,8 @@
     </ion-slide> -->
 
 
-<!-- Slide 10 -->
-    <!-- <ion-slide>
+  <!-- Slide 10 -->
+  <!-- <ion-slide>
 
       <ion-card>        
         <div class="card-top" >
@@ -499,8 +507,8 @@
     </ion-slide> -->
 
 
-<!-- </ion-slides> -->
-  
+  <!-- </ion-slides> -->
+
 </ion-content>
 
 <!-- Content end -->
@@ -524,50 +532,50 @@
 </div> -->
 
 <ion-footer class="footer-button" (click)="clicked()">
-    <div (click)="showWhatsOn()" class="center">
-      <ion-icon item-left name="md-arrow-round-up"></ion-icon>
-      <p item-content text-center class="center" style="font-size: initial">FIND OUT WHAT'S ON</p>
-    </div>
-  </ion-footer>
-  
-  
-  
-  <div class="popup" *ngIf="whatsOn" style="z-index: 102;">
-    <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
-    
-      <div class="popup-content animated"  [ngClass] = "(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
-        <ion-card class="big-content">
-          <ion-item class="popup-header">
-            <button item-left ion-button icon-only clear (click)="showWhatsOn()">
+  <div (click)="showWhatsOn()" class="center">
+    <ion-icon item-left name="md-arrow-round-up"></ion-icon>
+    <p item-content text-center class="center" style="font-size: initial">FIND OUT WHAT'S ON</p>
+  </div>
+</ion-footer>
+
+
+
+<div class="popup" *ngIf="whatsOn" style="z-index: 102;">
+  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation"></ion-backdrop>
+
+  <div class="popup-content animated" [ngClass]="(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
+    <ion-card class="big-content">
+      <ion-item class="popup-header">
+        <button item-left ion-button icon-only clear (click)="showWhatsOn()">
               <ion-icon  name="md-close"></ion-icon>
             </button>
-            <ion-label text-center style="margin: 0;font-size: initial;margin-bottom: 6px;">FIND OUT WHAT'S ON</ion-label>
-          </ion-item>
-  
-          <div class="top-slides-wrapper">
-            <ion-slides class="top-slides" slidesPerView=2  spaceBetween="10" >
-              <ion-slide *ngFor="let item of homeBlog">
-                <div style="height: 30vh;max-height: 30vh;min-height: 30vh">
-                <img *ngIf="item.image" src="{{item.image}}" style="width: 100%;">
-                <img *ngIf="!item.image" src="assets/img/150.png" style="width: 72%;height: 157px;">
-                <div class="slide-content">
-                  <ion-item >
-                    <p item-content>{{item.content.rendered}}</p>
-                  </ion-item>
-                  <ion-item>
-                    <button ion-button item-right clear small (click)="loadLink(item.link)">
+        <ion-label text-center style="margin: 0;font-size: initial;margin-bottom: 6px;">FIND OUT WHAT'S ON</ion-label>
+      </ion-item>
+
+      <div class="top-slides-wrapper">
+        <ion-slides class="top-slides" slidesPerView=2 spaceBetween="10">
+          <ion-slide *ngFor="let item of homeBlog">
+            <div style="height: 30vh;max-height: 30vh;min-height: 30vh">
+              <img *ngIf="item.image" src="{{item.image}}" style="width: 100%;">
+              <img *ngIf="!item.image" src="assets/img/150.png" style="width: 72%;height: 157px;">
+              <div class="slide-content">
+                <ion-item>
+                  <p item-content>{{item.content.rendered}}</p>
+                </ion-item>
+                <ion-item>
+                  <button ion-button item-right clear small (click)="loadLink(item.link)">
                       <div>Read more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
                     </button>
-                  </ion-item>
-                </div>
+                </ion-item>
               </div>
-              </ion-slide>
-              <ion-slide style="background-color: red;height: 200px;">
+            </div>
+          </ion-slide>
+          <ion-slide style="background-color: red;height: 200px;">
 
-              </ion-slide>
-            
-            
-              <!-- 
+          </ion-slide>
+
+
+          <!-- 
               <ion-slide>
                 <img src="assets/img/150.png" width="150" height="100">
                 <div class="slide-content">
@@ -594,26 +602,26 @@
                   </ion-item>
                 </div>
               </ion-slide> -->
-            </ion-slides>
-          </div>
-          <ion-slides  spaceBetween=8 slidesPerView=2>
-            <ion-slide>
-              <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
-            </ion-slide>
-            <ion-slide>
-              <img src="assets/img/badges_blog_thumb.png" width="150" height="100" (click)="handle('your_badges')">
-            </ion-slide>
-  
-          </ion-slides>
-  
-  
-          <ion-card class="popup-main" *ngIf="homeEvents"  (click)="mgmOpenPage()">
-            <img src="assets/img/mgm_blog_thumb.jpg">
-            <ion-card-content text-center>
-              £5 CREDIT FOR YOU AND YOUR FRIEND!
-            </ion-card-content>
-            <!-- <ion-img src="{{homeEvents.event_image}}" width="450" height="200"></ion-img> -->
-            <!--   <ion-item>
+        </ion-slides>
+      </div>
+      <ion-slides spaceBetween=8 slidesPerView=2>
+        <ion-slide>
+          <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/img/badges_blog_thumb.png" width="150" height="100" (click)="handle('your_badges')">
+        </ion-slide>
+
+      </ion-slides>
+
+
+      <ion-card class="popup-main" *ngIf="homeEvents" (click)="mgmOpenPage()">
+        <img src="assets/img/mgm_blog_thumb.jpg">
+        <ion-card-content text-center>
+          £5 CREDIT FOR YOU AND YOUR FRIEND!
+        </ion-card-content>
+        <!-- <ion-img src="{{homeEvents.event_image}}" width="450" height="200"></ion-img> -->
+        <!--   <ion-item>
                 <ion-avatar item-left>
                   <span class="day">{{homeEvents.event_date | date:'dd'}}</span>
                   <span class="year">{{homeEvents.event_date | date:'yy'}}</span>
@@ -625,12 +633,12 @@
               <ion-item> 
                 
               </ion-item>-->
-            <button class="center" ion-button item-right clear small>
+        <button class="center" ion-button item-right clear small>
               <div>Find out more <ion-icon name="md-arrow-round-forward"></ion-icon></div>
               </button>
-          </ion-card>
-  
-        </ion-card>
-      </div>
-  
+      </ion-card>
+
+    </ion-card>
   </div>
+
+</div>

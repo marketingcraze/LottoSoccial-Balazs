@@ -28,7 +28,7 @@ export class HelpPage {
   //     this.scrollHandler(this)
   //   }
   // }
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.content.enableScrollListener();
  }
   scrollHandler(event){
