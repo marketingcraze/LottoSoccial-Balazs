@@ -7,7 +7,7 @@
         <img src={{product?.image}} class="header-img" />
 
         <ion-label class="label-md-offer">
-            <div class="offer-title">{{product?.name | capitalizeFirst}}</div>
+            <div class="offer-title">{{product?.name | uppercase}}</div>
 
             <div class="amount offer-title">
                 £{{product?.jackpot}}
@@ -67,7 +67,7 @@
                 </div>   
         </ion-row> -->
 
-        <ion-item no-lines style="background-color: transparent">
+        <ion-item no-lines style="background-color: transparent" style="margin-top: 10px">
             <ion-range class="rangesliderOffer" *ngIf="!sliders" mode="ios" min="0" max="{{(product?.line_group|keys).length-1}}" snaps="true"
                 (ionChange)="watchSlider()" [(ngModel)]="slider">
                 <ion-label [ngStyle]="{'color':'#AAAAAA','font-family': 'lato-regular','font-size':'x-large'}" range-left>{{(product?.line_group| keys)[0]}}</ion-label>
@@ -75,18 +75,21 @@
             </ion-range>
         </ion-item>
 
+        <div *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;">
+                <span *ngIf="j<1">
+                    <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
+                </span>
+            </div>
+
         <div *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;"
             class="drawDayMargin">
-            <div col-12 *ngIf="i<1">
-                <p class="font-size"> Total: <span ion-text color="bonus"> £{{item?.prize}} </span></p>
-            </div>
+       <span  *ngIf="i<1">
+            <p class="font-size"> Total: <span ion-text style="color: #08A856;font-size: 1.2em;margin-left: 5px;margin-top: 5%"> £{{item?.prize}} </span></p>
+       </span>
+           
         </div>
 
-        <ion-row *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;">
-            <ion-col col-12 *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none;margin-top: 10px" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
-            </ion-col>
-        </ion-row>
+       
 <!-- 
         <div right class="tipsCorner" (click)="openTipsModal()">
                 <span style="position: relative;color: white;top: 14px;">How<br>To Play</span>
@@ -94,7 +97,7 @@
     </div>
    
     <div class="offer-of-the-day">
-        <h5 text-center style="height: 13px;margin-top: 7px;">DEAL OF THE DAY! <span style="margin-left: 15px">{{Nhrs}} {{Nmins}} {{Nsec}}</span></h5>
+        <h6 text-center style="height: 13px;margin-top: 7px;">DEAL OF THE DAY! <span style="margin-left: 15px">{{Nhrs}} {{Nmins}} {{Nsec}}</span></h6>
         <ion-slides slidesPerView=3>
             <ion-slide *ngFor="let productOffer of offersForYou">
                 <img src="{{productOffer.product_icon}}" class="img-responsive">

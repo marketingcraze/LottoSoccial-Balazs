@@ -1,5 +1,6 @@
 <cus-header title="Syndicates"></cus-header>
-<ion-content class="marg-top-12 main-bg">
+<ion-content class="marg-top-12 main-bg" (ionScroll)="scrollHandlerSyndicate($event)" id="winningContent">
+  <div id="innerWinnings">
   <div class="main-div">
     <ion-row>
       <ion-col class="g-header">HAVE YOU CHECKED YOUR TICKETS?</ion-col>
@@ -49,4 +50,10 @@
     </ion-row>
     </div>
   </div>
+</div>
 </ion-content>
+<div >
+    <span *ngIf="downShowing==0"  >
+        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+   </span>
+</div>

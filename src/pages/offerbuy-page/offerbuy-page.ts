@@ -38,6 +38,7 @@ export class offerBuy {
     buyoffer: any;
     buyOfferStatus: any;
     result: any = [];
+    dealTimer:any = [];
     private lotteryProductData: any = []
 
     constructor(private offerBuyData: productOffer,
@@ -51,6 +52,8 @@ export class offerBuy {
 
         this.NewTimeLeft = "";
         this.NewTimeLeft = this.navprms.get("Time");
+        this.dealTimer = this.navprms.get("dealTimer")
+
         this.TimeLeft = "";
         this.result = "";
         this.productName = navprms.get("offersData").product_name;
@@ -102,6 +105,9 @@ export class offerBuy {
     NewcalTime(NewLeft:any){
         
                 let now = new Date().getTime();
+                let now1 = new Date(NewLeft).getTime();
+                
+                if(now1 >= now){
                 if (!NewLeft) {
                     return this.result;
                 }
@@ -128,10 +134,11 @@ export class offerBuy {
                 this.Nmins = (minuteCal <= 9) ? '0' + minuteCal  + " :"  : minuteCal + " :";
                 this.Nsec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
             }
+        }
 
     ngOnInit() {
         Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime());
-        Observable.interval(1000).takeWhile(() => true).subscribe(() => this.NewcalTime("Wed 05 oct 17 23:59:59"));
+        Observable.interval(1000).takeWhile(() => true).subscribe(() => this.NewcalTime(this.dealTimer));
     }
 
     ionViewWillEnter() {
