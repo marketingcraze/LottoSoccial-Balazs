@@ -480,6 +480,32 @@ export class SyndicateService {
                         return res;
                 })
     }
+    socialsharing() {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/socialsharing";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+                    "request": [
+                        {
+                        "session_ID":  CommonService.sessionId,
+                        "action": "get_mgm_details",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "page_id": "5",
+                        "screen_id": "5.2.1",
+                        "module_name": "get_social_sharing",
+                        "program_id": "9",
+                        "customer_id": CommonService.session.customer_id
+                        }
+                    ]
+                    }
+                return this.http.post(action, data, { headers:headopt })
+                    .map(res => res.json())
+                    .map((res) => {
+                        return res;
+                })
+    }
+    
     
 }
 

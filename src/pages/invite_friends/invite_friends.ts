@@ -30,6 +30,8 @@ export class InviteFriendsPage {
   public sid: any;
   private mDeatils: any;
   private loader:any 
+  private loader2:any 
+  private sharedata:any;
 
   @ViewChild('contactListHeader') elementView: ElementRef;
 
@@ -42,7 +44,7 @@ export class InviteFriendsPage {
     this.loader = this.loadingCtrl.create({
       content:"Please wait..."
     });
-    let loader2 = this.loadingCtrl.create({
+    this.loader2 = this.loadingCtrl.create({
       content:"Please wait..."
     });
     this.searchControl = new FormControl();
@@ -52,29 +54,8 @@ export class InviteFriendsPage {
             this.setFilteredItems();
  
         });
-    loader2.present()
-    this.platform.ready().then(() => {
-      contacts.find(['displayName', 'phoneNumbers'], {multiple: true}).then((gcontacts:Array<Contact>) => {
-          var len = gcontacts.length;
-          for(var i=0; i<len; i++) {
-             var name = '';
-              if(gcontacts[i].displayName != null){
-                name = gcontacts[i].displayName;
-              }else {
-                name = gcontacts[i].name.formatted;
-              }
-              if(gcontacts[i].phoneNumbers) {
-                this.items.push({
-                    displayName: name,
-                    phoneNumbers: [{value: gcontacts[i].phoneNumbers[0].value}],
-                    selected: false
-                })
-              }
-          }
-           this.fItems = this.items;
-           loader2.dismiss();
-        })
-        })
+    
+      
 
     // this.items = [
             // {displayName: 'Benjamin Evalent', phoneNumbers:[{value:'+447448962353'}], selected:false},
@@ -100,6 +81,7 @@ export class InviteFriendsPage {
     this.clistheight = window.innerHeight - this.elementView.nativeElement.offsetHeight;
     this.getSyndicateMeembers();
     this.setFilteredItems();
+    this.getContentToBeShared() 
   }
    setFilteredItems() {
      if(this.items) {
@@ -123,6 +105,34 @@ export class InviteFriendsPage {
   }
   openContacts() {
     this.cclose = ''
+    this.loader2.present()
+    this.platform.ready().then(() => {
+      this.contacts.find(['displayName', 'phoneNumbers'], {multiple: true}).then((gcontacts:Array<Contact>) => {
+          var len = gcontacts.length;
+          for(var i=0; i<len; i++) {
+             var name = '';
+              if(gcontacts[i].displayName != null){
+                name = gcontacts[i].displayName;
+              }else {
+                name = gcontacts[i].name.formatted;
+              }
+              if(gcontacts[i].phoneNumbers) {
+                this.items.push({
+                    displayName: name,
+                    phoneNumbers: [{value: gcontacts[i].phoneNumbers[0].value}],
+                    selected: false
+                })
+              }
+          }
+           this.fItems = this.items;
+           this.loader2.dismiss();
+        })
+        .catch((err) =>
+         {
+            console.log('cordova is not available');
+            this.loader2.dismiss();
+         });
+      })
   }
   cCancle() {
     this.cclose = 'cclose'
@@ -248,8 +258,10 @@ export class InviteFriendsPage {
 }
 
 getSyndicateMeembers() {
+  this.loader.present();
   this._syndService.getSyndicateMeembers(this.sid)
   .subscribe((res)=> {
+    this.loader.dismiss();
     console.log(res);
     this.mDeatils = res.response["0"].get_private_syndicate_members.response;
     console.log(this.mDeatils);
@@ -261,7 +273,7 @@ shareInfo()
 {
  this.platform.ready().then(() =>
       {
-         this.socialSharing.share("message to be shared", "subject", null, null)
+         this.socialSharing.share(this.sharedata.mgm_description, this.sharedata.mgm_title, this.sharedata.mgm_image, this.sharedata.mgm_referurl)
          .then((data) =>
          {
             console.log('Shared via SharePicker');
@@ -273,4 +285,12 @@ shareInfo()
 
       });
 }
+
+  getContentToBeShared() {
+    this._syndService.socialsharing()
+    .subscribe((res) => {
+      console.log(res);
+      this.sharedata = res.response["0"].get_social_sharing.response.refer_friend_data["0"];
+    })
+  }
 }

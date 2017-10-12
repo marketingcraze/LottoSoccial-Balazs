@@ -26,7 +26,7 @@
         </div>
         <div>
         <ion-grid class="pad-0">
-            <ion-row class="b-border" *ngFor="let d of data; let i = index;">
+            <ion-row class="b-border" *ngFor="let d of data; let i = index;" (click)="viewBadges()">
                 <!--<ion-col col-3 class="" >-->
                     <ion-col col-3 class="" [innerHTML]="d.achievement_thumb">
                     <!--<img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>-->
@@ -69,6 +69,23 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
+        </div>
+        <div style="padding: 10px;border-top: 10px solid #e8e8e8;">
+            <div>GOTTA EARN THEM ALL!</div>
+            <div>All these badges are still up for grab. Make them yours!</div>
+            <div>
+                <ion-grid>
+                    <ion-row>
+                    <ion-col col-2 *ngFor="let d of data; let i = index" style="padding: 0;padding-bottom: 10px;">
+                            <div>
+                                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                            </div>
+                            <div style="font-size: 10px;">Get more!</div>
+                    </ion-col>
+                    </ion-row>
+                </ion-grid>
+                
+            </div>
         </div>
     </div>
 </ion-content>

@@ -5,6 +5,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferService } from '../../services/offer.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { BadgeViewPage } from '../../pages/badge-view/badge-view';
 
 declare var $: any;
 
@@ -97,5 +98,8 @@ export class BadgesPage {
             this.data = res.response[0].get_badgeos.response.data.achievements;
             console.log(this.data);
         })
+    }
+    viewBadges() {
+        this.navCtrl.push(BadgeViewPage);
     }
 }

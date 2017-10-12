@@ -66,6 +66,7 @@ import { PlayGamePage } from '../pages/play-games/play-games';
 import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-thank-you';
 import { GetBooster } from '../pages/play-games-get-booster/play-games-get-booster';
 import { BadgesPage } from '../pages/badges/badges';
+import { BadgeViewPage } from '../pages/badge-view/badge-view';
 import { GameThankYou} from '../pages/game-Thank-You/game-Thank-You';
 import { GameThankyouSubmittip } from '../pages/game-Thank-You-SubmitTip-modal/game-Thank-You-SubmitTip-modal';
 import { howtoplay } from '../pages/game-start-how-to-play/game-start-how-to-play';
@@ -203,6 +204,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         PrizeSummaryWinPage,
         PlayGamesThankYou,
         BadgesPage,
+        BadgeViewPage,
         GameThankYou,
         GameThankyouSubmittip,
         howtoplay,
@@ -334,6 +336,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         PrizeSummaryWinPage,
         PlayGamesThankYou,
         BadgesPage,
+        BadgeViewPage,
         GameThankYou,
         GameThankyouSubmittip,
         howtoplay,

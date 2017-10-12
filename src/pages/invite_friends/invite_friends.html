@@ -23,13 +23,13 @@
         <img onerror="this.src='./assets/img/contacts.svg'" [src]="m.profile_image">
       </ion-thumbnail>
       <h2>{{m?.first_name}} {{m?.last_name}}</h2>
-      <p>SYNDICATE MANAGER</p>
+      <!--<p>SYNDICATE MANAGER</p>-->
       <button ion-button clear item-right *ngIf="m?.next_draw_status == 'PAID'">PLAYING</button>
       <button ion-button clear item-right *ngIf="m?.next_draw_status != 'PAID'" style="background: yellow">PENDING</button>
     </ion-item>
   </ion-list>
 
-  <div class="w-div">
+  <div class="w-div" *ngIf="mDeatils < 2">
    <p><ion-icon name="information-circle"></ion-icon> Not enough members in your syndicate</p>
     <p>For its very nature, a syndicate can’t be formed  with just a member,
     therefore Lotto Social reserves the right to be a passive share of your 
@@ -58,7 +58,10 @@
           <div class="p3">Allow LottoSocial to access your contact list</div>
       </div>
       <div class="social-div">
-        <ion-grid>
+        <div style="color: blue;font-size: 18px;padding: 20px;" (click)="shareInfo()">
+          <ion-icon class="shareBucketicon icon icon-md ion-ios-share-outline" ios="ios-share-outline" md="ios-share-outline" style="left: 0;bottom: 0;"></ion-icon> Other sharing methods
+        </div>
+        <!--<ion-grid>
           <ion-row>
             <ion-col col-3>
               <img class="s-image" src="./assets/img/mail.svg" (click)="shareInfo()"/>
@@ -77,7 +80,7 @@
               <span>Twitter</span>
             </ion-col>
           </ion-row>
-        </ion-grid>
+        </ion-grid>-->
       </div>
     </div>
   </div>
