@@ -452,19 +452,17 @@ font-weight: 600;
 }
 
 .circle_inside{
-	border: 1px solid orange;
-    width: 64px;
+    width: 100px;
     border-radius: 8%;
-    background: #fff;
     padding: 8px;
     position: relative;
 	bottom: 59px;
     margin-left: 75%;
   }
   .circle_inside_Img{
-	width: 30px;
+	width: 65px;
+    right: 13%;
     position: relative;
-    left: 8px;
   }
   play-game{
 	.scroll-content{

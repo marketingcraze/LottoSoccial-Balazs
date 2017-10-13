@@ -60,14 +60,14 @@
           <ion-avatar class="account-avatarSlide">
               <img class="profile-pictureSlide" src="{{accountDetails?.profile_image ? accountDetails?.profile_image : 'assets/icon/user.svg'}}" width="72" height="72" alt="Profile" />
             </ion-avatar>
-            <p style="font-size: medium">
-              Share your code with your<br> friends and get £5!
+            <p style="font-size: medium;white-space: normal;">
+             {{accountDetails?.program_description}}
             </p>
           </div>
           <div class="sidemenuCoupon" (click)="mgmPage()">
           <ion-row >
             <ion-col col-9>
-            <span style="color: #2F76D1;vertical-align:sub;">  Dharam93</span>
+            <span style="color: #2F76D1;vertical-align:sub;">{{accountDetails?.user_code}}</span>
             </ion-col>
             <ion-col col3>
                 <ion-icon ios="ios-share-outline" md="ios-share-outline" class="shareBucketicon"></ion-icon>
@@ -83,6 +83,7 @@
                 <ion-item text-wrap (click)="onLeftMenuSelection('your_vouchers')"><span class="color"> Vouchers</span> </ion-item>
                 <ion-item text-wrap (click)="onLeftMenuSelection('affiliate')"><span class="color"> Affiliate </span></ion-item>
                 <ion-item text-wrap (click)="onLeftMenuSelection('pSyndicate')"><span class="color">Private Syndicate</span> </ion-item>
+                <ion-item text-wrap (click)="onLeftMenuSelection('update')"><span class="color">Update</span> </ion-item>
               
             </ion-list>
     </ion-content>

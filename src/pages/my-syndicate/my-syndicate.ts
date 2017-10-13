@@ -9,8 +9,9 @@ import { OfferService } from '../../services/offer.service';
 import { CommonService } from '../../services/common.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
-import { Content } from 'ionic-angular'
+import { Content, Platform } from 'ionic-angular'
 declare var $: any;
+declare var cordova:any;
 
 @Component({
     selector: 'page-my-syndicate',
@@ -39,6 +40,7 @@ export class MySyndicatePage {
         public app: App,
         public iab: InAppBrowser,
         public navParams: NavParams,
+        public platform:Platform,
         public srvOffer: OfferService,
         public navCtrl: NavController,
         public appSound:AppSoundProvider,
@@ -121,6 +123,7 @@ export class MySyndicatePage {
 
       loader.dismiss();
         this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
+        
         console.log("syndSrr is ", this.syndArr)
         this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
         if(this.chatcount >0){
@@ -189,12 +192,21 @@ export class MySyndicatePage {
     }
 
     chatNow(i) {
-         if(this.syndArr[i].peepso_group_id !=0) {
-            let opt: string = "toolbarposition=top";
-            let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url;
-            str += '/&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken ;
-            this.iab.create(str, 'blank', opt);
-         }
+        debugger;
+        //  if(this.syndArr[i].peepso_group_id !=0) {
+            // let opt: string = "toolbarposition=top";
+            // let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url;
+            // str += '/&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken ;
+            // this.iab.create(str, 'blank', opt);
+        //  }
+
+        this.platform.ready().then(() => {
+            if (typeof cordova !== 'undefined') {
+                const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url + '&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken + '', '_blank','location=no');
+            }
+        });
+
+
     }
 
     addMembers(){

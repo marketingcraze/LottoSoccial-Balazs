@@ -36,6 +36,7 @@ declare var cordova: any;
 })
 
 export class PlayGamePage implements OnInit {
+  scrollContent: any;
   ngOnInit(): void {
     this.platform.ready().then((readySource) => {
       var CurrentUserid = localStorage.getItem('appCurrentUserid');
@@ -113,8 +114,16 @@ export class PlayGamePage implements OnInit {
 
   }
   showBoosterModal() {
+    this.scrollContent=document.querySelector('.scroll-content');
+		this.scrollContent.style['overflow']='hidden';
     let myModal = this._modalController.create(GetBooster, { customer_award_log_id: this.gameInfo });
     myModal.present();
+    myModal.onDidDismiss((data: any[]) => {
+			if (data) {
+			 this.scrollContent=document.querySelector('.scroll-content');
+			 this.scrollContent.style['overflow']='none';
+			}
+		})
   }
   ionViewWillEnter() {
 
@@ -171,7 +180,6 @@ export class PlayGamePage implements OnInit {
   slider(level:any) {
     setTimeout(function () {
       $('.progressbarPlayGame').each(function () {
-        debugger;
         var t = $(this);
         var dataperc = t.attr('data-perc'),
           barperc = Math.round(dataperc * 2.5);

@@ -13,7 +13,7 @@
 </ion-header>-->
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
-<ion-content class="marg-top-12 main-bg" id="asynd" style="height: 88%" (ionScroll)="scrollHandlerSyndicate($event)"   >
+<ion-content class="marg-top-12 main-bg" id="asynd" style="height: 86%" (ionScroll)="scrollHandlerSyndicate($event)"   >
     <div id="innerMySyndicate" >
   <div id="sstate" *ngIf="syndArr.length > 0">
   <div *ngFor="let sd of syndArr; let i = index;">
@@ -40,25 +40,43 @@
       </div>
       </div>
       <div *ngIf="toggled[i]">
-      <ion-item>
+       <span *ngIf="sd.product_group.length>0">
+     <ion-item style="border-bottom: 1px solid #AAAAAA"> 
         <ion-grid>
-          <ion-row>
-            <ion-col col-50 class="left"><span class="tkt-lbl">Your tickets</span></ion-col>
-            <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates()">Manage syndicate</span></ion-col>
-          </ion-row>
+          <ion-row *ngFor="let tkt of sd.product_group;let j = index;">
+            <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
+                <input type="button" value="{{tkt?.product_name}}"  style="color: white;border: none;border-radius: 2px;
+                font-size: 12px;padding: 5px;height: 30px;max-width:100%;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;background-color: #255FC7" (click)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
+              </ion-col>
+              <ion-col col-9 class="right">
+                <p class="ticketsInfoP" style="margin-left: 0px!important"> x {{tkt.ticket_count}} tickets {{tkt.ticket_valid_date}}</p>
+              </ion-col>
+         </ion-row>
         </ion-grid>
-          <div style="padding: 10px 0;" *ngFor="let tkt of sd.product_group">
-            <span class="tkt-day">{{tkt.product_name}}</span><span class="day-lbl"> x{{tkt.ticket_count}} tickets valid fot {{tkt.ticket_valid_date}}</span>
-          </div>
-          <div style="padding: 5px 0 0 0; text-align: center">
-            <button ion-button class="btn" (click)="viewTickets(i)"> VIEW TICKETS </button>
-          </div>
       </ion-item>
-      <ion-item (click)="checkwins()" style="font-size: 14px;">
+    </span>
+        <ion-item  style="border-bottom: 1px solid #AAAAAA">
+          <div>
+            <button ion-button class="btn" style="float: left!important;width: 40%!important"> ADD MEMBERS </button>
+            <button ion-button class="btn" style="float: right!important;width: 40%!important" (click)="viewTickets(i)"> YOUR TICKETS </button>
+          </div>
+        </ion-item>
+    
+      <ion-item (click)="checkwins()" style="font-size: 14px;border-bottom: 1px solid #AAAAAA">
         <span *ngIf="sd.check_status == 'CHECKED'">
-          <div class="ckNow pulse" style="width: 50%;"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
+          <div class="ckNow pulse" style="width: 48%;display: inline-block"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
           </span>
-        <span  *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></span>
+        <span  *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'">
+          <div style="width: 48%;display: inline-block" >
+          <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span>
+           <span class="synd-f">DUE TO PLAY</span>
+          </div>
+          </span>
+       
+        <ion-col class="right" style="text-align: right;display: inline-block;width: 50%"><span class="tkt-a" (click)="manage_syndicates2()">
+            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(2,2);"></ion-icon>
+            <ion-col><span class="synd-f" style="color:#000000">SETTINGS</span></ion-col>
+          </span></ion-col>
       </ion-item>
       </div>
     </ion-card>

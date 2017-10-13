@@ -28,7 +28,7 @@ width: 35px;
 height: 35px;
 bottom: 20px;
 opacity: 0.5;
-margin-top: 147%;
+margin-top: 162%;
 background-size: contain;
 animation-name: bounce;
 animation-duration: 1s;
@@ -71,7 +71,7 @@ animation-direction: alternate;
 }
 .thumbnailListContent{
   color:white; 
-  font-size: 17px;
+  font-size: 1em;
   padding-left: -15px;
   
   margin-bottom: 10px;
@@ -79,7 +79,7 @@ animation-direction: alternate;
 }
 .thumbnailListContent1{
   color:white; 
-  font-size: 38px;
+  font-size: 2.1em;
   padding-left: 10px;
   
   margin-bottom: 10px;
@@ -198,7 +198,7 @@ animation-direction: alternate;
   margin-right: 0px;
   display: inline-block;
   border: 0.5px solid gray;
-  margin-left: -11px;
+  margin-left: -15px;
 }
 .circle_inside{
   width: 100px;
@@ -254,7 +254,8 @@ overflow: visible;
     padding-right: 0px;}
     .scroll-content {
       z-index: 0; 
-    
+      margin-bottom:0px!important;
+      height: 102%;
        -webkit-overflow-scrolling: auto;
        scroll-behavior: auto;
      }
@@ -268,7 +269,7 @@ overflow: visible;
           height: 35px;
           bottom: 20px;
           opacity: 0.5;
-          margin-top: 141%;
+          margin-top: 158%;
           background-size: contain;
           animation-name: bounce;
           animation-duration: 1s;

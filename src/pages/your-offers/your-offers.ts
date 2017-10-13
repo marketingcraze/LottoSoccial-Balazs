@@ -178,10 +178,10 @@ export class YourOffersPage {
 						
 						this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
 						this.st.newTimer('1sec', 1);
-					//	this.subscribeTimer0();
+						this.subscribeTimer0();
 						this.delay(4000);
 						this.content.enableScrollListener();
- 						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime("Wed 05 oct 17 23:59:59"));
+ 						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.lotteryProductData[0].draw_countdown));
 						break;
 					}
 				}
@@ -211,8 +211,9 @@ export class YourOffersPage {
 	//Offer Buy page
 	openBuyPage(index) {
 		var TimeLeft = document.getElementById("countDown").innerText;
+		var dealOfTheDayTime = this.lotteryProductData[0].draw_countdown
 		var timer2 = this.lotteryProductData[index].draw_countdown
-		let buyPageModal = this.modalController.create(offerBuy, { offersData: this.lotteryProductData[index], Time: timer2 });
+		let buyPageModal = this.modalController.create(offerBuy, { offersData: this.lotteryProductData[index], Time: timer2, dealTimer: dealOfTheDayTime });
 		buyPageModal.present();
 	}
 
@@ -306,7 +307,12 @@ export class YourOffersPage {
 	}
 	calTime(NewLeft:any){
 
+
+
 		let now = new Date().getTime();
+		let now1 = new Date(NewLeft).getTime();
+		
+		if(now1 >= now){
 		if (!NewLeft) {
 			return this.result;
 		}
@@ -332,6 +338,14 @@ export class YourOffersPage {
 		this.hrs = (hourCal <= 9) ? '0' + hourCal  + " :"  : hourCal + " :";
 		this.mins = (minuteCal <= 9) ? '0' + minuteCal  + " :"  : minuteCal + " :";
 		this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
+	}
+	else{
+		this.day =  '00' 
+		this.hrs = '00' + " :";
+		this.mins = '00' + " :";
+		this.sec = '00'
+	
+}
 	}
 
 }

@@ -129,6 +129,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { AnimationService, AnimatesDirective } from 'css-animator';
 import { paymentService } from '../services/paymentService'
 import { Badge } from '@ionic-native/badge'
+import { AppVersion } from '@ionic-native/app-version';
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
@@ -372,7 +373,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService,paymentService, CommonService, Badge,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,AppVersion]
 
 })
 export class AppModule { }

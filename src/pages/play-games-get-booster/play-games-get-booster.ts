@@ -60,7 +60,7 @@ export class GetBooster implements OnInit {
     });
   }
 
-  dismissView(data) {
+  dismissView(data:any=1) {
     this.viewCtrl.dismiss(data);
   }
 

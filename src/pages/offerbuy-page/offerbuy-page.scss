@@ -44,7 +44,7 @@
     display: -webkit-inline-box;
 }
 .SlideContentBorderTopOffer{
-    margin-top: 0px;
+    margin-top: -10px;
 } 
 
 .font-size{
@@ -53,7 +53,7 @@
 .BuyBtn
 {
     height: 34px;
-    font-size: 12px;
+    font-size: 1.1em;
     background:#00A651;
     color:#F8F8F8;
     float: right;
@@ -90,7 +90,7 @@ offer-buy{
             height: 6.5vh;
         }
         .drawDayMargin{
-            margin-top:-20px;
+            margin-top:0%;
         }
         .tipsCorner{
             height: 59px;
@@ -117,8 +117,8 @@ offer-buy{
         .HowtpText{
             position: relative;
             bottom: 180PX;
-            right: 23%;
+            right: 14%;
             color: white;
-            font-size: 1.25em;
+            font-size: 1.10em;
         }
 }

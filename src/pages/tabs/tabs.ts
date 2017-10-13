@@ -18,6 +18,7 @@ import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+declare var cordova:any;
 
 @Component({
     selector: 'page-tabs',
@@ -175,12 +176,20 @@ export class TabsPage {
         .then(
             data => {
               let session:any = JSON.parse(data);
-              let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=';
-              url += session.customer_id + '&customer_token=' + session.customer_token;
-              // console.log("session data", data, url);
+            //   let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=';
+            //   url += session.customer_id + '&customer_token=' + session.customer_token;
+            //   console.log("session data", data, url);
               
-              let opt:string = "toolbarposition=top";
-              const browser = this.iab.create(url, "_blank", opt);
+            //   let opt:string = "toolbarposition=top";
+            //   const browser = this.iab.create(url, "_blank", opt);
+
+              this.platform.ready().then(() => {
+                if (typeof cordova !== 'undefined') {
+                    const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id='+ session.customer_id + '&customer_token=' + session.customer_token + '', '_blank','location=no');
+                }
+            });
+
+
             }, error =>{
                 // show offline
                 this.params.setIsInternetAvailable(false);

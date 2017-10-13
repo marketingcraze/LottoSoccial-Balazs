@@ -115,7 +115,7 @@ scrollHandlerListGames(event){
     }
     confirmSelectionPage(index){
       this.scrollContent=document.querySelector('.scroll-content');
-      this.scrollContent.style['-webkit-overflow-scrolling']='auto';
+      this.scrollContent.style['overflow']='hidden';
 
       if(this.reward_point < this.redeem_products[index].product_price){
         this.point_status = "Failed"
@@ -136,8 +136,8 @@ scrollHandlerListGames(event){
     modal.present();
     modal.onDidDismiss((data: any[]) => {
 			if (data) {
-			 this.scrollContent=document.querySelector('.scroll-content');
-			 this.scrollContent.style['-webkit-overflow-scrolling']='initial';
+        this.scrollContent=document.querySelector('.scroll-content');
+        this.scrollContent.style['overflow']='none';
 			}
 		})
 
@@ -150,9 +150,9 @@ scrollHandlerListGames(event){
       if (this.platform.is('cordova')) {
       this.share.share("demo message", "Demo subject", "", "Demo data").
       then(() => {
-      // Success!
+     
       }).catch(() => {
-      // Error!
+    
       });
     }
   }

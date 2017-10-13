@@ -1,56 +1,74 @@
 <ion-header>
 	<ion-navbar>
-    	<p padding-left>Join a syndicate to start!</p>
-        <ion-buttons end>
-            <button ion-button clear (click)="goBack()">SKIP</button>
-        </ion-buttons>	
-    </ion-navbar>
+		<p padding-left>Join a syndicate to start!</p>
+		<ion-buttons end>
+			<button ion-button clear (click)="goBack()">SKIP</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 
 <ion-content>
-    <img margin-top full class="bkg" src="assets/icon/private_syndicate_hero@3x.png">
+	<ion-col col-12 no-padding>
+		<img margin-top full class="bkg" src="assets/icon/private_syndicate_hero@3x.png">
+	</ion-col>
+	<ion-list>
+		<ion-row style="background-color: white">
+			<ion-col col-4 style="    border-right: 0.5px solid lightgrey;">
+				<div class="circle">
+					<span>1</span>
+				</div>
+				<p>DECIDE
+					<br>THE RULES</p>
+			</ion-col>
+			<ion-col col-4  style="    border-right: 0.5px solid lightgrey;">
+				<div class="circle">
+					<span>2</span>
+				</div>
+				<p>BUY ONLY
+					<br>YOUR LINES</p>
+			</ion-col>
+			<ion-col col-4>
+				<div class="circle">
+					<span>3</span>
+				</div>
+				<p>INVITE YOUR
+					<br>FRIENDS</p>
+			</ion-col>
 
-    <ion-item class="line" margin-top padding>
-    	<img item-left src="assets/icon/settings_ico.svg" width="50" height="50">
-    	
-    	<div item-content>
-	    	<p class="head">USE THE FORCE LUKE</p>
-	    	<p class="desc">You are the Syndicate Manager</p>
-	    	<p class="desc">It's up to you <span>DECIDE THE RULES</span> of the syndicate (lotteries or member of the lines to play)</p>
-    	</div>
-    </ion-item>
-    <ion-item class="line" padding>
-    	<img item-left src="assets/icon/payment_ico.svg" width="50" height="50">
-    	
-    	<div item-content>
-	    	<p class="head">NO CHASING FOR MONEY</p>
-	    	<p class="desc"><span>BUY ONLY YOUR LINES</span>; if you have decided for a syndicated ticket with 1 line, each member has to buy 1 line</p>
-    	</div>
-    </ion-item>
-    <ion-item padding no-lines>
-    	<img item-left src="assets/icon/syndicate_ico.svg" width="50" height="50">
-    	
-    	<div item-content>
-	    	<p class="head">LET'S GET THIS PARTY STARTED</p>
-	    	<p class="desc"><span>INVITE ALL YOUR FRIENDS</span> to the syndicate, more lines = more chances</p>
-    	</div>
-    </ion-item>
-    <div class="bottom-button" padding-bottom>
-    	<button class="center" padding ion-button color="secondary" (click)="goCreateSyndicate()">CREATE YOUR SYNDICATE</button>
-    </div>
+			<ion-col col-12 style="padding-bottom: 16px;">
+				<div class="bottom-button">
+					<button class="center" padding ion-button class="btnClass" (click)="goCreateSyndicate()">CREATE YOUR SYNDICATE</button>
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-grid class="joincreate">
+			<ion-row>
+				<ion-col col-3>
+					<img class="img-left" src="assets/img/mng_thumb@3x.png">
+				</ion-col>
+				<ion-col col-9 style="left:8%">
+					<h4 text-center>OR JOIN A MANAGED
+						<BR>SYNDICATE</h4>
+					<P class="fontstyle">We will do all the hard work for you.Buy one of amazing deal available and start your
+						<button class="center" style="margin-top: 5px;background-color: #00A651" padding ion-button color="primary">VIEW ALL OFFERS</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-list>
 
-    <ion-item margin-top padding no-lines>
-    	<img item-left src="assets/icon/logo_ico.svg" width="50" height="50">
-    	
-    	<div item-content>
-	    	<h2 class="bold">OR JUST SIT BACK AND RELAX</h2>
-	    	<p>Join one of our managed syndicates and we will manage everything for you!</p>
-    	</div>
-    </ion-item>
-    <div class="bottom-button" padding-bottom margin-bottom >
-    	<button class="center" padding ion-button color="primary">VIEW ALL OFFERS</button>
-    </div>
+
+	<!-- <ion-item margin-top padding no-lines>
+		<img item-left src="assets/icon/logo_ico.svg" width="50" height="50">
+
+		<div item-content>
+			<h2 class="bold">OR JUST SIT BACK AND RELAX</h2>
+			<p>Join one of our managed syndicates and we will manage everything for you!</p>
+		</div>
+	</ion-item>
+	<div class="bottom-button" padding-bottom margin-bottom>
+		<button class="center" padding ion-button color="primary">VIEW ALL OFFERS</button>
+	</div> -->
 
 
 </ion-content>
