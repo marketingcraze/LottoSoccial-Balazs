@@ -1,4 +1,8 @@
 page-update {
+    .scroll-content{
+        background-color: white;
+        height: 100%;
+    }
     .update_img
     {
     width:100%;
@@ -11,10 +15,10 @@ page-update {
     }
     .main_text
     {
-        font-weight: 500; 
-        font-size: 1.4rem;
-        margin-left: 4%;
-        margin-right: 4%;      
+        font-weight: 500;
+        font-size: 1.3em;
+        margin-left: 0%;
+        margin-right: 2%;     
     }
 
 

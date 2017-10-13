@@ -3,14 +3,14 @@
 <ion-content class="card-background-page" style="height: 90%"  (ionScroll)="scrollHandlerListGames($event)" id="reddemReGamesContent">
        
     <div ion-fixed class="header-widthGetGame">
-        <ion-slides autoplay="5000" loop="true" speed="500" pager="true" *ngIf="sliderImage">
+        <ion-slides autoplay="5000" loop="true" speed="500" pager="true" *ngIf="sliderImage" style="background-color: #E8E8E8">
             <ion-slide *ngFor="let image of sliderImage">
                 <ion-card>
                     <img src="{{image?.slider_medium}}" style="margin-top: 1px;width: 100%" />
                 </ion-card>
             </ion-slide>
         </ion-slides>
-        <ion-item>
+        <ion-item style="height: 49px">
             <ion-row>
                 <ion-col col-6>
                         <ion-icon><img src="assets/icon/rwp_icon.svg" alt="" width="24" height="24" style="margin:0 5px -5px 0px;" /></ion-icon>
@@ -19,7 +19,7 @@
                 </ion-col>
                 <ion-col col-6 >
                     <div (click)="openShare()" style="text-align: right" >
-                        <ion-icon ios="ios-share-outline" md="ios-share-outline" style="color: #2F76D1;font-size: 1.3em"></ion-icon><span style="margin-left: 8px;color: #2F76D1;font-size: 0.9em" ion-text >share</span>
+                        <ion-icon ios="ios-share-outline" md="ios-share-outline" style="color: #2F76D1;font-size: 0.9em"></ion-icon><span style="margin-left: 8px;color: #2F76D1;font-size: 0.9em" ion-text >share</span>
                         <span style="font-size: 0.9em;color: #2F76D1">get free points</span>
                     </div>
                 </ion-col>
@@ -41,7 +41,7 @@
                 </ion-col>
                 <ion-col col-3 item-center>
                     <h2>{{redeem_product?.product_title}}</h2>
-                    <p ion-text color="orange" style="margin-left: 18px;font-size: larger;font-weight: 900;">${{redeem_product?.top_prize}}</p>
+                    <p ion-text color="orange" style="margin-left: 18px;font-size: larger;font-weight: 900;">£{{redeem_product?.top_prize}}</p>
                     <p ion-text color="orange">TOP PRIZE</p>
                 </ion-col>
 
@@ -70,7 +70,7 @@
                 </ion-col>
                 <ion-col col-3 item-center>
                     <h2>Lucky colors</h2>
-                    <p ion-text color="orange" style="margin-left: 18px;font-size: larger;font-weight: 900;">$50</p>
+                    <p ion-text color="orange" style="margin-left: 18px;font-size: larger;font-weight: 900;">£50</p>
                     <p ion-text color="orange">TOP PRIZE</p>
                 </ion-col>
                 <ion-col col-4 item-right text-center>
