@@ -5,6 +5,7 @@ import { ChooseNumberPage } from '../choose-number/choose-number';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { AgreementPage } from '../agreement/agreement';
+import { HomePage } from '../home/home';
 /*
   Generated class for the CreateSyndicate5 page.
 
@@ -30,7 +31,8 @@ export class CreateSyndicate5Page {
   }
   close() {
     this.appSound.play('menuClick');
-    this.navCtrl.pop(CreateSyndicate4Page);
+    // this.navCtrl.pop(CreateSyndicate4Page);
+    this.navCtrl.setRoot(HomePage);
   }
   next() {
     this.appSound.play('menuClick');

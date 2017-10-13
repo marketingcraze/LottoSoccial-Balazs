@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 import { ConfirmNumberPage } from '../confirm-number/confirm-number';
 import { SyndicateService } from '../../providers/syndicate-service';
 declare var $: any; 
@@ -15,7 +15,7 @@ export class ChooseNumberPage {
   dataArr = [];
   syndId: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl:ViewController) {
     //this.dataArr = JSON.parse(localStorage.getItem('cardSelected'));
     this.syndId = localStorage.getItem('synd_id');
   }
@@ -72,6 +72,19 @@ export class ChooseNumberPage {
       }
       this.dataArr[index].hasError[j] = errArr;
       this.dataArr[index].lines[j] = arr;
+
+    var tArr = [];
+    for(var s=0; s<this.dataArr.length; s++) {
+      for(var t=0; t<this.dataArr[s].lines.length; t++) {
+        tArr = tArr.concat(this.dataArr[s].lines[t]);
+      }
+      if(tArr.indexOf('') == -1) {
+        this.errArr[s] = true;
+      } else {
+        this.errArr[s] = false;
+      }
+    }
+
     }
     this.errArr[index] = true
     if(this.errArr.indexOf(false) == -1) {
@@ -124,6 +137,8 @@ export class ChooseNumberPage {
 
     if(this.errArr.indexOf(false) == -1) {
       this.dError = true
+    } else {
+      this.dError = false
     }
       
       // if(this.dataArr[r].lines[w].indexOf(val) == -1) {
@@ -147,7 +162,7 @@ export class ChooseNumberPage {
       loader.dismiss();
       this.dataArr = res.response.response.product_group;
       for(var i=0; i<this.dataArr.length; i++) {
-        this.errArr[i] = false;
+        this.errArr[i] = true;
       var count = this.dataArr[i].numbers + this.dataArr[i].bonus;
       var arr = [];
       var errorArr = []
@@ -167,6 +182,10 @@ export class ChooseNumberPage {
     console.log(this.dataArr)
 
     })
+  }
+
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
   }
 
   trackByIndex(index: number, obj: any): any {
