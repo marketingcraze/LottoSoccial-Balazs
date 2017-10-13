@@ -130,6 +130,8 @@ import { AnimationService, AnimatesDirective } from 'css-animator';
 import { paymentService } from '../services/paymentService'
 import { Badge } from '@ionic-native/badge'
 import { AppVersion } from '@ionic-native/app-version';
+
+
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
@@ -145,6 +147,8 @@ import { DateLeftPipe } from '../pipes/date-left/date-left';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { Device } from '@ionic-native/device';
 import { AffiliatePage } from '../pages/affiliate/affiliate'
+import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
+import {} from '../pages'
 
 
 @NgModule({
@@ -227,6 +231,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         gameLoss,
         confirmOfferPurchasePage,
         AffiliatePage,
+        AffiliatePage2,
         AffiliatePopup,
         HelpPage,
 
@@ -368,6 +373,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         SendBonusPage,
         your_vouchers_popups,
         AffiliatePage,
+        AffiliatePage2,
         AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },

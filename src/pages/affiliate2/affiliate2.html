@@ -1,0 +1,98 @@
+<ion-header>
+    
+    </ion-header>
+    
+    <ion-content scroll="false" class="mainContent" (ionScroll)="scrollHandlerAffiliate($event)" id="affiliateContent" >
+            <div id="innerAffiliate" >
+        <div>
+            <img src="assets/img/landing-page-header@3x.png" width="100%" height="150" class="" />
+    
+        </div>
+        <div class="get-section">
+            <div class="get-text">GET {{affilateModelBinding?.line_count}} LINES</div>
+            <div class="plus-text">PLUS 5 GAMES</div>
+        </div>
+    
+        <ion-list style="height: 9vh; margin-top: -5px; position: relative; background-color: #5486C0">
+            <div>
+    
+                <ion-item no-lines id="voucherListItem" style="background-color: #5486C0" no-padding>
+                    <ion-thumbnail item-left class="thumbnalTag">
+                        <img src='{{affilateModelBinding?.product_image}}' class="thumbnailListImage">
+                    </ion-thumbnail>
+    
+                    <div item-center text-wrap>
+                        <p class="thumbnailListContent">{{affilateModelBinding?.product_name | uppercase}}<br> {{luckyDipDate}} {{luckyDipMonth}}</p>
+                    </div>
+                    <div item-right text-wrap>
+                        <p class="thumbnailListContent1">{{dummy}}</p>
+                    </div>
+    
+    
+    
+                </ion-item>
+            </div>
+        </ion-list>
+    
+    
+        <ion-item text-center text-wrap>
+            <div class="time-left" text-center>
+                <span><img style="height: 33px;top: -3px;position: relative;left:5px" src="https://images.vexels.com/media/users/3/136994/isolated/lists/aa3216bc8664471a5f75363fd74c728a-timer-clock-icon.png"/>
+               <span style="color:white;position:relative;bottom:11px;margin-left: 10px;font-size: 15px">TIME LEFT: </span></span>
+    
+                <div style="display: -webkit-inline-box;color: #fff;top: 3px; position: relative;">
+    
+                    <div style="margin-right: 6px; margin-left: 8px;"><b style="font-size:22px">{{day}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Days</span></div>
+                    <div style="margin-right: 6px;"><b style="font-size:22px">{{hrs}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Hrs</span></div>
+                    <div style="margin-right: 6px;"><b style="font-size:22px">{{mins}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Mins</span></div>
+                    <div style="margin-right: 6px;"><b style="font-size:22px">{{sec}}</b> <br><span style="font-size:12px;position: relative;top:-6px">Secs</span></div>
+                </div>
+                <div></div>
+            </div>
+        </ion-item>
+    
+        <ion-item item-center no-lines style="text-align: center;margin-top: 5%">
+            <img src="assets/img/affilate2_image.jpg" style="width: 80%;text-align: center">
+            <p style="text-align: center;font-size: 2em;margin-top: 3%;color: black;font-family: -webkit-body"> £1.99 </p>
+        </ion-item>
+        <!-- <ion-label class="label-md-offer" style="text-align: center;margin-top: 8px; margin-bottom: 8px">
+            <div class="offer-title" style="color: black;font-weight: bold;font-size: 27px;">
+                Play now for £1
+            </div>
+            <div class="offer-title" style="color: black;font-size: 16px;">
+                for a limited time only
+            </div>
+        </ion-label> -->
+       
+    
+        <ion-item text-wrap text-center no-lines style="padding-top: 10px;text-align: center">
+            <div style="text-align: center">
+                <input type="button" value="PLAY NOW" style="width: 80%; height: 45px;
+                 color: white;background-color: #249040;border-radius: 30px;border: none; font-size: 23px; font-weight: bold;
+               "/>
+            </div>
+            <div style="text-align: center;width: 100%;margin-top: 3%;color: #262626">
+                <p>ƒ the number above may be replaced during checkout</p>
+            </div>
+        </ion-item>
+        <ion-item text-wrap text-center no-lines style="background-color: #262626;margin-top: 20px;height: 36%">
+            <div style="bottom: 10px; top: 10px; text-align: center">
+                <img src="assets/img/guaranteed_tickets.png" style="width: 30%;margin-bottom: 5px; margin-top: 5px">
+                <p style="color: white; font-size: 16px;padding: 2px 8px 10px 8px">Tckets are purchased directly from the National lottary. Each Ticket is shared with other memebers in the form
+                    of a syndicate of 49 or less. 1 in 5 jackpots are won by Syndicate!</p>
+            </div>
+        </ion-item>
+        <ion-item style="background-color: lightgray; height: 10%;margin-bottom: 2%">
+            <div>
+                <p style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 17px;" (click)="dismissPopUp()">No, thanks</p>
+            </div>
+        </ion-item>
+            </div>
+    </ion-content>
+    <div >
+            <span *ngIf="downShowing==0"  >
+                <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+           </span>
+        </div>
+        
+        
