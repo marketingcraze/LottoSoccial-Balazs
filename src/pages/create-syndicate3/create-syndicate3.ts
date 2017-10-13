@@ -21,7 +21,7 @@ export class CreateSyndicate3Page {
   euroselected: boolean = false
   lottoselected: boolean = false
   powerselected: boolean = false 
-  oneSelected: boolean = false
+  oneSelected: boolean = true
   lotteries = [];
   selectCount: number = 0;
 
@@ -44,11 +44,11 @@ export class CreateSyndicate3Page {
           this.selectCount += 1
         }
       }
-      if(this.selectCount >= 1) {
-        this.oneSelected = true;
-      } else {
-        this.oneSelected = false;
-      }
+      // if(this.selectCount >= 1) {
+      //   this.oneSelected = true;
+      // } else {
+      //   this.oneSelected = false;
+      // }
 
     } else {
       this.getlotteris();
@@ -71,15 +71,21 @@ export class CreateSyndicate3Page {
     }else {
       this.selectCount -= 1
     }
-    if(this.selectCount >= 1) {
-      this.oneSelected = true;
-    } else {
-      this.oneSelected = false;
-    }
+    // if(this.selectCount >= 1) {
+    //   this.oneSelected = true;
+    // } else {
+    //   this.oneSelected = false;
+    // }
     
   }
 
   next() {
+    if(this.selectCount >= 1) {
+      this.oneSelected = true;
+    } else {
+      this.oneSelected = false;
+      return;
+    }
     localStorage.setItem('cardDefault', JSON.stringify(this.lotteries));
     this.navCtrl.push(CreateSyndicate4Page);
   }

@@ -235,6 +235,7 @@ export class InviteFriendsPage {
       console.log('inisde api response')
       console.log(JSON.stringify(res));
       this.loader.dismiss();
+      this.getSyndicateMeembers()
       this.cCancle()
       this.closed()
       this.presentToast()

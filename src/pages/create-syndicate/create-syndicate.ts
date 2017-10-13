@@ -20,6 +20,7 @@ export class CreateSyndicatePage {
   public todo : FormGroup;
   public hideimagebtn: boolean = false
   public imagechosed: boolean = false
+  public namechosed: boolean = false
   public sImage: string = ''
   public title: string = ''
 
@@ -56,7 +57,6 @@ export class CreateSyndicatePage {
           this.title = storeddata.title
           if(this.sImage != undefined && this.sImage != '') {
             this.hideimagebtn = true
-            this.imagechosed = true
           }
           
         }
@@ -77,7 +77,24 @@ export class CreateSyndicatePage {
   }
 
   logForm(){
+    console.log("image link", this.sImage)
+    console.log("text view title ", this.todo.value.title)
     this.appSound.play('buttonClick');
+    if(!this.todo.valid) {
+      if(this.sImage == '' || !this.sImage) {
+        this.imagechosed = true
+        return;
+      } else if(this.sImage != '' && !this.todo.valid) {
+        this.namechosed = true
+        return;
+      } else {
+        this.imagechosed = false
+        this.namechosed = false
+      }
+    } else {
+        this.imagechosed = false
+        this.namechosed = false
+    }
     var data = {
       title: this.todo.value.title,
       image: this.sImage
