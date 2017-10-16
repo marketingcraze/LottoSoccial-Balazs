@@ -2,47 +2,50 @@
     <!-- Home Menu -->
     
     <div *ngIf="counter==0"style="position: absolute;">
-         <img src="assets/img/sideMenu.png" style="height: 42px;border-radius: 50%;max-width: 200%;width: 76%;margin-left: 2%;position: absolute;margin-top: 1px">
-        <img src="assets/img/share.svg" style=" left: 92%; color: white; height: 74px; position: relative; top: 5vh;z-index: inherit;transform: rotate(98deg);">
+         <img src="assets/img/sideMenu.png" class="c0SideMenu">
+        <img src="assets/img/share.svg" class="c0arrow">
        
     </div>
-    <div  *ngIf="counter==0" class="homeDiv"><p style="font-size: 18px;font-weight: bold;padding:4px">
-        <span style="color: #918922;font-size: 14px">
+    <div  *ngIf="counter==0" class="homeDiv">
+        <p class="c0Description">
+        <span class="descriptionInner">
             QUICK TOUR {{counter + 1}}/10<br>
         </span> 
-        Click here for useful links on the app.</p>  </div>
+        Click here for useful links on the app.
+    </p>  
+</div>
     
 
-     <div *ngIf="counter==2" style="margin-top: 10%;width: 100%;position: absolute">
-            <div class="homeCardDiv"><p style="font-size: 18px;font-weight: bold;padding:5px">
-                    <span style="color: #918922;font-size: 14px">
+     <div *ngIf="counter==2" class="c2MainDiv">
+            <div class="homeCardDiv"><p class="c2Description">
+                    <span  class="descriptionInner">
                             QUICK TOUR {{counter + 1}}/10<br>
                         </span> 
                 Useful information about the service .</p>  </div>
             
-        <img src="assets/img/share.svg" style=" left: 15%; color: white; height: 80px; position: relative; top: 0vh;z-index: inherit;transform:rotate(92deg);">
+        <img src="assets/img/share.svg" class="c2arrow">
            
-            <img src="assets/img/homepage.png" style="border: 5px solid gray;height: 53vh;width: 89%;opacity: 0.8"><br>
+            <img src="assets/img/homepage.png" class="c2img"><br>
      </div>
 
 
     <!-- Credit and Points Menu -->
 
-     <div *ngIf="counter==8 || counter==9" style="top: 7%;position: absolute;width: 100%">
-        <img src="assets/img/creditPoints.png" style="width: 100%;border: 5px solid gray">
+     <div *ngIf="counter==8 || counter==9" class="c89MinDiv">
+        <img src="assets/img/creditPoints.png" class="c89Image">
         <span *ngIf="counter==9">
-                <img src="assets/img/share.svg" style=" left: 12%; color: white; height: 68px; position: absolute; top: 7vh;z-index: inherit;transform: rotate(-41deg)">
-                <div class="rotetDiv fstDiv11"><p style="font-size: 18px;font-weight: bold;">
-                        <span style="color: #918922;font-size: 13px">
+                <img src="assets/img/share.svg" class="c89arrow">
+                <div class="rotetDiv fstDiv11"><p class="c9Div">
+                        <span  class="descriptionInner">
                                 QUICK TOUR {{counter + 1}}/10<br>
                             </span> 
                     Your Credit in Store / Offers pages.</p> </div>
         </span>
         <span  *ngIf="counter==8">
-                <img src="assets/img/share.svg" style=" right: 14%; color: white; height: 68px; position: absolute; top: 7vh;z-index: inherit;transform: scaleX(-1) rotate(-54deg)">
+                <img src="assets/img/share.svg" class="c8arrow">
                 
-                <div class="rotetDiv fstDiv12"><p style="font-size: 18px;font-weight: bold;padding: 0px 5px 0px 5px">
-                        <span style="color: #918922;font-size: 14px">
+                <div class="rotetDiv fstDiv12"><p class="c8Description">
+                        <span  class="descriptionInner">
                                 QUICK TOUR {{counter + 1}}/10<br>
                             </span> 
                     Spend your points on the Games section.</p> </div>
@@ -52,51 +55,51 @@
 
      <!-- Store Information -->
      <span  *ngIf="counter==4">
-    <div class="rotetDiv fstDiv"><p style="font-size: 18px;font-weight: bold">
-            <span style="color: #918922;font-size: 14px">
+    <div class="rotetDiv fstDiv"><p class="c4MainDiv">
+            <span  class="descriptionInner">
                     QUICK TOUR {{counter + 1}}/10<br>
                 </span>  
         Browse through the store for Amazing offers.</p>  </div>
 
-    <img src="assets/img/share.svg" style=" left: 0%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform: rotate(327deg)"> 
+    <img src="assets/img/share.svg" class="c4arrow"> 
 </span>
 
         <!-- Manage Syndicate -->
         <span *ngIf="counter==5">
-    <div class="rotetDiv sndDiv"><p style="font-size: 18px;font-weight: bold">
-            <span style="color: #918922;font-size: 14px">
+    <div class="rotetDiv sndDiv"><p class="c5mainDiv">
+            <span  class="descriptionInner">
                     QUICK TOUR {{counter + 1}}/10<br>
                 </span>  
         Manage your syndicates.</p> </div>
-    <img src="assets/img/share.svg" style=" left: 9%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform: rotate(301deg) ">
+    <img src="assets/img/share.svg" class="c5arrow">
 </span>
 
     <!-- Games -->
     <span *ngIf="counter==6">
-    <div class="rotetDiv thrdDiv"><p style="font-size: 18px;font-weight: bold;padding: 4px">
-            <span style="color: #918922;font-size: 14px">
+    <div class="rotetDiv thrdDiv"><p class="c6MainDiv">
+            <span  class="descriptionInner">
                     QUICK TOUR {{counter + 1}}/10<br>
                 </span>  
         Your games & games for you.</p>  </div>
-    <img src="assets/img/share.svg" style=" right: 9%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform:rotate(64deg) scaleX(-1)"> 
+    <img src="assets/img/share.svg" class="c6arrow"> 
 </span>
         <!-- offer -->
 <span *ngIf="counter==7" >
-<div class="rotetDiv fourthDiv"><p style="font-size: 18px;font-weight: bold;padding: 4px">
-        <span style="color: #918922;font-size: 14px">
+<div class="rotetDiv fourthDiv"><p class="c7MainDiv">
+        <span  class="descriptionInner">
                 QUICK TOUR {{counter + 1}}/10<br>
             </span>  
     Special offers available.</p>  </div>
-    <img src="assets/img/share.svg" style="right: 0%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform:rotate(43deg) scaleX(-1)"> 
+    <img src="assets/img/share.svg" class="c7arrow"> 
 </span>
    <!-- pullup -->
    <span *ngIf="counter==3">
-   <div class="rotetDiv pullUpDiv"><p style="font-size: 18px;font-weight: bold;padding: 4px">
-        <span style="color: #918922;font-size: 14px">
+   <div class="rotetDiv pullUpDiv"><p class="c3MainDiv">
+        <span  class="descriptionInner">
                 QUICK TOUR {{counter + 1}}/10<br>
             </span>    
     Latest news and  programmes for you.</p>  </div>
-    <img src="assets/img/share.svg" style="right: 4%; color: white; height: 69px; position: absolute; top: 74vh;z-index: 999;transform:scaleX(-1) rotate(-56deg)"> 
+    <img src="assets/img/share.svg" class="c3arrow"> 
     </span> 
     <!-- bottom image -->
      
@@ -112,8 +115,8 @@
 
     <span *ngIf="counter==1">
     <img src="assets/img/message-count.png" class="messageCountIcon">
-    <div  class=" fourthDivRight"><p style="font-size: 18px;font-weight: bold;padding: 4px">
-         <span style="color: #918922;font-size: 14px">
+    <div  class=" fourthDivRight"><p class="c1Description">
+         <span  class="descriptionInner">
             QUICK TOUR {{counter + 1}}/10<br>
         </span> 
         Click here for in app messages. </p></div>

@@ -7,6 +7,82 @@ overlay-page{
         top: 0;
         left: 0;
     }
+    .descriptionInner{
+      color: #918922;font-size: 14px
+    }
+    .c0SideMenu{
+      height: 42px;border-radius: 50%;max-width: 200%;width: 76%;margin-left: 2%;position: absolute;margin-top: 1px
+    }
+    .c0arrow{
+      left: 92%; color: white; height: 74px; position: relative; top: 4vh;z-index: inherit;transform: rotate(196deg) scaleY(-1);
+    }
+    .c0Description{
+      font-size: 18px;font-weight: bold;padding:4px
+    }
+    .c1Description{
+      font-size: 18px;font-weight: bold;padding: 4px
+          
+    }
+    .c2MainDiv{
+      margin-top: 10%;width: 100%;position: absolute
+    }
+    .c2Description{
+      font-size: 18px;font-weight: bold;padding:5px
+    }
+    .c2arrow{
+      left: 15%; color: white; height: 80px; position: relative; top: 0vh;z-index: inherit;transform:rotate(92deg);
+    }
+    .c2img{
+      border: 5px solid gray;height: 53vh;width: 89%;opacity: 0.8
+    }
+    .c3MainDiv{
+      font-size: 18px;font-weight: bold;padding: 4px
+    }
+    .c3arrow{
+      right: 4%; color: white; height: 69px; position: absolute; top: 74vh;z-index: 999;transform:rotate(119deg)
+    }
+    .c89MinDiv{
+      top: 7%;position: absolute;width: 100%
+    }
+    .c89Image{
+      width: 100%;border: 5px solid gray
+    }
+    .c89arrow{
+      left: 12%; color: white; height: 68px; position: absolute; top: 7vh;z-index: inherit;transform: rotate(-41deg)
+    }
+    .c9Div{
+      font-size: 18px;font-weight: bold;
+    }
+    .c8arrow{
+      right: 14%; color: white; height: 68px; position: absolute; top: 7vh;z-index: inherit;transform: scaleX(-1) rotate(-54deg)
+    }
+    .c8Description{
+      font-size: 18px;font-weight: bold;padding: 0px 5px 0px 5px
+    }
+    .c4MainDiv{
+      font-size: 18px;font-weight: bold
+    }
+    .c4arrow{
+      left: 0%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform: rotate(62deg) scaleY(-1)
+    }
+    .c5mainDiv{
+      font-size: 18px;font-weight: bold
+    }
+    .c5arrow{
+      left: 9%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform: rotate(44deg) scaleY(-1) 
+    }
+    .c6MainDiv{
+      font-size: 18px;font-weight: bold;padding: 4px
+    }
+    .c6arrow{
+      right: 9%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform:rotate(139deg) 
+    }
+    .c7MainDiv{
+      font-size: 18px;font-weight: bold;padding: 4px
+    }
+    .c7arrow{
+      right: 0%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform:rotate(115deg)
+    }
 
     .test {
 			border: 1px solid;
@@ -213,11 +289,11 @@ overlay-page{
 
   }   
 .message_count_icon-arrow{
-      transform: rotate(157deg);
+      transform: rotate(-40deg);
       height: 67px;
-      top: 9vh;
+      top: 8vh;
       position: absolute;
-      right: 0px;
+      right: 8%;
 }  
 .scroll-content{
   padding: 0 !important;
