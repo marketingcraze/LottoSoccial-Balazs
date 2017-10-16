@@ -122,6 +122,7 @@ export class MySyndicatePage {
       console.log('syndicate list');
 
       loader.dismiss();
+      if(res.response[0].get_syndicate_list.response.syndicate_group){
         this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
         
         console.log("syndSrr is ", this.syndArr)
@@ -129,14 +130,19 @@ export class MySyndicatePage {
         if(this.chatcount >0){
             $(".ctNow").removeClass('pulse');
         }
-        if(this.syndArr.length == 0){
-            this.viewEmpty = true;
+        if(this.syndArr){
+            if(this.syndArr.length == 0){
+                this.viewEmpty = true;
+            }
+            for(var i=0; i<this.syndArr.length; i++) {
+              this.toggled.push(false);
+            }
+            this.toggled[0] = true;
         }
-        for(var i=0; i<this.syndArr.length; i++) {
-          this.toggled.push(false);
-        }
-        this.toggled[0] = true;
+       
       console.log(this.syndArr);
+      }
+        
     })
   }
 

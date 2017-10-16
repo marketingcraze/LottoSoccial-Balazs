@@ -37,7 +37,7 @@
 
         <div text-center style="width: 100%" *ngIf="creditPoints==0" >
             <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-            <span class="tooltip t1" *ngIf="creditPoints>0"  (click)="redirectToOfferPage()" >GET CREDIT </span>
+            <span class="tooltip t1" style="color:cornflowerblue "  (click)="redirectToOfferPage()" >GET CREDIT </span>
           </div>
       </ion-col>
       <ion-col width-50 style="width: 100%">
@@ -52,9 +52,9 @@
           </span>
         </div>
 
-        <div text-center style="width: 100%" *ngIf="accountDetails.reward_points==0"   >
+        <div text-center style="width: 100%" *ngIf="accountDetails.reward_points==0 || !accountDetails.reward_points"   >
             <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
-            <span class="tooltip t2" *ngIf="accountDetails.reward_points>0" (click)="mgmPageOpen()">GET POINTS  </span>
+            <span class="tooltip t2"  style="color:cornflowerblue " (click)="mgmPageOpen()">GET POINTS  </span>
           </div>
       </ion-col>
     </ion-row>
@@ -142,7 +142,8 @@
   <!-- </div> -->
 
   <div style="text-align: center; width: 100%;" (click)="clicked()">
-    <p style="position: absolute; height: 8%;bottom: 0%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{currentSliderCount+1}} / {{total_cards}} CARDS</p>
+    <p *ngIf="currentSliderCount==0" style="position: absolute; height: 8%;bottom: 0%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{currentSliderCount+1}} / {{total_cards}} CARDS</p>
+    <p *ngIf="!currentSliderCount==0" style="position: absolute; height: 8%;bottom: 0%; text-align: center; width: 100%; color: gray;font-size: 16px" text-center>{{currentSliderCount}} / {{total_cards}} CARDS</p>
   </div>
 
 
