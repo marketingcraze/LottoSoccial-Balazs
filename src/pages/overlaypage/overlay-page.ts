@@ -12,15 +12,15 @@ export class OverlayPage {
         private viewctrl: ViewController,
         private navParms: NavParams, public voucher_service: VoucherService, private loadingCtrl: LoadingController) {
     }
-    dismissPopUp() {
-        this.viewctrl.dismiss();
+    dismissPopUp(data:any=1) {
+        this.viewctrl.dismiss(data);
     }
 
-    closeOverlay() {
+    closeOverlay(data:any=1) {
        this.counter++;
        if(this.counter>9)
        {
-         this.viewctrl.dismiss();
+         this.viewctrl.dismiss(data);
        }
       
     }

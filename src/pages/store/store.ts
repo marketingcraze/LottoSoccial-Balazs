@@ -1,5 +1,6 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { App, Platform, NavController, NavParams, ActionSheetController, 
+import {
+    App, Platform, NavController, NavParams, ActionSheetController,
     Slides, LoadingController, AlertController, ModalController, Loading, Tabs
 } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -22,8 +23,9 @@ import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { PlayGamePage } from '../play-games/play-games';
 import { confirmOfferPurchasePage } from '../confirm-offer-purchase/confirm-offer-purchase'
 import { OverlayPage } from '../overlaypage/overlay-page'
+import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
 // import * as $ from 'jquery';
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'page-store',
@@ -36,71 +38,71 @@ export class StorePage {
     @ViewChild('mySlide') carouselSlide: Slides;
     @ViewChild("confirmPayment") confirmPayment;
     public footerState: IonPullUpFooterState;
-    public homeCardData:any;
-    public spaceBetween:number = 0;
-    public whatsOn:boolean = false;
-    public nav:NavController;
+    public homeCardData: any;
+    public spaceBetween: number = 0;
+    public whatsOn: boolean = false;
+    public nav: NavController;
 
-    private currentTime:Date = new Date();
-    currentSliderCount:any=0;
+    private currentTime: Date = new Date();
+    currentSliderCount: any = 0;
 
     result: any = [];
     resultDate: any = [];
     counter0 = 0;
-	timer0Id: string;
-	timer0button = 'Subscribe';
-    count:number;
-    day:any;
-    hrs:any;
-    min:any;
-    sec:any;
-    counts:any=0;
+    timer0Id: string;
+    timer0button = 'Subscribe';
+    count: number;
+    day: any;
+    hrs: any;
+    min: any;
+    sec: any;
+    counts: any = 0;
     // payment variables
     userCards: any;
-    userCardsCount:number = 0;
-    customerToken:string;
-    jackpotList:any
-    jackpotGroup:any
+    userCardsCount: number = 0;
+    customerToken: string;
+    jackpotList: any
+    jackpotGroup: any
     total_cards = 0
 
     //buy credit
-    loading:Loading;
-    buyOfferStatus:any;
-    offerStatus:boolean=false;
-    errorshow:boolean=false;
-    visitorId:any;
+    loading: Loading;
+    buyOfferStatus: any;
+    offerStatus: boolean = false;
+    errorshow: boolean = false;
+    visitorId: any;
 
-    slideInUp:boolean = false;
-    tip11:boolean = false;
-    tip22:boolean = false;
-    
+    slideInUp: boolean = false;
+    tip11: boolean = false;
+    tip22: boolean = false;
+
     flyInOutState: String = 'out';
 
-    homeCard:any;
-    gameGroup:any;
-    siteUrl:string = CommonService.sitename;
+    homeCard: any;
+    gameGroup: any;
+    siteUrl: string = CommonService.sitename;
 
-    offersForYou:any = {
-        card_title:"",
-        offer_group:[]
+    offersForYou: any = {
+        card_title: "",
+        offer_group: []
     };
 
-    accountDetails:any = {
-        bonus_credit:0.00,
-        reward_points:0
+    accountDetails: any = {
+        bonus_credit: 0.00,
+        reward_points: 0
     };
-    homeMessage:any;
-    homeBlog:any;
-    homeEvents:any;
-    popMainSlide:any;
-    popSlides:any;
+    homeMessage: any;
+    homeBlog: any;
+    homeEvents: any;
+    popMainSlide: any;
+    popSlides: any;
 
-    homeData:any = {};
+    homeData: any = {};
 
     sliderOptions = {
-        loop:'true',
-        initialSlide:2,
-        effect:'coverflow'
+        loop: 'true',
+        initialSlide: 2,
+        effect: 'coverflow'
     };
 
     coverflow = {
@@ -108,7 +110,7 @@ export class StorePage {
         stretch: 0,
         depth: 100,
         modifier: 1,
-        slideShadows : true
+        slideShadows: true
     };
 
     private slides = [];
@@ -143,112 +145,116 @@ export class StorePage {
     ];
 
 
-    
+
     constructor(
-        public app:App,
+        public app: App,
         private st: SimpleTimer,
-        public params:Params,
+        public params: Params,
         private ref: ChangeDetectorRef,
-        private srvHome:HomeService,
-        private loadingCtrl:LoadingController,
-        private alertCtrl:AlertController,
-        public platform: Platform, 
-        public navCtrl: NavController, 
+        private srvHome: HomeService,
+        private loadingCtrl: LoadingController,
+        private alertCtrl: AlertController,
+        public platform: Platform,
+        public navCtrl: NavController,
         public navParams: NavParams,
         private storage: Storage,
         public srvOffer: OfferService,
         private iab: InAppBrowser,
-        public commonSrv:CommonService,
-        public appSound:AppSoundProvider,
-        public offerService:OfferService,
-        public modalCtrlr:ModalController,
-        public actionSheetCtrl: ActionSheetController) 
-        {
-            
-            if(localStorage.getItem('isInstall')==null)
-            {
-                this.onPopUp();
-            }
+        public commonSrv: CommonService,
+        public appSound: AppSoundProvider,
+        public offerService: OfferService,
+        public modalCtrlr: ModalController,
+        public actionSheetCtrl: ActionSheetController) {
 
-            if(localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall"){
-                localStorage.setItem('isInstall', "moreThanFirst");
-                this.onPopUp();
-            }
-          
-            //this.onPopUp();
-        storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
-            this.visitorId=firstTimeLoad;
-            });
+        if (localStorage.getItem('isInstall') == null) {
+            this.onPopUp();
+        }
+
+        if (localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall") {
+            localStorage.setItem('isInstall', "moreThanFirst");
+            this.onPopUp();
+        }
+
+        //this.onPopUp();
+        storage.get('firstTimeLoad').then((firstTimeLoad: any) => {
+            this.visitorId = firstTimeLoad;
+        });
         this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
 
-        this.srvHome.getCreditOffers().subscribe((data:any)=> {
+        this.srvHome.getCreditOffers().subscribe((data: any) => {
             console.log("StorePage->getCreditOffers() success", data);
             if (data && data.response) {
-              
+
                 // let res = JSON.parse( data.response );
                 // console.log("StorePage->getCreditOffers() success", res);
             }
-            
-        }, (err:Error)=> {
+
+        }, (err: Error) => {
             console.log("StorePage->getCreditOffers() error", err);
         });
 
         this.nav = this.app.getRootNav();
-        this.spaceBetween = Math.floor( platform.width() * -0.10 );
+        this.spaceBetween = Math.floor(platform.width() * -0.10);
 
         this.params.events.subscribe('home-data', data => {
             console.log("home-data", data);
-            
+
             for (var i = 0; i < data.length; i++) {
 
-                if ( data[i].get_home_card ) {
+                if (data[i].get_home_card) {
                     this.homeCard = data[i].get_home_card.response;
-                    
-                    if ( this.homeCard.game 
-                        && this.homeCard.game.game 
-                        && this.homeCard.game.game.game_group ) {
+
+                    if (this.homeCard.game
+                        && this.homeCard.game.game
+                        && this.homeCard.game.game.game_group) {
 
                         this.gameGroup = this.homeCard.game.game.game_group;
                         this.total_cards += this.gameGroup.length
                     }
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
-                      
+
                         this.st.newTimer('1sec', 1);
                         this.subscribeTimer0();
                         this.total_cards++
-                        
+
                         // updates every seconds
                         setInterval(() => {
                             this.currentTime = new Date();
                         }, 1000);
                     }
-                    
-                }else if ( data[i].get_account_details ) {
+
+                } else if (data[i].get_account_details) {
                     this.accountDetails = data[i].get_account_details.response;
-                    this.creditPoints=this.accountDetails.bonus_credit.slice(1)
-                }else if ( data[i].get_home_message ) {
+                    if (this.accountDetails.bonus_credit) {
+                        this.creditPoints = this.accountDetails.bonus_credit.slice(1)
+                    }
+                    else {
+                        this.creditPoints = 0;
+                    }
+
+                } else if (data[i].get_home_message) {
                     this.homeMessage = data[i].get_home_message.response;
                     params.setUnreadCount(this.homeMessage.count);
-                }else if ( data[i].get_home_events ) {
+                } else if (data[i].get_home_events) {
                     this.homeEvents = data[i].get_home_events.response.events[0];
-                }else if ( data[i].get_home_blog ) {
+                } else if (data[i].get_home_blog) {
                     this.homeBlog = data[i].get_home_blog.response.blogs;
                 }
             }
             this.slides = this.mySlides;
 
             // this.home_slides.coverflow.slideShadows = false;
-            
-            let timeoutId = setTimeout(() => {  
-              this.slideInitial();
-              clearTimeout(timeoutId);
+
+            let timeoutId = setTimeout(() => {
+                this.slideInitial();
+                clearTimeout(timeoutId);
             }, 1000);
-            
-            console.log("home data", this.homeMessage );
-        });        
+
+            console.log("home data", this.homeMessage);
+        });
 
         this.checkCardExists();
 
@@ -256,6 +262,11 @@ export class StorePage {
     onPopUp() {
         let modal = this.modalCtrlr.create(OverlayPage);
         modal.present();
+        modal.onDidDismiss((data) => {
+            if(data){
+                this.navCtrl.push(NewSyndicatePage)
+            }
+        })
     }
     ionViewDidLoad() {
         console.log('ionViewDidLoad StorePage');
@@ -265,36 +276,36 @@ export class StorePage {
         // initialize slider end
 
     }
-    
-    ionViewDidEnter(){
-        localStorage.setItem('isInstall',"empty")
+
+    ionViewDidEnter() {
+        localStorage.setItem('isInstall', "empty")
     }
 
     ionViewWillEnter() {
-        this.commonSrv.trackSegmentPage("Store","StorePage").subscribe(
-            data=>{
+        this.commonSrv.trackSegmentPage("Store", "StorePage").subscribe(
+            data => {
                 console.log("track segment called");
             },
-            err=>{            
+            err => {
             },
-            ()=> {  }
-            );
+            () => { }
+        );
     }
 
-    checkCardExists(){
+    checkCardExists() {
         console.log("StorePage::checkCardExists()");
         let loader = this._showLoader();
-        
+
         this.srvOffer.getJackpotList().subscribe((data) => {
             console.log("StorePage::getJackpotList() success", data);
-            if (data.response && data.response[0] 
+            if (data.response && data.response[0]
                 && data.response[0].get_big_jackpot_list) {
                 this.jackpotList = data.response[0].get_big_jackpot_list.response;
                 this.customerToken = this.jackpotList.customer_token;
-               
+
             }
             loader.dismiss();
-          
+
         }, (err) => {
             console.log("StorePage::getJackpotList() error", err);
             loader.dismiss();
@@ -302,33 +313,33 @@ export class StorePage {
     }
 
     showPaymentOptions(offer) {
-    
+
         this.appSound.play('buttonClick');
         if (!this.customerToken) {
             this.goPaymentWebview(offer);
-        }else{
+        } else {
             let loader = this._showLoader();
 
             // get all the cards details
             this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
                 console.log("StorePage::showPaymentOptions() success", data);
-              
+
                 let token_exists = 0;
                 for (var i = 0; i < data.response.length; ++i) {
                     if (data.response[i].get_customer_paymill_card_details) {
                         token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-                    } 
+                    }
                 }
 
                 if (token_exists > 0) {
-                   
+
                     data.response.push({ offer: offer });
                     this.userCards = data.response;
 
                     console.log("StorePage::showPaymentOptions() success", this.userCards);
                     loader.dismiss();
                     this.confirmPayment.togglePopup()
-                }else{
+                } else {
                     this.goPaymentWebview(offer);
                     loader.dismiss();
                 }
@@ -338,28 +349,28 @@ export class StorePage {
             });
         }
     }
-    goPaymentWebviewHomeoffer(offer:any,prosub_id){
-        
-           let opt:string = "toolbarposition=top";
-           let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
-           str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
-           str += this.customerToken+'&offer_id=' + offer+ '&prosub_id='+prosub_id;
-           console.log("goPaymentWebview", str);
-           this.iab.create( str, 'blank', opt);
-          
-       }
+    goPaymentWebviewHomeoffer(offer: any, prosub_id) {
 
-    goPaymentWebview(offer:any){
-     
-        let opt:string = "toolbarposition=top";
+        let opt: string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
-        str += '&customer_id='+CommonService.session.customer_id+'&customer_token='
-        str += this.customerToken+'&offer_id=' + offer+ '&prosub_id=1111';
+        str += '&customer_id=' + CommonService.session.customer_id + '&customer_token='
+        str += this.customerToken + '&offer_id=' + offer + '&prosub_id=' + prosub_id;
         console.log("goPaymentWebview", str);
-        this.iab.create( str, 'blank', opt);
-       
+        this.iab.create(str, 'blank', opt);
+
     }
-    paymentDone(){
+
+    goPaymentWebview(offer: any) {
+
+        let opt: string = "toolbarposition=top";
+        let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+        str += '&customer_id=' + CommonService.session.customer_id + '&customer_token='
+        str += this.customerToken + '&offer_id=' + offer + '&prosub_id=1111';
+        console.log("goPaymentWebview", str);
+        this.iab.create(str, 'blank', opt);
+
+    }
+    paymentDone() {
         /*
         let alert = this.alertCtrl.create({
             title: 'Success!',
@@ -369,42 +380,42 @@ export class StorePage {
         alert.present();
         */
     }
-        
-    loadLink(url){
+
+    loadLink(url) {
         this.appSound.play('buttonClick');
         let urlRedirect = url;
         console.log("::gameTargetLink to ", url);
-        let opt:string = "toolbarposition=top";
+        let opt: string = "toolbarposition=top";
         this.iab.create(urlRedirect, '_blank', opt);
-        
+
     }
 
-    mgmPageOpen(){
-     
-        let modal=this.modalCtrlr.create(referFriend);
-        modal.present()
+    mgmPageOpen() {
+        this.navCtrl.push(referFriend);
+        // let modal = this.modalCtrlr.create(referFriend);
+        // modal.present()
     }
 
-    gameTargetLink(target){
-       
-      this.appSound.play('buttonClick');
-      var parts=target.split('/');  
-      var gameId=parts[1].slice(8);
-      this.nav.push(PlayGamePage,{"game":gameId});
+    gameTargetLink(target) {
+
+        this.appSound.play('buttonClick');
+        var parts = target.split('/');
+        var gameId = parts[1].slice(8);
+        this.nav.push(PlayGamePage, { "game": gameId });
     }
 
     ngAfterViewInit() {
-        console.log( "ngAfterViewInit()" );
+        console.log("ngAfterViewInit()");
         // this.home_slides.freeMode = true;
         // this.home_slides.loop = true;
         // this.home_slides.autoplayDisableOnInteraction = false;
     }
 
-    showWhatsOn(){
+    showWhatsOn() {
         console.log("showWhatsOn: " + this.slideInUp);
         this.appSound.play('buttonClick');
 
-        if(this.slideInUp) {
+        if (this.slideInUp) {
 
             let timeoutId = setTimeout(() => {
                 this.whatsOn = !this.whatsOn;
@@ -412,85 +423,85 @@ export class StorePage {
             }, 500);
             this.slideInUp = !this.slideInUp;
 
-        }else{
+        } else {
 
             this.whatsOn = !this.whatsOn;
 
-            let timeoutId = setTimeout(() => {  
-              this.slideInUp = !this.slideInUp;
-              clearTimeout(timeoutId);
+            let timeoutId = setTimeout(() => {
+                this.slideInUp = !this.slideInUp;
+                clearTimeout(timeoutId);
             }, 10);
         }
     }
 
-    showLottoSocial(){
-          console.log("showLottoSocial()");
+    showLottoSocial() {
+        console.log("showLottoSocial()");
         this.appSound.play('buttonClick');
-          let actionSheet = this.actionSheetCtrl.create({
-          title: 'Modify your album',
-          cssClass:'bottom-sheet',
-          buttons: [
-            {
-              text: 'Destructive',
-              role: 'destructive',
-              handler: () => {
-                console.log('Destructive clicked');
-              }
-            },{
-              text: 'Archive',
-              handler: () => {
-                console.log('Archive clicked');
-              }
-            },{
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-                console.log('Cancel clicked');
-              }
-            }
-          ]
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Modify your album',
+            cssClass: 'bottom-sheet',
+            buttons: [
+                {
+                    text: 'Destructive',
+                    role: 'destructive',
+                    handler: () => {
+                        console.log('Destructive clicked');
+                    }
+                }, {
+                    text: 'Archive',
+                    handler: () => {
+                        console.log('Archive clicked');
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
         });
         actionSheet.present();
     }
 
-    viewAllOffers(){
+    viewAllOffers() {
         this.params.goTab(4);
     }
 
-    openTarget(str:string){
+    openTarget(str: string) {
         console.log("openTarget", str);
     }
 
-    handle(str:string){
+    handle(str: string) {
         console.log("handle", str);
         this.appSound.play('buttonClick');
         switch (str) {
             case 'invite_firends':
                 this.nav.push(JoinSyndicatePage);
-               // this.nav.push(InviteFriendsPage);
-              break;
-          case 'add_syndicate':
-               this.nav.push(AddSyndicatePage);
-              break;
-          case 'join_syndicate':
-               this.nav.push(JoinSyndicatePage);
-              break;
+                // this.nav.push(InviteFriendsPage);
+                break;
+            case 'add_syndicate':
+                this.nav.push(AddSyndicatePage);
+                break;
+            case 'join_syndicate':
+                this.nav.push(JoinSyndicatePage);
+                break;
             case 'your_badges':
-                this.params.goPage( BadgesPage )
+                this.params.goPage(BadgesPage)
                 break
-          
-          default:
-              // code...
-              break;
+
+            default:
+                // code...
+                break;
         }
 
     }
 
-    playFor(){
+    playFor() {
         this.appSound.play('buttonClick');
     }
 
-    goHomePage(){
+    goHomePage() {
         this.params.goHomePage();
     }
 
@@ -506,31 +517,31 @@ export class StorePage {
         this.slide = $('.slider-single');
         this.slideTotal = this.slide.length - 1;
         this.slideCurrent = -1;
-        
+
         this.slide.addClass('proactivede');
         this.slideRight();
     }
 
     slideRight() {
         if (this.slideCurrent < this.slideTotal) {
-          this.slideCurrent++;
+            this.slideCurrent++;
         } else {
-          this.slideCurrent = 0;
+            this.slideCurrent = 0;
         }
 
         if (this.slideCurrent > 0) {
-          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
+            var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
         } else {
-          var preactiveSlide = this.slide.eq(this.slideTotal);
+            var preactiveSlide = this.slide.eq(this.slideTotal);
         }
         var activeSlide = this.slide.eq(this.slideCurrent);
         if (this.slideCurrent < this.slideTotal) {
-          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
+            var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
         } else {
-          var proactiveSlide = this.slide.eq(0);
+            var proactiveSlide = this.slide.eq(0);
         }
 
-        this.slide.each(function() {
+        this.slide.each(function () {
             var thisSlide = $(this);
             if (thisSlide.hasClass('preactivede')) {
                 thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
@@ -547,30 +558,30 @@ export class StorePage {
 
     slideLeft() {
         if (this.slideCurrent > 0) {
-          this.slideCurrent--;
+            this.slideCurrent--;
         } else {
-          this.slideCurrent = this.slideTotal;
+            this.slideCurrent = this.slideTotal;
         }
 
         if (this.slideCurrent < this.slideTotal) {
-          var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
+            var proactiveSlide = this.slide.eq(this.slideCurrent + 1);
         } else {
-          var proactiveSlide = this.slide.eq(0);
+            var proactiveSlide = this.slide.eq(0);
         }
         var activeSlide = this.slide.eq(this.slideCurrent);
         if (this.slideCurrent > 0) {
-          var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
+            var preactiveSlide = this.slide.eq(this.slideCurrent - 1);
         } else {
-          var preactiveSlide = this.slide.eq(this.slideTotal);
+            var preactiveSlide = this.slide.eq(this.slideTotal);
         }
-        this.slide.each(function() {
-          var thisSlide = $(this);
-          if (thisSlide.hasClass('proactivede')) {
-            thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
-          }
-          if (thisSlide.hasClass('proactive')) {
-            thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
-          }
+        this.slide.each(function () {
+            var thisSlide = $(this);
+            if (thisSlide.hasClass('proactivede')) {
+                thisSlide.removeClass('preactive active proactive proactivede').addClass('preactivede');
+            }
+            if (thisSlide.hasClass('proactive')) {
+                thisSlide.removeClass('preactivede preactive active proactive').addClass('proactivede');
+            }
         });
         preactiveSlide.removeClass('preactivede active proactive proactivede').addClass('preactive');
         activeSlide.removeClass('preactivede preactive proactive proactivede').addClass('active');
@@ -595,81 +606,79 @@ export class StorePage {
     }
 
 
-    tip(){
+    tip() {
         console.log("clicked1")
-        if( this.tip11 == true )
-        {
-            
-            this.tip11 = false   
-            
-            
+        if (this.tip11 == true) {
+
+            this.tip11 = false
+
+
         }
-        else{
-            this.tip22 = false  
+        else {
+            this.tip22 = false
             this.delay(300);
-            this.tip11 = true   
-            
-            
+            this.tip11 = true
+
+
         }
     }
     delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-    tip2(){
+    tip2() {
         console.log("clicked2")
-        if( this.tip22 == true )
-        {
-            this.tip22 = false   
+        if (this.tip22 == true) {
+            this.tip22 = false
         }
-        else{
-            this.tip11 = false  
+        else {
+            this.tip11 = false
             this.delay(300);
-            this.tip22 = true   
-            
+            this.tip22 = true
+
         }
     }
 
     //pull up code here
     footerExpanded() {
-       
-        this.count=1;
+
+        this.count = 1;
         console.log('Footer expanded!');
-      }
+    }
 
-      footerCollapsed() {
+    footerCollapsed() {
         console.log('Footer collapsed!');
-      }
+    }
 
-      toggleFooter() {
+    toggleFooter() {
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
-      }
-      getMaximumHeight() {
-        return window.innerHeight / 1.02 ;
     }
-   
-//countDown timer
-
-subscribeTimer0() {
-
-    if (this.timer0Id) {
-
-        // Unsubscribe if timer Id is defined
-        this.st.unsubscribe(this.timer0Id);
-        this.timer0Id = undefined;
-        this.timer0button = 'Subscribe';
-        console.log('timer 0 Unsubscribed.');
-    } else {
-
-        // Subscribe if timer Id is undefined
-        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offersForYou.offer_group));
-        this.timer0button = 'Unsubscribe';
-        console.log('timer 0 Subscribed.');
+    getMaximumHeight() {
+        return window.innerHeight / 1.02;
     }
-    console.log(this.st.getSubscription());
-}
+
+    //countDown timer
+
+    subscribeTimer0() {
+
+        if (this.timer0Id) {
+
+            // Unsubscribe if timer Id is defined
+            this.st.unsubscribe(this.timer0Id);
+            this.timer0Id = undefined;
+            this.timer0button = 'Subscribe';
+            console.log('timer 0 Unsubscribed.');
+        } else {
+
+            // Subscribe if timer Id is undefined
+            this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offersForYou.offer_group));
+            this.timer0button = 'Unsubscribe';
+            console.log('timer 0 Subscribed.');
+        }
+        console.log(this.st.getSubscription());
+    }
 
 
-timer0callback(data) {
+    timer0callback(data) {
 
         var value: any = data[0].countdown
         this.result = "";
@@ -700,100 +709,104 @@ timer0callback(data) {
         this.min = (minute <= 9) ? '0' + minute + '' : minute + '';
         this.sec = (seconds <= 9) ? '0' + seconds : seconds;
 
-       
 
-}
-clicked(){
-    this.tip11 = false;
-    this.tip22 = false;
-    
-}
 
-buyCreditOffer(offerId: any,prosub_id:any,buttonText:any) {
-  
-    console.log("StorePage::showPaymentOptions()", offerId);
-    // let offer = {total_cost:4.99} ;
+    }
+    clicked() {
+        this.tip11 = false;
+        this.tip22 = false;
 
-    this.appSound.play('buttonClick');
-    if (!this.customerToken) {
-        this.goPaymentWebviewHomeoffer(offerId,prosub_id);
-    }else{
+    }
 
-       let loader=this.loadingCtrl.create();
-       loader.present().then(()=>{
-        this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
-            console.log("StorePage::showPaymentOptions() success", data);
-            let token_exists = 0;
-            
-            
-            for (var i = 0; i < data.response.length; ++i) {
-                if (data.response[i].get_customer_paymill_card_details) {
-                    token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-                } 
+    buyCreditOffer(offerId: any, prosub_id: any, buttonText: any) {
+
+        console.log("StorePage::showPaymentOptions()", offerId);
+        // let offer = {total_cost:4.99} ;
+
+        this.appSound.play('buttonClick');
+        if (!this.customerToken) {
+            this.goPaymentWebviewHomeoffer(offerId, prosub_id);
+        } else {
+
+            let loader = this.loadingCtrl.create();
+            loader.present().then(() => {
+                this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
+                    console.log("StorePage::showPaymentOptions() success", data);
+                    let token_exists = 0;
+
+
+                    for (var i = 0; i < data.response.length; ++i) {
+                        if (data.response[i].get_customer_paymill_card_details) {
+                            token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                        }
+                    }
+                    if (token_exists > 0) {
+                        //   this.storage.set('btnValue', bu);
+                        localStorage.removeItem("buttonText");
+                        localStorage.setItem("buttonText", buttonText);
+
+                        //data.response.push({ offer: offerId });
+                        this.userCards = data.response;
+
+                        console.log("StorePage::showPaymentOptions() success", this.userCards);
+                        loader.dismiss();
+                        // loader.dismiss()
+                        // let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
+                        // })
+                        // modal.present();
+
+                        console.log("StorePage::showPaymentOptions() success", this.userCards);
+                        this.confirmPayment.togglePopup()
+                    } else {
+                        loader.dismiss()
+                        this.goPaymentWebviewHomeoffer(offerId, prosub_id);
+                    }
+                }, (err) => {
+                    loader.dismiss()
+                    console.log("StorePage::showPaymentOptions() error", err);
+                });
+            })
+
+        }
+    }
+    showModalForcreditoffer() {
+        let homeCard: boolean = true;
+        let resultModal = this.modalCtrlr.create(offerBuyResultPage, { syndicateName: this.buyoffer, status: this.offerStatus, homeCard });
+        resultModal.present();
+        resultModal.onDidDismiss((data: any[]) => {
+            if (data) {
+                var tabs: Tabs = this.navCtrl.parent.parent.parent;
+                tabs.select(1);
             }
-            if (token_exists > 0) {
-             //   this.storage.set('btnValue', bu);
-             localStorage.removeItem("buttonText");
-                localStorage.setItem("buttonText",buttonText);
+        })
+    }
+    mgmOpenPage() {
+        this.navCtrl.push(referFriend);
+    }
 
-                //data.response.push({ offer: offerId });
-                this.userCards = data.response;
-
-                console.log("StorePage::showPaymentOptions() success", this.userCards);
-                loader.dismiss();
-                // loader.dismiss()
-                // let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
-                // })
-                // modal.present();
-
-               console.log("StorePage::showPaymentOptions() success", this.userCards);
-                this.confirmPayment.togglePopup()
-            }else{
-                loader.dismiss()
-                this.goPaymentWebviewHomeoffer(offerId,prosub_id);
+    countSlider(ev: any) {
+        if(this.total_cards==1)
+        {
+            this.currentSliderCount=0;
+        }else{
+            let direction = ev.direction;
+            if (direction == 2 && this.counts < this.carouselSlide.length()) {
+                this.counts++;
+                this.currentSliderCount = this.counts;
             }
-        }, (err) => {
-            loader.dismiss()
-            console.log("StorePage::showPaymentOptions() error", err);
-        });
-       })
+            else if (direction == 4 && this.counts > 0) {
+                this.counts--;
+                this.currentSliderCount = this.counts;
+            }
+        }
         
     }
-}
-showModalForcreditoffer(){
-    let homeCard:boolean=true;
-    let resultModal=this.modalCtrlr.create(offerBuyResultPage,{syndicateName:this.buyoffer,status:this.offerStatus,homeCard});
-    resultModal.present();
-    resultModal.onDidDismiss((data: any[]) => {
-        if (data) {
-          var tabs:Tabs=this.navCtrl.parent.parent.parent;
-          tabs.select(1);
-        }
-    })
-}
-mgmOpenPage(){
-    this.navCtrl.push(referFriend);
+    redirectToOfferPage() {
+        var tabs: Tabs = this.navCtrl.parent;
+        tabs.select(4);
+    }
 }
 
-countSlider(ev:any){
-    let direction=ev.direction;
-    if(direction==2 && this.counts<this.carouselSlide.length())
-    {
-      this.counts++;  
-      this.currentSliderCount=this.counts;
-    }
-    else if(direction==4 && this.counts>0)
-    {
-        this.counts--;  
-        this.currentSliderCount=this.counts;
-    }
-}
-redirectToOfferPage(){
-    var tabs:Tabs=this.navCtrl.parent;
-    tabs.select(4);
-  }
-}
-    
 //    let lastIndex=this.carouselSlide.length(); 
 //    = this.carouselSlide.getActiveIndex();
 
@@ -805,7 +818,7 @@ redirectToOfferPage(){
 //    }
 //    else{
 //     this.currentSliderCount=this.counts-1;
-   
+
 
 //    if(this.count==1&& this.currentSliderCount==0 && this.currentSliderCount< lastIndex)
 //    {
@@ -814,6 +827,6 @@ redirectToOfferPage(){
 //    else{
 //     this.currentSliderCount++; 
 //    }
- 
+
 
 

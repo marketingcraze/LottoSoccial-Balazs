@@ -28,9 +28,15 @@ import { your_vouchers } from '../your_vouchers/your_vouchers';
 import { AffiliatePage } from '../affiliate/affiliate'
 import { HelpPage } from '../Help/Help'
 import { NewSyndicatePage } from '../new-syndicate/new-syndicate'
-
+import { AffiliatePage2 } from '../affiliate2/affiliate2'
 
 declare var webengage: any;
+
+
+
+
+
+declare var webengage:any;
 
 export interface PageInterface {
     title: string;
@@ -81,21 +87,25 @@ export class HomePage implements OnInit {
         public platform: Platform,
         private srvHome: HomeService,
         public menu: MenuController,
-        private navCtrl: NavController,
-        private srvDb: DatabaseService,
-        private commonSrv: CommonService,
-        public appSound: AppSoundProvider,
-        private alertCtrl: AlertController,
-        private loadingCtrl: LoadingController,
-        private _modalCtrl: ModalController
-    ) {
+        private navCtrl:NavController,
+        private srvDb:DatabaseService,
+        private commonSrv:CommonService, 
+        public appSound:AppSoundProvider,
+        private alertCtrl:AlertController,
+        private loadingCtrl:LoadingController,
+        private _modalCtrl:ModalController,
+        
+        ) {
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
-        // var a= this.appVersion.getAppName();
-        // var b= this.appVersion.getPackageName();
-        // var c= this.appVersion.getVersionCode();
-        this.versionNumber= this.appVersion.getVersionNumber();
-        console.log(this.versionNumber);
-      
+/*
+        platform.ready().then(() => {
+            StatusBar.styleDefault();
+            Splashscreen.hide();
+        });
+
+*/
+
+
         this.params.events.subscribe('home-data', data => {
             for (var i = data.length - 1; i >= 0; i--) {
                 if (data[i].get_home_message) {
@@ -186,6 +196,10 @@ export class HomePage implements OnInit {
             case 'update':
                 this.params.goPage(UpdatePage)
                 break
+            case 'affiliate2':
+                this.params.goPage(AffiliatePage2)
+                break
+                
             case 'help':
                 this.params.goPage(HelpPage)
                 //   let opt:string = "toolbarposition=top";

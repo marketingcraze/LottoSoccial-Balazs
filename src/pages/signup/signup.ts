@@ -6,7 +6,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { HomePage } from '../home/home';
 import { SignupInvitedPage } from '../signup-invited/signup-invited';
-// import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
+import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
 
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
@@ -305,7 +305,7 @@ export class SignupPage {
 	            error => console.log(error)
 	        );
 	        let nav = this.app.getRootNav();
-	        nav.setRoot(HomePage);
+			nav.setRoot(HomePage);
 		}
 
 	}

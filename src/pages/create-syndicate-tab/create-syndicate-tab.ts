@@ -59,5 +59,10 @@ export class CreateSyndicateTab implements OnInit {
     ionViewWillLeave() {
         this.tabbarElement.style.display = 'flex';
     }
+    goToOffers(){
+        this.tabbarElement.style.display= 'flex';
+		var tabs:Tabs=this.navCtrl.parent;
+		tabs.select(0);
+    }
 
 }
