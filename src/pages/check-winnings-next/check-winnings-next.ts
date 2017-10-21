@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, Slides } from 'ionic-angular';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { PrizeSummaryWinPage } from '../prize-summary-win/prize-summary-win';
+import { PrizeSummaryNoSyndicate } from '../Prize-summary-No-syndicate/Prize-summary-No-syndicate';
+import { PrizeSummaryEarlyCheck } from '../Prize-summary-Early-check/Prize-summary-Early-check';
 declare const $
 /*
   Generated class for the CheckWinningsNext page.
@@ -21,12 +23,13 @@ export class CheckWinningsNextPage {
     sList2:any = [];
     movetype:any;
     errorMsg = '';
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,  
     public viewCtrl: ViewController,
     public _syndService: SyndicateService,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController
     ) {
         this.loader = this.loadingCtrl.create({
           content:"Please wait..."
@@ -43,7 +46,7 @@ export class CheckWinningsNextPage {
   }
   checkWinnings(){
     this.loading = true
-    this.loader.present();
+    //this.loader.present();
     this._syndService.checkWinnings()
     .subscribe((res) => {
       
@@ -53,7 +56,7 @@ export class CheckWinningsNextPage {
       
           this._syndService.checkwinFinal()
           .subscribe((res2)=> {
-            this.loader.dismiss();
+          //  this.loader.dismiss();
           //  res2 = {"response":[{"check_mywinnings":{"response":{"status":"SUCCESS","message":"","syndicate_offer":{"title":"You currently not playing in any of our syndicate.","description_group":{"description1":"You have got to be in it to win it","description2":"Fancy getting"},"offer_line_group":{"offer_line1":"30 EuroMillions Lines","offer_line2":"&pound;9,900,000m"},"destination_url_group":{"destination_url1":"#","destination_url2":"#"},"offer_id":"992","next_draw":{"name":"lotto","offer_title":"Lotto 20 lines","offer_jackpot":"£9,900,000","offer_id":"1701","prosub_id":"2247","offer_img":"http://ecommercelive.s3.amazonaws.com/wp-content/uploads/app_assets/offers_library/lotto_header.png","button_text":"Play for £4.99","countdown":"Sat 29 Apr 17 19:00:00"}},"response_type":"10.2","claim_event_id":"149822","claim_event_status":4}}}]}
             this.movetype = res2.response["0"].check_mywinnings.response
             this.loading = false;
@@ -82,7 +85,7 @@ export class CheckWinningsNextPage {
         this.movetoPage()  
       }
     } else {
-      this.navCtrl.push(PrizeSummaryWinPage);
+      //this.navCtrl.push(PrizeSummaryNoSyndicate);
       this.movetoPage()
     }
   }
@@ -95,13 +98,18 @@ export class CheckWinningsNextPage {
       if(this.movetype){
         
         if(this.movetype.response_type == '10.1'){
-          
-        }else if(this.movetype.response_type == '10.2') {
           this.navCtrl.push(PrizeSummaryWinPage);
+        }else if(this.movetype.response_type == '10.2') {
+          this.navCtrl.push(PrizeSummaryNoSyndicate);
         } else if(this.movetype.response_type == '10.4' || this.movetype.response_type == '10.7') {
-
+          this.navCtrl.push(PrizeSummaryEarlyCheck);
         } 
+      }else {
+        this.navCtrl.push(PrizeSummaryNoSyndicate);
       }
   }
+
+   
+
 
 }

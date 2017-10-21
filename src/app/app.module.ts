@@ -79,6 +79,8 @@ import { offerOfTheDayModal } from '../pages/offer-of-the-day-modal/offer-of-the
 import { your_vouchers } from '../pages/your_vouchers/your_vouchers'
 import { your_vouchers_popups } from '../pages/your_vouchers_popups/your_vouchers_popups'
 import { PrizeSummaryWinPage } from '../pages/prize-summary-win/prize-summary-win';
+import { PrizeSummaryNoSyndicate } from '../pages/Prize-summary-No-syndicate/Prize-summary-No-syndicate';
+import { PrizeSummaryEarlyCheck } from '../pages/Prize-summary-Early-check/Prize-summary-Early-check';
 import { getGamesModal } from '../pages/get-games-modal/get-games-modal'
 import { inboxModal } from '../pages/inbox-popup/inbox-popup';
 import { gameLoss } from '../pages/play-gamesLoss/play-gamesLoss';
@@ -205,6 +207,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         GetBooster,
         PlayGamePage,
         PrizeSummaryWinPage,
+        PrizeSummaryNoSyndicate,
+        PrizeSummaryEarlyCheck,
         PlayGamesThankYou,
         BadgesPage,
         BadgeViewPage,
@@ -337,6 +341,8 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
         GetBooster,
         PlayGamePage,
         PrizeSummaryWinPage,
+        PrizeSummaryNoSyndicate,
+        PrizeSummaryEarlyCheck,
         PlayGamesThankYou,
         BadgesPage,
         BadgeViewPage,
