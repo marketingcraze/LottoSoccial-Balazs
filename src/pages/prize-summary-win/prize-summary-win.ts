@@ -41,7 +41,9 @@ export class PrizeSummaryWinPage {
   next() {
     this.app.getRootNav().push(CheckWinningsNextPage);
   }
-
+   ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+  }
   chooseCreditcash() {
       let leave2Modal = this.modalCtrl.create(ChooseCreditcashPage, {cid: this.allData.claim_event_id, cash:this.prizeData.CashEquAmount, credit:this.prizeData.credit_win.value});
       leave2Modal.onDidDismiss(data => {
