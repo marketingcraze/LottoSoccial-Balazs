@@ -1,4 +1,4 @@
-<ion-tabs tabsPlacement="top" color="primary" (ionChange)="tabChange()">
-    <ion-tab [root]="tab1Root" tabTitle="OFFER FOR YOU"></ion-tab>
+<ion-tabs tabsPlacement="top" color="primary" (ionChange)="tabChange()" [selectedIndex]="myIndex" >
+    <ion-tab [root]="tab1Root" tabTitle="OFFER FOR YOU" ></ion-tab>
     <ion-tab [root]="tab2Root" tabTitle="SPEND BONUS CREDIT"></ion-tab>
 </ion-tabs>

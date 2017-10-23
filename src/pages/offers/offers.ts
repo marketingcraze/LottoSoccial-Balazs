@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, NgZone } from '@angular/core';
-import { Platform, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, NavController, NavParams, LoadingController, AlertController,Tabs } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -21,6 +21,7 @@ declare var webengage: any;
   templateUrl: 'offers.html',
 })
 export class OffersPage implements OnInit {
+  myIndex: number;
     ngOnInit(): void {
         this.platform.ready().then((readySource) => {
         var CurrentUserid = localStorage.getItem('appCurrentUserid');
@@ -33,17 +34,28 @@ export class OffersPage implements OnInit {
      });
    }
 
+  
     toptab: string = "offer";
     tab1Root = YourOffersPage;
     tab2Root = SendBonusPage;
-
-
   constructor(
       public appSound:AppSoundProvider,
       public platform: Platform,
-        private navCtrl:NavController) {
-
-    console.log("OffersPage:");
+        private navCtrl:NavController,
+      public navparm:NavParams,
+    public tab:Tabs) {
+  
+      if(this.navparm.get("app")=="outside")
+      {
+     this.myIndex =  1
+      }
+      
+      else{
+        this.myIndex = 0
+      }
+  }
+  ionViewWillEnter(){
+    
   }
 
     tabChange(){

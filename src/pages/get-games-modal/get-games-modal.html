@@ -19,11 +19,16 @@
                   <span style="color: #E97442;font-size: 13px">TOP PRIZE $50</span><br>
                   <span style="color: #5086D4;font-size: 12px">Get for {{price}} {{price_after}}</span>
               </div>
-    
-              <div item-center item-right style="border: 1px solid #255FC7;width: 40%;text-align: center;border-radius: 200px 200px 200px 200px;z-index: 1">
-                <input (click)="minusCounter()" type='button' value='-' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
-                <input type='number' disabled="disabled" minlength="1" maxlength="5" value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0;background-color: white;color: black">
-                <input (click)="plusCounter()" type='button' value='+' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;left: 4px">
+              
+              <div item-center item-right style="border: 1px solid #255FC7;width: 39%;text-align: center;border-radius: 200px 200px 200px 200px;z-index: 1;display: flex">
+                  <p style="position: absolute;margin-top: -6%;margin-left: 11%;color: black;">qty</p>
+                <img (click)="minusCounter()" src="assets/img/minus-1.png" style="border: none;width: 30%;height: 10%;margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
+                <input type='number' readonly="true" minlength="1" maxlength="5" value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0;background-color: white;color: black;height: 3.5vh;margin-top: 1px;">
+                <img (click)="plusCounter()" src="assets/img/plus-1.png" style="border: none;width: 30%;padding: 0px;height: 21%; margin: 0px;border-radius: 50%;position: relative;left: 6px;">
+
+                <!-- <input (click)="minusCounter()" type='button' value='-' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
+                
+                <input (click)="plusCounter()" type='button' value='+' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;left: 4px"> -->
             </div>
             </ion-item>
           </div>
@@ -37,14 +42,14 @@
                         {{price}}
                      </ion-col>
                 </ion-row>
-                <ion-row text-center style="height: 10%; vertical-align: middle">
+                <!-- <ion-row text-center style="height: 10%; vertical-align: middle">
                     <ion-col col-10 style="text-align: left;font-size: 15px">
                        Remaining Reward Points Balance:
                     </ion-col>
                     <ion-col col-2 style="text-align: right; color: #5086D4; height: 100%; display: block;">
                         300
                      </ion-col>
-                </ion-row>
+                </ion-row> -->
               
         
             </ion-item>

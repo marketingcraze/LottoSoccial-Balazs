@@ -67,6 +67,7 @@ export class PlayGamePage implements OnInit {
   public inAppBrowser: any;
   public gameLoss:boolean=true;
   pageLoaded:boolean=false;
+  boosterInfo = ""
 
   constructor(
     private _modalController:ModalController,
@@ -96,6 +97,7 @@ export class PlayGamePage implements OnInit {
         .subscribe(
         (responseData:any) => {
           this.gameInfo = responseData.response[0].get_game_info.response;
+          this.boosterInfo = responseData.response[0].get_game_info.response.booster_status
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
           this.totalGameLevel=responseData.response[0].get_game_info.response.total_game_level;
           this.progressPercentage = (this.gameLevelThanlyou/this.totalGameLevel*100);

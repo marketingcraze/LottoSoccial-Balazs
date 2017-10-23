@@ -57,6 +57,7 @@ export class HomePage implements OnInit {
 
         this.platform.ready().then((readySource) => {
 
+            
             var CurrentUserid = localStorage.getItem('appCurrentUserid');
             if (this.platform.is('cordova')) {
                 webengage.engage();

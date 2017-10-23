@@ -1,5 +1,5 @@
 import { Component, ViewChild ,ChangeDetectorRef} from '@angular/core';
-import { NavController, NavParams, App, Tabs, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, App, Tabs, LoadingController, ViewController } from 'ionic-angular';
 import { ManageSyndicatePage } from '../manage-syndicate/manage-syndicate';
 import { ManageSyndicate2Page } from '../manage-syndicate2/manage-syndicate2';
 import { YourTicketsPage } from '../your-tickets/your-tickets';
@@ -10,6 +10,7 @@ import { CommonService } from '../../services/common.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { Content, Platform } from 'ionic-angular'
+import { OffersPage } from '../offers/offers'
 declare var $: any;
 declare var cordova:any;
 
@@ -61,6 +62,11 @@ export class MySyndicatePage {
     ionViewWillEnter() {
         this.delay(4000);
         this.content.enableScrollListener();
+    }
+    openOfferPage(){
+        // debugger
+        // let nav = this.app.getRootNav();
+        // nav.setRoot(OffersPage);
     }
     scrollHandlerSyndicate(event){
         

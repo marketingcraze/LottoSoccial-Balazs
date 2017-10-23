@@ -64,18 +64,18 @@
     
       <ion-item (click)="checkwins()" style="font-size: 14px;border-bottom: 1px solid #AAAAAA">
         <span *ngIf="sd.check_status == 'CHECKED'">
-          <div class="ckNow pulse" style="width: 48%;display: inline-block"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
+          <div class="ckNow pulse" style="width: 48%;display: inline-block"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
           </span>
         <span  *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'">
           <div style="width: 48%;display: inline-block" >
-          <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span>
+          <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 19px;vertical-align: text-bottom;"></span>
            <span class="synd-f">DUE TO PLAY</span>
           </div>
           </span>
        
         <ion-col class="right" style="text-align: right;display: inline-block;width: 50%"><span class="tkt-a" (click)="manage_syndicates2()">
-            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(2,2);"></ion-icon>
-            <ion-col><span class="synd-f" style="color:#000000">SETTINGS</span></ion-col>
+            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
+            <ion-col style="top: -2px"><span class="synd-f" style="color:#000000;">SETTINGS</span></ion-col>
           </span></ion-col>
       </ion-item>
       </div>
@@ -140,24 +140,24 @@
             <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()"><ion-icon ios="ios-settings" md="md-settings"></ion-icon></span></ion-col>
         </ion-row>
           <div style="padding:0; text-align: center">
-            <button ion-button class="btn" (click)="Invite(sd.syndicate_id)"> ADD MEMBERS </button>
+            <button ion-button class="btn" (click)="openOfferPage()"> BUY MORE </button>
           </div>
       </ion-item>
       <ion-item *ngIf="!sd.purchased_status">
         
           <div style="padding:0; text-align: center; float: left;">
-            <button ion-button class="btn" (click)="Invite(sd.syndicate_id)"> ADD MEMBERS </button>
+            <button ion-button class="btn" (click)="openOfferPage()"> BUY MORE </button>
           </div>
           <div style="padding:0; text-align: center;float: right;">
             <button ion-button class="btn" (click)="viewTickets(i)"> VIEW TICKETS </button>
           </div>
       </ion-item>
       <ion-item style="height: 30px">
-        <ion-row style="padding: 0px 5px 5px">
-          <ion-col col-50 class="left" (click)="checkwins()"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 25px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></ion-col>
+        <ion-row >
+          <ion-col col-50 class="left" (click)="checkwins()"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></ion-col>
           <ion-col col-50 class="right"><span class="tkt-a" (click)="manage_syndicates2()">
-            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(2,2);"></ion-icon>
-            <ion-col><span class="synd-f" style="color:#000000">SETTINGS</span></ion-col>
+            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
+            <ion-col style="top: -2px"><span class="synd-f" style="color:#000000;">SETTINGS</span></ion-col>
           </span></ion-col>
         </ion-row>
       </ion-item>

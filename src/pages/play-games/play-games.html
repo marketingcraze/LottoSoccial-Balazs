@@ -80,13 +80,13 @@
                
             </ion-row >
             <ion-col col-12>
-                    <div class="circle_inside" (click)="showBoosterModal()"> <img src="assets/icon/booster_big_ico@3x.png" class="circle_inside_Img"></div>
+                    <div *ngIf="boosterInfo != 'booster_not_applicable'" class="circle_inside" (click)="showBoosterModal()"> <img src="assets/icon/booster_big_ico@3x.png" class="circle_inside_Img"></div>
+                    <div *ngIf="boosterInfo == 'booster_not_applicable'" class="circle_inside"  style="filter: grayscale(1)"> <img src="assets/icon/booster_big_ico@3x.png" class="circle_inside_Img"></div>
                 </ion-col>
         </div>
 
         <div text-center>
-            <button ion-button color="secondary" style="bottom: 14px" (click)="openThankyouPage()"> Play Now</button>
-
+            <button ion-button color="secondary" class="playButtonStart" style="bottom: 14px" (click)="openThankyouPage()">Play Now</button>
         </div>
     </div>
 

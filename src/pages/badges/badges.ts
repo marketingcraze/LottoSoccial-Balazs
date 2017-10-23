@@ -96,7 +96,7 @@ export class BadgesPage {
        // this.viewCtrl.showBackButton(false);
     }
     close() {
-        this.navCtrl.pop();
+        this.navCtrl.popAll;
     }
     getbadges() {
         this._syndService.getBadgeOS()

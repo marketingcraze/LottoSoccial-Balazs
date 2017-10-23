@@ -63,25 +63,25 @@ overlay-page{
       font-size: 18px;font-weight: bold
     }
     .c4arrow{
-      left: 0%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform: rotate(62deg) scaleY(-1)
+      left: 0%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform: rotate(62deg) scaleY(-1)
     }
     .c5mainDiv{
       font-size: 18px;font-weight: bold
     }
     .c5arrow{
-      left: 9%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform: rotate(44deg) scaleY(-1) 
+      left: 9%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform: rotate(44deg) scaleY(-1) 
     }
     .c6MainDiv{
       font-size: 18px;font-weight: bold;padding: 4px
     }
     .c6arrow{
-      right: 9%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform:rotate(139deg) 
+      right: 9%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform:rotate(139deg) 
     }
     .c7MainDiv{
       font-size: 18px;font-weight: bold;padding: 4px
     }
     .c7arrow{
-      right: 0%; color: white; height: 89px; position: absolute; top: 77vh;z-index: 999;transform:rotate(115deg)
+      right: 0%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform:rotate(115deg)
     }
 
     .test {
@@ -314,7 +314,7 @@ overlay-page{
             color: white;  height: 79px; position: absolute; top: 83vh;width: 100%;
       }
       .overlayDiv1{
-            color: white;  height: 79px; position: absolute; top: 91vh;width: 100%;
+            color: white;  height: 79px; position: absolute; top: 89vh;width: 100%;
       }
       .fstDiv12{
             color: white;
@@ -332,6 +332,20 @@ overlay-page{
             -webkit-transform: rotate(0deg); /* Safari */
             transform: rotate(0deg); 
       }
+      .fstDiv{
+        color: white;
+        
+        border-radius: 40%;
+        height: 86px;
+        width: 46%;
+        text-align: center;
+        vertical-align: middle;
+       
+        position: absolute;
+        top: 55vh;
+        left: 10px;
+        
+    }
       .continue{
             width: 50%;height: 40px;background: transparent;border-color: white;color: white;
             border-radius: 30px;margin-top: 135%;font-size: 16px;border:1px solid white;
@@ -346,7 +360,7 @@ and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 3)
 {
       .overlayDiv1{
-            color: white;  height: 79px; position: absolute; top: 91vh;
+            color: white;  height: 79px; position: absolute; top: 92vh;
       }
       .overlayDiv{
             color: white;  height: 79px; position: absolute; top: 87vh;

@@ -15,7 +15,9 @@ import { CommonService } from '../../services/common.service';
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { BadgesPage } from '../badges/badges';
-
+import { SendBonusPage } from '../send-bonus/send-bonus'
+import { OffersPage } from '../offers/offers'
+import { GamesPage } from '../games/games'
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare var webengage: any;
@@ -72,6 +74,8 @@ export class AccountPage {
 		console.log('ionViewDidLoad AccountPage');
 		this.delay(4000);
 		this.content.enableScrollListener();
+		
+		
 
 	}
 
@@ -162,7 +166,8 @@ export class AccountPage {
 		this.cache.clearDatabaseOnLogout();
 
 		this.storage.remove('session_ID');
-      
+		
+		
 		this.platform.ready().then((readySource) => {
 			
 			if (this.platform.is('cordova')) {
@@ -246,4 +251,13 @@ export class AccountPage {
 	moveToBadgeOs(){
 		this.navCtrl.push(BadgesPage)
 	}
+	openCreditModule(){
+		
+		this.navCtrl.push(OffersPage,{"app":"outside"});
+	}
+	openGetGamesModule(){
+		this.navCtrl.push(GamesPage,{"app":"outside"});
+	}
+
+
 }

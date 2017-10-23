@@ -96,13 +96,34 @@
             </div> -->
     </div>
    
-    <div class="offer-of-the-day">
+    <!-- <div class="offer-of-the-day">
         <h6 text-center style="height: 13px;margin-top: 7px;">DEAL OF THE DAY! <span style="margin-left: 15px">{{Nhrs}} {{Nmins}} {{Nsec}}</span></h6>
         <ion-slides slidesPerView=3>
             <ion-slide *ngFor="let productOffer of offersForYou">
                 <img src="{{productOffer.product_icon}}" class="img-responsive">
             </ion-slide>
         </ion-slides>
-    </div>
+    </div> -->
+<ion-grid>
+    <ion-row>
+        <ion-col col-6 style="margin-top: 1px;text-align: center;background-color: #255FC7;height: min-content">
+            <span style="color: white;font-size: 18px;top: 9%;position: relative">HOW TO PLAY</span>
+            <img src="assets/img/happys.png" style="margin-top: 5%">
+        </ion-col>
 
+        <ion-col col-6 style="background-color: white;height: min-content">
+            <div style="width: 100%;height: 20%;position: relative">
+                <p style="margin-top: 3%;position: relative">PRICE BREAKDOWN</p>
+            </div>
+            <div style="width: 100%;position: relative;text-align: center;height: 19.5vh;margin-bottom: 10px;margin-top: -10px">
+                <p style="margin: 0px"><span style="margin-right: 10%;font-size: 16px;text-align: left">1line</span><span style="margin-left: 14%;font-size: 16px">£0.30</span></p>
+                <p style="margin: 0px"><span style="margin-right: 10%;font-size: 16px;text-align: left">2lines</span><span style="margin-left: 10%;font-size: 16px">£0.60</span></p>
+                <p style="margin: 0px"><span style="margin-right: 10%;font-size: 16px;text-align: left">3lines</span><span style="margin-left: 10%;font-size: 16px">£0.90</span></p>
+                <p style="margin: 0px"><span style="margin-right: 10%;font-size: 16px;text-align: left">4lines</span><span style="margin-left: 10%;font-size: 16px">£1.20</span></p>
+                <p style="margin: 0px"><span style="margin-right: 10%;font-size: 16px;text-align: left">5lines</span><span style="margin-left: 10%;font-size: 16px">£1.50</span></p>
+                <p style="margin: 0px"><span style="margin-right: 10%;font-size: 16px;text-align: left">10lines</span><span style="margin-left: 5%;font-size: 16px">£3.00</span></p>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid>
 </ion-content>

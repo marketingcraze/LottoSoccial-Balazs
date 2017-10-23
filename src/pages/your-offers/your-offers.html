@@ -32,9 +32,9 @@
 
     <div id="innerYourOffers" style="padding: 0px;margin:0px;width: 100%;margin-top: 15%;height: 110vh;text-align: center">
       <p text-center text-uppercase no-margin style="font-size: 14px;text-align: center;width: 100%">Choose the lottery you want to play</p>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6 *ngFor="let c of lotteryProductData; let i=index">
+      <ion-grid style="text-align: center">
+        <ion-row style="text-align: center">
+          <ion-col col-6 *ngFor="let c of lotteryProductData; let i=index" style="text-align: center">
             <div style=" position: relative;background: #FFF;text-align: center;border: 1px solid #ccc; border-radius: 5px;
             height: 100%;" >
               <div style=" height: 50px;position: absolute;width: 100%;">
@@ -45,7 +45,7 @@
               <!-- <p class="pad-5-top">{{c.draw_countdown}}</p> -->
               <h1 style="margin: 0;font-family: Lato-Bold;margin-top: -5px" [style.color]="c.product_color">£{{c.jackpot}}</h1>
               <input type="button" value="PLAY NOW" style="text-align: center; height: 35px;color: white;background-color: #249940;
-              width: 59%;border: none;border-radius: 3px;font-size: 1.1em;margin-top: 5px;margin-bottom: 7px" (click) = "openBuyPage(i)">
+              width: 59%;border: none;border-radius: 3px;font-size: 15px;margin-top: 5px;margin-bottom: 7px;padding-left: -10px;padding: 5px" (click) = "openBuyPage(i)">
             </div>
           </ion-col>
         </ion-row>

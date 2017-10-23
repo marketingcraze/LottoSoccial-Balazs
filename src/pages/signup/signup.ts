@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { App, Platform, Tabs, NavController, NavParams, AlertController,
  PopoverController, LoadingController, ToastController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
-
+import { CacheController } from '../../services/cache_controller';
 import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { HomePage } from '../home/home';
 import { SignupInvitedPage } from '../signup-invited/signup-invited';
-import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
+// import { NewSyndicatePage } from '../new-syndicate/new-syndicate';
+import { Params } from '../../services/params';
 
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
@@ -30,6 +31,7 @@ export class SignupPage {
 
 	public showPass = false;
 	public tabs:Tabs;
+	private cache: CacheController
 	public selectedCountry:any = {
         name: "United Kingdom",
         iso2: "gb",
@@ -71,7 +73,8 @@ export class SignupPage {
 		public imagePicker: ImagePicker,
 		private popoverCtrl: PopoverController,	
 		private loadingCtrl: LoadingController,	
-		public authSrv:AuthService) {
+		public authSrv:AuthService,
+		public params:Params,) {
 
 		console.log('SignupPage', network);
 
@@ -207,6 +210,7 @@ export class SignupPage {
 
 	submitSignup(form:any){
 
+		
 		localStorage.setItem('isInstall', "firstTimeInstall");
 		// let nav = this.app.getRootNav();
         // nav.setRoot(NewSyndicatePage);
@@ -254,6 +258,7 @@ export class SignupPage {
 						
 					}).present()
 				}else{
+				
 					this.onRegistrationSuccess(data)
 				}
 			},
@@ -298,6 +303,7 @@ export class SignupPage {
             });
             alert.present();
 		}else{
+			CommonService.session = data;
 			this.storage.set('session_ID', CommonService.sessionId);
 	    	this.storage.set('session', JSON.stringify(data))
 	        .then(

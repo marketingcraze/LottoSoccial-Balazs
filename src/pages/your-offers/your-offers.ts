@@ -82,6 +82,9 @@ export class YourOffersPage {
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad YourOffersPage');
 	}
+	ionViewWillEnter(){
+		this.content.enableScrollListener();
+	}
 
 
 
@@ -180,7 +183,7 @@ export class YourOffersPage {
 						this.st.newTimer('1sec', 1);
 						this.subscribeTimer0();
 						this.delay(4000);
-						this.content.enableScrollListener();
+					
  						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.lotteryProductData[0].draw_countdown));
 						break;
 					}

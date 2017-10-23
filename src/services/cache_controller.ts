@@ -149,6 +149,26 @@ export class CacheController {
 	    }, (error)=> {
 	        console.error(error);
 	    });
+// tbl_Page_Module get_home_card", "get_account_details", "get_home_message"
+let tbl_Page_Module = "DELETE FROM get_home_card; ";
+this.srvDb.raw_query( tbl_Page_Module, []).then((module_result:any)=> {
+	// console.log("clearDatabaseOnLogout SUCCESS ", module_result );
+}, (error)=> {
+	console.error(error);
+});
+let get_account_details = "DELETE FROM get_account_details; ";
+this.srvDb.raw_query( get_account_details, []).then((module_result:any)=> {
+	// console.log("clearDatabaseOnLogout SUCCESS ", module_result );
+}, (error)=> {
+	console.error(error);
+});
+let get_home_message = "DELETE FROM get_home_message; ";
+this.srvDb.raw_query( get_home_message, []).then((module_result:any)=> {
+	// console.log("clearDatabaseOnLogout SUCCESS ", module_result );
+}, (error)=> {
+	console.error(error);
+});
+
 
     	let delete_module = "DELETE FROM tbl_Module; ";
         this.srvDb.raw_query( delete_module, []).then((module_result:any)=> {

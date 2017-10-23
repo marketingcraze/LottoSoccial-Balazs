@@ -17,10 +17,10 @@
                         <span style="color:#333333!important" *ngIf="reward_point>0" >Points : </span><span ion-text color="primary"> {{reward_point}}</span>
                         <span style="color:#2F76D1!important" *ngIf="reward_point==0" (click)="mgmPage()" >GET POINTS</span>
                 </ion-col>
-                <ion-col col-6 >
+                <ion-col col-6 class="fontSize">
                     <div (click)="openShare()" style="text-align: right" >
-                        <ion-icon ios="ios-share-outline" md="ios-share-outline" style="color: #2F76D1;font-size: 0.9em"></ion-icon><span style="margin-left: 8px;color: #2F76D1;font-size: 0.9em" ion-text >share</span>
-                        <span style="font-size: 0.9em;color: #2F76D1">get free points</span>
+                        <ion-icon ios="ios-share-outline" md="ios-share-outline" style="color: #2F76D1;"></ion-icon><span style="margin-left: 8px;color: #2F76D1;" ion-text >share</span>
+                        <span style="color: #2F76D1">get free points</span>
                     </div>
                 </ion-col>
             </ion-row>
@@ -35,8 +35,8 @@
             <ion-item *ngIf="redeem_product">
                 <ion-col col-3 item-left>
                     <ion-thumbnail item-left>
-                        <img src="{{redeem_product?.product_image}}" *ngIf="redeem_product?.product_image" style="height:68px">
-                        <img src="assets/img/sample_thumb_03@3x.png" *ngIf="!redeem_product?.product_image" style="height:68px">
+                        <img src="{{redeem_product?.product_image}}" *ngIf="redeem_product?.product_image" style="height:75px">
+                        <img src="assets/img/sample_thumb_03@3x.png" *ngIf="!redeem_product?.product_image" style="height:75px">
                     </ion-thumbnail>
                 </ion-col>
                 <ion-col col-3 item-center>
@@ -45,10 +45,10 @@
                     <p ion-text color="orange">TOP PRIZE</p>
                 </ion-col>
 
-                <ion-col col-4 item-right text-center>
-                    <button ion-button item-right color="secondary" style="width: 71px;height: 34px;" (click)="redeem(redeem_product?.product_link,i)">GET</button>
-                    <p color="calm" >{{redeem_product?.product_price}}</p>
-                    <p ion-text color="calm" >{{redeem_product?.product_price_after | uppercase}}</p>
+                <ion-col col-5 item-right text-center>
+                    <button ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (click)="redeem(redeem_product?.product_link,i)">GET</button>
+                    <p color="calm" style="font-size: 15px">{{redeem_product?.product_price}} pts</p>
+                    <!-- {{redeem_product?.product_price_after | uppercase}} -->
                 </ion-col>
             </ion-item>
             <ion-item-divider style="color:#333333!important;top:-23px!important;">{{redeem_product?.product_details}}</ion-item-divider>
@@ -74,9 +74,9 @@
                     <p ion-text color="orange">TOP PRIZE</p>
                 </ion-col>
                 <ion-col col-4 item-right text-center>
-                    <button (click)="confirmSelectionPage(i)" ion-button item-right color="secondary" style="width: 71px;height: 34px">GET</button>
-                    <p ion-text color="calm" >70</p>
-                    <p ion-text color="calm">POINTS</p>
+                    <button (click)="confirmSelectionPage(i)" ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px">GET</button>
+                    <p color="calm" style="font-size: 15px" >70 pts</p>
+                    
             </ion-col>
         </ion-item >
             <ion-item-divider *ngIf="!redeem_product" style="color:#333333!important;top:-22px!important;">This is the game description and excerpt</ion-item-divider>

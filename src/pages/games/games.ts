@@ -30,7 +30,7 @@ export class GamesPage implements OnInit {
     tab2Root = RedeemGamesPage;
 
     gameGroup:any = {};
-
+    myIndex: number;
     constructor(
         public platform:Platform,
         private params: Params,
@@ -43,6 +43,15 @@ export class GamesPage implements OnInit {
         if (this.navParams.data.game) {
             this.gameGroup = this.navParams.data.game.game_group;
         }
+        if(this.navParams.get("app")=="outside")
+        {
+       this.myIndex =  1
+        }
+        
+        else{
+          this.myIndex = 0
+        }
+
     }
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamesPage', this.navParams.data);
