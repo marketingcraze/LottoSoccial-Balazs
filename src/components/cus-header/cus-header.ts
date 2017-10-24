@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild,ElementRef } from '@angular/core';
 import { Params } from '../../services/params';
 import { Badge } from '@ionic-native/badge';
 
@@ -7,7 +7,7 @@ import { Badge } from '@ionic-native/badge';
 	templateUrl: 'cus-header.html'
 })
 export class CusHeaderComponent {
-
+	@ViewChild('animation') input;
 	@Input('title') title;
 	@Input('isHome') isHome;
 	// @Input('notification-count') notificationCount;  
@@ -19,7 +19,7 @@ export class CusHeaderComponent {
 
 	constructor(private params: Params, public badge: Badge) {
 		console.log('CusHeaderComponent');
-
+	
 		this.unreadCount = params.unreadCount;
 
 		params.events.subscribe('unread-count', (count) => {
@@ -49,5 +49,12 @@ export class CusHeaderComponent {
 			
 		}*/
 	}
+	ionViewWillEnter() {
+		console.log("I'm alive!");
+		this.animateButton()
+	  }
+	animateButton(){
+        this.input.start({ type: 'bounce', duration: '5000' })
+    }
 
 }
