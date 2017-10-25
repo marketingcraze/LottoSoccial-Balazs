@@ -1,6 +1,8 @@
 import { ViewChild, Component, ElementRef, Renderer } from '@angular/core';
-import { NavController, NavParams, ModalController, Platform, LoadingController, 
-    AlertController, Tabs } from 'ionic-angular';
+import {
+    NavController, NavParams, ModalController, Platform, LoadingController,
+    AlertController, Tabs
+} from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -18,7 +20,7 @@ import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-declare var cordova:any;
+declare var cordova: any;
 
 @Component({
     selector: 'page-tabs',
@@ -36,9 +38,9 @@ export class TabsPage {
 
     mySelectedIndex: number = 2;
 
-    homeCardData:any;
-    gameData:any;
-    homeData:any;
+    homeCardData: any;
+    gameData: any;
+    homeData: any;
 
     private cache: CacheController;
 
@@ -51,13 +53,13 @@ export class TabsPage {
         private navParams: NavParams,
         public navCtrl: NavController,
         private iab: InAppBrowser,
-        public platform: Platform, 
-        private srvDb:DatabaseService,
-        private srvHome:HomeService,
-        public appSound:AppSoundProvider,
+        public platform: Platform,
+        private srvDb: DatabaseService,
+        private srvHome: HomeService,
+        public appSound: AppSoundProvider,
         public modalCtrl: ModalController,
-        private loadingCtrl:LoadingController,
-        private alertCtrl:AlertController) {
+        private loadingCtrl: LoadingController,
+        private alertCtrl: AlertController) {
 
         console.log("TabsPage", navParams.data);
 
@@ -71,11 +73,11 @@ export class TabsPage {
             this.params.events.subscribe('go-page', (page) => {
                 let currentTab = this.homeTabs.getActiveChildNav();
                 console.log("go-page", page, currentTab);
-                try{
+                try {
                     if (page && currentTab.enabled) {
-                        currentTab.push( page );
+                        currentTab.push(page);
                     }
-                }catch( e ){
+                } catch (e) {
                     console.log("why the hell", e);
                 }
             });
@@ -84,30 +86,30 @@ export class TabsPage {
                 if (!tab) {
                     tab = 0;
                 }
-                try{
-                    this.homeTabs.select( tab );
-                }catch( e ){
+                try {
+                    this.homeTabs.select(tab);
+                } catch (e) {
                     console.log("home tab null", e);
                 }
-                
+
             });
 
         }
     }
 
-    ionViewDidLoad(){
+    ionViewDidLoad() {
         console.log("TabsPage::ionViewDidLoad");
-        this.homeTabs.select( this.mySelectedIndex );
+        this.homeTabs.select(this.mySelectedIndex);
     }
 
     ionViewDidEnter() {
-        
+
         // this.initData();
         let loader = this.loadingCtrl.create({
             content: "Please wait..."
         });
         loader.present();
-        
+
         // this.navCtrl.push(StorePage);
 
         /*
@@ -123,32 +125,32 @@ export class TabsPage {
         */
 
         this.cache.loadModules("home", "1", ["get_home_card", "get_account_details", "get_home_message"])
-        .then( data => {
-            loader.dismiss();
+            .then(data => {
+                loader.dismiss();
 
-            console.log("TabsPage::ionViewDidEnter", data);
-            this.params.setHomeData( data ); 
-      
-            /*
-            for (var i = data.length - 1; i >= 0; i--) {
-            // console.log("TabsPage::ionViewDidEnter", i, data[i].get_home_card);
-            if ( data[i].get_home_card ) {
-              // this.populateHomeData(data[i].get_home_card.response);
-              break;
-            }
-            }*/
-        }, err => {
-            loader.dismiss();
-            // show offline
-            this.params.setIsInternetAvailable(false);
-            console.log("TabsPage::ionViewDidEnter", err);
-        });
+                console.log("TabsPage::ionViewDidEnter", data);
+                this.params.setHomeData(data);
+
+                /*
+                for (var i = data.length - 1; i >= 0; i--) {
+                // console.log("TabsPage::ionViewDidEnter", i, data[i].get_home_card);
+                if ( data[i].get_home_card ) {
+                  // this.populateHomeData(data[i].get_home_card.response);
+                  break;
+                }
+                }*/
+            }, err => {
+                loader.dismiss();
+                // show offline
+                this.params.setIsInternetAvailable(false);
+                console.log("TabsPage::ionViewDidEnter", err);
+            });
     }
 
-    onSelectTab(tab){
+    onSelectTab(tab) {
         console.log("TabsPage::onSelectTab", tab);
         this.appSound.play('menuClick');
-        switch(tab){
+        switch (tab) {
             case 'account':
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', false)
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', true)
@@ -163,39 +165,46 @@ export class TabsPage {
         }
     }
 
-    populateHomeData(data:any){
+    populateHomeData(data: any) {
         this.homeCardData = data;
         this.gameData = this.homeCardData.game;
         this.homeData = this.homeCardData.information_for_you;
-        this.params.setHomeData( this.homeData );
+        this.params.setHomeData(this.homeData);
     }
 
-    goToStore(){
+    goToStore() {
         // console.log("goToStore()");
         this.storage.get('session')
-        .then(
+            .then(
             data => {
-              let session:any = JSON.parse(data);
-            //   let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=';
-            //   url += session.customer_id + '&customer_token=' + session.customer_token;
-            //   console.log("session data", data, url);
-              
-            //   let opt:string = "toolbarposition=top";
-            //   const browser = this.iab.create(url, "_blank", opt);
+                let session: any = JSON.parse(data);
+                //   let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=';
+                //   url += session.customer_id + '&customer_token=' + session.customer_token;
+                //   console.log("session data", data, url);
 
-              this.platform.ready().then(() => {
-                if (typeof cordova !== 'undefined') {
-                    const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id='+ session.customer_id + '&customer_token=' + session.customer_token + '', '_blank','location=no');
-                }
-            });
+                //   let opt:string = "toolbarposition=top";
+                //   const browser = this.iab.create(url, "_blank", opt);
 
+                this.platform.ready().then(() => {
+                    if (typeof cordova !== 'undefined') {
 
-            }, error =>{
+                        const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top');
+                        browser.addEventListener('loadstart', (event) => {
+                            setTimeout(function () {
+                                browser.insertCSS({ code: "body{background-color:#4286f4;}" })
+                            }, 3000);
+                        })
+                        browser.addEventListener('loadstop', (event) => {
+                            browser.insertCSS({ code: "body{background-color:#4286f4;}" })
+                        })
+                    }
+                });
+            }, error => {
                 // show offline
                 this.params.setIsInternetAvailable(false);
                 console.log(error)
-            } 
-        );
+            }
+            );
     }
 
 }

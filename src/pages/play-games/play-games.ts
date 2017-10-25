@@ -1,8 +1,8 @@
-import { Component, OnInit,NgModule } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { App, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
 import { GetBooster } from '../play-games-get-booster/play-games-get-booster'
-import { InAppBrowser,InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PlayGamesThankYou } from '../play-games-thank-you/play-games-thank-you';
 import { PlayGame } from '../../services/playgame.service';
@@ -16,7 +16,7 @@ import { CordovaInstance } from "@ionic-native/core";
 import { Subscription } from "rxjs/Rx";
 
 
-declare var $:any;
+declare var $: any;
 
 /*
   Generated class for the PlayGame page.
@@ -27,7 +27,7 @@ declare var webengage: any;
 declare var cordova: any;
 
 @NgModule({
-  providers:[InAppBrowser]
+  providers: [InAppBrowser]
 })
 
 @Component({
@@ -50,7 +50,7 @@ export class PlayGamePage implements OnInit {
   }
 
   public nav: NavController;
-  progressPercentage: any=0;
+  progressPercentage: any = 0;
   private gameInfo: any[];
   GameId: any;
   loading: any;
@@ -61,17 +61,17 @@ export class PlayGamePage implements OnInit {
   public gameUrl: any;
   public customerId: any;
   public customerToken: any;
-  public totalGameLevel:any;
-  public howToPlayModal:any;
-  public event:string;
+  public totalGameLevel: any;
+  public howToPlayModal: any;
+  public event: string;
   public inAppBrowser: any;
-  public gameLoss:boolean=true;
-  pageLoaded:boolean=false;
+  public gameLoss: boolean = true;
+  pageLoaded: boolean = false;
   boosterInfo = ""
 
   constructor(
-    private _modalController:ModalController,
-    public platform:Platform,
+    private _modalController: ModalController,
+    public platform: Platform,
     public app: App,
     public navCtrl: NavController,
     private appSound: AppSoundProvider,
@@ -86,7 +86,7 @@ export class PlayGamePage implements OnInit {
     }
     this.customerId = CommonService.session.customer_id;
     this.customerToken = CommonService.session.customer_token;
-   // this.slider();
+    // this.slider();
   }
 
   ionViewDidLoad() {
@@ -95,37 +95,37 @@ export class PlayGamePage implements OnInit {
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
-        (responseData:any) => {
+        (responseData: any) => {
           this.gameInfo = responseData.response[0].get_game_info.response;
           this.boosterInfo = responseData.response[0].get_game_info.response.booster_status
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
-          this.totalGameLevel=responseData.response[0].get_game_info.response.total_game_level;
-          this.progressPercentage = (this.gameLevelThanlyou/this.totalGameLevel*100);
+          this.totalGameLevel = responseData.response[0].get_game_info.response.total_game_level;
+          this.progressPercentage = (this.gameLevelThanlyou / this.totalGameLevel * 100);
           this.slider(this.gameLevelThanlyou);
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
-          
+
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
           this.loading.dismiss();
-          this.pageLoaded=true;
+          this.pageLoaded = true;
         },
         err => {
-            console.log("error", err);
+          console.log("error", err);
         }
-      );
+        );
     });
 
   }
   showBoosterModal() {
-    this.scrollContent=document.querySelector('.scroll-content');
-		this.scrollContent.style['overflow']='hidden';
+    this.scrollContent = document.querySelector('.scroll-content');
+    this.scrollContent.style['overflow'] = 'hidden';
     let myModal = this._modalController.create(GetBooster, { customer_award_log_id: this.gameInfo });
     myModal.present();
     myModal.onDidDismiss((data: any[]) => {
-			if (data) {
-			 this.scrollContent=document.querySelector('.scroll-content');
-			 this.scrollContent.style['overflow']='none';
-			}
-		})
+      if (data) {
+        this.scrollContent = document.querySelector('.scroll-content');
+        this.scrollContent.style['overflow'] = 'none';
+      }
+    })
   }
   ionViewWillEnter() {
 
@@ -137,49 +137,43 @@ export class PlayGamePage implements OnInit {
   openThankyouPage() {
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
-        var options = {
-          location : "yes",
-          toolbar: "no"
-        };
-          const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank','location=no');
-          browser.addEventListener('loadstart', (event) => {
-              if(event.url.includes("win"))
-                  {
-                     browser.close();
-                     this.nav.push(PlayGamesThankYou,{customer_awardLog_id:this.customerAwardLogId,gameLevel:this.gameLevelThanlyou,game_Id:this.GameId})
-                  }
-                  else if(event.url.includes("loss"))
-                    {
-                      browser.close();
-                      this.navCtrl.push(gameLoss,{gameId:this.GameId})
-                    }
-          });
-          
-          //If we want to close the page after the page is loaded
+        const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbarposition=top');
+        browser.addEventListener('loadstart', (event) => {
+          if (event.url.includes("win")) {
+            browser.close();
+            this.nav.push(PlayGamesThankYou, { customer_awardLog_id: this.customerAwardLogId, gameLevel: this.gameLevelThanlyou, game_Id: this.GameId })
+          }
+          else if (event.url.includes("loss")) {
+            browser.close();
+            this.navCtrl.push(gameLoss, { gameId: this.GameId })
+          }
+        });
+
+        //If we want to close the page after the page is loaded
 
         //   browser.addEventListener('loadstop', (event) => {
         //     alert("loadstop"+event);
-           
+
         // });
 
       }
-  });
- 
-}   
-  howToPlay(){
-    this.howToPlayModal=this._modalController.create(howtoplay,{gameInfo:this.gameInfo})
+    });
+
+  }
+  howToPlay() {
+    this.howToPlayModal = this._modalController.create(howtoplay, { gameInfo: this.gameInfo })
     this.howToPlayModal.present();
   }
-    recentWinnerTipsmodal(){
-    this.howToPlayModal=this._modalController.create(recentWinnerTips,{gameInfo:this.gameInfo})
+  recentWinnerTipsmodal() {
+    this.howToPlayModal = this._modalController.create(recentWinnerTips, { gameInfo: this.gameInfo })
     this.howToPlayModal.present();
   }
-    gameTermsModal(){
-    this.howToPlayModal=this._modalController.create(gameTerms,{gameTermsdata:this.gameInfo})
+  gameTermsModal() {
+    this.howToPlayModal = this._modalController.create(gameTerms, { gameTermsdata: this.gameInfo })
     this.howToPlayModal.present();
   }
 
-  slider(level:any) {
+  slider(level: any) {
     setTimeout(function () {
       $('.progressbarPlayGame').each(function () {
         var t = $(this);
@@ -193,7 +187,7 @@ export class PlayGamePage implements OnInit {
             perc = Math.round(parseInt(length) / 2.5),
             labelpos = (parseInt(length) - 2);
           t.find('.labelPlayGame').css('left', labelpos);
-          t.find('.perc').text("Level "+level);
+          t.find('.perc').text("Level " + level);
         }
         perc();
         setInterval(perc, 0);
