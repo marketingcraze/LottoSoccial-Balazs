@@ -19,7 +19,7 @@
       <ion-slides style="margin-top: -5px;margin-left: 5px" slidesPerView=2 >
         <ion-slide *ngFor="let product of offersForYou let i = index" style="background-color: #249940;">
           <div style="height: 22vh">
-          <img style="width: 100%" src="{{product.product_icon}}" class="img-responsive" (click)="offerOfTheDayModal(i) ">
+          <img style="width: 100%" src="{{product.product_icon}}" class="img-responsive" (tap)="offerOfTheDayModal(i) ">
         </div>
         </ion-slide>     
       </ion-slides>
@@ -45,7 +45,7 @@
               <!-- <p class="pad-5-top">{{c.draw_countdown}}</p> -->
               <h1 style="margin: 0;font-family: Lato-Bold;margin-top: -5px" [style.color]="c.product_color">£{{c.jackpot}}</h1>
               <input type="button" value="PLAY NOW" style="text-align: center; height: 35px;color: white;background-color: #249940;
-              width: 59%;border: none;border-radius: 3px;font-size: 15px;margin-top: 5px;margin-bottom: 7px;padding-left: -10px;padding: 5px" (click) = "openBuyPage(i)">
+              width: 59%;border: none;border-radius: 3px;font-size: 15px;margin-top: 5px;margin-bottom: 7px;padding-left: -10px;padding: 5px" (tap) = "openBuyPage(i)">
             </div>
           </ion-col>
         </ion-row>

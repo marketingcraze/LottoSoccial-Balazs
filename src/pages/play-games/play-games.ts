@@ -68,6 +68,9 @@ export class PlayGamePage implements OnInit {
   public gameLoss: boolean = true;
   pageLoaded: boolean = false;
   boosterInfo = ""
+  recent_winner:any;
+  
+
 
   constructor(
     private _modalController: ModalController,
@@ -95,7 +98,7 @@ export class PlayGamePage implements OnInit {
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
-        (responseData: any) => {
+        (responseData:any) => {
           this.gameInfo = responseData.response[0].get_game_info.response;
           this.boosterInfo = responseData.response[0].get_game_info.response.booster_status
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
@@ -103,8 +106,8 @@ export class PlayGamePage implements OnInit {
           this.progressPercentage = (this.gameLevelThanlyou / this.totalGameLevel * 100);
           this.slider(this.gameLevelThanlyou);
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
-
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
+          this.recent_winner = responseData.response[1].get_game_recent_winners.response         
           this.loading.dismiss();
           this.pageLoaded = true;
         },

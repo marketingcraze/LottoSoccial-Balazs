@@ -6,7 +6,7 @@
        <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
         <span class="SlideTitle" *ngIf="Credit_Points2>0"  >Your Bonus Credit Balance : <span ion-text class="PriceTxt">{{Credit_Points}}</span></span>
-        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (click)="goToOffers()">GET CREDIT</span>
+        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (tap)="goToOffers()">GET CREDIT</span>
        </ion-item>
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
@@ -31,7 +31,7 @@
             <ion-row class="SpaceBetweenRow">
               <ion-col *ngFor="let draw of  product?.draw_group|keys ; let i = index">
                 <button ion-button class="slide1FontColor" [ngStyle]="(i == position  )?{'background-color': product?.product_color}:{'background-color':  '#AAAAAA'}"
-                  (click)="drawday(i)">{{draw}}</button>
+                  (tap)="drawday(i)">{{draw}}</button>
               </ion-col>
 
             </ion-row>
@@ -71,7 +71,7 @@
                 </ion-grid>
             <div *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;" style="margin-top: 10px;width: 100%;text-align: center"> 
               <span  *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none" (click)="buyCreditOffer(items?.offer_id,product)"><span style="font-size: large">BUY NOW</span></button>
+                <button ion-button class="BuyBtn" style="float: none" (tap)="buyCreditOffer(items?.offer_id,product)"><span style="font-size: large">BUY NOW</span></button>
               </span>
             </div>
             <div  *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[product.sliderrange ? product.sliderrange : credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" style="margin-top: 5%;width: 100%;text-align: center">

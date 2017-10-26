@@ -74,9 +74,6 @@ export class AccountPage {
 		console.log('ionViewDidLoad AccountPage');
 		this.delay(4000);
 		this.content.enableScrollListener();
-		
-		
-
 	}
 
 	scrollHandlerAccount(event){

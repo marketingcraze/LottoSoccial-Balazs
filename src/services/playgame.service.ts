@@ -56,7 +56,21 @@ export class PlayGame {
             screen_id: "3.2",
             module_name: module_names,
             customer_id: this.customerId
+        },
+        {
+            "session_ID": CommonService.sessionId,
+            "page_ID": "3",
+            "screen_id": "3.6",
+            "action": "get_recent_winners",
+            "website": "Lotto Social",
+            "website_id": "27",
+            "source_site": "mobi.lottosocial.com",
+            "module_name": "get_game_recent_winners",
+            "customer_id":this.customerId,
+            "game_id":GameID
         });
+       
+
 
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
