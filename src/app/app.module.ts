@@ -153,7 +153,7 @@ import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
 import {} from '../pages'
 
 
-import { PhotoLibrary } from '@ionic-native/photo-library';
+
 @NgModule({
     declarations: [
         MyApp,
@@ -384,7 +384,7 @@ import { PhotoLibrary } from '@ionic-native/photo-library';
         AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
-        AnimationService, DatabaseService,paymentService, CommonService, PhotoLibrary,Badge,  AuthService, HomeService, AccountService, Params,AffiliateServices,
+        AnimationService, DatabaseService,paymentService, CommonService,Badge,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,AppVersion]
 

@@ -54,15 +54,17 @@ export class ManageSyndicate2Page {
     // this.iab.create(url, "_blank", opt);
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
-        const browser = cordova.InAppBrowser.open(url, "_blank", 'location=no,toolbarposition=top');
-        browser.addEventListener('loadstart', (event) => {
-          setTimeout(function () {
-            browser.insertCSS({ code: "body{background-color:#4286f4;}" })
-          }, 3000);
-        })
-        browser.addEventListener('loadstop', (event) => {
-          browser.insertCSS({ code: "body{background-color:#4286f4;}" })
-        })
+        const browser = this.iab.create(url, "_blank", 'location=no,toolbarposition=top');
+        browser.on("loadstop").
+          subscribe(
+          (data) => {
+            debugger
+            alert(data)
+            browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
+          },
+          err => {
+            console.log("InAppBrowser Loadstop Event Error: " + err);
+          });
       }
     })
   }
