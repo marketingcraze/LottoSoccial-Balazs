@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController, App } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, App, Platform } from 'ionic-angular';
 import { Leave2Page } from '../leave2/leave2';
 import { TandcPage } from '../tandc/tandc';
 import { RecentDrawPage } from '../recent-draw/recent-draw';
@@ -12,45 +12,60 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+declare var cordova: any;
 @Component({
   selector: 'page-manage-syndicate2',
   templateUrl: 'manage-syndicate2.html'
 })
 export class ManageSyndicate2Page {
 
- constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {}
+  constructor(private iab: InAppBrowser, private platform: Platform, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ManageSyndicatePage');
   }
-   ionViewWillEnter() {
-        this.viewCtrl.showBackButton(false);
-    }
-    close() {
-      this.navCtrl.pop();
-    }
-    leaveSyndicate() {
-      let leave2Modal = this.modalCtrl.create(Leave2Page);
-      leave2Modal.onDidDismiss(data => {
-        console.log(data);
-      });
-      leave2Modal.present();
-    }
-    agreement() {
-      this.navCtrl.push(TandcPage);
-    }
-    viewRecent() {
-      this.navCtrl.push(RecentDrawPage);
-    }
-    viewTicket() {
-      this.navCtrl.push(YourTicketsPage);
-    }
-    Invite() {
-      this.navCtrl.push(InviteFriendsPage);
-    }
-    openUrl(url:string){
-      let opt:string = "toolbarposition=top";
-      this.iab.create(url, "_blank", opt);
-    }
-
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+  }
+  close() {
+    this.navCtrl.pop();
+  }
+  leaveSyndicate() {
+    let leave2Modal = this.modalCtrl.create(Leave2Page);
+    leave2Modal.onDidDismiss(data => {
+      console.log(data);
+    });
+    leave2Modal.present();
+  }
+  agreement() {
+    this.navCtrl.push(TandcPage);
+  }
+  viewRecent() {
+    this.navCtrl.push(RecentDrawPage);
+  }
+  viewTicket() {
+    this.navCtrl.push(YourTicketsPage);
+  }
+  Invite() {
+    this.navCtrl.push(InviteFriendsPage);
+  }
+  openUrl(url: string) {
+    // let opt: string = "toolbarposition=top";
+    // this.iab.create(url, "_blank", opt);
+    this.platform.ready().then(() => {
+      if (typeof cordova !== 'undefined') {
+        const browser = this.iab.create(url, "_blank", 'location=no,toolbarposition=top');
+        browser.on("loadstop").
+          subscribe(
+          (data) => {
+            debugger
+            //alert(data)
+            browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
+          },
+          err => {
+            console.log("InAppBrowser Loadstop Event Error: " + err);
+          });
+      }
+    })
+  }
 }

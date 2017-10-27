@@ -4,7 +4,7 @@
 	<ion-avatar item-center icon-left>
 		<div class="lotto-logo">
 			
-			<img class="profile-picture" src="{{ signup.image ? signup.image : 'assets/icon/user.svg' }}" width="72" height="72" alt="Profile" />
+			<img class="profile-picture" src="{{ signup.image ? signup.image : 'assets/icon/user.svg' }}" width="72" height="72" alt="Profile" (click)="selectProfileImage()" />
 
 			<img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"/>
 			

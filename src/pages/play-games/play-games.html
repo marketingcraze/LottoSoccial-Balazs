@@ -80,13 +80,13 @@
                
             </ion-row >
             <ion-col col-12>
-                    <div *ngIf="boosterInfo != 'booster_not_applicable'" class="circle_inside" (click)="showBoosterModal()"> <img src="assets/icon/booster_big_ico@3x.png" class="circle_inside_Img"></div>
+                    <div *ngIf="boosterInfo != 'booster_not_applicable'" class="circle_inside" (tap)="showBoosterModal()"> <img src="assets/icon/booster_big_ico@3x.png" class="circle_inside_Img"></div>
                     <div *ngIf="boosterInfo == 'booster_not_applicable'" class="circle_inside"  style="filter: grayscale(1)"> <img src="assets/icon/booster_big_ico@3x.png" class="circle_inside_Img"></div>
                 </ion-col>
         </div>
 
         <div text-center>
-            <button ion-button color="secondary" class="playButtonStart" style="bottom: 14px" (click)="openThankyouPage()">Play Now</button>
+            <button ion-button color="secondary" class="playButtonStart" style="bottom: 14px" (tap)="openThankyouPage()">Play Now</button>
         </div>
     </div>
 
@@ -97,20 +97,21 @@
                 <span class="m-l-20" text-wrap>Recent Winners</span>
             </a>
             </li>
-            <li class="col-xs-3"><b><a href="#" class="black">Matt<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;50</span><span class="border-line">|</span></a></b></li>
-            <li class="col-xs-2"><b><a href="#" class="black">Jane<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;100</span><span class="border-line">|</span></a></b></li>
+            <li *ngIf="recent_winner?.game_winners" class="col-xs-3"><b><a href="#" class="black">{{recent_winner?.game_winners[0]?.name}}<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;{{recent_winner?.game_winners[0]?.amount}}</span><span class="border-line">|</span></a></b></li>
+            <li *ngIf="recent_winner?.game_winners" class="col-xs-2"><b><a href="#" class="black">{{recent_winner?.game_winners[1]?.name}}<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;{{recent_winner?.game_winners[1]?.amount}}</span><span class="border-line">|</span></a></b></li>
+            <li *ngIf="!recent_winner?.game_winners" class="col-xs-3"><b><a href="#" class="black">No Winner<span><img src="assets/icon/arw_feed_ico.svg" class="image-setting"  /></span> <span>&#8356;0</span><span class="border-line">|</span></a></b></li>
         </ul>
     </div>
 
     <div text-center style="position: relative;bottom: 16px;">
         <ion-list>
-            <ion-item href="#" (click)="recentWinnerTipsmodal()" detail-push>
+            <ion-item href="#" (tap)="recentWinnerTipsmodal()" detail-push>
                 Recent Winner Tips
             </ion-item>
-            <ion-item href="#" (click)="howToPlay()" detail-push>
+            <ion-item href="#" (tap)="howToPlay()" detail-push>
                 How to Play
             </ion-item>
-            <ion-item href="#" (click)="gameTermsModal()" detail-push hidden>
+            <ion-item href="#" (tap)="gameTermsModal()" detail-push hidden>
                 Game Terms
             </ion-item>
         </ion-list>

@@ -605,14 +605,10 @@
               </ion-slide> -->
         </ion-slides>
       </div>
-      <ion-slides spaceBetween=8 slidesPerView=2>
-        <ion-slide>
-          <img src="assets/img/mm_blog_thumb.png" width="150" height="100" (click)="loadLink('https://nima.lottosocial.com/category/millionairemoments')">
+      <ion-slides spaceBetween=8 slidesPerView=2 *ngFor="let c of millionerImage">
+        <ion-slide style="width: 51%">
+          <img src="{{c.event_image}}" width="150" height="100" style="height: 18vh">
         </ion-slide>
-        <ion-slide>
-          <img src="assets/img/badges_blog_thumb.png" width="150" height="100" (click)="handle('your_badges')">
-        </ion-slide>
-
       </ion-slides>
 
 

@@ -20,6 +20,7 @@ import { Network } from '@ionic-native/network';
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
+import { Camera } from 'ionic-native'
 
 @Component({
 	selector: 'page-signup',
@@ -32,6 +33,12 @@ export class SignupPage {
 	public showPass = false;
 	public tabs:Tabs;
 	private cache: CacheController
+	private imageSrc: string;
+	private baseUrl;
+	image_name1:any;
+	image_name11:string;
+	newImage:any;
+	
 	public selectedCountry:any = {
         name: "United Kingdom",
         iso2: "gb",
@@ -134,22 +141,42 @@ export class SignupPage {
 
     selectProfileImage(){
     	console.log("selectProfileImage");
-
-    	let options = {
-    		maximumImagesCount: 1,
-    		width: 800,
-    		height: 800,
-    		quality: 80
-    	};
-    	this.imagePicker.getPictures(options).then((results) => {
-    		this.signup.image = results[0];
-    		console.log('Image URI: ' + results[0]);
-    		// this.uploadImage();
-    		this.uploadPhoto(results[0]);
-    		// this.uploadProfilePic( results[0] );
-    	}, (err) => { });
+		this.openGallery()
+    	// let options = {
+    	// 	maximumImagesCount: 1,
+    	// 	width: 800,
+    	// 	height: 800,
+    	// 	quality: 80
+    	// };
+    	// this.imagePicker.getPictures(options).then((results) => {
+    	// 	this.signup.image = results[0];
+    	// 	console.log('Image URI: ' + results[0]);
+    	// 	// this.uploadImage();
+    	// 	this.uploadPhoto(results[0]);
+    	// 	// this.uploadProfilePic( results[0] );
+		// }, (err) => { });
+		
+		
     }
-    
+    private openGallery (): void {
+		let cameraOptions = {
+		  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+		  destinationType: Camera.DestinationType.FILE_URI,      
+		  quality: 70,
+		  targetWidth: 1000,
+		  targetHeight: 1000,
+		  encodingType: Camera.EncodingType.JPEG,      
+		  correctOrientation: true
+		}
+		Camera.getPicture(cameraOptions).then((fileUri)=>{
+			this.signup.image = fileUri
+			debugger
+			//this.uploadImage()
+			this.uploadPhoto(this.signup.image)
+			
+		}),
+		err => console.log(err);   
+	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad SignupPage');
@@ -197,7 +224,7 @@ export class SignupPage {
 			(data:any) => {
 				loader.dismiss();
 				console.log("image upload successful", data);
-				this.signup.profile_image_url = data.response.image_name;
+				this.signup.profile_image_url = data.response.image_name1;
 			},
 			err =>{
 				loader.dismiss();
@@ -216,8 +243,11 @@ export class SignupPage {
         // nav.setRoot(NewSyndicatePage);
 		
 		// this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
+		debugger;
+		var img=localStorage.getItem('userimg');
 		this.prepareMobile();
 		this.signup.country_code = this.selectedCountry.dialCode;
+		this.signup.profile_image_url = "https://nima.lottosocial.com/uploads/"+img
 		console.log("submitSignup", this.signup, form);
 		// console.log("submitSignup", form);
 
@@ -237,13 +267,15 @@ export class SignupPage {
 			content: "Please wait..."
 		});
 		loader.present();
-		
+		debugger
 		this.authSrv.addUser(this.signup).subscribe(
 			data=>{
+			
 				loader.dismiss();
 				
 				console.log("user registration successful", data);
 				// show register success message and redirect to login
+				
 				try {
                     data = data.response;
                 } catch (e) {
@@ -429,15 +461,18 @@ url:""
 	}
 
 	private readFile(file: any) {
+		
 		const reader = new FileReader();
 		reader.onloadend = () => {
-			const imgBlob = new Blob([reader.result], {type: file.type});
+			const imgBlob = new Blob([reader.result], {type:'image/jpg'});
+			
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);
 	}
 
 	private postData(blob:any, fileName:string) {
+		debugger
 		let server = CommonService.apiUrl + 
             CommonService.version + '/upload/?process=profile';
 
@@ -465,8 +500,16 @@ url:""
 		this.http.post(server, blob, options)
 		.catch( err =>this.handleError(err))
 		.map(response => response.json())
-		.finally(() => this.loading.dismiss())
-		.subscribe(ok => console.log("uploadPhoto:", ok));
+		// .finally(() => console.log('inside finaly'))
+		.subscribe((ok) => {
+			debugger;
+			this.loading.dismiss();
+			console.log("uploadPhoto:");
+			console.log(ok);
+			localStorage.setItem('userimg',ok.response.image_name)
+			//this.navCtrl.push(CreateSyndicatePage, {'image': ok.response.image_url});
+		  });
+	
 	}
 
 	private handleError(error: Response | any) {

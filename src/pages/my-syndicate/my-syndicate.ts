@@ -212,7 +212,17 @@ export class MySyndicatePage {
 
         this.platform.ready().then(() => {
             if (typeof cordova !== 'undefined') {
-                const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + this.syndArr[i].peepso_group_url + '&customer_id=' + this.customer_id + '&customer_token=' + this.customerToken + '', '_blank', 'location=no');
+                const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + this.syndArr[i].peepso_group_url + '&customer_id=' + this.customer_id + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbarposition=top');
+                browser.on("loadstop").
+                    subscribe(
+                    (data) => {
+                        debugger
+                       // alert(data)
+                        browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
+                    },
+                    err => {
+                        console.log("InAppBrowser Loadstop Event Error: " + err);
+                    });
             }
         });
 

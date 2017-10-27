@@ -62,6 +62,7 @@ export class StorePage {
     jackpotList:any
     jackpotGroup:any
     total_cards = 0
+    millionerImage:any;
 
     //buy credit
     loading:Loading;
@@ -200,6 +201,7 @@ export class StorePage {
 
         this.params.events.subscribe('home-data', data => {
             console.log("home-data", data);
+        
    
             for (var i = 0; i < data.length; i++) {
 
@@ -240,10 +242,14 @@ export class StorePage {
                     params.setUnreadCount(this.homeMessage.count);
                 }else if ( data[i].get_home_events ) {
                     this.homeEvents = data[i].get_home_events.response.events[0];
+                   
                 }else if ( data[i].get_home_blog ) {
                     this.homeBlog = data[i].get_home_blog.response.blogs;
+                 
                 }
             }
+            this.millionerImage = data[4].get_home_events.response.events
+          
             this.slides = this.mySlides;
 
             // this.home_slides.coverflow.slideShadows = false;
