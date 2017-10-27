@@ -10,7 +10,7 @@
         <ion-item class="line">
 	        <ion-avatar class="account-avatar" item-center item-left>
 
-				<img class="profile-picture" src="{{image_Data}}" width="72" height="72" alt="Profile" />
+				<img class="profile-picture" src="{{image_Data?image_Data:'assets/icon/user.svg'}}" width="72" height="72" alt="Profile" />
 
 				<img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"/>
 			</ion-avatar>
