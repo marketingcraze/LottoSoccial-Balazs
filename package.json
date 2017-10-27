@@ -33,6 +33,7 @@
         "@ionic-native/native-audio": "^4.1.0",
         "@ionic-native/network": "^3.14.0",
         "@ionic-native/onesignal": "^3.14.0",
+        "@ionic-native/photo-library": "^4.3.2",
         "@ionic-native/secure-storage": "^3.14.0",
         "@ionic-native/social-sharing": "^4.1.0",
         "@ionic-native/sqlite": "^3.14.0",
@@ -42,9 +43,9 @@
         "angular2-countrypicker": "^1.0.0",
         "animate.css": "^3.5.2",
         "autoprefixer": "^7.1.2",
-        "com.synconset.imagepicker": "https://github.com/Telerik-Verified-Plugins/ImagePicker",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
+        "cordova-plugin-add-swift-support": "^1.6.0",
         "cordova-plugin-badge": "^0.8.3",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
@@ -99,9 +100,6 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-file": {},
-            "com.synconset.imagepicker": {
-                "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
-            },
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-file-transfer": {},

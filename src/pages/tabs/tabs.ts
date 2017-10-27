@@ -193,7 +193,7 @@ export class TabsPage {
                             subscribe(
                             (data) => {
                                 debugger
-                                alert(data)
+                               // alert(data)
                                 browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
                             },
                             err => {
