@@ -19,6 +19,12 @@ import { SendBonusPage } from '../send-bonus/send-bonus'
 import { OffersPage } from '../offers/offers'
 import { GamesPage } from '../games/games'
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { Camera } from 'ionic-native'
+import { File, FileEntry } from '@ionic-native/file';
+
+import { Http, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
 declare var webengage: any;
 
@@ -34,6 +40,7 @@ export class AccountPage {
 	private refreshCache:boolean = false;
 	private unreadCount:number = 0;
 	downShowing = 0;
+	image_Data = ""
 	private homeMessage:any = {};
 	private accountDetails:any = {
 		bonus_credit:0.00,
@@ -61,7 +68,9 @@ export class AccountPage {
 	    public modalCtrl: ModalController,
 	    private loadingCtrl:LoadingController,
 		private alertCtrl:AlertController,
-		public cdRef:ChangeDetectorRef ) {
+		public cdRef:ChangeDetectorRef,
+		private file: File, 
+		private http:Http) {
 
 		console.log('AccountPage');
 
@@ -113,7 +122,22 @@ export class AccountPage {
             console.log("AccountPage::ionViewDidLoad", data);
             for (var i = 0; i < data.length; i++) {
             	if ( data[i].get_account_details ) {
-            		this.accountDetails = data[i].get_account_details.response;
+					this.accountDetails = data[i].get_account_details.response;
+					
+					if(this.accountDetails.profile_image)
+					{
+						this.image_Data = this.accountDetails.profile_image
+					}
+					else{
+						this.image_Data = "assets/icon/user.svg"
+					}
+					
+					if(localStorage.getItem("imageUrl"))
+					{
+						this.image_Data = localStorage.getItem("imageUrl")
+					}
+					
+					
             	}else if ( data[i].get_home_message ) {
             		this.homeMessage = data[i].get_home_message.response;
 		            this.unreadCount = this.homeMessage.unread;
@@ -254,6 +278,105 @@ export class AccountPage {
 	}
 	openGetGamesModule(){
 		this.navCtrl.push(GamesPage,{"app":"outside"});
+	}
+	private openGallery (): void {
+		let cameraOptions = {
+		  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+		  destinationType: Camera.DestinationType.FILE_URI,      
+		  quality: 70,
+		  targetWidth: 1000,
+		  targetHeight: 1000,
+		  encodingType: Camera.EncodingType.JPEG,      
+		  correctOrientation: true
+		}
+		Camera.getPicture(cameraOptions).then((fileUri)=>{
+			this.image_Data = fileUri
+			localStorage.setItem("imageUrl", fileUri)
+			debugger
+			//this.uploadImage()
+			this.uploadPhoto(fileUri)
+			
+		}),
+		err => console.log(err);   
+	}
+	selectProfileImage(){
+		this.openGallery()
+	}
+	private error;
+	private loading:any;
+	private uploadPhoto(imageFileUri: any): void {
+		this.error = null;
+		this.loading = this.loadingCtrl.create({
+			content: 'Uploading...'
+		});
+
+		this.loading.present();
+
+		this.file.resolveLocalFilesystemUrl(imageFileUri)
+		.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
+		.catch(err => console.log(err));
+	}
+
+	private readFile(file: any) {
+		
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			const imgBlob = new Blob([reader.result], {type:'image/jpg'});
+			
+			this.postData(imgBlob, file.name);
+		};
+		reader.readAsArrayBuffer(file);
+	}
+
+	private postData(blob:any, fileName:string) {
+		debugger
+		let server = CommonService.apiUrl + 
+            CommonService.version + '/upload/?process=profile';
+
+		var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
+        let myHeaders: Headers = new Headers();
+        myHeaders.set('Authorization', 
+            'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
+            'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
+            'oauth_signature_method="HMAC-SHA1",' +
+            'oauth_timestamp="1490087533",' +
+            'oauth_nonce="dWL9pr",' +
+            'oauth_version="1.0",' +
+            'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
+            );
+
+		
+        let options = {
+            fileKey: fileName,
+            fileName: fileName,
+            mimeType: "image/"+extension,
+            headers: myHeaders
+        };
+
+		console.log("SignupPage:: upload image options:", options);
+		this.http.post(server, blob, options)
+		.catch( err =>this.handleError(err))
+		.map(response => response.json())
+		// .finally(() => console.log('inside finaly'))
+		.subscribe((ok) => {
+			debugger;
+			this.loading.dismiss();
+			console.log("uploadPhoto:");
+			console.log(ok);
+		  });
+	
+	}
+	private handleError(error: Response | any) {
+		let errMsg: string;
+		if (error instanceof Response) {
+			const body = error.json() || '';
+			const err = body.error || JSON.stringify(body);
+			errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+		} else {
+			errMsg = error.message ? error.message : error.toString();
+		}
+		this.error = errMsg;
+		return Observable.throw(errMsg);
 	}
 
 

@@ -219,6 +219,7 @@ export class LoginPage {
                 if(data) {
                     if(data.status != "FAIL" ) {
                         CommonService.session = data;
+                        var ne = this.storage.get("session_ID")
                         this.storage.set('session_ID', CommonService.sessionId);
                         this.storage.set('session', JSON.stringify(data))
                         .then(

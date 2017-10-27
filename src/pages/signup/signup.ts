@@ -247,7 +247,7 @@ export class SignupPage {
 		var img=localStorage.getItem('userimg');
 		this.prepareMobile();
 		this.signup.country_code = this.selectedCountry.dialCode;
-		this.signup.profile_image_url = "https://nima.lottosocial.com/uploads/"+img
+		this.signup.profile_image_url = img
 		console.log("submitSignup", this.signup, form);
 		// console.log("submitSignup", form);
 
@@ -341,7 +341,7 @@ export class SignupPage {
 	        .then(
 	            data => console.log(data),
 	            error => console.log(error)
-	        );
+			);
 	        let nav = this.app.getRootNav();
 			nav.setRoot(HomePage);
 		}

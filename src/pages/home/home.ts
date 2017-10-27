@@ -73,7 +73,7 @@ export class HomePage implements OnInit {
     @ViewChild("messageDetails") messageDetails;
 
     private cache: CacheController;
-
+    image_Data:any;
     rootPage: any = TabsPage;
     messageLoading = false;
 
@@ -118,6 +118,20 @@ export class HomePage implements OnInit {
                 }
                 else if (data[i].get_account_details) {
                     this.accountDetails = data[i].get_account_details.response;
+                    if(this.accountDetails.profile_image)
+					{
+						this.image_Data = this.accountDetails.profile_image
+					}
+					else{
+						this.image_Data = "assets/icon/user.svg"
+					}
+					
+					if(localStorage.getItem("imageUrl"))
+					{
+						this.image_Data = localStorage.getItem("imageUrl")
+					}
+
+
                 }
             }
             console.log("HomePage::home data", this.homeMessage, this.messages);

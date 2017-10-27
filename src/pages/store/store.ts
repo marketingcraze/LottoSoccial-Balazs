@@ -242,13 +242,16 @@ export class StorePage {
                     params.setUnreadCount(this.homeMessage.count);
                 }else if ( data[i].get_home_events ) {
                     this.homeEvents = data[i].get_home_events.response.events[0];
+                    this.millionerImage = data[i].get_home_events.response.events
                    
                 }else if ( data[i].get_home_blog ) {
                     this.homeBlog = data[i].get_home_blog.response.blogs;
                  
                 }
+
+                
             }
-            this.millionerImage = data[4].get_home_events.response.events
+           
           
             this.slides = this.mySlides;
 
