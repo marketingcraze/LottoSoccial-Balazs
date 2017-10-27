@@ -99,7 +99,7 @@ export class CheckWinningsNextPage {
         
         if(this.movetype.response_type == '10.1'){
           this.navCtrl.push(PrizeSummaryWinPage);
-        }else if(this.movetype.response_type == '10.2') {
+        }else if(this.movetype.response_type == '10.2' ||  this.movetype.response_type == '10.3') {
           this.navCtrl.push(PrizeSummaryNoSyndicate);
         } else if(this.movetype.response_type == '10.4' || this.movetype.response_type == '10.7') {
           this.navCtrl.push(PrizeSummaryEarlyCheck);

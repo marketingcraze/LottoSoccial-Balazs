@@ -28,6 +28,8 @@ export class ConfirmNumberPage {
   dataArr = [];
   syndId: any;
   offerArr = [];
+  propertyArr = [];
+  TotalPaybale = 9;
 
     userCards: any;
     userCardsCount:number = 0;
@@ -85,7 +87,16 @@ export class ConfirmNumberPage {
     this._syndService.getBigJack(id).subscribe((res) => {
       loader.dismiss();
       console.log("ConfirmNumberPage", res);
-      this.offerArr = res.response["0"].get_private_syndicate_tkt_confirmation_special_offers.response.offer_details;
+      this.offerArr = res.response["0"].fetch_lottery_products.response.get_private_syndicate_offers;
+      this.propertyArr = res.response["0"].fetch_lottery_products.response.lottery_product_data;
+      for(var i=0; i<this.offerArr.length; i++) {
+        for(var j=0; j<this.propertyArr.length; j++) {
+          if(this.offerArr[i].product_category.toLowerCase() == this.propertyArr[j].product_name) {
+            this.offerArr[i].product_details = this.propertyArr[j]
+            this.offerArr[i].selected = false
+          }
+        }
+      }
       // this.offerArr = this.offerArr.concat(res.response[0].get_big_jackpot_list.response.rollover_jackpot_group);
       console.log(this.offerArr);
       this.st.newTimer('1sec', 1);
@@ -204,7 +215,7 @@ subscribeTimer0() {
 
 timer0callback(data) {
 
-        var value: any = data[0].jackpot_details.count_down
+        var value: any = data[0].product_details.draw_countdown
         this.result = "";
 
 
@@ -241,6 +252,21 @@ timer0callback(data) {
   }
   nextSlide() {
     this.slides.slideNext()
+  }
+
+  selecetOffer(i:any) {
+    this.TotalPaybale = 9
+    this.offerArr[i].selected = !this.offerArr[i].selected
+    for(var j=0; j<this.offerArr.length; j++) {
+      if(this.offerArr[j].selected) {
+        if(this.offerArr[j].product_price == '') {
+           this.TotalPaybale = this.TotalPaybale + 0
+        }else {
+           this.TotalPaybale = this.TotalPaybale + parseFloat(this.offerArr[j].product_price)
+        }
+       
+      }
+    }
   }
 
 }

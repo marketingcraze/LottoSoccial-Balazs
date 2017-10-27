@@ -49,8 +49,8 @@
         <ion-grid class="my-grid border-btm">
           <ion-row style="text-align: center">
             <ion-col *ngFor="let da of d.days; let di=index">
-             <span (click)="tick(i, di)">
-               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon cico" [hidden]="d.dayactive[di]"></ion-icon>
+             <span (click)="tick(i, di)" style="font-size: 16px;">
+               <ion-icon ios="ios-square-outline" md="md-square-outline" class="check-icon cico" [hidden]="d.dayactive[di]" style="font-size: 20px;"></ion-icon>
                <ion-icon ios="ios-checkmark" md="md-checkmark" class="check-icon tickb cico" [hidden]="!d.dayactive[di]" style="content: url('./assets/img/check_b.svg');"></ion-icon>
                 {{da}}
                 </span>

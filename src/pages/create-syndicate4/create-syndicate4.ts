@@ -24,7 +24,7 @@ export class CreateSyndicate4Page {
   count2: number = 1
   dataArr = []
   validArr = []
-  valid = false
+  valid = true
   euroDays = {
     tue: true,
     fri: true
@@ -42,8 +42,9 @@ export class CreateSyndicate4Page {
     var data = JSON.parse(localStorage.getItem('cardDefault'));
     for(var i=0;i< data.length; i++) {
       if(data[i].selected) {
+        data[i].dayactive[0] = true
         this.dataArr.push(data[i]);
-        this.validArr.push(false)
+        this.validArr.push(true)
       }
     }
     console.log(data);

@@ -185,18 +185,22 @@ export class SyndicateService {
     getBigJack(id: any) {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
-        // var data = {
-        //     "session_ID": CommonService.sessionId,
-        //     "page_ID": "4",
-        //     "screen_id": "4.7",
-        //     "action": "jackpot_list",
-        //     "website": "Lotto Social",
-        //     "website_id": "27",
-        //     "source_site": "mobi.lottosocial.com",
-        //     "module_name": "get_big_jackpot_list",
-        //     "customer_id": CommonService.session.customer_id,
-        //     "private_syndicate_id": id
-        // }
+        var data = {
+                    "request": [{
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "4",
+                        "screen_id": "4.7",
+                        "action": "get_private_syndicate_offers",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "fetch_lottery_products",
+                        "customer_id":CommonService.session.customer_id,
+                        "private_syndicate_id":id
+                        }]
+                    }
+
+
 
         var data2 = {
                     "request": [{
@@ -225,7 +229,7 @@ export class SyndicateService {
                         // }
                     ]}
 
-        return this.http.post(this.apiUrl + action, data2, { headers: headopt })
+        return this.http.post(this.apiUrl + action, data, { headers: headopt })
             .map(res => res.json())
             .map((res) => {
                 return res;
