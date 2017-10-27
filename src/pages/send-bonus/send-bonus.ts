@@ -128,12 +128,10 @@ export class SendBonusPage {
 
 				if (this.Credit_Points) {
 					this.Credit_Points2 = this.Credit_Points.slice(1);
+					loader.dismiss();
 				}
 				else {
 					this.Credit_Points2 = 0;
-				}
-
-				if (this.credit_product) {
 					loader.dismiss();
 				}
 			}
