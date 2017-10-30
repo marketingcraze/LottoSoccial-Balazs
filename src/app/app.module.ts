@@ -114,6 +114,7 @@ import { VoucherService } from '../services/voucherList_service'
 import { AffiliateServices } from '../services/affliate.service';
 import { forkOffersSyndicate } from '../services/syndicateForkOffer.service';
 import { winnerTips } from '../services/recentWinnerTips.service';
+import { badgesOs } from '../services/badges.service';
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -386,7 +387,7 @@ import {} from '../pages'
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService,paymentService, CommonService,Badge,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,AppVersion]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion]
 
 })
 export class AppModule { }

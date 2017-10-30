@@ -46,7 +46,8 @@
                 </ion-col>
 
                 <ion-col col-5 item-right text-center>
-                    <button ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (tap)="redeem(redeem_product?.product_link,i)">GET</button>
+                    <button *ngIf="reward_point>0" ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (tap)="redeem(redeem_product?.product_link,i)">GET</button>
+                    <button *ngIf="reward_point==0" disabled="disabled" ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (tap)="redeem(redeem_product?.product_link,i)">GET</button>
                     <p color="calm" style="font-size: 15px">{{redeem_product?.product_price}} pts</p>
                     <!-- {{redeem_product?.product_price_after | uppercase}} -->
                 </ion-col>
