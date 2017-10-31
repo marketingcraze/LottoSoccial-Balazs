@@ -59,6 +59,7 @@ export class CheckWinningsNextPage {
           //  this.loader.dismiss();
           //  res2 = {"response":[{"check_mywinnings":{"response":{"status":"SUCCESS","message":"","syndicate_offer":{"title":"You currently not playing in any of our syndicate.","description_group":{"description1":"You have got to be in it to win it","description2":"Fancy getting"},"offer_line_group":{"offer_line1":"30 EuroMillions Lines","offer_line2":"&pound;9,900,000m"},"destination_url_group":{"destination_url1":"#","destination_url2":"#"},"offer_id":"992","next_draw":{"name":"lotto","offer_title":"Lotto 20 lines","offer_jackpot":"£9,900,000","offer_id":"1701","prosub_id":"2247","offer_img":"http://ecommercelive.s3.amazonaws.com/wp-content/uploads/app_assets/offers_library/lotto_header.png","button_text":"Play for £4.99","countdown":"Sat 29 Apr 17 19:00:00"}},"response_type":"10.2","claim_event_id":"149822","claim_event_status":4}}}]}
             this.movetype = res2.response["0"].check_mywinnings.response
+            // this.movetype.response_type = '10.7'
             this.loading = false;
             console.log('final response');
             console.log(res2);

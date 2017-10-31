@@ -186,48 +186,30 @@ export class SyndicateService {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         var data = {
-                    "request": [{
-                        "session_ID": CommonService.sessionId,
-                        "page_ID": "4",
-                        "screen_id": "4.7",
-                        "action": "get_private_syndicate_offers",
-                        "website": "Lotto Social",
-                        "website_id": "27",
-                        "source_site": "mobi.lottosocial.com",
-                        "module_name": "fetch_lottery_products",
-                        "customer_id":CommonService.session.customer_id,
-                        "private_syndicate_id":id
-                        }]
+                        "request": [{
+                            "session_ID": CommonService.sessionId,
+                            "page_ID": "4",
+                            "screen_id": "4.7",
+                            "action": "get_private_syndicate_offers",
+                            "website": "Lotto Social",
+                            "website_id": "27",
+                            "source_site": "mobi.lottosocial.com",
+                            "module_name": "fetch_lottery_products",
+                            "customer_id":CommonService.session.customer_id
+                            },
+                            {
+                            "session_ID": CommonService.sessionId,
+                            "page_ID": "4",
+                            "screen_id": "4.7",
+                            "action": "jackpot_list",
+                            "website": "Lotto Social",
+                            "website_id": "27",
+                            "source_site": "mobi.lottosocial.com",
+                            "module_name": "get_big_jackpot_list",
+                            "customer_id":CommonService.session.customer_id,
+                            "private_syndicate_id":id
+                            }]
                     }
-
-
-
-        var data2 = {
-                    "request": [{
-                        "session_ID": CommonService.sessionId,
-                        "page_ID": "4",
-                        "screen_id": "4.7",
-                        "action": "jackpot_list",
-                        "website": "Lotto Social",
-                        "website_id": "27",
-                        "source_site": "mobi.lottosocial.com",
-                        "module_name": "get_private_syndicate_tkt_confirmation_special_offers",
-                        "customer_id":CommonService.session.customer_id,
-                        "private_syndicate_id":id
-                        }
-                        // {        
-                        // "session_ID": CommonService.sessionId,        
-                        // "page_ID": "22",        
-                        // "screen_id": "22.2",        
-                        // "action": "special_offer",        
-                        // "website": "Lotto Social",        
-                        // "website_id": "27",        
-                        // "source_site": "mobi.lottosocial.com",        
-                        // "module_name": "get_special_offer_details",        
-                        // "customer_id":CommonService.session.customer_id,        
-                        // "callfrom":"syndicate_confirm_numbers_load"
-                        // }
-                    ]}
 
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
             .map(res => res.json())

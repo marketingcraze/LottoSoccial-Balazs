@@ -6,12 +6,12 @@
 <ion-content class="main-bg">
     <div style="background: #fff;margin-top: 12px;padding: 10px;">
         <img src="./assets/image/smartsad_ico@3x.png" style="width: 50%;">
-        <div style="font-size: 18px;">YOUR DRAW HAS NOT OCCURRED YET</div>
-        <div style="padding: 10px;">Your next available draw to check will be for:</div>
+        <div style="font-size: 18px;text-transform: uppercase;font-family: lato-black;color: #444;">{{data?.title}}</div>
+        <div style="padding: 10px;">{{data?.description_group?.description1}}:</div>
         <div style="padding: 10px;">
-            <span ><img src="../assets/icon/rwp_icon.svg" style="width: 40px;vertical-align: middle;margin-right: 20px;"/></span>
-            <span style="font-weight: bold; font-size: 18px">EuroMillions - 23 Dec</span>
-            <span><img src="../assets/icon/rwp_icon.svg" style="width: 40px;vertical-align: middle;margin-left: 20px;"/></span>
+            <span ><img src="../assets/img/check-winnings-stars.svg" style="width: 40px;vertical-align: middle;margin-right: 20px;"/></span>
+            <span style="font-weight: bold; font-size: 18px;font-family: lato-black;color: #444;">{{data?.description_group?.description2}}</span>
+            <span><img src="../assets/img/check-winnings-stars2.svg" style="width: 40px;vertical-align: middle;margin-left: 20px;"/></span>
         </div>
         <div style="padding: 10px;">The Millionaire clock is ticking..</div>
         <div style="width:95%;height: 2px;margin: 0 auto;background: #ccc;"></div>

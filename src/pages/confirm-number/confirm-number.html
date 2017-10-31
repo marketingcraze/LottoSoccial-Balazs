@@ -50,7 +50,8 @@
                 <ion-row class="offerRow">
                   <ion-col col-2> <img [src]="d?.product_details?.image_url" /> </ion-col>
                   <ion-col col-7 class="text-center"> 
-                    <div>{{d?.product_title}}</div>
+                    <div *ngIf="d?.app_lines">{{d?.product_title}}</div>
+                    <div *ngIf="!d?.app_lines">{{d?.product_name}}</div>
                     <div>{{d?.product_details?.draw_countdown | date}}</div>
                   </ion-col>
                   <ion-col col-3 class="jprice"> &#x20A4;{{d?.product_details?.jackpot}} </ion-col>
@@ -65,7 +66,7 @@
                     <div style="margin-right: 10px;"><b style="font-size:18px">{{min}}</b> <br><span>Mins</span></div>
                     <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
                 </div>
-              <div class="lines-type" *ngIf="d?.app_type == 'ONE-OFF'">
+              <div class="lines-type" *ngIf="d?.app_lines">
                 <div style="float: left;width: 50%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
                     <div style="margin-top: 6px"><b style="font-size:18px">{{d?.app_lines}}</b> <br><span>LINES</span></div>
                     <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
@@ -75,9 +76,9 @@
                     <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
                 </div>
               </div>
-              <div class="lines-type" *ngIf="d?.app_type != 'ONE-OFF'">
+              <div class="lines-type" *ngIf="!d?.app_lines">
                 <div style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;border-right: 1px solid lightgrey;height: 8vh"> 
-                    <div style="margin-top: 6px"><b style="font-size:18px">{{d?.app_lines}}</b> <br><span>LINES</span></div>
+                    <div style="margin-top: 6px"><b style="font-size:18px">{{d?.lines_count}}</b> <br><span>LINES</span></div>
                     <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
                 </div>
                 <div  style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;height: 8vh;border-right: 1px solid lightgrey;height: 8vh">
@@ -85,7 +86,7 @@
                     <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
                 </div>
                 <div  style="float: left;width: 33.3%;border-bottom: 1px solid lightgrey;height: 8vh">
-                    <div style="margin-top: 6px"><b style="font-size:18px">&#x20A4;{{d?.rollover_jackpot | uppercase}}</b> <br><span>TRIGGER</span></div>
+                    <div style="margin-top: 6px"><b style="font-size:18px">&#x20A4;{{d?.jackpot_value | uppercase}}</b> <br><span>TRIGGER</span></div>
                     <span style="float: right;bottom: 18px;position: relative;right: 12px;"><ion-icon ios="ios-alert" md="md-alert"></ion-icon></span>
                 </div>
               </div>
@@ -93,7 +94,9 @@
             <div text-center style="clear: both;padding: 15px;">
               <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;margin-bottom: 15px;" (click)="selecetOffer(mi)">
                 <span style="font-size: 17px;font-weight: lighter;" [hidden]="d?.selected">
-                ADD FOR &#x20A4;<span *ngIf="d?.product_price == ''">0</span><span *ngIf="d?.product_price != ''">{{d?.product_price}} </span> 
+                ADD FOR &#x20A4;
+                <span *ngIf="d?.app_lines"><span *ngIf="d?.product_price == ''">0</span><span *ngIf="d?.product_price != ''">{{d?.product_price}} </span></span>
+                <span *ngIf="!d?.app_lines"><span *ngIf="d?.package_price == ''">0</span><span *ngIf="d?.package_price != ''">{{d?.package_price}} </span></span>
                 </span>
                 <span style="font-size: 14px;font-weight: lighter;" [hidden]="!d?.selected">
                 Remove from cart
@@ -123,9 +126,16 @@
         <ion-row *ngFor="let o of offerArr; let oi = index;" [hidden]="!o.selected">
           <ion-col col-8>
             <span (click)="selecetOffer(oi)" class="icon-cross" style="content: url(./assets/img/close2.svg);max-width: 12px;margin-right: 5px;"></span>
-            <span>{{o?.product_title}}</span>
+            <span *ngIf="o?.app_lines">{{o?.product_title}}</span>
+            <span *ngIf="!o?.app_lines">{{o?.product_name}}</span>
           </ion-col>
-          <ion-col col-4 text-right> &#x20A4;<span *ngIf="o?.product_price != ''">{{o?.product_price}}</span> <span *ngIf="o?.product_price == ''">0</span></ion-col>
+          <ion-col col-4 text-right> &#x20A4;
+            <!--<span *ngIf="o?.product_price != ''">{{o?.product_price}}</span> 
+            <span *ngIf="o?.product_price == ''">0</span>-->
+
+            <span *ngIf="o?.app_lines"><span *ngIf="o?.product_price == ''">0</span><span *ngIf="o?.product_price != ''">{{o?.product_price}} </span></span>
+            <span *ngIf="!o?.app_lines"><span *ngIf="o?.package_price == ''">0</span><span *ngIf="o?.package_price != ''">{{o?.package_price}} </span></span>
+            </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>

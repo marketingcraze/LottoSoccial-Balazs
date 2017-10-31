@@ -6,13 +6,13 @@
 <ion-content class="main-bg">
     <div style="background: #fff;margin-top: 12px;padding: 10px;">
         <img src="./assets/image/smartsad_ico@3x.png" style="width: 50%;">
-        <div style="color: red;font-size: 18px;">YOU HAVE NO ACTIVE SYNDICATES</div>
+        <div style="color: red;font-size: 18px;text-transform: uppercase;font-family: lato-black;">{{data?.description_group?.description1}}</div>
     </div>
     <div style="background: #fff;margin-top: 12px;">
-        <div style="padding: 10px;font-size: 16px;">Don't miss the chance of being a millionaire in the next available draw</div>
-        <div style="background: url('./assets/image/euro_offers@3x.png'); background-size: cover;height: 80px;text-align: left;padding-left: 20px;padding-top: 12px;" >
-            <div style="color:#444;">EUROMILLIONS 20 LINES</div>
-            <div style="font-size: 24px;color: skyblue;font-family: Lato-black;">£43,000,000</div>
+        <div style="padding: 10px;font-size: 16px;font-family: lato-black;color: #444;">Don't miss the chance of being a millionaire in the next available draw</div>
+        <div style="/*background: url('./assets/image/euro_offers@3x.png'); background-size: cover;*/ height: 80px;text-align: left;padding-left: 20px;padding-top: 12px;" [ngStyle]="bgStyle" >
+            <div style="color:#444;text-transform: uppercase;">{{data?.next_draw?.offer_title}}</div>
+            <div style="font-size: 24px;color: skyblue;font-family: Lato-black;">{{data?.next_draw?.offer_jackpot}}</div>
         </div>
         <div class="homeTime-left" text-left>
             <span  text-center style="text-align: center"><img style="height: 33px;width: 14%" src="assets/icon/timer.svg"/><span style="color:white;vertical-align: super;">TIME LEFT: </span></span>
@@ -23,7 +23,7 @@
                 <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
             </div>
             <div style="display: -webkit-inline-box;color: #fff;">
-                <button style="font-size: 10px;margin: 0;margin-top: -25px;" ion-button class="btn-ccg" >BUY FOR £4.99</button>
+                <button style="font-size: 10px;margin: 0;margin-top: -25px;" ion-button class="btn-ccg" >{{data?.next_draw?.button_text}}</button>
             </div>
         </div>
         <div style="padding: 15px;"> Or go to the store for a wide range of offers</div>

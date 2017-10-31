@@ -87,7 +87,8 @@ export class ConfirmNumberPage {
     this._syndService.getBigJack(id).subscribe((res) => {
       loader.dismiss();
       console.log("ConfirmNumberPage", res);
-      this.offerArr = res.response["0"].fetch_lottery_products.response.get_private_syndicate_offers;
+      this.offerArr = res.response[2].get_private_syndicate_offers.response
+      this.offerArr = this.offerArr.concat(res.response[1].get_big_jackpot_list.response.rollover_jackpot_group)
       this.propertyArr = res.response["0"].fetch_lottery_products.response.lottery_product_data;
       for(var i=0; i<this.offerArr.length; i++) {
         for(var j=0; j<this.propertyArr.length; j++) {
@@ -100,7 +101,7 @@ export class ConfirmNumberPage {
       // this.offerArr = this.offerArr.concat(res.response[0].get_big_jackpot_list.response.rollover_jackpot_group);
       console.log(this.offerArr);
       this.st.newTimer('1sec', 1);
-      this.subscribeTimer0();
+      this.subscribeTimer0(0);
                         
       // updates every seconds
       setInterval(() => {
@@ -193,7 +194,7 @@ export class ConfirmNumberPage {
 
     //countDown timer
 
-subscribeTimer0() {
+subscribeTimer0(i:any) {
 
     if (this.timer0Id) {
 
@@ -205,17 +206,28 @@ subscribeTimer0() {
     } else {
 
         // Subscribe if timer Id is undefined
-        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offerArr));
+        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offerArr[i]));
         this.timer0button = 'Unsubscribe';
         console.log('timer 0 Subscribed.');
     }
     console.log(this.st.getSubscription());
 }
+changesubscribeTimer0(i:any) {
 
+        this.st.unsubscribe(this.timer0Id);
+        this.timer0Id = undefined;
+        this.timer0button = 'Subscribe';
+        console.log('timer 0 Unsubscribed.');
+
+        // Subscribe if timer Id is undefined
+        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(this.offerArr[i]));
+        this.timer0button = 'Unsubscribe';
+        console.log('timer 0 Subscribed.');
+}
 
 timer0callback(data) {
 
-        var value: any = data[0].product_details.draw_countdown
+        var value: any = data.product_details.draw_countdown
         this.result = "";
 
 
@@ -247,7 +259,8 @@ timer0callback(data) {
 }
 
   slideChanged(ev:any) {
-    console.log('active slide', ev);
+    console.log('active slide', ev.realIndex);
+    this.changesubscribeTimer0(ev.realIndex)
     this.appSound.play('cardFlip');
   }
   nextSlide() {
@@ -259,11 +272,20 @@ timer0callback(data) {
     this.offerArr[i].selected = !this.offerArr[i].selected
     for(var j=0; j<this.offerArr.length; j++) {
       if(this.offerArr[j].selected) {
-        if(this.offerArr[j].product_price == '') {
+        if(this.offerArr[j].app_lines) {
+          if(this.offerArr[j].product_price == '') {
            this.TotalPaybale = this.TotalPaybale + 0
-        }else {
+          }else {
            this.TotalPaybale = this.TotalPaybale + parseFloat(this.offerArr[j].product_price)
+          }
+        }else {
+          if(this.offerArr[j].package_price == '') {
+           this.TotalPaybale = this.TotalPaybale + 0
+          }else {
+           this.TotalPaybale = this.TotalPaybale + parseFloat(this.offerArr[j].package_price)
+          }
         }
+        
        
       }
     }

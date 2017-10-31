@@ -10,6 +10,7 @@ declare const $
 })  
 export class PrizeSummaryEarlyCheck {
     loader:any;
+    data:any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,  
@@ -23,11 +24,20 @@ export class PrizeSummaryEarlyCheck {
     }
 
   ionViewDidLoad() {
-    
-    console.log('ionViewDidLoad prize summary early check');
+    this.getData()
   }
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
-
+  getData() {
+    this.loader.present();
+    this._syndService.prizeBreakDown()
+    .subscribe((res)=> {
+      // res = {"response":{"status":"SUCCESS OR FAIL","message":"","title":"Your draw hasn’t taken place yet","description_group":{"description1":"Your Next available draw is ","description2":"Euro Mill -  dec 30"}}}
+      console.log(res)
+      this.data = res.response;
+      this.loader.dismiss();
+    })
+    
+  }
 }
