@@ -385,13 +385,13 @@ export class AccountPage {
 	ionViewWillEnter() {
 		this._badgesOs.getBadgesData().subscribe(data => {
 			if (data) {
-				this.badgesForYou=data.response[0].badges	
+				this.badgesForYou = data.response[0].badges
 			}
 		})
 	}
-	goToBadgesView(badge:any){
+	goToBadgesView(badgeData: any) {
 		debugger;
-		this.navCtrl.push(BadgeViewPage);
+		this.navCtrl.push(BadgeViewPage, { badge: badgeData });
 	}
 
 

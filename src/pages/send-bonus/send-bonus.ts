@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { App, Platform, NavController, Tabs, NavParams, LoadingController, AlertController, MenuController, ModalController } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth.service';
@@ -10,7 +10,9 @@ import { CacheController } from '../../services/cache_controller';
 import { Storage } from '@ionic/storage';
 import { SyndicatesPage } from '../syndicates/syndicates';
 import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
+import { Observable } from 'rxjs/Rx';
 
+declare var $: any;
 /*
   Generated class for the SendBonusPage page.
 
@@ -22,7 +24,9 @@ import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 	templateUrl: 'send-bonus.html'
 })
 export class SendBonusPage {
+	itemPriceModel: any;
 	Credit_Points2: any;
+	liveCreditPoint: any = 0.00;
 
 	private cache: CacheController;
 	userCards: any;
@@ -70,7 +74,7 @@ export class SendBonusPage {
 		public navCtrl: NavController,
 		public modalCtrlr: ModalController,
 		public menu: MenuController,
-		public navParams: NavParams,
+		public navParams: NavParams, public cdRef: ChangeDetectorRef,
 		public loadingCtrl: LoadingController) {
 		this.nav = this.app.getRootNav();
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
@@ -78,6 +82,7 @@ export class SendBonusPage {
 			this.visitorId = firstTimeLoad;
 			console.log('firstTimeLoad storage', firstTimeLoad);
 		});
+		//this.cdRef.detectChanges()
 		this.syndicate = SyndicatesPage;
 	}
 
@@ -128,6 +133,7 @@ export class SendBonusPage {
 
 				if (this.Credit_Points) {
 					this.Credit_Points2 = this.Credit_Points.slice(1);
+					this.liveCreditPoint = this.Credit_Points.slice(1)
 					loader.dismiss();
 				}
 				else {
@@ -182,20 +188,24 @@ export class SendBonusPage {
 	}
 
 	watchSlider(currentProduct: any, Index: any, proIndex: any) {
+
 		if (Index >= 0 && proIndex == Index && currentProduct.sliderrange != null) {
 			this.sliders = true;
 			this.credit_product[Index]['sliderrange'] = currentProduct.sliderrange;
-			console.log(this.credit_product);
+			//console.log(this.credit_product);
 		}
 		else if (Index >= 0 && proIndex == Index && currentProduct.sliderrange == null) {
 			this.sliders = true;
 			this.credit_product[Index]['sliderrange'] = this.slider;
-			console.log(this.credit_product);
-
+			//console.log(this.credit_product);
 		}
 		else {
 			this.sliders = false;
 		}
+		setTimeout( ()=> {
+			debugger;
+			this.Onblur()
+		}, 200);
 	}
 
 	private _showLoader() {
@@ -214,9 +224,21 @@ export class SendBonusPage {
 				tabs.select(1);
 			}
 		})
+
 	}
 	goToOffers() {
 		var tabs: Tabs = this.navCtrl.parent;
 		tabs.select(0)
 	}
+	Onblur() {
+		debugger;
+		var currentData =this.Credit_Points.slice(1);
+		var creditData = parseFloat(document.getElementById("mySpan").innerText.slice(1));
+		console.log(currentData, creditData)
+		this.liveCreditPoint = currentData - creditData;
+		this.Credit_Points2 = this.liveCreditPoint;
+		console.log(this.liveCreditPoint, this.Credit_Points)
+		this.cdRef.detectChanges()
+	}
+
 }

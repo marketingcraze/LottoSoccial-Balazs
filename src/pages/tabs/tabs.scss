@@ -71,5 +71,14 @@ page-tabs{
 		content: url(../assets/icon/offers_ico.svg);
 	}
 
+	.ion-ios-Menu, .ion-md-Menu{
+		content: url(../assets/icon/menu-leftBlack.svg);
+		margin-right: 25px!important;
+	}
+	.ion-ios-Menu-outline, .ion-md-Menu-outline {
+		content: url(../assets/icon/menu-leftBlack.svg);
+		margin-right: 25px!important;
+	}
+
 
 }

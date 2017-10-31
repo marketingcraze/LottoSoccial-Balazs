@@ -3,14 +3,14 @@
 <ion-content class="marg-top-12 main-bg">
   <div class="badges-main">
         <div>
-            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 25%;padding: 5px;margin-left: 45px;"/>
+            <img src="{{BadgeData?.thumbnail}}" style="width: 25%;padding: 5px;margin-left: 45px;"/>
             <span class="shareIco">
                 <div><ion-icon class="shareBucketicon icon icon-md ion-ios-share-outline" ios="ios-share-outline" md="ios-share-outline" style="left: 0;bottom: 0;"></ion-icon></div>
                 <div>SHARE</div>
             </span>
         </div>
         <div style="font-size: 17px;color: #343434;">
-            <div class="">Brucie Bonus</div>
+            <div class="">{{BadgeData?.post_title}}</div>
             <div class="light-font pad-tb">100% comleted</div>
             <div>
                 <span ><img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"/></span>
@@ -20,11 +20,10 @@
                 <span ><img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"/></span>
                 <span ><img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"/></span>
             </div>
-            <div class="pad5">Every good millionaire check their finances. <br/> Check if you won at least 3 times.</div>
+            <div class="pad5">{{BadgeData?.post_content}}</div>
             <div class="separator"></div>
             <div>REWARD</div>
-            <div class="dark large-font pad5">300 pts</div>
-            <div> <button ion-button type="submit" class="btn" >SHARE BADGE</button> </div>
+            <div class="dark large-font pad5"> {{BadgeData?.points}} pts</div>
             <div class="separator"></div>
             <div class="pad5">STEPS REQUIRED</div>
             <div style="padding: 5px 0px 25px 0px;">

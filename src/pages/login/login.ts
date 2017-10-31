@@ -20,6 +20,7 @@ declare var webengage: any;
 
 export class LoginPage {
     @ViewChild('animation') input;    
+    @ViewChild('loginForm') LoginData:any;
     public countryPopOver:any;
     public selectedCountry:any = {
         name: "United Kingdom",
@@ -177,8 +178,10 @@ export class LoginPage {
     }
 
 
-    submitLogin(animation){        
-        
+    submitLogin(){   
+        if(this.LoginData.form.controls.password._value=="" ){
+            return alert("Enter login details correctly")
+        }
         // this.login.free_reg_msn = "" + this.countryNumber + this.login.mobile;
         this.prepareMobile();
 
