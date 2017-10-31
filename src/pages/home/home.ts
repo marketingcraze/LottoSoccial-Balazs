@@ -118,18 +118,29 @@ export class HomePage implements OnInit {
                 }
                 else if (data[i].get_account_details) {
                     this.accountDetails = data[i].get_account_details.response;
-                    if(this.accountDetails.profile_image)
+                    if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
 					{
-						this.image_Data = this.accountDetails.profile_image
+						var str = this.accountDetails.profile_image
+						console.log("last character is ",str.charAt(str.length - 1) )
+						if(str.charAt(str.length - 1) == ".")
+						{
+						str = str.substring(0, str.length - 1);
+						this.image_Data = str
+						}
+						else{
+							this.image_Data = this.accountDetails.profile_image
+						}
 					}
 					else{
-						this.image_Data = "assets/icon/user.svg"
+                        if(localStorage.getItem("imageUrl"))
+                        {
+                            this.image_Data = localStorage.getItem("imageUrl")
+                        }else{
+                        this.image_Data = "assets/icon/user.svg"
+                        }
 					}
 					
-					if(localStorage.getItem("imageUrl"))
-					{
-						this.image_Data = localStorage.getItem("imageUrl")
-					}
+				
 
 
                 }

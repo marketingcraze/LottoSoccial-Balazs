@@ -16,6 +16,7 @@ export class HelpPage {
   @ViewChild(Content) content: Content;
   @ViewChild('newDiv') fileInput:ElementRef;
   downShowing = 0;
+  down_arrow_showing = 0;
   lottoSocialGamesHalf:any;
   lottoSocialBonusHalf:any;
   constructor(public navCtrl: NavController, private viewctrl:ViewController,public cdRef: ChangeDetectorRef) {
@@ -30,6 +31,16 @@ export class HelpPage {
   // }
   ionViewWillEnter() {
     this.content.enableScrollListener();
+    var a = localStorage.getItem("HelpP")
+    if(localStorage.getItem("HelpP") == undefined || localStorage.getItem("HelpP") == null)
+    {
+      this.down_arrow_showing = 1
+    }
+    else{
+      this.down_arrow_showing = 0
+    }
+    localStorage.setItem("HelpP","1")
+
  }
   scrollHandler(event){
     
@@ -47,6 +58,7 @@ export class HelpPage {
     else
     {
       this.downShowing = 0
+      this.down_arrow_showing = 0
       this.cdRef.detectChanges();
     }
     }

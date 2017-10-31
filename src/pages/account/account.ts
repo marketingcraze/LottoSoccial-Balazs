@@ -47,6 +47,7 @@ export class AccountPage {
 	private unreadCount: number = 0;
 	downShowing = 0;
 	image_Data = ""
+	down_arrow_showing=0
 	private homeMessage: any = {};
 	private accountDetails: any = {
 		bonus_credit: 0.00,
@@ -88,10 +89,10 @@ export class AccountPage {
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad AccountPage');
-		this.delay(4000);
-		this.content.enableScrollListener();
+		
+		
 	}
-
+	
 	scrollHandlerAccount(event) {
 		var scrollDiv = document.getElementById('accountContent').clientHeight;
 		var innerDiv = document.getElementById('innerAccount').scrollHeight;
@@ -101,9 +102,11 @@ export class AccountPage {
 		if (valu > innerDiv) {
 			this.downShowing = 1
 			this.cdRef.detectChanges();
+			
 		}
 		else {
 			this.downShowing = 0
+			this.down_arrow_showing = 0
 			this.cdRef.detectChanges();
 		}
 	}
@@ -112,50 +115,77 @@ export class AccountPage {
 	}
 	loadAccountData() {
 		// show loading screen
-		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
-		});
-		loader.present();
+    	let loader = this.loadingCtrl.create({
+            content: "Please wait..."
+        });
+        loader.present();
 
-		// load data
-		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
-			.then(data => {
-				loader.dismiss();
+    	// load data
+    	this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
+        .then( data => {
+            loader.dismiss();
+			
+            this.refreshCache = false;
 
-				this.refreshCache = false;
-
-				console.log("AccountPage::ionViewDidLoad", data);
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].get_account_details) {
-						this.accountDetails = data[i].get_account_details.response;
-
-						if (this.accountDetails.profile_image) {
+            console.log("AccountPage::ionViewDidLoad", data);
+            for (var i = 0; i < data.length; i++) {
+            	if ( data[i].get_account_details ) {
+					debugger
+					this.accountDetails = data[i].get_account_details.response;
+					
+					if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
+					{
+						var str = this.accountDetails.profile_image
+						console.log("last character is ",str.charAt(str.length - 1) )
+						if(str.charAt(str.length - 1) == ".")
+						{
+						debugger
+						str = str.substring(0, str.length - 1);
+						this.image_Data = str
+						}
+						else{
 							this.image_Data = this.accountDetails.profile_image
 						}
-						else {
-							this.image_Data = "assets/icon/user.svg"
-						}
+					}
+					else{
 
-						if (localStorage.getItem("imageUrl")) {
+						
+						if(localStorage.getItem("imageUrl"))
+						{
 							this.image_Data = localStorage.getItem("imageUrl")
 						}
-
-
-					} else if (data[i].get_home_message) {
-						this.homeMessage = data[i].get_home_message.response;
-						this.unreadCount = this.homeMessage.unread;
+						else{
+							this.image_Data = "assets/icon/user.svg"
+						}
+						
 					}
+				}else if ( data[i].get_home_message ) {
+            		this.homeMessage = data[i].get_home_message.response;
+		            this.unreadCount = this.homeMessage.unread;
 				}
+				this.content.enableScrollListener();
+			}
+			
+		
+			console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
+			
+			//debugger
+			var a = localStorage.getItem("arrow_accountP")
+			if(localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null)
+			{
+				this.down_arrow_showing = 1
+			}
+			else{
+				this.down_arrow_showing = 0
+			}
+			localStorage.setItem("arrow_accountP","1")
 
-
-				console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
-
-			}, err => {
-				loader.dismiss();
-				// show offline
-				this.params.setIsInternetAvailable(false);
-				console.log("AccountPage::ionViewDidLoad", err);
-			});
+        }, err => {
+            loader.dismiss();
+            // show offline
+            this.params.setIsInternetAvailable(false);
+            console.log("AccountPage::ionViewDidLoad", err);
+        });
 	}
 	updateNickName() {
 		this.appSound.play('buttonClick');
@@ -188,9 +218,17 @@ export class AccountPage {
 		this.appSound.play('buttonClick');
 
 		this.cache.clearDatabaseOnLogout();
-
+		localStorage.removeItem("imageUrl")
 		this.storage.remove('session_ID');
-
+		localStorage.removeItem("arrow_accountP")
+		localStorage.removeItem("affiliateP")
+		localStorage.removeItem("affiliate2P")
+		localStorage.removeItem("badgeP")
+		localStorage.removeItem("chkWinningP")
+		localStorage.removeItem("HelpP")
+		localStorage.removeItem("redeemP")
+		localStorage.removeItem("yourOffersP")
+		localStorage.removeItem("yourGamesP")
 
 		this.platform.ready().then((readySource) => {
 

@@ -18,6 +18,7 @@ export class CheckWinningsPage {
   private myWinnings:any = [];
   loader:any; 
   downShowing = 0;
+  down_arrow_showing = 0;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams, 
@@ -49,8 +50,18 @@ export class CheckWinningsPage {
     this._syndService.loadWinnings()
     .subscribe((res)=> {
       console.log(res);
+      var a = localStorage.getItem("chkWinningP")
+			if(localStorage.getItem("chkWinningP") == undefined || localStorage.getItem("chkWinningP") == null)
+			{
+				this.down_arrow_showing = 1
+			}
+			else{
+				this.down_arrow_showing = 0
+			}
+			localStorage.setItem("chkWinningP","1")
       this.loader.dismiss();
       this.myWinnings = res.response["0"].get_previous_check_list.response.previous_check_group;
+
       this.content.enableScrollListener();
     });
   }
@@ -70,6 +81,7 @@ export class CheckWinningsPage {
     else
     {
       this.downShowing = 0
+      this.down_arrow_showing = 0
       this.cdRef.detectChanges();
     }
     }

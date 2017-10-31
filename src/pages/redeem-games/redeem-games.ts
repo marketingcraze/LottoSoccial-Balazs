@@ -26,6 +26,7 @@ export class RedeemGamesPage {
   reward_point:number;
   point_status:any;
   downShowing  = 0;
+  down_arrow_showing = 0;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private share: SocialSharing,
@@ -54,6 +55,7 @@ scrollHandlerListGames(event){
     else
     {
       this.downShowing = 0
+      this.down_arrow_showing = 0
       this.cdRef.detectChanges();
     }
     }
@@ -71,7 +73,15 @@ scrollHandlerListGames(event){
                    this.reward_point=data.response.response.reward_points_balance;
                    console.log("redeem game",data.response);
                    this.loading.dismiss();   // Hide the message when the data is ready 
-                   this.delay(4000);
+                   var a = localStorage.getItem("redeemP")
+                   if(localStorage.getItem("redeemP") == undefined || localStorage.getItem("redeemP") == null)
+                   {
+                     this.down_arrow_showing = 1
+                   }
+                   else{
+                     this.down_arrow_showing = 0
+                   }
+                   localStorage.setItem("redeemP","1")
                    this.content.enableScrollListener();
              },
              err=>{ 

@@ -133,6 +133,7 @@ import { AnimationService, AnimatesDirective } from 'css-animator';
 import { paymentService } from '../services/paymentService'
 import { Badge } from '@ionic-native/badge'
 import { AppVersion } from '@ionic-native/app-version';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 
 // pipes
@@ -385,7 +386,7 @@ import {} from '../pages'
         AgreementPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
-        AnimationService, DatabaseService,paymentService, CommonService,Badge,  AuthService, HomeService, AccountService, Params,AffiliateServices,
+        AnimationService, DatabaseService,paymentService, CommonService,Badge,UniqueDeviceID,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion]
 

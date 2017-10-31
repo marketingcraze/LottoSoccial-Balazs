@@ -59,7 +59,7 @@ export class PlayGame {
         },
         {
             "session_ID": CommonService.sessionId,
-            "page_ID": "3",
+            "page_ID": page_id,
             "screen_id": "3.6",
             "action": "get_recent_winners",
             "website": "Lotto Social",

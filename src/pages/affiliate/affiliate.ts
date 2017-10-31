@@ -28,6 +28,7 @@ export class AffiliatePage implements OnInit {
     day: any = [];
     hrs: any = [];
     mins: any = [];
+    down_arrow_showing=0;
     sec: any = [];
     TimeLeft: string = ""
     //NewTimeLeft: any;
@@ -72,6 +73,15 @@ export class AffiliatePage implements OnInit {
                     this.bonus_duplicate = this.affilateModelBinding.bonus_duplicate;
                     Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.affilateModelBinding.countdown));
                     this.dummy = (String(this.affilateModelBinding.offer_jackpot).substr(0, 4))
+                    var a = localStorage.getItem("affiliateP")
+                    if(localStorage.getItem("affiliateP") == undefined || localStorage.getItem("affiliateP") == null)
+                    {
+                        this.down_arrow_showing = 1
+                    }
+                    else{
+                        this.down_arrow_showing = 0
+                    }
+                    localStorage.setItem("affiliateP","1")
                     loading.dismiss();
                 })
         })
@@ -96,6 +106,7 @@ export class AffiliatePage implements OnInit {
         }
         else {
             this.downShowing = 0
+            this.down_arrow_showing = 0
             this.cdRef.detectChanges();
         }
     }

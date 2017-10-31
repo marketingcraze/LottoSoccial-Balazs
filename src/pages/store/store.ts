@@ -54,7 +54,7 @@ export class StorePage {
     hrs:any;
     min:any;
     sec:any;
-    counts:any=0;
+    counts:any=1;
     // payment variables
     userCards: any;
     userCardsCount:number = 0;
@@ -790,17 +790,26 @@ mgmOpenPage(){
 }
 
 countSlider(ev:any){
+    
     let direction=ev.direction;
     if(direction==2 && this.counts<this.carouselSlide.length())
     {
-      this.counts++;  
-      this.currentSliderCount=this.counts;
+        if(this.count==this.carouselSlide.length()-1)
+        {
+        }
+        else{
+            this.counts++;  
+            this.currentSliderCount=this.counts;
+            
+        }
+      
     }
-    else if(direction==4 && this.counts>0)
+    else if(direction==4 && this.counts>1)
     {
         this.counts--;  
         this.currentSliderCount=this.counts;
     }
+  
 }
 redirectToOfferPage(){
     var tabs:Tabs=this.navCtrl.parent;
