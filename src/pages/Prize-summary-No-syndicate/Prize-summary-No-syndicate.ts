@@ -10,7 +10,8 @@ declare const $
 })
 export class PrizeSummaryNoSyndicate {
     loader:any;
-
+    data:any;
+    bgStyle:any
     private currentTime:Date = new Date();
     result: any = [];
     resultDate: any = [];
@@ -22,6 +23,7 @@ export class PrizeSummaryNoSyndicate {
     hrs:any;
     min:any;
     sec:any;
+
 
   constructor(
     public navCtrl: NavController, 
@@ -37,16 +39,15 @@ export class PrizeSummaryNoSyndicate {
     }
 
   ionViewDidLoad() {
-    
-    console.log('ionViewDidLoad CheckWinningsNextPage');
+    this.getData()
   }
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
-    this.subscribeTimer0()
+    
   }
   //countDown timer
 
-subscribeTimer0() {
+subscribeTimer0(d:any) {
 
     if (this.timer0Id) {
 
@@ -58,7 +59,7 @@ subscribeTimer0() {
     } else {
 
         // Subscribe if timer Id is undefined
-        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback('10/10/2018'));
+        this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback(d));
         this.timer0button = 'Unsubscribe';
         console.log('timer 0 Subscribed.');
     }
@@ -98,5 +99,19 @@ timer0callback(data) {
         this.sec = (seconds <= 9) ? '0' + seconds : seconds;
 
 }
-
+    getData() {
+        this.loader.present();
+        this._syndService.prizeBreakDown().
+        subscribe((res)=> {
+            this.loader.dismiss();
+            console.log(JSON.stringify(res));
+            this.data = res.response["0"].check_mywinnings.response.syndicate_offer;
+            this.bgStyle = {
+                'background': 'url(' + this.data.next_draw.offer_img + ')',
+                'background-size': 'cover'
+            }
+            this.subscribeTimer0(this.data.next_draw.countdown)
+            
+        })
+    }
 }
