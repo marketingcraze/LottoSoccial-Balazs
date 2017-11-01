@@ -103,6 +103,56 @@ export class AccountService {
         var response = this.http.post(action, reqData, opt).map(res => res.json());
         return response;
     }
+
+    saveImageUrl(image_url:any){
+        console.log("inside voucher list");
+        if (!CommonService.session) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+		}
+
+		
+
+
+		debugger
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/profile/" 
+        let parameter = {
+			"request": [
+			  {
+				"session_ID": "avjtjgu0f257f0orggqufcn5g2",
+				"page_ID": "7",
+				"screen_id": "7.5",
+				"action": "profile_pwd_update",
+				"website": "Lotto Social",
+				"website_id": "27",
+				"source_site": "mobi.lottosocial.com",
+				"module_name": "update_customer_profile",
+				"customer_id":CommonService.session.customer_id,
+				"profile_image_url": image_url,
+				   }
+			]
+		  }
+		  var a =CommonService.session.customer_id
+		  var b = CommonService.sessionId
+	
+		  let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+	debugger
+		var response = this.http.post(action, parameter, opt).map(response => response.json());
+		
+        return response;
+    }
  
     saveEmail(details:any) {
         console.log("saveDetails", details);

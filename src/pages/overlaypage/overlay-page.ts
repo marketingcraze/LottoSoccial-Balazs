@@ -6,7 +6,7 @@ import { VoucherService } from '../../services/voucherList_service';
     templateUrl: 'overlay-page.html'
 })
 export class OverlayPage {
-    counter:any = 0;
+    counter:any = 1;
     constructor(public navCtrl: NavController,
         public alertCtrl: AlertController,
         private viewctrl: ViewController,

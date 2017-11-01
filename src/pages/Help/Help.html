@@ -1,4 +1,4 @@
-<cus-header title="Personal Guid" notification-count="0"></cus-header>
+<cus-header title="Personal Guide" notification-count="0"></cus-header>
 
 
 <ion-content (ionScroll)="scrollHandler($event)" class="ionContentDesign"  id="contents" >
@@ -26,11 +26,10 @@
             <p *ngIf="lottoSocialGamesHalf=='halfLotto'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
                 You can play and get more games from the
                  <span style="color: #316BCB">game page</span>.
-                 The games are split between instant win games and story games. 
-                 Instant win games operates like .... <span style="color: #316BCB" (click)="changeVal('fullLotto')">read more</span>
+                 The games are split...   <span style="color: #316BCB" (click)="changeVal('fullLotto')">read more</span>
                 </p>
                 <p *ngIf="lottoSocialGamesHalf=='fullLotto'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
-                    You can play and get more games from the
+                    between instant win games and story games.Instant win games operates like You can play and get more games from the
                      <span style="color: #316BCB">game page</span>.
                      The games are split between instant win games and story games. 
                      Instant win games operates like scratchcards: 
@@ -50,12 +49,12 @@
                  <p *ngIf="lottoSocialBonusHalf=='halfBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
                     You can spend your bonus credit in the 
                      <span style="color: #316BCB">offer page</span>.
-                     by clicking on "SPEND BONUS CREDIT" and chossing from any lottery available! 
-                     Accumulate bounus credit by converting your small cash wins.. <span style="color: #316BCB" (click)="changeValBonus('fullBonus')">read more</span>
+                     by clicking on "SPEND BONUS CREDIT"  <span style="color: #316BCB" (click)="changeValBonus('fullBonus')">read more</span>
                    
                     </p>
                     <p *ngIf="lottoSocialBonusHalf=='fullBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
-                        You can spend your bonus credit in the 
+                        and chossing from any lottery available! 
+                        Accumulate bounus credit by converting your small cash wins. You can spend your bonus credit in the 
                          <span style="color: #316BCB">offer page</span>.
                          by clicking on "SPEND BONUS CREDIT" and chossing from any lottery available! 
                          Accumulate bounus credit by converting your small cash wins (60p or less) 

@@ -13,6 +13,7 @@ import { DatabaseService } from '../../services/db.service';
 import { CacheController } from '../../services/cache_controller';
 import { AccountService } from '../../services/account.service';
 import { CommonService } from '../../services/common.service';
+
 import { badgesOs } from '../../services/badges.service';
 
 
@@ -27,7 +28,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { Camera } from 'ionic-native'
 import { File, FileEntry } from '@ionic-native/file';
 
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 
@@ -235,6 +236,7 @@ export class AccountPage {
 		localStorage.removeItem("redeemP")
 		localStorage.removeItem("yourOffersP")
 		localStorage.removeItem("yourGamesP")
+		
 
 		this.platform.ready().then((readySource) => {
 
@@ -410,11 +412,24 @@ export class AccountPage {
 				this.loading.dismiss();
 				console.log("uploadPhoto:");
 				console.log(ok);
+				this.uploadAPI_Image(ok.response.image_name);
 			});
 
 	}
+	private customerId: string = "";
+	
+	uploadAPI_Image(image_url:any){
+		// this.srvAccount.saveImageUrl(image_url).subscribe(data =>{
+		// 	if(data)
+		// 	{
+		// 		alert(data.response)
+		// 	}
+			
+		// })
+	}
 	private handleError(error: Response | any) {
-		let errMsg: string;
+		this.loading.dismiss();
+		let errMsg: string; 
 		if (error instanceof Response) {
 			const body = error.json() || '';
 			const err = body.error || JSON.stringify(body);
@@ -429,13 +444,13 @@ export class AccountPage {
 	ionViewWillEnter() {
 		this._badgesOs.getBadgesData().subscribe(data => {
 			if (data) {
-				this.badgesForYou = data.response[0].badges
+				this.badgesForYou=data.response[0].badges	
 			}
 		})
 	}
-	goToBadgesView(badgeData: any) {
+	goToBadgesView(badge:any){
 		debugger;
-		this.navCtrl.push(BadgeViewPage, { badge: badgeData });
+		this.navCtrl.push(BadgeViewPage);
 	}
 
 
