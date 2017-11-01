@@ -48,7 +48,7 @@
         <div text-center style="width: 100%" *ngIf="accountDetails.reward_points>0" (click)="tip2()">
           <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
           <span class="tooltip t2">POINTS
-            <span class="points">{{accountDetails.reward_points}}</span>
+            <span class="points">{{rewardPoints}}</span>
             <div *ngIf="tip22==true">
               <span class="tooltiptext t-right" style="text-align: justify;padding: 10px; color: gray">
                 Use your points to get

@@ -30,6 +30,7 @@ declare var $:any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    rewardPoints: number;
     creditPoints: any;
     buyoffer: any;
     @ViewChild(Slides) home_slides: Slides;
@@ -237,6 +238,13 @@ export class StorePage {
                     else {
                         this.creditPoints = 0;
                     }
+                    if (this.accountDetails.reward_points) {
+                        this.rewardPoints = parseInt(this.accountDetails.reward_points)
+                    }
+                    else {
+                        this.rewardPoints = 0;
+                    }
+
                 }else if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
                     params.setUnreadCount(this.homeMessage.count);
@@ -251,7 +259,7 @@ export class StorePage {
 
                 
             }
-           
+          
           
             this.slides = this.mySlides;
 

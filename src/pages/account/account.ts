@@ -38,6 +38,7 @@ declare var webengage: any;
 	templateUrl: 'account.html'
 })
 export class AccountPage {
+	rewardPoints: number;
 	badgesForYou: any;
 	@ViewChild(Content) content: Content;
 	private cache: CacheController;
@@ -132,7 +133,12 @@ export class AccountPage {
             	if ( data[i].get_account_details ) {
 					debugger
 					this.accountDetails = data[i].get_account_details.response;
-					
+					if (this.accountDetails.reward_points) {
+                        this.rewardPoints = parseInt(this.accountDetails.reward_points)
+                    }
+                    else {
+                        this.rewardPoints = 0;
+                    }
 					if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
 					{
 						var str = this.accountDetails.profile_image
