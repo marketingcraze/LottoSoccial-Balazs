@@ -349,7 +349,7 @@ mobile:"23423423423"
 
 
     uploadProfilePic( filePath:string ){
-        
+        debugger
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
             return;
@@ -383,6 +383,7 @@ mobile:"23423423423"
         console.log("options ", server, options);
 
         console.log("form data ", formData);
+        debugger
         /*
         var response = this.http.post(server, formData, options)
         .map(res => res.json());
@@ -393,10 +394,11 @@ mobile:"23423423423"
         
         return new Observable( observer => {
             let fileTransfer = this.transfer.create();
-
+debugger
             fileTransfer.upload(filePath, encodeURI(server), options)
             .then((data:any) => {
                 // success
+                debugger
                 console.log("success" + data);
                 if(data && data.response && data.response.status == 'SUCCESS') {
                     observer.next(data.response);

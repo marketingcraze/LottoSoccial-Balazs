@@ -73,33 +73,26 @@ export class YourGamesPage {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     ionViewDidEnter(){
-      this.delay(4000);
+    
       this.content.enableScrollListener();
     }
     ionViewWillEnter() {
-     
+    
       this.loading = this.loadingCtrl.create();
+      debugger
       this.loading.present().then(() => {
         this.authSrv.your_games().subscribe(
           data => {
             this.game_group = data.response.response.game_group;
-            console.log("your game", data);
-            var a = localStorage.getItem("yourGamesP")
-            if(localStorage.getItem("yourGamesP") == undefined || localStorage.getItem("yourGamesP") == null)
-            {
-              this.down_arrow_showing = 1
-            }
-            else{
-              this.down_arrow_showing = 0
-            }
-            localStorage.setItem("yourGamesP","1")
+          
+            
             this.loading.dismiss();   // Hide the message when the data is ready
          
           },
           err => {
             console.log("error", err);
           },
-          () => console.log("your games  get sucesss")
+          () =>this.downA()
         );
       });
     }
@@ -116,7 +109,26 @@ export class YourGamesPage {
       this.appSound.play('menuClick');
       this.navCtrl.parent.select(1);
     }
+downA(){
 
+  if(localStorage.getItem("yourGamesP") == undefined || localStorage.getItem("yourGamesP") == null)
+  {
+   
+    var len = this.game_group.length
+    debugger
+    if(len < 6)
+    {
+      this.down_arrow_showing = 0
+    }
+    else{
+      this.down_arrow_showing = 1
+    }
+   }
+  else{
+    this.down_arrow_showing = 0
+  }
+  localStorage.setItem("yourGamesP","1")
+}
 
     goHomePage(){
         this.params.goHomePage();
@@ -125,4 +137,5 @@ export class YourGamesPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad YourGamesPage', this.navParams.data);
     }
+   
 }

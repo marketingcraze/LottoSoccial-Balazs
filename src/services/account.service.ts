@@ -8,7 +8,7 @@ import { Params } from './params';
 
 @Injectable()
 export class AccountService {
-    
+    private customerId: string = "";
     static get parameters() {
         return [[Http]];
     }
@@ -122,7 +122,7 @@ export class AccountService {
 		}
 
 		
-
+        this.customerId = CommonService.session.customer_id;
 
 		debugger
         let action = "https://nima.lottosocial.com/wp-json/mobi/v2/profile/" 

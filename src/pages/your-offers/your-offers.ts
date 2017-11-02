@@ -140,15 +140,8 @@ export class YourOffersPage {
 				} else {
 					this.goPaymentWebview();
 				}
-				var a = localStorage.getItem("yourOffersP")
-				if(localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null)
-				{
-					this.down_arrow_showing = 1
-				}
-				else{
-					this.down_arrow_showing = 0
-				}
-
+				
+				
 			}, (err) => {
 				console.log("OffersPage::showPaymentOptions() error", err);
 				loader.dismiss();
@@ -195,7 +188,25 @@ export class YourOffersPage {
 						this.st.newTimer('1sec', 1);
 						this.subscribeTimer0();
 						this.delay(4000);
-					
+						debugger
+						var a = localStorage.getItem("yourOffersP")
+						if(localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null)
+						{
+							var scrollDiv = document.getElementById('reddemOffersContent').clientHeight;
+							var innerDiv = document.getElementById('innerYourOffers').scrollHeight;	debugger
+							var valu = scrollDiv + this.content.scrollTop
+							console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
+							if (valu < innerDiv) 
+							{
+							  this.down_arrow_showing = 1
+							}
+							else{
+							  this.down_arrow_showing = 0
+							}
+						}
+						  else{
+							this.down_arrow_showing = 0
+						}
  						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.lotteryProductData[0].draw_countdown));
 						break;
 					}

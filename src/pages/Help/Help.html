@@ -7,7 +7,7 @@
         
       <ion-card text-center text-wrap class="cardMainDesign">
        <div class="cardMainDiv">
-         <ion-badge class="badgeDesing"> NEW</ion-badge>
+         <span class="badgeDesing"> NEW</span>
          <p class="cardHeading">CHECK YOUR WINNINGS</p>
          <p style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: center;color: #2C2C2C">You can simply check your winnings by going to your <span style="color: #316BCB" (click)="openSyndicatePage()">syndicate page</span> and tapping on the <span style="font-size: 16px">"CHECK WINNING"</span> tab</p>
          <div >
@@ -19,17 +19,17 @@
        </div>
       </ion-card>
     
-      <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 15px">
-          <div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
-              <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> DONE </ion-badge>
+      <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 10px">
+          <div style="text-align: center;">
+              <span style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;padding: 3px;padding-right: 10px;font-weight: 500;border-radius: 20px;color: white"> DONE </span>
             <p style="font-size: 18px; font-weight: bold;color: #2C2C2C">LOTTO SOCIAL GAMES</p>
             <p *ngIf="lottoSocialGamesHalf=='halfLotto'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
                 You can play and get more games from the
                  <span style="color: #316BCB">game page</span>.
-                 The games are split...   <span style="color: #316BCB" (click)="changeVal('fullLotto')">read more</span>
+                 The games are split between ...   <span style="color: #316BCB" (click)="changeVal('fullLotto')">read more</span>
                 </p>
                 <p *ngIf="lottoSocialGamesHalf=='fullLotto'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
-                    between instant win games and story games.Instant win games operates like You can play and get more games from the
+                    instant win games and story games.Instant win games operates like You can play and get more games from the
                      <span style="color: #316BCB">game page</span>.
                      The games are split between instant win games and story games. 
                      Instant win games operates like scratchcards: 
@@ -39,21 +39,20 @@
                      <span style="color: #316BCB">Test your skills know </span>.
                      <span style="color: #316BCB;padding-left: 10px" (click)="changeVal('halfLotto')">  show less..</span> 
                     </p>
-            
           </div>
          </ion-card>
-         <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 15px;margin-bottom: 18%">
-            <div style="text-align: center;margin-top: 20px;margin-bottom: 20%">
-                <ion-badge style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px"> DONE </ion-badge>
+         <ion-card text-center text-wrap style="margin: 0px;width: 100%;margin-top: 10px;margin-bottom: 5%">
+            <div style="text-align: center;">
+                <span style="background-color: #9A9A9A;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;color: white;padding: 3px;padding-right: 10px;font-weight: 500;border-radius: 20px"> DONE </span>
                  <p style="font-size: 18px; font-weight: bold;color: #2C2C2C">BONUS CREDIT</p>
                  <p *ngIf="lottoSocialBonusHalf=='halfBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
                     You can spend your bonus credit in the 
                      <span style="color: #316BCB">offer page</span>.
-                     by clicking on "SPEND BONUS CREDIT"  <span style="color: #316BCB" (click)="changeValBonus('fullBonus')">read more</span>
+                     by clicking on "SPEND BONUS ...<span style="color: #316BCB" (click)="changeValBonus('fullBonus')">read more</span>
                    
                     </p>
                     <p *ngIf="lottoSocialBonusHalf=='fullBonus'" style="font-size: 16px;padding: 3px 15px 8px 15px;text-align: justify;color: #2C2C2C">
-                        and chossing from any lottery available! 
+                         CREDIT" and chossing from any lottery available! 
                         Accumulate bounus credit by converting your small cash wins. You can spend your bonus credit in the 
                          <span style="color: #316BCB">offer page</span>.
                          by clicking on "SPEND BONUS CREDIT" and chossing from any lottery available! 
@@ -69,7 +68,7 @@
           
     
         </div>
-   
+   <br><br><br>
     </ion-content>
     <div *ngIf="down_arrow_showing==1">
             <span *ngIf="downShowing==0"  >

@@ -31,7 +31,7 @@ import { File, FileEntry } from '@ionic-native/file';
 import { Http, Headers, Response,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
-
+import { AuthService } from '../../services/auth.service';
 declare var webengage: any;
 
 @Component({
@@ -49,8 +49,8 @@ export class AccountPage {
 	private refreshCache: boolean = false;
 	private unreadCount: number = 0;
 	downShowing = 0;
-	image_Data = ""
-	down_arrow_showing = 0
+	image_Data
+	down_arrow_showing=0
 	private homeMessage: any = {};
 	private accountDetails: any = {
 		//bonus_credit: 0.00,
@@ -69,6 +69,7 @@ export class AccountPage {
 		private storage: Storage,
 		public navParams: NavParams,
 		private iab: InAppBrowser,
+		public authSrv:AuthService,
 		public platform: Platform,
 		private srvDb: DatabaseService,
 		private _badgesOs: badgesOs,
@@ -344,13 +345,13 @@ export class AccountPage {
 	openGetGamesModule() {
 		this.navCtrl.push(GamesPage, { "app": "outside" });
 	}
-	private openGallery(): void {
+	private openGallery(){
 		let cameraOptions = {
 			sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 			destinationType: Camera.DestinationType.FILE_URI,
-			quality: 70,
-			targetWidth: 1000,
-			targetHeight: 1000,
+			quality: 80,
+			targetWidth: 350,
+			targetHeight: 120,
 			encodingType: Camera.EncodingType.JPEG,
 			correctOrientation: true
 		}
@@ -359,11 +360,35 @@ export class AccountPage {
 			localStorage.setItem("imageUrl", fileUri)
 			debugger
 			//this.uploadImage()
-			this.uploadPhoto(fileUri)
+			//this.uploadPhoto(fileUri)
 
 		}),
 			err => console.log(err);
 	}
+
+	uploadImage(){
+		debugger
+		let loader = this.loadingCtrl.create({
+			content: "Please wait..."
+		});
+		loader.present();
+		
+		this.authSrv.uploadProfilePic(this.image_Data ).subscribe(
+			(data:any) => {
+				loader.dismiss();
+				debugger
+				console.log("image upload successful", data);
+				
+			},
+			err =>{
+				loader.dismiss();
+				console.log("image upload error", err);
+			},
+			()=> console.log("image upload complete")
+		);
+		
+	}
+
 	selectProfileImage() {
 		this.openGallery()
 	}
@@ -384,30 +409,32 @@ export class AccountPage {
 
 	private readFile(file: any) {
 
-		const reader = new FileReader();
-		reader.onloadend = () => {
-			const imgBlob = new Blob([reader.result], { type: 'image/jpg' });
-
+		var reader;
+		reader = new FileReader();
+		reader.onloadend = (e) => {
+			debugger
+			const imgBlob = new Blob([reader.result], {type: 'image/jpg'});
+			debugger
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);
 	}
 
-	private postData(blob: any, fileName: string) {
+	 postData(blob: any, fileName: string) {
 		debugger
-		let server = CommonService.apiUrl +
-			CommonService.version + '/upload/?process=profile';
+		//let server = CommonService.apiUrl +			CommonService.version + '/upload/?process=profile';
 
+		let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=profile'
 		var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
 		let myHeaders: Headers = new Headers();
-		myHeaders.set('Authorization',
-			'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
-			'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
-			'oauth_signature_method="HMAC-SHA1",' +
-			'oauth_timestamp="1490087533",' +
-			'oauth_nonce="dWL9pr",' +
-			'oauth_version="1.0",' +
-			'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
+		myHeaders.set('Authorization', 
+		'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
+		'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
+		'oauth_signature_method="HMAC-SHA1",' +
+		'oauth_timestamp="1490087533",' +
+		'oauth_nonce="dWL9pr",' +
+		'oauth_version="1.0",' +
+		'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
 		);
 
 
@@ -435,13 +462,14 @@ export class AccountPage {
 	private customerId: string = "";
 	
 	uploadAPI_Image(image_url:any){
-		// this.srvAccount.saveImageUrl(image_url).subscribe(data =>{
-		// 	if(data)
-		// 	{
-		// 		alert(data.response)
-		// 	}
+		debugger
+		this.srvAccount.saveImageUrl(image_url).subscribe(data =>{
+			if(data)
+			{
+				alert(data.response)
+			}
 			
-		// })
+		})
 	}
 	private handleError(error: Response | any) {
 		this.loading.dismiss();

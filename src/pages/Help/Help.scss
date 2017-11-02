@@ -1,19 +1,19 @@
 page-Help{
+    
     .card-md p {
         margin: 0 0 -2px;
     }
     .ionContentDesign{
-        background-color: #E2E2E2;margin-top: 10%;margin-bottom: 20%;
-        
+        background-color: #E2E2E2;margin-top: 10%;
     }
     .cardMainDesign{
         margin: 0px;width: 100%;margin-top: 5px
     }
     .cardMainDiv{
-        text-align: center;margin-top: 20px;margin-bottom: 10%;
+        text-align: center;margin-bottom: 15px;
     }
     .badgeDesing{
-        background-color: green;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;margin-top: -20px;padding: 5px;padding-right: 10px;font-weight: 500;border-radius: 20px
+       color: white; background-color: green;font-size: 1.1em;margin-left: -53%;text-align: right;position: absolute;width: 21%;padding: 3px;padding-right: 10px;font-weight: 500;border-radius: 20px
     }
     .cardHeading{
         font-size: 18px; font-weight: bold;color: #2C2C2C
@@ -25,9 +25,6 @@ page-Help{
         75%  {top:15px;}
         100% {top:20px;}
     }
-    
-    
-   
     
     .arrow {
       position: fixed;
@@ -43,12 +40,13 @@ page-Help{
       animation-duration: 1s;
       animation-timing-function: linear;
       animation-delay: 1s;
-      animation-iteration-count: infinite;
+      animation-iteration-count: 2;
       animation-direction: alternate;
     }
     .scroll-content{
-       margin-bottom: 7% !important;
-       bottom: 10%!important;
+       
+       
+       margin-bottom: 22%!important;
        
     }
     @media only screen and (max-width: 320px) {
@@ -67,7 +65,7 @@ page-Help{
                animation-duration: 1s;
                animation-timing-function: linear;
                animation-delay: 1s;
-               animation-iteration-count: infinite;
+               animation-iteration-count: 2;
                animation-direction: alternate;
              }
        }
