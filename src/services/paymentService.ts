@@ -11,13 +11,13 @@ import { Params } from './params';
 @Injectable()
 export class paymentService {
     private customerId: string = "";
-    mobile_number:any;
-    
-    constructor(private http: Http,private params: Params) {
+    mobile_number: any;
+
+    constructor(private http: Http, private params: Params) {
         console.log("PaymentService");
     }
-    getPaymentDescription(){
-       
+    getPaymentDescription() {
+
         if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
@@ -34,49 +34,100 @@ export class paymentService {
         }
 
         this.customerId = CommonService.session.customer_id;
-       
+
 
         let action = "https://nima.lottosocial.com/wp-json/mobi/v2/payment/  "
         let parameter = {
             "request": [
-              {
-                "session_ID": CommonService.sessionId,
-                "page_ID": "4",
-                "screen_id": "4.10",
-                "action": "get_card_details",
-                "website": "Lotto Social",
-                "website_id": "27",
-                "source_site": "mobi.lottosocial.com",
-                "module_name": "get_customer_paymill_card_details",
-                "customer_id": CommonService.session.customer_id,
-                "p_type": "10",
-                "paymill_offer_id": "1019"
-              },
-              {
-                "session_ID": CommonService.sessionId,
-                "page_ID": "7",
-                "screen_id": "7.2",
-                "action": "profile_details",
-                "website": "Lotto Social",
-                "website_id": "27",
-                "source_site": "mobi.lottosocial.com",
-                "module_name": "get_customer_details",
-                "customer_id":CommonService.session.customer_id
-              }
+                {
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "4",
+                    "screen_id": "4.10",
+                    "action": "get_card_details",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "get_customer_paymill_card_details",
+                    "customer_id": CommonService.session.customer_id,
+                    "p_type": "10",
+                    "paymill_offer_id": "1019"
+                },
+                {
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "7",
+                    "screen_id": "7.2",
+                    "action": "profile_details",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "get_customer_details",
+                    "customer_id": CommonService.session.customer_id
+                }
             ]
-          }
-          
+        }
+
 
         let opt: RequestOptions = new RequestOptions({
             headers: CommonService.getHeaderJson()
         });
-       var response = this.http.post(action, parameter, opt).map(response => response.json());
-   
-       return response;
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+
+        return response;
     }
 
-  
+    redeemGame(visitor_id:any,productCount:any,price:any,productName:any,productDetail:any,awardId:any) {
+        if (!CommonService.session) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+        }
+
+        this.customerId = CommonService.session.customer_id;
+
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/payment/  "
+        let parameter = {
+            "request": [
+                {
+                  "session_ID": CommonService.sessionId,
+                  "action": "login_mobile_app",
+                  "website": "Lotto Social",
+                  "website_id": "27",
+                  "source_site": "mobi.lottosocial.com",
+                  "page_id": "3",
+                  "screen_id": "3.7",
+                  "module_name": "reward_payment_process",
+                  "customer_id": this.customerId,
+                  "product_name": productName,
+                  "product_detail": productDetail,
+                  "visitor_id": visitor_id,
+                  "award_id": awardId,
+                  "product_count": productCount,
+                  "price_per_product": price
+                }
+              ]
+        }
+
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+
+        return response;
+
     }
+
+
+}
 
 
 

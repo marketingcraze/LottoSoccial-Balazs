@@ -16,6 +16,7 @@ import 'rxjs/add/operator/map';
 })
 
 export class BadgeViewPage {
+  steps: any;
   BadgeData: any
 
   constructor(public navCtrl: NavController,
@@ -29,6 +30,7 @@ export class BadgeViewPage {
     public viewCtrl: ViewController) {
     debugger;
     this.BadgeData = this.navParams.get("badge")
+    this.steps = this.BadgeData.steps;
 
   }
 

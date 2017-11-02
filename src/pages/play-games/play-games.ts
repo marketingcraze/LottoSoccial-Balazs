@@ -36,6 +36,8 @@ declare var cordova: any;
 })
 
 export class PlayGamePage implements OnInit {
+  gameBadge: any;
+
   scrollContent: any;
   ngOnInit(): void {
     this.platform.ready().then((readySource) => {
@@ -68,8 +70,8 @@ export class PlayGamePage implements OnInit {
   public gameLoss: boolean = true;
   pageLoaded: boolean = false;
   boosterInfo = ""
-  recent_winner:any;
-  
+  recent_winner: any;
+
 
 
   constructor(
@@ -98,7 +100,7 @@ export class PlayGamePage implements OnInit {
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
-        (responseData:any) => {
+        (responseData: any) => {
           this.gameInfo = responseData.response[0].get_game_info.response;
           this.boosterInfo = responseData.response[0].get_game_info.response.booster_status
           this.gameLevelThanlyou = responseData.response[0].get_game_info.response.game_level;
@@ -107,7 +109,8 @@ export class PlayGamePage implements OnInit {
           this.slider(this.gameLevelThanlyou);
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
-          this.recent_winner = responseData.response[1].get_game_recent_winners.response         
+          this.recent_winner = responseData.response[1].get_game_recent_winners.response
+          this.getBadges(this.GameId)
           this.loading.dismiss();
           this.pageLoaded = true;
         },
@@ -196,5 +199,13 @@ export class PlayGamePage implements OnInit {
         setInterval(perc, 0);
       });
     }, 1000);
+  }
+  getBadges(gameID: any) {
+    this.playgameService.getGameBadges(gameID).subscribe(data => {
+      debugger;
+      if (data) {
+        this.gameBadge=data.response[0].gamebadges[0];
+      }
+    })
   }
 }

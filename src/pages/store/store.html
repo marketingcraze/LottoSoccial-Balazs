@@ -23,7 +23,7 @@
         <div text-center style="width: 100%" *ngIf="creditPoints>0" (click)="tip()">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
           <span class="tooltip t1">CREDIT
-            <span class="credit">{{accountDetails.bonus_credit}}</span>
+            <span class="credit">£{{creditPoints}}</span>
             <div *ngIf="tip11==true">
               <span class="tooltiptext t-left">
                 <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
@@ -41,7 +41,7 @@
 
         <div text-center style="width: 100%" *ngIf="creditPoints==0">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span class="tooltip t1" (click)="redirectToOfferPage()" style="color: cadetblue">GET CREDIT </span>
+          <span class="tooltip t1" (click)="mgmPageOpen()" style="color: cornflowerblue">GET CREDIT </span>
         </div>
       </ion-col>
       <ion-col width-50 style="width: 100%">
@@ -62,7 +62,7 @@
 
         <div text-center style="width: 100%" *ngIf="accountDetails.reward_points==0 || !accountDetails.reward_points">
           <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
-          <span class="tooltip t2" style="color:cornflowerblue " menuToggle="menu2">GET POINTS </span>
+          <span class="tooltip t2" style="color:cornflowerblue " (tap)="mgmPageOpen()">GET POINTS </span>
         </div>
       </ion-col>
     </ion-row>

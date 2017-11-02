@@ -233,7 +233,7 @@ export class StorePage {
 
                     this.accountDetails = data[i].get_account_details.response;
                     if (this.accountDetails.bonus_credit) {
-                        this.creditPoints = this.accountDetails.bonus_credit.slice(1)
+                        this.creditPoints = parseInt(this.accountDetails.bonus_credit.slice(1))
                     }
                     else {
                         this.creditPoints = 0;

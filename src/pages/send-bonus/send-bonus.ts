@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 import { SyndicatesPage } from '../syndicates/syndicates';
 import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { Observable } from 'rxjs/Rx';
+import { referFriend } from '../refer-friend-page/refer-friend-page';
 
 declare var $: any;
 /*
@@ -240,5 +241,9 @@ export class SendBonusPage {
 		console.log(this.liveCreditPoint, this.Credit_Points)
 		this.cdRef.detectChanges()
 	}
+	mgmPage() {
+		let mgmModal = this.modalCtrlr.create(referFriend);
+		mgmModal.present();
+	  }
 
 }

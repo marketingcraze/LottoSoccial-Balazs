@@ -46,16 +46,16 @@
 
     <ion-card class="options your-achievements">
         <h3 text-center>YOUR ACHIEVEMENTS</h3>
-        <ion-slides slidesPerView=6>
-            <ion-slide *ngFor="let product of offersForYou" >
-              <p class="account-badge">BADGE</p>
-              <p text-center>Get more!</p>
-            </ion-slide>
-            <ion-slide >
-              <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()"/>
-              <p text-center>Get more!</p>
-            </ion-slide>
-        </ion-slides>
+        <ion-slides slidesPerView=6 spaceBetween="13">
+                <ion-slide>
+                    <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()" />
+                    <p text-center>Get more!</p>
+               </ion-slide>
+                <ion-slide *ngFor="let badge of badgesForYou" >
+                    <img src="{{badge?.thumbnail}}" alt="No Img" (click)="goToBadgesView(badge)">
+                    <p text-center>{{badge?.post_title}}</p>
+                </ion-slide> 
+            </ion-slides>
     </ion-card>
 
     <ion-card class="options">
@@ -68,7 +68,7 @@
         <ion-item class="line" >
             <img item-left width="16" height="16" src="assets/icon/bc_ico.svg" alt="Update"/>
             <p>Bonus credit</p>
-            <ion-badge item-right color="bonus">&pound;{{accountDetails.bonus_credit}}</ion-badge>
+            <ion-badge item-right color="bonus">&pound;{{bonusCredit}}</ion-badge>
             <ion-icon ios="ios-arrow-forward" (click)="openCreditModule()" item-right></ion-icon>
         </ion-item>
         <ion-item >

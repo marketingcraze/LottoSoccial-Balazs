@@ -39,6 +39,7 @@ declare var webengage: any;
 	templateUrl: 'account.html'
 })
 export class AccountPage {
+	bonusCredit: number;
 	rewardPoints: number;
 	badgesForYou: any;
 	@ViewChild(Content) content: Content;
@@ -49,10 +50,10 @@ export class AccountPage {
 	private unreadCount: number = 0;
 	downShowing = 0;
 	image_Data = ""
-	down_arrow_showing=0
+	down_arrow_showing = 0
 	private homeMessage: any = {};
 	private accountDetails: any = {
-		bonus_credit: 0.00,
+		//bonus_credit: 0.00,
 		message: "",
 		msn: "",
 		nick_name: null,
@@ -91,10 +92,10 @@ export class AccountPage {
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad AccountPage');
-		
-		
+
+
 	}
-	
+
 	scrollHandlerAccount(event) {
 		var scrollDiv = document.getElementById('accountContent').clientHeight;
 		var innerDiv = document.getElementById('innerAccount').scrollHeight;
@@ -104,7 +105,7 @@ export class AccountPage {
 		if (valu > innerDiv) {
 			this.downShowing = 1
 			this.cdRef.detectChanges();
-			
+
 		}
 		else {
 			this.downShowing = 0
@@ -117,82 +118,97 @@ export class AccountPage {
 	}
 	loadAccountData() {
 		// show loading screen
-    	let loader = this.loadingCtrl.create({
-            content: "Please wait..."
-        });
-        loader.present();
+		let loader = this.loadingCtrl.create({
+			content: "Please wait..."
+		});
+		loader.present();
 
-    	// load data
-    	this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
-        .then( data => {
-            loader.dismiss();
-			
-            this.refreshCache = false;
+		// load data
+		debugger;
+		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
+			.then(data => {
 
-            console.log("AccountPage::ionViewDidLoad", data);
-            for (var i = 0; i < data.length; i++) {
-            	if ( data[i].get_account_details ) {
-					debugger
-					this.accountDetails = data[i].get_account_details.response;
-					if (this.accountDetails.reward_points) {
-                        this.rewardPoints = parseInt(this.accountDetails.reward_points)
-                    }
-                    else {
-                        this.rewardPoints = 0;
-                    }
-					if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
-					{
-						var str = this.accountDetails.profile_image
-						console.log("last character is ",str.charAt(str.length - 1) )
-						if(str.charAt(str.length - 1) == ".")
-						{
+				// this._badgesOs.getBadgesData().subscribe(badgeData => {
+				// 	if (badgeData) {
+				// 		debugger;
+				// 		this.badgesForYou = badgeData.response[0].badges
+				// 	}
+				// })
+
+				loader.dismiss();
+
+				this.refreshCache = false;
+
+				console.log("AccountPage::ionViewDidLoad", data);
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].get_account_details) {
 						debugger
-						str = str.substring(0, str.length - 1);
-						this.image_Data = str
+						this.accountDetails = data[i].get_account_details.response;
+						if (this.accountDetails.bonus_credit) {
+							debugger;
+							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
 						}
-						else{
-							this.image_Data = this.accountDetails.profile_image
+						else {
+							this.bonusCredit = 0;
 						}
-					}
-					else{
+						if (this.accountDetails.reward_points) {
+							this.rewardPoints = parseInt(this.accountDetails.reward_points)
+						}
+						else {
+							this.rewardPoints = 0;
+						}
 
-						
-						if(localStorage.getItem("imageUrl"))
-						{
-							this.image_Data = localStorage.getItem("imageUrl")
+
+
+						if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
+							var str = this.accountDetails.profile_image
+							console.log("last character is ", str.charAt(str.length - 1))
+							if (str.charAt(str.length - 1) == ".") {
+								debugger
+								str = str.substring(0, str.length - 1);
+								this.image_Data = str
+							}
+							else {
+								this.image_Data = this.accountDetails.profile_image
+							}
 						}
-						else{
-							this.image_Data = "assets/icon/user.svg"
+						else {
+
+
+							if (localStorage.getItem("imageUrl")) {
+								this.image_Data = localStorage.getItem("imageUrl")
+							}
+							else {
+								this.image_Data = "assets/icon/user.svg"
+							}
+
 						}
-						
+					} else if (data[i].get_home_message) {
+						this.homeMessage = data[i].get_home_message.response;
+						this.unreadCount = this.homeMessage.unread;
 					}
-				}else if ( data[i].get_home_message ) {
-            		this.homeMessage = data[i].get_home_message.response;
-		            this.unreadCount = this.homeMessage.unread;
+					this.content.enableScrollListener();
 				}
-				this.content.enableScrollListener();
-			}
-			
-		
-			console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
-			
-			//debugger
-			var a = localStorage.getItem("arrow_accountP")
-			if(localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null)
-			{
-				this.down_arrow_showing = 1
-			}
-			else{
-				this.down_arrow_showing = 0
-			}
-			localStorage.setItem("arrow_accountP","1")
 
-        }, err => {
-            loader.dismiss();
-            // show offline
-            this.params.setIsInternetAvailable(false);
-            console.log("AccountPage::ionViewDidLoad", err);
-        });
+
+				console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
+
+				//debugger
+				var a = localStorage.getItem("arrow_accountP")
+				if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
+					this.down_arrow_showing = 1
+				}
+				else {
+					this.down_arrow_showing = 0
+				}
+				localStorage.setItem("arrow_accountP", "1")
+
+			}, err => {
+				loader.dismiss();
+				// show offline
+				this.params.setIsInternetAvailable(false);
+				console.log("AccountPage::ionViewDidLoad", err);
+			});
 	}
 	updateNickName() {
 		this.appSound.play('buttonClick');
@@ -442,14 +458,17 @@ export class AccountPage {
 	}
 
 	ionViewWillEnter() {
-		this._badgesOs.getBadgesData().subscribe(data => {
-			if (data) {
-				this.badgesForYou=data.response[0].badges	
+		
+		this._badgesOs.getBadgesData().subscribe(badgeData => {
+			if (badgeData) {
+				
+				this.badgesForYou = badgeData.response[0].badges
 			}
 		})
+
 	}
 	goToBadgesView(badge:any){
-		debugger;
+	
 		this.navCtrl.push(BadgeViewPage);
 	}
 

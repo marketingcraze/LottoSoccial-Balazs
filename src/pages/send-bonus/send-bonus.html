@@ -6,10 +6,10 @@
        <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
         <span class="SlideTitle" *ngIf="Credit_Points2>0"  >Your Bonus Credit Balance :
-           <span id="myCurrentPint" name="myCurrentPint" ion-text  *ngIf="Credit_Points2>0"   class="PriceTxt">£{{Credit_Points2 | number : '1.2-2'}} </span>
+           <span id="myCurrentPint" name="myCurrentPint" ion-text  *ngIf="Credit_Points2>0"  class="PriceTxt">£{{Credit_Points2 | number:'1.2-2'}} </span>
     
           </span>
-        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (tap)="goToOffers()">GET CREDIT</span>
+        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (tap)="mgmPage()">GET CREDIT</span>
        </ion-item>
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>

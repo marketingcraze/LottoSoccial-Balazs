@@ -67,6 +67,7 @@ export class RedeemGamesPage {
     this.loading.present().then(() => {
       this.authSrv.redeem_game().subscribe(
         data => {
+          debugger;
           this.redeem_products = data.response[1].get_buy_game_list.response.redeem_products;
           this.sliderImage = data.response[0].get_your_game_list.response.game_slider;
           this.reward_point = parseInt(data.response.response.reward_points_balance);
@@ -108,7 +109,10 @@ export class RedeemGamesPage {
       title: this.redeem_products[index].product_title,
       price: this.redeem_products[index].product_price,
       price_after: this.redeem_products[index].product_price_after,
-      p_staus: this.point_status
+      p_staus: this.point_status,
+      p_name:this.redeem_products[index].product_name,
+      p_detail:this.redeem_products[index].product_details,
+      p_award_id:this.redeem_products[index].award_id
     })
 
     modal.present();
@@ -138,7 +142,8 @@ export class RedeemGamesPage {
       title: "Lucky colors",
       price: "70",
       price_after: "POINTS",
-      p_staus: this.point_status
+      p_staus: this.point_status,
+
 
     })
     modal.present();
