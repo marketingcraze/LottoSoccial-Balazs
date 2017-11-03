@@ -35,6 +35,7 @@ export class MySyndicatePage {
     customer_id: any;
     viewEmpty: boolean = false;
     downShowing = 0;
+    down_arrow_showing = 0;
 
 
     constructor(
@@ -82,6 +83,7 @@ export class MySyndicatePage {
         }
         else {
             this.downShowing = 0
+            this.down_arrow_showing = 0
             this.cdRef.detectChanges();
         }
     }
@@ -128,7 +130,15 @@ export class MySyndicatePage {
             loader.dismiss();
             if (res.response[0].get_syndicate_list.response.syndicate_group) {
                 this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
-
+                var a = localStorage.getItem("syndicateP")
+                if(localStorage.getItem("syndicateP") == undefined || localStorage.getItem("syndicateP") == null)
+                {
+                    this.down_arrow_showing = 1
+                }
+                else{
+                    this.down_arrow_showing = 0
+                }
+                localStorage.setItem("syndicateP","1")
                 console.log("syndSrr is ", this.syndArr)
                 this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
                 if (this.chatcount > 0) {

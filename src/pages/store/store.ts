@@ -30,6 +30,7 @@ declare var $:any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    rewardPoints: number;
     creditPoints: any;
     buyoffer: any;
     @ViewChild(Slides) home_slides: Slides;
@@ -54,7 +55,7 @@ export class StorePage {
     hrs:any;
     min:any;
     sec:any;
-    counts:any=0;
+    counts:any=1;
     // payment variables
     userCards: any;
     userCardsCount:number = 0;
@@ -232,23 +233,33 @@ export class StorePage {
 
                     this.accountDetails = data[i].get_account_details.response;
                     if (this.accountDetails.bonus_credit) {
-                        this.creditPoints = this.accountDetails.bonus_credit.slice(1)
+                        this.creditPoints = parseInt(this.accountDetails.bonus_credit.slice(1))
                     }
                     else {
                         this.creditPoints = 0;
                     }
+                    if (this.accountDetails.reward_points) {
+                        this.rewardPoints = parseInt(this.accountDetails.reward_points)
+                    }
+                    else {
+                        this.rewardPoints = 0;
+                    }
+
                 }else if ( data[i].get_home_message ) {
                     this.homeMessage = data[i].get_home_message.response;
                     params.setUnreadCount(this.homeMessage.count);
                 }else if ( data[i].get_home_events ) {
                     this.homeEvents = data[i].get_home_events.response.events[0];
+                    this.millionerImage = data[i].get_home_events.response.events
                    
                 }else if ( data[i].get_home_blog ) {
                     this.homeBlog = data[i].get_home_blog.response.blogs;
                  
                 }
+
+                
             }
-            this.millionerImage = data[4].get_home_events.response.events
+          
           
             this.slides = this.mySlides;
 
@@ -787,17 +798,26 @@ mgmOpenPage(){
 }
 
 countSlider(ev:any){
+    
     let direction=ev.direction;
     if(direction==2 && this.counts<this.carouselSlide.length())
     {
-      this.counts++;  
-      this.currentSliderCount=this.counts;
+        if(this.count==this.carouselSlide.length()-1)
+        {
+        }
+        else{
+            this.counts++;  
+            this.currentSliderCount=this.counts;
+            
+        }
+      
     }
-    else if(direction==4 && this.counts>0)
+    else if(direction==4 && this.counts>1)
     {
         this.counts--;  
         this.currentSliderCount=this.counts;
     }
+  
 }
 redirectToOfferPage(){
     var tabs:Tabs=this.navCtrl.parent;

@@ -56,7 +56,7 @@
   </div>
 </div>
 </ion-content>
-<div >
+<div *ngIf="down_arrow_showing==1" >
     <span *ngIf="downShowing==0"  >
         <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
    </span>

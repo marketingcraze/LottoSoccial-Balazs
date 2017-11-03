@@ -52,13 +52,13 @@
 
 </ion-menu>
 
-<ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" id="menu2" (ionOpen)="onOpenLeftMenu()">
+<ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" persistent="true" id="menu2" (ionOpen)="onOpenLeftMenu()">
     <ion-content>
       <ion-item text-center>
         <div class="UpperPart">
         <span style="color: #E6D011;font-size: medium">{{accountDetails?.nick_name}}</span>
           <ion-avatar class="account-avatarSlide">
-              <img class="profile-pictureSlide" src="{{accountDetails?.profile_image ? accountDetails?.profile_image : 'assets/icon/user.svg'}}" width="72" height="72" alt="Profile" />
+              <img class="profile-pictureSlide" src="{{image_Data?image_Data:'assets/icon/user.svg'}}" width="72" height="72" alt="Profile" />
             </ion-avatar>
             <p style="font-size: medium;white-space: normal;">
              {{accountDetails?.program_description}}

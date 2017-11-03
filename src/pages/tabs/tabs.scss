@@ -71,5 +71,16 @@ page-tabs{
 		content: url(../assets/icon/offers_ico.svg);
 	}
 
+	.ion-ios-Menu, .ion-md-Menu{
+		content: url(../assets/icon/burgerMenu.png);
+		width: 10vw;
+	}
+	.ion-ios-Menu-outline, .ion-md-Menu-outline {
+		content: url(../assets/icon/burgerMenu.png);
+		width: 10vw;
+	}
+	a{
+		padding: 0px!important;
+	}	
 
 }

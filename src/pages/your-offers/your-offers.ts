@@ -50,7 +50,8 @@ export class YourOffersPage {
 	day: any = [];
     hrs: any = [];
     mins: any = [];
-    sec: any = [];
+	sec: any = [];
+	down_arrow_showing = 0;
 
 
 	private lotteryProductData: any
@@ -132,10 +133,20 @@ export class YourOffersPage {
 					data.response.push({ offer: offer });
 					this.userCards = data.response;
 					console.log("OffersPage::showPaymentOptions() success", this.userCards);
+					
+					localStorage.setItem("yourOffersP","1")
 					loader.dismiss();
 					this.confirmPayment.togglePopup()
 				} else {
 					this.goPaymentWebview();
+				}
+				var a = localStorage.getItem("yourOffersP")
+				if(localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null)
+				{
+					this.down_arrow_showing = 1
+				}
+				else{
+					this.down_arrow_showing = 0
 				}
 
 			}, (err) => {
@@ -158,6 +169,7 @@ export class YourOffersPage {
 		  else
 		  {
 			this.downShowing = 0
+			this.down_arrow_showing = 0
 			this.cdRef.detectChanges();
 		  }
 		  }

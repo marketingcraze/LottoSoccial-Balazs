@@ -21,6 +21,7 @@ import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Camera } from 'ionic-native'
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 @Component({
 	selector: 'page-signup',
@@ -60,7 +61,8 @@ export class SignupPage {
 		free_reg_msn:'',
 		free_reg_pwd: '',
 		mobile:'',
-		country_code:""
+		country_code:"",
+		uuid:""
 	};
 
 
@@ -81,7 +83,8 @@ export class SignupPage {
 		private popoverCtrl: PopoverController,	
 		private loadingCtrl: LoadingController,	
 		public authSrv:AuthService,
-		public params:Params,) {
+		public params:Params,
+		private uniqueDeviceID: UniqueDeviceID) {
 
 		console.log('SignupPage', network);
 
@@ -170,9 +173,14 @@ export class SignupPage {
 		}
 		Camera.getPicture(cameraOptions).then((fileUri)=>{
 			this.signup.image = fileUri
+			localStorage.setItem("imageUrl", fileUri)
 			debugger
 			//this.uploadImage()
 			this.uploadPhoto(this.signup.image)
+			this.uniqueDeviceID.get()
+			.then((uuid: any) => this.signup.uuid = uuid)
+			.catch((error: any) => console.log(error));
+	
 			
 		}),
 		err => console.log(err);   
@@ -244,10 +252,11 @@ export class SignupPage {
 		
 		// this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
 		debugger;
+		
 		var img=localStorage.getItem('userimg');
 		this.prepareMobile();
 		this.signup.country_code = this.selectedCountry.dialCode;
-		this.signup.profile_image_url = "https://nima.lottosocial.com/uploads/"+img
+		this.signup.profile_image_url = img
 		console.log("submitSignup", this.signup, form);
 		// console.log("submitSignup", form);
 
@@ -341,7 +350,7 @@ export class SignupPage {
 	        .then(
 	            data => console.log(data),
 	            error => console.log(error)
-	        );
+			);
 	        let nav = this.app.getRootNav();
 			nav.setRoot(HomePage);
 		}

@@ -332,7 +332,8 @@ mobile:"23423423423"
                 "first_name": user.first_name, 
                 "last_name": user.last_name, 
                 "email": user.email, 
-                "profile_image_url": user.profile_image_url
+                "profile_image_url": user.profile_image_url,
+                "uuid":user.uuid
             } ]
         };
 

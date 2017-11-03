@@ -14,7 +14,7 @@
             <ion-row>
                 <ion-col col-6>
                         <ion-icon><img src="assets/icon/rwp_icon.svg" alt="" width="24" height="24" style="margin:0 5px -5px 0px;" /></ion-icon>
-                        <span style="color:#333333!important" *ngIf="reward_point>0" >Points : </span><span ion-text color="primary"> {{reward_point}}</span>
+                        <span style="color:#333333!important" *ngIf="reward_point>0" >Points : </span><span  *ngIf="reward_point>0" ion-text color="primary"> {{reward_point}}</span>
                         <span style="color:#2F76D1!important" *ngIf="reward_point==0" (tap)="mgmPage()" >GET POINTS</span>
                 </ion-col>
                 <ion-col col-6 class="fontSize">
@@ -46,12 +46,13 @@
                 </ion-col>
 
                 <ion-col col-5 item-right text-center>
-                    <button ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (tap)="redeem(redeem_product?.product_link,i)">GET</button>
+                    <button *ngIf="reward_point>0" ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (tap)="redeem(redeem_product?.product_link,i)">GET</button>
+                    <button *ngIf="reward_point==0" disabled="disabled" ion-button item-right color="secondary" style="width: 71px;height: 34px;margin-top: -5px" (tap)="redeem(redeem_product?.product_link,i)">GET</button>
                     <p color="calm" style="font-size: 15px">{{redeem_product?.product_price}} pts</p>
                     <!-- {{redeem_product?.product_price_after | uppercase}} -->
                 </ion-col>
             </ion-item>
-            <ion-item-divider style="color:#333333!important;top:-23px!important;">{{redeem_product?.product_details}}</ion-item-divider>
+            <ion-item-divider style="color:#333333!important;top:-23px!important;">{{redeem_product?.product_details}} <span color="calm" (click)="openGameBlog()">Read more</span></ion-item-divider>
             <!--<ion-item>
             <ion-thumbnail item-left>
                 <img src="assets/img/sample_thumb_02@3x.png">
@@ -84,7 +85,7 @@
     </div>
    
 </ion-content>
-<div >
+<div *ngIf="down_arrow_showing==1">
         <span *ngIf="downShowing==0"  >
             <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
        </span>

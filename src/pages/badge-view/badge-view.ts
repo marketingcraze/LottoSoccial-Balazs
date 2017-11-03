@@ -16,22 +16,29 @@ import 'rxjs/add/operator/map';
 })
 
 export class BadgeViewPage {
+  steps: any;
+  BadgeData: any
 
-  private loader:any 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private contacts: Contacts, public platform: Platform, public _syndService: SyndicateService,
-    public loadingCtrl: LoadingController, private socialSharing: SocialSharing, public viewCtrl: ViewController) {
-    this.loader = this.loadingCtrl.create({
-      content:"Please wait..."
-    });
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private toastCtrl: ToastController,
+    private contacts: Contacts,
+    public platform: Platform,
+    public _syndService: SyndicateService,
+    public loadingCtrl: LoadingController,
+    private socialSharing: SocialSharing,
+    public viewCtrl: ViewController) {
+    debugger;
+    this.BadgeData = this.navParams.get("badge")
+    this.steps = this.BadgeData.steps;
 
   }
 
   ionViewDidLoad() {
-   
+
   }
   ionViewWillEnter() {
-       this.viewCtrl.showBackButton(false);
-    }
-    
+    this.viewCtrl.showBackButton(false);
+  }
+
 }

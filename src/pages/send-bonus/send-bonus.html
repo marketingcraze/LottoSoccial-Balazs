@@ -5,8 +5,11 @@
 
        <ion-item no-padding no-lines class="creditbox">
         <img src="assets/icon/credit_ico.png"  class="coinimg" >
-        <span class="SlideTitle" *ngIf="Credit_Points2>0"  >Your Bonus Credit Balance : <span ion-text class="PriceTxt">{{Credit_Points}}</span></span>
-        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (tap)="goToOffers()">GET CREDIT</span>
+        <span class="SlideTitle" *ngIf="Credit_Points2>0"  >Your Bonus Credit Balance :
+           <span id="myCurrentPint" name="myCurrentPint" ion-text  *ngIf="Credit_Points2>0"  class="PriceTxt">£{{Credit_Points2 | number:'1.2-2'}} </span>
+    
+          </span>
+        <span class="SlideTitle" *ngIf="Credit_Points2==0" style="color:#2F76D1 !important" (tap)="mgmPage()">GET CREDIT</span>
        </ion-item>
 
     <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
@@ -71,12 +74,17 @@
                 </ion-grid>
             <div *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;" style="margin-top: 10px;width: 100%;text-align: center"> 
               <span  *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none" (tap)="buyCreditOffer(items?.offer_id,product)"><span style="font-size: large">BUY NOW</span></button>
+                <button ion-button class="BuyBtn" *ngIf="Credit_Points2>0" style="float: none" (tap)="buyCreditOffer(items?.offer_id,product)"><span style="font-size: large">BUY NOW</span></button>
+                <button ion-button class="BuyBtn" disabled="disabled" *ngIf="Credit_Points2==0" style="float: none" (tap)="buyCreditOffer(items?.offer_id,product)"><span style="font-size: large">BUY NOW</span></button>
               </span>
             </div>
             <div  *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[product.sliderrange ? product.sliderrange : credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" style="margin-top: 5%;width: 100%;text-align: center">
               <span *ngIf="i<1">
-                <p class="SlideSubTitle SlideLastText"> for <span ion-text color="bonus" style="font-size: medium">£{{item?.prize}} </span> credit</p>
+                <p class="SlideSubTitle SlideLastText"> for 
+                  <span #spanCredit  id="mySpan" ion-text color="bonus" style="font-size: medium" >£{{item?.prize}} </span>
+                  
+                   <!-- <input type="text" [(ngModel)]="item.prize" (onModelChange)  (change)="Onblur($event)" > -->
+                   credit</p>
               </span>
             </div>
 

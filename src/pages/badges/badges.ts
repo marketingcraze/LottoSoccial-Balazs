@@ -17,6 +17,7 @@ export class BadgesPage {
     @ViewChild(Content) content:Content;
     private data:any = [];
     downShowing = 0;
+    down_arrow_showing = 0;
      constructor(
         public app: App,
         public iab: InAppBrowser,
@@ -103,7 +104,15 @@ export class BadgesPage {
         .subscribe((res)=> {
             this.data = res.response[0].get_badgeos.response.data.achievements;
             console.log(this.data);
-            this.delay(4000);
+            var a = localStorage.getItem("badgeP")
+			if(localStorage.getItem("badgeP") == undefined || localStorage.getItem("badgeP") == null)
+			{
+				this.down_arrow_showing = 1
+			}
+			else{
+				this.down_arrow_showing = 0
+			}
+			localStorage.setItem("badgeP","1")
             this.content.enableScrollListener();
 
         })
@@ -125,7 +134,8 @@ export class BadgesPage {
 		  }
 		  else
 		  {
-			this.downShowing = 0
+            this.downShowing = 0
+            this.down_arrow_showing = 0
 			this.cdRef.detectChanges();
 		  }
 		  }

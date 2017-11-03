@@ -47,6 +47,7 @@ export class AffiliatePage2 implements OnInit {
     dummy:any;
     downShowing = 0;
     scrollContent:any;
+    down_arrow_showing = 0;
 
     ngOnInit() {
       
@@ -71,6 +72,15 @@ export class AffiliatePage2 implements OnInit {
                     this.bonus_duplicate = this.affilateModelBinding.bonus_duplicate;
                     Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.affilateModelBinding.countdown));
                     this.dummy = (String(this.affilateModelBinding.offer_jackpot).substr(0,4))
+                    var a = localStorage.getItem("affiliate2P")
+                    if(localStorage.getItem("affiliate2P") == undefined || localStorage.getItem("affiliate2P") == null)
+                    {
+                        this.down_arrow_showing = 1
+                    }
+                    else{
+                        this.down_arrow_showing = 0
+                    }
+                    localStorage.setItem("affiliate2P","1")
                     loading.dismiss();
                 })
         })
@@ -99,6 +109,7 @@ export class AffiliatePage2 implements OnInit {
         else
         {
           this.downShowing = 0
+          this.down_arrow_showing = 0
           this.cdRef.detectChanges();
         }
         }

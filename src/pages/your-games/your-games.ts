@@ -17,6 +17,7 @@ export class YourGamesPage {
   @ViewChild(Content) content: Content;
   private loading : any;
    game_group:any[]=[];
+   down_arrow_showing = 0;
    tab:Tabs;
 	yourGames:any[];
     private unreadCount:number = 0;
@@ -64,6 +65,7 @@ export class YourGamesPage {
       else
       {
         this.downShowing = 0
+        this.down_arrow_showing = 0
         this.cdRef.detectChanges();
       }
       }
@@ -82,6 +84,15 @@ export class YourGamesPage {
           data => {
             this.game_group = data.response.response.game_group;
             console.log("your game", data);
+            var a = localStorage.getItem("yourGamesP")
+            if(localStorage.getItem("yourGamesP") == undefined || localStorage.getItem("yourGamesP") == null)
+            {
+              this.down_arrow_showing = 1
+            }
+            else{
+              this.down_arrow_showing = 0
+            }
+            localStorage.setItem("yourGamesP","1")
             this.loading.dismiss();   // Hide the message when the data is ready
          
           },

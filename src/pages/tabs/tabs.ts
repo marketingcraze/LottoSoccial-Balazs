@@ -1,7 +1,7 @@
 import { ViewChild, Component, ElementRef, Renderer } from '@angular/core';
 import {
     NavController, NavParams, ModalController, Platform, LoadingController,
-    AlertController, Tabs
+    AlertController, Tabs, MenuController
 } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -56,11 +56,12 @@ export class TabsPage {
         public platform: Platform,
         private srvDb: DatabaseService,
         private srvHome: HomeService,
+        private menuCtrl: MenuController,
         public appSound: AppSoundProvider,
         public modalCtrl: ModalController,
         private loadingCtrl: LoadingController,
         private alertCtrl: AlertController) {
-
+        this.menuCtrl
         console.log("TabsPage", navParams.data);
 
         this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
@@ -148,6 +149,7 @@ export class TabsPage {
     }
 
     onSelectTab(tab) {
+        var menu1 = this.menuCtrl.getMenus();
         console.log("TabsPage::onSelectTab", tab);
         this.appSound.play('menuClick');
         switch (tab) {
@@ -157,6 +159,9 @@ export class TabsPage {
                 break
             case 'store':
                 this.goToStore();
+                break
+            case 'sideMenu':
+            menu1[1].open();
             default:
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', true)
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', false)
@@ -193,7 +198,7 @@ export class TabsPage {
                             subscribe(
                             (data) => {
                                 debugger
-                               // alert(data)
+                                // alert(data)
                                 browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
                             },
                             err => {
@@ -208,6 +213,9 @@ export class TabsPage {
                 console.log(error)
             }
             );
+    }
+    clickStore() {
+        var abc = this.menuCtrl;
     }
 
 }
