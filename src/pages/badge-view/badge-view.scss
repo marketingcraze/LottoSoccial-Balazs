@@ -55,6 +55,8 @@ page-badge-view {
     }
     .right {
         float: right;
+        position: relative;
+        top: 16px;
     }
     .left {
         float: left;
@@ -65,5 +67,6 @@ page-badge-view {
     }
     ul{
         list-style: none;
+        padding-left: 8px;
     }
 }

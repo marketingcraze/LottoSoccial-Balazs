@@ -84,19 +84,30 @@ page-confirm-number {
     }
     .input-number {
         //border: 1px solid #ccc;
+        // width: 38px;
+        // height: 38px;
+        // color: white;
+        // padding: 10px;
+        // border-radius: 5px;
+        // font-family: lato-black;
+        // text-align: center;
+        // background: url(../assets/img/circular.png);
+        // background-size: cover;
+
         width: 38px;
         height: 38px;
-        color: white;
-        padding: 10px;
+        border: 1px solid;
+        color: black;
+        padding: 10px 0px;
         border-radius: 5px;
         font-family: lato-black;
         text-align: center;
-        background: url(../assets/img/circular.png);
-        background-size: cover;
+        border: 1px solid #ccc;
     }
     .st-input {
-        background: url(../assets/img/star.png);
-        background-size: cover; 
+        // background: url(../assets/img/star.png);
+        // background-size: cover; 
+        background: #ffeb92;
     }
     .lotto-c {
         background: url(../assets/img/circular2.png);
@@ -242,6 +253,17 @@ page-confirm-number {
         background-color: #14993f;
         -webkit-transform: translate3d(16px, 0, 0);
         transform: translate3d(16px, 0, 0);
+    }
+        ion-slide.swiper-slide.swiper-slide-next {
+       width: 96% !important;
+    }
+    ion-slide.swiper-slide.swiper-slide-active {
+        width: 96% !important;
+        padding: 0 10px;
+    }
+    ion-slide.swiper-slide.swiper-slide-prev {
+       width: 96% !important;
+       margin-left: 22px;
     }
     .offerRow {
         color: white;

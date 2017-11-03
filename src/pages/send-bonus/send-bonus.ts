@@ -205,7 +205,7 @@ export class SendBonusPage {
 		}
 		setTimeout( ()=> {
 			debugger;
-			this.Onblur()
+			this.Onblur(Index)
 		}, 200);
 	}
 
@@ -231,10 +231,12 @@ export class SendBonusPage {
 		var tabs: Tabs = this.navCtrl.parent;
 		tabs.select(0)
 	}
-	Onblur() {
+	Onblur(index:any) {
 		debugger;
 		var currentData =this.Credit_Points.slice(1);
-		var creditData = parseFloat(document.getElementById("mySpan").innerText.slice(1));
+		this.cdRef.detectChanges()
+		var creditData = parseFloat(document.getElementById("mySpan"+index).innerText.slice(1));
+		this.cdRef.detectChanges()
 		console.log(currentData, creditData)
 		this.liveCreditPoint = currentData - creditData;
 		this.Credit_Points2 = this.liveCreditPoint;

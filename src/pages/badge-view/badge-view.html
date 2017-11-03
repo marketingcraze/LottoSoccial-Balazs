@@ -15,29 +15,34 @@
         </div>
         <div style="font-size: 17px;color: #343434;">
             <div class="">{{BadgeData?.post_title}}</div>
-            <div class="light-font pad-tb">100% comleted(static)</div>
+            <div class="light-font pad-tb">{{percentage | number:'1.0-2'}}% comleted</div>
             <div>
                 <span *ngFor="let steps of BadgeData.steps">
                     <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small" />
                 </span>
             </div>
-            <div class="pad5">{{BadgeData?.post_content}}</div>
+            <div>{{BadgeData?.post_content}}</div>
             <div class="separator"></div>
             <div>REWARD</div>
             <div class="dark large-font pad5"> {{BadgeData?.points}} pts</div>
             <div class="separator"></div>
             <div class="pad5">STEPS REQUIRED</div>
-            <div style="padding: 5px 0px 25px 0px;">
+            <div style="padding: 5px 12px 25px 0
+            px;">
                 <span class="left">
                     <ul>
-                        <li *ngFor="let steps of BadgeData.steps">
+                        <li *ngFor="let step of steps">
                             <span class="left">
-                                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small" /> {{steps.title}}
+                                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small" />
+                                <span>
+                                    {{step?.title}}
+                                </span>
                             </span>
                         </li>
                     </ul>
                 </span>
-                <span class="green right">5/5</span>
+                <span *ngIf="BadgeData?.steps" class="green right">{{completedStepCount}}/{{BadgeData?.steps?.length}}</span>
+                <span *ngIf="!BadgeData?.steps">No step found for this Badge</span>
             </div>
         </div>
     </div>

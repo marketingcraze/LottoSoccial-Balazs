@@ -426,19 +426,6 @@ debugger
         // return firebase.auth().onAuthStateChanged(callback);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     get_credit_offer(){
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);

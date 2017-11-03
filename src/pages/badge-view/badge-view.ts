@@ -16,6 +16,8 @@ import 'rxjs/add/operator/map';
 })
 
 export class BadgeViewPage {
+  completedStepCount: number;
+  percentage: any;
   steps: any;
   BadgeData: any
 
@@ -30,8 +32,17 @@ export class BadgeViewPage {
     public viewCtrl: ViewController) {
     debugger;
     this.BadgeData = this.navParams.get("badge")
-    this.steps = this.BadgeData.steps;
-
+    if (this.BadgeData.steps) {
+      this.steps = this.BadgeData.steps;
+      this.completedStepCount = this.countCompletedStep(this.steps)
+      this.percentage = this.completedStepCount / this.BadgeData.steps.length * 100;
+    }
+    else
+      if (this.BadgeData.earned == 0) {
+        this.percentage = 0
+      } else if (this.BadgeData.earned == 1) {
+        this.percentage = 100
+      }
   }
 
   ionViewDidLoad() {
@@ -39,6 +50,15 @@ export class BadgeViewPage {
   }
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
+  }
+  countCompletedStep(steps) {
+    var count = 0;
+    for (let i = 0; i <= steps / length; i++) {
+      if (steps[i].percentage == 100) {
+        count++
+      }
+    }
+    return count;
   }
 
 }

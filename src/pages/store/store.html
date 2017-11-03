@@ -652,9 +652,9 @@
               </ion-slide> -->
         </ion-slides>
       </div>
-      <ion-slides spaceBetween=8 slidesPerView=2 *ngFor="let c of millionerImage">
-        <ion-slide style="width: 51%">
-          <img src="{{c.event_image}}" width="150" height="100" style="height: 18vh">
+      <ion-slides spaceBetween=8 slidesPerView=2 >
+        <ion-slide style="width: 51%" *ngFor="let c of millionerImage">
+          <img src="{{c.image_url}}" width="150" height="100" style="height: 18vh">
         </ion-slide>
       </ion-slides>
 
