@@ -97,7 +97,6 @@ export class CheckWinningsNextPage {
 
   movetoPage() {
       if(this.movetype){
-        
         if(this.movetype.response_type == '10.1'){
           this.navCtrl.push(PrizeSummaryWinPage);
         }else if(this.movetype.response_type == '10.2' ||  this.movetype.response_type == '10.3') {
@@ -109,8 +108,4 @@ export class CheckWinningsNextPage {
         this.navCtrl.push(PrizeSummaryNoSyndicate);
       }
   }
-
-   
-
-
 }
