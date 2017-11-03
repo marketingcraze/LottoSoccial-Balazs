@@ -424,19 +424,6 @@ mobile:"23423423423"
         // return firebase.auth().onAuthStateChanged(callback);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     get_credit_offer(){
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);

@@ -81,7 +81,7 @@
             <div  *ngFor="let item of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[product.sliderrange ? product.sliderrange : credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;" style="margin-top: 5%;width: 100%;text-align: center">
               <span *ngIf="i<1">
                 <p class="SlideSubTitle SlideLastText"> for 
-                  <span #spanCredit  id="mySpan" ion-text color="bonus" style="font-size: medium" >£{{item?.prize}} </span>
+                  <span #spanCredit  id="mySpan{{id}}" ion-text color="bonus" style="font-size: medium" >£{{item?.prize}} </span>
                   
                    <!-- <input type="text" [(ngModel)]="item.prize" (onModelChange)  (change)="Onblur($event)" > -->
                    credit</p>

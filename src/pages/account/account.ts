@@ -469,7 +469,7 @@ export class AccountPage {
 	}
 	goToBadgesView(badge:any){
 	
-		this.navCtrl.push(BadgeViewPage);
+		this.navCtrl.push(BadgeViewPage,{badge:badge});
 	}
 
 

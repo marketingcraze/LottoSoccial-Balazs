@@ -169,8 +169,8 @@ export class RedeemGamesPage {
         });
     }
   }
-  openGameBlog() {
-    let modal = this.modalController.create(gameBlog);
+  openGameBlog(index:any) {
+    let modal = this.modalController.create(gameBlog,{redeem_products_blog: this.redeem_products[index].blog_content});
     modal.present();
   }
 
