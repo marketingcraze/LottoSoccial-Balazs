@@ -1,4 +1,17 @@
-<cus-header title="Personal Guide" notification-count="0"></cus-header>
+<ion-header>
+    <ion-navbar>
+        <ion-title>Personal Guide</ion-title>
+        <ion-buttons end >
+           <div *ngIf="material_icon==1" (click)="openAppBrw()">
+                <i class="icon icon-chat grey" >
+                    <span class="dot dot-left"></span>
+                    <span class="dot"></span>
+                    <span class="dot dot-right"></span>
+                  </i>
+        </div>
+        </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content (ionScroll)="scrollHandler($event)" class="ionContentDesign"  id="contents" >
@@ -68,7 +81,7 @@
           
     
         </div>
-   <br><br><br>
+   <br>
     </ion-content>
     <div *ngIf="down_arrow_showing==1">
             <span *ngIf="downShowing==0"  >

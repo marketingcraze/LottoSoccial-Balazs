@@ -384,17 +384,17 @@ mobile:"23423423423"
 
         console.log("form data ", formData);
         debugger
-        /*
-        var response = this.http.post(server, formData, options)
-        .map(res => res.json());
+        
+        // var response = this.http.post(server, formData, options)
+        // .map(res => res.json());
 
-        return response;
-        */
+        // return response;
+        
 
         
         return new Observable( observer => {
             let fileTransfer = this.transfer.create();
-debugger
+            debugger
             fileTransfer.upload(filePath, encodeURI(server), options)
             .then((data:any) => {
                 // success

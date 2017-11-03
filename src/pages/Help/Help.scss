@@ -1,10 +1,227 @@
 page-Help{
+
+    .toolbar-title-md {
+        padding: 0 0px;
+    }
+    .toolbar-title-ios {
+        padding: 0 0px;
+    }
+    
+    .button-inner{
+        margin-top: 5px;
+        margin-left: -10px;
+    }
+    .title title-md{
+        margin-left: -25px;
+    }
+    @import url(https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext);
+    //HOVER-SLIDE TRANSITIONS
+    $hover: all 0.2s ease-in;
+    $slide:all, 0.4s 0.1s, cubic-bezier(0.55,0,0.1,1);
+    //COLORS
+    $light-grey: #e0dfe1;
+    $grey: #9f9e9f;
+    $white: #ffffff;
+    $blue: #0190ec;
+    
+    body {
+      background-color: #ffffff;
+      font-family: 'Noto Sans', sans-serif;
+      padding: 100px 200px;
+      text-align: center;
+    }
+    
+    .main-wrapper {
+      padding-top: 60px;
+    }
+    
+    .icons-wrapper {
+      display: inline-block;
+      margin: 0 auto;
+    }
+    
+    .icon {
+      display: inline-block;
+      vertical-align: top;
+      margin: 10px;
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+    //   box-shadow: -1px 1px 5px -1px rgba(55,55,55,0.5);
+    //   box-shadow: rgb(240, 240, 240) 1px 1px,
+    //     rgb(240, 240, 240) 2px 2px,
+    //     rgb(240, 240, 240) 3px 3px,
+    //     rgb(240, 240, 240) 4px 4px,
+    //     rgb(240, 240, 240) 5px 5px,
+    //     rgb(240, 240, 240) 6px 6px,
+    //     rgb(240, 240, 240) 7px 7px,
+    //     rgb(240, 240, 240) 8px 8px,
+    //     rgb(241, 241, 241) 9px 9px,
+    //     rgb(242, 242, 242) 10px 10px,
+    //     rgb(243, 243, 243) 11px 11px,
+    //     rgb(245, 245, 245) 12px 12px,
+    //     rgb(246, 246, 246) 13px 13px,
+    //     rgb(247, 247, 247) 14px 14px,
+    //     rgb(248, 248, 248) 15px 15px,
+    //     rgb(250, 250, 250) 16px 16px,
+    //     rgb(251, 251, 251) 17px 17px,
+    //     rgb(252, 252, 252) 18px 18px,
+    //     rgb(253, 253, 253) 19px 19px,
+    //     rgb(255, 255, 255) 20px 20px;
+      
+      &.blue {
+        background-color: $blue;
+        border-top-left-radius: 0;
+        
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -14px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 14px 24px 0;
+          border-color: transparent $blue transparent transparent;
+        }
+        
+        &:hover {
+          .bar {
+            width: 36px;
+            
+            &:before {
+              width: 36px;
+            }
+            
+            &:after {
+              width: 40px;
+            }
+          }
+        }
+      }
+      
+      &.grey {
+        background-color: $light-grey;
+       
+        border-top-right-radius: 0;
+        
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -10px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 24px 14px 0 0;
+          border-color: $light-grey transparent transparent transparent;
+        }
+        
+      
+          .dot {
+            animation: wave 0.8s .4s ease-out infinite;
+          }
+          
+          .dot-left {
+            animation: wave 0.8s .2s ease-out infinite;
+          }
+          
+          .dot-right {
+            animation: wave 0.8s .6s ease-out infinite;
+          }
+        
+      }
+    }
+    
+    .bar {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      width: 40px;
+      margin-left: -20px;
+      margin-top: -3px;
+      height: 6px;
+      background-color: $white;
+      transition: $slide;
+      
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 40px;
+        top: -12px;
+        background-color: $white;
+        transition: $slide;
+      }
+      
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 30px;
+        bottom: -12px;
+        background-color: $white;
+        transition: $slide;
+      }
+    }
+    
+    .dot {
+      display: block;
+      background-color: $grey;
+      position: absolute;
+      top: 57%;
+      left: 71%;
+      width: 7px;
+      height: 7px;
+      margin-top: -5px;
+      margin-left: -11px;
+      border-radius: 100%;
+      transition: $slide;
+      
+      &.dot-left {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 7px;
+        height: 7px;
+        margin-left: -22px;
+        background-color: $grey;
+        border-radius: 100%;
+        transition: $slide;
+      }
+      
+      &.dot-right {
+        position: absolute;
+        display: block;
+        width: 7px;
+        height: 7px;
+        margin-left: 0px;
+        background-color: $grey;
+        border-radius: 100%;
+        transition: $slide;
+      }
+    }
+    
+    //animation
+    @keyframes wave {
+      0%    { transform: translateY(0); }
+      50%    { transform: translateY(5px); }
+      100%  { transform: translateY(0); }
+    }
     
     .card-md p {
         margin: 0 0 -2px;
     }
     .ionContentDesign{
-        background-color: #E2E2E2;margin-top: 10%;
+        background-color: #E2E2E2;
     }
     .cardMainDesign{
         margin: 0px;width: 100%;margin-top: 5px

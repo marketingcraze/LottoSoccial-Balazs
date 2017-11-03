@@ -264,13 +264,15 @@ export class LoginPage {
                  if (this.platform.is('cordova')) {
 			      webengage.engage(); 
                    webengage.user.login(this.login.free_reg_msn);
-                 }        
-
-               
+                   webengage.notification.onDismiss((inAppData)=> {
+                    alert("notifcation call back is"+ inAppData)
+                  });
+                  webengage.engage();
                 
-
-
-               });
+                 }
+                 
+                 
+    });
     }
 
     submitMobile(){ 

@@ -360,7 +360,7 @@ export class AccountPage {
 			localStorage.setItem("imageUrl", fileUri)
 			debugger
 			//this.uploadImage()
-			//this.uploadPhoto(fileUri)
+			this.uploadPhoto(fileUri)
 
 		}),
 			err => console.log(err);
@@ -415,6 +415,9 @@ export class AccountPage {
 			debugger
 			const imgBlob = new Blob([reader.result], {type: 'image/jpg'});
 			debugger
+			var p=reader.response
+			var m = reader.result
+			
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);

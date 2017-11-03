@@ -5,6 +5,7 @@ import { Content } from 'ionic-angular'
 import { Inject, HostListener } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { DOCUMENT } from "@angular/platform-browser";
+import {InAppBrowser} from '@ionic-native/in-app-browser'
 
 
 @Component({
@@ -18,8 +19,12 @@ export class HelpPage {
   downShowing = 0;
   down_arrow_showing = 0;
   lottoSocialGamesHalf:any;
+  material_icon = 0;
   lottoSocialBonusHalf:any;
-  constructor(public navCtrl: NavController, private viewctrl:ViewController,public cdRef: ChangeDetectorRef) {
+  constructor(public navCtrl: NavController,
+     private viewctrl:ViewController,
+     public cdRef: ChangeDetectorRef,
+    public iab:InAppBrowser) {
     this.lottoSocialGamesHalf="halfLotto"
     this.lottoSocialBonusHalf="halfBonus"
    
@@ -42,8 +47,12 @@ export class HelpPage {
     localStorage.setItem("HelpP","1")
 
  }
+ openAppBrw(){
+   let browser = this.iab.create(" https://help.lotto-social.com/hc/en-us","_blank",'location=no,toolbarposition=top')
+
+   }
   scrollHandler(event){
-    
+    this.material_icon = 1
       var innerDiv = document.getElementById('inner').scrollHeight;
       var scrollDiv = document.getElementById('contents').clientHeight;
       
