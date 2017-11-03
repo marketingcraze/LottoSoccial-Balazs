@@ -7,15 +7,15 @@
                 </ion-row>
                 <ion-row>
                     <ion-item>
-                        The whole data goes here
+                        <div [innerHTML]="decodedHtml">
+
+                        </div>
                     </ion-item>
                 </ion-row>
             </ion-col>
         </ion-item>
     </ion-list>
-    <ion-footer>
-        <button class="btn-transparent" (click)="dismissView()">
-            No, Thanks
-        </button>
-    </ion-footer>
+    <button class="btn-transparent" (click)="dismissView()">
+        No, Thanks
+    </button>
 </ion-content>

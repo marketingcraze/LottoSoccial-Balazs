@@ -194,16 +194,16 @@ export class TabsPage {
                     if (typeof cordova !== 'undefined') {
 
                         var browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top')
-                        browser.on("loadstop").
-                            subscribe(
-                            (data) => {
-                                debugger
-                                // alert(data)
-                                browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
-                            },
-                            err => {
-                                console.log("InAppBrowser Loadstop Event Error: " + err);
-                            });
+                        // browser.on("loadstop").
+                        //     subscribe(
+                        //     (data) => {
+                        //         debugger
+                        //         // alert(data)
+                        //         browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
+                        //     },
+                        //     err => {
+                        //         console.log("InAppBrowser Loadstop Event Error: " + err);
+                        //     });
                     }
                 });
 

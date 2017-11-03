@@ -50,21 +50,19 @@ export class ManageSyndicate2Page {
     this.navCtrl.push(InviteFriendsPage);
   }
   openUrl(url: string) {
-    // let opt: string = "toolbarposition=top";
-    // this.iab.create(url, "_blank", opt);
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
         const browser = this.iab.create(url, "_blank", 'location=no,toolbarposition=top');
-        browser.on("loadstop").
-          subscribe(
-          (data) => {
-            debugger
-            //alert(data)
-            browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
-          },
-          err => {
-            console.log("InAppBrowser Loadstop Event Error: " + err);
-          });
+        // browser.on("loadstop").
+        //   subscribe(
+        //   (data) => {
+        //     debugger
+        //     //alert(data)
+        //     browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
+        //   },
+        //   err => {
+        //     console.log("InAppBrowser Loadstop Event Error: " + err);
+        //   });
       }
     })
   }

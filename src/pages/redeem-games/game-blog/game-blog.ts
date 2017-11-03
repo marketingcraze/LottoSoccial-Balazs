@@ -6,10 +6,21 @@ import { NavController, NavParams, ViewController, LoadingController, AlertContr
     templateUrl: 'game-blog.html'
 })
 export class gameBlog {
-    constructor(private _viewCtrl:ViewController){
-
+    blogContent: any;
+    public decodedHtml: any;
+    constructor(private _viewCtrl: ViewController,
+        private _navPrms: NavParams
+    ) {
+        debugger;
+        this.blogContent = this._navPrms.get("redeem_products_blog")
+        this.decodeHtmlEntity()
     }
-    dismissView(){
+    dismissView() {
         this._viewCtrl.dismiss();
+    }
+    decodeHtmlEntity() {
+        var sampleTxt = document.createElement("textarea");
+        sampleTxt.innerHTML = this.blogContent;
+        this.decodedHtml = sampleTxt.value;
     }
 }
