@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController, Slides } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Slides, AlertController } from 'ionic-angular';
 import { PaymentPage } from '../payment/payment';
 import { SyndicateService } from '../../providers/syndicate-service';
 
@@ -56,7 +56,8 @@ export class ConfirmNumberPage {
       public appSound:AppSoundProvider,
       public _syndService: SyndicateService,
       public loadingCtrl: LoadingController,
-      private st: SimpleTimer) {
+      private st: SimpleTimer,
+      public alertCtrl: AlertController) {
 
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
     this.syndId = localStorage.getItem('synd_id');
@@ -68,7 +69,17 @@ export class ConfirmNumberPage {
   }
 
   next() {
-    this.buysyndicate();
+    var count = 0;
+    for(var i=0; i<this.offerArr.length; i++) {
+      if(this.offerArr[i].selected) {
+        count++;
+      }
+    }
+    if(count > 0) {
+      this.buysyndicate();
+    }else {
+      this.showConfirm();
+    }   
   }
 
   small(index, c) {
@@ -289,6 +300,28 @@ timer0callback(data) {
        
       }
     }
+  }
+
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Alert',
+      message: 'Are you sure you don’t want our special offers',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('no clicked')
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.buysyndicate();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

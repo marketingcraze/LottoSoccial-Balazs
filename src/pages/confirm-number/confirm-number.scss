@@ -154,13 +154,13 @@ page-confirm-number {
         background: rgb(25, 57, 116);
         padding: 10px;
         // margin-bottom: 12px;
-        position: fixed;
-        text-align: center;
-        left: 0;
-        bottom: 0;
+        // position: fixed;
+        // text-align: center;
+        // left: 0;
+        // bottom: 0;
         width: 100%;
-        right: 0;
-        z-index: 999999;
+        // right: 0;
+        // z-index: 999999;
 
         .button-md {
             height: 4.5rem;
@@ -292,5 +292,11 @@ page-confirm-number {
     margin-top: 8px;
     color: #444;
  }
+ .alert-md .alert-head {
+    padding: 10px 24px 10px 24px;
+ }
+ .alert-md .alert-message, .alert-md .alert-input-group {
+    padding: 0 24px 5px 24px;
+  }
 
 }
