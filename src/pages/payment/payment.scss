@@ -31,7 +31,9 @@ page-payment {
 }
 .main-bg {
     background: #e3e3e3;
-    font-family: lato-regular;
+    $font-family-md-base: "Lato-Regular";
+    $font-family-ios-base: "Lato-Regular";
+    $font-family-wp-base: "Lato-Regular";
 }
 .inner-body {
     background: white;

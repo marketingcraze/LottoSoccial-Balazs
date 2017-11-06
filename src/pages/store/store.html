@@ -20,35 +20,58 @@
   <ion-grid class="score-panel">
     <ion-row>
       <ion-col width-50 style="width: 100%">
-        <div text-center style="width: 100%" *ngIf="creditPoints>0" (click)="tip()">
-          <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
-          <span class="tooltip t1">CREDIT
-            <span class="credit">£{{creditPoints}}</span>
-            <div *ngIf="tip11==true">
-              <span class="tooltiptext t-left">
-                <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
-                  <li>Bonus credit can be used to
-                    <a href="">Buy MORE lottery Lines</a>
-                  </li>
-                  <li>If you will win less than 60p you can boost the win to
-                    <strong>4x</strong> bonus credit</li>
-                  <li>Bonus credit cannot be converted back into cash</li>
-                </ul>
-              </span>
-            </div>
+        <div text-center style="width: 100%" >
+         
+          <div  *ngIf="waveShowing==true" >
+          <span class="tooltip t1">
+            <i class="icon11 icon-chat grey" style="margin-left: 47vw">
+                <span class="dot dot-left"></span>
+                <span class="dot"></span>
+                <span class="dot dot-right"></span>
+              </i>
           </span>
-        </div>
-
-        <div text-center style="width: 100%" *ngIf="creditPoints==0">
+        </div> 
+        
+        <div  *ngIf="waveShowing==false && bonus_creditAPI>0" (click)="tip()" class="animated fadeIn">
+             <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
+            <span class="tooltip t1">CREDIT
+              <span class="credit">£{{bonus_creditAPI}}</span>
+              <div *ngIf="tip11==true">
+                <span class="tooltiptext t-left">
+                  <ul style="margin: 0px; text-align: justify;color: gray; padding-right: 10px">
+                    <li>Bonus credit can be used to
+                      <a href="">Buy MORE lottery Lines</a>
+                    </li>
+                    <li>If you will win less than 60p you can boost the win to
+                      <strong>4x</strong> bonus credit</li>
+                    <li>Bonus credit cannot be converted back into cash</li>
+                  </ul>
+                </span>
+              </div>
+            </span>
+          </div>
+    </div>
+       <div text-center style="width: 100%" *ngIf="waveShowing==false && bonus_creditAPI==0">
           <img src="assets/icon/bc_ico.svg" alt="" width="16" height="16" />
           <span class="tooltip t1" (click)="mgmPageOpen()" style="color: cornflowerblue">GET CREDIT </span>
         </div>
       </ion-col>
+
       <ion-col width-50 style="width: 100%">
-        <div text-center style="width: 100%" *ngIf="accountDetails.reward_points>0" (click)="tip2()">
+        <div text-center style="width: 100%">
+            <!-- <div  *ngIf="waveShowing==true" >
+                <span class="tooltip t1">
+                  <i class="icon icon-chat grey" style="margin-left: -2vw">
+                      <span class="dot dot-left"></span>
+                      <span class="dot"></span>
+                      <span class="dot dot-right"></span>
+                    </i>
+                </span>
+              </div>  -->
+        <div  *ngIf="waveShowing==false && reward_pointsAPI>0" (click)="tip2()" class="animated fadeIn">
           <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
           <span class="tooltip t2">POINTS
-            <span class="points">{{rewardPoints}}</span>
+            <span class="points">{{reward_pointsAPI}}</span>
             <div *ngIf="tip22==true">
               <span class="tooltiptext t-right" style="text-align: justify;padding: 10px; color: gray">
                 Use your points to get
@@ -58,9 +81,10 @@
               </span>
             </div>
           </span>
+              </div>
         </div>
 
-        <div text-center style="width: 100%" *ngIf="accountDetails.reward_points==0 || !accountDetails.reward_points">
+        <div text-center style="width: 100%" *ngIf="waveShowing==false && reward_pointsAPI==0">
           <img src="assets/icon/rwp_icon.svg" alt="" width="16" height="16" />
           <span class="tooltip t2" style="color:cornflowerblue " (tap)="mgmPageOpen()">GET POINTS </span>
         </div>

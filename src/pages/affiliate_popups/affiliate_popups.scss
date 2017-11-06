@@ -67,7 +67,9 @@
 .messagecolor{
 color:#FFFFFF;
 font-size: 16px;
-font-family:Lato;
+$font-family-md-base: "Lato-Regular";
+$font-family-ios-base: "Lato-Regular";
+$font-family-wp-base: "Lato-Regular";
 padding-top: 5%;
 }
 .scroll-content {

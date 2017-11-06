@@ -78,7 +78,9 @@ modal-wrapper {
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 12px;
-  font-family: 'lato';
+  $font-family-md-base: "Lato-Regular";
+  $font-family-ios-base: "Lato-Regular";
+  $font-family-wp-base: "Lato-Regular";
   text-transform: uppercase;
   font-weight: normal;
   line-height: 1.42857143;
@@ -162,7 +164,9 @@ ion-modal {
   color: #000000;
   font-size: 20px;
   text-transform: capitalize;
-  font-family:'lato';
+  $font-family-md-base: "Lato-Regular";
+  $font-family-ios-base: "Lato-Regular";
+  $font-family-wp-base: "Lato-Regular";
   text-align: center;
 
 }

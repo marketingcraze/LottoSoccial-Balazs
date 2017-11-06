@@ -164,6 +164,36 @@ OAuth oauth_consumer_key="NDes1FKC0Kkg", oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",
             return response;
         } 
     }
+    getCreditPoints(){
+        
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/voucher/"
+        let data = {
+            "request": [
+               {
+                "session_ID": CommonService.sessionId,
+                "action": "get_account_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "page_id": "7",
+                "screen_id": "7.1",
+                "module_name": "get_balance_details",
+                "customer_id":CommonService.session.customer_id
+              }
+          
+            ]
+          }
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        console.log("getCreditPoints", action, data);
+        var response = this.http.post(action, data, opt)
+        .map(res => res.json());
+
+        return response;
+    
+    }
 }
 
 
