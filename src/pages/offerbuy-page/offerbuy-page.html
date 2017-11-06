@@ -75,7 +75,7 @@
             </ion-range>
         </ion-item>
 
-        <div *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;">
+        <div *ngFor="let items of credit_offer let j=index;">
                 <span *ngIf="j<1">
                     <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px" (click)="buyCreditOffer(items?.offer_id,product)">BUY NOW</button>
                 </span>

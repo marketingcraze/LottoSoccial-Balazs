@@ -149,6 +149,12 @@ export class TabsPage {
     }
 
     onSelectTab(tab) {
+        debugger;
+        var tabss = this.homeTabs.getActiveChildNav()
+        if (tabss._views[1]) {
+            // tabss[0]._views[0].dismiss();
+            tabss._views[1].dismiss();
+        }
         var menu1 = this.menuCtrl.getMenus();
         console.log("TabsPage::onSelectTab", tab);
         this.appSound.play('menuClick');
@@ -213,9 +219,6 @@ export class TabsPage {
                 console.log(error)
             }
             );
-    }
-    clickStore() {
-        var abc = this.menuCtrl;
     }
 
 }

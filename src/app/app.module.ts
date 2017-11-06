@@ -92,6 +92,7 @@ import { newArrowHeader } from '../components/newArrowHeader/newArrowHeader';
 import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
 import  { OverlayPage } from '../pages/overlaypage/overlay-page'
 import { gameBlog } from '../pages/redeem-games/game-blog/game-blog'
+import { eventBlog } from '../pages/store/eventBlog/eventBlog';
 
 
 // components
@@ -244,7 +245,7 @@ import {} from '../pages'
         HelpPage,
         gameBlog,
         AgreementPage,
-
+        eventBlog,
         newArrowHeader,
         buyOfferTips,
         OverlayPage,
@@ -375,6 +376,7 @@ import {} from '../pages'
         buyOfferTips,
         OverlayPage,
         gameBlog,
+        eventBlog,
   
         // popovers
         // OffersPayment,

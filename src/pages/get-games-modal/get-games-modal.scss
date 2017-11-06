@@ -44,7 +44,7 @@ page-get-games-modal{
       ul{
         -webkit-padding-start: 20px;
       }
-      .buycard{
+      .buyGameSuccess{
         background:#00A651;
         overflow: hidden;
         position: absolute;  
@@ -61,12 +61,18 @@ page-get-games-modal{
         border-radius: 15px;
       
     }
+    .successIconBuyGame{
+      background:#F8F8F8; border-radius:50%; height: 70px;
+    }
 
-.messagecolor{
+.messagecolorGetGame{
   color:#FFFFFF;
   font-size: 18px;
   font-family:Lato;
   padding-top: 5%;
+}
+.failedBtn{
+  font-size: 18px;width:50%; height: 45px
 }
 .scroll-content {
   
@@ -97,6 +103,34 @@ img, .item-md ion-thumbnail img {
 .label-md {
   margin: 13px 8px 13px 0; 
 }
-
+.buyGameSuccess p{
+  font-size: 1.4em;
+  font-family: lato;
+  color: white;
+ }
+ .errorcardGetGame{
+  background:#990033;
+  overflow: hidden;
+  position: absolute;  
+  max-width: 100%;
+  max-height: 105%;
+  width: 100%;
+  height: 105%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 15%;
+  box-shadow: 0 16px 20px rgba(184, 68, 68, 0.4);
+  border-radius: 15px;
+ }
+ .failedBackgroundGetGame{
+  background:#F8F8F8; border-radius:50%;width:25%;height: 70px
+}
+.errorcardGetGame p{
+  font-size: 1.4em;
+  font-family: lato;
+  color: white;
+ }
       
-    }
+}

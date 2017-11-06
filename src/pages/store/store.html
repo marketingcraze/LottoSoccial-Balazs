@@ -140,13 +140,12 @@
           <div style="height:40px">
             <span>{{offer?.offer_title}}</span>
           </div>
-          <button class="center"  padding ion-button text-center color="secondary" style="width: 160px;height: 40px;"
-            (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id,offer?.button_text)">
+          <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id,offer?.button_text)">
             <span style="font-size: 17px;font-weight: lighter;">
               {{offer?.button_text}}
             </span>
           </button>
-         
+
         </div>
         <!-- <button class="center" style="bottom: 5vh" padding ion-button text-center clear small (click)="viewAllOffers()" >View all offers</button> -->
       </ion-card>
@@ -652,9 +651,9 @@
               </ion-slide> -->
         </ion-slides>
       </div>
-      <ion-slides spaceBetween=8 slidesPerView=2 >
-        <ion-slide style="width: 51%" *ngFor="let c of millionerImage">
-          <img src="{{c.image_url}}" width="150" height="100" style="height: 18vh">
+      <ion-slides spaceBetween=8 slidesPerView=2>
+        <ion-slide style="width: 51%" *ngFor="let c of millionerImage" (tap)=openModal(c)>
+          <img src="{{c.image_url}}" width="150" height="100" style="height: 18vh" >
         </ion-slide>
       </ion-slides>
 
