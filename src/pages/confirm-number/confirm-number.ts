@@ -29,7 +29,9 @@ export class ConfirmNumberPage {
   syndId: any;
   offerArr = [];
   propertyArr = [];
-  TotalPaybale = 9;
+  TotalPaybale = 0;
+  syndicatePrice = 0;
+
 
     userCards: any;
     userCardsCount:number = 0;
@@ -60,6 +62,10 @@ export class ConfirmNumberPage {
       public alertCtrl: AlertController) {
 
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
+    for (var i=0; i<this.dataArr.length; i++) {
+      this.syndicatePrice = this.syndicatePrice + (this.dataArr[i].value * this.dataArr[i].line_count)
+    }
+    this.TotalPaybale = this.syndicatePrice;
     this.syndId = localStorage.getItem('synd_id');
     console.log(this.dataArr);
   }
@@ -279,7 +285,7 @@ timer0callback(data) {
   }
 
   selecetOffer(i:any) {
-    this.TotalPaybale = 9
+    this.TotalPaybale = this.syndicatePrice
     this.offerArr[i].selected = !this.offerArr[i].selected
     for(var j=0; j<this.offerArr.length; j++) {
       if(this.offerArr[j].selected) {

@@ -121,7 +121,7 @@
             <span class="icon-cross" style="content: url(./assets/img/close2.svg);max-width: 12px;margin-right: 5px;"></span>
             <span>Private Syndicate</span>
           </ion-col>
-          <ion-col col-4 text-right>&#x20A4;9 </ion-col>
+          <ion-col col-4 text-right>&#x20A4;{{syndicatePrice}} </ion-col>
         </ion-row>
         <ion-row *ngFor="let o of offerArr; let oi = index;" [hidden]="!o.selected">
           <ion-col col-8>
