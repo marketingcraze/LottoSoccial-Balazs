@@ -25,18 +25,18 @@
   </div>
   <div class="pad-10 inner-body">
     <div class="section-top">
-      <div class="pad-10-tlr">Every member equally contribue as follows:</div>
+      <div class="pad-10-tlr">Every member equally contribute as follows:</div>
       <div class="pad-10-lr">
         <ion-grid>
           <ion-row *ngFor="let t of termsData?.product_group">
             <ion-col col-2 class="text-center pad-2"><img [src]="t?.product_image" class="lot-img"/></ion-col>
-            <ion-col col-10 class="pad-top pad-2 lh-23" style="font-size: large">{{t?.line_count}}x {{t?.product_name}} line on <span *ngFor="let d of t?.draw_day">{{d?.long}} </span></ion-col>
+            <ion-col col-10 class="pad-top pad-2 lh-23" style="font-size: 14px;line-height: 35px;">{{t?.line_count}}x {{t?.product_name}} line on <span *ngFor="let d of t?.draw_day">{{d?.long}} </span></ion-col>
           </ion-row>
         </ion-grid>
         <!--<p class="desc-p" *ngFor="let t of termsData?.product_group"><img src="./assets/img/euroball@3x.png" class="lot-img"/> {{t?.line_count}}x {{t?.product_name}} line on <span *ngFor="let d of t?.draw_day">{{d?.long}} </span></p>-->
         <!--<p class="desc-p"><img src="./assets/img/euroball@3x.png" class="lot-img"/> 1x EuroMillions line on Friday</p>
         <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> 2x EuroMillions line on Wednesday</p>-->
-        <p >and receives an equal share of all the winnings!</p>
+        <p style="font-size: 14px;">and receives an equal share of all the winnings!</p>
       </div>
     </div>
     <div class="section-btm">

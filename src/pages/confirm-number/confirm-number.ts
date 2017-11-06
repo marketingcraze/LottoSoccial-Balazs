@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController, Slides } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Slides, AlertController } from 'ionic-angular';
 import { PaymentPage } from '../payment/payment';
 import { SyndicateService } from '../../providers/syndicate-service';
 
@@ -29,7 +29,9 @@ export class ConfirmNumberPage {
   syndId: any;
   offerArr = [];
   propertyArr = [];
-  TotalPaybale = 9;
+  TotalPaybale = 0;
+  syndicatePrice = 0;
+
 
     userCards: any;
     userCardsCount:number = 0;
@@ -56,9 +58,14 @@ export class ConfirmNumberPage {
       public appSound:AppSoundProvider,
       public _syndService: SyndicateService,
       public loadingCtrl: LoadingController,
-      private st: SimpleTimer) {
+      private st: SimpleTimer,
+      public alertCtrl: AlertController) {
 
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
+    for (var i=0; i<this.dataArr.length; i++) {
+      this.syndicatePrice = this.syndicatePrice + (this.dataArr[i].value * this.dataArr[i].line_count)
+    }
+    this.TotalPaybale = this.syndicatePrice;
     this.syndId = localStorage.getItem('synd_id');
     console.log(this.dataArr);
   }
@@ -68,7 +75,17 @@ export class ConfirmNumberPage {
   }
 
   next() {
-    this.buysyndicate();
+    var count = 0;
+    for(var i=0; i<this.offerArr.length; i++) {
+      if(this.offerArr[i].selected) {
+        count++;
+      }
+    }
+    if(count > 0) {
+      this.buysyndicate();
+    }else {
+      this.showConfirm();
+    }   
   }
 
   small(index, c) {
@@ -268,7 +285,7 @@ timer0callback(data) {
   }
 
   selecetOffer(i:any) {
-    this.TotalPaybale = 9
+    this.TotalPaybale = this.syndicatePrice
     this.offerArr[i].selected = !this.offerArr[i].selected
     for(var j=0; j<this.offerArr.length; j++) {
       if(this.offerArr[j].selected) {
@@ -289,6 +306,28 @@ timer0callback(data) {
        
       }
     }
+  }
+
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Alert',
+      message: 'Are you sure you don’t want our special offers',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('no clicked')
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.buysyndicate();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }
