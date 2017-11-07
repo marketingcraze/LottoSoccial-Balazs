@@ -5,6 +5,7 @@ import { Contacts, Contact, ContactFieldType, ContactFindOptions } from '@ionic-
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { FormControl } from '@angular/forms';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { HomePage } from '../home/home';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 
@@ -54,23 +55,6 @@ export class InviteFriendsPage {
             this.setFilteredItems();
  
         });
-    
-      
-
-    // this.items = [
-            // {displayName: 'Benjamin Evalent', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'I am me', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Somewhat somewhere', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'john Papa', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Angular 2', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Ionic 2', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Node Evalent', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Ninja Bedi', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Dev Geek', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'john Charter', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Google contacts', phoneNumbers:[{value:'+447448962353'}], selected:false},
-            // {displayName: 'Demo Contacts', phoneNumbers:[{value:'+447448962353'}], selected:false}
-        // ]
   }
 
   onSearchInput(){
@@ -124,7 +108,7 @@ export class InviteFriendsPage {
                 })
               }
           }
-           this.fItems = this.items;
+          //  this.fItems = this.items;
            this.loader2.dismiss();
         })
         .catch((err) =>
@@ -135,15 +119,16 @@ export class InviteFriendsPage {
       })
   }
   cCancle() {
-    this.cclose = 'cclose'
-    this.cfoothide = true;
-    this.listPadding = 0;
-    if(this.items){
-    var arrlen = this.items.length;
-      for(var j = 0; j < arrlen; j++){
-        this.items[j].selected = false
-      }
-    }
+    // this.cclose = 'cclose'
+    // this.cfoothide = true;
+    // this.listPadding = 0;
+    // if(this.items){
+    // var arrlen = this.items.length;
+    //   for(var j = 0; j < arrlen; j++){
+    //     this.items[j].selected = false
+    //   }
+    // }
+    this.navCtrl.pop();
   }
 
   addContact(item, i) {
@@ -293,5 +278,9 @@ shareInfo()
       console.log(res);
       this.sharedata = res.response["0"].get_social_sharing.response.refer_friend_data["0"];
     })
+  }
+
+  viewTicket() {
+    this.navCtrl.pop()
   }
 }

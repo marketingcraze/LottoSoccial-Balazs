@@ -34,6 +34,7 @@ export class CreateSyndicate3Page {
     public loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
+    console.log("lottery page")
   }
   ionViewWillEnter() {
 
@@ -98,7 +99,7 @@ export class CreateSyndicate3Page {
     this._syndService.getLotteries().subscribe((res) => {
         // console.log(res);
         loader.dismiss();
-        var arr = res.response.response.product_group;
+        var arr = res.response["0"].get_syndicate_lotteries.response.product_group;
         var len = arr.length;
         for(var i=0; i<len; i++) {
           var days = [];
