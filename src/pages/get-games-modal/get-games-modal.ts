@@ -23,7 +23,7 @@ export class getGamesModal {
   title: any;
   price: any;
   price_after: any;
-  pointsLive:any;
+  pointsLive: any;
   status: any = "Passed";
   statusBuy: any = "Passed";
   value: boolean = false;
@@ -43,14 +43,14 @@ export class getGamesModal {
     });
     this.VoucherCode = this.navprms.get("VoucherCode")
     this.price = this.navprms.get("price")
-    this.pointsLive=this.price;
+    this.pointsLive = this.price;
     this.title = this.navprms.get("title")
     this.price_after = this.navprms.get("price_after")
     this.status = this.navprms.get("p_staus")
     this.productName = this.navprms.get("p_name")
     this.productDetail = this.navprms.get("p_detail")
     this.awardID = this.navprms.get("p_award_id")
-    this.creditBalance=this.navprms.get("cBalance");
+    this.creditBalance = this.navprms.get("cBalance");
     //this.creditBalance=60;
     console.log("status is " + this.status)
 
@@ -61,7 +61,7 @@ export class getGamesModal {
     this.viewctrl.dismiss(data);
   }
   confirmpurchase() {
-     
+
     this.productCount = this.counter;
     let loading = this.loadingCtrl.create();
     loading.present().then(() => {
@@ -70,10 +70,7 @@ export class getGamesModal {
           loading.dismiss()
           var status = data.response[0].reward_payment_process.response.status
           if (status === "SUCCESS") {
-            // this.value = true;
-            this.value = false;
-            this.statusBuy = 'FAILED';
-
+            this.value = true;
           }
           else {
             this.value = false;
@@ -90,33 +87,33 @@ export class getGamesModal {
     this.navCtrl.popAll()
   }
   minusCounter() {
-    if (this.counter != 1 && this.price<=this.creditBalance) {
-       
-      this.disable=document.getElementById("imgPlus");
-      this.disable.style.filter="opacity(1) drop-shadow(0 0 0 red)"
+    if (this.counter != 1 && this.price <= this.creditBalance) {
+
+      this.disable = document.getElementById("imgPlus");
+      this.disable.style.filter = "opacity(1) drop-shadow(0 0 0 red)"
       this.counter--;
       this.price = this.pointsLive * this.counter;
       this.changeDetect.detectChanges();
     }
   }
   plusCounter() {
-    if (this.counter < 5 && this.price!=this.creditBalance) {
-       
+    if (this.counter < 5 && this.price != this.creditBalance) {
+
       this.counter++;
       this.price = this.pointsLive * this.counter;
       this.changeDetect.detectChanges();
     }
-    else if(this.price>=this.creditBalance ){
+    else if (this.price >= this.creditBalance) {
       debugger
-      this.disable=document.getElementById("imgPlus");
-      this.disable.style.filter="opacity(0.5) drop-shadow(0 0 0 gray)"
+      this.disable = document.getElementById("imgPlus");
+      this.disable.style.filter = "opacity(0.5) drop-shadow(0 0 0 gray)"
       // this.disable="opacity(0.5) drop-shadow(0 0 0 gray)";
     }
 
   }
-  moveToPlayGame(){
+  moveToPlayGame() {
     this.navCtrl.popAll();
-    this.navCtrl.push(PlayGamePage,{game:"kjshdfjusdgf"})
+    this.navCtrl.push(PlayGamePage, { game: "kjshdfjusdgf" })
   }
 }
 
