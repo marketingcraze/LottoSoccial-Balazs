@@ -78,7 +78,7 @@ export class ChooseImagePage {
     });
     loader.present();
     this._syndService.getcovers().subscribe((res) => {
-            var dt = res.response.response.image_group
+            var dt = res.response["0"].get_syndicate_images_lib.response.image_group
             for (var key in dt) {
               if (dt.hasOwnProperty(key)) {
                 this.images.push(dt[key].trim());

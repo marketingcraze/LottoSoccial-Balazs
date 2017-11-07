@@ -85,26 +85,18 @@ export class CreateSyndicate4Page {
           "line_count": this.dataArr[i].linecount
       })
     }
-    var data = {
-      "session_ID": "avjtjgu0f257f0orggqufcn5g2",
-      "page_ID": "4",
-      "screen_id": "4.4",
-      "action": "syndicate_lotteries",
-      "website": "Lotto Social",
-      "website_id": "27",
-      "source_site": "mobi.lottosocial.com",
-      "module_name": "create_private_syndicate",
-      "customer_id": "1970400",
+    var data = {             
       "syndicate_name": JSON.parse(localStorage.getItem('sdetails')).title,
       "image_url": JSON.parse(localStorage.getItem('sdetails')).image,
       "type": localStorage.getItem('cardType'),
       "product_group": lotArr
     }
     this._syndService.createSynd(data).subscribe((res) =>{
+      console.log(res)
       loader.dismiss();
-      if(res.response.response.status == "SUCCESS") {
+      if(res.response["0"].create_private_syndicate.response.status == "SUCCESS") {
         localStorage.setItem('cardSelected', JSON.stringify(this.dataArr));
-        localStorage.setItem('synd_id',res.response.response.private_syndicate_id);
+        localStorage.setItem('synd_id',res.response["0"].create_private_syndicate.response.private_syndicate_id);
         this.navCtrl.push(CreateSyndicate5Page);
       }
       

@@ -34,7 +34,8 @@ export class SyndicateService {
     getcovers() {
         let action = 'privatesyndicate/';
         let data = {
-            "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                        "request": [{
+            "session_ID": CommonService.sessionId,
             "page_ID": "4",
             "screen_id": "4.1",
             "action": "ilist_banner",
@@ -42,8 +43,8 @@ export class SyndicateService {
             "website_id": "27",
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_syndicate_images_lib",
-            "customer_id": "1970400"
-        }
+            "customer_id": CommonService.session.customer_id
+        }]}
         let headopt = SyndicateService.getHeader();
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
             .map(res => res.json())
@@ -111,6 +112,7 @@ export class SyndicateService {
     getLotteries() {
         let action = 'privatesyndicate'
         let data = {
+                        "request": [{
             "session_ID": CommonService.sessionId,
             "page_ID": "4",
             "screen_id": "4.3",
@@ -120,7 +122,7 @@ export class SyndicateService {
             "source_site": "mobi.lottosocial.com",
             "module_name": "get_syndicate_lotteries",
             "customer_id": CommonService.session.customer_id
-        }
+        }]}
         let headopt = SyndicateService.getHeader();
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
             .map(res => res.json())
@@ -128,7 +130,23 @@ export class SyndicateService {
                 return res;
             })
     }
-    createSynd(data: any) {
+    createSynd(d: any) {
+        var data = {
+                    "request": [{
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "4",
+                    "screen_id": "4.4",
+                    "action": "syndicate_lotteries",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "create_private_syndicate",
+                    "customer_id": "1970400",
+                    "syndicate_name": JSON.parse(localStorage.getItem('sdetails')).title,
+                    "image_url": JSON.parse(localStorage.getItem('sdetails')).image,
+                    "type": localStorage.getItem('cardType'),
+                    "product_group": d.product_group
+                }]}
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         return this.http.post(this.apiUrl + action, data, { headers: headopt })

@@ -330,4 +330,8 @@ timer0callback(data) {
     confirm.present();
   }
 
+  skip() {
+    this.navCtrl.setRoot(HomePage)
+  }
+
 }

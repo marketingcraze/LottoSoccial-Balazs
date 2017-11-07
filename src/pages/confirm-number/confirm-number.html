@@ -8,7 +8,7 @@
   <ion-navbar>
     <ion-title>Confirm your selection</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="skip()">
             <!--<ion-icon ios="md-close" md="md-close"></ion-icon>-->
             SKIP
         </button>
@@ -29,7 +29,7 @@
             </ion-row>  
           </ion-grid>  
         </div>
-        <p class="s-title">Valid for: Ongoing every <span *ngFor="let day of data.draw_day; let di = index"><span><span *ngIf="di > 0"> and </span>{{day.long}}</span></span> - &#x20A4;{{data.value}} </p>
+        <p class="s-title">Valid for: Ongoing every <span *ngFor="let day of data.draw_day; let di = index"><span><span *ngIf="di > 0"> and </span>{{day.long}}</span></span> - &#x20A4;{{data.value | number : '1.2-2'}} </p>
   </div>
 
   <div class="like-div">
@@ -104,7 +104,7 @@
               </button>
 
               <a (click)="nextSlide()" *ngIf="mi != offerArr?.length-1">No, Thanks</a>
-              <a (click)="nextSlide()" *ngIf="mi == offerArr?.length-1" >Remove from cart</a>
+              <!--<a (click)="nextSlide()" *ngIf="mi == offerArr?.length-1" >Remove from cart</a>-->
 
             </div>
           </div>
@@ -121,7 +121,7 @@
             <span class="icon-cross" style="content: url(./assets/img/close2.svg);max-width: 12px;margin-right: 5px;"></span>
             <span>Private Syndicate</span>
           </ion-col>
-          <ion-col col-4 text-right>&#x20A4;{{syndicatePrice}} </ion-col>
+          <ion-col col-4 text-right>&#x20A4;{{syndicatePrice | number : '1.2-2'}} </ion-col>
         </ion-row>
         <ion-row *ngFor="let o of offerArr; let oi = index;" [hidden]="!o.selected">
           <ion-col col-8>
@@ -133,8 +133,8 @@
             <!--<span *ngIf="o?.product_price != ''">{{o?.product_price}}</span> 
             <span *ngIf="o?.product_price == ''">0</span>-->
 
-            <span *ngIf="o?.app_lines"><span *ngIf="o?.product_price == ''">0</span><span *ngIf="o?.product_price != ''">{{o?.product_price}} </span></span>
-            <span *ngIf="!o?.app_lines"><span *ngIf="o?.package_price == ''">0</span><span *ngIf="o?.package_price != ''">{{o?.package_price}} </span></span>
+            <span *ngIf="o?.app_lines"><span *ngIf="o?.product_price == ''">0</span><span *ngIf="o?.product_price != ''">{{o?.product_price | number : '1.2-2'}} </span></span>
+            <span *ngIf="!o?.app_lines"><span *ngIf="o?.package_price == ''">0</span><span *ngIf="o?.package_price != ''">{{o?.package_price | number : '1.2-2'}} </span></span>
             </ion-col>
         </ion-row>
       </ion-grid>
@@ -143,7 +143,7 @@
           <ion-col col-8 text-left>
             <span>TOTAL PAYABLE TODAY</span>
           </ion-col>
-          <ion-col col-4 text-right>&#x20A4;{{TotalPaybale}} </ion-col>
+          <ion-col col-4 text-right>&#x20A4;{{TotalPaybale | number : '1.2-2'}} </ion-col>
         </ion-row>
       </ion-grid>
     </div>
