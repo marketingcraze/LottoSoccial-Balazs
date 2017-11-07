@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef,OnInit } from '@angular/core';
 import { NavController, NavParams, LoadingController, ModalController, Platform, Content, Tabs } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 
@@ -14,11 +14,12 @@ import { gameBlog } from './game-blog/game-blog'
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+declare var webengage:any;
 @Component({
   selector: 'page-redeem-games',
   templateUrl: 'redeem-games.html'
 })
-export class RedeemGamesPage {
+export class RedeemGamesPage implements OnInit {
   @ViewChild(Content) content: Content;
   redeem_products: any;
   sliderImage: any;
@@ -41,6 +42,21 @@ export class RedeemGamesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RedeemGamesPage');
   }
+  ngOnInit(): void {
+    this.platform.ready().then((readySource) => {
+      var CurrentUserid = localStorage.getItem('appCurrentUserid');
+      if (this.platform.is('cordova')) {
+        webengage.engage();
+        webengage.track('Play Game Page', {
+          "UserId": CurrentUserid,
+        });
+        webengage.screen("GetGamesPage")
+        webengage.notification.onDismiss((inAppData)=> {
+       });
+      }
+    });
+  }
+
 
   scrollHandlerListGames(event) {
     var scrollDiv = document.getElementById('reddemReGamesContent').clientHeight;
@@ -112,7 +128,8 @@ export class RedeemGamesPage {
       p_staus: this.point_status,
       p_name:this.redeem_products[index].product_name,
       p_detail:this.redeem_products[index].product_details,
-      p_award_id:this.redeem_products[index].award_id
+      p_award_id:this.redeem_products[index].award_id,
+      cBalance:this.reward_point
     })
 
     modal.present();

@@ -22,10 +22,10 @@
                 </div>
 
                 <div item-center item-right style="border: 1px solid #255FC7;width: 39%;text-align: center;border-radius: 200px 200px 200px 200px;z-index: 1;display: flex">
-                    <p style="position: absolute;margin-top: -6%;margin-left: 11%;color: black;">qty</p>
+                    <p style="position: absolute;margin-top: -6%;margin-left: 11%;color: black;">Qtp</p>
                     <img (click)="minusCounter()" src="assets/img/minus-1.png" style="border: none;width: 30%;height: 10%;margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
                     <input type='number' readonly="true" minlength="1" maxlength="5" value='{{counter}}' style="width: 37%;text-align: center;font-size: 14px;border: none; z-index: 0;background-color: white;color: black;height: 3.5vh;margin-top: 1px;">
-                    <img (click)="plusCounter()" src="assets/img/plus-1.png" style="border: none;width: 30%;padding: 0px;height: 21%; margin: 0px;border-radius: 50%;position: relative;left: 6px;">
+                    <img (click)="plusCounter()" src="assets/img/plus-1.png" style="border: none;width: 30%;padding: 0px;height: 21%; margin: 0px;border-radius: 50%;position: relative;left: 6px;"  id="imgPlus" class="inactive">
 
                     <!-- <input (click)="minusCounter()" type='button' value='-' style="background-color: #255FC7;color: white;border: none;width: 25%;padding: 5px; margin: 0px;border-radius: 50%;position: relative;right: 3.5px">
                 
@@ -58,7 +58,8 @@
         <ion-item text-center no-lines style="height: 30%; border-radius:0px 0px 20px 20px">
             <div style="text-align: center; padding-top: 5%;height: 10%; border-radius:0px 0px 20px 20px">
                 <input type="button" value="CONFIRM" style="background-color:#249040; color: white;text-align: center;border: 0px;
-                              width: 40%; height:38px;border-radius: 5px; " (click)="confirmpurchase()">
+                              width: 40%;position: relative;
+                              bottom: 14px; height:38px;border-radius: 5px; " (click)="confirmpurchase()">
             </div>
             <div style="text-align: center; padding-top: 5%;height: 10%;border-radius: 20px">
                 <p (click)="dismissPopUp()" style="text-decoration: none !important;color: #4E85D4; text-align: center; font-size: 15px;">Not Now</p>
@@ -69,14 +70,18 @@
 
 
     <ion-list *ngIf="value==true && statusBuy=='Passed'" class="buyGameSuccess" ion-fixed>
+        
         <button ion-button icon-only class="successIconBuyGame">
             <ion-icon style="width:70px; ">
-                <img src="assets/icon/check_icon.png"> </ion-icon>
+                <img class="thumbNailImg" src="assets/image/dark-green-check-mark-md.png"> </ion-icon>
         </button>
-        <p>Paymet Successful</p>
+        <p>Ace! Good luck with lucky colours</p>
         <ion-row style="padding-top: 5%; height: 45px">
             <ion-col col-12>
-                <button ion-button outline round class="moveToVoucher" color="light" (click)="closePopup()">Close</button>
+                <button ion-button outline round class="moveToVoucher" color="light" (click)="moveToPlayGame()">PLAY NOW</button>
+            </ion-col>
+            <ion-col col-12>
+                <button ion-button outline round class="moveToVoucher" color="light" (click)="closePopup()">GET MORE GAMES</button>
             </ion-col>
         </ion-row>
     </ion-list>
@@ -84,14 +89,14 @@
 
 
     <ion-list *ngIf="!value && statusBuy=='FAILED'" class="errorcardGetGame" ion-fixed>
-        <button ion-button icon-only class="failedBackgroundGetGame">
-            <ion-icon style="width:50px; ">
-                <img src="assets/icon/failed_icon.png"> </ion-icon>
-        </button>
-        <p> Payment Failed!!</p>
-        <ion-row  style="padding-top: 5%; height: 45px">
+        <button ion-button icon-only class="successIconBuyGame">
+                <ion-icon style="width:70px; ">
+                    <img class="thumbNailImg" src="assets/icon/failed_icon.png"> </ion-icon>
+            </button>
+        <p>An error has occured. Please try again later</p>
+        <ion-row style="padding-top: 5%; height: 45px">
             <ion-col col-12>
-                <button ion-button outline round class="moveToVoucher" color="light" (click)="closePopup()">Close</button>
+                <button ion-button outline round class="moveToVoucher" color="light" (click)="closePopup()">Got it</button>
             </ion-col>
         </ion-row>
     </ion-list>

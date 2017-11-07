@@ -3,6 +3,7 @@ import { NavController, NavParams, ViewController, AlertController, ModalControl
 import { RedeemGamesPage } from '../../pages/redeem-games/redeem-games'
 import { paymentService } from '../../services/paymentService'
 import { Storage } from '@ionic/storage';
+import { PlayGamePage } from '../play-games/play-games';
 
 
 @Component({
@@ -10,6 +11,8 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'get-games-modal.html'
 })
 export class getGamesModal {
+  disable: any;
+  creditBalance: any;
   awardID: any;
   visitorId: any;
   productDetail: any;
@@ -47,6 +50,8 @@ export class getGamesModal {
     this.productName = this.navprms.get("p_name")
     this.productDetail = this.navprms.get("p_detail")
     this.awardID = this.navprms.get("p_award_id")
+    this.creditBalance=this.navprms.get("cBalance");
+    //this.creditBalance=60;
     console.log("status is " + this.status)
 
   }
@@ -56,7 +61,7 @@ export class getGamesModal {
     this.viewctrl.dismiss(data);
   }
   confirmpurchase() {
-    debugger;
+     
     this.productCount = this.counter;
     let loading = this.loadingCtrl.create();
     loading.present().then(() => {
@@ -65,7 +70,10 @@ export class getGamesModal {
           loading.dismiss()
           var status = data.response[0].reward_payment_process.response.status
           if (status === "SUCCESS") {
-            this.value = true;
+            // this.value = true;
+            this.value = false;
+            this.statusBuy = 'FAILED';
+
           }
           else {
             this.value = false;
@@ -82,21 +90,33 @@ export class getGamesModal {
     this.navCtrl.popAll()
   }
   minusCounter() {
-    if (this.counter != 1) {
-      debugger;
+    if (this.counter != 1 && this.price<=this.creditBalance) {
+       
+      this.disable=document.getElementById("imgPlus");
+      this.disable.style.filter="opacity(1) drop-shadow(0 0 0 red)"
       this.counter--;
       this.price = this.pointsLive * this.counter;
       this.changeDetect.detectChanges();
     }
   }
   plusCounter() {
-    if (this.counter < 5) {
-      debugger;
+    if (this.counter < 5 && this.price!=this.creditBalance) {
+       
       this.counter++;
       this.price = this.pointsLive * this.counter;
       this.changeDetect.detectChanges();
     }
+    else if(this.price>=this.creditBalance ){
+      debugger
+      this.disable=document.getElementById("imgPlus");
+      this.disable.style.filter="opacity(0.5) drop-shadow(0 0 0 gray)"
+      // this.disable="opacity(0.5) drop-shadow(0 0 0 gray)";
+    }
 
+  }
+  moveToPlayGame(){
+    this.navCtrl.popAll();
+    this.navCtrl.push(PlayGamePage,{game:"kjshdfjusdgf"})
   }
 }
 

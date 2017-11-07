@@ -203,7 +203,7 @@ export class SendBonusPage {
 		else {
 			this.sliders = false;
 		}
-		setTimeout( ()=> {
+		setTimeout(() => {
 			debugger;
 			this.Onblur(Index)
 		}, 200);
@@ -231,21 +231,25 @@ export class SendBonusPage {
 		var tabs: Tabs = this.navCtrl.parent;
 		tabs.select(0)
 	}
-	Onblur(index:any) {
+	Onblur(index: any) {
 		debugger;
-		var currentData =this.Credit_Points.slice(1);
+		var currentData = this.Credit_Points.slice(1);
 		this.cdRef.detectChanges()
-		var creditData = parseFloat(document.getElementById("mySpan"+index).innerText.slice(1));
-		this.cdRef.detectChanges()
-		console.log(currentData, creditData)
-		this.liveCreditPoint = currentData - creditData;
-		this.Credit_Points2 = this.liveCreditPoint;
-		console.log(this.liveCreditPoint, this.Credit_Points)
-		this.cdRef.detectChanges()
+		var spanData = document.getElementById("mySpan" + index);
+		if (spanData || spanData != undefined) {
+			var creditData = parseFloat(document.getElementById("mySpan" + index).innerText.slice(1));
+			this.cdRef.detectChanges()
+			console.log(currentData, creditData)
+			this.liveCreditPoint = currentData - creditData;
+			this.Credit_Points2 = this.liveCreditPoint;
+			console.log(this.liveCreditPoint, this.Credit_Points)
+			this.cdRef.detectChanges()
+		}
+
 	}
 	mgmPage() {
 		let mgmModal = this.modalCtrlr.create(referFriend);
 		mgmModal.present();
-	  }
+	}
 
 }

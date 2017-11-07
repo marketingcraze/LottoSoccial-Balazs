@@ -35,7 +35,7 @@ export class StorePage {
     rewardPoints: number;
     creditPoints: any;
     buyoffer: any;
-    waveShowing:boolean = true;
+    waveShowing: boolean = true;
     @ViewChild(Slides) home_slides: Slides;
     @ViewChild('mySlide') carouselSlide: Slides;
     @ViewChild("confirmPayment") confirmPayment;
@@ -49,8 +49,8 @@ export class StorePage {
     reward_pointsAPI;
     bonus_creditAPI;
 
-    private currentTime:Date = new Date();
-    currentSliderCount:any=0;
+    private currentTime: Date = new Date();
+    currentSliderCount: any = 0;
 
     result: any = [];
     resultDate: any = [];
@@ -177,15 +177,15 @@ export class StorePage {
             this.onPopUp();
         }
 
-            if(localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall"){
-                localStorage.setItem('isInstall', "moreThanFirst");
-                this.onPopUp();
-            }
-            this.waveShowing = true
-            
-        storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
-            this.visitorId=firstTimeLoad;
-            });
+        if (localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall") {
+            localStorage.setItem('isInstall', "moreThanFirst");
+            this.onPopUp();
+        }
+        this.waveShowing = true
+
+        storage.get('firstTimeLoad').then((firstTimeLoad: any) => {
+            this.visitorId = firstTimeLoad;
+        });
         this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
@@ -281,33 +281,29 @@ export class StorePage {
         this.checkCardExists();
 
     }
-    lastCalling(){
-        this.commonSrv.getCreditPoints().subscribe(data=>{
+    lastCalling() {
+        this.commonSrv.getCreditPoints().subscribe(data => {
             console.log("at last data is ", data)
-            if(data)
-            {
-                if(data.response[0].get_balance_details)
-                {
-                    if(data.response[0].get_balance_details.response.bonus_credit)
-                    {
+            if (data) {
+                if (data.response[0].get_balance_details) {
+                    if (data.response[0].get_balance_details.response.bonus_credit) {
                         this.bonus_creditAPI = parseInt(data.response[0].get_balance_details.response.bonus_credit.slice(1))
                     }
-                    else{
+                    else {
                         this.bonus_creditAPI = 0
                     }
                     this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
                     this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
-                 }
-                else
-                {
+                }
+                else {
                     this.bonus_creditAPI = ""
                     this.winning_balanceAPI = ""
                     this.reward_pointsAPI = ""
                 }
-              
+
             }
-           this.waveShowing = false
-            
+            this.waveShowing = false
+
 
         })
     }
@@ -338,8 +334,8 @@ export class StorePage {
         );
     }
 
- 
-    checkCardExists(){
+
+    checkCardExists() {
         console.log("StorePage::checkCardExists()");
         let loader = this._showLoader();
 
@@ -452,33 +448,45 @@ export class StorePage {
     }
 
     ngOnInit() {
-        console.log( "ngAfterViewInit()" );
+        console.log("ngAfterViewInit()");
         // this.home_slides.freeMode = true;
         // this.home_slides.loop = true;
         // this.home_slides.autoplayDisableOnInteraction = false;
-        
+
     }
 
     showWhatsOn() {
-        console.log("showWhatsOn: " + this.slideInUp);
-        this.appSound.play('buttonClick');
+        // console.log("showWhatsOn: " + this.slideInUp);
+        // this.appSound.play('buttonClick');
 
+        // if (this.slideInUp) {
+
+        //     let timeoutId = setTimeout(() => {
+        //         this.whatsOn = !this.whatsOn;
+        //         clearTimeout(timeoutId);
+        //     }, 500);
+        //     this.slideInUp = !this.slideInUp;
+
+        // } else {
+
+        //     this.whatsOn = !this.whatsOn;
+
+        //     let timeoutId = setTimeout(() => {
+        //         this.slideInUp = !this.slideInUp;
+        //         clearTimeout(timeoutId);
+        //     },100);
+        // }
         if (this.slideInUp) {
-
             let timeoutId = setTimeout(() => {
                 this.whatsOn = !this.whatsOn;
                 clearTimeout(timeoutId);
-            }, 500);
+            }, 3000);
             this.slideInUp = !this.slideInUp;
 
-        } else {
-
+        }
+        else {
             this.whatsOn = !this.whatsOn;
-
-            let timeoutId = setTimeout(() => {
-                this.slideInUp = !this.slideInUp;
-                clearTimeout(timeoutId);
-            }, 10);
+            this.slideInUp = !this.slideInUp;
         }
     }
 
@@ -764,9 +772,9 @@ export class StorePage {
         this.tip11 = false;
         this.tip22 = false;
     }
-    openModal(eventData:any) {
+    openModal(eventData: any) {
         debugger;
-        let modal = this.modalCtrlr.create(eventBlog,{event:eventData})
+        let modal = this.modalCtrlr.create(eventBlog, { event: eventData })
         modal.present();
     }
 

@@ -47,6 +47,9 @@ export class PlayGamePage implements OnInit {
         webengage.track('Play Game Page', {
           "UserId": CurrentUserid,
         });
+        webengage.screen("PlayGamePage")
+        webengage.notification.onDismiss((inAppData)=> {
+       });
       }
     });
   }

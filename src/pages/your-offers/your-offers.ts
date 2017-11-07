@@ -17,7 +17,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { offerOfTheDayModal } from '../../pages/offer-of-the-day-modal/offer-of-the-day-modal'
 import { SimpleTimer } from 'ng2-simple-timer';
 import { Observable } from "rxjs/Rx";
-
+declare var webengage:any;
 @Component({
 	selector: 'page-your-offers',
 	templateUrl: 'your-offers.html'
@@ -216,6 +216,19 @@ export class YourOffersPage {
 				this.params.setIsInternetAvailable(false);
 				console.log("OffersPage::ionViewDidEnter", err);
 			});
+
+			this.platform.ready().then((readySource) => {
+				var CurrentUserid = localStorage.getItem('appCurrentUserid');
+				if (this.platform.is('cordova')) {
+				  webengage.engage();
+				  webengage.track('Play Game Page', {
+					"UserId": CurrentUserid,
+				  });
+				  webengage.screen("YourOfferPage")
+				  webengage.notification.onDismiss((inAppData)=> {
+				 });
+				}
+			  });
 	}
 
 

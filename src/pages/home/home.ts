@@ -64,6 +64,10 @@ export class HomePage implements OnInit {
                 webengage.track('Home Page', {
                     "UserId": CurrentUserid,
                 });
+                webengage.screen("HomePage")
+                webengage.notification.onDismiss((inAppData)=> {
+               });
+               webengage.engage();
             }
         });
 

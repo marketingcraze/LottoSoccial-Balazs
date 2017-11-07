@@ -1,4 +1,4 @@
-import { Component,NgModule,ViewChild,ChangeDetectorRef } from '@angular/core';
+import { Component,NgModule,ViewChild,ChangeDetectorRef,OnInit } from '@angular/core';
 import { App,NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -6,14 +6,14 @@ import { GetBooster } from '../play-games-get-booster/play-games-get-booster';
 import { PlayGamePage } from '../play-games/play-games';
 import { Params } from '../../services/params';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-import { Content } from 'ionic-angular'
+import { Content, Platform } from 'ionic-angular'
 
-
+declare var webengage:any;
 @Component({
   selector: 'page-your-games',
   templateUrl: 'your-games.html'
 })
-export class YourGamesPage {
+export class YourGamesPage implements OnInit {
   @ViewChild(Content) content: Content;
   private loading : any;
    game_group:any[]=[];
@@ -32,6 +32,7 @@ export class YourGamesPage {
         public navCtrl: NavController, 
       	public navParams: NavParams, 
         public authSrv:AuthService,
+        public platform:Platform,
         public appSound:AppSoundProvider,
         private loadingCtrl: LoadingController,
         private iab: InAppBrowser,
@@ -48,7 +49,19 @@ export class YourGamesPage {
       	console.log('constructor YourGamesPage', this.navParams.data);
     }
 
-   
+    ngOnInit(): void {
+      this.platform.ready().then((readySource) => {
+        var CurrentUserid = localStorage.getItem('appCurrentUserid');
+        if (this.platform.is('cordova')) {
+          webengage.track('Your Games page', {
+            "UserId": CurrentUserid,
+          });
+          webengage.screen("GamesPage")
+          webengage.notification.onDismiss((inAppData)=> {
+         });
+        }
+      });
+    }
     scrollHandlerGame(event){
       
         var innerDiv = document.getElementById('innerGames').scrollHeight;
