@@ -44,8 +44,8 @@ page-Help{
       display: inline-block;
       vertical-align: top;
       margin: 10px;
-      width: 35px;
-      height: 35px;
+      width: 29px;
+      height: 31px;
       border-radius: 8px;
       position: relative;
       cursor: pointer;
@@ -110,15 +110,15 @@ page-Help{
         &:before {
           content: "";
           position: absolute;
-          top: 0;
-          right: -10px;
+          top: 1.5px;
+          right: -7px;
           width: 0;
           height: 0;
           border-style: solid;
           width: 0;
           height: 0;
           border-style: solid;
-          border-width: 24px 14px 0 0;
+          border-width: 20px 17px 2px 0;
           border-color: $light-grey transparent transparent transparent;
         }
         
@@ -178,9 +178,9 @@ page-Help{
       background-color: $grey;
       position: absolute;
       top: 57%;
-      left: 71%;
-      width: 7px;
-      height: 7px;
+      left: 76%;
+      width: 6px;
+      height: 6px;
       margin-top: -5px;
       margin-left: -11px;
       border-radius: 100%;
@@ -190,9 +190,9 @@ page-Help{
         content: "";
         position: absolute;
         display: block;
-        width: 7px;
-        height: 7px;
-        margin-left: -22px;
+        width: 6px;
+        height: 6px;
+        margin-left: -19px;
         background-color: $grey;
         border-radius: 100%;
         transition: $slide;
@@ -201,9 +201,9 @@ page-Help{
       &.dot-right {
         position: absolute;
         display: block;
-        width: 7px;
-        height: 7px;
-        margin-left: 0px;
+        width: 6px;
+        height: 6px;
+        margin-left: -3px;
         background-color: $grey;
         border-radius: 100%;
         transition: $slide;

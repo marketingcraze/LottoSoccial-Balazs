@@ -8,7 +8,8 @@ overlay-page{
         left: 0;
     }
     .descriptionInner{
-      color: #918922;font-size: 14px
+      color: #918922;font-size: 14px;    font-family: "Lato-Regular";
+      
     }
     .c0SideMenu{
       height: 42px;border-radius: 50%;max-width: 200%;width: 76%;margin-left: 2%;position: absolute;margin-top: 1px
@@ -17,17 +18,25 @@ overlay-page{
       left: 92%; color: white; height: 74px; position: relative; top: 4vh;z-index: inherit;transform: rotate(196deg) scaleY(-1);
     }
     .c0Description{
-      font-size: 18px;font-weight: bold;padding:4px
+      font-size: 18px;font-weight: bold;padding:4px;
+      font-family: "Lato-Regular";
+      
     }
     .c1Description{
-      font-size: 18px;font-weight: bold;padding: 4px
+      font-size: 18px;font-weight: bold;padding: 4px;
+      font-family: "Lato-Regular";
+      
           
     }
     .c2MainDiv{
-      margin-top: 10%;width: 100%;position: absolute
+      margin-top: 10%;width: 100%;position: absolute;
+      font-family: "Lato-Regular";
+      
     }
     .c2Description{
-      font-size: 18px;font-weight: bold;padding:5px
+      font-size: 18px;font-weight: bold;padding:5px;
+      font-family: "Lato-Regular";
+      
     }
     .c2arrow{
       left: 15%; color: white; height: 80px; position: relative; top: 0vh;z-index: inherit;transform:rotate(92deg);
@@ -36,13 +45,17 @@ overlay-page{
       border: 5px solid gray;height: 53vh;width: 89%;
     }
     .c3MainDiv{
-      font-size: 18px;font-weight: bold;padding: 4px
+      font-size: 18px;font-weight: bold;padding: 4px;
+      font-family: "Lato-Regular";
+      
     }
     .c3arrow{
       right: 4%; color: white; height: 69px; position: absolute; top: 74vh;z-index: 999;transform:rotate(119deg)
     }
     .c89MinDiv{
-      top: 7%;position: absolute;width: 100%
+      top: 7%;position: absolute;width: 100%;
+      font-family: "Lato-Regular";
+      
     }
     .c89Image{
       width: 100%;border: 5px solid gray
@@ -52,33 +65,45 @@ overlay-page{
     }
     .c9Div{
       font-size: 18px;font-weight: bold;
+      font-family: "Lato-Regular";
+      
     }
     .c8arrow{
       right: 14%; color: white; height: 68px; position: absolute; top: 7vh;z-index: inherit;transform: scaleX(-1) rotate(-54deg)
     }
     .c8Description{
-      font-size: 18px;font-weight: bold;padding: 0px 5px 0px 5px
+      font-size: 18px;font-weight: bold;padding: 0px 5px 0px 5px;
+      font-family: "Lato-Regular";
+      
     }
     .c4MainDiv{
-      font-size: 18px;font-weight: bold
+      font-size: 18px;font-weight: bold;
+      font-family: "Lato-Regular";
+      
     }
     .c4arrow{
       left: 0%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform: rotate(62deg) scaleY(-1)
     }
     .c5mainDiv{
-      font-size: 18px;font-weight: bold
+      font-size: 18px;font-weight: bold;
+      font-family: "Lato-Regular";
+      
     }
     .c5arrow{
       left: 9%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform: rotate(44deg) scaleY(-1) 
     }
     .c6MainDiv{
-      font-size: 18px;font-weight: bold;padding: 4px
+      font-size: 18px;font-weight: bold;padding: 4px;
+      font-family: "Lato-Regular";
+      
     }
     .c6arrow{
       right: 9%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform:rotate(139deg) 
     }
     .c7MainDiv{
-      font-size: 18px;font-weight: bold;padding: 4px
+      font-size: 18px;font-weight: bold;padding: 4px;
+      font-family: "Lato-Regular";
+      
     }
     .c7arrow{
       right: 0%; color: white; height: 12%; position: absolute; top: 77vh;z-index: 999;transform:rotate(115deg)
@@ -201,6 +226,7 @@ overlay-page{
      .continue{
       width: 50%;height: 40px;background: transparent;border-color: white;color: white;
       border-radius: 30px;margin-top: 140%;font-size: 16px;border:1px solid white;
+      font-family: "Lato-Regular";
      }
       .fstDiv11{
             color: white;

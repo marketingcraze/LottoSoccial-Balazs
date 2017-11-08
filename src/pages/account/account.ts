@@ -42,6 +42,7 @@ export class AccountPage {
 	bonusCredit: number;
 	rewardPoints: number;
 	badgesForYou: any;
+	waveShowingAccount:boolean = true;
 	@ViewChild(Content) content: Content;
 	private cache: CacheController;
 
@@ -51,6 +52,12 @@ export class AccountPage {
 	downShowing = 0;
 	image_Data
 	down_arrow_showing=0
+
+	winning_balanceAPI;
+    reward_pointsAPI;
+    bonus_creditAPI;
+
+
 	private homeMessage: any = {};
 	private accountDetails: any = {
 		//bonus_credit: 0.00,
@@ -82,7 +89,8 @@ export class AccountPage {
 		private alertCtrl: AlertController,
 		public cdRef: ChangeDetectorRef,
 		private file: File,
-		private http: Http) {
+		private http: Http,
+		public commonSrv: CommonService,) {
 
 		console.log('AccountPage');
 
@@ -137,7 +145,7 @@ export class AccountPage {
 				// })
 
 				loader.dismiss();
-
+				this.waveShowingAccount = true
 				this.refreshCache = false;
 
 				console.log("AccountPage::ionViewDidLoad", data);
@@ -146,8 +154,9 @@ export class AccountPage {
 						debugger
 						this.accountDetails = data[i].get_account_details.response;
 						if (this.accountDetails.bonus_credit) {
-							debugger;
+							
 							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
+							this.lastCalling()
 						}
 						else {
 							this.bonusCredit = 0;
@@ -365,7 +374,37 @@ export class AccountPage {
 		}),
 			err => console.log(err);
 	}
+	lastCalling(){
+        
+        this.commonSrv.getCreditPoints().subscribe(data=>{
+            console.log("at last data is ", data)
+            if(data)
+            {
+                if(data.response[0].get_balance_details)
+                {
+                    if(data.response[0].get_balance_details.response.bonus_credit)
+                    {
+                        this.bonus_creditAPI = data.response[0].get_balance_details.response.bonus_credit
+                    }
+                    else{
+                        this.bonus_creditAPI = 0
+                    }
+                    this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
+                    this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
+                 }
+                else
+                {
+                    this.bonus_creditAPI = 0
+                    this.winning_balanceAPI = 0
+                    this.reward_pointsAPI = 0
+                }
+           
+            }
+           this.waveShowingAccount = false
+            
 
+        })
+    }
 	uploadImage(){
 		debugger
 		let loader = this.loadingCtrl.create({

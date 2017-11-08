@@ -12,7 +12,7 @@ import { SyndicatesPage } from '../syndicates/syndicates';
 import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { Observable } from 'rxjs/Rx';
 import { referFriend } from '../refer-friend-page/refer-friend-page';
-
+import { CommonService } from '../../services/common.service';
 declare var $: any;
 /*
   Generated class for the SendBonusPage page.
@@ -28,6 +28,11 @@ export class SendBonusPage {
 	itemPriceModel: any;
 	Credit_Points2: any;
 	liveCreditPoint: any = 0.00;
+	waveShowingAccount:boolean = true;
+	winning_balanceAPI;
+    reward_pointsAPI;
+    bonus_creditAPI;
+
 
 	private cache: CacheController;
 	userCards: any;
@@ -74,7 +79,7 @@ export class SendBonusPage {
 		public authSrv: AuthService,
 		public navCtrl: NavController,
 		public modalCtrlr: ModalController,
-		public menu: MenuController,
+		public menu: MenuController,public commonSrv: CommonService,
 		public navParams: NavParams, public cdRef: ChangeDetectorRef,
 		public loadingCtrl: LoadingController) {
 		this.nav = this.app.getRootNav();
@@ -83,6 +88,7 @@ export class SendBonusPage {
 			this.visitorId = firstTimeLoad;
 			console.log('firstTimeLoad storage', firstTimeLoad);
 		});
+		this.waveShowingAccount = true
 		//this.cdRef.detectChanges()
 		this.syndicate = SyndicatesPage;
 	}
@@ -92,6 +98,7 @@ export class SendBonusPage {
 	}
 
 	ionViewWillEnter() {
+		this.waveShowingAccount = true
 		this.spaceBetween = Math.floor(window.innerWidth * -0.10);
 		window.onresize = (e) => {
 			this.ngZone.run(() => {
@@ -141,7 +148,9 @@ export class SendBonusPage {
 					this.Credit_Points2 = 0;
 					loader.dismiss();
 				}
+				
 			}
+			this.lastCalling()
 			//console.log("get_Credit_Points",data)
 		},
 			err => {
@@ -252,4 +261,36 @@ export class SendBonusPage {
 		mgmModal.present();
 	}
 
+	  lastCalling(){
+        
+        this.commonSrv.getCreditPoints().subscribe(data=>{
+            console.log("at last data is ", data)
+            if(data)
+            {
+                if(data.response[0].get_balance_details)
+                {
+                    if(data.response[0].get_balance_details.response.bonus_credit)
+                    {
+						this.Credit_Points2 = parseInt(data.response[0].get_balance_details.response.bonus_credit.slice(1))
+						//Credit_Points2
+                    }
+                    else{
+                        this.Credit_Points2 = 0
+                    }
+                    this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
+                    this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
+                 }
+                else
+                {
+                    this.Credit_Points2 = 0
+                    this.winning_balanceAPI = 0
+                    this.reward_pointsAPI = 0
+                }
+           
+            }
+           this.waveShowingAccount = false
+            
+
+        })
+    }
 }

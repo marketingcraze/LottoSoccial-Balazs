@@ -32,6 +32,7 @@ declare var $: any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    secondTime: string;
     rewardPoints: number;
     creditPoints: any;
     buyoffer: any;
@@ -177,15 +178,15 @@ export class StorePage {
             this.onPopUp();
         }
 
-        if (localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall") {
-            localStorage.setItem('isInstall', "moreThanFirst");
-            this.onPopUp();
-        }
-        this.waveShowing = true
-
-        storage.get('firstTimeLoad').then((firstTimeLoad: any) => {
-            this.visitorId = firstTimeLoad;
-        });
+            if(localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall"){
+                localStorage.setItem('isInstall', "moreThanFirst");
+                this.onPopUp();
+            }
+            this.waveShowing = true
+         
+        storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
+            this.visitorId=firstTimeLoad;
+            });
         this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
@@ -204,7 +205,8 @@ export class StorePage {
 
         this.nav = this.app.getRootNav();
         this.spaceBetween = Math.floor(platform.width() * -0.10);
-
+        this.waveShowing = true
+       
         this.params.events.subscribe('home-data', data => {
             console.log("home-data", data);
 
@@ -281,8 +283,8 @@ export class StorePage {
         this.checkCardExists();
 
     }
-    lastCalling() {
-        this.commonSrv.getCreditPoints().subscribe(data => {
+    lastCalling(){
+                this.commonSrv.getCreditPoints().subscribe(data=>{
             console.log("at last data is ", data)
             if (data) {
                 if (data.response[0].get_balance_details) {
@@ -324,7 +326,15 @@ export class StorePage {
     }
 
     ionViewWillEnter() {
-        this.commonSrv.trackSegmentPage("Store", "StorePage").subscribe(
+        if(this.secondTime !="")
+        {
+            this.waveShowing = true
+            this.bonus_creditAPI = ""
+            this.winning_balanceAPI = ""
+            this.reward_pointsAPI = ""
+           this.lastCalling()
+        }
+       this.commonSrv.trackSegmentPage("Store", "StorePage").subscribe(
             data => {
                 console.log("track segment called");
             },

@@ -87,7 +87,7 @@ export class YourGamesPage implements OnInit {
     }
     ionViewDidEnter(){
     
-      this.content.enableScrollListener();
+      
     }
     ionViewWillEnter() {
     
@@ -141,6 +141,7 @@ downA(){
     this.down_arrow_showing = 0
   }
   localStorage.setItem("yourGamesP","1")
+  this.content.enableScrollListener();
 }
 
     goHomePage(){
