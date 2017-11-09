@@ -15,10 +15,11 @@
     <span style="content: url('./assets/vid/blue_bg.gif'); width:140px;"></span>
   </div>
   <div>
-      <div style="padding:30px;">Munching numbers...</div>
+    <marquee *ngIf="loading"><div style="padding:30px;">Munching numbers...</div></marquee>  
+    <div *ngIf="!loading" style="padding:30px;">Munching numbers...</div>
   </div>
   <div class="move1" style="padding-top:30px;" *ngIf="errorMsg != ''">{{errorMsg}}</div>
-  <div style="height: 50px;overflow: hidden;" id="tickerMain">
+  <div *ngIf="hideAtFinish" style="height: 50px;overflow: hidden;" id="tickerMain">
     <div id="ticker">
       <div class="" style="padding: 10px 0;" *ngFor="let l of sList2">
         <div>Syndicate {{l?.syndicate_name}}</div>
@@ -26,6 +27,7 @@
       </div>
     </div>
   </div>
+  <div class="fadeIn" *ngIf="!hideAtFinish">Completed</div>
 
   <div style="padding: 0 20px;" *ngIf="sList">
   <ion-slides pager style="height: 275px;">

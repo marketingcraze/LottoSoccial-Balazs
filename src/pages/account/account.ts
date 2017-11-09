@@ -28,7 +28,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { Camera } from 'ionic-native'
 import { File, FileEntry } from '@ionic-native/file';
 
-import { Http, Headers, Response,RequestOptions} from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { AuthService } from '../../services/auth.service';
@@ -42,7 +42,7 @@ export class AccountPage {
 	bonusCredit: number;
 	rewardPoints: number;
 	badgesForYou: any;
-	waveShowingAccount:boolean = true;
+	waveShowingAccount: boolean = true;
 	@ViewChild(Content) content: Content;
 	private cache: CacheController;
 
@@ -51,11 +51,11 @@ export class AccountPage {
 	private unreadCount: number = 0;
 	downShowing = 0;
 	image_Data
-	down_arrow_showing=0
+	down_arrow_showing = 0
 
 	winning_balanceAPI;
-    reward_pointsAPI;
-    bonus_creditAPI;
+	reward_pointsAPI;
+	bonus_creditAPI;
 
 
 	private homeMessage: any = {};
@@ -76,7 +76,7 @@ export class AccountPage {
 		private storage: Storage,
 		public navParams: NavParams,
 		private iab: InAppBrowser,
-		public authSrv:AuthService,
+		public authSrv: AuthService,
 		public platform: Platform,
 		private srvDb: DatabaseService,
 		private _badgesOs: badgesOs,
@@ -90,7 +90,7 @@ export class AccountPage {
 		public cdRef: ChangeDetectorRef,
 		private file: File,
 		private http: Http,
-		public commonSrv: CommonService,) {
+		public commonSrv: CommonService, ) {
 
 		console.log('AccountPage');
 
@@ -133,17 +133,13 @@ export class AccountPage {
 		loader.present();
 
 		// load data
-		debugger;
+		this._badgesOs.getBadgesData().subscribe(badgeData => {
+			if (badgeData) {
+				this.badgesForYou = badgeData.response[0].badges
+			}
+		})
 		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
 			.then(data => {
-
-				// this._badgesOs.getBadgesData().subscribe(badgeData => {
-				// 	if (badgeData) {
-				// 		debugger;
-				// 		this.badgesForYou = badgeData.response[0].badges
-				// 	}
-				// })
-
 				loader.dismiss();
 				this.waveShowingAccount = true
 				this.refreshCache = false;
@@ -151,10 +147,9 @@ export class AccountPage {
 				console.log("AccountPage::ionViewDidLoad", data);
 				for (var i = 0; i < data.length; i++) {
 					if (data[i].get_account_details) {
-						debugger
 						this.accountDetails = data[i].get_account_details.response;
 						if (this.accountDetails.bonus_credit) {
-							
+
 							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
 							this.lastCalling()
 						}
@@ -174,7 +169,6 @@ export class AccountPage {
 							var str = this.accountDetails.profile_image
 							console.log("last character is ", str.charAt(str.length - 1))
 							if (str.charAt(str.length - 1) == ".") {
-								debugger
 								str = str.substring(0, str.length - 1);
 								this.image_Data = str
 							}
@@ -203,7 +197,7 @@ export class AccountPage {
 
 				console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
 
-				//debugger
+				// 
 				var a = localStorage.getItem("arrow_accountP")
 				if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
 					this.down_arrow_showing = 1
@@ -262,7 +256,7 @@ export class AccountPage {
 		localStorage.removeItem("redeemP")
 		localStorage.removeItem("yourOffersP")
 		localStorage.removeItem("yourGamesP")
-		
+
 
 		this.platform.ready().then((readySource) => {
 
@@ -354,7 +348,7 @@ export class AccountPage {
 	openGetGamesModule() {
 		this.navCtrl.push(GamesPage, { "app": "outside" });
 	}
-	private openGallery(){
+	private openGallery() {
 		let cameraOptions = {
 			sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 			destinationType: Camera.DestinationType.FILE_URI,
@@ -367,65 +361,58 @@ export class AccountPage {
 		Camera.getPicture(cameraOptions).then((fileUri) => {
 			this.image_Data = fileUri
 			localStorage.setItem("imageUrl", fileUri)
-			debugger
 			//this.uploadImage()
 			this.uploadPhoto(fileUri)
 
 		}),
 			err => console.log(err);
 	}
-	lastCalling(){
-        
-        this.commonSrv.getCreditPoints().subscribe(data=>{
-            console.log("at last data is ", data)
-            if(data)
-            {
-                if(data.response[0].get_balance_details)
-                {
-                    if(data.response[0].get_balance_details.response.bonus_credit)
-                    {
-                        this.bonus_creditAPI = data.response[0].get_balance_details.response.bonus_credit
-                    }
-                    else{
-                        this.bonus_creditAPI = 0
-                    }
-                    this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
-                    this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
-                 }
-                else
-                {
-                    this.bonus_creditAPI = 0
-                    this.winning_balanceAPI = 0
-                    this.reward_pointsAPI = 0
-                }
-           
-            }
-           this.waveShowingAccount = false
-            
+	lastCalling() {
 
-        })
-    }
-	uploadImage(){
-		debugger
+		this.commonSrv.getCreditPoints().subscribe(data => {
+			console.log("at last data is ", data)
+			if (data) {
+				if (data.response[0].get_balance_details) {
+					if (data.response[0].get_balance_details.response.bonus_credit) {
+						this.bonus_creditAPI = data.response[0].get_balance_details.response.bonus_credit
+					}
+					else {
+						this.bonus_creditAPI = 0
+					}
+					this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
+					this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
+				}
+				else {
+					this.bonus_creditAPI = 0
+					this.winning_balanceAPI = 0
+					this.reward_pointsAPI = 0
+				}
+
+			}
+			this.waveShowingAccount = false
+
+
+		})
+	}
+	uploadImage() {
 		let loader = this.loadingCtrl.create({
 			content: "Please wait..."
 		});
 		loader.present();
-		
-		this.authSrv.uploadProfilePic(this.image_Data ).subscribe(
-			(data:any) => {
+
+		this.authSrv.uploadProfilePic(this.image_Data).subscribe(
+			(data: any) => {
 				loader.dismiss();
-				debugger
 				console.log("image upload successful", data);
-				
+
 			},
-			err =>{
+			err => {
 				loader.dismiss();
 				console.log("image upload error", err);
 			},
-			()=> console.log("image upload complete")
+			() => console.log("image upload complete")
 		);
-		
+
 	}
 
 	selectProfileImage() {
@@ -451,32 +438,33 @@ export class AccountPage {
 		var reader;
 		reader = new FileReader();
 		reader.onloadend = (e) => {
-			debugger
-			const imgBlob = new Blob([reader.result], {type: 'image/jpg'});
-			debugger
-			var p=reader.response
+
+			const imgBlob = new Blob([reader.result], { type: 'image/jpg' });
+
+			var p = reader.response
 			var m = reader.result
-			
+
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);
+		
 	}
 
-	 postData(blob: any, fileName: string) {
-		debugger
+	postData(blob: any, fileName: string) {
+
 		//let server = CommonService.apiUrl +			CommonService.version + '/upload/?process=profile';
 
 		let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=profile'
 		var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
 		let myHeaders: Headers = new Headers();
-		myHeaders.set('Authorization', 
-		'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
-		'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
-		'oauth_signature_method="HMAC-SHA1",' +
-		'oauth_timestamp="1490087533",' +
-		'oauth_nonce="dWL9pr",' +
-		'oauth_version="1.0",' +
-		'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
+		myHeaders.set('Authorization',
+			'Oauth oauth_consumer_key = "NDes1FKC0Kkg",' +
+			'oauth_token="djKnEJjJ7TYw0VJEsxGEtlfg",' +
+			'oauth_signature_method="HMAC-SHA1",' +
+			'oauth_timestamp="1490087533",' +
+			'oauth_nonce="dWL9pr",' +
+			'oauth_version="1.0",' +
+			'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
 		);
 
 
@@ -493,29 +481,30 @@ export class AccountPage {
 			.map(response => response.json())
 			// .finally(() => console.log('inside finaly'))
 			.subscribe((ok) => {
-				debugger;
+
 				this.loading.dismiss();
 				console.log("uploadPhoto:");
 				console.log(ok);
 				this.uploadAPI_Image(ok.response.image_name);
-			});
+			}),(Err)=>{
+				this.loading.dismiss();
+			}
 
 	}
 	private customerId: string = "";
-	
-	uploadAPI_Image(image_url:any){
-		debugger
-		this.srvAccount.saveImageUrl(image_url).subscribe(data =>{
-			if(data)
-			{
-				alert(data.response)
+
+	uploadAPI_Image(image_url: any) {
+
+		this.srvAccount.saveImageUrl(image_url).subscribe(data => {
+			if (data) {
+				// alert(data.response)
 			}
-			
+
 		})
 	}
 	private handleError(error: Response | any) {
 		this.loading.dismiss();
-		let errMsg: string; 
+		let errMsg: string;
 		if (error instanceof Response) {
 			const body = error.json() || '';
 			const err = body.error || JSON.stringify(body);
@@ -528,18 +517,18 @@ export class AccountPage {
 	}
 
 	ionViewWillEnter() {
-		
-		this._badgesOs.getBadgesData().subscribe(badgeData => {
-			if (badgeData) {
-				
-				this.badgesForYou = badgeData.response[0].badges
-			}
-		})
+
+		// this._badgesOs.getBadgesData().subscribe(badgeData => {
+		// 	if (badgeData) {
+
+		// 		this.badgesForYou = badgeData.response[0].badges
+		// 	}
+		// })
 
 	}
-	goToBadgesView(badge:any){
-	
-		this.navCtrl.push(BadgeViewPage,{badge:badge});
+	goToBadgesView(badge: any) {
+
+		this.navCtrl.push(BadgeViewPage, { badge: badge });
 	}
 
 

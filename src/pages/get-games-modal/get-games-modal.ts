@@ -11,6 +11,7 @@ import { PlayGamePage } from '../play-games/play-games';
   templateUrl: 'get-games-modal.html'
 })
 export class getGamesModal {
+  gameId: any;
   disable: any;
   creditBalance: any;
   awardID: any;
@@ -68,7 +69,8 @@ export class getGamesModal {
       this.paymentSrv.redeemGame(this.visitorId, this.productCount, this.price, this.productName, this.productDetail, this.awardID).subscribe(data => {
         if (data) {
           loading.dismiss()
-          var status = data.response[0].reward_payment_process.response.status
+          var status = data.response[0].reward_payment_process.response.status;
+          this.gameId = data.response[0].reward_payment_process.response.game_id;
           if (status === "SUCCESS") {
             this.value = true;
           }
@@ -113,7 +115,7 @@ export class getGamesModal {
   }
   moveToPlayGame() {
     this.navCtrl.popAll();
-    this.navCtrl.push(PlayGamePage, { game: "kjshdfjusdgf" })
+    this.navCtrl.push(PlayGamePage, { game: this.gameId })
   }
 }
 

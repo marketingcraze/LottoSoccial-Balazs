@@ -24,6 +24,9 @@ page-my-syndicate {
     .scroll-content {
         margin-top:3% !important;
     }
+    #estate{
+        margin-top: 5%;
+    }
     
     @keyframes bounce {
         0%   {top:0px;}
@@ -217,7 +220,7 @@ page-my-syndicate {
     .btn-div {
         background-color: #304d85;
         padding: 10px;
-        margin-top: 10px;
+        margin-bottom: 20px;
         .btn {
             height: 4.5rem;
             border-radius: 25px;

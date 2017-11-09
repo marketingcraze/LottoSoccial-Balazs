@@ -289,7 +289,7 @@ export class StorePage {
             if (data) {
                 if (data.response[0].get_balance_details) {
                     if (data.response[0].get_balance_details.response.bonus_credit) {
-                        this.bonus_creditAPI = parseInt(data.response[0].get_balance_details.response.bonus_credit.slice(1))
+                        this.bonus_creditAPI = data.response[0].get_balance_details.response.bonus_credit.slice(1)
                     }
                     else {
                         this.bonus_creditAPI = 0
