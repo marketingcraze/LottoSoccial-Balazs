@@ -40,7 +40,7 @@ export class CreateSyndicate5Page {
             content: "Please wait..."
         });
         loader.present();
-    this.navCtrl.push(ChooseNumberPage);
+    this.navCtrl.push(ChooseNumberPage, {'s_id':localStorage.getItem('synd_id')});
     loader.dismiss();
   }
   aggreement(){
