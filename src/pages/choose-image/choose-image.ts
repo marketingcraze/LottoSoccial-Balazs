@@ -87,9 +87,14 @@ export class ChooseImagePage {
           loader.dismiss();
         });
   }
-
-
+  private error;
+  private loader: any;
   private uploadPhoto(imageFileUri: any): void {
+    this.error = null;
+		this.loader = this.loadingCtrl.create({
+			content: 'Uploading...'
+		});
+    this.loader.present();
 
 		this.file.resolveLocalFilesystemUrl(imageFileUri)
 		.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
@@ -97,6 +102,7 @@ export class ChooseImagePage {
 	}
 
 private readFile(file: any) {
+  console.log('reader')
 		var reader;
     reader = new FileReader();
 		reader.onloadend = (e) => {
@@ -109,10 +115,7 @@ private readFile(file: any) {
 	}
 
   postData(blob:any, fileName:string) {
-    let loader = this.loadingCtrl.create({
-            content: "Please wait..."
-        });
-        loader.present();
+    console.log('postdata')
 		let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=syndicate';
 
 		var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
@@ -143,7 +146,7 @@ private readFile(file: any) {
 		.map(response => response.json())
 		// .finally(() => console.log('inside finaly'))
 		.subscribe((ok) => {
-      loader.dismiss();
+      this.loader.dismiss();
       console.log("uploadPhoto:");
       console.log(ok);
       this.navCtrl.push(CreateSyndicatePage, {'image': ok.response.image_url});

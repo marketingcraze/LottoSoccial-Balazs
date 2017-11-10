@@ -17,7 +17,8 @@ export class ChooseNumberPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl:ViewController) {
     //this.dataArr = JSON.parse(localStorage.getItem('cardSelected'));
-    this.syndId = localStorage.getItem('synd_id');
+    this.syndId = this.navParams.get('s_id')
+    // this.syndId = localStorage.getItem('synd_id');
   }
 
   ionViewDidLoad() {
