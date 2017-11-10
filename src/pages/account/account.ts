@@ -3,7 +3,7 @@ import {
 	App, NavController, NavParams, Platform, LoadingController, AlertController,
 	ModalController, Content
 } from 'ionic-angular';
-
+import { ActionSheetController } from 'ionic-angular'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 
@@ -75,6 +75,7 @@ export class AccountPage {
 		private params: Params,
 		private storage: Storage,
 		public navParams: NavParams,
+		public actionSheetCtrl: ActionSheetController,
 		private iab: InAppBrowser,
 		public authSrv: AuthService,
 		public platform: Platform,
@@ -447,7 +448,7 @@ export class AccountPage {
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);
-		
+
 	}
 
 	postData(blob: any, fileName: string) {
@@ -486,7 +487,7 @@ export class AccountPage {
 				console.log("uploadPhoto:");
 				console.log(ok);
 				this.uploadAPI_Image(ok.response.image_name);
-			}),(Err)=>{
+			}), (Err) => {
 				this.loading.dismiss();
 			}
 
@@ -529,6 +530,29 @@ export class AccountPage {
 	goToBadgesView(badge: any) {
 
 		this.navCtrl.push(BadgeViewPage, { badge: badge });
+	}
+	presentActionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: 'Are you sure you want to log out?',
+			buttons: [
+				{
+					text: 'Log Out',
+					role: 'destructive',
+					handler: () => {
+						this.logout()
+					}
+				},
+				{
+					text: 'Cancel',
+					role: 'cancel',
+					handler: () => {
+						console.log('Cancel clicked');
+					}
+				}
+			]
+		});
+
+		actionSheet.present();
 	}
 
 

@@ -82,4 +82,9 @@ page-check-winnings {
         animation-direction: alternate;
       }
 }
+.overFlow{
+    //text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 }
