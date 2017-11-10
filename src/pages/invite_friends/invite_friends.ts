@@ -46,7 +46,7 @@ export class InviteFriendsPage {
       content:"Please wait..."
     });
     this.loader2 = this.loadingCtrl.create({
-      content:"Please wait..."
+      content:"Fetching Contacts..."
     });
     this.searchControl = new FormControl();
     this.searchControl.valueChanges.debounceTime(100).subscribe(search => {
