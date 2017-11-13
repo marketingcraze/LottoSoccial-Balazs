@@ -140,4 +140,24 @@ page-create-syndicate {
         padding: 4px;
         font-weight: bold;
     }
+    .bottom_bar {
+        background: rgb(25, 57, 116);
+        padding: 10px;
+        //margin-bottom: 12px;
+        // position: fixed;
+        // text-align: center;
+        // left: 0;
+        // bottom: 0;
+        width: 100%;
+        // right: 0;
+
+        .button-md {
+            height: 4.5rem;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            width: 100%;
+            background: rgb(20, 153, 63);
+        }
+    }
 }

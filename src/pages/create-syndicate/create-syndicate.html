@@ -23,7 +23,7 @@
           <div class="h-title"> SYNDICATE DETAILS </div>
           <div class="s-title"> Choose a photo and a name for your new syndicate </div>
       </div>
-      <form [formGroup]="todo" (ngSubmit)="logForm()">
+      <form [formGroup]="todo" >
       <div class="img-picker" [ngClass]="{ 'n-bg': !hideimagebtn , 'w-bg': hideimagebtn }">
           <button ion-button outline icon-left class="marg-35" type="button" [hidden]="hideimagebtn" (click)="chooseImage()">
               <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
@@ -39,11 +39,15 @@
             <p *ngIf="imagechosed" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a cover for your syndicate</p>
             <p *ngIf="namechosed" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a name for your syndicate</p>
         </div>
-        <div>
-            <button ion-button type="submit" class="btn" style="margin-top: 20px;">Next</button>
-        </div>
+        
       </div>
       
       </form>
     </div>
 </ion-content>
+
+<ion-footer>
+    <div class="bottom_bar">
+        <button ion-button type="submit" class="btn" (click)="logForm()">Next</button>
+    </div>
+</ion-footer>
