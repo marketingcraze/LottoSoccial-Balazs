@@ -40,9 +40,9 @@ export class PrizeSummaryWinPage {
     this.loadPrize();
 
   }
-  next() {
-    this.app.getRootNav().push(CheckWinningsNextPage);
-  }
+  // next() {
+  //   this.app.getRootNav().push(CheckWinningsNextPage);
+  // }
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
@@ -65,6 +65,7 @@ export class PrizeSummaryWinPage {
       })
   }
   goto(value: any = 'game') {
-    this.app.getRootNav().setRoot(TabsPage)
+    this.viewCtrl.dismiss(value)
+
   }
 }

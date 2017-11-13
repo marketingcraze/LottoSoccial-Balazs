@@ -279,6 +279,7 @@ import {} from '../pages'
         BrowserModule,
         IonicModule.forRoot(MyApp,
         {
+            tabsHideOnSubPages: true,
             autoFocusAssist: false,
             scrollAssist: false,
             tabsPlacement:'top', 

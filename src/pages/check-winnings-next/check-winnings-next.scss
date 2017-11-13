@@ -47,6 +47,8 @@ button.swiper-pagination-bullet {
     background: #f8f8f8;
 }
 .h-ticker {
+    overflow: visible;
+    width: 100%;
     -webkit-animation-iteration-count: infinite; 
           animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;

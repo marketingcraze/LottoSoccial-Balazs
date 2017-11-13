@@ -1,21 +1,95 @@
-<!--
-  Generated template for the Leave page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
-<ion-content style="background-color: rgba(0, 0, 0, 0.6);">
-  <div style="height:240px; padding: 20px;" [style.margin-top.px]="topmar">
-      <div style="height: 100%; background:white;border-radius: 3px; padding: 10px;text-align:center">
-        <div style="font-weight: bold;">Leaving your syndicate?</div>
-        <div style="padding: 20px 0;">Please call our customer services helpline from 9.30-5.30, Monday to Friday on:</div>
-        <div style="font-size: 20px;padding-bottom: 15px;">
-          <span style="content:url('./assets/icon/call-centre-ico.svg');width: 35px;vertical-align: middle;margin-right: 15px;"></span>01613 750 628
-        </div>
-        <div>
-          <button ion-button style="height: 30px;background:#00A651;" (click)="dismissm()"> GOT IT </button>
-        </div>
+<ion-content class="modalLeaveOne">
+  <ion-list *ngIf="!paused && !leave">
+    <div></div>
+    <ion-col col-12>
+      <ion-item no-lines style="font-weight: bold;text-align: center;white-space: normal">
+        Did you know you can pause ypur syndicate for one month?
+      </ion-item>
+      <p class="pClass" style="font-size:0.9em;">This service is absolutely
+        <b>FREE OF CHARGE</b> and no money will be talen from your account during this period.</p>
+      <ion-item center no-lines>
+        <p style="font-size:0.9em;" class="pClass">Your Normal billing will resume on</p>
+        <p style="font-size:0.9em;font-weight: bold" class="pClass">
+          <b>18/07/2017</b>
+        </p>
+        <br>
+        <p style="font-size:0.9em;" class="pClass">Do you want to pause the syndicate?</p>
+      </ion-item>
+    </ion-col>
+    <ion-col col-12>
+      <div text-center>
+        <button ion-button color='secondary' (tap)="pauseSyndicate()">YES, PAUSE SYNDICATE</button>
+        <br>
+        <br>
+        <button class="Leave-btn-transparent" (tap)="leaveSyndicate()">
+          No, I want to leave
+        </button>
       </div>
-  </div>
+    </ion-col>
+  </ion-list>
+
+  <ion-list *ngIf="paused && !leave">
+    <ion-col col-12>
+      <div style="height: 70%">
+        <ion-item no-lines style="font-weight: bold;text-align: center;white-space: normal;">
+          <span style="color:green"> Your syndicate has been successfully paused.</span>
+          <p class="pClassPaused" style="margin-top: 8px;">Your Normal billing will resume on</p>
+          <p class="pClassPaused" style="font-weight: bold;margin-top: 3px">
+            <b>18/07/2017</b>
+          </p>
+          <br>
+          <p class="pClassPaused">Meanwhile why don't you take advantage of other offers available?
+            <br>You can still open your bonus credit to buy one-off lotterylines or redeem your points to play game</p>
+          <br>
+          <p class="pClassPaused">You've got to be in to win it!</p>
+        </ion-item>
+      </div>
+    </ion-col>
+    <ion-col col-12>
+      <div text-center>
+        <button ion-button color='secondary' (tap)="moveTOffer()">VIEW OFFERS</button>
+      </div>
+    </ion-col>
+  </ion-list>
+
+  <ion-list *ngIf="leave && !paused">
+    <ion-col>
+      <div>
+        <ion-item no-lines style="text-align: center">
+          <span style="font-size: 1.2em">Are you sure you wan to leave your syndicate and stop any further payments?</span>
+        </ion-item>
+        <ion-item no-lines style="text-align: center;margin: 20px 0px;">
+          <button ion-button color="secondary" style="height: 36px;width: 50%;font-size: 1em" (tap)="leaveSynd()">LEAVE SYNDICATE</button>
+        </ion-item>
+        <ion-item>
+          <span style="font-size: 1.2em">Why dont you pause your syndicate for a month instead for
+            <b>FREE?</b>
+          </span>
+        </ion-item>
+        <ion-item no-lines style="text-align: center;margin-top:20px">
+          <button class="Leave-btn-transparent" (tap)="pauseSyndicate()">
+           Go back to pause syndicate
+          </button>
+        </ion-item>
+      </div>
+    </ion-col>
+  </ion-list>
+
+  <ion-list  class="leaveSuccess" *ngIf="leaveSuccess && !paused && !leave" ion-fixed>
+      <button ion-button icon-only class="successIconLeave">
+          <ion-icon style="width:70px; ">
+              <img class="thumbNailImgLeave" src="assets/image/dark-green-check-mark-md.png"> </ion-icon>
+      </button>
+      <p>We're processing your request.</p>
+      <p>A confirmation message will be sent to you via text</p>
+      <br>
+      <p>Do you want to join a new syndicate?</p>
+      <p>Check out the offers available</p>
+      <ion-row style="padding-top: 5%; height: 45px">
+          <ion-col col-12>
+              <button ion-button outline round class="moveToOffers" color="light" (click)="moveTOffer()">VIEW OFFERS</button>
+          </ion-col>
+      </ion-row>
+  </ion-list>
+
 </ion-content>

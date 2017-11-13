@@ -178,15 +178,15 @@ export class StorePage {
             this.onPopUp();
         }
 
-            if(localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall"){
-                localStorage.setItem('isInstall', "moreThanFirst");
-                this.onPopUp();
-            }
-            this.waveShowing = true
-         
-        storage.get('firstTimeLoad').then( (firstTimeLoad:any) => {
-            this.visitorId=firstTimeLoad;
-            });
+        if (localStorage.getItem('isInstall') != undefined && localStorage.getItem('isInstall') != null && localStorage.getItem('isInstall') === "firstTimeInstall") {
+            localStorage.setItem('isInstall', "moreThanFirst");
+            this.onPopUp();
+        }
+        this.waveShowing = true
+
+        storage.get('firstTimeLoad').then((firstTimeLoad: any) => {
+            this.visitorId = firstTimeLoad;
+        });
         this.footerState = IonPullUpFooterState.Collapsed;
         // this.homeData = this.navParams.data;
         console.log("StorePage", this.navParams.data);
@@ -206,7 +206,7 @@ export class StorePage {
         this.nav = this.app.getRootNav();
         this.spaceBetween = Math.floor(platform.width() * -0.10);
         this.waveShowing = true
-       
+
         this.params.events.subscribe('home-data', data => {
             console.log("home-data", data);
 
@@ -256,11 +256,11 @@ export class StorePage {
                     this.homeMessage = data[i].get_home_message.response;
                     params.setUnreadCount(this.homeMessage.count);
                 } else if (data[i].get_home_events) {
-                    this.homeEvents = data[i].get_home_events.response.events[0];
-                    this.millionerImage = data[i].get_home_events.response.events
+                    // this.homeEvents = data[i].get_home_events.response.events[0];
+                    // this.millionerImage = data[i].get_home_events.response.events
 
                 } else if (data[i].get_home_blog) {
-                    this.homeBlog = data[i].get_home_blog.response.blogs;
+                    // this.homeBlog = data[i].get_home_blog.response.blogs;
 
                 }
 
@@ -283,8 +283,8 @@ export class StorePage {
         this.checkCardExists();
 
     }
-    lastCalling(){
-                this.commonSrv.getCreditPoints().subscribe(data=>{
+    lastCalling() {
+        this.commonSrv.getCreditPoints().subscribe(data => {
             console.log("at last data is ", data)
             if (data) {
                 if (data.response[0].get_balance_details) {
@@ -322,19 +322,24 @@ export class StorePage {
     }
 
     ionViewDidEnter() {
+        this.srvHome.getHomeEventsBlog().subscribe(data => {
+            if(data){
+                this.millionerImage = data.response[1].get_home_events.response.events;
+                this.homeBlog = data.response[0].get_home_blog.response.blogs;
+            }
+        })
         localStorage.setItem('isInstall', "empty")
     }
 
     ionViewWillEnter() {
-        if(this.secondTime !="")
-        {
+        if (this.secondTime != "") {
             this.waveShowing = true
             this.bonus_creditAPI = ""
             this.winning_balanceAPI = ""
             this.reward_pointsAPI = ""
-           this.lastCalling()
+            this.lastCalling()
         }
-       this.commonSrv.trackSegmentPage("Store", "StorePage").subscribe(
+        this.commonSrv.trackSegmentPage("Store", "StorePage").subscribe(
             data => {
                 console.log("track segment called");
             },

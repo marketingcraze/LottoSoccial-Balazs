@@ -28,7 +28,7 @@ export class ManageSyndicatePage {
     leaveSyndicate() {
       let leaveModal = this.modalCtrl.create(LeavePage);
       leaveModal.onDidDismiss(data => {
-        console.log(data);
+        this.viewCtrl.dismiss(data)
       });
       leaveModal.present();
     }

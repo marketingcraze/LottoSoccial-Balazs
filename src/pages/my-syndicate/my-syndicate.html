@@ -62,9 +62,9 @@
           </div>
         </ion-item>
     
-      <ion-item (tap)="checkwins()" style="font-size: 14px;border-bottom: 1px solid #AAAAAA">
+      <ion-item  style="font-size: 14px;border-bottom: 1px solid #AAAAAA">
         <span *ngIf="sd.check_status == 'CHECKED'">
-          <div class="ckNow pulse" style="width: 48%;display: inline-block"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
+          <div (tap)="checkwins()" class="ckNow pulse" style="width: 48%;display: inline-block"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
           </span>
         <span  *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'">
           <div style="width: 48%;display: inline-block" >
@@ -73,7 +73,7 @@
           </div>
           </span>
        
-        <ion-col class="right" style="text-align: right;display: inline-block;width: 50%"><span class="tkt-a" (tap)="manage_syndicates2()">
+        <ion-col class="right" style="text-align: right;display: inline-block;width: 50%"><span class="tkt-a" (tap)="manage_syndicates()">
             <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
             <ion-col style="top: -2px"><span class="synd-f" style="color:#000000;">SETTINGS</span></ion-col>
           </span></ion-col>
