@@ -172,20 +172,22 @@ export class AccountPage {
 							if (str.charAt(str.length - 1) == ".") {
 								str = str.substring(0, str.length - 1);
 								this.image_Data = str
+								if (!localStorage.getItem("imageUrl")) {
+									this.image_Data = "assets/icon/user.svg"
+									this.cdRef.detectChanges()
+								}
+								else{
+									this.image_Data = localStorage.getItem("imageUrl")
+									this.cdRef.detectChanges()
+								}
 							}
-							else {
-								this.image_Data = this.accountDetails.profile_image
-							}
+							
 						}
 						else {
 
 
-							if (localStorage.getItem("imageUrl")) {
-								this.image_Data = localStorage.getItem("imageUrl")
-							}
-							else {
-								this.image_Data = "assets/icon/user.svg"
-							}
+						
+							
 
 						}
 					} else if (data[i].get_home_message) {
@@ -369,6 +371,11 @@ export class AccountPage {
 			err => console.log(err);
 	}
 	lastCalling() {
+		debugger;
+		if (localStorage.getItem("imageUrl")) {
+			this.image_Data = localStorage.getItem("imageUrl")
+		}
+		
 
 		this.commonSrv.getCreditPoints().subscribe(data => {
 			console.log("at last data is ", data)
@@ -426,16 +433,17 @@ export class AccountPage {
 		this.loading = this.loadingCtrl.create({
 			content: 'Uploading...'
 		});
-
+debugger
 		this.loading.present();
 
 		this.file.resolveLocalFilesystemUrl(imageFileUri)
 			.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
-			.catch(err => console.log(err));
+			.catch(err => 	this.loading.dismiss());
 	}
 
 	private readFile(file: any) {
-
+		debugger
+		this.loading.dismiss();
 		var reader;
 		reader = new FileReader();
 		reader.onloadend = (e) => {
@@ -452,7 +460,7 @@ export class AccountPage {
 	}
 
 	postData(blob: any, fileName: string) {
-
+		debugger
 		//let server = CommonService.apiUrl +			CommonService.version + '/upload/?process=profile';
 
 		let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=profile'
@@ -475,14 +483,14 @@ export class AccountPage {
 			mimeType: "image/" + extension,
 			headers: myHeaders
 		};
-
+		this.loading.dismiss();
 		console.log("SignupPage:: upload image options:", options);
 		this.http.post(server, blob, options)
 			.catch(err => this.handleError(err))
 			.map(response => response.json())
 			// .finally(() => console.log('inside finaly'))
 			.subscribe((ok) => {
-
+				debugger
 				this.loading.dismiss();
 				console.log("uploadPhoto:");
 				console.log(ok);
@@ -495,7 +503,7 @@ export class AccountPage {
 	private customerId: string = "";
 
 	uploadAPI_Image(image_url: any) {
-
+		debugger
 		this.srvAccount.saveImageUrl(image_url).subscribe(data => {
 			if (data) {
 				// alert(data.response)
