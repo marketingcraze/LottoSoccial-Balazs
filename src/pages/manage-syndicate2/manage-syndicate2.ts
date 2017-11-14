@@ -18,8 +18,11 @@ declare var cordova: any;
   templateUrl: 'manage-syndicate2.html'
 })
 export class ManageSyndicate2Page {
+  sId: any;
 
-  constructor(private iab: InAppBrowser, private platform: Platform, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) { }
+  constructor(private iab: InAppBrowser, private platform: Platform, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
+    this.sId = this.navParams.get("syndicate_id")
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ManageSyndicatePage');
@@ -31,7 +34,7 @@ export class ManageSyndicate2Page {
     this.navCtrl.pop();
   }
   leaveSyndicate() {
-    let leave2Modal = this.modalCtrl.create(Leave2Page);
+    let leave2Modal = this.modalCtrl.create(Leave2Page, { syndId: this.sId });
     leave2Modal.onDidDismiss(data => {
       console.log(data);
     });
@@ -53,16 +56,6 @@ export class ManageSyndicate2Page {
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
         const browser = this.iab.create(url, "_blank", 'location=no,toolbarposition=top');
-        // browser.on("loadstop").
-        //   subscribe(
-        //   (data) => {
-        //     debugger
-        //     //alert(data)
-        //     browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
-        //   },
-        //   err => {
-        //     console.log("InAppBrowser Loadstop Event Error: " + err);
-        //   });
       }
     })
   }

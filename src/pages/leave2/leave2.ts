@@ -13,29 +13,31 @@ import { ConfirmModalPage } from '../confirm-modal/confirm-modal';
   templateUrl: 'leave2.html'
 })
 export class Leave2Page {
-
-   deviceHeight: any;
+  syndicateId: any;
+  deviceHeight: any;
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
+    this.syndicateId = this.navParams.get("syndId")
+  }
 
   ionViewDidLoad() {
     this.deviceHeight = window.screen.height;
-    this.topmar = (this.deviceHeight/2) - 150;
-    console.log('ionViewDidLoad LeavePage',this.deviceHeight, this.topmar );
+    this.topmar = (this.deviceHeight / 2) - 150;
+    console.log('ionViewDidLoad LeavePage', this.deviceHeight, this.topmar);
   }
 
   dismissm() {
-    let data = {'foo':'bar'}
+    let data = { 'foo': 'bar' }
     this.viewCtrl.dismiss(data);
- }
- confirm() {
-    let data = {'foo':'bar'}
+  }
+  confirm() {
+    let data = { 'foo': 'bar' }
     this.viewCtrl.dismiss(data);
     let confirmModal = this.modalCtrl.create(ConfirmModalPage);
-      confirmModal.onDidDismiss(data => {
-        console.log(data);
-      });
-      confirmModal.present();
- }
+    confirmModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    confirmModal.present();
+  }
 
 }

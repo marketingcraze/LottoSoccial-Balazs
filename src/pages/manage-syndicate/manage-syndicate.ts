@@ -13,24 +13,27 @@ import { LeavePage } from '../leave/leave';
   templateUrl: 'manage-syndicate.html'
 })
 export class ManageSyndicatePage {
+  sId: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
+    this.sId = this.navParams.get("syndicate_id")
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ManageSyndicatePage');
   }
-   ionViewWillEnter() {
-        this.viewCtrl.showBackButton(false);
-    }
-    close() {
-      this.navCtrl.pop();
-    }
-    leaveSyndicate() {
-      let leaveModal = this.modalCtrl.create(LeavePage);
-      leaveModal.onDidDismiss(data => {
-        this.viewCtrl.dismiss(data)
-      });
-      leaveModal.present();
-    }
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+  }
+  close() {
+    this.navCtrl.pop();
+  }
+  leaveSyndicate() {
+    let leaveModal = this.modalCtrl.create(LeavePage, { syndId: this.sId });
+    leaveModal.onDidDismiss(data => {
+      this.viewCtrl.dismiss(data)
+    });
+    leaveModal.present();
+  }
 
 }

@@ -117,6 +117,7 @@ import { AffiliateServices } from '../services/affliate.service';
 import { forkOffersSyndicate } from '../services/syndicateForkOffer.service';
 import { winnerTips } from '../services/recentWinnerTips.service';
 import { badgesOs } from '../services/badges.service';
+import { leaveSyndicate } from '../services/syndicate_leave.service'
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -279,7 +280,7 @@ import {} from '../pages'
         BrowserModule,
         IonicModule.forRoot(MyApp,
         {
-            tabsHideOnSubPages: true,
+            // tabsHideOnSubPages: true,
             autoFocusAssist: false,
             scrollAssist: false,
             tabsPlacement:'top', 
@@ -393,7 +394,7 @@ import {} from '../pages'
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
         AnimationService, DatabaseService,paymentService, CommonService,Badge,UniqueDeviceID,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion,leaveSyndicate]
 
 })
 export class AppModule { }

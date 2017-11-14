@@ -5,13 +5,15 @@ import { OfferService } from '../../services/offer.service';
 import { Storage } from '@ionic/storage';
 import { Observable } from "rxjs/Rx";
 import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
+import { IonPullUpFooterState } from 'ionic-pullup';
 
 @Component({
     selector: 'offer-buy',
     templateUrl: 'offerbuy-page.html'
 })
 export class offerBuy {
-
+    showDown: boolean;
+    @ViewChild("pullup") pullUp: any;
     credit_offer: any;
     product: any
     credit_filter_line: any = 0;
@@ -28,7 +30,7 @@ export class offerBuy {
     day: any = [];
     hrs: any = [];
     mins: any = [];
-    sec: any = []; 
+    sec: any = [];
     Nday: any = [];
     Nhrs: any = [];
     Nmins: any = [];
@@ -38,18 +40,18 @@ export class offerBuy {
     buyoffer: any;
     buyOfferStatus: any;
     result: any = [];
-    dealTimer:any = [];
+    dealTimer: any = [];
     private lotteryProductData: any = []
-
+    footerState: IonPullUpFooterState;
     constructor(private offerBuyData: productOffer,
         private loadingCtrl: LoadingController,
         private storage: Storage,
-        private modalCtrl:ModalController,
+        private modalCtrl: ModalController,
         private offerService: OfferService,
         private navprms: NavParams, ) {
 
 
-
+        this.footerState = IonPullUpFooterState.Collapsed;
         this.NewTimeLeft = "";
         this.NewTimeLeft = this.navprms.get("Time");
         this.dealTimer = this.navprms.get("dealTimer")
@@ -63,12 +65,12 @@ export class offerBuy {
         });
     }
     ionViewWillUnload() {
-     //   console.log("view is unload ")
+        //   console.log("view is unload ")
         this.TimeLeft = "";
         this.NewTimeLeft = "";
     }
 
-    calTime(){
+    calTime() {
 
         let now = new Date().getTime();
         if (!this.NewTimeLeft) {
@@ -98,43 +100,43 @@ export class offerBuy {
         this.day = (dayCal <= 9) ? '0' + dayCal : dayCal;
 
         this.hrs = (hourCal <= 9) ? '0' + hourCal : hourCal;
-        this.mins = (minuteCal <= 9) ? '0' + minuteCal  : minuteCal;
+        this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
 
-    NewcalTime(NewLeft:any){
-        
-                let now = new Date().getTime();
-                let now1 = new Date(NewLeft).getTime();
-                
-                if(now1 >= now){
-                if (!NewLeft) {
-                    return this.result;
-                }
-                if (typeof (NewLeft) === "string") {
-                    NewLeft = new Date(NewLeft);
-                }
-            
-                let delta = Math.floor((now - NewLeft.getTime()) / 1000);
-                if (delta < 0) {
-                    this.result = "-"
-                    delta = Math.abs(delta);
-                }
-            
-                let dayCal = Math.floor(delta / 86400);
-                delta %= 86400
-                let hourCal = Math.floor(delta / 3600);
-                delta %= 3600
-                let minuteCal = Math.floor(delta / 60);
-                delta %= 60
-                let secondsCal = Math.floor(delta)
-            
-                this.Nday = (dayCal <= 9) ? '0' + dayCal: dayCal;
-                this.Nhrs = (hourCal <= 9) ? '0' + hourCal  + " :"  : hourCal + " :";
-                this.Nmins = (minuteCal <= 9) ? '0' + minuteCal  + " :"  : minuteCal + " :";
-                this.Nsec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
+    NewcalTime(NewLeft: any) {
+
+        let now = new Date().getTime();
+        let now1 = new Date(NewLeft).getTime();
+
+        if (now1 >= now) {
+            if (!NewLeft) {
+                return this.result;
             }
+            if (typeof (NewLeft) === "string") {
+                NewLeft = new Date(NewLeft);
+            }
+
+            let delta = Math.floor((now - NewLeft.getTime()) / 1000);
+            if (delta < 0) {
+                this.result = "-"
+                delta = Math.abs(delta);
+            }
+
+            let dayCal = Math.floor(delta / 86400);
+            delta %= 86400
+            let hourCal = Math.floor(delta / 3600);
+            delta %= 3600
+            let minuteCal = Math.floor(delta / 60);
+            delta %= 60
+            let secondsCal = Math.floor(delta)
+
+            this.Nday = (dayCal <= 9) ? '0' + dayCal : dayCal;
+            this.Nhrs = (hourCal <= 9) ? '0' + hourCal + " :" : hourCal + " :";
+            this.Nmins = (minuteCal <= 9) ? '0' + minuteCal + " :" : minuteCal + " :";
+            this.Nsec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
         }
+    }
 
     ngOnInit() {
         Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime());
@@ -162,7 +164,7 @@ export class offerBuy {
                 err => {
                     console.log("error", err);
                 }
-                
+
                 );
         })
     }
@@ -205,9 +207,28 @@ export class offerBuy {
     openSuccessModal() {
 
     }
-    openTipsModal(){
-        let modalTips=this.modalCtrl.create(buyOfferTips);
+    openTipsModal() {
+        let modalTips = this.modalCtrl.create(buyOfferTips);
         modalTips.present();
     }
+    footerExpanded() {
+        this.showDown = true;
+        var a = this.pullUp;
+        console.log('Footer expanded!');
+    }
+
+    footerCollapsed() {
+        this.showDown = false;
+        var a = this.pullUp
+        console.log('Footer collapsed!');
+    }
+
+    toggleFooter() {
+        this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
+    }
+    getMaximumHeight() {
+        return (window.innerHeight / 1.8);
+    }
+
 
 }

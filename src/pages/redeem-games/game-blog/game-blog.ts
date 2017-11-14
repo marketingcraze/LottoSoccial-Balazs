@@ -23,4 +23,7 @@ export class gameBlog {
         sampleTxt.innerHTML = this.blogContent;
         this.decodedHtml = sampleTxt.value;
     }
+    close(){
+        this._viewCtrl.dismiss();
+    }
 }

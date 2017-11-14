@@ -99,20 +99,20 @@ export class MySyndicatePage {
         var t: Tabs = this.navCtrl.parent;
         t.select(1);
     }
-    manage_syndicates() {
+    manage_syndicates(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicatePage);
+        let Modal = this.modalCtrl.create(ManageSyndicatePage,{ syndicate_id: sd.syndicate_id });
         Modal.onDidDismiss(data => {
             var tabs: Tabs = this.navCtrl.parent.parent.parent;
             tabs.select(4)
         })
         Modal.present();
     }
-    manage_syndicates2() {
+    manage_syndicates2(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicate2Page);
+        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate_id: sd.syndicate_id });
         Modal.present();
         // this.appSound.play('buttonClick');
         // this.app.getRootNav().push(ManageSyndicate2Page);
