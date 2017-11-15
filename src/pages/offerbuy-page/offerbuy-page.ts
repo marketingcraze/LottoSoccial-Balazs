@@ -12,7 +12,9 @@ import { IonPullUpFooterState } from 'ionic-pullup';
     templateUrl: 'offerbuy-page.html'
 })
 export class offerBuy {
+    userCards: any;
     showDown: boolean;
+    @ViewChild("confirmPayment") confirmPayment;
     @ViewChild("pullup") pullUp: any;
     credit_offer: any;
     product: any
@@ -179,28 +181,28 @@ export class offerBuy {
         this.position = index;
         this.credit_filter_draw = index;
     }
-    buyCreditOffer(offerId: any) {
-        this.loading = this.loadingCtrl.create();
-        this.loading.present().then(() => {
-            this.offerService.buy_Credit_Offer(offerId, this.visitorId).subscribe(data => {
-                this.loading.dismiss();
-                this.buyoffer = data.response.response;
-                this.buyOfferStatus = data.response.response.status;
-                if (this.buyOfferStatus === "FAIL") {
-                    this.openFailureModal();
-                }
-                else {
-                    this.openSuccessModal();
-                }
-            },
-                err => {
+    // buyCreditOffer(offerId: any) {
+    //     this.loading = this.loadingCtrl.create();
+    //     this.loading.present().then(() => {
+    //         this.offerService.buy_Credit_Offer(offerId, this.visitorId).subscribe(data => {
+    //             this.loading.dismiss();
+    //             this.buyoffer = data.response.response;
+    //             this.buyOfferStatus = data.response.response.status;
+    //             if (this.buyOfferStatus === "FAIL") {
+    //                 this.openFailureModal();
+    //             }
+    //             else {
+    //                 this.openSuccessModal();
+    //             }
+    //         },
+    //             err => {
 
-                    console.log("error", err);
-                },
-                () => console.log("offer buy successfully")
-            );
-        })
-    }
+    //                 console.log("error", err);
+    //             },
+    //             () => console.log("offer buy successfully")
+    //         );
+    //     })
+    // }
     openFailureModal() {
 
     }
@@ -228,6 +230,10 @@ export class offerBuy {
     }
     getMaximumHeight() {
         return (window.innerHeight / 1.8);
+    }
+    buyCashOffer() {
+      this.userCards
+      this.confirmPayment.togglePopup();
     }
 
 

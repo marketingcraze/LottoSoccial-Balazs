@@ -34,14 +34,16 @@
 }
 .mainContainer{
     background-color: white;
-    height: 43vh;
+    height: 60%;
 }
 .SlideSubTitleOffer{
     font-size:15px;
     font-weight: bolder;
+    text-align: center;
 }
 .SpaceBetweenRowOffer{
     display: -webkit-inline-box;
+    margin-top: 13%;
 }
 .SlideContentBorderTopOffer{
     margin-top: -10px;
@@ -87,7 +89,8 @@ offer-buy{
             margin-top: 15px !important;
         }
         .row{
-            height: 6.5vh;
+            height: 13%;
+            // margin-top: 5%;
         }
         .drawDayMargin{
             margin-top:0%;

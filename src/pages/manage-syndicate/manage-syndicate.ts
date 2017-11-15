@@ -13,10 +13,16 @@ import { LeavePage } from '../leave/leave';
   templateUrl: 'manage-syndicate.html'
 })
 export class ManageSyndicatePage {
+  syndicate: any;
   sId: any;
+  oneOff: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
-    this.sId = this.navParams.get("syndicate_id")
+    this.syndicate = this.navParams.get("syndicate")
+    this.sId=this.syndicate.syndicate_id;
+    if (this.syndicate.syndicate_end_date == 'oneoff') {
+      this.oneOff = true
+    }
   }
 
   ionViewDidLoad() {
@@ -31,7 +37,8 @@ export class ManageSyndicatePage {
   leaveSyndicate() {
     let leaveModal = this.modalCtrl.create(LeavePage, { syndId: this.sId });
     leaveModal.onDidDismiss(data => {
-      this.viewCtrl.dismiss(data)
+      if (data == 'offerPage')
+        this.viewCtrl.dismiss(data)
     });
     leaveModal.present();
   }

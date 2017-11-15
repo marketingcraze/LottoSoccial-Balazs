@@ -50,7 +50,7 @@ export class AccountPage {
 	private refreshCache: boolean = false;
 	private unreadCount: number = 0;
 	downShowing = 0;
-	image_Data
+	image_Data:any;
 	down_arrow_showing = 0
 
 	winning_balanceAPI;
@@ -166,29 +166,26 @@ export class AccountPage {
 
 
 
-						if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
+						if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
+						{
 							var str = this.accountDetails.profile_image
-							console.log("last character is ", str.charAt(str.length - 1))
-							if (str.charAt(str.length - 1) == ".") {
-								str = str.substring(0, str.length - 1);
-								this.image_Data = str
-								if (!localStorage.getItem("imageUrl")) {
-									this.image_Data = "assets/icon/user.svg"
-									this.cdRef.detectChanges()
-								}
-								else{
-									this.image_Data = localStorage.getItem("imageUrl")
-									this.cdRef.detectChanges()
-								}
+							console.log("last character is ",str.charAt(str.length - 1) )
+							if(str.charAt(str.length - 1) == ".")
+							{
+							str = str.substring(0, str.length - 1);
+							this.image_Data = str
 							}
-							
+							else{
+								this.image_Data = this.accountDetails.profile_image
+							}
 						}
-						else {
-
-
-						
-							
-
+						else{
+							if(localStorage.getItem("imageUrl"))
+							{
+								this.image_Data = localStorage.getItem("imageUrl")
+							}else{
+							this.image_Data = "assets/icon/user.svg"
+							}
 						}
 					} else if (data[i].get_home_message) {
 						this.homeMessage = data[i].get_home_message.response;

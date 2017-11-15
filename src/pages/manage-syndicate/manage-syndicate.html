@@ -33,5 +33,5 @@
   <div class="sub-c"><span style="content: url(../assets/icon/history-ico.svg); width: 14px;margin-right: 2px;"></span>Recent draws<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
   <div class="sub-c"><span style="content: url(../assets/icon/syndicates_ico.svg); width: 14px;margin-right: 2px;"></span> View tickets<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
   <div class="sub-c">View syndicate agreement<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
-  <div style="text-align: center;padding: 25px;"> <a (click)="leaveSyndicate()">Leave syndicate</a></div>
+  <div *ngIf="!oneOff" style="text-align: center;padding: 25px;"> <a (click)="leaveSyndicate()">Leave syndicate</a></div>
 </ion-content>

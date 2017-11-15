@@ -102,10 +102,13 @@ export class MySyndicatePage {
     manage_syndicates(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicatePage,{ syndicate_id: sd.syndicate_id });
+        let Modal = this.modalCtrl.create(ManageSyndicatePage, { syndicate: sd});
         Modal.onDidDismiss(data => {
-            var tabs: Tabs = this.navCtrl.parent.parent.parent;
-            tabs.select(4)
+            if (data == 'offerPage') {
+                var tabs: Tabs = this.navCtrl.parent.parent.parent;
+                tabs.select(4)
+            }
+
         })
         Modal.present();
     }

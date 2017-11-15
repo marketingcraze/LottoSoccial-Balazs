@@ -10,7 +10,9 @@ import { Content } from 'ionic-angular'
     templateUrl: 'affiliate.html'
 })
 export class AffiliatePage implements OnInit {
+    userCards: any;
     tabbarElement: any;
+    @ViewChild("confirmPayment") confirmPayment;
     @ViewChild(Content) content: Content;
 
     tabBarElement: any;
@@ -134,6 +136,10 @@ export class AffiliatePage implements OnInit {
             this.viewctrl.dismiss();
         })
 
+    }
+    openPurchage(){
+        this.userCards
+        this.confirmPayment.togglePopup();
     }
 
     genrateRanNumberUpdate(luckyDips: any, index: any) {

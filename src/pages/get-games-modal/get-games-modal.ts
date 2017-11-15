@@ -11,6 +11,7 @@ import { PlayGamePage } from '../play-games/play-games';
   templateUrl: 'get-games-modal.html'
 })
 export class getGamesModal {
+  fixedPrice: any;
   gameId: any;
   disable: any;
   creditBalance: any;
@@ -44,6 +45,7 @@ export class getGamesModal {
     });
     this.VoucherCode = this.navprms.get("VoucherCode")
     this.price = this.navprms.get("price")
+    this.fixedPrice=this.navprms.get("price")
     this.pointsLive = this.price;
     this.title = this.navprms.get("title")
     this.price_after = this.navprms.get("price_after")

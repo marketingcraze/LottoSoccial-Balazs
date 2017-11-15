@@ -36,6 +36,7 @@ export class LeavePage {
     loader.present().then(() => {
       this.serviceLeave.managedSyndicatePause(this.syndicateId).subscribe(data => {
         if (data) {
+          loader.dismiss();
           this.leave = false
           this.leaveSuccess = false
           this.paused = true
@@ -44,7 +45,7 @@ export class LeavePage {
     })
 
   }
-  moveTOffer(data: any = 'okay') {
+  moveTOffer(data: any = 'offerPage') {
     debugger
     this.viewCtrl.dismiss(data)
   }
@@ -53,6 +54,7 @@ export class LeavePage {
     loader.present().then(() => {
       this.serviceLeave.manageSyndicateLeave(this.syndicateId).subscribe(data => {
         if (data) {
+          loader.dismiss();
           this.paused = false;
           this.leaveSuccess = false;
           this.leave = true
