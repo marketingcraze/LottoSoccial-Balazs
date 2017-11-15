@@ -146,7 +146,7 @@ export class PlayGamePage implements OnInit {
   openThankyouPage() {
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
-        const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no');
+        const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbar=no');
         browser.addEventListener('loadstart', (event) => {
           if (event.url.includes("win")) {
             browser.close();

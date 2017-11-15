@@ -32,6 +32,8 @@ declare var $: any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    showDown: boolean;
+    @ViewChild("pullup") pullUp: any;
     secondTime: string;
     rewardPoints: number;
     creditPoints: any;
@@ -495,7 +497,7 @@ export class StorePage {
             let timeoutId = setTimeout(() => {
                 this.whatsOn = !this.whatsOn;
                 clearTimeout(timeoutId);
-            }, 3000);
+            }, 100);
             this.slideInUp = !this.slideInUp;
 
         }
@@ -711,20 +713,36 @@ export class StorePage {
 
     //pull up code here
     footerExpanded() {
-
+        this.showDown = true;
+        var a = this.pullUp;
         this.count = 1;
         console.log('Footer expanded!');
     }
 
     footerCollapsed() {
+        this.showDown = false;
+        var a = this.pullUp
         console.log('Footer collapsed!');
     }
+ 
+
+    // footerExpanded() {
+        
+    //     console.log('Footer expanded!');
+    // }
+
+    // footerCollapsed() {
+       
+    //     console.log('Footer collapsed!');
+    // }
 
     toggleFooter() {
+        this.showWhatsOn()
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
     }
     getMaximumHeight() {
-        return window.innerHeight / 1.02;
+        return window.innerHeight / 1.1;
+
     }
 
     //countDown timer
@@ -856,7 +874,9 @@ export class StorePage {
         })
     }
     mgmOpenPage() {
-        this.navCtrl.push(referFriend);
+       
+            this.navCtrl.push(referFriend);
+       
     }
 
     countSlider(ev: any) {
@@ -882,6 +902,7 @@ export class StorePage {
         var tabs: Tabs = this.navCtrl.parent;
         tabs.select(4);
     }
+    
 }
 
 //    let lastIndex=this.carouselSlide.length(); 

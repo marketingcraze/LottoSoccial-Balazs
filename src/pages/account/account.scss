@@ -242,7 +242,7 @@ body {
 	  animation-duration: 1s;
 	  animation-timing-function: linear;
 	  animation-delay: 1s;
-	  animation-iteration-count: 10;
+	  animation-iteration-count: 4;
 	  animation-direction: alternate;
 	}
 	.profile-completion{
@@ -376,6 +376,8 @@ body {
 			text-transform: none;
 			border-right: 1px solid #3478ce;
 			line-height: $toolbar-md-height;
+		
+		
 		}
 		a:last-of-type {
 			border: none;
@@ -400,7 +402,7 @@ body {
         animation-duration: 1s;
         animation-timing-function: linear;
         animation-delay: 1s;
-        animation-iteration-count: 10;
+        animation-iteration-count:4;
         animation-direction: alternate;
       }
 }

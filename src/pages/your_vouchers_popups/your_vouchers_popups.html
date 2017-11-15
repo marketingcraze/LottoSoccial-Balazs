@@ -21,7 +21,7 @@
       <div style="margin-top: -4px">
         <ul style="font-size: 14px" *ngFor='let lst of lottoMiddleJson;let i=index;'>
           <li  *ngIf="lst" class="middleDescription">{{lottoMiddleJson[i]}}</li>
-         <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
+         <li  *ngIf="!lst" style="font-size: 15px;"> Invalid Voucher</li>
         </ul>
       </div>
     </ion-item>

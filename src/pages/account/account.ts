@@ -3,6 +3,7 @@ import {
 	App, NavController, NavParams, Platform, LoadingController, AlertController,
 	ModalController, Content
 } from 'ionic-angular';
+import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
 import { ActionSheetController } from 'ionic-angular'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -69,7 +70,24 @@ export class AccountPage {
 		winning_balance: 0.00,
 		percentage: 0
 	};
+	buttonLabels = [];
+	 options: ActionSheetOptions = {
+		
+		subtitle: 'Are you sure you want to log out?',
+		buttonLabels: this.buttonLabels,
+		addCancelButtonWithLabel: 'Cancel',
+		addDestructiveButtonWithLabel: 'Log Out',
+		androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+		destructiveButtonLast: true
+		
+	  };
 
+	//   subtitle: 'Are you sure you want to log out?',
+	//   buttonLabels: this.buttonLabels,
+	//   addCancelButtonWithLabel: 'Cancel',
+	//   addDestructiveButtonWithLabel: 'Delete',
+	//   androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+	//   destructiveButtonLast: true
 	constructor(
 		public app: App,
 		private params: Params,
@@ -91,13 +109,15 @@ export class AccountPage {
 		public cdRef: ChangeDetectorRef,
 		private file: File,
 		private http: Http,
-		public commonSrv: CommonService, ) {
+		public commonSrv: CommonService,
+		private actionSheet: ActionSheet ) {
 
 		console.log('AccountPage');
 
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
 		this.loadAccountData()
+	
 	}
 
 	ionViewDidLoad() {
@@ -144,7 +164,7 @@ export class AccountPage {
 				loader.dismiss();
 				this.waveShowingAccount = true
 				this.refreshCache = false;
-
+				this.lastCalling()
 				console.log("AccountPage::ionViewDidLoad", data);
 				for (var i = 0; i < data.length; i++) {
 					if (data[i].get_account_details) {
@@ -152,19 +172,6 @@ export class AccountPage {
 						if (this.accountDetails.bonus_credit) {
 
 							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
-							this.lastCalling()
-						}
-						else {
-							this.bonusCredit = 0;
-						}
-						if (this.accountDetails.reward_points) {
-							this.rewardPoints = parseInt(this.accountDetails.reward_points)
-						}
-						else {
-							this.rewardPoints = 0;
-						}
-
-
 
 						if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
 						{
@@ -373,6 +380,7 @@ export class AccountPage {
 			this.image_Data = localStorage.getItem("imageUrl")
 		}
 		
+		var dat = localStorage.getItem("imageUrl")
 
 		this.commonSrv.getCreditPoints().subscribe(data => {
 			console.log("at last data is ", data)
@@ -537,27 +545,39 @@ debugger
 		this.navCtrl.push(BadgeViewPage, { badge: badge });
 	}
 	presentActionSheet() {
-		let actionSheet = this.actionSheetCtrl.create({
-			title: 'Are you sure you want to log out?',
-			buttons: [
-				{
-					text: 'Log Out',
-					role: 'destructive',
-					handler: () => {
-						this.logout()
-					}
-				},
-				{
-					text: 'Cancel',
-					role: 'cancel',
-					handler: () => {
-						console.log('Cancel clicked');
-					}
-				}
-			]
-		});
+		if (this.platform.is('cordova')) {
+		this.actionSheet.show(this.options).then((buttonIndex: number) => {
+			console.log('Button pressed: ' + buttonIndex);
+			if(buttonIndex == 1){
+				this.logout()	
+			}
+		  });
+		}
+		else
+		{
+			this.logout()
+		}
+		// let actionSheet = this.actionSheetCtrl.create({
+		// 	title: 'Are you sure you want to log out?',
+		// 	buttons: [
+		// 		{
+		// 			text: 'Log Out',
+		// 			role: 'destructive',
+		// 			handler: () => {
+		// 				this.logout()
+		// 			}
+		// 		},
+		// 		{
+		// 			text: 'Cancel',
+		// 			role: 'cancel',
+		// 			handler: () => {
+		// 				console.log('Cancel clicked');
+		// 			}
+		// 		}
+		// 	]
+		// });
 
-		actionSheet.present();
+		// actionSheet.present();
 	}
 
 

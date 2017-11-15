@@ -41,6 +41,9 @@ export class LeavePage {
           this.leaveSuccess = false
           this.paused = true
         }
+        else{
+          loader.dismiss()
+        }
       })
     })
 

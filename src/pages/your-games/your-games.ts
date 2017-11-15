@@ -87,7 +87,6 @@ export class YourGamesPage implements OnInit {
     }
     ionViewDidEnter(){
     
-      
     }
     ionViewWillEnter() {
     
