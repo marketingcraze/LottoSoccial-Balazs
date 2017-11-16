@@ -69,7 +69,7 @@ export class TabsPage {
         this.gameData = "game data";
 
         this.mySelectedIndex = navParams.data.tabIndex || 2;
-
+debugger
         if (this.params.events) {
             this.params.events.subscribe('go-page', (page) => {
                 let currentTab = this.homeTabs.getActiveChildNav();

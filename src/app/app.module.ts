@@ -156,6 +156,7 @@ import { Device } from '@ionic-native/device';
 import { AffiliatePage } from '../pages/affiliate/affiliate'
 import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
 import {} from '../pages'
+import { SessionCheckOutPage } from '../pages/session-check-out/session-check-out';
 
 
 
@@ -263,6 +264,7 @@ import {} from '../pages'
         ValuePipe,
         CapitalizeFirstPipe,
         TimeDifferencePipe,
+        SessionCheckOutPage,
 
         // popups 
         CountryListPopPage,
@@ -358,6 +360,7 @@ import {} from '../pages'
         PlayGamesThankYou,
         BadgesPage,
         BadgeViewPage,
+        SessionCheckOutPage,
         GameThankYou,
         GameThankyouSubmittip,
         howtoplay,

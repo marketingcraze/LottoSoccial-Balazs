@@ -31,12 +31,13 @@ import { Constants } from './constants';
 
 
 import { Network } from '@ionic-native/network';
+import { SessionCheckOutPage } from '../pages/session-check-out/session-check-out';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage:any = SplashPage;
+    rootPage:any = SessionCheckOutPage;
     // rootPage:any = WelcomePage;
     // rootPage:any = CreateSyndicatePage;
     // rootPage:any = CreateSyndicate2Page;
