@@ -81,7 +81,8 @@ export class LoginPage {
 
     loadCountries(){
         let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
 
@@ -194,7 +195,8 @@ export class LoginPage {
         this.warningPhone = false;
 
         let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
         localStorage.setItem('appCurrentUserid', this.login.free_reg_msn);    
@@ -282,7 +284,8 @@ export class LoginPage {
         this.warningPhonePopup = false;
 
         let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
 

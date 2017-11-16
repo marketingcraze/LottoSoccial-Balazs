@@ -149,78 +149,92 @@ export class AccountPage {
 	loadAccountData() {
 		// show loading screen
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
-
+	  
 		// load data
 		this._badgesOs.getBadgesData().subscribe(badgeData => {
-			if (badgeData) {
-				this.badgesForYou = badgeData.response[0].badges
-			}
+		 if (badgeData) {
+		  this.badgesForYou = badgeData.response[0].badges
+		 }
 		})
 		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
-			.then(data => {
-				loader.dismiss();
-				this.waveShowingAccount = true
-				this.refreshCache = false;
-				this.lastCalling()
-				console.log("AccountPage::ionViewDidLoad", data);
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].get_account_details) {
-						this.accountDetails = data[i].get_account_details.response;
-						if (this.accountDetails.bonus_credit) {
-
-							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
-
-						if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
-						{
-							var str = this.accountDetails.profile_image
-							console.log("last character is ",str.charAt(str.length - 1) )
-							if(str.charAt(str.length - 1) == ".")
-							{
-							str = str.substring(0, str.length - 1);
-							this.image_Data = str
-							}
-							else{
-								this.image_Data = this.accountDetails.profile_image
-							}
-						}
-						else{
-							if(localStorage.getItem("imageUrl"))
-							{
-								this.image_Data = localStorage.getItem("imageUrl")
-							}else{
-							this.image_Data = "assets/icon/user.svg"
-							}
-						}
-					} else if (data[i].get_home_message) {
-						this.homeMessage = data[i].get_home_message.response;
-						this.unreadCount = this.homeMessage.unread;
-					}
-					this.content.enableScrollListener();
-				}
-
-
-				console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
-
-				// 
-				var a = localStorage.getItem("arrow_accountP")
-				if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
-					this.down_arrow_showing = 1
-				}
-				else {
-					this.down_arrow_showing = 0
-				}
-				localStorage.setItem("arrow_accountP", "1")
-
-			}, err => {
-				loader.dismiss();
-				// show offline
-				this.params.setIsInternetAvailable(false);
-				console.log("AccountPage::ionViewDidLoad", err);
-			});
-	}
+		 .then(data => {
+		  loader.dismiss();
+		  this.waveShowingAccount = true
+		  this.refreshCache = false;
+	  
+		  console.log("AccountPage::ionViewDidLoad", data);
+		  for (var i = 0; i < data.length; i++) {
+		   if (data[i].get_account_details) {
+			this.accountDetails = data[i].get_account_details.response;
+			if (this.accountDetails.bonus_credit) {
+	  
+			 this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
+			 this.lastCalling()
+			}
+			else {
+			 this.bonusCredit = 0;
+			}
+			if (this.accountDetails.reward_points) {
+			 this.rewardPoints = parseInt(this.accountDetails.reward_points)
+			}
+			else {
+			 this.rewardPoints = 0;
+			}
+	  
+	  
+	  
+			if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
+			{
+			 var str = this.accountDetails.profile_image
+			 console.log("last character is ",str.charAt(str.length - 1) )
+			 if(str.charAt(str.length - 1) == ".")
+			 {
+			 str = str.substring(0, str.length - 1);
+			 this.image_Data = str
+			 }
+			 else{
+			  this.image_Data = this.accountDetails.profile_image
+			 }
+			}
+			else{
+			 if(localStorage.getItem("imageUrl"))
+			 {
+			  this.image_Data = localStorage.getItem("imageUrl")
+			 }else{
+			 this.image_Data = "assets/icon/user.svg"
+			 }
+			}
+		   } else if (data[i].get_home_message) {
+			this.homeMessage = data[i].get_home_message.response;
+			this.unreadCount = this.homeMessage.unread;
+		   }
+		   this.content.enableScrollListener();
+		  }
+	  
+	  
+		  console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
+	  
+		  // 
+		  var a = localStorage.getItem("arrow_accountP")
+		  if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
+		   this.down_arrow_showing = 1
+		  }
+		  else {
+		   this.down_arrow_showing = 0
+		  }
+		  localStorage.setItem("arrow_accountP", "1")
+	  
+		 }, err => {
+		  loader.dismiss();
+		  // show offline
+		  this.params.setIsInternetAvailable(false);
+		  console.log("AccountPage::ionViewDidLoad", err);
+		 });
+	   }
 	updateNickName() {
 		this.appSound.play('buttonClick');
 		let alert = this.alertCtrl.create({
@@ -312,7 +326,8 @@ export class AccountPage {
 		console.log('AccountPage::updateNickname() ', nick);
 
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 
@@ -409,7 +424,8 @@ export class AccountPage {
 	}
 	uploadImage() {
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 
@@ -436,7 +452,8 @@ export class AccountPage {
 	private uploadPhoto(imageFileUri: any): void {
 		this.error = null;
 		this.loading = this.loadingCtrl.create({
-			content: 'Uploading...'
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 debugger
 		this.loading.present();

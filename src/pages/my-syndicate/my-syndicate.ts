@@ -115,7 +115,7 @@ export class MySyndicatePage {
     manage_syndicates2(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate_id: sd.syndicate_id });
+        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate_id: sd });
         Modal.present();
         // this.appSound.play('buttonClick');
         // this.app.getRootNav().push(ManageSyndicate2Page);
@@ -135,7 +135,8 @@ export class MySyndicatePage {
 
     loadSyndicate() {
         let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
         this._syndService.syndicateList().subscribe((res) => {
@@ -258,7 +259,8 @@ export class MySyndicatePage {
 
     private _showLoader() {
         let loader = this.loadingCtrl.create({
-            content: "Loading data..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;

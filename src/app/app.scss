@@ -33,7 +33,17 @@
 .line-top{
 	border-top: 1px solid #dedede;
 }
-
+.loading-wrapper{
+  background: transparent!important;
+  padding: 0px!important;
+  box-shadow:none!important;
+  }
+  .loading-content{
+    Img{
+        height: 90px;
+        border-radius: 50%;
+    }
+}
 ion-img{
   background: transparent;
   padding-top: 2px;

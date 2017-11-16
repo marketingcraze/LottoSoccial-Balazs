@@ -35,7 +35,10 @@ export class GetBooster implements OnInit {
   }
   getBooster() {
   
-    this.loading = this.loadingCtrl.create();
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     console.log('ionViewDidLoad PlayGamePage');
     this.loading.present().then(() => {
       this.playgameServiceForBooster.getGameBooster(this.customerAward_logId)

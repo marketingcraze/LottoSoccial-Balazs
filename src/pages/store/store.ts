@@ -672,7 +672,8 @@ export class StorePage {
 
     private _showLoader() {
         let loader = this.loadingCtrl.create({
-            content: "Loading data..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;
@@ -821,7 +822,10 @@ export class StorePage {
             this.goPaymentWebviewHomeoffer(offerId, prosub_id);
         } else {
 
-            let loader = this.loadingCtrl.create();
+            let loader = this.loadingCtrl.create({
+                spinner: 'hide',
+                content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            });
             loader.present().then(() => {
                 this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
                     console.log("StorePage::showPaymentOptions() success", data);

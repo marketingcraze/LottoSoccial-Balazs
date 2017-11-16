@@ -66,7 +66,10 @@ export class getGamesModal {
   confirmpurchase() {
 
     this.productCount = this.counter;
-    let loading = this.loadingCtrl.create();
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     loading.present().then(() => {
       this.paymentSrv.redeemGame(this.visitorId, this.productCount, this.price, this.productName, this.productDetail, this.awardID).subscribe(data => {
         if (data) {

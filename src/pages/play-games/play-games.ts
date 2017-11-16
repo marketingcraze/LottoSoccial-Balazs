@@ -98,7 +98,10 @@ export class PlayGamePage implements OnInit {
   }
 
   ionViewDidLoad() {
-    this.loading = this.loadingCtrl.create();
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     console.log('ionViewDidLoad PlayGamePage');
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)

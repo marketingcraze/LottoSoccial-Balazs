@@ -14,19 +14,19 @@
       </ion-item>
       
       <ion-item-sliding *ngFor="let message of messages let i=index">
-        <ion-item text-wrap (click)="alert(i)">
+        <ion-item style="background-color: #333333;border-right:10px solid #C10A09" text-wrap (click)="alert(i)">
           <span item-left class="">
             <img *ngIf="message.icon_url" src="{{message.icon_url}}" alt="" width="24" height="24" />
             <img *ngIf="!message.icon_url" src="assets/icon/notification_ico.svg" alt="" width="16" height="16" />
           </span>
           <!-- <span class="notific-new"></span> -->
           <p>{{message.card_title}}</p>
-        </ion-item>
+        </ion-item> 
 
         <ion-item-options side="right" (ionSwipe)="saveItem()">
           <button ion-button class="btn-delete" (click)="deleteNotification()">Delete</button>
 
-          <button ion-button text-wrap expandable class="btn-unread" (click)="markAsUnread()"><p class="wrap-text">Mark As Unread</p></button>
+          <button ion-button class="btn-unread" (click)="markAsUnread()">Mark As Unread</button>
         </ion-item-options>
         
       </ion-item-sliding>
@@ -94,7 +94,7 @@
         <ion-item>
           <div text-center>
           <img src="assets/icon/logo_icoFooter.svg" height="20px" width="20px" style="margin-bottom: 1px;margin-right: 10px;">
-          <span style="font-family: cursive;font-size:0.8em;color: gray;vertical-align: super;">Lotto Social app version 2.6.1</span>
+          <span style="font-family: cursive;font-size:0.8em;color: white;vertical-align: super;">Lotto Social app version 2.6.1</span>
         </div>
         </ion-item>
     </ion-footer>

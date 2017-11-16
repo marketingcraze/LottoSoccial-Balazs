@@ -60,7 +60,8 @@ export class EditProfilePage {
 		this.appSound.play('buttonClick');
 
 		let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
 
@@ -97,7 +98,8 @@ export class EditProfilePage {
 
 	loadProfileData(){
 		let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         })
         loader.present();
 

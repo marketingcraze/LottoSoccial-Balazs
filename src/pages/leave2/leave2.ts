@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, LoadingController } from 'ionic-angular';
 import { ConfirmModalPage } from '../confirm-modal/confirm-modal';
+import { leaveSyndicate } from '../../services/syndicate_leave.service'
 
-/*
-  Generated class for the Leave2 page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-leave2',
   templateUrl: 'leave2.html'
 })
 export class Leave2Page {
+  privateSyndicate: any;
+  members; any
   syndicateId: any;
   deviceHeight: any;
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
-    this.syndicateId = this.navParams.get("syndId")
+  constructor(public navCtrl: NavController, public leaveSynd: leaveSyndicate, public loadingCtrl: LoadingController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
+    debugger
+    this.members = this.navParams.get("members");
+    this.privateSyndicate = this.navParams.get("syndId")
+    this.syndicateId = this.privateSyndicate.syndicate_id
   }
 
   ionViewDidLoad() {
@@ -31,13 +31,27 @@ export class Leave2Page {
     this.viewCtrl.dismiss(data);
   }
   confirm() {
-    let data = { 'foo': 'bar' }
-    this.viewCtrl.dismiss(data);
-    let confirmModal = this.modalCtrl.create(ConfirmModalPage);
-    confirmModal.onDidDismiss(data => {
-      console.log(data);
+    let loader = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
-    confirmModal.present();
+    loader.present().then(() => {
+      this.leaveSynd.privateSyndicateLeave(this.syndicateId).subscribe(data => {
+        if (data) {
+          debugger
+          loader.dismiss()
+          // if (data.response[0].manage_syndicate.response.status == 'SUCCESS') {
+            this.viewCtrl.dismiss(data);
+            let confirmModal = this.modalCtrl.create(ConfirmModalPage);
+            confirmModal.onDidDismiss(data => {
+              console.log(data);
+            });
+            confirmModal.present();
+          // }
+        }
+      })
+    })
+
   }
 
 }

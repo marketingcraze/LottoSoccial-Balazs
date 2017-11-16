@@ -35,7 +35,8 @@ export class CheckWinningsNextPage {
     public loadingCtrl: LoadingController
   ) {
     this.loader = this.loadingCtrl.create({
-      content: "Please wait..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
   }
 

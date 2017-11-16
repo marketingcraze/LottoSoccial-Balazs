@@ -12,16 +12,10 @@
           Hatchster Syndicate?</div>
           <div style="font-weight: bold;">Your friend will miss you!</div>
           <div style="white-space: nowrap;overflow-x: auto;text-align:center;padding: 10px 0;">
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar"/><br/>Paul</div>
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar" /><br/>Martin</div>
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar" /><br/>Jessica</div>
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar" /><br/>Laura</div>
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar" /><br/>Sumit</div>
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar" /><br/>Ali</div>
-            <div class="avatar-div"><img src="./assets/icon/user.svg" class="img-avatar" /><br/>Deepak</div>
+            <div *ngFor="let member of members.member_group" class="avatar-div"><img src="{{member.profile_image}}" class="img-avatar"/><br/>{{member.first_name}}</div>
           </div>
         <div>
-         <span> <button ion-button style="height: 30px;background:#990033;font-weight: normal;" (click)="confirm()"> STOP PLAYING </button></span>
+         <span> <button ion-button style="height: 30px;background:#990033;font-weight: normal;" (click)="confirm()"> Leave </button></span>
          <span> <button ion-button style="height: 30px;background:#00A651;font-weight: normal;" (click)="dismissm()"> KEEP PLAYING</button></span>
         </div>
       </div>

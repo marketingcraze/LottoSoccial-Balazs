@@ -31,7 +31,8 @@ export class PrizeSummaryWinPage {
     public _syndSrvc: SyndicateService
   ) {
     this.loader = this.loadingCtrl.create({
-      content: "Please wait ..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
   }
 

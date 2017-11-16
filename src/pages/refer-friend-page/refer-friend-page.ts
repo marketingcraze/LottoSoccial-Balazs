@@ -83,7 +83,8 @@ export class referFriend {
     }
     ionViewWillEnter() {
         this.loading = this.loadingCtrl.create({
-            content: 'Loading data...'
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         this.loading.present().then(() => {
             this.referService.referFriend()

@@ -224,7 +224,8 @@ export class SignupPage {
 	uploadImage(){
 		
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 		
@@ -273,7 +274,8 @@ export class SignupPage {
 		this.warningPhone = false;
 		
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 		debugger
@@ -407,7 +409,8 @@ url:""
 		console.log("submitLogin", this.signup );
 		
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 		

@@ -30,7 +30,8 @@ export class YourTicketsPage {
     this.sid = this.navParams.get('synd');
     this.stype = this.navParams.get('stype');
     loader = this.loadingCtrl.create({
-      content:"Please wait..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
   }
 

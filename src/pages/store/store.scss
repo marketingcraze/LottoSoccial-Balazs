@@ -1,5 +1,18 @@
 page-store {
-
+	.mainNew{
+		
+	   // background-color: #2f76d1;
+		img{
+		 position: absolute;
+		 height: 17%;
+		 width: 32%;
+		 top: 60%;
+		 left: 68%;
+		 border-radius: 50%;
+		 margin-top: -100px;
+		 margin-left: -125px;
+		}
+	   }
   //FONT IMPORT
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext);
 //HOVER-SLIDE TRANSITIONS
