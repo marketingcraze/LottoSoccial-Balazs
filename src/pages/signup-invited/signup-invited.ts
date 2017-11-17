@@ -43,8 +43,6 @@ export class SignupInvitedPage {
 			.subscribe((res) => {
 				console.log(res);
 			})
-
-		
 	}
 
 

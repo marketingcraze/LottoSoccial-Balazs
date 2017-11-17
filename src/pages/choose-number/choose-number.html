@@ -28,7 +28,7 @@
           </ion-grid>  
         </div>
         <p class="xs-title"> DRAWS INCLUDED: <span *ngFor="let day of data.draw_day; let di = index"><span class="tag" style="text-transform: uppercase">{{day.short}}</span></span></p>
-        <p class="errorDiv" *ngIf="errArr[r] == false"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select all your numbers</p>
+        <p class="errorDiv" *ngIf="errArr[r] == false && clicked"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select all your numbers</p>
         <ion-grid>
             <ion-row>
                 <ion-col style="text-align: right;"> <button ion-button type="button" class="btn" style="background: #2F76D1;padding: 7px 36px;" (click)="getlucky(r, data.numbers, data.regular_from, data.regular_to, data.bonus, data.bonus_from, data.bonus_to)">LUCKY DIP</button> </ion-col>
@@ -39,7 +39,7 @@
 </ion-content>
 <ion-footer>
     <div class="bottom_bar">
-        <button ion-button (click)="next()" [disabled]="!dError">CONFIRM NUMBERS</button>
+        <button ion-button (click)="next()" >CONFIRM NUMBERS</button>
     </div>
 </ion-footer>
 

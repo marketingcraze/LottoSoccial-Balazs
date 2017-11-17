@@ -179,7 +179,7 @@ page-confirm-number {
             padding: 3px;
         }
     }
-    .like-div {
+    .like-div, .like-div2 {
         text-align: center;
         font-size: 16px;
         text-transform: uppercase;
@@ -192,6 +192,16 @@ page-confirm-number {
             margin-right: auto;
         }
     }
+    .like-div2 {
+        margin-top: 20px;
+        p {
+            margin-top: -13px;
+            background: #ffffff;
+            width: 62%;
+            font-size: 14px;
+        }
+    }
+    
     .divider {
         height: 2px;
         width: 100%;

@@ -14,6 +14,7 @@ export class ChooseNumberPage {
   errArr = [];
   dataArr = [];
   syndId: any;
+  clicked = false
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
     //this.dataArr = JSON.parse(localStorage.getItem('cardSelected'));
@@ -27,11 +28,19 @@ export class ChooseNumberPage {
   }
 
   next() {
+    console.log(this.errArr);
+    this.clicked= true
+    if (this.errArr.indexOf(false) != -1) {
+      
+      // this.dError = true
+      return
+    }
     localStorage.setItem('numberData', JSON.stringify(this.dataArr));
     this.navCtrl.push(ConfirmNumberPage);
   }
 
   clear(index, n1, n2) {
+    this.clicked = false
     for (var i = 0; i < this.dataArr[index].lines.length; i++) {
       var arr = []
       var errArr = []
@@ -43,10 +52,11 @@ export class ChooseNumberPage {
       this.dataArr[index].hasError[i] = errArr
     }
     this.errArr[index] = false;
-    this.dError = false
+    // this.dError = false
   }
 
   getlucky(index, n1, n1_f, n1_t, n2, n2_f, n2_t) {
+    this.clicked = false
     for (var j = 0; j < this.dataArr[index].lines.length; j++) {
       var arr = [];
       var errArr = [];
@@ -87,9 +97,9 @@ export class ChooseNumberPage {
 
     }
     this.errArr[index] = true
-    if (this.errArr.indexOf(false) == -1) {
-      this.dError = true
-    }
+    // if (this.errArr.indexOf(false) == -1) {
+    //   this.dError = true
+    // }
   }
 
   getRandomArbitrary(min, max) {
@@ -97,7 +107,7 @@ export class ChooseNumberPage {
   }
 
   onKey(r, w, i, rt, rn, bt, bn) {
-
+    this.clicked = false
     var val = this.dataArr[r].lines[w][i];
     var count = 0;
     if (i > rn - 1 && val > bt) {
@@ -115,7 +125,8 @@ export class ChooseNumberPage {
     for (var t = 0; t < this.dataArr[r].lines.length; t++) {
       tArr = tArr.concat(this.dataArr[r].lines[t]);
     }
-    if (tArr.indexOf('') == -1) {
+    console.log(tArr)
+    if (tArr.indexOf('') == -1 && tArr.indexOf(null) == -1) {
       this.errArr[r] = true;
     } else {
       this.errArr[r] = false;
@@ -163,7 +174,7 @@ export class ChooseNumberPage {
       loader.dismiss();
       this.dataArr = res.response.response.product_group;
       for (var i = 0; i < this.dataArr.length; i++) {
-        this.errArr[i] = true;
+        this.errArr[i] = false;
         var count = this.dataArr[i].numbers + this.dataArr[i].bonus;
         var arr = [];
         var errorArr = []

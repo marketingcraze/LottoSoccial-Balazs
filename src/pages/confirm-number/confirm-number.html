@@ -123,6 +123,22 @@
           </ion-col>
           <ion-col col-4 text-right>&#x20A4;{{syndicatePrice | number : '1.2-2'}} </ion-col>
         </ion-row>
+        <ion-row *ngIf="!offerSelected">
+          <ion-col col-12 style="text-align: center; padding: 20px;">
+            Don’t forget to add your special offers
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="offerSelected">
+          <ion-col col-12>
+            <div class="like-div2">
+              <div>
+                <div class="divider"></div>
+                <p>SPECIAL OFFERS ADDED</p>
+                <!--Don’t forget to add your special offers-->
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
         <ion-row *ngFor="let o of offerArr; let oi = index;" [hidden]="!o.selected">
           <ion-col col-8>
             <span (click)="selecetOffer(oi)" class="icon-cross" style="content: url(./assets/img/close2.svg);max-width: 12px;margin-right: 5px;"></span>

@@ -31,6 +31,7 @@ export class ConfirmNumberPage {
   propertyArr = [];
   TotalPaybale = 0;
   syndicatePrice = 0;
+  offerSelected = false
 
 
     userCards: any;
@@ -305,10 +306,20 @@ timer0callback(data) {
            this.TotalPaybale = this.TotalPaybale + parseFloat(this.offerArr[j].package_price)
           }
         }
-        
-       
       }
     }
+
+    var count = 0;
+    for(var ii=0; ii<this.offerArr.length; ii++) {
+      if(this.offerArr[ii].selected) {
+        count++;
+      }
+    }
+    if(count > 0) {
+      this.offerSelected = true
+    }else {
+      this.offerSelected = false
+    }   
   }
 
   showConfirm() {
