@@ -509,6 +509,34 @@ export class SyndicateService {
                         return res;
                 })
     }
+
+    joinSyndicate(pid:any, mid:any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/privatesyndicate/";
+        let headopt = SyndicateService.getHeader();
+        var data = {
+            "request": [{
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "12",
+                    "screen_id": "12.2",
+                    "action": "click_to_join",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "join_private_syndicate",
+                    "customer_id":CommonService.session.customer_id,
+                    "private_syndicate_id":pid,
+                    "invite_member_id":mid,
+                    "join_status":"JOINED"
+                }]
+            }
+
+             return this.http.post(action, data, { headers:headopt })
+                    .map(res => res.json())
+                    .map((res) => {
+                        return res;
+                })
+
+    }
     
     
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams } from 'ionic-angular';
-
+import { App, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { SyndicateService } from '../../providers/syndicate-service';
 import { HomePage } from '../home/home';
-
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 /*
   Generated class for the SignupInvited page.
 
@@ -18,7 +18,8 @@ export class SignupInvitedPage {
 
 	constructor( 
 		public app:App,
-		public navParams: NavParams) {
+		public navParams: NavParams,
+		public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
 
 		this.navCtrl = app.getRootNav();
 
@@ -26,10 +27,24 @@ export class SignupInvitedPage {
 
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad SignupInvitedPage');
+			this.joinSyndicate()
 	}
 
 	goHome(){
 		this.navCtrl.push( HomePage );
+	}
+
+	joinSyndicate() {
+			let loader = this.loadingCtrl.create({
+					content: "Please wait..."
+			});
+			loader.present();
+			this._syndService.joinSyndicate(20,20)
+			.subscribe((res) => {
+				console.log(res);
+			})
+
+		
 	}
 
 
