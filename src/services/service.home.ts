@@ -209,6 +209,41 @@ export class HomeService {
         var response = this.http.post(url, parameter, opt).map(response => response.json());
         return response;
     }
+    markAsRead(cardId) {
+        if (!CommonService.session) {
+            return null;
+        }
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+        console.log("getHomeCard");
+
+        let url = 'https://nima.lottosocial.com/wp-json/mobi/v2/limb/';
+        let parameter = {
+            "request": [
+                {
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "1",
+                    "screen_id": "1.6.3",
+                    "action": "get_card_details",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "mark_home_inbox_message",
+                    "customer_id": this.customerId,
+                    "card_id": cardId
+
+                }
+            ]
+        };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        var response = this.http.post(url, parameter, opt).map(response => response.json());
+        return response;
+    }
 
 
 }

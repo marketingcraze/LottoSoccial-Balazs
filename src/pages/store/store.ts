@@ -24,6 +24,7 @@ import { PlayGamePage } from '../play-games/play-games';
 import { eventBlog } from './eventBlog/eventBlog';
 
 import { OverlayPage } from '../overlaypage/overlay-page'
+import { SignupInvitedPage } from '../signup-invited/signup-invited';
 // import * as $ from 'jquery';
 declare var $: any;
 
@@ -32,6 +33,7 @@ declare var $: any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    invitedPsyndicate: any;
     showDown: boolean;
     @ViewChild("pullup") pullUp: any;
     secondTime: string;
@@ -214,7 +216,6 @@ export class StorePage {
 
 
             for (var i = 0; i < data.length; i++) {
-
                 if (data[i].get_home_card) {
                     this.homeCard = data[i].get_home_card.response;
 
@@ -224,6 +225,14 @@ export class StorePage {
 
                         this.gameGroup = this.homeCard.game.game.game_group;
                         this.total_cards += this.gameGroup.length
+                    }
+                    if (this.homeCard.game
+                        && this.homeCard.invited_to_private_syndicate
+                        && this.homeCard.invited_to_private_syndicate.invited_group
+                    ) {
+
+                        this.invitedPsyndicate = this.homeCard.invited_to_private_syndicate.invited_group;
+                        this.total_cards += this.invitedPsyndicate.length
                     }
                     if (this.homeCard.offers_for_you) {
                         this.offersForYou = this.homeCard.offers_for_you;
@@ -325,7 +334,7 @@ export class StorePage {
 
     ionViewDidEnter() {
         this.srvHome.getHomeEventsBlog().subscribe(data => {
-            if(data){
+            if (data) {
                 this.millionerImage = data.response[1].get_home_events.response.events;
                 this.homeBlog = data.response[0].get_home_blog.response.blogs;
             }
@@ -462,6 +471,10 @@ export class StorePage {
         var parts = target.split('/');
         var gameId = parts[1].slice(8);
         this.nav.push(PlayGamePage, { "game": gameId });
+    }
+    gotoSignupInvited(invited: any) {
+        this.appSound.play('buttonClick');
+        this.nav.push(SignupInvitedPage, { private_syndicate_id: invited.private_syndicate_id, invite_member_id: invited.private_syndicate_invite_member_id });
     }
 
     ngOnInit() {
@@ -673,7 +686,7 @@ export class StorePage {
     private _showLoader() {
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;
@@ -725,15 +738,15 @@ export class StorePage {
         var a = this.pullUp
         console.log('Footer collapsed!');
     }
- 
+
 
     // footerExpanded() {
-        
+
     //     console.log('Footer expanded!');
     // }
 
     // footerCollapsed() {
-       
+
     //     console.log('Footer collapsed!');
     // }
 
@@ -841,7 +854,6 @@ export class StorePage {
                         //   this.storage.set('btnValue', bu);
                         localStorage.removeItem("buttonText");
                         localStorage.setItem("buttonText", buttonText);
-
                         //data.response.push({ offer: offerId });
                         this.userCards = data.response;
 
@@ -878,9 +890,9 @@ export class StorePage {
         })
     }
     mgmOpenPage() {
-       
-            this.navCtrl.push(referFriend);
-       
+
+        this.navCtrl.push(referFriend);
+
     }
 
     countSlider(ev: any) {
@@ -906,7 +918,7 @@ export class StorePage {
         var tabs: Tabs = this.navCtrl.parent;
         tabs.select(4);
     }
-    
+
 }
 
 //    let lastIndex=this.carouselSlide.length(); 

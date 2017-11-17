@@ -92,7 +92,7 @@
 
         <div *ngFor="let items of credit_offer let j=index;">
             <span *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px" (click)="buyCashOffer(items?.offer_id,product)">BUY NOW</button>
+                <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px" (click)="buyCashOffer(items)">BUY NOW</button>
             </span>
         </div>
 

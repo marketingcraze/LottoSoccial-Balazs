@@ -4,6 +4,7 @@ import { AffiliateServices } from '../../services/affliate.service';
 import { Observable } from "rxjs/Rx";
 import { AffiliatePopup } from '../affiliate_popups/affiliate_popups'
 import { Content } from 'ionic-angular'
+import { OfferService } from '../../services/offer.service';
 
 @Component({
     selector: 'page-affliate',
@@ -20,6 +21,7 @@ export class AffiliatePage implements OnInit {
         private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
         private viewctrl: ViewController,
         private navCtrl: NavController,
+        private offerService: OfferService,
         private modalController: ModalController,
         public cdRef: ChangeDetectorRef
     ) {
@@ -30,7 +32,7 @@ export class AffiliatePage implements OnInit {
     day: any = [];
     hrs: any = [];
     mins: any = [];
-    down_arrow_showing=0;
+    down_arrow_showing = 0;
     sec: any = [];
     TimeLeft: string = ""
     //NewTimeLeft: any;
@@ -61,13 +63,12 @@ export class AffiliatePage implements OnInit {
 
         let loading = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         console.log('ionViewDidLoad PlayGamePage');
         loading.present().then(() => {
             this._affiliateServices.loadAffiliateData()
                 .subscribe(data => {
-
                     this.affilateModelBinding = data.response[0].get_affiliate_page_details.response.product_group[0];
                     this.getDateAndMonth(this.affilateModelBinding.countdown);
                     this.regular_from = this.affilateModelBinding.regular_from
@@ -79,14 +80,13 @@ export class AffiliatePage implements OnInit {
                     Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.affilateModelBinding.countdown));
                     this.dummy = (String(this.affilateModelBinding.offer_jackpot).substr(0, 4))
                     var a = localStorage.getItem("affiliateP")
-                    if(localStorage.getItem("affiliateP") == undefined || localStorage.getItem("affiliateP") == null)
-                    {
+                    if (localStorage.getItem("affiliateP") == undefined || localStorage.getItem("affiliateP") == null) {
                         this.down_arrow_showing = 1
                     }
-                    else{
+                    else {
                         this.down_arrow_showing = 0
                     }
-                    localStorage.setItem("affiliateP","1")
+                    localStorage.setItem("affiliateP", "1")
                     loading.dismiss();
                 })
         })
@@ -133,16 +133,45 @@ export class AffiliatePage implements OnInit {
         let modal = this.modalController.create(AffiliatePopup);
         modal.present();
         modal.onDidDismiss((data: any[]) => {
-            this.tabbarElement.style.display= 'flex';
+            this.tabbarElement.style.display = 'flex';
             this.scrollContent = document.querySelector('.scroll-content');
             this.scrollContent.style['overflow'] = 'none';
             this.viewctrl.dismiss();
         })
 
     }
-    openPurchage(){
-        this.userCards
-        this.confirmPayment.togglePopup();
+    openPurchage() {
+
+        this.userCards  
+        this.confirmPayment.togglePopup()
+        // let loader = this.loadingCtrl.create({
+        //     spinner: 'hide',
+        //     content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        // });
+        // loader.present().then(() => {
+        //     this.offerService.buyCurrentOfferOnHomeCard("").subscribe((data) => {
+        //         let token_exists = 0;
+        //         for (var i = 0; i < data.response.length; ++i) {
+        //             if (data.response[i].get_customer_paymill_card_details) {
+        //                 token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+        //             }
+        //         }
+        //         if (token_exists > 0) {
+        //             debugger
+
+        //             this.userCards = data.response;
+
+
+        //             loader.dismiss();
+        //             this.confirmPayment.togglePopup()
+        //         } else {
+        //             loader.dismiss()
+        //         }
+        //     }, (err) => {
+        //         loader.dismiss()
+        //         console.log("StorePage::showPaymentOptions() error", err);
+        //     });
+        // })
     }
 
     genrateRanNumberUpdate(luckyDips: any, index: any) {

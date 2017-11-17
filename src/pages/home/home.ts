@@ -36,7 +36,7 @@ declare var webengage: any;
 
 
 
-declare var webengage:any;
+declare var webengage: any;
 
 export interface PageInterface {
     title: string;
@@ -50,6 +50,7 @@ export interface PageInterface {
     templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
+    @ViewChild('btn-unread') btnRead: any;
     versionNumber: Promise<any>;
     accountDetails: any;
 
@@ -57,7 +58,7 @@ export class HomePage implements OnInit {
 
         this.platform.ready().then((readySource) => {
 
-            
+
             var CurrentUserid = localStorage.getItem('appCurrentUserid');
             if (this.platform.is('cordova')) {
                 webengage.engage();
@@ -65,9 +66,9 @@ export class HomePage implements OnInit {
                     "UserId": CurrentUserid,
                 });
                 webengage.screen("HomePage")
-                webengage.notification.onDismiss((inAppData)=> {
-               });
-               webengage.engage();
+                webengage.notification.onDismiss((inAppData) => {
+                });
+                webengage.engage();
             }
         });
 
@@ -77,7 +78,7 @@ export class HomePage implements OnInit {
     @ViewChild("messageDetails") messageDetails;
 
     private cache: CacheController;
-    image_Data:any;
+    image_Data: any;
     rootPage: any = TabsPage;
     messageLoading = false;
 
@@ -92,23 +93,23 @@ export class HomePage implements OnInit {
         public platform: Platform,
         private srvHome: HomeService,
         public menu: MenuController,
-        private navCtrl:NavController,
-        private srvDb:DatabaseService,
-        private commonSrv:CommonService, 
-        public appSound:AppSoundProvider,
-        private alertCtrl:AlertController,
-        private loadingCtrl:LoadingController,
-        private _modalCtrl:ModalController,
-        
-        ) {
-        this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
-/*
-        platform.ready().then(() => {
-            StatusBar.styleDefault();
-            Splashscreen.hide();
-        });
+        private navCtrl: NavController,
+        private srvDb: DatabaseService,
+        private commonSrv: CommonService,
+        public appSound: AppSoundProvider,
+        private alertCtrl: AlertController,
+        private loadingCtrl: LoadingController,
+        private _modalCtrl: ModalController,
 
-*/
+    ) {
+        this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
+        /*
+                platform.ready().then(() => {
+                    StatusBar.styleDefault();
+                    Splashscreen.hide();
+                });
+        
+        */
 
 
         this.params.events.subscribe('home-data', data => {
@@ -124,37 +125,31 @@ export class HomePage implements OnInit {
                 else if (data[i].get_account_details) {
                     // debugger
                     this.accountDetails = data[i].get_account_details.response;
-                    if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
-					{
-                        // debugger
-						var str = this.accountDetails.profile_image
-						console.log("last character is ",str.charAt(str.length - 1) )
-						if(str.charAt(str.length - 1) == ".")
-						{
-						str = str.substring(0, str.length - 1);
-						this.image_Data = str
-						}
-						
-                        if(localStorage.getItem("imageUrl"))
-                        {
+                    if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
+                        var str = this.accountDetails.profile_image
+                        console.log("last character is ", str.charAt(str.length - 1))
+                        if (str.charAt(str.length - 1) == ".") {
+                            str = str.substring(0, str.length - 1);
+                            this.image_Data = str
+                        }
+
+                        if (localStorage.getItem("imageUrl")) {
                             this.image_Data = localStorage.getItem("imageUrl")
                         }
-                        else
-                        {
-                          
-                        this.image_Data = "assets/icon/user.svg"
+                        else {
+
+                            this.image_Data = "assets/icon/user.svg"
                         }
-					}
-					else{
-                        if(localStorage.getItem("imageUrl"))
-                        {
+                    }
+                    else {
+                        if (localStorage.getItem("imageUrl")) {
                             this.image_Data = localStorage.getItem("imageUrl")
-                        }else{
-                        this.image_Data = "assets/icon/user.svg"
+                        } else {
+                            this.image_Data = "assets/icon/user.svg"
                         }
-					}
-					
-				
+                    }
+
+
 
 
                 }
@@ -239,7 +234,7 @@ export class HomePage implements OnInit {
             case 'affiliate2':
                 this.params.goPage(AffiliatePage2)
                 break
-                
+
             case 'help':
                 this.params.goPage(HelpPage)
                 //   let opt:string = "toolbarposition=top";
@@ -322,8 +317,22 @@ export class HomePage implements OnInit {
         this.appSound.play('menuClick');
     }
 
-    markAsUnread() {
-        console.log("markAsUnread()");
+    // markAsUnread() {
+
+    //     console.log("markAsUnread()");
+    // }
+    markAsRead(cardId: any,index) {
+        debugger
+        var btn=document.getElementById('btnRead'+index).style.backgroundColor='gray'
+        debugger
+        this.srvHome.markAsRead(cardId).subscribe((data) => {
+            if (data) {
+                if (data.response[0].mark_home_inbox_message.response.status == 'SUCCESS') {
+                    console.log("msg read")
+                }
+            }
+        })
+
     }
 
     deleteNotification() {

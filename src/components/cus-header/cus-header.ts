@@ -23,7 +23,6 @@ export class CusHeaderComponent {
 		this.unreadCount = params.unreadCount;
 
 		params.events.subscribe('unread-count', (count) => {
-			// debugger;
 			console.log('CusHeaderComponent::', count);
 			this.unreadCount = count;
 			if (this.unreadCount == undefined) {

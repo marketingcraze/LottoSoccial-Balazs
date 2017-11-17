@@ -7,6 +7,7 @@ import { Observable } from "rxjs/Rx";
 import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
 import { IonPullUpFooterState } from 'ionic-pullup';
 
+
 @Component({
     selector: 'offer-buy',
     templateUrl: 'offerbuy-page.html'
@@ -148,7 +149,7 @@ export class offerBuy {
     ionViewWillEnter() {
         this.loading = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         this.loading.present().then(() => {
             this.offerBuyData.dedicatedOfferData(this.productName)
@@ -232,9 +233,41 @@ export class offerBuy {
     getMaximumHeight() {
         return (window.innerHeight / 1.8);
     }
-    buyCashOffer() {
-      this.userCards
-      this.confirmPayment.togglePopup();
+    buyCashOffer(offerId, buttonText) {
+        this.userCards
+//        loader.dismiss();
+        this.confirmPayment.togglePopup()
+
+
+        // debugger
+        // let loader = this.loadingCtrl.create({
+        //     spinner: 'hide',
+        //     content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        // });
+        // loader.present().then(() => {
+        //     this.offerService.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
+        //         let token_exists = 0;
+        //         for (var i = 0; i < data.response.length; ++i) {
+        //             if (data.response[i].get_customer_paymill_card_details) {
+        //                 token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+        //             }
+        //         }
+        //         if (token_exists > 0) {
+        //             debugger
+
+        //             this.userCards = data.response;
+
+
+        //             loader.dismiss();
+        //             this.confirmPayment.togglePopup()
+        //         } else {
+        //             loader.dismiss()
+        //         }
+        //     }, (err) => {
+        //         loader.dismiss()
+        //         console.log("StorePage::showPaymentOptions() error", err);
+        //     });
+        // })
     }
 
 
