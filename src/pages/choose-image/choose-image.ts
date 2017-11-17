@@ -74,7 +74,8 @@ export class ChooseImagePage {
 
   getCovers() {
     let loader = this.loadingCtrl.create({
-      content: "Please wait..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     loader.present();
     this._syndService.getcovers().subscribe((res) => {

@@ -1,21 +1,18 @@
-<ion-content class="sample-modal-page">
-    <ion-list>
-        <ion-item>
-            <ion-col col-12>
-                <ion-row>
-                    <h3>This is Game Blog popup</h3>
-                </ion-row>
-                <ion-row>
-                    <ion-item>
-                        <div [innerHTML]="decodedHtml">
+<div style="background-color: transparent;height: 117px">
+    <img (tap)=close() src="http://pngimages.net/sites/default/files/multiply-png-image-59177.png" class="imgClassClose" >
+    <ion-content class="sample-modal-page">
+        <ion-list>
+            <ion-item>
+                <ion-col col-12>
+                    <ion-row>
+                        <ion-item>
+                            <div style="white-space: normal" [innerHTML]="decodedHtml">
 
-                        </div>
-                    </ion-item>
-                </ion-row>
-            </ion-col>
-        </ion-item>
-    </ion-list>
-    <button class="btn-transparent" (click)="dismissView()">
-        No, Thanks
-    </button>
-</ion-content>
+                            </div>
+                        </ion-item>
+                    </ion-row>
+                </ion-col>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</div>

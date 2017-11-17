@@ -112,6 +112,7 @@ export class HomePage implements OnInit {
 
 
         this.params.events.subscribe('home-data', data => {
+            debugger
             for (var i = data.length - 1; i >= 0; i--) {
                 if (data[i].get_home_message) {
                     this.homeMessage = data[i].get_home_message.response;
@@ -121,9 +122,11 @@ export class HomePage implements OnInit {
                     params.setUnreadCount(this.homeMessage.count);
                 }
                 else if (data[i].get_account_details) {
+                    debugger
                     this.accountDetails = data[i].get_account_details.response;
                     if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
 					{
+                        debugger
 						var str = this.accountDetails.profile_image
 						console.log("last character is ",str.charAt(str.length - 1) )
 						if(str.charAt(str.length - 1) == ".")
@@ -131,9 +134,16 @@ export class HomePage implements OnInit {
 						str = str.substring(0, str.length - 1);
 						this.image_Data = str
 						}
-						else{
-							this.image_Data = this.accountDetails.profile_image
-						}
+						
+                        if(localStorage.getItem("imageUrl"))
+                        {
+                            this.image_Data = localStorage.getItem("imageUrl")
+                        }
+                        else
+                        {
+                          
+                        this.image_Data = "assets/icon/user.svg"
+                        }
 					}
 					else{
                         if(localStorage.getItem("imageUrl"))

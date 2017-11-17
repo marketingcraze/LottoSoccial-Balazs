@@ -79,7 +79,10 @@ export class RedeemGamesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.loading = this.loadingCtrl.create();
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     this.loading.present().then(() => {
       this.authSrv.redeem_game().subscribe(
         data => {

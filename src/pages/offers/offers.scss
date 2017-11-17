@@ -72,9 +72,8 @@ page-offers {
         height: $toolbar-md-height;
     }
     .tabs-ios .tabbar, .tabs-md .tabbar {
-        background-color: #304d85;
-        border-bottom: 1px solid #ccc;
-
+        background-color: #2F76D1;
+        min-height: 40px!important;
         .tab-highlight{
           top: auto !important;
           height: 4px;
@@ -366,6 +365,13 @@ page-offers {
                 color: #333333;
             }
         }
+    }
+    .tabbar :not(:last-of-type) {
+        border-right: 3px solid #fff;
+       
+    }
+    .tabs-md .tabbar .tab-button {
+        min-height: 40px!important;
     }
        
 }

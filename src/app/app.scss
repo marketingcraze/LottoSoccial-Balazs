@@ -33,7 +33,17 @@
 .line-top{
 	border-top: 1px solid #dedede;
 }
-
+.loading-wrapper{
+  background: transparent!important;
+  padding: 0px!important;
+  box-shadow:none!important;
+  }
+  .loading-content{
+    Img{
+        height: 90px;
+        border-radius: 50%;
+    }
+}
 ion-img{
   background: transparent;
   padding-top: 2px;
@@ -169,4 +179,14 @@ ion-modal {
   $font-family-wp-base: "Lato-Regular";
   text-align: center;
 
+}
+p{
+  $font-family-md-base: "Lato-Regular";
+  $font-family-ios-base: "Lato-Regular";
+  $font-family-wp-base: "Lato-Regular";
+}
+span{
+  $font-family-md-base: "Lato-Regular";
+  $font-family-ios-base: "Lato-Regular";
+  $font-family-wp-base: "Lato-Regular";
 }

@@ -34,14 +34,14 @@ export class CreateSyndicate4Page {
     sat: false
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public appSound:AppSoundProvider,
-    private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public appSound: AppSoundProvider,
+    private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) { }
 
   ionViewDidLoad() {
     var data = JSON.parse(localStorage.getItem('cardDefault'));
-    for(var i=0;i< data.length; i++) {
-      if(data[i].selected) {
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].selected) {
         data[i].dayactive[0] = true
         this.dataArr.push(data[i]);
         this.validArr.push(true)
@@ -66,68 +66,69 @@ export class CreateSyndicate4Page {
   }
   next() {
     let loader = this.loadingCtrl.create({
-            content: "Please wait..."
-        });
-        loader.present();
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
+    loader.present();
     var lotArr = []
-    for(var i=0; i<this.dataArr.length; i++) {
+    for (var i = 0; i < this.dataArr.length; i++) {
       var days = {};
       var c = 0;
-      for(var j=0; j<this.dataArr[i].days.length; j++) {
-        if(this.dataArr[i].dayactive[j]) {
+      for (var j = 0; j < this.dataArr[i].days.length; j++) {
+        if (this.dataArr[i].dayactive[j]) {
           c++;
-          days["draw_day"+c] = this.dataArr[i].days[j].substr(0, 3);
+          days["draw_day" + c] = this.dataArr[i].days[j].substr(0, 3);
         }
       }
       lotArr.push({
         "product_name": this.dataArr[i].name,
-          "draw_day_group": days,
-          "line_count": this.dataArr[i].linecount
+        "draw_day_group": days,
+        "line_count": this.dataArr[i].linecount
       })
     }
-    var data = {             
+    var data = {
       "syndicate_name": JSON.parse(localStorage.getItem('sdetails')).title,
       "image_url": JSON.parse(localStorage.getItem('sdetails')).image,
       "type": localStorage.getItem('cardType'),
       "product_group": lotArr
     }
-    this._syndService.createSynd(data).subscribe((res) =>{
+    this._syndService.createSynd(data).subscribe((res) => {
       console.log(res)
       loader.dismiss();
-      if(res.response["0"].create_private_syndicate.response.status == "SUCCESS") {
+      if (res.response["0"].create_private_syndicate.response.status == "SUCCESS") {
         localStorage.setItem('cardSelected', JSON.stringify(this.dataArr));
-        localStorage.setItem('synd_id',res.response["0"].create_private_syndicate.response.private_syndicate_id);
+        localStorage.setItem('synd_id', res.response["0"].create_private_syndicate.response.private_syndicate_id);
         this.navCtrl.push(CreateSyndicate5Page);
       }
-      
+
     })
 
-    
+
   }
 
   increase(i) {
     this.dataArr[i].linecount += 1
   }
   decrease(i) {
-    if(this.dataArr[i].linecount  != 1){
-      this.dataArr[i].linecount  -= 1
+    if (this.dataArr[i].linecount != 1) {
+      this.dataArr[i].linecount -= 1
     }
   }
   tick(i, p) {
     this.dataArr[i].dayactive[p] = !this.dataArr[i].dayactive[p]
-    if(this.validArr[i]){
-      if(this.dataArr[i].dayactive.indexOf(true) == -1){
+    if (this.validArr[i]) {
+      if (this.dataArr[i].dayactive.indexOf(true) == -1) {
         this.validArr[i] = false
-      } else [
+      } else[
         this.validArr[i] = true
       ]
     } else {
       this.validArr[i] = true
     }
-    
-    if(this.validArr.indexOf(false) == -1) {
+
+    if (this.validArr.indexOf(false) == -1) {
       this.valid = true
-    }else {
+    } else {
       this.valid = false
     }
     // if(name == 'tue' || name == 'fri') {

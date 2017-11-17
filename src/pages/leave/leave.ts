@@ -1,30 +1,78 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { leaveSyndicate } from '../../services/syndicate_leave.service'
 
-/*
-  Generated class for the Leave page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-leave',
   templateUrl: 'leave.html'
 })
 export class LeavePage {
+  syndicateId: any;
   deviceHeight: any;
+  paused: boolean = false;
+  leave: boolean = false;
+  leaveSuccess: boolean = false;
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {}
+  constructor(public navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    public navParams: NavParams,
+    public serviceLeave: leaveSyndicate,
+    public viewCtrl: ViewController) {
+    this.syndicateId = this.navParams.get("syndId")
+  }
 
   ionViewDidLoad() {
     this.deviceHeight = window.screen.height;
-    this.topmar = (this.deviceHeight/2) - 120;
-    console.log('ionViewDidLoad LeavePage',this.deviceHeight, this.topmar );
+    this.topmar = (this.deviceHeight / 2) - 120;
+    console.log('ionViewDidLoad LeavePage', this.deviceHeight, this.topmar);
   }
 
   dismissm() {
-    let data = {'foo':'bar'}
+    let data = { 'foo': 'bar' }
     this.viewCtrl.dismiss(data);
- }
+  }
+  pauseSyndicate() {
+    let loader = this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
+    loader.present().then(() => {
+      this.serviceLeave.managedSyndicatePause(this.syndicateId).subscribe(data => {
+        if (data) {
+          loader.dismiss();
+          this.leave = false
+          this.leaveSuccess = false
+          this.paused = true
+        }
+        else{
+          loader.dismiss()
+        }
+      })
+    })
 
+  }
+  moveTOffer(data: any = 'offerPage') {
+    debugger
+    this.viewCtrl.dismiss(data)
+  }
+  leaveSyndicate() {
+    let loader = this.loadingCtrl.create();
+    loader.present().then(() => {
+      this.serviceLeave.manageSyndicateLeave(this.syndicateId).subscribe(data => {
+        if (data) {
+          loader.dismiss();
+          this.paused = false;
+          this.leaveSuccess = false;
+          this.leave = true
+        }
+      })
+    })
+
+  }
+  leaveSynd() {
+    this.paused = false;
+    this.leave = false
+    this.leaveSuccess = true;
+
+  }
 }

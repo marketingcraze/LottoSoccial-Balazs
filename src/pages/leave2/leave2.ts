@@ -1,41 +1,57 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, LoadingController } from 'ionic-angular';
 import { ConfirmModalPage } from '../confirm-modal/confirm-modal';
+import { leaveSyndicate } from '../../services/syndicate_leave.service'
 
-/*
-  Generated class for the Leave2 page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-leave2',
   templateUrl: 'leave2.html'
 })
 export class Leave2Page {
-
-   deviceHeight: any;
+  privateSyndicate: any;
+  members; any
+  syndicateId: any;
+  deviceHeight: any;
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {}
+  constructor(public navCtrl: NavController, public leaveSynd: leaveSyndicate, public loadingCtrl: LoadingController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
+    debugger
+    this.members = this.navParams.get("members");
+    this.privateSyndicate = this.navParams.get("syndId")
+    this.syndicateId = this.privateSyndicate.syndicate_id
+  }
 
   ionViewDidLoad() {
     this.deviceHeight = window.screen.height;
-    this.topmar = (this.deviceHeight/2) - 150;
-    console.log('ionViewDidLoad LeavePage',this.deviceHeight, this.topmar );
+    this.topmar = (this.deviceHeight / 2) - 150;
+    console.log('ionViewDidLoad LeavePage', this.deviceHeight, this.topmar);
   }
 
   dismissm() {
-    let data = {'foo':'bar'}
+    let data = { 'foo': 'bar' }
     this.viewCtrl.dismiss(data);
- }
- confirm() {
-    let data = {'foo':'bar'}
-    this.viewCtrl.dismiss(data);
-    let confirmModal = this.modalCtrl.create(ConfirmModalPage);
-      confirmModal.onDidDismiss(data => {
-        console.log(data);
-      });
-      confirmModal.present();
- }
+  }
+  confirm() {
+    let loader = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
+    loader.present().then(() => {
+      this.leaveSynd.privateSyndicateLeave(this.syndicateId).subscribe(data => {
+        if (data) {
+          debugger
+          loader.dismiss()
+          // if (data.response[0].manage_syndicate.response.status == 'SUCCESS') {
+            this.viewCtrl.dismiss(data);
+            let confirmModal = this.modalCtrl.create(ConfirmModalPage);
+            confirmModal.onDidDismiss(data => {
+              console.log(data);
+            });
+            confirmModal.present();
+          // }
+        }
+      })
+    })
+
+  }
 
 }

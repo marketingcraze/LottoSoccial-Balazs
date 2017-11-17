@@ -98,7 +98,8 @@ export class ConfirmNumberPage {
 
   getbigjack(id:any) {
     let loader = this.loadingCtrl.create({
-      content: "Please wait..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     loader.present();
     this._syndService.getBigJack(id).subscribe((res) => {
@@ -129,7 +130,8 @@ export class ConfirmNumberPage {
 
   showPaymentOptions() {
     let loader = this.loadingCtrl.create({
-      content: "Please wait..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     loader.present();
     var arr = [];
@@ -203,7 +205,8 @@ export class ConfirmNumberPage {
 
     private _showLoader() {
         let loader = this.loadingCtrl.create({
-            content: "Loading data..."
+          spinner: 'hide',
+          content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;

@@ -98,7 +98,10 @@ export class PlayGamePage implements OnInit {
   }
 
   ionViewDidLoad() {
-    this.loading = this.loadingCtrl.create();
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     console.log('ionViewDidLoad PlayGamePage');
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
@@ -146,7 +149,7 @@ export class PlayGamePage implements OnInit {
   openThankyouPage() {
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
-        const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbarposition=top');
+        const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbar=no');
         browser.addEventListener('loadstart', (event) => {
           if (event.url.includes("win")) {
             browser.close();

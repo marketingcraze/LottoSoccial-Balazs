@@ -10,7 +10,9 @@ import { Content } from 'ionic-angular'
     templateUrl: 'affiliate.html'
 })
 export class AffiliatePage implements OnInit {
+    userCards: any;
     tabbarElement: any;
+    @ViewChild("confirmPayment") confirmPayment;
     @ViewChild(Content) content: Content;
 
     tabBarElement: any;
@@ -57,7 +59,10 @@ export class AffiliatePage implements OnInit {
 
     getAffiliateData() {
 
-        let loading = this.loadingCtrl.create();
+        let loading = this.loadingCtrl.create({
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        });
         console.log('ionViewDidLoad PlayGamePage');
         loading.present().then(() => {
             this._affiliateServices.loadAffiliateData()
@@ -134,6 +139,10 @@ export class AffiliatePage implements OnInit {
             this.viewctrl.dismiss();
         })
 
+    }
+    openPurchage(){
+        this.userCards
+        this.confirmPayment.togglePopup();
     }
 
     genrateRanNumberUpdate(luckyDips: any, index: any) {

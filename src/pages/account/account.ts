@@ -3,7 +3,8 @@ import {
 	App, NavController, NavParams, Platform, LoadingController, AlertController,
 	ModalController, Content
 } from 'ionic-angular';
-
+import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
+import { ActionSheetController } from 'ionic-angular'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 
@@ -50,7 +51,7 @@ export class AccountPage {
 	private refreshCache: boolean = false;
 	private unreadCount: number = 0;
 	downShowing = 0;
-	image_Data
+	image_Data:any;
 	down_arrow_showing = 0
 
 	winning_balanceAPI;
@@ -69,12 +70,30 @@ export class AccountPage {
 		winning_balance: 0.00,
 		percentage: 0
 	};
+	buttonLabels = [];
+	 options: ActionSheetOptions = {
+		
+		subtitle: 'Are you sure you want to log out?',
+		buttonLabels: this.buttonLabels,
+		addCancelButtonWithLabel: 'Cancel',
+		addDestructiveButtonWithLabel: 'Log Out',
+		androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+		destructiveButtonLast: true
+		
+	  };
 
+	//   subtitle: 'Are you sure you want to log out?',
+	//   buttonLabels: this.buttonLabels,
+	//   addCancelButtonWithLabel: 'Cancel',
+	//   addDestructiveButtonWithLabel: 'Delete',
+	//   androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+	//   destructiveButtonLast: true
 	constructor(
 		public app: App,
 		private params: Params,
 		private storage: Storage,
 		public navParams: NavParams,
+		public actionSheetCtrl: ActionSheetController,
 		private iab: InAppBrowser,
 		public authSrv: AuthService,
 		public platform: Platform,
@@ -90,13 +109,15 @@ export class AccountPage {
 		public cdRef: ChangeDetectorRef,
 		private file: File,
 		private http: Http,
-		public commonSrv: CommonService, ) {
+		public commonSrv: CommonService,
+		private actionSheet: ActionSheet ) {
 
 		console.log('AccountPage');
 
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 
 		this.loadAccountData()
+	
 	}
 
 	ionViewDidLoad() {
@@ -128,92 +149,92 @@ export class AccountPage {
 	loadAccountData() {
 		// show loading screen
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
-
+	  
 		// load data
 		this._badgesOs.getBadgesData().subscribe(badgeData => {
-			if (badgeData) {
-				this.badgesForYou = badgeData.response[0].badges
-			}
+		 if (badgeData) {
+		  this.badgesForYou = badgeData.response[0].badges
+		 }
 		})
 		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
-			.then(data => {
-				loader.dismiss();
-				this.waveShowingAccount = true
-				this.refreshCache = false;
-
-				console.log("AccountPage::ionViewDidLoad", data);
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].get_account_details) {
-						this.accountDetails = data[i].get_account_details.response;
-						if (this.accountDetails.bonus_credit) {
-
-							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
-							this.lastCalling()
-						}
-						else {
-							this.bonusCredit = 0;
-						}
-						if (this.accountDetails.reward_points) {
-							this.rewardPoints = parseInt(this.accountDetails.reward_points)
-						}
-						else {
-							this.rewardPoints = 0;
-						}
-
-
-
-						if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
-							var str = this.accountDetails.profile_image
-							console.log("last character is ", str.charAt(str.length - 1))
-							if (str.charAt(str.length - 1) == ".") {
-								str = str.substring(0, str.length - 1);
-								this.image_Data = str
-							}
-							else {
-								this.image_Data = this.accountDetails.profile_image
-							}
-						}
-						else {
-
-
-							if (localStorage.getItem("imageUrl")) {
-								this.image_Data = localStorage.getItem("imageUrl")
-							}
-							else {
-								this.image_Data = "assets/icon/user.svg"
-							}
-
-						}
-					} else if (data[i].get_home_message) {
-						this.homeMessage = data[i].get_home_message.response;
-						this.unreadCount = this.homeMessage.unread;
-					}
-					this.content.enableScrollListener();
-				}
-
-
-				console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
-
-				// 
-				var a = localStorage.getItem("arrow_accountP")
-				if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
-					this.down_arrow_showing = 1
-				}
-				else {
-					this.down_arrow_showing = 0
-				}
-				localStorage.setItem("arrow_accountP", "1")
-
-			}, err => {
-				loader.dismiss();
-				// show offline
-				this.params.setIsInternetAvailable(false);
-				console.log("AccountPage::ionViewDidLoad", err);
-			});
-	}
+		 .then(data => {
+		  loader.dismiss();
+		  this.waveShowingAccount = true
+		  this.refreshCache = false;
+	  
+		  console.log("AccountPage::ionViewDidLoad", data);
+		  for (var i = 0; i < data.length; i++) {
+		   if (data[i].get_account_details) {
+			this.accountDetails = data[i].get_account_details.response;
+			if (this.accountDetails.bonus_credit) {
+	  
+			 this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
+			 this.lastCalling()
+			}
+			else {
+			 this.bonusCredit = 0;
+			}
+			if (this.accountDetails.reward_points) {
+			 this.rewardPoints = parseInt(this.accountDetails.reward_points)
+			}
+			else {
+			 this.rewardPoints = 0;
+			}
+	  
+	  
+	  
+			if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
+			{
+			 var str = this.accountDetails.profile_image
+			 console.log("last character is ",str.charAt(str.length - 1) )
+			 if(str.charAt(str.length - 1) == ".")
+			 {
+			 str = str.substring(0, str.length - 1);
+			 this.image_Data = str
+			 }
+			 else{
+			  this.image_Data = this.accountDetails.profile_image
+			 }
+			}
+			else{
+			 if(localStorage.getItem("imageUrl"))
+			 {
+			  this.image_Data = localStorage.getItem("imageUrl")
+			 }else{
+			 this.image_Data = "assets/icon/user.svg"
+			 }
+			}
+		   } else if (data[i].get_home_message) {
+			this.homeMessage = data[i].get_home_message.response;
+			this.unreadCount = this.homeMessage.unread;
+		   }
+		   this.content.enableScrollListener();
+		  }
+	  
+	  
+		  console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
+	  
+		  // 
+		  var a = localStorage.getItem("arrow_accountP")
+		  if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
+		   this.down_arrow_showing = 1
+		  }
+		  else {
+		   this.down_arrow_showing = 0
+		  }
+		  localStorage.setItem("arrow_accountP", "1")
+	  
+		 }, err => {
+		  loader.dismiss();
+		  // show offline
+		  this.params.setIsInternetAvailable(false);
+		  console.log("AccountPage::ionViewDidLoad", err);
+		 });
+	   }
 	updateNickName() {
 		this.appSound.play('buttonClick');
 		let alert = this.alertCtrl.create({
@@ -305,7 +326,8 @@ export class AccountPage {
 		console.log('AccountPage::updateNickname() ', nick);
 
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 
@@ -368,6 +390,12 @@ export class AccountPage {
 			err => console.log(err);
 	}
 	lastCalling() {
+		debugger;
+		if (localStorage.getItem("imageUrl")) {
+			this.image_Data = localStorage.getItem("imageUrl")
+		}
+		
+		var dat = localStorage.getItem("imageUrl")
 
 		this.commonSrv.getCreditPoints().subscribe(data => {
 			console.log("at last data is ", data)
@@ -396,7 +424,8 @@ export class AccountPage {
 	}
 	uploadImage() {
 		let loader = this.loadingCtrl.create({
-			content: "Please wait..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present();
 
@@ -423,18 +452,20 @@ export class AccountPage {
 	private uploadPhoto(imageFileUri: any): void {
 		this.error = null;
 		this.loading = this.loadingCtrl.create({
-			content: 'Uploading...'
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
-
+debugger
 		this.loading.present();
 
 		this.file.resolveLocalFilesystemUrl(imageFileUri)
 			.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
-			.catch(err => console.log(err));
+			.catch(err => 	this.loading.dismiss());
 	}
 
 	private readFile(file: any) {
-
+		debugger
+		this.loading.dismiss();
 		var reader;
 		reader = new FileReader();
 		reader.onloadend = (e) => {
@@ -447,11 +478,11 @@ export class AccountPage {
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);
-		
+
 	}
 
 	postData(blob: any, fileName: string) {
-
+		debugger
 		//let server = CommonService.apiUrl +			CommonService.version + '/upload/?process=profile';
 
 		let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=profile'
@@ -474,19 +505,19 @@ export class AccountPage {
 			mimeType: "image/" + extension,
 			headers: myHeaders
 		};
-
+		this.loading.dismiss();
 		console.log("SignupPage:: upload image options:", options);
 		this.http.post(server, blob, options)
 			.catch(err => this.handleError(err))
 			.map(response => response.json())
 			// .finally(() => console.log('inside finaly'))
 			.subscribe((ok) => {
-
+				debugger
 				this.loading.dismiss();
 				console.log("uploadPhoto:");
 				console.log(ok);
 				this.uploadAPI_Image(ok.response.image_name);
-			}),(Err)=>{
+			}), (Err) => {
 				this.loading.dismiss();
 			}
 
@@ -494,7 +525,7 @@ export class AccountPage {
 	private customerId: string = "";
 
 	uploadAPI_Image(image_url: any) {
-
+		debugger
 		this.srvAccount.saveImageUrl(image_url).subscribe(data => {
 			if (data) {
 				// alert(data.response)
@@ -529,6 +560,41 @@ export class AccountPage {
 	goToBadgesView(badge: any) {
 
 		this.navCtrl.push(BadgeViewPage, { badge: badge });
+	}
+	presentActionSheet() {
+		if (this.platform.is('cordova')) {
+		this.actionSheet.show(this.options).then((buttonIndex: number) => {
+			console.log('Button pressed: ' + buttonIndex);
+			if(buttonIndex == 1){
+				this.logout()	
+			}
+		  });
+		}
+		else
+		{
+			this.logout()
+		}
+		// let actionSheet = this.actionSheetCtrl.create({
+		// 	title: 'Are you sure you want to log out?',
+		// 	buttons: [
+		// 		{
+		// 			text: 'Log Out',
+		// 			role: 'destructive',
+		// 			handler: () => {
+		// 				this.logout()
+		// 			}
+		// 		},
+		// 		{
+		// 			text: 'Cancel',
+		// 			role: 'cancel',
+		// 			handler: () => {
+		// 				console.log('Cancel clicked');
+		// 			}
+		// 		}
+		// 	]
+		// });
+
+		// actionSheet.present();
 	}
 
 

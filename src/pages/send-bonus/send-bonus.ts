@@ -28,10 +28,10 @@ export class SendBonusPage {
 	itemPriceModel: any;
 	Credit_Points2: any;
 	liveCreditPoint: any = 0.00;
-	waveShowingAccount:boolean = true;
+	waveShowingAccount: boolean = true;
 	winning_balanceAPI;
-    reward_pointsAPI;
-    bonus_creditAPI;
+	reward_pointsAPI;
+	bonus_creditAPI;
 
 
 	private cache: CacheController;
@@ -79,7 +79,7 @@ export class SendBonusPage {
 		public authSrv: AuthService,
 		public navCtrl: NavController,
 		public modalCtrlr: ModalController,
-		public menu: MenuController,public commonSrv: CommonService,
+		public menu: MenuController, public commonSrv: CommonService,
 		public navParams: NavParams, public cdRef: ChangeDetectorRef,
 		public loadingCtrl: LoadingController) {
 		this.nav = this.app.getRootNav();
@@ -148,7 +148,7 @@ export class SendBonusPage {
 					this.Credit_Points2 = 0;
 					loader.dismiss();
 				}
-				
+
 			}
 			this.lastCalling()
 			//console.log("get_Credit_Points",data)
@@ -162,7 +162,10 @@ export class SendBonusPage {
 	}
 
 	buyCreditOffer(offerId: any, openSuccessModal: any) {
-		this.loading = this.loadingCtrl.create();
+		this.loading = this.loadingCtrl.create({
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+		});
 		this.loading.present().then(() => {
 			this.offerService.buy_Credit_Offer(offerId, this.visitorId).subscribe(data => {
 				this.loading.dismiss();
@@ -220,7 +223,8 @@ export class SendBonusPage {
 
 	private _showLoader() {
 		let loader = this.loadingCtrl.create({
-			content: "Loading data..."
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
 		});
 		loader.present()
 		return loader;
@@ -228,10 +232,14 @@ export class SendBonusPage {
 	showModalForcreditoffer() {
 		let resultModal = this.modalCtrlr.create(offerBuyResultPage, { syndicateName: this.buyoffer, status: this.offerStatus });
 		resultModal.present();
-		resultModal.onDidDismiss((data: any[]) => {
+		resultModal.onDidDismiss((data: any) => {
 			if (data) {
-				var tabs: Tabs = this.navCtrl.parent.parent.parent;
-				tabs.select(1);
+				if (data == 'getMoreLines') {
+					this.lastCalling()
+				} else {
+					var tabs: Tabs = this.navCtrl.parent.parent.parent;
+					tabs.select(1);
+				}
 			}
 		})
 
@@ -261,36 +269,32 @@ export class SendBonusPage {
 		mgmModal.present();
 	}
 
-	  lastCalling(){
-        
-        this.commonSrv.getCreditPoints().subscribe(data=>{
-            console.log("at last data is ", data)
-            if(data)
-            {
-                if(data.response[0].get_balance_details)
-                {
-                    if(data.response[0].get_balance_details.response.bonus_credit)
-                    {
-						this.Credit_Points2 = parseInt(data.response[0].get_balance_details.response.bonus_credit.slice(1))
+	lastCalling() {
+		debugger
+		this.commonSrv.getCreditPoints().subscribe(data => {
+			console.log("at last data is ", data)
+			if (data) {
+				if (data.response[0].get_balance_details) {
+					if (data.response[0].get_balance_details.response.bonus_credit) {
+						this.Credit_Points2 = data.response[0].get_balance_details.response.bonus_credit.slice(1)
 						//Credit_Points2
-                    }
-                    else{
-                        this.Credit_Points2 = 0
-                    }
-                    this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
-                    this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
-                 }
-                else
-                {
-                    this.Credit_Points2 = 0
-                    this.winning_balanceAPI = 0
-                    this.reward_pointsAPI = 0
-                }
-           
-            }
-           this.waveShowingAccount = false
-            
+					}
+					else {
+						this.Credit_Points2 = 0
+					}
+					this.winning_balanceAPI = data.response[0].get_balance_details.response.winning_balance
+					this.reward_pointsAPI = data.response[0].get_balance_details.response.reward_points
+				}
+				else {
+					this.Credit_Points2 = 0
+					this.winning_balanceAPI = 0
+					this.reward_pointsAPI = 0
+				}
 
-        })
-    }
+			}
+			this.waveShowingAccount = false
+
+
+		})
+	}
 }

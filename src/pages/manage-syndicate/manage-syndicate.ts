@@ -13,24 +13,34 @@ import { LeavePage } from '../leave/leave';
   templateUrl: 'manage-syndicate.html'
 })
 export class ManageSyndicatePage {
+  syndicate: any;
+  sId: any;
+  oneOff: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
+    this.syndicate = this.navParams.get("syndicate")
+    this.sId=this.syndicate.syndicate_id;
+    if (this.syndicate.syndicate_end_date == 'oneoff') {
+      this.oneOff = true
+    }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ManageSyndicatePage');
   }
-   ionViewWillEnter() {
-        this.viewCtrl.showBackButton(false);
-    }
-    close() {
-      this.navCtrl.pop();
-    }
-    leaveSyndicate() {
-      let leaveModal = this.modalCtrl.create(LeavePage);
-      leaveModal.onDidDismiss(data => {
-        console.log(data);
-      });
-      leaveModal.present();
-    }
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+  }
+  close() {
+    this.navCtrl.pop();
+  }
+  leaveSyndicate() {
+    let leaveModal = this.modalCtrl.create(LeavePage, { syndId: this.sId });
+    leaveModal.onDidDismiss(data => {
+      if (data == 'offerPage')
+        this.viewCtrl.dismiss(data)
+    });
+    leaveModal.present();
+  }
 
 }

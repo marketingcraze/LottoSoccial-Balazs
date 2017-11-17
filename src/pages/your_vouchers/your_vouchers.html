@@ -12,7 +12,7 @@
 <ion-content scroll="true" class="mainContent" style="margin-bottom: 46px" >
   
   <ion-list class="firstList">
-
+<div style="background: white">
     <ion-item text-wrap text-center no-lines style="margin-top: 5px">
       <div class="voucherCodeHeadingDiv">
         <span><b class="voucherCodeHeading">REDEEM YOUR VOUCHER CODE</b></span><br>
@@ -20,16 +20,22 @@
 
       </div>
     </ion-item>
-    <ion-item class="voucherCodeTextItem">
-      <ion-label stacked class="voucherCodeInputHeading">Enter your Voucher here</ion-label>
-      <ion-input type="text" placeholder="VOUCHERCODE" [(ngModel)] = "voucher_code" class="voucherCodeText"></ion-input>
-    </ion-item>
+    <!-- <ion-item class="voucherCodeTextItem">
+
+      <ion-input type="text" placeholder="Enter Voucher code"  ></ion-input>
+    </ion-item> -->
+    <ion-col col-10 #popoverText>
+			<ion-item style="position: relative;top: -18px;">
+				<ion-input type="tel" name="mobile" [(ngModel)] = "voucher_code" placeholder="Enter Voucher code" required></ion-input>
+			</ion-item>
+		</ion-col>
 
     <ion-item text-wrap text-center no-lines>
       <div class="redeemButtonDiv">
         <input type="button" value="VIEW" class="redeemButton" (tap)="voucherCodeClaimButton()"/>
       </div>
     </ion-item>
+  </div>
 <ion-list>
     <div *ngIf="count>0" style="margin-top: 4px">
       <ion-item text-wrap text-center class="yourVoucherList">

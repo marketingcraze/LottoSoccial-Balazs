@@ -21,13 +21,14 @@
       <div style="margin-top: -4px">
         <ul style="font-size: 14px" *ngFor='let lst of lottoMiddleJson;let i=index;'>
           <li  *ngIf="lst" class="middleDescription">{{lottoMiddleJson[i]}}</li>
-         <li  *ngIf="!lst" style="font-size: 15px;">No Voucher Description</li>
+         <li  *ngIf="!lst" style="font-size: 15px;"> Invalid Voucher</li>
         </ul>
       </div>
     </ion-item>
     <ion-item text-center no-lines style="border-radius: 0px 0px 10px 10px">
       <div style="text-align: center">
-        <input type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
+        <input *ngIf="lst && show" type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
+        <input *ngIf="!lst && show" type="button" value="TRY AGAIN" class="claimButton" (click) = "dismissPopUp()" >
       </div>
         <div class="dismissLinkDiv" >
           <p class="dismissLink" (click)="dismissPopUp()">Maybe Later </p>

@@ -34,14 +34,16 @@
 }
 .mainContainer{
     background-color: white;
-    height: 43vh;
+    height: 60%;
 }
 .SlideSubTitleOffer{
     font-size:15px;
     font-weight: bolder;
+    text-align: center;
 }
 .SpaceBetweenRowOffer{
     display: -webkit-inline-box;
+    margin-top: 13%;
 }
 .SlideContentBorderTopOffer{
     margin-top: -10px;
@@ -87,7 +89,8 @@ offer-buy{
             margin-top: 15px !important;
         }
         .row{
-            height: 6.5vh;
+            height: 13%;
+            // margin-top: 5%;
         }
         .drawDayMargin{
             margin-top:0%;
@@ -122,4 +125,22 @@ offer-buy{
             color: white;
             font-size: 1.10em;
         }
+      .iconArrow{
+        position: relative;
+        left: 47%;
+        font-size: 34px;
+        top: -21px;
+      }
+      .titleFooter{
+        text-align: center;
+        position: relative;
+        margin-top: -33px;
+      }
+      ion-footer{
+        margin: 5% 0 0 5%;;
+        width: 90%!important
+      }
+      .myGrid{
+        padding: 25px 0!important;
+      }
 }

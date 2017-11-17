@@ -1,8 +1,8 @@
 import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import { Transfer, FileUploadOptions, TransferObject, } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -15,15 +15,15 @@ import { Params } from './params';
 @Injectable()
 export class HomeService {
 
-    private customerId:string = "";
+    private customerId: string = "";
 
     static get parameters() {
         return [[Http]];
     }
-  
+
     constructor(
-        private http:Http, 
-        private params:Params,
+        private http: Http,
+        private params: Params,
         private storage: Storage,
         public platform: Platform,
         private transfer: Transfer,
@@ -31,12 +31,12 @@ export class HomeService {
 
         console.log("HomeService");
 
-        
+
     }
 
-    getModules(action:string, page_id:string, module_names:string[]) {
+    getModules(action: string, page_id: string, module_names: string[]) {
 
-        if ( !CommonService.session ) {
+        if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
                 observer.complete();
@@ -50,15 +50,15 @@ export class HomeService {
             });
         }
         this.customerId = CommonService.session.customer_id;
-        console.log("getModules", CommonService.session );
+        console.log("getModules", CommonService.session);
 
         let parameter = { request: [] };
 
         for (var i = 0; i < module_names.length; ++i) {
             parameter.request.push({
                 page_id: page_id,
-                screen_id: "1.4", 
-                module_name: module_names[i], 
+                screen_id: "1.4",
+                module_name: module_names[i],
                 customer_id: this.customerId
             });
         }
@@ -75,6 +75,7 @@ export class HomeService {
     }
 
     getHomeCard(module_name) {
+        debugger;
         console.log("getHomeCard");
         if (!CommonService.isOnline) {
             this.params.setIsInternetAvailable(false);
@@ -84,12 +85,44 @@ export class HomeService {
         let action = CommonService.version + '/home/';
         let parameter = {
             "request": [
-            {
-                "page_id": "1",
-                "screen_id": "1.4", 
-                "module_name": module_name, 
-                "customer_id": this.customerId
-            }
+                {
+                    "page_id": "1",
+                    "screen_id": "1.4",
+                    "module_name": module_name,
+                    "customer_id": this.customerId
+                }
+            ]
+        };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        var response = this.http.post(CommonService.apiUrl + action, parameter, opt).map(response => response.json());
+        return response;
+    }
+    getHomeEventsBlog() {
+        console.log("getHomeCard");
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+
+        let action = CommonService.version + '/home/';
+        let parameter = {
+            "request": [
+                {
+                    "page_id": "1",
+                    "screen_id": "1.6.2",
+                    "module_name": "get_home_blog",
+                    "customer_id": this.customerId
+                },
+                {
+                    "page_id": "1",
+                    "screen_id": "1.6.1",
+                    "module_name": "get_home_events",
+                    "customer_id": this.customerId
+                }
+
             ]
         };
         let opt: RequestOptions = new RequestOptions({
@@ -103,7 +136,7 @@ export class HomeService {
 
     getHomeMessages() {
 
-        if ( !CommonService.session ) {
+        if (!CommonService.session) {
             return null;
         }
         if (!CommonService.isOnline) {
@@ -115,14 +148,14 @@ export class HomeService {
         let url = CommonService.apiUrl + CommonService.version + '/limb/';
         let parameter = {
             "request": [
-            {
-                "session_ID": CommonService.sessionId,
-                "action": "login_mobile_app",
-                "page_id": "1",
-                "screen_id": "1.8", 
-                "module_name": "get_home_message", 
-                "customer_id": CommonService.session.customer_id
-            } 
+                {
+                    "session_ID": CommonService.sessionId,
+                    "action": "login_mobile_app",
+                    "page_id": "1",
+                    "screen_id": "1.8",
+                    "module_name": "get_home_message",
+                    "customer_id": CommonService.session.customer_id
+                }
             ]
         };
         let opt: RequestOptions = new RequestOptions({
@@ -132,12 +165,12 @@ export class HomeService {
         var response = this.http.post(url, parameter, opt).map(response => response.json());
         return response;
     }
-    
-    
+
+
     getCreditOffers() {
         console.log("HomeService::getCreditOffers");
 
-        if ( !CommonService.session ) {
+        if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
                 observer.complete();
@@ -150,11 +183,11 @@ export class HomeService {
                 observer.complete();
             });
         }
-        
+
         let url = CommonService.apiUrlDF + 'proc_get_credit_offers_mobile_app';
         let parameter = {
             "params": [{
-                "name":"json_request",
+                "name": "json_request",
                 "param_type": "IN",
                 "value": "{\"page_id\": \"2\",\"screen_id\": \"2..1\",\"module_name\":\"get_credit_offer\",\"customer_id\": \"1970400\"}",
                 "type": "NVARCHAR(500)",
@@ -166,7 +199,7 @@ export class HomeService {
                 "value": "",
                 "type": "NVARCHAR(max)"
             }],
-            "request_source":"mobile_app"
+            "request_source": "mobile_app"
         };
 
         let opt: RequestOptions = new RequestOptions({
@@ -176,8 +209,8 @@ export class HomeService {
         var response = this.http.post(url, parameter, opt).map(response => response.json());
         return response;
     }
-    
-    
+
+
 }
 
 

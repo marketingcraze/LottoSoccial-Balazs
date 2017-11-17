@@ -29,9 +29,9 @@
     <div style="padding: 10px 0;"><span class="tkt-day">EURO FRI</span> <span class="tkt-day">EURO TUE</span></div>
     <div style="padding: 2px 0;">10 Euromillions line in every Tuesday and Friday draw</div>
   </div>
-  <div class="sub-c"><ion-icon name="ios-help-circle-outline" class="s-ic" style="color: #2F76D1;"></ion-icon>Need help?<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
+  <!-- <div class="sub-c"><ion-icon name="ios-help-circle-outline" class="s-ic" style="color: #2F76D1;"></ion-icon>Need help?<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div> -->
   <div class="sub-c"><span style="content: url(../assets/icon/history-ico.svg); width: 14px;margin-right: 2px;"></span>Recent draws<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
   <div class="sub-c"><span style="content: url(../assets/icon/syndicates_ico.svg); width: 14px;margin-right: 2px;"></span> View tickets<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
   <div class="sub-c">View syndicate agreement<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
-  <div style="text-align: center;padding: 25px;"> <a (click)="leaveSyndicate()">Leave syndicate</a></div>
+  <div *ngIf="!oneOff" style="text-align: center;padding: 25px;"> <a (click)="leaveSyndicate()">Leave syndicate</a></div>
 </ion-content>

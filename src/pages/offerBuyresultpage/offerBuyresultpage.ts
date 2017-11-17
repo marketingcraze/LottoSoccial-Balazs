@@ -17,8 +17,8 @@ export class offerBuyResultPage {
         this.status = this.navParams.get("status");
         this.nav = this.app.getRootNav();
     }
-    getmoreline() {
-        this.viewCtrl.dismiss();
+    getmoreline(data:any="getMoreLines") {
+        this.viewCtrl.dismiss(data);
     }
     moveToSyndicate(data:boolean=true) {
         this.viewCtrl.dismiss(data);

@@ -15,5 +15,12 @@ game-blog{
         box-shadow: 0 16px 20px rgba(0,0,0,.4);
         background-color: #fafafa;
     }
-      
+      .imgClassClose{
+        position: fixed;
+        height: 44px;
+        width: 47px;
+        left: 88%;
+        top: 14%;
+        z-index: 9999;
+      }
     }

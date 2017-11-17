@@ -43,10 +43,12 @@ export class InviteFriendsPage {
     this.sid = this.navParams.get('sid');
     console.log(this.sid);
     this.loader = this.loadingCtrl.create({
-      content:"Please wait..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     this.loader2 = this.loadingCtrl.create({
-      content:"Fetching Contacts..."
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     this.searchControl = new FormControl();
     this.searchControl.valueChanges.debounceTime(100).subscribe(search => {

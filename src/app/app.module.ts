@@ -117,6 +117,7 @@ import { AffiliateServices } from '../services/affliate.service';
 import { forkOffersSyndicate } from '../services/syndicateForkOffer.service';
 import { winnerTips } from '../services/recentWinnerTips.service';
 import { badgesOs } from '../services/badges.service';
+import { leaveSyndicate } from '../services/syndicate_leave.service'
 
 // providers
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -136,7 +137,7 @@ import { paymentService } from '../services/paymentService'
 import { Badge } from '@ionic-native/badge'
 import { AppVersion } from '@ionic-native/app-version';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
-
+import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -155,6 +156,7 @@ import { Device } from '@ionic-native/device';
 import { AffiliatePage } from '../pages/affiliate/affiliate'
 import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
 import {} from '../pages'
+import { SessionCheckOutPage } from '../pages/session-check-out/session-check-out';
 
 
 
@@ -262,6 +264,7 @@ import {} from '../pages'
         ValuePipe,
         CapitalizeFirstPipe,
         TimeDifferencePipe,
+        SessionCheckOutPage,
 
         // popups 
         CountryListPopPage,
@@ -279,6 +282,7 @@ import {} from '../pages'
         BrowserModule,
         IonicModule.forRoot(MyApp,
         {
+            // tabsHideOnSubPages: true,
             autoFocusAssist: false,
             scrollAssist: false,
             tabsPlacement:'top', 
@@ -356,6 +360,7 @@ import {} from '../pages'
         PlayGamesThankYou,
         BadgesPage,
         BadgeViewPage,
+        SessionCheckOutPage,
         GameThankYou,
         GameThankyouSubmittip,
         howtoplay,
@@ -389,10 +394,10 @@ import {} from '../pages'
         AffiliatePage2,
         AgreementPage
     ],
-    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },ActionSheet,
         AnimationService, DatabaseService,paymentService, CommonService,Badge,UniqueDeviceID,  AuthService, HomeService, AccountService, Params,AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion]
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion,leaveSyndicate]
 
 })
 export class AppModule { }

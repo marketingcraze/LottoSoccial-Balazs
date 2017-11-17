@@ -14,12 +14,14 @@ page-yourvouchers {
   padding-top: 0px;
 }
 .voucherCodeTextItem{
-  padding-right: 16px
+  padding-right: 16px;
+  margin-top: -12px;
 }
 .voucherCodeText{
   font-size: 20px;
   margin-top: -10px; 
   color: black;
+  border: 1px solid;
 }
 .redeemButtonDiv{
   margin-top: 2%;

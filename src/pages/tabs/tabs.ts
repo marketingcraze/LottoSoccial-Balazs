@@ -69,7 +69,7 @@ export class TabsPage {
         this.gameData = "game data";
 
         this.mySelectedIndex = navParams.data.tabIndex || 2;
-
+debugger
         if (this.params.events) {
             this.params.events.subscribe('go-page', (page) => {
                 let currentTab = this.homeTabs.getActiveChildNav();
@@ -107,7 +107,8 @@ export class TabsPage {
 
         // this.initData();
         let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
 

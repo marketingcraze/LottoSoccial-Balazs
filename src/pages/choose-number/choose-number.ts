@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 import { ConfirmNumberPage } from '../confirm-number/confirm-number';
 import { SyndicateService } from '../../providers/syndicate-service';
-declare var $: any; 
+declare var $: any;
 
 @Component({
   selector: 'page-choose-number',
   templateUrl: 'choose-number.html'
 })
 export class ChooseNumberPage {
-   
+
   dError = false;
   errArr = [];
   dataArr = [];
   syndId: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl:ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
     //this.dataArr = JSON.parse(localStorage.getItem('cardSelected'));
     this.syndId = this.navParams.get('s_id')
     // this.syndId = localStorage.getItem('synd_id');
@@ -23,7 +23,7 @@ export class ChooseNumberPage {
 
   ionViewDidLoad() {
     this.syndNumber(this.syndId);
-    
+
   }
 
   next() {
@@ -32,38 +32,37 @@ export class ChooseNumberPage {
   }
 
   clear(index, n1, n2) {
-    for(var i=0; i<this.dataArr[index].lines.length; i++) {
-        var arr = []
-        var errArr = []
-        for(var j=0; j< n1+n2; j++) {
-          arr.push("")
-          errArr.push(false)
-        }
-        this.dataArr[index].lines[i] = arr;
-        this.dataArr[index].hasError[i] = errArr
+    for (var i = 0; i < this.dataArr[index].lines.length; i++) {
+      var arr = []
+      var errArr = []
+      for (var j = 0; j < n1 + n2; j++) {
+        arr.push("")
+        errArr.push(false)
       }
-      this.errArr[index] = false;
-      this.dError = false
+      this.dataArr[index].lines[i] = arr;
+      this.dataArr[index].hasError[i] = errArr
+    }
+    this.errArr[index] = false;
+    this.dError = false
   }
 
   getlucky(index, n1, n1_f, n1_t, n2, n2_f, n2_t) {
-    for(var j=0; j<this.dataArr[index].lines.length; j++) {
+    for (var j = 0; j < this.dataArr[index].lines.length; j++) {
       var arr = [];
       var errArr = [];
-      for(var i=0; i<n1 + n2; i++) {
+      for (var i = 0; i < n1 + n2; i++) {
         errArr.push(false)
-        if(i<n1){
+        if (i < n1) {
           var random = this.getRandomArbitrary(n1_f, n1_t)
-          if(arr.indexOf(random) == -1){
+          if (arr.indexOf(random) == -1) {
             arr.push(random);
           } else {
             random = this.getRandomArbitrary(n1_f, n1_t)
             arr.push(random);
           }
-        }else {
+        } else {
           var random = this.getRandomArbitrary(n2_f, n2_t)
-          if(arr.indexOf(random) == -1)
-          {
+          if (arr.indexOf(random) == -1) {
             arr.push(random)
           } else {
             random = this.getRandomArbitrary(n2_f, n2_t)
@@ -74,21 +73,21 @@ export class ChooseNumberPage {
       this.dataArr[index].hasError[j] = errArr;
       this.dataArr[index].lines[j] = arr;
 
-    var tArr = [];
-    for(var s=0; s<this.dataArr.length; s++) {
-      for(var t=0; t<this.dataArr[s].lines.length; t++) {
-        tArr = tArr.concat(this.dataArr[s].lines[t]);
+      var tArr = [];
+      for (var s = 0; s < this.dataArr.length; s++) {
+        for (var t = 0; t < this.dataArr[s].lines.length; t++) {
+          tArr = tArr.concat(this.dataArr[s].lines[t]);
+        }
+        if (tArr.indexOf('') == -1) {
+          this.errArr[s] = true;
+        } else {
+          this.errArr[s] = false;
+        }
       }
-      if(tArr.indexOf('') == -1) {
-        this.errArr[s] = true;
-      } else {
-        this.errArr[s] = false;
-      }
-    }
 
     }
     this.errArr[index] = true
-    if(this.errArr.indexOf(false) == -1) {
+    if (this.errArr.indexOf(false) == -1) {
       this.dError = true
     }
   }
@@ -98,89 +97,90 @@ export class ChooseNumberPage {
   }
 
   onKey(r, w, i, rt, rn, bt, bn) {
-   
+
     var val = this.dataArr[r].lines[w][i];
     var count = 0;
-      if(i > rn-1 && val > bt) {
+    if (i > rn - 1 && val > bt) {
+      val = "";
+      this.dataArr[r].lines[w][i] = val;
+      $("#input" + r + w + i).focus();
+    } else {
+      if (val > rt) {
         val = "";
-        this.dataArr[r].lines[w][i] = val ;
-        $("#input"+r+w+i).focus();
-      } else {
-        if(val > rt) {
-          val = "";
-          this.dataArr[r].lines[w][i] = val;
-          $("#input"+r+w+i).focus();
-        }
+        this.dataArr[r].lines[w][i] = val;
+        $("#input" + r + w + i).focus();
       }
+    }
     var tArr = [];
-    for(var t=0; t<this.dataArr[r].lines.length; t++) {
+    for (var t = 0; t < this.dataArr[r].lines.length; t++) {
       tArr = tArr.concat(this.dataArr[r].lines[t]);
     }
-    if(tArr.indexOf('') == -1) {
+    if (tArr.indexOf('') == -1) {
       this.errArr[r] = true;
     } else {
       this.errArr[r] = false;
     }
 
-    for(var x=0; x<this.dataArr[r].lines[w].length; x++) {
-      if(this.dataArr[r].lines[w][x] == val) {
+    for (var x = 0; x < this.dataArr[r].lines[w].length; x++) {
+      if (this.dataArr[r].lines[w][x] == val) {
         count++;
       }
-    }   
-      if( count > 1 && val != "") {
-        this.dataArr[r].lines[w][i] = "";
-        this.dataArr[r].hasError[w][i] = true
-        $("#input"+r+w+i).focus();
-      } else {
-        this.dataArr[r].lines[w][i] = val;
-        this.dataArr[r].hasError[w][i] = false
-      }
+    }
+    if (count > 1 && val != "") {
+      this.dataArr[r].lines[w][i] = "";
+      this.dataArr[r].hasError[w][i] = true
+      $("#input" + r + w + i).focus();
+    } else {
+      this.dataArr[r].lines[w][i] = val;
+      this.dataArr[r].hasError[w][i] = false
+    }
 
-    if(this.errArr.indexOf(false) == -1) {
+    if (this.errArr.indexOf(false) == -1) {
       this.dError = true
     } else {
       this.dError = false
     }
-      
-      // if(this.dataArr[r].lines[w].indexOf(val) == -1) {
-      //   console.log('index c')
-      //   this.dataArr[r].lines[w][i] = val;
-      // }else {
-      //   console.log(this.dataArr[r].lines[w]);
-      //   console.log('inside else');
-      //   this.dataArr[r].lines[w][i] = "";
-      // }
+
+    // if(this.dataArr[r].lines[w].indexOf(val) == -1) {
+    //   console.log('index c')
+    //   this.dataArr[r].lines[w][i] = val;
+    // }else {
+    //   console.log(this.dataArr[r].lines[w]);
+    //   console.log('inside else');
+    //   this.dataArr[r].lines[w][i] = "";
+    // }
 
   }
 
   syndNumber(id: any) {
     let loader = this.loadingCtrl.create({
-            content: "Please wait..."
-        });
-        loader.present();
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
+    loader.present();
     this._syndService.syndnumber(id).subscribe((res) => {
       console.log(res);
       loader.dismiss();
       this.dataArr = res.response.response.product_group;
-      for(var i=0; i<this.dataArr.length; i++) {
+      for (var i = 0; i < this.dataArr.length; i++) {
         this.errArr[i] = true;
-      var count = this.dataArr[i].numbers + this.dataArr[i].bonus;
-      var arr = [];
-      var errorArr = []
-      for(var j=0; j<this.dataArr[i].line_count; j++) {
+        var count = this.dataArr[i].numbers + this.dataArr[i].bonus;
+        var arr = [];
+        var errorArr = []
+        for (var j = 0; j < this.dataArr[i].line_count; j++) {
           var tempArr = []
           var tempArr2 = []
-          for(var k=0; k<count; k++) {
+          for (var k = 0; k < count; k++) {
             tempArr.push("")
             tempArr2.push(false)
           }
           arr.push(tempArr)
           errorArr.push(tempArr2)
+        }
+        this.dataArr[i].lines = arr;
+        this.dataArr[i].hasError = errorArr;
       }
-      this.dataArr[i].lines = arr;
-      this.dataArr[i].hasError = errorArr;
-    }
-    console.log(this.dataArr)
+      console.log(this.dataArr)
 
     })
   }

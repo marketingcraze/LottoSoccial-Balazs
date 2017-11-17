@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, App, Tabs, LoadingController, ViewController } from 'ionic-angular';
+import { NavController, NavParams, App, Tabs, LoadingController, ViewController, ModalController } from 'ionic-angular';
 import { ManageSyndicatePage } from '../manage-syndicate/manage-syndicate';
 import { ManageSyndicate2Page } from '../manage-syndicate2/manage-syndicate2';
 import { YourTicketsPage } from '../your-tickets/your-tickets';
@@ -42,6 +42,7 @@ export class MySyndicatePage {
         public app: App,
         public iab: InAppBrowser,
         public navParams: NavParams,
+        public modalCtrl: ModalController,
         public platform: Platform,
         public srvOffer: OfferService,
         public navCtrl: NavController,
@@ -98,13 +99,26 @@ export class MySyndicatePage {
         var t: Tabs = this.navCtrl.parent;
         t.select(1);
     }
-    manage_syndicates() {
+    manage_syndicates(sd: any) {
+        debugger
         this.appSound.play('buttonClick');
-        this.app.getRootNav().push(ManageSyndicatePage);
+        let Modal = this.modalCtrl.create(ManageSyndicatePage, { syndicate: sd});
+        Modal.onDidDismiss(data => {
+            if (data == 'offerPage') {
+                var tabs: Tabs = this.navCtrl.parent.parent.parent;
+                tabs.select(4)
+            }
+
+        })
+        Modal.present();
     }
-    manage_syndicates2() {
+    manage_syndicates2(sd: any) {
+        debugger
         this.appSound.play('buttonClick');
-        this.app.getRootNav().push(ManageSyndicate2Page);
+        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate_id: sd });
+        Modal.present();
+        // this.appSound.play('buttonClick');
+        // this.app.getRootNav().push(ManageSyndicate2Page);
     }
     viewTickets(i) {
 
@@ -121,7 +135,8 @@ export class MySyndicatePage {
 
     loadSyndicate() {
         let loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
         this._syndService.syndicateList().subscribe((res) => {
@@ -131,14 +146,13 @@ export class MySyndicatePage {
             if (res.response[0].get_syndicate_list.response.syndicate_group) {
                 this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
                 var a = localStorage.getItem("syndicateP")
-                if(localStorage.getItem("syndicateP") == undefined || localStorage.getItem("syndicateP") == null)
-                {
+                if (localStorage.getItem("syndicateP") == undefined || localStorage.getItem("syndicateP") == null) {
                     this.down_arrow_showing = 1
                 }
-                else{
+                else {
                     this.down_arrow_showing = 0
                 }
-                localStorage.setItem("syndicateP","1")
+                localStorage.setItem("syndicateP", "1")
                 console.log("syndSrr is ", this.syndArr)
                 this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
                 if (this.chatcount > 0) {
@@ -245,7 +259,8 @@ export class MySyndicatePage {
 
     private _showLoader() {
         let loader = this.loadingCtrl.create({
-            content: "Loading data..."
+            spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;

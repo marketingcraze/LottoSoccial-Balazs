@@ -18,32 +18,7 @@ export class SplashPage {
         public navCtrl: NavController, 
 		public navParams: NavParams) {
 
-        this.storage.ready().then( ()=> {
-
-            this.storage.get('session_ID').then((val) => {
-                CommonService.sessionId = val;
-            });
-
-            this.storage.get('session').then((val) => {
-                
-                CommonService.session = JSON.parse(val);
-
-                console.log('Your session is', val);
-                setTimeout(()=>{
-                    /*if (CommonService.updateAvailable) {
-                        this.navCtrl.setRoot(HomePage);
-                        return;
-                    }else */
-                    if (val) {
-                        this.navCtrl.setRoot(HomePage);
-                    }else{
-                        this.navCtrl.setRoot(WelcomePage);
-                    }
-                }, 5000);
-            });
-        });
-
-		
+            this.navCtrl.setRoot(HomePage)       
 	}
 
 	ionViewDidLoad() {
