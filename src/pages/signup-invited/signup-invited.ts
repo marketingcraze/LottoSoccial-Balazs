@@ -3,6 +3,7 @@ import { App, NavController, NavParams, LoadingController } from 'ionic-angular'
 import { SyndicateService } from '../../providers/syndicate-service';
 import { HomePage } from '../home/home';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { CreateSyndicate5Page } from '../create-syndicate5/create-syndicate5';
 /*
   Generated class for the SignupInvited page.
 
@@ -15,6 +16,8 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 })
 export class SignupInvitedPage {
 	public navCtrl: NavController
+	public sid:any;
+	public mid:any;
 
 	constructor( 
 		public app:App,
@@ -22,12 +25,14 @@ export class SignupInvitedPage {
 		public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
 
 		this.navCtrl = app.getRootNav();
+		this.sid = this.navParams.get('private_syndicate_id')
+		this.mid = this.navParams.get('invite_member_id')
+		console.log('sid ', this.sid, 'mid ', this.mid);
 
 	}
 
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad SignupInvitedPage');
-			this.joinSyndicate()
 	}
 
 	goHome(){
@@ -39,8 +44,11 @@ export class SignupInvitedPage {
 					content: "Please wait..."
 			});
 			loader.present();
-			this._syndService.joinSyndicate(20,20)
+			this._syndService.joinSyndicate(this.sid, this.mid)
 			.subscribe((res) => {
+				loader.dismiss();
+				localStorage.setItem('synd_id', this.sid);
+				this.navCtrl.push(CreateSyndicate5Page);
 				console.log(res);
 			})
 	}

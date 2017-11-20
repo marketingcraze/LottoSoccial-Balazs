@@ -11,6 +11,19 @@ page-confirm-number {
         font-family: lato-bold;
         src: url(../assets/fonts/Lato-Bold.ttf);
     }
+    .title{
+        position: relative;
+        bottom: 18px;
+        left: 25px;
+    }
+    .icon{
+        position: relative;
+        display: inline-block;
+        font-size: 2.2em;
+        top: 10px;
+        left: 10px;
+        color: white;
+    }
     
     .toolbar-background-md {
         background: rgb(37, 95, 199);

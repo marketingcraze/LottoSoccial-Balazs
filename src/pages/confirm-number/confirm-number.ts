@@ -287,6 +287,9 @@ timer0callback(data) {
   nextSlide() {
     this.slides.slideNext()
   }
+  close() {
+    this.navCtrl.pop();
+  }
 
   selecetOffer(i:any) {
     this.TotalPaybale = this.syndicatePrice
