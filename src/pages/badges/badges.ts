@@ -6,7 +6,7 @@ import { OfferService } from '../../services/offer.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { BadgeViewPage } from '../badge-view/badge-view';
-
+import { badgesOs } from '../../services/badges.service';
 declare var $: any;
 
 @Component({
@@ -18,6 +18,12 @@ export class BadgesPage {
     private data:any = [];
     downShowing = 0;
     down_arrow_showing = 0;
+    loader:any;
+    completedStepCount: number;
+    percentage: any;
+    steps: any;
+    BadgeData: any
+    badgesForYou: any;
      constructor(
         public app: App,
         public iab: InAppBrowser,
@@ -27,6 +33,7 @@ export class BadgesPage {
         public appSound:AppSoundProvider,
         public loadingCtrl: LoadingController,
         public viewCtrl: ViewController,
+        private _badgess: badgesOs,
         public _syndService: SyndicateService,
         public cdRef:ChangeDetectorRef ) {  }
 
@@ -100,8 +107,15 @@ export class BadgesPage {
         this.navCtrl.popAll;
     }
     getbadges() {
+        
+        this.loader = this.loadingCtrl.create({
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        });
+        this.loader.present();
         this._syndService.getBadgeOS()
         .subscribe((res)=> {
+            debugger
             this.data = res.response[0].get_badgeos.response.data.achievements;
             console.log(this.data);
             var a = localStorage.getItem("badgeP")
@@ -114,10 +128,42 @@ export class BadgesPage {
 			}
 			localStorage.setItem("badgeP","1")
             this.content.enableScrollListener();
+         //   this.getMoreBdgesData()
 
         })
+        
+       
     }
-
+    getMoreBdgesData(){
+        this._badgess.getBadgesData().subscribe(badgeData => {
+                debugger
+            if (badgeData) {
+                var response = badgeData.response[0].badges
+                for (let i = 0; i <= response.length; i++) {
+                    this.steps = response[i].steps;
+                    this.completedStepCount = this .countCompletedStep(this.steps)
+                    this.percentage = this.completedStepCount / this.BadgeData.steps.length * 100;
+                }
+               }
+              else
+                if (this.BadgeData.earned == 0) {
+                  this.percentage = 0
+                } else if (this.BadgeData.earned == 1) {
+                  this.percentage = 100
+                }
+                this.loader.dismiss()
+            }
+        )
+    }
+    countCompletedStep(steps) {
+        var count = 0;
+        for (let i = 0; i <= steps / length; i++) {
+          if (steps[i].percentage == 100) {
+            count++
+          }
+        }
+        return count;
+      }
     viewBadges() {
         this.navCtrl.push(BadgeViewPage);
     }

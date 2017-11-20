@@ -27,8 +27,8 @@
     </ion-item>
     <ion-item text-center no-lines style="border-radius: 0px 0px 10px 10px">
       <div style="text-align: center">
-        <input *ngIf="lst && show" type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
-        <input *ngIf="!lst && show" type="button" value="TRY AGAIN" class="claimButton" (click) = "dismissPopUp()" >
+        <input *ngIf="shButton==1" type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
+        <input *ngIf="shButton==0" type="button" value="TRY AGAIN" class="claimButton" (click) = "dismissPopUp()" >
       </div>
         <div class="dismissLinkDiv" >
           <p class="dismissLink" (click)="dismissPopUp()">Maybe Later </p>
