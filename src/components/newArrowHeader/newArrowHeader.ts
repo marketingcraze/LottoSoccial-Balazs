@@ -14,7 +14,7 @@ export class newArrowHeader {
     console.log('Hello CusHeader Component');
   }
   close() {
-      debugger;
+      // debugger;
     this.navCtrl.pop();
   }
   ngAfterViewInit(){
