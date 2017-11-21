@@ -67,7 +67,7 @@ import { PlayGamesThankYou } from '../pages/play-games-thank-you/play-games-than
 import { GetBooster } from '../pages/play-games-get-booster/play-games-get-booster';
 import { BadgesPage } from '../pages/badges/badges';
 import { BadgeViewPage } from '../pages/badge-view/badge-view';
-import { GameThankYou} from '../pages/game-Thank-You/game-Thank-You';
+import { GameThankYou } from '../pages/game-Thank-You/game-Thank-You';
 import { GameThankyouSubmittip } from '../pages/game-Thank-You-SubmitTip-modal/game-Thank-You-SubmitTip-modal';
 import { howtoplay } from '../pages/game-start-how-to-play/game-start-how-to-play';
 import { recentWinnerTips } from '../pages/recent-winners-tips/recent-winners-tips';
@@ -90,7 +90,7 @@ import { HelpPage } from '../pages/Help/Help'
 import { AgreementPage } from '../pages/agreement/agreement'
 import { newArrowHeader } from '../components/newArrowHeader/newArrowHeader';
 import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
-import  { OverlayPage } from '../pages/overlaypage/overlay-page'
+import { OverlayPage } from '../pages/overlaypage/overlay-page'
 import { gameBlog } from '../pages/redeem-games/game-blog/game-blog'
 import { eventBlog } from '../pages/store/eventBlog/eventBlog';
 
@@ -143,6 +143,7 @@ import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
 import { MyFilterPipe } from '../pipes/contact-selected'
 import { lotsPipe } from '../pipes/selected-lottries';
 import { FilterPipe } from '../pipes/filter-pipe';
+import { FilterBadge } from '../pipes/filterBadge'
 import { KeysPipe } from '../pipes/keys-pipe';
 import { DayPipe } from '../pipes/day-pipe';
 import { ValuePipe } from '../pipes/value-pipe';
@@ -155,7 +156,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { Device } from '@ionic-native/device';
 import { AffiliatePage } from '../pages/affiliate/affiliate'
 import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
-import {} from '../pages'
+import { } from '../pages'
 import { SessionCheckOutPage } from '../pages/session-check-out/session-check-out';
 
 
@@ -251,7 +252,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         newArrowHeader,
         buyOfferTips,
         OverlayPage,
-     
+
         // master,
         // OffersPayment,
 
@@ -259,6 +260,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         MyFilterPipe,
         lotsPipe,
         FilterPipe,
+        FilterBadge,
         KeysPipe,
         DayPipe,
         ValuePipe,
@@ -274,25 +276,25 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         NoInternetMessageComponent,
         PopupConfirmPaymentComponent,
         PopupMessageDetails,
-    ProgressBarComponent,
-    DateLeftPipe
+        ProgressBarComponent,
+        DateLeftPipe
     ],
     imports: [
         // BrowserAnimationsModule,
         BrowserModule,
         IonicModule.forRoot(MyApp,
-        {
-            // tabsHideOnSubPages: true,
-            autoFocusAssist: false,
-            scrollAssist: false,
-            tabsPlacement:'top', 
-            iconMode: 'ios',
-            tabsHighlight:true, 
-            mode:'md',
-            modalEnter: 'modal-slide-in',
-            modalLeave: 'modal-slide-out',
-            statusbarPadding: false
-        }),
+            {
+                // tabsHideOnSubPages: true,
+                autoFocusAssist: false,
+                scrollAssist: false,
+                tabsPlacement: 'top',
+                iconMode: 'ios',
+                tabsHighlight: true,
+                mode: 'md',
+                modalEnter: 'modal-slide-in',
+                modalLeave: 'modal-slide-out',
+                statusbarPadding: false
+            }),
         IonicStorageModule.forRoot({
             name: '__lottosocialdb',
             driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -382,7 +384,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         OverlayPage,
         gameBlog,
         eventBlog,
-  
+
         // popovers
         // OffersPayment,
         CountryListPopPage,
@@ -394,10 +396,10 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         AffiliatePage2,
         AgreementPage
     ],
-    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },ActionSheet,
-        AnimationService, DatabaseService,paymentService, CommonService,Badge,UniqueDeviceID,  AuthService, HomeService, AccountService, Params,AffiliateServices,
-        SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService,VoucherService,
-        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider,productOffer, PlayGame, ReferFriend, SocialSharing,Device,Contacts,forkOffersSyndicate,winnerTips,badgesOs,AppVersion,leaveSyndicate]
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, ActionSheet,
+        AnimationService, DatabaseService, paymentService, CommonService, Badge, UniqueDeviceID, AuthService, HomeService, AccountService, Params, AffiliateServices,
+        SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService, VoucherService,
+        Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider, productOffer, PlayGame, ReferFriend, SocialSharing, Device, Contacts, forkOffersSyndicate, winnerTips, badgesOs, AppVersion, leaveSyndicate]
 
 })
 export class AppModule { }

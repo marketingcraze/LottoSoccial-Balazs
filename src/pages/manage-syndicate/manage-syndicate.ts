@@ -19,7 +19,7 @@ export class ManageSyndicatePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
     this.syndicate = this.navParams.get("syndicate")
-    this.sId=this.syndicate.syndicate_id;
+    this.sId = this.syndicate.syndicate_id;
     if (this.syndicate.syndicate_end_date == 'oneoff') {
       this.oneOff = true
     }
@@ -35,7 +35,7 @@ export class ManageSyndicatePage {
     this.navCtrl.pop();
   }
   leaveSyndicate() {
-    let leaveModal = this.modalCtrl.create(LeavePage, { syndId: this.sId });
+    let leaveModal = this.modalCtrl.create(LeavePage, { syndId: this.sId, billingDate: this.syndicate.resume_billing_date });
     leaveModal.onDidDismiss(data => {
       if (data == 'offerPage')
         this.viewCtrl.dismiss(data)

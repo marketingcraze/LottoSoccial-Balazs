@@ -40,11 +40,11 @@ export class leaveSyndicate {
                     "source_site": "mobi.lottosocial.com",
                     "page_id": "12",
                     "screen_id": "12.3",
-                    "module_name": "leave_private_syndicate",
+                    "module_name": "manage_syndicate",
                     "customer_id": this.customerId,
                     "private_syndicate_id": sId,
                     "syndicate_type": "managed",
-                    "join_status": "PAUSE"
+                    "syndicate_status": "PAUSE"
                 }
             ]
         }
@@ -81,11 +81,12 @@ export class leaveSyndicate {
                     "source_site": "mobi.lottosocial.com",
                     "page_id": "12",
                     "screen_id": "12.3",
-                    "module_name": "leave_private_syndicate",
+                    "module_name": "manage_syndicate",
                     "customer_id": this.customerId,
-                    "private_syndicate_id": sId,
+                    "syndicate_id": sId,
                     "syndicate_type": "managed",
-                    "join_status": "CANCEL"
+                    "syndicate_status": "CANCEL"
+
                 }
 
             ]
@@ -167,7 +168,7 @@ export class leaveSyndicate {
                     "customer_id": this.customerId,
                     "syndicate_id": sId,
                     "syndicate_type": "private",
-                    "join_status": "DECLINE"
+                    "syndicate_status": "LEAVE"
 
                 }
 

@@ -10,7 +10,7 @@
       <ion-item center no-lines>
         <p style="font-size:0.9em;" class="pClass">Your Normal billing will resume on</p>
         <p style="font-size:0.9em;font-weight: bold" class="pClass">
-          <b>18/07/2017</b>
+          <b>{{resumeBilling}}</b>
         </p>
         <br>
         <p style="font-size:0.9em;" class="pClass">Do you want to pause the syndicate?</p>
@@ -21,7 +21,7 @@
         <button ion-button color='secondary' (tap)="pauseSyndicate()">YES, PAUSE SYNDICATE</button>
         <br>
         <br>
-        <button class="Leave-btn-transparent" (tap)="leaveSyndicate()">
+        <button class="Leave-btn-transparent" (tap)="leaveSyndicateManaged()">
           No, I want to leave
         </button>
       </div>
@@ -68,28 +68,28 @@
         </ion-item>
         <ion-item no-lines style="text-align: center;margin-top:20px">
           <button class="Leave-btn-transparent" (tap)="pauseSyndicate()">
-           Go back to pause syndicate
+            Go back to pause syndicate
           </button>
         </ion-item>
       </div>
     </ion-col>
   </ion-list>
 
-  <ion-list  class="leaveSuccess" *ngIf="leaveSuccess && !paused && !leave" ion-fixed>
-      <button ion-button icon-only class="successIconLeave">
-          <ion-icon style="width:70px; ">
-              <img class="thumbNailImgLeave" src="assets/image/dark-green-check-mark-md.png"> </ion-icon>
-      </button>
-      <p>We're processing your request.</p>
-      <p>A confirmation message will be sent to you via text</p>
-      <br>
-      <p>Do you want to join a new syndicate?</p>
-      <p>Check out the offers available</p>
-      <ion-row style="padding-top: 5%; height: 45px">
-          <ion-col col-12>
-              <button ion-button outline round class="moveToOffers" color="light" (click)="moveTOffer()">VIEW OFFERS</button>
-          </ion-col>
-      </ion-row>
+  <ion-list class="leaveSuccess" *ngIf="leaveSuccess && !paused && !leave" ion-fixed>
+    <button ion-button icon-only class="successIconLeave">
+      <ion-icon style="width:70px; ">
+        <img class="thumbNailImgLeave" src="assets/image/dark-green-check-mark-md.png"> </ion-icon>
+    </button>
+    <p>We're processing your request.</p>
+    <p>A confirmation message will be sent to you via text</p>
+    <br>
+    <p>Do you want to join a new syndicate?</p>
+    <p>Check out the offers available</p>
+    <ion-row style="padding-top: 5%; height: 45px">
+      <ion-col col-12>
+        <button ion-button outline round class="moveToOffers" color="light" (click)="moveTOffer()">VIEW OFFERS</button>
+      </ion-col>
+    </ion-row>
   </ion-list>
 
 </ion-content>

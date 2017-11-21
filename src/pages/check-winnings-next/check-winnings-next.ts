@@ -36,7 +36,7 @@ export class CheckWinningsNextPage {
   ) {
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
   }
 
@@ -56,7 +56,7 @@ export class CheckWinningsNextPage {
     //this.loader.present();
     this._syndService.checkWinnings()
       .subscribe((res) => {
-        res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ABIA0891", "syndicate_id": 2615959, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ABY011", "syndicate_id": 2615960, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ABY0784", "syndicate_id": 2615977, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZULA0191", "syndicate_id": 2615962, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZULA0653", "syndicate_id": 2615961, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0812", "syndicate_id": 2615965, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0846", "syndicate_id": 2615952, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0899", "syndicate_id": 2615963, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }] } } }] }
+         res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ABIA0891", "syndicate_id": 2615959, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ABY011", "syndicate_id": 2615960, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ABY0784", "syndicate_id": 2615977, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZULA0191", "syndicate_id": 2615962, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZULA0653", "syndicate_id": 2615961, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0812", "syndicate_id": 2615965, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0846", "syndicate_id": 2615952, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0899", "syndicate_id": 2615963, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ZURI0865", "syndicate_id": 2615376 }, { "syndicate_name": "ZURI0865", "syndicate_id": 2615376 }, { "syndicate_name": "ABIE0813", "syndicate_id": 2615377 }, { "syndicate_name": "ZURI0143", "syndicate_id": 2615378 }, { "syndicate_name": "ZURI0698", "syndicate_id": 2615379 }, { "syndicate_name": "ABY033", "syndicate_id": 2615380 }, { "syndicate_name": "ZULA092", "syndicate_id": 2615381 }, { "syndicate_name": "BRAD0442", "syndicate_id": 2615382 }, { "syndicate_name": "ZURI08", "syndicate_id": 2615383 }, { "syndicate_name": "ABIA0657", "syndicate_id": 2615384 }, { "syndicate_name": "ZURI0378", "syndicate_id": 2615385 }, { "syndicate_name": "ABIA0835", "syndicate_id": 2615386 }, { "syndicate_name": "ZULA0124", "syndicate_id": 2615388 }, { "syndicate_name": "ZULA0124", "syndicate_id": 2615388 }, { "syndicate_name": "ZURI0951", "syndicate_id": 2615389 }, { "syndicate_name": "ZURI0951", "syndicate_id": 2615389 }, { "syndicate_name": "ZULA038", "syndicate_id": 2615390 }, { "syndicate_name": "ZULA038", "syndicate_id": 2615390 }] } } }] }
         console.log(res);
         this.sList = res.response["0"].cliamable_syndicates.response.syndicate_group
@@ -83,7 +83,7 @@ export class CheckWinningsNextPage {
       if (this.sList2.length != this.sList.length) {
         setTimeout(() => {
           this.sList2.push(this.sList[this.sList2.length])
-          this.duration = (this.sList[this.sList2.length-1].Product_Name.length) * 6000
+          this.duration = (this.sList[this.sList2.length - 1].Product_Name.length) * 6000
           durations = this.duration
           $("#tickerMain").animate({ scrollTop: $("#ticker").height() }, 500);
           this.nextSlide();
@@ -106,17 +106,14 @@ export class CheckWinningsNextPage {
   movetoPage() {
     if (this.movetype) {
       setTimeout(() => {
-        // var moveTypes=this.movetype.bind(this)
-        if (this.movetype.response_type == '10.1') {
-          // this.navCtrl.push(PrizeSummaryWinPage);
-          this.openModal(PrizeSummaryWinPage)
-        } else if (this.movetype.response_type == '10.2' || this.movetype.response_type == '10.3') {
-          // this.navCtrl.push(PrizeSummaryNoSyndicate);
-          this.openModal(PrizeSummaryNoSyndicate)
-        } else if (this.movetype.response_type == '10.4' || this.movetype.response_type == '10.7') {
-          // this.navCtrl.push(PrizeSummaryEarlyCheck);
-          this.openModal(PrizeSummaryEarlyCheck)
-        }
+
+        // if (this.movetype.response_type == '10.1') {
+        //   this.openModal(PrizeSummaryWinPage)
+        // } else if (this.movetype.response_type == '10.2' || this.movetype.response_type == '10.3') {
+          // this.openModal(PrizeSummaryNoSyndicate)
+        //} else if (this.movetype.response_type == '10.4' || this.movetype.response_type == '10.7') {
+        this.openModal(PrizeSummaryEarlyCheck)
+        //}
       }, 3000);
     } else {
       this.navCtrl.push(PrizeSummaryNoSyndicate);
