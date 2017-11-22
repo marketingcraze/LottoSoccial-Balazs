@@ -19,20 +19,19 @@ export class CashModalPage {
   }
 
   dismissm() {
-    let data = {'foo':'bar'}
-    this.viewCtrl.dismiss(data);
+    this.viewCtrl.dismiss();
  }
  nothanks() {
-   this.viewCtrl.dismiss();
-   //this.navCtrl.push(TabsPage);
-   //this.app.getRootNav().push(TabsPage); 
+  //  this.viewCtrl.dismiss();
+  //  this.navCtrl.push(TabsPage);
+  //  this.app.getRootNav().push(TabsPage); 
   //  this.navCtrl.setRoot(TabsPage, {tabIndex: 1})
-   //let option = [{tabIndex: 1}]
-   //this.navCtrl.popToRoot()
-   //this.navCtrl.setRoot(TabsPage, {tabIndex: 1});
+  //  let option = [{tabIndex: 1}]
+  //  this.navCtrl.popToRoot()
+  //  this.navCtrl.setRoot(TabsPage, {tabIndex: 1});
  }
- find() {
-   
+ find(data:any="RDM") {
+  this.viewCtrl.dismiss(data)
  }
 
 }

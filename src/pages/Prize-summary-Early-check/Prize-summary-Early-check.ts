@@ -17,25 +17,23 @@ export class PrizeSummaryEarlyCheck {
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public platform:Platform,
-    public storage:Storage,
-    public iab:InAppBrowser,
+    public platform: Platform,
+    public storage: Storage,
+    public iab: InAppBrowser,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
   ) {
+
+  }
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+    this.getData()
+  }
+  getData() {
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
-  }
-
-  ionViewDidLoad() {
-    this.getData()
-  }
-  ionViewWillEnter() {
-    this.viewCtrl.showBackButton(false);
-  }
-  getData() {
     this.loader.present();
     this._syndService.prizeBreakDown()
       .subscribe((res) => {
@@ -44,21 +42,20 @@ export class PrizeSummaryEarlyCheck {
         this.data = res.response;
         this.loader.dismiss();
       })
-
   }
   openStore() {
     this.storage.get('session')
-    .then(
-    data => {
-      let session: any = JSON.parse(data);
-      this.platform.ready().then(() => {
-        if (typeof cordova !== 'undefined') {
-          var browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top')
-        }
-      });
-    }, error => {
-     
-    }
-    );
+      .then(
+      data => {
+        let session: any = JSON.parse(data);
+        this.platform.ready().then(() => {
+          if (typeof cordova !== 'undefined') {
+            var browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top')
+          }
+        });
+      }, error => {
+
+      }
+      );
   }
 }

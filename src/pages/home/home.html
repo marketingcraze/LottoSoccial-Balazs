@@ -24,7 +24,8 @@
         </ion-item> 
 
         <ion-item-options side="right" (ionSwipe)="saveItem()">
-          <!-- <button ion-button class="btn-delete" (click)="deleteNotification()">Delete</button> -->
+          <button ion-button class="btn-delete" (click)="deleteNotification()">Delete</button>
+          <button ion-button id="btnRead{{i}}" class="btn-unread" (click)="markAsRead(message.card_id,i)">Mark As Read</button>
           <button ion-button id="btnRead{{i}}" class="btn-unread" (click)="markAsRead(message.card_id,i)">Mark As Read</button>
         </ion-item-options>
         

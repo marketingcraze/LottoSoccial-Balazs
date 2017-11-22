@@ -9,4 +9,22 @@ page-chooseCash-modal {
         border-radius: 15px;
         display: inline-block;
     }
+    .modal-page {
+        position: absolute;
+        overflow: visible;
+        max-width: 90%;
+        max-height: 80%;
+        height: 60%;
+        bottom: 0;
+        left: 0;
+        background:#00A651;
+        right: 0;
+        margin: auto;
+        box-shadow: 0 0 150px black;
+        border-radius: 15px;
+        opacity: 1;
+        }
+        .scroll-content{
+            height: 100%;
+        }
 }

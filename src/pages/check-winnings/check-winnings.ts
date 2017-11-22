@@ -1,8 +1,10 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, App, ViewController, LoadingController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, App, Nav, ViewController, LoadingController, ModalController } from 'ionic-angular';
 import { CheckWinningsNextPage } from '../check-winnings-next/check-winnings-next';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { Content, Tabs } from 'ionic-angular'
+import { OffersPage } from '../offers/offers'
+import { GamesPage } from '../games/games';
 /*
   Generated class for the CheckWinnings page.
 
@@ -14,6 +16,7 @@ import { Content, Tabs } from 'ionic-angular'
   templateUrl: 'check-winnings.html'
 })
 export class CheckWinningsPage {
+  nav: NavController;
   @ViewChild(Content) content: Content;
   private myWinnings: any = [];
   loader: any;
@@ -23,15 +26,16 @@ export class CheckWinningsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public app: App,
-    public modalCtrl:ModalController,
+    public modalCtrl: ModalController,
     public viewCtrl: ViewController,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
     public cdRef: ChangeDetectorRef
   ) {
+    this.nav = this.app.getRootNav();
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
   }
 
@@ -46,17 +50,27 @@ export class CheckWinningsPage {
   }
   next() {
     debugger
-    let modal=this.modalCtrl.create(CheckWinningsNextPage)
+    let modal = this.modalCtrl.create(CheckWinningsNextPage)
     modal.present()
-    modal.onDidDismiss((data: any[]) => {
+    modal.onDidDismiss((data: any) => {
       if (data) {
         debugger
-        if(data[0]=='game'){
-          var tabs:Tabs=this.navCtrl.parent.parent.parent;
+        if (data == 'game') {
+          var tabs: Tabs = this.navCtrl.parent.parent.parent;
           tabs.select(3)
-          alert(data)
+
         }
-        
+        else if (data == 'SBC') {
+          var tabs: Tabs = this.navCtrl.parent.parent.parent;
+          tabs.getActiveChildNav().setRoot(OffersPage, { "app": "outside" })
+          // var nav=this.app.getRootNav()
+          // nav.push(OffersPage, { "app": "outside" })
+        }
+        else if(data=='RDM'){
+          var tabs: Tabs = this.navCtrl.parent.parent.parent;
+          tabs.getActiveChildNav().setRoot(GamesPage, { "app": "outside" })
+        }
+
       }
     })
     // this.app.getRootNav().push(CheckWinningsNextPage);

@@ -279,6 +279,7 @@ export class HomePage implements OnInit {
         this.srvHome.getHomeMessages().take(1).subscribe((data) => {
             console.log("onOpenRightMenu success ", data);
             this.zone.run(() => {
+                debugger
                 this.messageLoading = false;
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;

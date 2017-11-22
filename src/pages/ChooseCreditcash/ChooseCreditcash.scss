@@ -1,4 +1,21 @@
 page-ChooseCreditcash{
+    .modal-page {
+        position: absolute;
+        overflow: visible;
+        max-width: 90%;
+        max-height: 80%;
+        height: 60%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        box-shadow: 0 0 150px black;
+        border-radius: 15px;
+        opacity: 1;
+        }
+        .scroll-content{
+            height: 100%;
+        }
     .avatar-div { display: inline-block; width: 60px;}
     .img-avatar {
         width: 50px;
@@ -23,7 +40,7 @@ page-ChooseCreditcash{
         }
     }
     .pink {
-        background:#990033;
+        background:#FF3366;
     }
     .green {
         background:#00A651;
