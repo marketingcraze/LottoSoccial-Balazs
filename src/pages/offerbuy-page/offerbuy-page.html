@@ -145,15 +145,22 @@
 </ion-grid> -->
 
 </ion-content>
-<ion-pullup #pullup id="pullup" (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" [maxHeight]="getMaximumHeight()">
+<ion-pullup #pullup id="pullup" (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" 
+[maxHeight]="getMaximumHeight()" style="height: 10vh!important">
     <!-- <ion-pullup-tab [footer]="pullup" (tap)="toggleFooter()">
                     <ion-icon name="arrow-up" *ngIf="footerState == 0"></ion-icon>
                     <ion-icon name="arrow-down" *ngIf="footerState == 1"></ion-icon>
                 </ion-pullup-tab> -->
-    <ion-toolbar style="position: relative;top: 15px;height: 52px;" color="primary" (tap)="toggleFooter()">
-        <ion-icon class="iconArrow" *ngIf="showDown" name="arrow-down"></ion-icon>
-        <ion-icon class="iconArrow" *ngIf="!showDown" name="arrow-up"></ion-icon>
-        <ion-title class="titleFooter">HOW TO PLAY</ion-title>
+    <ion-toolbar style="position: relative;top: 15px;" (tap)="toggleFooter()"  class="m">
+        
+        <span style="margin-left: 5px;z-index: 9999;color: white;font-size: 1.3em">
+                HOW TO PLAY
+              </span>
+              <span style=" margin-top: -7px;position: absolute;margin-left: -25px;z-index: 100;color: white;font-size: 1.4em" >
+                  <ion-icon style="margin-left: 29vw" *ngIf="showDown" name="arrow-down" ></ion-icon>
+                  <ion-icon style="margin-left: 29vw" *ngIf="!showDown" name="arrow-up"></ion-icon>
+                </span>
+  
     </ion-toolbar>
     <ion-content>
         <ion-grid class="myGrid">
@@ -165,7 +172,7 @@
 
                 <ion-col col-6 style="background-color: white;height: min-content">
                     <div style="width: 100%;height: 20%;position: relative">
-                        <p style="margin-top: 3%;position: relative">PRICE BREAKDOWN</p>
+                        <p style="margin-top: 3%;position: relative;font-size: 1.2em;text-align: center">PRICE BREAKDOWN</p>
                     </div>
                     <div style="width: 100%;position: relative;text-align: center;height: 19.5vh;margin-bottom: 10px;margin-top: -10px">
                         <p style="margin: 0px">
@@ -194,6 +201,7 @@
                         </p>
                     </div>
                 </ion-col>
+                <br>
             </ion-row>
         </ion-grid>
     </ion-content>
