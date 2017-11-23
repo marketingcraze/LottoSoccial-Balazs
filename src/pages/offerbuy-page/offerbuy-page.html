@@ -2,7 +2,7 @@
     <synd-cus-header1 title="Offer Product Page" notification-count="5"></synd-cus-header1>
 </ion-header>
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
-<ion-content style="margin-top: -20px;height: 105%">
+<ion-content style="margin-top: -20px;height: 105%;;background-color: white!important">
     <div class="container-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
         <img src={{product?.image}} class="header-img" />
 
@@ -157,52 +157,54 @@
                 HOW TO PLAY
               </span>
               <span style=" margin-top: -7px;position: absolute;margin-left: -25px;z-index: 100;color: white;font-size: 1.4em" >
-                  <ion-icon style="margin-left: 29vw" *ngIf="showDown" name="arrow-down" ></ion-icon>
-                  <ion-icon style="margin-left: 29vw" *ngIf="!showDown" name="arrow-up"></ion-icon>
+                  <ion-icon style="margin-left: 27vw" *ngIf="showDown" name="arrow-down" ></ion-icon>
+                  <ion-icon style="margin-left: 27vw" *ngIf="!showDown" name="arrow-up"></ion-icon>
                 </span>
   
     </ion-toolbar>
-    <ion-content>
+    <ion-content  >
+  
         <ion-grid class="myGrid">
             <ion-row>
                 <ion-col col-6 style="margin-top: 1px;text-align: center;background-color: #255FC7;height: min-content">
-                    <span style="color: white;font-size: 18px;top: 9%;position: relative">HOW TO PLAY</span>
+                    <span style="color: white;font-size: 18px;top: 2%;position: relative">HOW TO PLAY</span>
                     <img src="assets/img/happys.png" style="margin-top: 5%">
                 </ion-col>
 
                 <ion-col col-6 style="background-color: white;height: min-content">
                     <div style="width: 100%;height: 20%;position: relative">
-                        <p style="margin-top: 3%;position: relative;font-size: 1.2em;text-align: center">PRICE BREAKDOWN</p>
+                        <p class="price">PRICE BREAKDOWN</p>
                     </div>
                     <div style="width: 100%;position: relative;text-align: center;height: 19.5vh;margin-bottom: 10px;margin-top: -10px">
                         <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 16px;text-align: left">1line</span>
-                            <span style="margin-left: 14%;font-size: 16px">£0.30</span>
+                            <span style="margin-right: 10%;font-size: 1em;text-align: left">1line</span>
+                            <span style="margin-left: 14%;font-size: 1em">£0.30</span>
                         </p>
                         <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 16px;text-align: left">2lines</span>
-                            <span style="margin-left: 10%;font-size: 16px">£0.60</span>
+                            <span style="margin-right: 10%;font-size: 1em;text-align: left">2lines</span>
+                            <span style="margin-left: 10%;font-size: 1em">£0.60</span>
                         </p>
                         <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 16px;text-align: left">3lines</span>
-                            <span style="margin-left: 10%;font-size: 16px">£0.90</span>
+                            <span style="margin-right: 10%;font-size: 1em;text-align: left">3lines</span>
+                            <span style="margin-left: 10%;font-size: 1em">£0.90</span>
                         </p>
                         <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 16px;text-align: left">4lines</span>
-                            <span style="margin-left: 10%;font-size: 16px">£1.20</span>
+                            <span style="margin-right: 10%;font-size: 1em;text-align: left">4lines</span>
+                            <span style="margin-left: 10%;font-size: 1em">£1.20</span>
                         </p>
                         <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 16px;text-align: left">5lines</span>
-                            <span style="margin-left: 10%;font-size: 16px">£1.50</span>
+                            <span style="margin-right: 10%;font-size: 1em;text-align: left">5lines</span>
+                            <span style="margin-left: 10%;font-size: 1em">£1.50</span>
                         </p>
                         <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 16px;text-align: left">10lines</span>
-                            <span style="margin-left: 5%;font-size: 16px">£3.00</span>
+                            <span style="margin-right: 10%;font-size: 1em;text-align: left">10lines</span>
+                            <span style="margin-left: 5%;font-size: 1em">£3.00</span>
                         </p>
                     </div>
                 </ion-col>
-                <br>
+                <br><br><br>
             </ion-row>
         </ion-grid>
+
     </ion-content>
 </ion-pullup>

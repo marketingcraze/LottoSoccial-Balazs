@@ -82,10 +82,20 @@
 }
 
 ion-pullup .footer ion-content.content-md .scroll-content{
-    bottom: 0px!important
+    bottom: 0px!important;
+    background-color: white!important;
+}
+ion-pullup .footer ion-toolbar {
+    box-shadow: none!important;
 }
 offer-buy{
 .m{
+    .price{
+        margin-top: 3%;
+        position: relative;
+        font-size: 1.2em;
+        text-align: center
+    }
     .toolbar-content-md {
         height: 4vh;
         text-align: center;
@@ -118,9 +128,9 @@ offer-buy{
    .iconArrow{
        font-size: 2.0em
    }
-   ion-pullup .footer ion-toolbar {
-       box-shadow: none!important;
-   }
+   
+   
+   
 }
     .modal-wrapper{
         width: 100%;
@@ -185,4 +195,20 @@ offer-buy{
         padding: 12px 0!important;
       }
      
+}
+@media only screen and (max-width: 375px) {
+    .price{
+        margin-top: 3%;
+        position: relative;
+        font-size: 1.2em;
+        text-align: center
+    }   
+}
+@media only screen and (max-width: 320px) {
+    .price{
+        margin-top: 3%;
+        position: relative;
+        font-size: 1em;
+        text-align: center
+    }   
 }
