@@ -25,9 +25,15 @@
     <div id="ticker">
       <div class="" style="padding: 10px 0;" *ngFor="let l of sList2 let i=index">
         <div>Syndicate {{l?.syndicate_name}}</div>
-        <div class="h-ticker">
-        <span style="margin-left: 5px" *ngFor="let product of l.Product_Name | filter:{syndicate:l[i]}"> {{product}} - </span>
-        </div>
+        <!-- <div class="h-ticker"> -->
+        <!-- <span style="margin-left: 5px" *ngFor="let product of l.Product_Name | filter:{syndicate:l[i]}"> {{product}} - </span> -->
+        <ion-slides [autoplay]="slideAutoplay" speed="6000">
+          <ion-slide *ngFor="let product of l.Product_Name | filter:{syndicate:l[i]}">
+            <span > {{product}}</span>
+
+          </ion-slide>
+        </ion-slides>
+        <!-- </div> -->
       </div>
     </div>
   </div>

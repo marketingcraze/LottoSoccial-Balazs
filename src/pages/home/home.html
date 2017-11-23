@@ -1,19 +1,20 @@
 <ion-menu side="right" type="push" swipeEnabled=false [content]="content" id="menu1" (ionOpen)="onOpenRightMenu()">
 
   <ion-content>
-    
+
     <ion-item class="notification-bar">
       <ion-icon name="ios-log-out" (click)="closeMenu1()"></ion-icon>
       <!-- {{unreadCount}} <span class="color-white">Unread</span>
       <span item-right>Mark all as read</span> -->
+      <span style="position: relative;left: 22%;bottom: 2px;"> Notifications</span>
     </ion-item>
 
     <ion-list>
       <ion-item *ngIf="messageLoading">
-          <ion-spinner class="center" name="bubbles"></ion-spinner>
+        <ion-spinner class="center" name="bubbles"></ion-spinner>
       </ion-item>
-      
-      <ion-item-sliding *ngFor="let message of messages let i=index">
+
+      <ion-item-sliding id="delete{{i}}" *ngFor="let message of messages let i=index">
         <ion-item style="background-color: #333333;border-right:10px solid #C10A09" text-wrap (click)="alert(i)">
           <span item-left class="">
             <img *ngIf="message.icon_url" src="{{message.icon_url}}" alt="" width="24" height="24" />
@@ -21,17 +22,17 @@
           </span>
           <!-- <span class="notific-new"></span> -->
           <p>{{message.card_title}}</p>
-        </ion-item> 
+        </ion-item>
 
         <ion-item-options side="right" (ionSwipe)="saveItem()">
-          <button ion-button class="btn-delete" (click)="deleteNotification()">Delete</button>
-          <button ion-button id="btnRead{{i}}" class="btn-unread" (click)="markAsRead(message.card_id,i)">Mark As Read</button>
-          <button ion-button id="btnRead{{i}}" class="btn-unread" (click)="markAsRead(message.card_id,i)">Mark As Read</button>
+          <button ion-button class="btn-delete" (click)="deleteNotification(message.card_id,i)">Delete</button>
+          <button ion-button id="btnRead{{i}}" *ngIf="message.status=='unread'" class="btn-read" (click)="markAsRead(message.card_id,i)">Mark As Read</button>
+          <button ion-button *ngIf="message.status=='read'" class="btn-unread">Mark As Read</button>
         </ion-item-options>
-        
+
       </ion-item-sliding>
-      
-<!-- 
+
+      <!-- 
       <ion-item-sliding>
         <ion-item text-wrap>
           <span item-left class="rounded-background1"><img src="assets/icon/notification_ico.svg" alt="" width="24" height="24" /></span>
@@ -53,51 +54,68 @@
 </ion-menu>
 
 <ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" persistent="true" id="menu2" (ionOpen)="onOpenLeftMenu()">
-    <ion-content>
-      <ion-item text-center>
-        <div class="UpperPart">
+  <ion-content>
+    <ion-item text-center>
+      <div class="UpperPart">
         <span style="color: #E6D011;font-size: medium">{{accountDetails?.nick_name}}</span>
-          <ion-avatar class="account-avatarSlide">
-              <img class="profile-pictureSlide" src="{{image_Data?image_Data:'assets/icon/user.svg'}}" width="72" height="72" alt="Profile" />
-            </ion-avatar>
-            <p style="font-size: medium;white-space: normal;">
-             {{accountDetails?.program_description}}
-            </p>
-          </div>
-          <div class="sidemenuCoupon" (click)="mgmPage()">
-          <ion-row >
-            <ion-col col-9>
+        <ion-avatar class="account-avatarSlide">
+          <img class="profile-pictureSlide" src="{{image_Data?image_Data:'assets/icon/user.svg'}}" width="72" height="72" alt="Profile"
+          />
+        </ion-avatar>
+        <p style="font-size: medium;white-space: normal;">
+          {{accountDetails?.program_description}}
+        </p>
+      </div>
+      <div class="sidemenuCoupon" (click)="mgmPage()">
+        <ion-row>
+          <ion-col col-9>
             <span style="color: #2F76D1;vertical-align:sub;">{{accountDetails?.user_code}}</span>
-            </ion-col>
-            <ion-col col3>
-                <ion-icon ios="ios-share-outline" md="ios-share-outline" class="shareBucketicon"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </div>
+          </ion-col>
+          <ion-col col3>
+            <ion-icon ios="ios-share-outline" md="ios-share-outline" class="shareBucketicon"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-item>
+    <!-- <ion-item class="notification-bar"> </ion-item> -->
+    <ion-list>
+      <ion-item text-wrap (tap)="onLeftMenuSelection('accounts')">
+        <span class="color">Accounts </span>
       </ion-item>
-        <!-- <ion-item class="notification-bar"> </ion-item> -->
-            <ion-list>
-                <ion-item text-wrap (tap)="onLeftMenuSelection('accounts')"><span class="color">Accounts </span></ion-item>
-                <!-- <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')"><span class="color"> My Winnings</span> </ion-item> -->
-                <ion-item text-wrap (tap)="onLeftMenuSelection('your_badges')"><span class="color"> Badges </span></ion-item>
-                <ion-item text-wrap (tap)="onLeftMenuSelection('your_vouchers')"><span class="color"> Vouchers</span> </ion-item>
-                <ion-item text-wrap (tap)="onLeftMenuSelection('affiliate')"><span class="color"> Affiliate </span></ion-item>
-                <ion-item text-wrap (tap)="onLeftMenuSelection('affiliate2')"><span class="color"> Affiliate2 </span></ion-item>
-                <ion-item text-wrap (tap)="onLeftMenuSelection('pSyndicate')"><span class="color">Private Syndicate</span> </ion-item>
-                <ion-item text-wrap (tap)="onLeftMenuSelection('update')"><span class="color">Update</span> </ion-item>
-              
-            </ion-list>
-    </ion-content>
-    <ion-footer>
-        <ion-item text-wrap style="border-top: 1px solid" (click)="onLeftMenuSelection('help')"><span class="color">Help</span> </ion-item>
+      <!-- <ion-item text-wrap (click)="onLeftMenuSelection('check_winnings')"><span class="color"> My Winnings</span> </ion-item> -->
+      <ion-item text-wrap (tap)="onLeftMenuSelection('your_badges')">
+        <span class="color"> Badges </span>
+      </ion-item>
+      <ion-item text-wrap (tap)="onLeftMenuSelection('your_vouchers')">
+        <span class="color"> Vouchers</span>
+      </ion-item>
+      <ion-item text-wrap (tap)="onLeftMenuSelection('affiliate')">
+        <span class="color"> Affiliate </span>
+      </ion-item>
+      <ion-item text-wrap (tap)="onLeftMenuSelection('affiliate2')">
+        <span class="color"> Affiliate2 </span>
+      </ion-item>
+      <ion-item text-wrap (tap)="onLeftMenuSelection('pSyndicate')">
+        <span class="color">Private Syndicate</span>
+      </ion-item>
+      <ion-item text-wrap (tap)="onLeftMenuSelection('update')">
+        <span class="color">Update</span>
+      </ion-item>
 
-        <ion-item>
-          <div text-center>
-          <img src="assets/icon/logo_icoFooter.svg" height="20px" width="20px" style="margin-bottom: 1px;margin-right: 10px;">
-          <span style="font-family: cursive;font-size:0.8em;color: white;vertical-align: super;">Lotto Social app version 2.6.1</span>
-        </div>
-        </ion-item>
-    </ion-footer>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-item text-wrap style="border-top: 1px solid" (click)="onLeftMenuSelection('help')">
+      <span class="color">Help</span>
+    </ion-item>
+
+    <ion-item>
+      <div text-center>
+        <img src="assets/icon/logo_icoFooter.svg" height="20px" width="20px" style="margin-bottom: 1px;margin-right: 10px;">
+        <span style="font-family: cursive;font-size:0.8em;color: white;vertical-align: super;">Lotto Social app version 2.6.1</span>
+      </div>
+    </ion-item>
+  </ion-footer>
 </ion-menu>
 
 <!-- <popup-message-details #messageDetails [existing-cards]="userCards"></popup-message-details> -->

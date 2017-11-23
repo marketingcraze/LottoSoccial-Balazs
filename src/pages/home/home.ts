@@ -317,14 +317,15 @@ export class HomePage implements OnInit {
     onOpenLeftMenu() {
         this.appSound.play('menuClick');
     }
+    
 
     // markAsUnread() {
 
     //     console.log("markAsUnread()");
     // }
-    markAsRead(cardId: any,index) {
+    markAsRead(cardId: any, index) {
         debugger
-        var btn=document.getElementById('btnRead'+index).style.backgroundColor='gray'
+        var btn = document.getElementById('btnRead' + index).style.backgroundColor = 'gray'
         debugger
         this.srvHome.markAsRead(cardId).subscribe((data) => {
             if (data) {
@@ -336,8 +337,15 @@ export class HomePage implements OnInit {
 
     }
 
-    deleteNotification() {
-        console.log("deleteNotification()");
+    deleteNotification(cardId: any, index) {
+        this.srvHome.deleteMsg(cardId).subscribe((data) => {
+            if (data) {
+                if (data.response[0].delete_home_inbox_message.response.status == 'SUCCESS') {
+                    alert("Message deleted")
+                    document.getElementById("delete" + index).style.display = 'none';
+                }
+            }
+        })
     }
 
     saveItem() {

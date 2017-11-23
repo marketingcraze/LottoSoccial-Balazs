@@ -198,6 +198,39 @@
 
       </ion-card>
     </ion-slide>
+       <!-- syndicate -->
+   <ion-slide *ngFor="let invited of invitedPsyndicate">
+    <ion-card style="max-height:60vh;width: 80%;margin-left: 10%;margin-top: 10%;">
+      <div class="card-top">
+        <div class="card-title">
+          <img src="assets/img/home/ch_invited@3x.png">
+          <h4>YOU HAVE BEEN INVITED!</h4>
+        </div>
+        <img *ngIf="invited.private_syndicate_image_url" class="center invitesyndicate" src="{{invited?.private_syndicate_image_url}}" >
+        <img *ngIf="!invited.private_syndicate_image_url" class="center invitesyndicate" src="assets/icon/account_ico.svg" >
+        <div style="background: black;opacity: 0.7; position: relative;bottom: 17px;color: white;">
+          <h2 style="color: white!important">{{invited?.private_syndicate_name}}</h2>
+        </div>
+        <ion-row>
+          <ion-col col-3>
+            <ion-thumbnail item-left class="thumbnalTag">
+                <img *ngIf="invited.invitee_profile_pic_url" src='{{invited?.invitee_profile_pic_url}}' class="thumbnailListImage">
+              <img *ngIf="!invited.invitee_profile_pic_url" src='assets/img/voucher_ico.png' class="thumbnailListImage">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col col-9 style="margin-left: 0px">
+            <p style="text-align: left">{{invited?.inviter_member_name}} has invited you to join their syndicate with other {{invited?.syndicate_member_count}}
+              players
+            </p>
+          </ion-col>
+        </ion-row>
+        <div padding>
+          <button class="center" padding ion-button text-center color="secondary" (click)="gotoSignupInvited(invited)">{{invited?.button_label}}</button>
+        </div>
+      </div>
+    </ion-card>
+  </ion-slide>
+
   </ion-slides>
 
 

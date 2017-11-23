@@ -9,14 +9,14 @@
             <!-- <button *ngIf="!isHome" ion-button icon-only (click)="goHomePage()">
                 <ion-icon name="md-home"></ion-icon>
             </button> -->
-        	<button ion-button class="buttonNotification" icon-only menuToggle="menu1" *ngIf="unreadCount>1"  >
+        	<button ion-button class="buttonNotification" icon-only menuToggle="menu1" *ngIf="unreadCount>=1"  >
                 <ion-icon name="notification_ico" class="bell-icon"></ion-icon>
                 <ion-badge item-right mode="ios" color="badge">{{unreadCount}}</ion-badge>
             </button>
-            <button class="buttonNotification" ion-button icon-only menuToggle="menu1" *ngIf="unreadCount<1">
+            <!-- <button class="buttonNotification" ion-button icon-only menuToggle="menu1" *ngIf="unreadCount<1">
                 <ion-icon name="notification_ico" class="bell-icon"></ion-icon>
                 <ion-badge item-right mode="ios" color="badge">{{unreadCount}}</ion-badge>
-            </button>
+            </button> -->
         </ion-buttons>
   </ion-navbar>
 </ion-header>
