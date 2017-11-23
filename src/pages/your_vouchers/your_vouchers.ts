@@ -37,6 +37,7 @@ export class your_vouchers {
 
   loadVouchers() {
     let loader = this._showLoader();
+    this.voucher_code = ""
     this.voucher_service.getVoucherList().subscribe(
       data => {
         if (data.response[1].get_issued_voucher_code) {

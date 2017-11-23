@@ -26,7 +26,7 @@ export class ConfirmModalPage {
     this.viewCtrl.dismiss();
     //this.navCtrl.push(TabsPage);
     //this.app.getRootNav().push(TabsPage); 
-    this.navCtrl.setRoot(TabsPage, { tabIndex: 1 })
+    this.navCtrl.getActiveChildNav().push(TabsPage, { tabIndex: 1 })
     //let option = [{tabIndex: 1}]
     //this.navCtrl.popToRoot()
     //this.navCtrl.setRoot(TabsPage, {tabIndex: 1});

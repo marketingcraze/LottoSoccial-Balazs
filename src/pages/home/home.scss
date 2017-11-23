@@ -111,10 +111,17 @@ page-home {
 		font-size: .9em;
 		background-color: #C10A09;
 	}
-	.btn-unread{
+	.btn-read{
 		font-size: .9em;
 		color: #333;
 		background-color: #FFEB92;
+		white-space: normal;
+		font-size: smaller;
+	}
+	.btn-unread{
+		font-size: .9em;
+		color: #fff;
+		background-color: gray;
 		white-space: normal;
 		font-size: smaller;
 	}
