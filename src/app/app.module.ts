@@ -159,7 +159,7 @@ import { AffiliatePage } from '../pages/affiliate/affiliate'
 import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
 import { } from '../pages'
 import { SessionCheckOutPage } from '../pages/session-check-out/session-check-out';
-
+import { prizeBreakdownPage } from '../pages/prize-breakdown/prize-breakdown';
 
 
 @NgModule({
@@ -254,6 +254,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         buyOfferTips,
         OverlayPage,
         SyndicateCreatedModalPage,
+        prizeBreakdownPage,
         // master,
         // OffersPayment,
 
@@ -385,7 +386,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         OverlayPage,
         gameBlog,
         eventBlog,
-
+        prizeBreakdownPage,
         // popovers
         // OffersPayment,
         CountryListPopPage,

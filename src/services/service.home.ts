@@ -189,7 +189,7 @@ export class HomeService {
             "params": [{
                 "name": "json_request",
                 "param_type": "IN",
-                "value": "{\"page_id\": \"2\",\"screen_id\": \"2..1\",\"module_name\":\"get_credit_offer\",\"customer_id\": \"1970400\"}",
+                "value": { page_id: 2, screen_id: 2.1, module_name: "get_credit_offer", customer_id: CommonService.session.customer_id },
                 "type": "NVARCHAR(500)",
                 "length": 0
             },

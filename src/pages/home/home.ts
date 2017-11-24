@@ -29,6 +29,7 @@ import { AffiliatePage } from '../affiliate/affiliate'
 import { HelpPage } from '../Help/Help'
 import { NewSyndicatePage } from '../new-syndicate/new-syndicate'
 import { AffiliatePage2 } from '../affiliate2/affiliate2'
+import { prizeBreakdownPage } from '../prize-breakdown/prize-breakdown';
 
 declare var webengage: any;
 
@@ -209,6 +210,7 @@ export class HomePage implements OnInit {
         console.log("HomePage::onLeftMenuSelection");
         this.appSound.play('menuClick');
         this.menu.close();
+        debugger
         switch (selection) {
             case 'accounts':
                 this.params.goPage(AccountPage)
@@ -234,7 +236,9 @@ export class HomePage implements OnInit {
             case 'affiliate2':
                 this.params.goPage(AffiliatePage2)
                 break
-
+            case 'prizeBreak':
+                this.params.goPage(prizeBreakdownPage)
+                break
             case 'help':
                 this.params.goPage(HelpPage)
                 //   let opt:string = "toolbarposition=top";
@@ -317,7 +321,7 @@ export class HomePage implements OnInit {
     onOpenLeftMenu() {
         this.appSound.play('menuClick');
     }
-    
+
 
     // markAsUnread() {
 

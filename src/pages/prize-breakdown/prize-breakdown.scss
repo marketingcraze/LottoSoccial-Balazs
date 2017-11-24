@@ -1,0 +1,31 @@
+prize-breakdown{
+   .shareContent{
+    height: 50px;
+    background: black;
+    width: 100%;
+    text-align: center;
+    ion-icon{
+        color: #E4CD12;
+        margin-top: 3%;
+    }
+    span{
+        margin-left: 8px;
+        color: #E4CD12;
+    }
+   } 
+   .icon-s {
+    width: 20px;
+}
+.grid{
+    padding: 0px!important;
+}
+.item-inner{
+    padding: 0px;
+}
+.showTicket{
+    position: fixed;
+    content: url(./assets/icon/view_more.svg);
+    min-width: 14px;
+    margin-left: 5px;
+}
+}
