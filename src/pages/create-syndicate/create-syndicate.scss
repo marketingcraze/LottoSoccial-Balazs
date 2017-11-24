@@ -41,7 +41,7 @@ page-create-syndicate {
 }
 .inner-body {
     background: white;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 .pad-top-5 {
     padding-top: 5px;
@@ -85,7 +85,7 @@ page-create-syndicate {
     }
     ion-input {
         border: 1px solid #ccc;
-        margin-top: 0px;
+        margin-bottom: 2px;
     }
     .text-input-md {
         font-size: 15px;
@@ -95,6 +95,7 @@ page-create-syndicate {
         padding: 15px;
         background: #FEE5E5;
         color: #C10A09;
+        font-size: 16px;
     }
     .btn {
         background: #00A651;
@@ -137,7 +138,7 @@ page-create-syndicate {
         width: 30px;
         height: 30px;
         border-radius: 15px;
-        padding: 4px;
+        padding: 2px;
         font-weight: bold;
     }
     .bottom_bar {

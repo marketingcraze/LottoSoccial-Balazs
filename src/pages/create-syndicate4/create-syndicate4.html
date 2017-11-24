@@ -43,9 +43,9 @@
         </ion-grid>
   </div>
   <div class="syndicateRow">
-    <div class="pad-10"><div class="h-title" style="border-bottom: 1.5px solid #ccc;"> DRAWS </div></div>
+    <div class="pad-10"><div class="h-title" style="border-bottom: 1.5px solid #ccc;"> CHOOSE DRAWS </div></div>
     <div class="pad-side-10" *ngFor="let d of dataArr | lotselecetd; let i=index;">
-      <p class="desc-p"><img src="{{d.image}}" class="lot-img"/> Choose {{d.name}} draws</p>
+      <p class="desc-p"><img src="{{d.image}}" class="lot-img"/> {{d.name}} draws</p>
         <ion-grid class="my-grid border-btm">
           <ion-row style="text-align: center">
             <ion-col *ngFor="let da of d.days; let di=index">
@@ -64,14 +64,14 @@
               </span>
             </ion-col>-->
           </ion-row>
-          <ion-row><ion-col class="text-center" style="font-weight: bold">Choose number of lines for each member</ion-col></ion-row>
+          <ion-row><ion-col class="text-center" style="font-weight: bold">Number of lines each member will contribute</ion-col></ion-row>
           <ion-row>
             <ion-col col-5 class="text-right"><img src="./assets/img/minus.svg" class="pm-icon" (click)="decrease(i)"/></ion-col>
             <ion-col col-2 class="count-text">{{d.linecount}}</ion-col>
             <ion-col col-5><img src="./assets/img/plus.svg" class="pm-icon" (click)="increase(i)"/></ion-col>
           </ion-row>
         </ion-grid>
-        <p class="selected-desc" *ngIf="i == dataArr.length - 1">Your selection: <span *ngFor="let t of dataArr; let li=index"><span *ngIf="li != 0">+</span>{{t.linecount}} line(s) in {{t.name}} <span *ngIf="t.dayactive[0]">{{t.days[0]}}</span> <span *ngIf="t.dayactive[0] && t.dayactive[1]">and</span>  <span *ngIf="t.dayactive[1]">{{t.days[1]}}</span> </span></p>
+        <div class="selected-desc" *ngIf="i == dataArr.length - 1">Your selection: <p *ngFor="let t of dataArr; let li=index"><span *ngIf="li != 0">+</span>{{t.linecount}} line(s) in {{t.name}} <span *ngIf="t.dayactive[0]">{{t.days[0]}}</span> <span *ngIf="t.dayactive[0] && t.dayactive[1]">and</span>  <span *ngIf="t.dayactive[1]">{{t.days[1]}}</span> </p></div>
     </div>
     <!--<div class="pad-side-10">
       <p class="desc-p"><img src="./assets/img/lottoball@3x.png" class="lot-img"/> Choose Lotto draws</p>
@@ -114,7 +114,7 @@
 </ion-content>
 <ion-footer>
     <div class="bottom_bar">
-        <button ion-button type="submit" class="btn" (click)="next()">Next</button>
+        <button ion-button type="submit" class="btn" (click)="next()">CREATE</button>
     </div>
 </ion-footer>
 

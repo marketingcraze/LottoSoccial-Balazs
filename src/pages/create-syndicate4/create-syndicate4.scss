@@ -143,8 +143,13 @@ page-create-syndicate4 {
         border-bottom: 1px solid #ccc;
     }
     .selected-desc {
-        font-size: 10px;
+        font-size: 14px;
         text-align: center;
+        padding: 10px;
+        p {
+            font-size: 14px;
+            margin: 0;
+        }
     }
     .tickb {
         line-height: 0;

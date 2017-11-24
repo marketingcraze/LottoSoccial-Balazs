@@ -23,5 +23,12 @@
     </div>
     <div class="image-list" *ngFor="let image of images; let i=index" (click)="selectedImage(image)">
         <img src="{{image}}" />
+        <ion-icon class="ic" name="md-add-circle"></ion-icon>
     </div>
 </ion-content>
+
+<div *ngIf="timeout">
+    <span  >
+        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+    </span>
+</div>

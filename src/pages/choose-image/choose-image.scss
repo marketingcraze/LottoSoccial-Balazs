@@ -63,6 +63,14 @@ page-choose-image {
             width: 100%;
             height: 100%
         }
+        .ic {
+            position: relative;
+            float: right;
+            color: #d81d1d;
+            margin-top: -50px;
+            font-size: 35px;
+            right: 10px;
+        }
     }
     .upload-icon {
         width: 24px;
@@ -70,4 +78,30 @@ page-choose-image {
         padding: 0px 5px 2px;
         opacity: 0.9;
     }
+
+    @keyframes bounce {
+		0%   {top:0px;}
+		25%  {top:5px;}
+		50%  {top:10px;}
+		75%  {top:15px;}
+		100% {top:20px;}
+	}
+	.arrow {
+	  position: fixed;
+	  left: 50%;
+	  margin-left:-20px;
+	  width: 35px;
+	  height: 35px;
+	  bottom: 20px;
+	  margin-top: 150%;
+	  opacity: 0.5;
+
+	  background-size: contain;
+	  animation-name: bounce;
+	  animation-duration: 1s;
+	  animation-timing-function: linear;
+	  animation-delay: 1s;
+	  animation-iteration-count: 4;
+	  animation-direction: alternate;
+	}
 }

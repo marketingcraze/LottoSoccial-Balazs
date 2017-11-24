@@ -30,22 +30,23 @@
 
 <ion-content class="marg-top-12 main-bg">
   <div class="syndicateRow" *ngFor="let data of dataArr; let r = index;">
-        <p class="desc-p"><img src="{{data.product_image}}" class="lot-img"/> Choose your {{data.product_name}} numbers</p>
+        <p class="desc-p"><img src="{{data.product_image}}" class="lot-img"/> Your {{data.product_name}} numbers</p>
         <p class="s-title"> Enter {{data.numbers}} numbers from {{data.regular_from}} to {{data.regular_to}} and {{data.bonus}} Lucky Stars from {{data.bonus_from}} to {{data.bonus_to}} </p>
         <div class="text-center">
           <ion-grid>
             <ion-row class="grid-row" style="width: auto;" *ngFor="let l of dataArr[r].lines; let i = index">
+              <ion-col class="alpha">{{alpha[i]}}</ion-col>
                 <ion-col *ngFor="let c of l; let j = index; trackBy: small" > <div class="input-number" [ngClass]="{ 'st-input': j>data.numbers-1 }">{{c}}</div> </ion-col>
             </ion-row>  
           </ion-grid>  
         </div>
-        <p class="s-title">Valid for: Ongoing every <span *ngFor="let day of data.draw_day; let di = index"><span><span *ngIf="di > 0"> and </span>{{day.long}}</span></span> - &#x20A4;{{data.value | number : '1.2-2'}} </p>
+        <p class="s-title">Valid for: Ongoing every <span *ngFor="let day of data.draw_day; let di = index"><span><span *ngIf="di > 0"> and </span>{{day.long}}</span></span> - &#x20A4;{{data.value * data?.line_count * data?.draw_day.length | number : '1.2-2'}} </p>
   </div>
 
   <div class="like-div">
       <div>
         <div class="divider"></div>
-        <p>SPECIAL OFFERS FOR YOU</p>
+        <p>SPECIAL OFFERS</p>
       </div>
   </div>
   <div style="padding:0px;">

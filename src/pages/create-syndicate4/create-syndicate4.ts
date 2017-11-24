@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, ModalController } from 'ionic-angular';
 import { CreateSyndicatePage } from '../create-syndicate/create-syndicate';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 import { CreateSyndicate3Page } from '../create-syndicate3/create-syndicate3';
 import { CreateSyndicate5Page } from '../create-syndicate5/create-syndicate5';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { SyndicateCreatedModalPage } from '../syndicate-created-modal/syndicate-created-modal';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -35,7 +36,7 @@ export class CreateSyndicate4Page {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public appSound: AppSoundProvider,
+    public appSound: AppSoundProvider,public modalCtrl: ModalController,
     private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) { }
 
   ionViewDidLoad() {
@@ -65,6 +66,7 @@ export class CreateSyndicate4Page {
     this.navCtrl.push(CreateSyndicate3Page);
   }
   next() {
+    
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
@@ -98,7 +100,11 @@ export class CreateSyndicate4Page {
       if (res.response["0"].create_private_syndicate.response.status == "SUCCESS") {
         localStorage.setItem('cardSelected', JSON.stringify(this.dataArr));
         localStorage.setItem('synd_id', res.response["0"].create_private_syndicate.response.private_syndicate_id);
-        this.navCtrl.push(CreateSyndicate5Page);
+        let leave2Modal = this.modalCtrl.create(SyndicateCreatedModalPage, { s_name:JSON.parse(localStorage.getItem('sdetails')).title  });
+        leave2Modal.onDidDismiss(data => {
+            console.log(data);
+        });
+        leave2Modal.present();
       }
 
     })

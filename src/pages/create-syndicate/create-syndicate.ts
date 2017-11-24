@@ -3,6 +3,8 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ChooseImagePage } from '../choose-image/choose-image';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
+import { SyndicateService } from '../../providers/syndicate-service';
+
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -29,7 +31,8 @@ export class CreateSyndicatePage {
     public navParams: NavParams, 
     public appSound:AppSoundProvider,
     private formBuilder: FormBuilder, 
-    private viewCtrl: ViewController) {
+    private viewCtrl: ViewController,
+    private _syndService:SyndicateService) {
 
     this.todo = this.formBuilder.group({
       title: ['', Validators.required],
@@ -92,15 +95,33 @@ export class CreateSyndicatePage {
         this.namechosed = false
       }
     } else {
-        this.imagechosed = false
-        this.namechosed = false
+      var patt = /^[^\W0-9_][a-zA-Z0-9\s]+$/
+      console.log("syndicate title", patt.test(this.todo.value.title))
+        if(patt.test(this.todo.value.title)) {
+           this.imagechosed = false
+          this.namechosed = false
+        } else {
+          this.namechosed = true
+          return;
+        }
     }
-    var data = {
-      title: this.todo.value.title,
-      image: this.sImage
-    }
-    localStorage.setItem('sdetails', JSON.stringify(data));
-    this.navCtrl.push(CreateSyndicate2Page);
+
+   this._syndService.profanity(this.todo.value.title)
+   .subscribe((res)=> {
+     console.log(res);
+     if(res.response[0].profanity_check.response.valid_str) {
+       var data = {
+          title: this.todo.value.title,
+          image: this.sImage
+       }
+        localStorage.setItem('sdetails', JSON.stringify(data));
+        this.navCtrl.push(CreateSyndicate2Page);
+     } else {
+       alert("please check your syndicate name")
+      return
+     }
+   })
+    
   }
 
 }

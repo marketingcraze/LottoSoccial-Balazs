@@ -24,6 +24,9 @@
           <div class="s-title"> Choose a photo and a name for your new syndicate </div>
       </div>
       <form [formGroup]="todo" >
+          <div style="text-align: center;">
+            <ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" maxlength="25"></ion-input>
+          </div>
       <div class="img-picker" [ngClass]="{ 'n-bg': !hideimagebtn , 'w-bg': hideimagebtn }">
           <button ion-button outline icon-left class="marg-35" type="button" [hidden]="hideimagebtn" (click)="chooseImage()">
               <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
@@ -34,10 +37,10 @@
           <ion-icon ios="md-sync" md="md-sync" class="reload" (click)="chooseImage()" [hidden]="!hideimagebtn"></ion-icon>
       </div>
       <div style="text-align: center;">
-        <ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" maxlength="25"></ion-input>
+        <!--<ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" maxlength="25"></ion-input>-->
         <div>
             <p *ngIf="imagechosed" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a cover for your syndicate</p>
-            <p *ngIf="namechosed" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a name for your syndicate</p>
+            <p *ngIf="namechosed" class="errorDiv"><span style="content: url('./assets/img/warning.svg'); width: 12px;"></span> Please select a valid name for your syndicate</p>
         </div>
         
       </div>

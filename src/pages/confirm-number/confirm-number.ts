@@ -50,7 +50,7 @@ export class ConfirmNumberPage {
     hrs:any;
     min:any;
     sec:any;
-
+    alpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","z"]
 
   constructor(public navCtrl: NavController, 
       public iab: InAppBrowser,
@@ -64,7 +64,7 @@ export class ConfirmNumberPage {
 
     this.dataArr = JSON.parse(localStorage.getItem('numberData'));
     for (var i=0; i<this.dataArr.length; i++) {
-      this.syndicatePrice = this.syndicatePrice + (this.dataArr[i].value * this.dataArr[i].line_count)
+      this.syndicatePrice = this.syndicatePrice + (this.dataArr[i].value * this.dataArr[i].line_count * this.dataArr[i].draw_day.length)
     }
     this.TotalPaybale = this.syndicatePrice;
     this.syndId = localStorage.getItem('synd_id');

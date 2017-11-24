@@ -23,6 +23,7 @@ export class ChooseImagePage {
   public createsynd: CreateSyndicatePage
   base64Image
   private imageSrc: string;
+  timeout = false
 
   constructor(
     public navCtrl: NavController,
@@ -34,6 +35,8 @@ export class ChooseImagePage {
     public appSound:AppSoundProvider,
     private loadingCtrl: LoadingController
     ) {
+      
+      
    
   }
 
@@ -86,6 +89,10 @@ export class ChooseImagePage {
               }       
           }
           loader.dismiss();
+          this.timeout = true
+          setTimeout(() => {
+            this.timeout = false
+          }, 5000)
         });
   }
   private error;

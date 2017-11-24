@@ -537,6 +537,30 @@ export class SyndicateService {
                 })
 
     }
+
+    profanity(name:any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/profanity_validate/";
+        let data = {
+                    "request": [{
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "4",
+                        "screen_id": "4.1.1",
+                        "action": "profanity_check",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "profanity_check",
+                        "str":name 
+                        }]
+                    }
+
+        let headopt = SyndicateService.getHeader();
+        return this.http.post(action, data, { headers:headopt })
+                    .map(res => res.json())
+                    .map((res) => {
+                        return res;
+                })
+    }
     
     
 }

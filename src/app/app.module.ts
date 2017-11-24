@@ -93,6 +93,7 @@ import { buyOfferTips } from '../pages/BuyofferPageTips/BuyofferPageTips';
 import  { OverlayPage } from '../pages/overlaypage/overlay-page'
 import { gameBlog } from '../pages/redeem-games/game-blog/game-blog'
 import { eventBlog } from '../pages/store/eventBlog/eventBlog';
+import { SyndicateCreatedModalPage } from '../pages/syndicate-created-modal/syndicate-created-modal';
 
 
 // components
@@ -251,6 +252,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         newArrowHeader,
         buyOfferTips,
         OverlayPage,
+        SyndicateCreatedModalPage,
      
         // master,
         // OffersPayment,
@@ -392,7 +394,8 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
         your_vouchers_popups,
         AffiliatePage,
         AffiliatePage2,
-        AgreementPage
+        AgreementPage,
+        SyndicateCreatedModalPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },ActionSheet,
         AnimationService, DatabaseService,paymentService, CommonService,Badge,UniqueDeviceID,  AuthService, HomeService, AccountService, Params,AffiliateServices,
