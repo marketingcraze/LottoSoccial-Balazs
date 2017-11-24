@@ -16,7 +16,7 @@
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
 
 <ion-content style="top: 0.5%;">
-
+    
   <ion-grid class="score-panel">
     <ion-row>
       <ion-col width-50 style="width: 100%">
@@ -689,7 +689,7 @@
             </div>
             <ion-slides spaceBetween=8 slidesPerView=2>
               <ion-slide style="width: 51%" *ngFor="let c of millionerImage" (tap)=openModal(c)>
-                <img src="{{c.image_url}}" width="150" height="100" style="height: 17.5vh;margin-top: 1px;" >
+                <img src="{{c.image_url}}" width="150" height="100" style="height: 17.5vh;margin-top: 5px;" >
               </ion-slide>
             </ion-slides>
       
