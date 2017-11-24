@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { SyndicateService } from '../../providers/syndicate-service';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
+import { badgesOs } from '../../services/badges.service';
 
 
 
@@ -26,6 +27,7 @@ export class BadgeViewPage {
     private toastCtrl: ToastController,
     private contacts: Contacts,
     public platform: Platform,
+    private _badgess: badgesOs,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
     private socialSharing: SocialSharing,
@@ -53,12 +55,30 @@ export class BadgeViewPage {
   }
   countCompletedStep(steps) {
     var count = 0;
-    for (let i = 0; i <= steps / length; i++) {
+    for (let i = 0; i < steps.length; i++) {
       if (steps[i].percentage == 100) {
         count++
       }
     }
     return count;
   }
-
+  collect(d: any) {
+    var loader = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
+    loader.present().then(() => {
+      this._badgess.collectBadge(d.post_title, d.ID, d.award_id).subscribe(data => {
+        if (data) {
+          if (data.response[0].issue_customer_award.response.status == 'SUCCESS') {
+            loader.dismiss()
+            alert("Points collected successfully")
+          }
+          else {
+            loader.dismiss()
+          }
+        }
+      })
+    })
+  }
 }

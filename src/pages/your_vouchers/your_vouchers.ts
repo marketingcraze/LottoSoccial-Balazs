@@ -37,12 +37,13 @@ export class your_vouchers {
 
   loadVouchers() {
     let loader = this._showLoader();
+    this.voucher_code = ""
     this.voucher_service.getVoucherList().subscribe(
       data => {
         if (data.response[1].get_issued_voucher_code) {
           this.appList = data.response[1].get_issued_voucher_code.response.voucher_code_details
           this.mobileNumber = data.response[0].get_customer_details.response.mobile_number
-
+          debugger
           console.log("mobile number is ", this.mobileNumber)
           this.adjustListCount()
           this.timerInstance.newTimer('1min', 1);
@@ -68,6 +69,7 @@ export class your_vouchers {
   }
 
   adjustListCount() {
+
     if (this.appList) {
       this.count = this.appList.length
       this.height = this.appList.length * 78;
@@ -105,6 +107,7 @@ export class your_vouchers {
 
   }
   selectedButtonID(index) {
+    debugger
     let modal = this.modalController.create(your_vouchers_popups, {
       VoucherDetail: this.appList[index].voucher_description,
       VoucherCode: this.appList[index].voucher_code,

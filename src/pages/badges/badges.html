@@ -1,93 +1,94 @@
 <ion-header>
     <newArrow-Header title="Badges" notification-count="5"></newArrow-Header>
-  </ion-header>
+</ion-header>
 
-<ion-content  (ionScroll)="scrollHandlerBadges($event)" id="badgesContent" style="margin-bottom: 40px;">
-        <div id="innerBadges" >
-    <div class="badges-main">
-        <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-bottom: 10px solid #e8e8e8">
-            <!--Hey champ, this is a list of your achivements.<br> tap on each badges to see more info.-->
-            <div style="text-align: center">
-                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 25%;padding: 5px;"/>
+<ion-content (ionScroll)="scrollHandlerBadges($event)" id="badgesContent" style="margin-bottom: 40px;">
+    <div id="innerBadges">
+        <div class="badges-main">
+            <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-bottom: 10px solid #e8e8e8">
+                <!--Hey champ, this is a list of your achivements.<br> tap on each badges to see more info.-->
+                <div style="text-align: center">
+                    <img src="{{highestBadge?.thumbnail}}" style="width: 25%;padding: 5px;" />
+                </div>
+                <img src="assets/img/gold_star.png" style="position: absolute;top: 20px;right: 88px;height: 16px">
+                <span style="position: absolute;top: 20px;right: 10px;">{{highestBadge?.points}} Points</span>
+                <div style="font-size:1.2em">Badegs with most progress</div>
+                <div style="padding: 5px;">{{highestBadge?.precentage}}%</div>
+                <div>
+                    <button ion-button class="btn btn1" (click)="viewTickets(highestBadge)" style="background: white;color: lightseagreen;"> EARN </button>
+                </div>
             </div>
-            <span style="position: absolute;top: 20px;right: 10px;">50 Points</span>
-            <div style="font-size:1.2em">Badegs with most progress</div>
-            <div style="padding: 5px;">75% completed</div>
             <div>
-                <button ion-button class="btn btn1" (click)="viewTickets(i)" style="background: white;color: lightseagreen;"> EARN </button> 
-            </div>
-        </div>
-        <div>
-        <ion-grid class="pad-0">
-            <ion-row class="b-border" *ngFor="let d of data; let i = index;" (click)="viewBadges()">
-                <!--<ion-col col-3 class="" >-->
-                    <ion-col col-3 class="">
-                    <img src="{{d.achievement_thumb}}" style="width: 100%;padding: 5px;"/>
-                </ion-col>
-                <ion-col col-6 class="left pad-top-18">
-                    <div class="text-bold" [innerHTML]="d.achievement_title"></div>
-                    <div class="light-font pad-tb">{{d.completed}}% completed</div>
-                    <div>
-                        <span *ngFor="let gr of d.greenC"><img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"/></span>
-                        <span *ngFor="let gn of d.grayC"><img src="http://iconbug.com/data/15/256/3480417b5a330cdbcbf3297477dbe664.png" class="badge-small"/></span>
-                    </div>
-                </ion-col>
-                <ion-col col-3 class="right pad-t-25">
-                    <button ion-button class="btn btn1" (click)="viewTickets(i)" *ngIf="d.achievement_points_markup"> {{d.achievement_points_markup}} </button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        </div>
-        <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-top: 10px solid #e8e8e8">
-            <div style="font-size:1.2em; font-weight: bold;">YOUR ACHIEVEMENTS</div>
-            <ion-grid style="padding: 0;">
-                <ion-row>
-                    <ion-col col-2 class="right pad-t-25" style="text-align: center;padding: 0;">
-                        <div>
-                            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
-                        </div>
-                        <div style="font-size: 10px;">Bruice Bonus</div>
-                    </ion-col>
-                    <ion-col col-2 class="right pad-t-25" style="text-align: center;padding: 0;">
-                        <div>
-                            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
-                        </div>
-                        <div style="font-size: 10px;">Subscribers</div>
-                    </ion-col>
-                    <ion-col col-2 class="right pad-t-25" style="text-align: center ;padding: 0;">
-                        <div>
-                            <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
-                        </div>
-                        <div style="font-size: 10px;">Get more!</div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-        <div style="padding: 10px;border-top: 10px solid #e8e8e8;">
-            <div>GOTTA EARN THEM ALL!</div>
-            <div>All these badges are still up for grab. Make them yours!</div>
-            <div>
-                <ion-grid>
-                    <ion-row>
-                    <ion-col col-2 *ngFor="let d of data; let i = index" style="padding: 0;padding-bottom: 10px;">
+                <ion-grid class="pad-0">
+                    <ion-row class="b-border" *ngFor="let d of data; let i = index;">
+                        <ion-col col-3 class="">
+                            <img src="{{d.thumbnail}}" style="width: 100%;padding: 5px;" />
+                        </ion-col>
+                        <ion-col col-5 class="left pad-top-18">
+                            <div class="text-bold" [innerHTML]="d.post_title"></div>
+                            <div class="light-font pad-tb">{{d.precentage | number : '1.0-2'}}% completed</div>
                             <div>
-                                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" style="width: 100%;padding: 5px;"/>
+                                <span *ngFor="let gr of d.steps">
+                                    <img *ngIf="gr.percentage<'100'" src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"
+                                    />
+                                    <img *ngIf="gr.percentage=='100'" src="http://iconbug.com/data/15/256/3480417b5a330cdbcbf3297477dbe664.png" class="badge-small"
+                                    />
+                                </span>
                             </div>
-                            <div style="font-size: 10px;">Get more!</div>
-                    </ion-col>
+                        </ion-col>
+                        <ion-col col-4 class="right pad-t-25">
+                            <img src="assets/img/gold_star.png" style="position: absolute;top: 3px;right: 75px;height: 16px">
+                            <span style="position: absolute;top: 3px;right: 13px">{{d?.points}} Pts</span>
+                            <button style="width: 90%" ion-button class="btn btn1" (click)="viewTickets(d)" *ngIf="d.precentage<'100'"> EARN</button>
+                            <button style="width: 90%" ion-button class="btn btn1" (click)="viewTickets(d)" disabled="disabled" *ngIf="d.precentage=='100' && d.collect=='1'">COLLECT </button>
+                            <button style="width: 90%" ion-button class="btn btn1" (click)="viewTickets(d)" *ngIf="d.precentage=='100' && d.collect=='0'">COLLECT </button>
+                        </ion-col>
                     </ion-row>
                 </ion-grid>
-                
+            </div>
+            <div class="pad-10 b-border" style="background: lightseagreen; color: white;border-top: 10px solid #e8e8e8">
+                <div style="font-size:1.2em; font-weight: bold;">YOUR ACHIEVEMENTS</div>
+                <ion-grid style="padding: 0;">
+                    <ion-row>
+                        <ion-col *ngFor="let d of data | filterBadge:100" col-2 class="right pad-t-25" style="text-align: center;padding: 0;">
+                            <img src="{{d?.thumbnail}}" style="width: 100%;padding: 5px;" (tap)="viewTickets(d)" />
+                            <div *ngIf="d.precentage=='100'" style="font-size: 10px;">{{d?.post_title}}</div>
+                        </ion-col>
+
+                        <ion-col col-2 class="right pad-t-25" style="text-align: center ;padding: 0;">
+                            <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()" />
+                            <div style="font-size: 10px;">Get more!</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div style="padding: 10px;border-top: 10px solid #e8e8e8;">
+                <div>GOTTA EARN THEM ALL!</div>
+                <div>All these badges are still up for grab. Make them yours!</div>
+                <div>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-2 *ngFor="let d of data | filterBadge:0; let i = index" style="padding: 0;padding-bottom: 10px;">
+                                <div *ngIf="d?.precentage=='0'">
+                                    <img src="{{d?.thumbnail}}" style="width: 100%;padding: 5px;" />
+                                </div>
+                                <div *ngIf="d?.precentage=='0'" style="font-size: 10px;">{{d?.post_title}}</div>
+                            </ion-col>
+                            <ion-col col-2 class="right pad-t-25" style="text-align: center ;padding: 0;">
+                                <div style="background-color: #20B2AA">
+                                    <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()" />
+                                </div>
+                                <div style="font-size: 10px;">Get more!</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
             </div>
         </div>
     </div>
-        </div>
 </ion-content>
 <div *ngIf="down_arrow_showing==1">
-        <span *ngIf="downShowing==0"  >
-            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
-       </span>
-    </div>
-    
-
-
+    <span *ngIf="downShowing==0">
+        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+    </span>
+</div>

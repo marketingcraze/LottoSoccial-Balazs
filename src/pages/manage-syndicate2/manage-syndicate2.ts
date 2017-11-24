@@ -47,6 +47,7 @@ export class ManageSyndicate2Page {
     loader.present().then(() => {
       this.leveSynd.privateSyndicateMembers(this.sId.syndicate_id).subscribe(data => {
         if (data) {
+          loader.dismiss()
           let leave2Modal = this.modalCtrl.create(Leave2Page, { syndId: this.sId, members: data.response[0].get_private_syndicate_members.response });
           leave2Modal.onDidDismiss(data => {
             console.log(data);

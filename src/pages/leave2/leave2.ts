@@ -38,16 +38,19 @@ export class Leave2Page {
     loader.present().then(() => {
       this.leaveSynd.privateSyndicateLeave(this.syndicateId).subscribe(data => {
         if (data) {
-          debugger
           loader.dismiss()
-          // if (data.response[0].manage_syndicate.response.status == 'SUCCESS') {
+          if (data.response[0].manage_syndicate.response.status == 'SUCCESS') {
             this.viewCtrl.dismiss(data);
             let confirmModal = this.modalCtrl.create(ConfirmModalPage);
             confirmModal.onDidDismiss(data => {
               console.log(data);
             });
             confirmModal.present();
-          // }
+          }
+          else{
+            loader.dismiss();
+            alert("Error occured");
+          }
         }
       })
     })

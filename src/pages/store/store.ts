@@ -321,6 +321,7 @@ export class StorePage {
         })
     }
     onPopUp() {
+        debugger
         let modal = this.modalCtrlr.create(OverlayPage);
         modal.present();
     }
@@ -897,6 +898,8 @@ export class StorePage {
 
     countSlider(ev: any) {
 
+        this.appSound.play("cardFlip")
+        
         let direction = ev.direction;
         if (direction == 2 && this.counts < this.carouselSlide.length()) {
             if (this.count == this.carouselSlide.length() - 1) {

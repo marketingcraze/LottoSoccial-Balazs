@@ -77,6 +77,7 @@ export class VoucherService {
 
     getPopUpVoucherData(mNumber,code) {
         console.log("inside voucher list");
+        debugger
         if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
@@ -112,8 +113,7 @@ export class VoucherService {
                 "voucher":code, //code write here
                 "email_address ":"",
                 "mobile_number":mNumber
-          
-              }
+          }
             ]
           }
           

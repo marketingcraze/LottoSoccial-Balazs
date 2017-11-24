@@ -25,6 +25,7 @@
             <div class="separator"></div>
             <div>REWARD</div>
             <div class="dark large-font pad5"> {{BadgeData?.points}} pts</div>
+            <button style="width: 40%" ion-button class="btn btn1" (click)="collect(BadgeData)" *ngIf="BadgeData.precentage=='100'">COLLECT </button>
             <div class="separator"></div>
             <div class="pad5">STEPS REQUIRED</div>
             <div style="padding: 5px 12px 25px 0
@@ -33,7 +34,10 @@
                     <ul>
                         <li *ngFor="let step of steps">
                             <span class="left">
-                                <img src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small" />
+                                <img *ngIf="step.percentage<'100'" src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"
+                                />
+                                <img *ngIf="step.percentage=='100'" src="http://iconbug.com/data/15/256/3480417b5a330cdbcbf3297477dbe664.png" class="badge-small"
+                                />
                                 <span>
                                     {{step?.title}}
                                 </span>

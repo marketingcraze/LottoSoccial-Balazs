@@ -21,6 +21,7 @@ export class your_vouchers_popups {
   sucessState: any = "";
   gift_status: any = "";
   contentHeight: any = "";
+  shButton:any= 0
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -68,7 +69,16 @@ export class your_vouchers_popups {
       data => {
         this.middleData = data.response[0].voucher_validation.response.Voucher_description;
         this.gift_status = data.response[0].voucher_validation.response.gift_status;
+
         this.lottoMiddleJson = this.middleData.split("#");
+        if(data.response[0].voucher_validation.response.status == "1")
+        {
+          this.shButton = 1
+        }
+        else{
+          this.shButton = 0
+        }
+        debugger
         this.delay(300);
         this.ionEnter();
         loader.dismiss()

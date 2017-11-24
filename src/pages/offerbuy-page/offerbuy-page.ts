@@ -231,7 +231,7 @@ export class offerBuy {
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
     }
     getMaximumHeight() {
-        return (window.innerHeight / 1.8);
+        return (window.innerHeight / 2.5);
     }
     buyCashOffer(offerId, buttonText) {
         this.userCards

@@ -7,6 +7,7 @@ import { leaveSyndicate } from '../../services/syndicate_leave.service'
   templateUrl: 'leave.html'
 })
 export class LeavePage {
+  resumeBilling: any;
   syndicateId: any;
   deviceHeight: any;
   paused: boolean = false;
@@ -18,6 +19,7 @@ export class LeavePage {
     public navParams: NavParams,
     public serviceLeave: leaveSyndicate,
     public viewCtrl: ViewController) {
+    this.resumeBilling = this.navParams.get("billingDate")
     this.syndicateId = this.navParams.get("syndId")
   }
 
@@ -34,7 +36,7 @@ export class LeavePage {
   pauseSyndicate() {
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     loader.present().then(() => {
       this.serviceLeave.managedSyndicatePause(this.syndicateId).subscribe(data => {
@@ -44,30 +46,35 @@ export class LeavePage {
           this.leaveSuccess = false
           this.paused = true
         }
-        else{
+        else {
           loader.dismiss()
         }
       })
     })
-
   }
   moveTOffer(data: any = 'offerPage') {
-    debugger
     this.viewCtrl.dismiss(data)
   }
-  leaveSyndicate() {
-    let loader = this.loadingCtrl.create();
+  leaveSyndicateManaged() {
+    let loader = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     loader.present().then(() => {
       this.serviceLeave.manageSyndicateLeave(this.syndicateId).subscribe(data => {
         if (data) {
-          loader.dismiss();
-          this.paused = false;
-          this.leaveSuccess = false;
-          this.leave = true
+          if (data.response[0].manage_syndicate.response.status == 'SUCCESS') {
+            loader.dismiss();
+            this.paused = false;
+            this.leaveSuccess = false;
+            this.leave = true
+          }
+          else{
+            alert("oops!! Errrrrrr")
+          }
         }
       })
     })
-
   }
   leaveSynd() {
     this.paused = false;

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController,LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, LoadingController } from 'ionic-angular';
 import { CashModalPage } from '../chooseCash-modal/chooseCash-modal';
 import { CreditModalPage } from '../chooseCredit-modal/chooseCredit-modal';
 import { SyndicateService } from '../../providers/syndicate-service';
-declare const $:any;
+declare const $: any;
 /*
   Generated class for the Leave2 page.
 
@@ -16,20 +16,20 @@ declare const $:any;
 })
 export class ChooseCreditcashPage {
 
-   deviceHeight: any;
-   mless = 'less';
-   mlBool =  true
-   isCash = false;
-   claimevent_id:any;
-   cash:any;
-   credit:any;
-   loader:any
-    topmar: any;
+  deviceHeight: any;
+  mless = 'less';
+  mlBool = true
+  isCash = false;
+  claimevent_id: any;
+  cash: any;
+  credit: any;
+  loader: any
+  topmar: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,
-  public _syndSrvc:SyndicateService,public loadingCtrl:LoadingController) {
+    public _syndSrvc: SyndicateService, public loadingCtrl: LoadingController) {
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     this.claimevent_id = navParams.get('cid');
     this.cash = navParams.get('cash');
@@ -38,57 +38,53 @@ export class ChooseCreditcashPage {
 
   ionViewDidLoad() {
     this.deviceHeight = window.screen.height;
-    
-      var h = $('.m-div').height();
-      this.topmar = (this.deviceHeight - h)/2;
+
+    var h = $('.m-div').height();
+    this.topmar = (this.deviceHeight - h) / 2;
   }
 
 
- chooseCredit() {
-    let data = {'foo':'bar'}
-    this.viewCtrl.dismiss(data);
+  chooseCredit() {
     let chooseCreditModal = this.modalCtrl.create(CreditModalPage);
-      chooseCreditModal.onDidDismiss(data => {
-        console.log(data);
-      });
-      chooseCreditModal.present();
- }
- chooseCash() {
-    let data = {'foo':'bar'}
-    this.viewCtrl.dismiss(data);
+    chooseCreditModal.onDidDismiss(data => {
+      this.viewCtrl.dismiss(data)
+    });
+    chooseCreditModal.present();
+  }
+  chooseCash() {
     let chooseCashModal = this.modalCtrl.create(CashModalPage);
-      chooseCashModal.onDidDismiss(data => {
-        console.log(data);
-      });
-      chooseCashModal.present();
- }
- readMore(){
-     if(this.mlBool == true){
-         this.mlBool = false;
-         this.mless = 'more'
-     }else {
-         this.mlBool = true;
-         this.mless = 'less';
-     }
- }
- selectCC(n:any) {
-   if(n==0 && this.isCash){
-     this.isCash = !this.isCash
-   }else if(n==1 && !this.isCash) {
-     this.isCash = !this.isCash
-   }
- }
- choose() {
-    if(this.isCash) {
+    chooseCashModal.onDidDismiss(data => {
+      this.viewCtrl.dismiss(data)
+    });
+    chooseCashModal.present();
+  }
+  readMore() {
+    if (this.mlBool == true) {
+      this.mlBool = false;
+      this.mless = 'more'
+    } else {
+      this.mlBool = true;
+      this.mless = 'less';
+    }
+  }
+  selectCC(n: any) {
+    if (n == 0 && this.isCash) {
+      this.isCash = !this.isCash
+    } else if (n == 1 && !this.isCash) {
+      this.isCash = !this.isCash
+    }
+  }
+  choose() {
+    if (this.isCash) {
       this.loader.present();
       this._syndSrvc.convertCash(this.claimevent_id)
-        .subscribe((res:any)=> {
+        .subscribe((res: any) => {
           console.log(res);
           this.chooseCash();
           this.loader.dismiss();
         })
-   }else {
-     this.chooseCredit();
-   }
- }
+    } else {
+      this.chooseCredit();
+    }
+  }
 }

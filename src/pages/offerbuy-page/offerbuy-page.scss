@@ -1,3 +1,4 @@
+
 .container-header{
    padding-top:20px; 
    
@@ -80,7 +81,57 @@
     margin-top: 0px;
 }
 
+ion-pullup .footer ion-content.content-md .scroll-content{
+    bottom: 0px!important;
+    background-color: white!important;
+}
+ion-pullup .footer ion-toolbar {
+    box-shadow: none!important;
+}
 offer-buy{
+.m{
+    .price{
+        margin-top: 3%;
+        position: relative;
+        font-size: 1.2em;
+        text-align: center
+    }
+    .toolbar-content-md {
+        height: 4vh;
+        text-align: center;
+    }
+    .toolbar-title-md {
+       font-size: 1.4em;
+       position: absolute;
+       margin-top: 6%;
+       
+    }
+    
+    ion-pullup .footer ion-content.content-md .scroll-content {
+         bottom: 0px !important; 
+    }
+    ion-icon {
+       display: inline-block;
+       font-size: 1.6em;
+   }
+   .scroll-content{
+       height: 100%!important
+   }
+
+   .swiper-wrapper {
+       margin-top: 5%
+   }
+   .toolbar-background-md{
+       height: 82%;
+   }
+   
+   .iconArrow{
+       font-size: 2.0em
+   }
+   
+   
+   
+}
     .modal-wrapper{
         width: 100%;
         height: 100%;
@@ -126,10 +177,10 @@ offer-buy{
             font-size: 1.10em;
         }
       .iconArrow{
-        position: relative;
-        left: 47%;
-        font-size: 34px;
-        top: -21px;
+            font-size: 29px;
+            margin-left: 85%;
+            color: white;
+            margin-top: -10px;
       }
       .titleFooter{
         text-align: center;
@@ -137,10 +188,27 @@ offer-buy{
         margin-top: -33px;
       }
       ion-footer{
-        margin: 5% 0 0 5%;;
-        width: 90%!important
+        margin: 3% 0 0 3%;;
+        width: 94%!important
       }
       .myGrid{
-        padding: 25px 0!important;
+        padding: 12px 0!important;
       }
+     
+}
+@media only screen and (max-width: 375px) {
+    .price{
+        margin-top: 3%;
+        position: relative;
+        font-size: 1.2em;
+        text-align: center
+    }   
+}
+@media only screen and (max-width: 320px) {
+    .price{
+        margin-top: 3%;
+        position: relative;
+        font-size: 1em;
+        text-align: center
+    }   
 }
