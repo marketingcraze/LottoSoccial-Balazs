@@ -155,6 +155,7 @@ export class offerBuy {
             this.offerBuyData.dedicatedOfferData(this.productName)
                 .subscribe(
                 responseData => {
+                    debugger
                     this.calTime();
                     this.credit_offer = responseData.response[0].get_credit_offer.response.offers;
                     this.product = responseData.response[0].get_credit_offer.response.product[0];
@@ -233,41 +234,36 @@ export class offerBuy {
     getMaximumHeight() {
         return (window.innerHeight / 2.5);
     }
-    buyCashOffer(offerId, buttonText) {
-        this.userCards
-//        loader.dismiss();
-        this.confirmPayment.togglePopup()
-
-
-        // debugger
-        // let loader = this.loadingCtrl.create({
-        //     spinner: 'hide',
-        //     content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-        // });
-        // loader.present().then(() => {
-        //     this.offerService.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
-        //         let token_exists = 0;
-        //         for (var i = 0; i < data.response.length; ++i) {
-        //             if (data.response[i].get_customer_paymill_card_details) {
-        //                 token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-        //             }
-        //         }
-        //         if (token_exists > 0) {
-        //             debugger
-
-        //             this.userCards = data.response;
-
-
-        //             loader.dismiss();
-        //             this.confirmPayment.togglePopup()
-        //         } else {
-        //             loader.dismiss()
-        //         }
-        //     }, (err) => {
-        //         loader.dismiss()
-        //         console.log("StorePage::showPaymentOptions() error", err);
-        //     });
-        // })
+    buyCashOffer(offerId) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        });
+        loader.present().then(() => {
+            this.offerService.buyCurrentOfferOnHomeCard(offerId.offer_id).subscribe((data) => {
+                debugger
+                let token_exists = 0;
+                for (var i = 0; i < data.response.length; ++i) {
+                    if (data.response[i].get_customer_paymill_card_details) {
+                        localStorage.removeItem("buttonText");
+                        localStorage.setItem("buttonText", offerId.offer_id);
+                        token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                    }
+                }
+                if (token_exists > 0) {
+                    debugger
+                    this.userCards = data.response;
+                    loader.dismiss();
+                    this.confirmPayment.togglePopup()
+                } else {
+                    loader.dismiss()
+                    this.confirmPayment.togglePopup()
+                }
+            }, (err) => {
+                loader.dismiss()
+                console.log("StorePage::showPaymentOptions() error", err);
+            });
+        })
     }
 
 

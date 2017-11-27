@@ -1,14 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, Slides } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, Slides, Platform } from 'ionic-angular';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { SimpleTimer } from 'ng2-simple-timer';
-declare const $
+import { Storage } from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+declare const $
+declare var cordova: any;
 @Component({
     selector: 'page-prize-summary-No-syndicate',
     templateUrl: 'Prize-summary-No-syndicate.html'
 })
 export class PrizeSummaryNoSyndicate {
+    userCards: any;
+    @ViewChild("confirmPayment") confirmPayment;
     loader: any;
     data: any;
     bgStyle: any
@@ -28,6 +33,9 @@ export class PrizeSummaryNoSyndicate {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
+        public platform: Platform,
+        private storage: Storage,
+        private iab:InAppBrowser,
         public viewCtrl: ViewController,
         public _syndService: SyndicateService,
         public loadingCtrl: LoadingController,
@@ -36,11 +44,9 @@ export class PrizeSummaryNoSyndicate {
 
     }
 
-    ionViewDidLoad() {
-        this.getData()
-    }
     ionViewWillEnter() {
         this.viewCtrl.showBackButton(false);
+        this.getData()
 
     }
     //countDown timer
@@ -98,6 +104,7 @@ export class PrizeSummaryNoSyndicate {
 
     }
     getData() {
+        debugger
         this.loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
@@ -105,6 +112,7 @@ export class PrizeSummaryNoSyndicate {
         this.loader.present();
         this._syndService.prizeBreakDown().
             subscribe((res) => {
+                debugger
                 this.loader.dismiss();
                 console.log(JSON.stringify(res));
                 this.data = res.response["0"].check_mywinnings.response.syndicate_offer;
@@ -115,5 +123,25 @@ export class PrizeSummaryNoSyndicate {
                 this.subscribeTimer0(this.data.next_draw.countdown)
 
             })
+    }
+    openpaymentPopup() {
+        this.userCards
+        this.confirmPayment.togglePopup()
+    }
+    goToStore() {
+
+        this.storage.get('session')
+            .then(
+            data => {
+                let session: any = JSON.parse(data);
+                this.platform.ready().then(() => {
+                    if (typeof cordova !== 'undefined') {
+                        var browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top')
+                    }
+                });
+            }, error => {
+                console.log(error)
+            }
+            );
     }
 }
