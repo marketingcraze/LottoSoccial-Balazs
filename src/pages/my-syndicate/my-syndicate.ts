@@ -154,6 +154,12 @@ export class MySyndicatePage {
                 }
                 localStorage.setItem("syndicateP", "1")
                 console.log("syndSrr is ", this.syndArr)
+                setTimeout(()=>
+                {
+                    this.down_arrow_showing = 0
+                    this.cdRef.detectChanges()
+                    console.log("value changed for dwn arow in syndicate")
+                }, 3000);
                 this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
                 if (this.chatcount > 0) {
                     $(".ctNow").removeClass('pulse');

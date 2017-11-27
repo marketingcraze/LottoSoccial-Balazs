@@ -82,6 +82,7 @@ export class HomePage implements OnInit {
     image_Data: any;
     rootPage: any = TabsPage;
     messageLoading = false;
+    imageUpdate:string = ""
 
     private homeMessage: any;
     public messages: any[] = [];
@@ -128,6 +129,7 @@ export class HomePage implements OnInit {
                     this.accountDetails = data[i].get_account_details.response;
                     if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
                         var str = this.accountDetails.profile_image
+                        this.imageUpdate = this.accountDetails.profile_image
                         console.log("last character is ", str.charAt(str.length - 1))
                         if (str.charAt(str.length - 1) == ".") {
                             str = str.substring(0, str.length - 1);
@@ -139,7 +141,7 @@ export class HomePage implements OnInit {
                         }
                         else {
 
-                            this.image_Data = "assets/icon/user.svg"
+                            this.image_Data = str
                         }
                     }
                     else {
@@ -192,6 +194,7 @@ export class HomePage implements OnInit {
         });*/
     }
     ionViewWillEnter() {
+        console.log("ionViewWillEnter in home page")
         this.commonSrv.trackSegmentPage("Home", "HomePage").subscribe(
             data => {
                 console.log("track segment called");
@@ -204,6 +207,9 @@ export class HomePage implements OnInit {
 
     closeMenu1() {
         this.menu.close();
+         if (localStorage.getItem("imageUrl")) {
+                            this.image_Data = localStorage.getItem("imageUrl")
+                        }
     }
 
     onLeftMenuSelection(selection) {
@@ -320,6 +326,16 @@ export class HomePage implements OnInit {
 
     onOpenLeftMenu() {
         this.appSound.play('menuClick');
+        if (localStorage.getItem("imageUrl")) {
+            this.image_Data = localStorage.getItem("imageUrl")
+        }
+        else if(this.imageUpdate != "")
+        {
+            this.image_Data = this.imageUpdate
+        }
+        else{
+            this.image_Data = "assets/icon/user.svg"
+        }
     }
 
 

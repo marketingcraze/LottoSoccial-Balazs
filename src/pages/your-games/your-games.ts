@@ -144,6 +144,12 @@ downA(){
   }
   localStorage.setItem("yourGamesP","1")
   this.content.enableScrollListener();
+  setTimeout(()=>
+  {
+    this.down_arrow_showing = 0
+    this.cdRef.detectChanges()
+    console.log("value changed for dwn arow in yours offer")
+  }, 3000);
 }
 
     goHomePage(){

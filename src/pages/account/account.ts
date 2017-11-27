@@ -197,7 +197,14 @@ export class AccountPage {
 			 this.image_Data = str
 			 }
 			 else{
-			  this.image_Data = this.accountDetails.profile_image
+				if(localStorage.getItem("imageUrl"))
+				{
+				 this.image_Data = localStorage.getItem("imageUrl")
+				}
+				else{
+					this.image_Data = this.accountDetails.profile_image
+				}
+			  
 			 }
 			}
 			else{
