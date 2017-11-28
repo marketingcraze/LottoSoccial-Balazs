@@ -176,7 +176,7 @@
                         <p class="price">PRICE BREAKDOWN</p>
                     </div>
                     <div style="width: 100%;position: relative;text-align: center;height: 19.5vh;margin-bottom: 10px;margin-top: -10px">
-                        <p style="margin: 0px" *ngFor="let item of credit_offer | filter:{draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
+                        <p style="margin: 0px;font-size: initial!important" *ngFor="let item of credit_offer | filter:{draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
                             <span style="margin-right: 10%;font-size: 1em;text-align: left">{{item?.line}}</span>
                             <span style="margin-left: 14%;font-size: 1em"> £{{item?.prize | number : '1.1-1'}}</span>
                         </p>

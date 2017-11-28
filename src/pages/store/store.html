@@ -660,11 +660,11 @@
     </ion-toolbar>
    
     <ion-content style="margin-bottom: 0px!important;z-index: 10"> 
-        <ion-card class="big-content">
+        <ion-card class="big-content" style="background: #333!important">
            
       
             <div class="top-slides-wrapper">
-              <ion-slides class="top-slides" slidesPerView=2 spaceBetween="10">
+              <ion-slides class="top-slides" slidesPerView=2 spaceBetween="10" style="padding: 0px 5px 0px 6px;">
                 <ion-slide *ngFor="let item of homeBlog">
                   <div >
                     <img *ngIf="item.image" src="{{item.image}}" style="width: 100%;height: 11vh">
@@ -687,7 +687,7 @@
       
               </ion-slides>
             </div>
-            <ion-slides spaceBetween=8 slidesPerView=2>
+            <ion-slides style="padding: 0px 5px 0px 6px;" spaceBetween=8 slidesPerView=2>
               <ion-slide style="width: 51%" *ngFor="let c of millionerImage" (tap)=openModal(c)>
                 <img src="{{c.image_url}}" width="150" height="100" style="height: 17.5vh;margin-top: 5px;" >
               </ion-slide>

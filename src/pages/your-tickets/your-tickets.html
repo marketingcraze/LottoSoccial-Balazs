@@ -11,39 +11,57 @@
 
 <ion-content>
   <ion-slides style="height: auto;margin-top: 12px;">
- 
-  <ion-slide *ngFor="let d of allTicketData; let mi = index;">
-    <div style="height:500px; background: white; border: 1px solid rgba(204, 204, 204, 0.41);" *ngIf="d"> 
-      <div class="top-lbl">
-        <div style="position: absolute;right: 11px;top: 0;" [hidden]="d.raffle_display == '0'">
-          <div class="rAngle" (click)="toggles(mi)">
-            <div class="rfl" *ngIf="d?.hideNumber">LINES</div>
-            <div class="rfl" *ngIf="!d?.hideNumber">RAFFLE</div>
-            <div class="rfl-icon"><ion-icon name="redo"></ion-icon></div>
+
+    <ion-slide *ngFor="let d of allTicketData; let mi = index;" [style.background-color]="d?.product_color">
+      <div style="height:500px; border: 1px solid rgba(204, 204, 204, 0.41);" *ngIf="d">
+        <div class="top-lbl">
+          <div style="position: absolute;right: 11px;top: 0;" [hidden]="d.raffle_display == '0'">
+            <div class="rAngle" (click)="toggles(mi)">
+              <div class="rfl" *ngIf="d?.hideNumber">LINES</div>
+              <div class="rfl" *ngIf="!d?.hideNumber">RAFFLE</div>
+              <div class="rfl-icon">
+                <ion-icon name="redo"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 10px;">
+            <div>Syndicate:
+              <span style="font-weight:bold">{{d.syndicate_name}}</span>
+            </div>
+            <div>Syndicate size:
+              <span style="font-weight:bold"> {{d.syndicate_size}} members</span>
+            </div>
+            <div>Valid for:
+              <span style="font-weight:bold"> {{d.valid_for}}</span>
+            </div>
+            <div style="padding-bottom: 4px;border-bottom: 1px solid rgba(170, 170, 170, 0.5);">Lines on ticket:
+              <span style="font-weight:bold"> {{d.no_of_lines}}</span>
+            </div>
           </div>
         </div>
-        <div style="padding: 10px;">
-          <div>Syndicate: <span style="font-weight:bold">{{d.syndicate_name}}</span></div>
-          <div>Syndicate size:<span style="font-weight:bold"> {{d.syndicate_size}} members</span></div>
-          <div>Valid for:<span style="font-weight:bold"> {{d.valid_for}}</span></div>
-          <div style="padding-bottom: 4px;border-bottom: 1px solid rgba(170, 170, 170, 0.5);">Lines on ticket:<span style="font-weight:bold"> {{d.no_of_lines}}</span></div>
+        <div class="syndicateRow" style="height: 380px;max-height:380px;overflow:scroll;">
+          <div class="text-center">
+            <ion-grid>
+              <ion-row class="grid-row" style="width: auto;padding: 5px 0;" *ngFor="let l of d?.winning_number_group; let i = index">
+                <ion-col *ngFor="let c of l.m; let j = index; trackBy: small" [hidden]="d?.hideNumber">
+                  <div class="input-number">{{c}}</div>
+                </ion-col>
+                <ion-col *ngFor="let c of l.b; let j = index; trackBy: small" [hidden]="d?.hideNumber || c==''">
+                  <div class="input-number st-input">{{c}}</div>
+                </ion-col>
+                <ion-col style="width:250px; text-align:center;max-width:250px;" [hidden]="!d?.hideNumber">
+                  <span class="numberLbl">{{d?.raffle_numbers[i]}}</span>
+                </ion-col>
+                <ion-col>
+                  <span style="content: url('./assets/icon/eye_open.svg');width: 22px;padding-top: 10px;" (click)="viewTickets(i)"></span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
         </div>
+        <div style="height: 1px; background: #ccc;width: 75vw;margin: 0 auto;"></div>
       </div>
-      <div class="syndicateRow" style="height: 380px;max-height:380px;overflow:scroll;">
-        <div class="text-center">
-          <ion-grid>
-            <ion-row class="grid-row" style="width: auto;padding: 5px 0;" *ngFor="let l of d?.winning_number_group; let i = index">
-                <ion-col *ngFor="let c of l.m; let j = index; trackBy: small" [hidden]="d?.hideNumber"> <div class="input-number">{{c}}</div> </ion-col>
-                <ion-col *ngFor="let c of l.b; let j = index; trackBy: small" [hidden]="d?.hideNumber || c==''"> <div class="input-number st-input">{{c}}</div> </ion-col>
-                <ion-col style="width:250px; text-align:center;max-width:250px;" [hidden]="!d?.hideNumber"><span class="numberLbl">{{d?.raffle_numbers[i]}}</span></ion-col>
-                <ion-col><span style="content: url('./assets/icon/eye_open.svg');width: 22px;padding-top: 10px;" (click)="viewTickets(i)"></span></ion-col>
-            </ion-row>  
-          </ion-grid>  
-        </div>
-    </div>
-    <div style="height: 1px; background: #ccc;width: 75vw;margin: 0 auto;"></div>
-    </div>
-  </ion-slide>
- 
-</ion-slides>
+    </ion-slide>
+
+  </ion-slides>
 </ion-content>

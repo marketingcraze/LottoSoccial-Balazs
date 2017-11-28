@@ -125,12 +125,16 @@ export class OffersForYouPage {
 
 	}
 	buyCreditOffer(offerId: any, prosub_id: any, buttonText: any) {
-		let loader = this.loadingctrl.create();
+		let loader = this.loadingctrl.create({
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+		});
 		loader.present().then(() => {
 			localStorage.removeItem("buttonText");
 			localStorage.setItem("buttonText", buttonText);
 			this.userCards = "";
 			this.confirmPayment.togglePopup()
+			loader.dismiss()
 		})
 
 	}
