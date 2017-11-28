@@ -90,9 +90,8 @@ export class YourTicketsPage {
     }
     loader.dismiss();
   }
-  // changeBackground(): any {
-  //   debugger
-  //   return { 'background-color': this.allTicketData[0].product_color };
-  // }
+  indexAlphabetic(val){
+    return String.fromCharCode(65+val);
+  }
 
 }

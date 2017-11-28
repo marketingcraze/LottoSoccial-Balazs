@@ -65,7 +65,7 @@ page-your-tickets {
         margin: 0 auto;
         width: 260px;
         .col {
-            max-width: 11vw;
+            max-width: 10vw;
             padding: 3px;
         }
     }
@@ -73,18 +73,19 @@ page-your-tickets {
         //border: 1px solid #ccc;
         width: 33px;
         height: 33px;
-        color: white;
-        padding: 9px;
-        font-size: 12px;
+        color: black;
+        padding: 7px;
+        font-size: 13px;
         border-radius: 5px;
-        font-family: lato-black;
+        
         text-align: center;
-        background: url(../assets/img/circular.png);
+        border: 1px solid;
         background-size: cover;
     }
     .st-input {
-        background: url(../assets/img/star.png);
+        
         background-size: cover; 
+        background-color: #E1C911;
     }
     .star-icon {
         position: absolute;

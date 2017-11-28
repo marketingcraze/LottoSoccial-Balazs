@@ -14,6 +14,7 @@ import { gameLoss } from '../play-gamesLoss/play-gamesLoss';
 import { Observable } from "rxjs/Observable";
 import { CordovaInstance } from "@ionic-native/core";
 import { Subscription } from "rxjs/Rx";
+import { StatusBar } from 'ionic-native';
 
 
 declare var $: any;
@@ -151,6 +152,7 @@ export class PlayGamePage implements OnInit {
       if (typeof cordova !== 'undefined') {
         const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbar=no');
         browser.addEventListener('loadstart', (event) => {
+          StatusBar.hide()
           if (event.url.includes("win")) {
             browser.close();
             this.nav.push(PlayGamesThankYou, { customer_awardLog_id: this.customerAwardLogId, gameLevel: this.gameLevelThanlyou, game_Id: this.GameId })
