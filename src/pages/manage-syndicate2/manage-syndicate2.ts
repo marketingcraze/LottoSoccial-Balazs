@@ -16,6 +16,10 @@ declare var cordova: any;
   templateUrl: 'manage-syndicate2.html'
 })
 export class ManageSyndicate2Page {
+  result: boolean;
+  waveShowingAccount: boolean;
+  oneOff: boolean;
+  syndicate: any;
   sId: any;
 
   constructor(private iab: InAppBrowser,
@@ -26,7 +30,12 @@ export class ManageSyndicate2Page {
     public loadingCtrl: LoadingController,
     public viewCtrl: ViewController,
     public modalCtrl: ModalController, public app: App) {
-    this.sId = this.navParams.get("syndicate_id")
+    debugger
+    this.syndicate = this.navParams.get("syndicate")
+    this.sId = this.syndicate.syndicate_id;
+    if (this.syndicate.syndicate_end_date == 'oneoff') {
+      this.oneOff = true
+    }
   }
 
   ionViewDidLoad() {
@@ -42,7 +51,7 @@ export class ManageSyndicate2Page {
     debugger
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
     loader.present().then(() => {
       this.leveSynd.privateSyndicateMembers(this.sId.syndicate_id).subscribe(data => {
@@ -77,4 +86,9 @@ export class ManageSyndicate2Page {
       }
     })
   }
+  getSize() {
+    this.waveShowingAccount = true;
+    this.result = false
+  }
+
 }

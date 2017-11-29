@@ -115,7 +115,7 @@ export class MySyndicatePage {
     manage_syndicates2(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate_id: sd });
+        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate: sd });
         Modal.present();
         // this.appSound.play('buttonClick');
         // this.app.getRootNav().push(ManageSyndicate2Page);

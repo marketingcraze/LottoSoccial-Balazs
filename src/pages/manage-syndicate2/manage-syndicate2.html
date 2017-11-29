@@ -3,7 +3,7 @@
     <ion-title>Manage your syndicate</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="close()">
-          <span class="icon-cross" style="content: url(./assets/img/close.svg);min-width: 14px"></span>
+        <span class="icon-cross" style="content: url(./assets/img/close.svg);min-width: 14px"></span>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -14,19 +14,50 @@
 <ion-content class="main-bg">
   <div class="main-c">
     <div class="light-header" style="padding: 2px 0;">SYNDICATE INFO:</div>
-    <div style="padding: 2px 0;">NAME: <span class="lb">GREY0012</span></div>
-    <div style="padding: 2px 0;">CREATED: <span class="lb">10/02/2017</span></div>
-    <div style="padding: 2px 0;">END: <span class="lb">ONGOING</span></div>
-    <div style="padding: 2px 0;">MEMBERS: <span class="lb">49</span></div>
+    <div style="padding: 2px 0;">NAME:
+      <span class="lb">{{syndicate?.syndicate_name}}</span>
+    </div>
+    <div style="padding: 2px 0;">CREATED:
+      <span class="lb">{{syndicate?.syndicate_start_date | date:'fullDate'}}</span>
+    </div>
+    <div style="padding: 2px 0;">END:
+      <span class="lb">{{syndicate.syndicate_end_date}}</span>
+    </div>
+    <div style="padding: 2px 0;">SYNDICATE SIZE:
+      <span class="lb" *ngIf="!waveShowingAccount && !result" (tap)="getSize()"> CHECK</span>
+      <span *ngIf="waveShowingAccount==true" class="lb">
+        <span class="tooltip t1">
+          <i class="icon3 icon-chat grey" style="margin-left: 2vw;margin-top: -4px">
+            <span class="dot dot-left"></span>
+            <span class="dot"></span>
+            <span class="dot dot-right"></span>
+          </i>
+        </span>
+      </span>
+      <span *ngIf="result && !waveShowingAccount && !result" class="lb">10</span>
+    </div>
     <div class="bline"></div>
     <div class="light-header" style="padding: 2px 0;">PLAYING IN </div>
-    <div style="padding: 10px 0;"><span class="tkt-day">EURO FRI</span> <span class="tkt-day">EURO TUE</span></div>
+    <div style="padding: 10px 0;">
+    <span>  <p *ngFor="let playing of syndicate.product_group" class="tkt-day">{{playing?.product_name | uppercase}}</p></span>
+    </div>
+    <div style="padding: 2px 0;">10 Euromillions line in every Tuesday and Friday draw</div>
   </div>
   <!-- <div class="sub-c" (click)="openUrl('https://help.lotto-social.com/hc/en-us')"><ion-icon name="ios-help-circle-outline" class="s-ic" style="color: #2F76D1;"></ion-icon>Need help?<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div> -->
-  <div class="sub-c" (click)="viewRecent()"><span style="content: url(../assets/icon/history-ico.svg); width: 14px;margin-right: 2px;"></span>Recent draws<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
-  <div class="sub-c" (click)="viewTicket()"><span style="content: url(../assets/icon/syndicates_ico.svg); width: 14px;margin-right: 2px;"></span>View tickets<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
+  <div class="sub-c" (click)="viewRecent()">
+    <span style="content: url(../assets/icon/history-ico.svg); width: 14px;margin-right: 2px;"></span>Recent draws
+    <ion-icon name="arrow-forward" class="a-ic"></ion-icon>
+  </div>
+  <div class="sub-c" (click)="viewTicket()">
+    <span style="content: url(../assets/icon/syndicates_ico.svg); width: 14px;margin-right: 2px;"></span>View tickets
+    <ion-icon name="arrow-forward" class="a-ic"></ion-icon>
+  </div>
   <!-- <div class="sub-c" (click)="Invite()"><span style="content: url(../assets/icon/group-ico.svg); width: 14px;margin-right: 2px;"></span>Invite friends<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div> -->
   <!-- <div class="sub-c" style="margin-top: 1px;" (click)="openUrl('https://nima.lottosocial.com/webview-auth/?redirect_to=members&customer_id=1970400&customer_token=818113679640')"><span style="content: url(../assets/icon/chat-ico.svg); width: 14px;margin-right: 2px;"></span>Chat with members<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div> -->
-  <div class="sub-c" (click)="agreement()">View syndicate agreement<ion-icon name="arrow-forward" class="a-ic"></ion-icon></div>
-  <div style="text-align: center;padding: 25px;"> <a (click)="leaveSyndicate()">Leave syndicate</a></div>
+  <div class="sub-c" (click)="agreement()">View syndicate agreement
+    <ion-icon name="arrow-forward" class="a-ic"></ion-icon>
+  </div>
+  <div style="text-align: center;padding: 25px;">
+    <a (click)="leaveSyndicate()">Leave syndicate</a>
+  </div>
 </ion-content>
