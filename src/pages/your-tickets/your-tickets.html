@@ -43,6 +43,8 @@
           <div class="text-center">
             <ion-grid>
               <ion-row class="grid-row" style="width: auto;padding: 5px 0;" *ngFor="let l of d?.winning_number_group; let i = index">
+                  <span style="position: relative;margin-top: 8px;margin-right: 7px;">{{indexAlphabetic(i)}}</span>
+                  
                 <ion-col *ngFor="let c of l.m; let j = index; trackBy: small" [hidden]="d?.hideNumber">
                   <div class="input-number">{{c}}</div>
                 </ion-col>
@@ -61,22 +63,7 @@
         </div>
         <div style="height: 1px; background: #ccc;width: 75vw;margin: 0 auto;"></div>
       </div>
-      <div class="syndicateRow" style="height: 380px;max-height:380px;overflow:scroll;">
-        <div class="text-center">
-          <ion-grid>
-            <ion-row class="grid-row" style="width: auto;padding: 5px 0;" *ngFor="let l of d?.winning_number_group; let i = index">
-                <span style="position: relative;margin-top: 8px;margin-right: 7px;">{{indexAlphabetic(i)}}</span>
-                <ion-col *ngFor="let c of l.m; let j = index; trackBy: small" [hidden]="d?.hideNumber"> <div class="input-number">{{c}}</div> </ion-col>
-                <ion-col *ngFor="let c of l.b; let j = index; trackBy: small" [hidden]="d?.hideNumber || c==''"> <div class="input-number st-input">{{c}}</div> </ion-col>
-                <ion-col style="width:250px; text-align:center;max-width:250px;" [hidden]="!d?.hideNumber"><span class="numberLbl">{{d?.raffle_numbers[i]}}</span></ion-col>
-                <ion-col><span style="content: url('./assets/icon/eye_open.svg');width: 22px;padding-top: 10px;" (click)="viewTickets(i)"></span></ion-col>
-            </ion-row>  
-          </ion-grid>  
-        </div>
-    </div>
-    <div style="height: 1px; background: #ccc;width: 75vw;margin: 0 auto;"></div>
-    </div>
-  </ion-slide>
- 
-</ion-slides>
+    </ion-slide>
+
+  </ion-slides>
 </ion-content>
