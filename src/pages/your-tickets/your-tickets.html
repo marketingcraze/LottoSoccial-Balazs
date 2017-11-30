@@ -39,10 +39,10 @@
             </div>
           </div>
         </div>
-        <div class="syndicateRow" style="height: 380px;max-height:380px;overflow:scroll;">
-          <div class="text-center">
-            <ion-grid>
-              <ion-row class="grid-row" style="width: auto;padding: 5px 0;" *ngFor="let l of d?.winning_number_group; let i = index">
+        <div class="syndicateRow" style="height: 380px;max-height:380px;overflow:scroll;text-align: center">
+          <div class="text-center" text-center  style="text-align: center">
+            <ion-grid style="text-align: center">
+              <ion-row class="grid-row" style="width: auto;padding: 5px 0;text-align: center" *ngFor="let l of d?.winning_number_group; let i = index">
                   <span style="position: relative;margin-top: 8px;margin-right: 7px;">{{indexAlphabetic(i)}}</span>
                   
                 <ion-col *ngFor="let c of l.m; let j = index; trackBy: small" [hidden]="d?.hideNumber">

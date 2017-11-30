@@ -104,41 +104,41 @@
       <ion-card style="max-height:60vh;width: 80%;margin-left: 10%;margin-top: 10%;">
         <div class="card-top ">
           <div class="card-title">
-            <img src="assets/img/home/ch_offers@3x.png">
+            <img src="assets/img/home/ch_offers@3x.png" style="height: 7vh">
             <h4>{{offersForYou.card_title}}</h4>
           </div>
         </div>
 
-        <div style="position: absolute" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
-          <img src="{{offer?.offer_img}}" class="homeHeader-img" />
+        <div style="position: absolute;width:100%" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
+          <img src="{{offer?.offer_img}}" class="homeHeader-img" style="width:100%"/>
           <div class="homeOffer-title" style="color:white;font-weight: lighter" text-center>{{offer?.name | uppercase}}</div>
           <div class="homeAmount homeOffer-title" style="color:white;font-weight: 900;font-size: x-large" text-center>
             {{offer?.offer_jackpot}}
           </div>
         </div>
-        <div text-center style="text-align: center;position: relative;margin-top: 17%">
-          <div style="background-color: black;padding: 3px">
+        <div text-center style="text-align: center;position: relative;margin-top: 15%">
+          <div style="background-color: black;padding: 3px;text-align: -webkit-right">
           <span text-center style="text-align: center">
-            <img style="top: 3%;position: absolute;margin-left: 6%;width:8%" src="assets/icon/timer.svg" />
-            <span style="color:white;position:absolute;margin-top: 4%;font-size: 0.8em;margin-left: 13%">TIME LEFT: </span>
+            <img style="top: 3%;position: absolute;margin-left: 6%;width:25px" src="assets/icon/timer.svg" />
+            <span style="color:white;position:absolute;margin-top: 4%;font-size: 0.8em;margin-left: -21%">TIME LEFT: </span>
           </span>
-          <div style="display: -webkit-inline-box;color: #fff;bottom: 25px;margin-left: 30%">
-            <div style="margin-right: 10px; margin-left: 15px;">
+          <div style="display: -webkit-inline-box;color: #fff;bottom: 25px;text-align: -webkit-left;margin-right: 5%">
+            <div style="margin-right: 10px; margin-left: 15px;text-align: -webkit-center">
               <b style="font-size:1.1em">{{day}}</b>
               <br>
               <span>Days</span>
             </div>
-            <div style="margin-right: 10px;">
+            <div style="margin-right: 10px;text-align: -webkit-center">
               <b style="font-size:1.1em">{{hrs}}</b>
               <br>
               <span>Hrs</span>
             </div>
-            <div style="margin-right: 10px;">
+            <div style="margin-right: 10px;text-align: -webkit-center">
               <b style="font-size:1.1em">{{min}}</b>
               <br>
               <span>Mins</span>
             </div>
-            <div style="margin-right: 10px;">
+            <div style="margin-right: 10px;text-align: -webkit-center">
               <b style="font-size:1.1em">{{sec}}</b>
               <br>
               <span>Secs</span>
@@ -168,7 +168,7 @@
               </span>
             </div>
           </div> 
-          <div style="height:40px;margin-top: 8%">
+          <div style="height:40px;margin-top: 6%">
             <span>{{offer?.offer_title}}</span>
           </div>
           <button class="center" padding ion-button text-center color="secondary" style="width: 160px;height: 40px;margin-top: 0%;margin-bottom: 10%" (click)="buyCreditOffer(offer?.offer_id,offer?.prosub_id,offer?.button_text)">
@@ -687,9 +687,9 @@
       
               </ion-slides>
             </div>
-            <ion-slides style="padding: 0px 5px 0px 6px;" spaceBetween=8 slidesPerView=2>
+            <ion-slides style="padding: 0px 5px 0px 6px;" spaceBetween=10 slidesPerView=2>
               <ion-slide style="width: 51%" *ngFor="let c of millionerImage" (tap)=openModal(c)>
-                <img src="{{c.image_url}}" width="150" height="100" style="height: 17.5vh;margin-top: 5px;" >
+                <img src="{{c.image_url}}" width="150" height="100" style="height: 17.5vh;margin-top: 8px;" >
               </ion-slide>
             </ion-slides>
       
