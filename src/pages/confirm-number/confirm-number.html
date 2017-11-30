@@ -130,22 +130,22 @@
           <ion-col col-8 text-left>
             <!--<ion-icon ios="md-close" md="md-close" style="font-size: 20px; color: rgb(25, 57, 116); vertical-align: middle;"></ion-icon> -->
             <span class="icon-cross" style="content: url(./assets/img/close2.svg);max-width: 12px;margin-right: 5px;"></span>
-            <span>Private Syndicate</span>
+            <span>{{s_name.length > 20 ? s_name.substring(0,20) + '...' : s_name}}</span>
           </ion-col>
           <ion-col col-4 text-right>&#x20A4;{{syndicatePrice | number : '1.2-2'}} </ion-col>
         </ion-row>
-        <ion-row *ngIf="!offerSelected">
+        <!--<ion-row *ngIf="!offerSelected">
           <ion-col col-12 style="text-align: center; padding: 20px;">
             Don’t forget to add your special offers
           </ion-col>
-        </ion-row>
-        <ion-row *ngIf="offerSelected">
+        </ion-row>-->
+        <ion-row>
           <ion-col col-12>
             <div class="like-div2">
               <div>
                 <div class="divider"></div>
-                <p>SPECIAL OFFERS ADDED</p>
-                <!--Don’t forget to add your special offers-->
+                <p *ngIf="offerSelected">SPECIAL OFFERS ADDED</p>
+                <p *ngIf="!offerSelected" style="width: 80%;">Don’t forget to add your special offers</p>
               </div>
             </div>
           </ion-col>

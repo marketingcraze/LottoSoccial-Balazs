@@ -24,7 +24,7 @@ declare var $: any;
 export class ConfirmNumberPage {
     @ViewChild("confirmPayment") confirmPayment;
     @ViewChild(Slides) slides: Slides;
-  
+  loader:any 
   dataArr = [];
   syndId: any;
   offerArr = [];
@@ -32,6 +32,7 @@ export class ConfirmNumberPage {
   TotalPaybale = 0;
   syndicatePrice = 0;
   offerSelected = false
+  s_name = '';
 
 
     userCards: any;
@@ -68,6 +69,11 @@ export class ConfirmNumberPage {
     }
     this.TotalPaybale = this.syndicatePrice;
     this.syndId = localStorage.getItem('synd_id');
+    this.s_name = JSON.parse(localStorage.getItem('sdetails')).title
+    this.loader= this.loadingCtrl.create({
+      spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    });
     console.log(this.dataArr);
   }
 
@@ -83,7 +89,7 @@ export class ConfirmNumberPage {
       }
     }
     if(count > 0) {
-      this.buysyndicate();
+      this.showPaymentOptions();
     }else {
       this.showConfirm();
     }   
@@ -130,11 +136,7 @@ export class ConfirmNumberPage {
   }
 
   showPaymentOptions() {
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-    });
-    loader.present();
+    this.loader.present();
     var arr = [];
     for(var i=0; i<this.dataArr.length; i++) {
       var name = this.dataArr[i].product_name;
@@ -147,26 +149,14 @@ export class ConfirmNumberPage {
         "ticket_group": tickets
       })
     }
-    var data = {
-      "session_ID": CommonService.sessionId,
-      "page_ID": "4",
-      "screen_id": "4.9",
-      "action": "syndicate_buy",
-      "website": "Lotto Social",
-      "website_id": "27",
-      "source_site": "mobi.lottosocial.com",
-      "module_name": "save_private_syndicate_tickets",
-      "customer_id": CommonService.session.customer_id,
-      "private_syndicate_id": this.syndId,
-      "product_group": arr,
-      "trigger_action": "ACTIVATE/DEACTIVATE",
-      "rollover_prosub_id": "2236",
-      "rollover_offer_id": "1851"
-    }
-
-    this._syndService.buySyndicate(data).subscribe((res) => {
+    this._syndService.saveTickets(this.syndId, arr).subscribe((res) => {
       console.log(res);
-      loader.dismiss();
+      var data = res.response["0"].save_private_syndicate_tickets.response
+      if(data.token_exists) {
+        this.create_order_id(data.prosub_id, data.p_type);
+      } else {
+        this.loader.dismiss();
+      }
       
     })
   }
@@ -181,9 +171,9 @@ export class ConfirmNumberPage {
         
         let loader = this._showLoader();
         // get all the cards details
-        this.srvOffer.getExistingPaymilCardsDetails().subscribe((data) => {
+        this.srvOffer.getExistingPaymilCardsDetails2().subscribe((data) => {
             console.log("ConfirmNumberPage::showPaymentOptions() success", data);
-
+            data.response[0].get_customer_paymill_card_details.response.offer_name = this.s_name
             data.response.push({ offer: offer });
             this.userCards = data.response;
 
@@ -339,7 +329,7 @@ timer0callback(data) {
         {
           text: 'Yes',
           handler: () => {
-            this.buysyndicate();
+            this.showPaymentOptions();
           }
         }
       ]
@@ -349,6 +339,49 @@ timer0callback(data) {
 
   skip() {
     this.navCtrl.setRoot(HomePage)
+  }
+
+  create_order_id(id:any, p_type:any) {
+    var p_arr = [{
+                  "product_type": "private_syndicate",
+                  "item_id": this.syndId,
+                  "product_name": this.s_name,
+                  "product_price": this.syndicatePrice,
+                  "p_type": p_type.toString()
+                }]
+
+    for(var i=0; i<this.offerArr.length; i++) {
+       if(this.offerArr[i].selected) {
+         
+        if(this.offerArr[i].product_type == "offer") {
+            p_arr.push({
+            "product_type": "offer",
+            "item_id": this.offerArr[i].award_id,
+            "product_name": this.offerArr[i].product_title,
+            "product_price": this.offerArr[i].product_price != '' ? parseInt(this.offerArr[i].product_price) : 0,
+            "p_type": this.offerArr[i].p_type
+          })
+        } else {
+            p_arr.push({
+            "product_type": "rollover_jackpot",
+            "item_id": this.offerArr[i].prosub_id,
+            "product_name": this.offerArr[i].product_name,
+            "product_price": 0,
+            "p_type": this.offerArr[i].p_type
+          })
+        }
+          
+       }
+      }
+
+      this._syndService.create_order_id(p_arr).subscribe((res)=> {
+        console.log(res);
+        this.loader.dismiss();
+        this.buysyndicate()
+      })
+
+    
+
   }
 
 }

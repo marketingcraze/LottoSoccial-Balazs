@@ -55,9 +55,9 @@ export class CreateSyndicate5Page {
     });
     loader.present();
     this._syndService.getTerms(id).subscribe((res) => {
-      loader.dismiss();
       this.termsData = res.response.response;
       console.log(res);
+      loader.dismiss();
     })
 
   }
