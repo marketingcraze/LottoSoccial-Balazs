@@ -160,6 +160,49 @@ export class OfferService {
         return response;
     }
 
+    getExistingPaymilCardsDetails2() {
+        console.log("getExistingPaymilCardsDetails", CommonService.session);
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return;
+        }
+
+        // let action = CommonService.apiUrlDF + 'Proc_fetch_private_syndicates_Mobile_App';
+        let action = CommonService.apiUrl + CommonService.version + '/privatesyndicate/';
+        let parameter = {
+            "request": [
+            {
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "4",
+                "screen_id": "4.10",
+                "action": "get_card_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com", 
+                "module_name": "get_customer_paymill_card_details", 
+                "customer_id": CommonService.session.customer_id,
+                "p_type": "10",
+                "from_process": "profile"
+            }, {
+                "session_ID": CommonService.sessionId, 
+                "page_ID": "7",
+                "screen_id": "7.2",
+                "action": "profile_details",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",  
+                "module_name": "get_customer_details", 
+                "customer_id": CommonService.session.customer_id
+            } ]
+        };
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+        console.log("getExistingPaymilCardsDetails", action, parameter, opt);
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+        return response;
+    }
+
     buyCurrentOfferOnHomeCard(offerId:any) {
         console.log("getExistingPaymilCardsDetails", CommonService.session);
         if (!CommonService.isOnline) {

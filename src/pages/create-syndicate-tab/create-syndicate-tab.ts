@@ -46,7 +46,7 @@ export class CreateSyndicateTab implements OnInit {
     goBack(){
 		this.tabbarElement.style.display= 'flex';
 		var tabs:Tabs=this.navCtrl.parent.parent.parent;
-		tabs.select(3);
+		tabs.select(2);
 	}
 
     goCreateSyndicate() {

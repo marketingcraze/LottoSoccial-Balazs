@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ChooseImagePage } from '../choose-image/choose-image';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
@@ -32,7 +32,8 @@ export class CreateSyndicatePage {
     public appSound:AppSoundProvider,
     private formBuilder: FormBuilder, 
     private viewCtrl: ViewController,
-    private _syndService:SyndicateService) {
+    private _syndService:SyndicateService,
+    private loadingCtrl:LoadingController) {
 
     this.todo = this.formBuilder.group({
       title: ['', Validators.required],
@@ -105,10 +106,15 @@ export class CreateSyndicatePage {
           return;
         }
     }
-
+    let loader = this.loadingCtrl.create({
+          spinner: 'hide',
+          content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        });
+        loader.present();
    this._syndService.profanity(this.todo.value.title)
    .subscribe((res)=> {
      console.log(res);
+     loader.dismiss();
      if(res.response[0].profanity_check.response.valid_str) {
        var data = {
           title: this.todo.value.title,

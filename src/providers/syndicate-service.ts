@@ -200,6 +200,38 @@ export class SyndicateService {
                 return res;
             })
     }
+
+    saveTickets(sid:any, arr:any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/privatesyndicate/";
+        let headopt = SyndicateService.getHeader();
+        let data = {
+                    "request": [
+                        {
+                        "session_ID": CommonService.sessionId,
+                        "page_ID": "4",
+                        "screen_id": "4.9",
+                        "action": "syndicate_buy",
+                        "website": "Lotto Social",
+                        "website_id": "27",
+                        "source_site": "mobi.lottosocial.com",
+                        "module_name": "save_private_syndicate_tickets",
+                        "customer_id": CommonService.session.customer_id,
+                        "private_syndicate_id": sid,
+                        "product_group": arr,
+                        "trigger_action": "ACTIVATE/DEACTIVATE"
+                        }
+                    ]
+                }
+
+            return this.http.post(action, data, { headers: headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+            })
+
+
+    }
+
     getBigJack(id: any) {
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
@@ -236,6 +268,7 @@ export class SyndicateService {
             })
     }
     buySyndicate(data: any) {
+        
         let action = "privatesyndicate";
         let headopt = SyndicateService.getHeader();
         return this.http.post(this.apiUrl + action, data, { headers: headopt })
@@ -561,7 +594,30 @@ export class SyndicateService {
                         return res;
                 })
     }
-    
+
+    create_order_id(p_arr: any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/privatesyndicate_order/ ";
+        let headopt = SyndicateService.getHeader();
+        let data = {
+                "request": [{
+                    "session_ID": CommonService.sessionId,
+                    "action": "create_order_id",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "page_id": "4",
+                    "screen_id": "4.9.1",
+                    "module_name": "create_order_id_for_PS_Payment",
+                    "customer_id": CommonService.session.customer_id,
+                    "ps_cart": p_arr
+                  }]
+              }
+        return this.http.post(action, data, { headers: headopt })
+            .map(res => res.json())
+            .map((res) => {
+                return res;
+            })
+    }
     
 }
 
