@@ -9,7 +9,6 @@ import { Params } from './params';
 export class forkOffersSyndicate {
     private customerId: string = "";
     mobile_number: any;
-
     constructor(private http: Http, private params: Params) {
         console.log("VoucherService");
     }
@@ -33,8 +32,6 @@ export class forkOffersSyndicate {
         console.log("getModules", CommonService.session);
         console.log("custome id is ", this.customerId)
 
-
-
         let action = "https://nima.lottosocial.com/wp-json/mobi/v2/privatesyndicate/ "
         let parameter = {
             "request": [
@@ -48,7 +45,7 @@ export class forkOffersSyndicate {
                     "page_id": "4",
                     "screen_id": "4.1.1",
                     "module_name": "get_fork_offer_for_you",
-                   
+
                 }
             ]
         }
@@ -59,5 +56,51 @@ export class forkOffersSyndicate {
         var response = this.http.post(action, parameter, opt).map(response => response.json());
 
         return response;
+    }
+    paymentCardDetails() {
+        if (!CommonService.session) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+        }
+
+        this.customerId = CommonService.session.customer_id;
+        console.log("custome id is ", this.customerId)
+
+
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/privatesyndicate/ "
+        let parameter = {
+            "request": [
+                {
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "4",
+                    "screen_id": "4.10",
+                    "action": "get_card_details",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "get_customer_paymill_card_details",
+                    "customer_id": this.customerId,
+                    "p_type": "10",
+                    "from_process": "profile"
+                }
+            ]
+        }
+
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+        return response;
+
     }
 }

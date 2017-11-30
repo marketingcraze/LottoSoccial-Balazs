@@ -4,18 +4,22 @@ import { AffiliateServices } from '../../services/affliate.service';
 import { Observable } from "rxjs/Rx";
 import { AffiliatePopup } from '../affiliate_popups/affiliate_popups'
 import { Content } from 'ionic-angular'
+import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service'
 
 @Component({
     selector: 'page-affliate2',
     templateUrl: 'affiliate2.html'
 })
 export class AffiliatePage2 implements OnInit {
+  
+    userCards: any;
     @ViewChild(Content) content:Content;
-
+    @ViewChild("confirmPayment") confirmPayment;
     tabbarElement:any;
     constructor(
         private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
         private viewctrl: ViewController,
+        private getCardsSrv:forkOffersSyndicate,
         private navCtrl:NavController,
         private modalController: ModalController,
         public cdRef: ChangeDetectorRef
@@ -177,5 +181,35 @@ export class AffiliatePage2 implements OnInit {
         this.hrs = (hourCal <= 9) ? '0' + hourCal : hourCal;
         this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
+    }
+    openPurchage() {
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        });
+        loader.present().then(() => {
+            this.getCardsSrv.paymentCardDetails().subscribe((data) => {
+                debugger
+                let token_exists = 0;
+                for (var i = 0; i < data.response.length; ++i) {
+                    if (data.response[i].get_customer_paymill_card_details) {
+                        localStorage.removeItem("buttonText");
+                        token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                    }
+                }
+                if (token_exists > 0) {
+                    debugger
+                    this.userCards = data.response;
+                    loader.dismiss();
+                    this.confirmPayment.togglePopup()
+                } else {
+                    loader.dismiss()
+                    //this.confirmPayment.togglePopup()
+                }
+            }, (err) => {
+                loader.dismiss()
+                console.log("StorePage::showPaymentOptions() error", err);
+            });
+        })
     }
 }

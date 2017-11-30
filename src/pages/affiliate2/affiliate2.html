@@ -1,7 +1,7 @@
 <ion-header>
     
     </ion-header>
-    
+    <popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
     <ion-content scroll="false" class="mainContent" (ionScroll)="scrollHandlerAffiliate($event)" id="affiliateContent" >
             <div id="innerAffiliate" >
         <div>
@@ -67,7 +67,7 @@
     
         <ion-item text-wrap text-center no-lines style="padding-top: 10px;text-align: center">
             <div style="text-align: center">
-                <input type="button" value="PLAY NOW" style="width: 80%; height: 45px;
+                <input type="button" (tap)="openPurchage()" value="PLAY NOW" style="width: 80%; height: 45px;
                  color: white;background-color: #249040;border-radius: 30px;border: none; font-size: 23px; font-weight: bold;
                "/>
             </div>

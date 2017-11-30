@@ -6,7 +6,7 @@
             <ion-item *ngIf="i < game_group?.length-1">
                 <ion-thumbnail item-left>
                     <img src="{{game?.game_iconurl}}">
-                    <ion-badge id="cart-badge">3</ion-badge>
+                    <ion-badge id="cart-badge"><span>{{game?.gameCount}}</span></ion-badge>
                     
                 </ion-thumbnail>
                 <h2>{{game?.game_title}}</h2>

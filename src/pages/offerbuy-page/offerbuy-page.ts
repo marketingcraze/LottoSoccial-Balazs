@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Observable } from "rxjs/Rx";
 import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
 import { IonPullUpFooterState } from 'ionic-pullup';
-
+import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
 
 @Component({
     selector: 'offer-buy',
@@ -50,6 +50,7 @@ export class offerBuy {
         private loadingCtrl: LoadingController,
         private storage: Storage,
         private modalCtrl: ModalController,
+        private getCardsSrv: forkOffersSyndicate,
         private offerService: OfferService,
         private navprms: NavParams, ) {
 
@@ -240,7 +241,7 @@ export class offerBuy {
             content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present().then(() => {
-            this.offerService.buyCurrentOfferOnHomeCard(offerId.offer_id).subscribe((data) => {
+            this.getCardsSrv.paymentCardDetails().subscribe((data) => {
                 debugger
                 let token_exists = 0;
                 for (var i = 0; i < data.response.length; ++i) {
@@ -257,7 +258,7 @@ export class offerBuy {
                     this.confirmPayment.togglePopup()
                 } else {
                     loader.dismiss()
-                    this.confirmPayment.togglePopup()
+                    //this.confirmPayment.togglePopup()
                 }
             }, (err) => {
                 loader.dismiss()

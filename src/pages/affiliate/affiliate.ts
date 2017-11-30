@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Rx";
 import { AffiliatePopup } from '../affiliate_popups/affiliate_popups'
 import { Content } from 'ionic-angular'
 import { OfferService } from '../../services/offer.service';
+import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service'
 
 @Component({
     selector: 'page-affliate',
@@ -21,6 +22,7 @@ export class AffiliatePage implements OnInit {
         private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
         private viewctrl: ViewController,
         private navCtrl: NavController,
+        private getCardsSrv:forkOffersSyndicate,
         private offerService: OfferService,
         private modalController: ModalController,
         public cdRef: ChangeDetectorRef
@@ -140,40 +142,6 @@ export class AffiliatePage implements OnInit {
         })
 
     }
-    openPurchage() {
-
-        this.userCards  
-        this.confirmPayment.togglePopup()
-        // let loader = this.loadingCtrl.create({
-        //     spinner: 'hide',
-        //     content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-        // });
-        // loader.present().then(() => {
-        //     this.offerService.buyCurrentOfferOnHomeCard("").subscribe((data) => {
-        //         let token_exists = 0;
-        //         for (var i = 0; i < data.response.length; ++i) {
-        //             if (data.response[i].get_customer_paymill_card_details) {
-        //                 token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-        //             }
-        //         }
-        //         if (token_exists > 0) {
-        //             debugger
-
-        //             this.userCards = data.response;
-
-
-        //             loader.dismiss();
-        //             this.confirmPayment.togglePopup()
-        //         } else {
-        //             loader.dismiss()
-        //         }
-        //     }, (err) => {
-        //         loader.dismiss()
-        //         console.log("StorePage::showPaymentOptions() error", err);
-        //     });
-        // })
-    }
-
     genrateRanNumberUpdate(luckyDips: any, index: any) {
 
         let j = 0;
@@ -246,5 +214,37 @@ export class AffiliatePage implements OnInit {
         this.hrs = (hourCal <= 9) ? '0' + hourCal : hourCal;
         this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
+    }
+
+    openPurchage(offer) {
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        });
+        loader.present().then(() => {
+            this.getCardsSrv.paymentCardDetails().subscribe((data) => {
+                debugger
+                let token_exists = 0;
+                for (var i = 0; i < data.response.length; ++i) {
+                    if (data.response[i].get_customer_paymill_card_details) {
+                        localStorage.removeItem("buttonText");
+                        localStorage.setItem("buttonText", offer);
+                        token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                    }
+                }
+                if (token_exists > 0) {
+                    debugger
+                    this.userCards = data.response;
+                    loader.dismiss();
+                    this.confirmPayment.togglePopup()
+                } else {
+                    loader.dismiss()
+                    //this.confirmPayment.togglePopup()
+                }
+            }, (err) => {
+                loader.dismiss()
+                console.log("StorePage::showPaymentOptions() error", err);
+            });
+        })
     }
 }
