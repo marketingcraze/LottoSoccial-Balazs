@@ -200,7 +200,7 @@ page-confirm-number {
         p{
             margin-top: -12px;
             background: #e3e3e3;
-            width: 60%;
+            width: 50%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -210,15 +210,31 @@ page-confirm-number {
         p {
             margin-top: -11px;
             background: #ffffff;
-            width: 62%;
+            width: 55%;
             font-size: 14px;
         }
     }
     
     .divider {
-        height: 2px;
+        clear: both;
+        float: none;
         width: 100%;
-        background: #ccc;
+        height: 2px;
+        // margin: 1.4em 0;
+        border: none;
+        background: #ddd;
+        background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0.5, rgb(221,221,221)),
+            color-stop(0.5, rgb(255,255,255))
+        );
+        // background-image: -moz-linear-gradient(
+        //     center top,
+        //     rgb(221,221,221) 50%,
+        //     rgb(255,255,255) 50%
+        // );
     }
     .b-desc {
         font-size: 14px;
