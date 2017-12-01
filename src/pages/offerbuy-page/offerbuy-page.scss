@@ -55,6 +55,7 @@
 }
 .BuyBtn
 {
+    z-index: 1;
     height: 34px;
     font-size: 1.1em;
     background:#00A651;
@@ -90,6 +91,7 @@ ion-pullup .footer ion-toolbar {
 }
 offer-buy{
 .m{
+    z-index: 9999;
     .price{
         margin-top: 3%;
         position: relative;

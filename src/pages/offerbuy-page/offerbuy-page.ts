@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Platform, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { productOffer } from '../../services/productoffer.service';
 import { OfferService } from '../../services/offer.service';
@@ -43,6 +43,7 @@ export class offerBuy {
     buyoffer: any;
     buyOfferStatus: any;
     result: any = [];
+    change: boolean = false
     dealTimer: any = [];
     private lotteryProductData: any = []
     footerState: IonPullUpFooterState;
@@ -52,7 +53,8 @@ export class offerBuy {
         private modalCtrl: ModalController,
         private getCardsSrv: forkOffersSyndicate,
         private offerService: OfferService,
-        private navprms: NavParams, ) {
+        private navprms: NavParams,
+    public cdf: ChangeDetectorRef ) {
 
 
         this.footerState = IonPullUpFooterState.Collapsed;
@@ -230,6 +232,15 @@ export class offerBuy {
     }
 
     toggleFooter() {
+        if(this.change == false)
+        {
+            this.change = true
+        }
+        else{
+            this.change = false
+        }
+        this.cdf.detectChanges()
+        
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
     }
     getMaximumHeight() {

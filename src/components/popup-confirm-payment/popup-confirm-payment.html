@@ -5,9 +5,11 @@
 
       <div class="payment-popover">
         <p class="header" text-center>Confirm Purchase</p>
+        <span *ngIf="offer_detail">
         <ion-item text-center text-wrap no-lines>
           <p text-center style="margin-bottom: 10px">{{offer_detail}}</p>
         </ion-item>
+      </span>
         <ion-scroll style="width:100%;height:40vh" scrollY="true">
           <ion-list radio-group class="windows" [(ngModel)]="cardSelected" scroll="true">
             <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> <span style="font-size: 15px">Secure payment details</span> </ion-list-header>

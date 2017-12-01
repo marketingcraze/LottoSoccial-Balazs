@@ -92,7 +92,7 @@
 
         <div *ngFor="let items of credit_offer let j=index;">
             <span *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px" (click)="buyCashOffer(items)">BUY NOW</button>
+                <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px;" (tap)="buyCashOffer(items)">BUY NOW</button>
             </span>
         </div>
 
@@ -146,7 +146,7 @@
 
 </ion-content>
 <ion-pullup #pullup id="pullup" (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" [maxHeight]="getMaximumHeight()"
-    style="height: 10vh!important">
+    style="height: 10vh!important;z-index: 9999">
     <!-- <ion-pullup-tab [footer]="pullup" (tap)="toggleFooter()">
                     <ion-icon name="arrow-up" *ngIf="footerState == 0"></ion-icon>
                     <ion-icon name="arrow-down" *ngIf="footerState == 1"></ion-icon>
