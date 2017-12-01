@@ -215,14 +215,14 @@ export class HomePage implements OnInit {
         }
         this.srvHome.getHomeMessages().take(1).subscribe((data) => {
             this.zone.run(() => {
-                debugger
+                this.homeMessage = data.response[0].get_home_message.response;
                 this.params.setUnreadCount(this.homeMessage.notification.length);
             });
 
         }, (err) => {
             console.log("onOpenRightMenu error ", err);
         })
-       
+
 
     }
 
