@@ -106,7 +106,8 @@ export class OfferService {
                 "transaction_log_id": "", 
                 "customer_payment_stored_detail_id": payment.pay_stored_detail_id, 
                 "client_id": payment.client_id, 
-                "client_pay_id": payment.client_pay_id
+                "client_pay_id": payment.client_pay_id,
+                "order_id":offer.order_id
             } ]
         };
         let opt: RequestOptions = new RequestOptions({

@@ -18,9 +18,16 @@ import { HomePage } from '../home/home';
 })
 export class CreateSyndicate5Page {
   private termsData: any;
+  loader:any
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public appSound: AppSoundProvider,
-    private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) { }
+    private viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) { 
+
+      this.loader = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      });
+    }
 
   ionViewDidLoad() {
     var id = localStorage.getItem('synd_id');
@@ -36,28 +43,18 @@ export class CreateSyndicate5Page {
   }
   next() {
     this.appSound.play('menuClick');
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-    });
-    loader.present();
     this.navCtrl.push(ChooseNumberPage, { 's_id': localStorage.getItem('synd_id') });
-    loader.dismiss();
   }
   aggreement() {
     this.navCtrl.push(AgreementPage, { 'tandc': this.termsData.terms_contents, 'agree': this.termsData.agreement });
   }
   getTerms(id: any) {
     this.appSound.play('buttonClick');
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-    });
-    loader.present();
+    this.loader.present();
     this._syndService.getTerms(id).subscribe((res) => {
       this.termsData = res.response.response;
       console.log(res);
-      loader.dismiss();
+      this.loader.dismiss();
     })
 
   }

@@ -44,8 +44,8 @@ export class ConfirmNumberPage {
     result: any = [];
     resultDate: any = [];
     counter0 = 0;
-	timer0Id: string;
-	timer0button = 'Subscribe';
+	  timer0Id: string;
+	  timer0button = 'Subscribe';
     count:number;
     day:any;
     hrs:any;
@@ -70,11 +70,13 @@ export class ConfirmNumberPage {
     this.TotalPaybale = this.syndicatePrice;
     this.syndId = localStorage.getItem('synd_id');
     this.s_name = JSON.parse(localStorage.getItem('sdetails')).title
+    console.log(this.dataArr);
+
     this.loader= this.loadingCtrl.create({
       spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
     });
-    console.log(this.dataArr);
+
   }
 
   ionViewDidLoad() {
@@ -104,13 +106,7 @@ export class ConfirmNumberPage {
   }
 
   getbigjack(id:any) {
-    let loader = this.loadingCtrl.create({
-      spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-    });
-    loader.present();
     this._syndService.getBigJack(id).subscribe((res) => {
-      loader.dismiss();
       console.log("ConfirmNumberPage", res);
       this.offerArr = res.response[2].get_private_syndicate_offers.response
       this.offerArr = this.offerArr.concat(res.response[1].get_big_jackpot_list.response.rollover_jackpot_group)
@@ -132,6 +128,7 @@ export class ConfirmNumberPage {
       setInterval(() => {
           this.currentTime = new Date();
       }, 1000);
+      this.loader.dismiss();
     })
   }
 
@@ -155,6 +152,7 @@ export class ConfirmNumberPage {
       if(data.token_exists) {
         this.create_order_id(data.prosub_id, data.p_type);
       } else {
+        alert('something went wrong');
         this.loader.dismiss();
       }
       
@@ -163,9 +161,9 @@ export class ConfirmNumberPage {
 
 
 
-    buysyndicate() {
+    buysyndicate(o_id:any) {
         console.log("ConfirmNumberPage::showPaymentOptions()");
-        let offer = {total_cost:9.00} ;
+        let offer = {total_cost:this.TotalPaybale,order_id:o_id} ;
 
         this.appSound.play('buttonClick');
         
@@ -190,7 +188,7 @@ export class ConfirmNumberPage {
 
     onPaymentComplete(){
         console.log("ConfirmNumberPage::onPaymentComplete");
-        this.navCtrl.setRoot(HomePage);
+        // this.navCtrl.setRoot(HomePage);
     }
 
 
@@ -338,6 +336,9 @@ timer0callback(data) {
   }
 
   skip() {
+    // this.navCtrl.insert(0, HomePage).then(() => {
+    //   this.navCtrl.popToRoot();
+    // });
     this.navCtrl.setRoot(HomePage)
   }
 
@@ -377,7 +378,11 @@ timer0callback(data) {
       this._syndService.create_order_id(p_arr).subscribe((res)=> {
         console.log(res);
         this.loader.dismiss();
-        this.buysyndicate()
+        let data = res.response["0"].create_order_id_for_PS_Payment.response
+        if(data.status == "SUCCESS") {
+          this.buysyndicate(data.order_id)
+        }
+        
       })
 
     
