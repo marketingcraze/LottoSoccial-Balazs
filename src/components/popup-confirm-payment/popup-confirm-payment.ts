@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, SimpleChange, OnChanges } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, NavController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 import { OfferService } from '../../services/offer.service';
 import { Params } from '../../services/params';
+import { HomePage } from '../../pages/home/home';
 
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
@@ -21,6 +22,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     public cardSelected:any
     public cardsValue:any
     public cardsList:any[]
+    public payment_Type:any;
     public offer_detail = "";
 
     public customerDetails
@@ -36,7 +38,8 @@ export class PopupConfirmPaymentComponent implements OnChanges{
     @Output() onPaymentComplete = new EventEmitter();
 
     @Input('existing-cards') existingPaymilCards;  
-    
+    @Input("payment-type") paymentType;  
+
     ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
       
         if(localStorage.getItem("buttonText")){
@@ -69,6 +72,12 @@ export class PopupConfirmPaymentComponent implements OnChanges{
             // console.log("customerDetails", this.customerDetails );
             
         }
+
+        if (changes["paymentType"] && changes["paymentType"].currentValue) {
+            debugger
+            this.payment_Type = changes["paymentType"].currentValue;
+            console.log("existingPaymilCards", this.cardsValue);
+        }
     }
     
     ngOnInit(){
@@ -81,6 +90,7 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         public alertCtrl:AlertController,
         public appSound:AppSoundProvider,
         public loadingCtrl: LoadingController,
+        public navCtrl: NavController,
         public storage:Storage) {
         console.log('Hello PopupConfirmPaymentComponent Component');
         // this.storage.get('btnValue').then( (btnValue:any) => {
@@ -167,6 +177,12 @@ export class PopupConfirmPaymentComponent implements OnChanges{
         this.appSound.play('buttonClick');
         this.togglePopup();
         this.params.goTab(4);
+        this.showBuyNowView = false;
+    }
+
+    close() {
+        this.togglePopup();
+        this.navCtrl.setRoot(HomePage)
         this.showBuyNowView = false;
     }
 

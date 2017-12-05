@@ -36,6 +36,7 @@ export class ConfirmNumberPage {
 
 
     userCards: any;
+    paymentType:any
     userCardsCount:number = 0;
     customerToken:string;
 
@@ -174,6 +175,7 @@ export class ConfirmNumberPage {
             data.response[0].get_customer_paymill_card_details.response.offer_name = this.s_name
             data.response.push({ offer: offer });
             this.userCards = data.response;
+            this.paymentType = 'syndicate';
 
             console.log("ConfirmNumberPage::showPaymentOptions() success", this.userCards);
             loader.dismiss();

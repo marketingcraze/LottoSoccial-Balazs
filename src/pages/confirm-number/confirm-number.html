@@ -26,7 +26,7 @@
   </ion-navbar>-->
 </ion-header>
 
-<popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="onPaymentComplete()"></popup-confirm-payment>
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards" [payment-type]="paymentType" (onPaymentComplete)="onPaymentComplete()"></popup-confirm-payment>
 
 <ion-content class="marg-top-12 main-bg">
   <div class="syndicateRow" *ngFor="let data of dataArr; let r = index;">
