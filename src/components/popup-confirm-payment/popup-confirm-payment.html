@@ -1,76 +1,82 @@
 <div class="popup" *ngIf="confirmPayment" style="z-index: 102;">
-  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation" ></ion-backdrop>
-  
-    <div class="popup-content animated" [ngClass] = "(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
+  <ion-backdrop disable-activated="" style="opacity:.5; z-index: 10;" role="presentation"></ion-backdrop>
 
-      <div class="payment-popover">
-        <p class="header" text-center>Confirm Purchase</p>
-        <span *ngIf="offer_detail">
-        <ion-item text-center text-wrap no-lines>
-          <p text-center style="margin-bottom: 10px">{{offer_detail}}</p>
-        </ion-item>
-      </span>
-        <ion-scroll style="width:100%;height:40vh" scrollY="true">
-          <ion-list radio-group class="windows" [(ngModel)]="cardSelected" scroll="true">
-            <ion-list-header text-center><span><ion-icon name="md-lock" color="secondary"></ion-icon> </span> <span style="font-size: 15px">Secure payment details</span> </ion-list-header>
-            
-            <ion-item *ngFor="let card of cardsList; let i = index">
-              <ion-label>Use preferred card:<br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
-              <ion-radio value="{{i}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio> 
-            </ion-item>
-            <ion-item style="border-bottom: 0px">
-              <ion-label>Use a different card</ion-label>
-              <ion-radio value="-1" item-left color="secondary"></ion-radio>
-            </ion-item>
+  <div class="popup-content animated" [ngClass]="(slideInUp) ? 'slideInUp' : 'slideOutDown' ">
 
-          </ion-list>
-        </ion-scroll>
-        <div><button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for {{buttonValu}}</button>
+    <div class="payment-popover">
+      <p class="header" text-center>Confirm Purchase</p>
+      <ion-item text-center text-wrap no-lines>
+        <p text-center style="margin-bottom: 10px">{{offer_detail}}</p>
+      </ion-item>
+      <ion-scroll style="width:100%;height:40vh" scrollY="true">
+        <ion-list radio-group class="windows" [(ngModel)]="cardSelected" scroll="true">
+          <ion-list-header text-center>
+            <span>
+              <ion-icon name="md-lock" color="secondary"></ion-icon>
+            </span>
+            <span style="font-size: 15px">Secure payment details</span>
+          </ion-list-header>
+
+          <ion-item *ngFor="let card of cardsList; let i = index">
+            <ion-label>Use preferred card:
+              <br>{{card.card_type | uppercase}} ending with {{card.last4_digit}}</ion-label>
+            <ion-radio value="{{i}}" item-left color="secondary" checked="{{(i==0)?true:false}}"></ion-radio>
+          </ion-item>
+          <ion-item style="border-bottom: 0px">
+            <ion-label>Use a different card</ion-label>
+            <ion-radio value="-1" item-left color="secondary"></ion-radio>
+          </ion-item>
+
+        </ion-list>
+      </ion-scroll>
+      <div>
+        <button class="center" ion-button padding color="secondary" (click)="buyNow(syndicate.total_cost)">Buy now for {{buttonValu}}</button>
+      </div>
+
+      <div>
+        <button class="center" ion-button clear (click)="togglePopup()">Not now</button>
+      </div>
+
+      <div class="buy-now" *ngIf="showBuyNowView">
+        <div class="outer buy-success" *ngIf="confirmPaymentSuccess">
+          <ion-grid class="middle">
+            <ion-row>
+              <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
+            </ion-row>
+            <ion-row>
+              <p class="center" text-center color="light">Syndicate {{syndicate.syndicate_name}} created!
+                <br>What you want to do next?</p>
+            </ion-row>
+            <ion-row>
+              <button class="center" *ngIf="!payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="viewTickets()">VIEW TICKETS</button>
+              <button class="center" *ngIf="payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="viewTicketsCash()">VIEW MORE OFFERS</button>
+            </ion-row>
+            <ion-row>
+              <button class="center" *ngIf="!payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="viewOffers()">VIEW MORE OFFERS</button>
+              <button class="center" *ngIf="payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="getMoreLines()">GET MORE LINES</button>
+            </ion-row>
+          </ion-grid>
         </div>
 
-        <div>
-          <button class="center" ion-button clear (click)="togglePopup()">Not now</button>
+        <div class="outer buy-fail" *ngIf="!confirmPaymentSuccess">
+          <ion-grid class="middle">
+            <ion-row>
+              <img class="center" src="./assets/icon/cross.svg" width="80" height="80" />
+            </ion-row>
+            <ion-row>
+              <p class="center" text-center color="light">An error as occurred,
+                <br>please try again</p>
+            </ion-row>
+            <ion-row>
+              <button class="center" ion-button padding outline round color="light" (click)="try_again()">TRY AGAIN</button>
+            </ion-row>
+          </ion-grid>
         </div>
 
-        <div class="buy-now" *ngIf="showBuyNowView">
-          <div class="outer buy-success" *ngIf="confirmPaymentSuccess">
-            <ion-grid class="middle">
-              <ion-row>
-                <img class="center" src="./assets/icon/check.svg" width="70" height="70" />
-              </ion-row>
-              <ion-row >
-                <p class="center" text-center color="light">Syndicate {{syndicate.syndicate_name}} created!<br>What you want to do next?</p>
-              </ion-row>
-              <ion-row>
-                <button class="center" ion-button padding outline round color="light" (click)="viewTickets()">VIEW TICKETS</button>
-              </ion-row>
-              <ion-row>
-                <button class="center" ion-button padding outline round color="light" (click)="viewOffers()">VIEW MORE OFFERS</button>
-              </ion-row>
-              <ion-row>
-                <button class="center" *ngIf="payment_Type == 'syndicate'" ion-button padding outline round color="light" (click)="close()">CLOSE</button>
-              </ion-row>
-            </ion-grid>
-          </div>
 
-          <div class="outer buy-fail" *ngIf="!confirmPaymentSuccess">
-            <ion-grid class="middle">
-              <ion-row>
-                <img class="center" src="./assets/icon/cross.svg" width="80" height="80" />
-              </ion-row>
-              <ion-row >
-                <p class="center" text-center color="light">An error as occurred,<br>please try again</p>
-              </ion-row>
-              <ion-row>
-                <button class="center" ion-button padding outline round color="light" (click)="try_again()">TRY AGAIN</button>
-              </ion-row>
-            </ion-grid>
-          </div>
-
-
-        </div>
-        
       </div>
 
     </div>
+
+  </div>
 </div>

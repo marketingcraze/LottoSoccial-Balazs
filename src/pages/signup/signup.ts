@@ -101,7 +101,11 @@ export class SignupPage {
 		
 		platform.ready().then(() => {
 			console.log('ready');
-        });
+			this.uniqueDeviceID.get()
+			.then((uuid: any) => this.signup.uuid = uuid)
+			.catch((error: any) => console.log(error));
+		});
+		
 	}
 
     loadCountries(){
@@ -288,6 +292,7 @@ export class SignupPage {
 				// show register success message and redirect to login
 				
 				try {
+					debugger
                     data = data.response;
                 } catch (e) {
                     data = undefined;
@@ -301,7 +306,7 @@ export class SignupPage {
 						
 					}).present()
 				}else{
-				
+				debugger
 					this.onRegistrationSuccess(data)
 				}
 			},
@@ -317,7 +322,8 @@ export class SignupPage {
 	onRegistrationSuccess(data:any){
 		console.log('onRegistrationSuccess', data);
 		// this.submitLogin();
-		if (data.message == "both_exists") {
+		debugger
+		if (data[0].register.response.message == "both_exists") {
 			let alert = this.alertCtrl.create({
                 title: 'Cool!',
                 subTitle: "You already have an account with us. We're loggin you in..",
@@ -332,7 +338,7 @@ export class SignupPage {
                 }]
             });
             alert.present();
-		}else if (data.message == 'msn_exists') {
+		}else if (data[0].register.response.message == 'msn_exists') {
 			let alert = this.alertCtrl.create({
                 title: 'Error!',
                 subTitle: 'An account with this mobile number already exists, enter correct password to login or try with other new msn',

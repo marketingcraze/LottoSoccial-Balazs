@@ -180,5 +180,44 @@ export class leaveSyndicate {
         var response = this.http.post(action, parameter, opt).map(response => response.json());
         return response;
     }
-
+    getSyndicateSize(sId: any, type) {
+        console.log("inside voucher list");
+        if (!CommonService.session) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        }
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+        }
+        this.customerId = CommonService.session.customer_id;
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/syndicate_size/"
+        let parameter = {
+            "request": [
+                {
+                    "session_ID": "avjtjgu0f257f0orggqufcn5g2",
+                    "action": "manage_syndicate",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "page_id": "12",
+                    "screen_id": "12.5",
+                    "module_name": "get_syndicate_size",
+                    "customer_id": this.customerId,
+                    "syndicate_id": sId,
+                    "syndicate_type": type
+                }
+            ]
+        }
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+        var response = this.http.post(action, parameter, opt).map(response => response.json());
+        return response;
+    }
 }

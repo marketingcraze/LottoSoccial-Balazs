@@ -1,7 +1,7 @@
 <ion-header>
     <synd-cus-header1 title="Offer Product Page" notification-count="5"></synd-cus-header1>
 </ion-header>
-<popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards" [payment-type]="paymentType" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
 <ion-content style="margin-top: -20px;height: 105%;;background-color: white!important">
     <div class="container-header white-bg" [style.backgroundColor]="product?.product_color?product?.product_color:grey">
         <img src={{product?.image}} class="header-img" />
@@ -90,7 +90,7 @@
             </ion-range>
         </ion-item>
 
-        <div *ngFor="let items of credit_offer let j=index;">
+        <div *ngFor="let items of credit_offer | filter:{ line:parseInt((product?.line_group| keys)[credit_filter_line]), draw:(product?.draw_group|keys)[credit_filter_draw]};let j=index;">
             <span *ngIf="j<1">
                 <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px;" (tap)="buyCashOffer(items)">BUY NOW</button>
             </span>

@@ -30,7 +30,7 @@
       <span class="lb">{{syndicate.syndicate_end_date}}</span>
     </div>
     <div style="padding: 2px 0;">SYNDICATE SIZE:
-      <span class="lb" *ngIf="!waveShowingAccount && !result" (tap)="getSize()"> CHECK</span>
+      <span class="lb" *ngIf="!waveShowingAccount && !result" (tap)="getSize()">{{dynamicText}}</span>
       <span *ngIf="waveShowingAccount==true" class="lb">
         <span class="tooltip t1">
           <i class="icon3 icon-chat grey" style="margin-left: 2vw;margin-top: -4px">
@@ -40,7 +40,8 @@
           </i>
         </span>
       </span>
-      <span *ngIf="result && !waveShowingAccount && !result" class="lb">10</span>
+      <span *ngIf="result && !waveShowingAccount" class="lb">{{sizeOfSyndicate}}</span>
+      <!-- <span *ngIf="!result && !waveShowingAccount" class="lb" (tap)="getSize()">TRY AGAIN</span> -->
     </div>
     <div class="bline"></div>
     <div class="light-header" style="padding: 2px 0;">PLAYING IN </div>

@@ -57,7 +57,7 @@ export class forkOffersSyndicate {
 
         return response;
     }
-    paymentCardDetails() {
+    paymentCardDetails(offerId) {
         if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
@@ -91,8 +91,21 @@ export class forkOffersSyndicate {
                     "module_name": "get_customer_paymill_card_details",
                     "customer_id": this.customerId,
                     "p_type": "10",
-                    "from_process": "profile"
+                    "from_process": "profile",
+                    "offer_id": offerId
+                },
+                {
+                    "session_ID": CommonService.sessionId,
+                    "page_ID": "7",
+                    "screen_id": "7.2",
+                    "action": "profile_details",
+                    "website": "Lotto Social",
+                    "website_id": "27",
+                    "source_site": "mobi.lottosocial.com",
+                    "module_name": "get_customer_details",
+                    "customer_id": CommonService.session.customer_id
                 }
+
             ]
         }
 

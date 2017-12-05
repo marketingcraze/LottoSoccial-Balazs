@@ -15,6 +15,7 @@ import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
 export class offerBuy {
     userCards: any;
     showDown: boolean;
+    paymentType: any;
     @ViewChild("confirmPayment") confirmPayment;
     @ViewChild("pullup") pullUp: any;
     credit_offer: any;
@@ -246,36 +247,53 @@ export class offerBuy {
     getMaximumHeight() {
         return (window.innerHeight / 2.5);
     }
-    buyCashOffer(offerId) {
+    buyCashOffer(offer) {
+        debugger
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present().then(() => {
-            this.getCardsSrv.paymentCardDetails().subscribe((data) => {
-                debugger
+            this.getCardsSrv.paymentCardDetails(offer.offer_id).subscribe((data) => {
+                console.log("StorePage::showPaymentOptions() success", data);
                 let token_exists = 0;
+                debugger
                 for (var i = 0; i < data.response.length; ++i) {
                     if (data.response[i].get_customer_paymill_card_details) {
-                        localStorage.removeItem("buttonText");
-                        localStorage.setItem("buttonText", offerId.offer_id);
                         token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
                     }
                 }
                 if (token_exists > 0) {
-                    debugger
+                    localStorage.removeItem("buttonText");
+                    localStorage.setItem("buttonText", offer.prize);
                     this.userCards = data.response;
+                    this.paymentType = "CashOffer";
+                    console.log("StorePage::showPaymentOptions() success", this.userCards);
                     loader.dismiss();
+
+                    console.log("StorePage::showPaymentOptions() success", this.userCards);
                     this.confirmPayment.togglePopup()
                 } else {
                     loader.dismiss()
-                    //this.confirmPayment.togglePopup()
+                    // this.goPaymentWebviewHomeoffer(offerId, prosub_id);
                 }
             }, (err) => {
                 loader.dismiss()
                 console.log("StorePage::showPaymentOptions() error", err);
             });
         })
+
+
+    }
+    paymentDone() {
+        /*
+        let alert = this.alertCtrl.create({
+            title: 'Success!',
+            subTitle: 'Successfully transaction completed.',
+            buttons: ['OK']
+        });
+        alert.present();
+        */
     }
 
 

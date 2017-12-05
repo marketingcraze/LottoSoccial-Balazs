@@ -10,12 +10,15 @@ import { leaveSyndicate } from '../../services/syndicate_leave.service'
 import { debounce } from 'ionic-native/node_modules/rxjs/operator/debounce';
 
 
+
 declare var cordova: any;
 @Component({
   selector: 'page-manage-syndicate2',
   templateUrl: 'manage-syndicate2.html'
 })
 export class ManageSyndicate2Page {
+  dynamicText: string="CHECK";
+  sizeOfSyndicate: any;
   result: boolean;
   waveShowingAccount: boolean;
   oneOff: boolean;
@@ -89,6 +92,20 @@ export class ManageSyndicate2Page {
   getSize() {
     this.waveShowingAccount = true;
     this.result = false
+    this.leveSynd.getSyndicateSize(this.sId, this.syndicate.syndicate_type).subscribe(data => {
+      if (data) {
+        if (data.response[0].get_syndicate_size.response.status == "SUCCESS") {
+          this.waveShowingAccount = false;
+          this.sizeOfSyndicate = data.response[0].get_syndicate_size.response.syndicate_size;
+          this.result = true
+        }
+        else {
+          this.waveShowingAccount = false;
+          this.result = true
+          this.dynamicText="TRY AGAIN"
+        }
+      }
+    })
   }
 
 }

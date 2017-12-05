@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController, App } from 'ionic-angular';
 import { LeavePage } from '../leave/leave';
+import { leaveSyndicate } from '../../services/syndicate_leave.service';
 
 /*
   Generated class for the ManageSyndicate page.
@@ -16,11 +17,14 @@ export class ManageSyndicatePage {
   waveShowingAccount: boolean = false;
   result: boolean = false;
   syndicate: any;
+  sizeOfSyndicate: any
   sId: any;
+  dynamicText: any = "CHECK"
   oneOff: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public cdChange: ChangeDetectorRef,
+    public leave_syndicate: leaveSyndicate,
     public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
     this.syndicate = this.navParams.get("syndicate")
     this.sId = this.syndicate.syndicate_id;
@@ -47,11 +51,22 @@ export class ManageSyndicatePage {
     leaveModal.present();
   }
   getSize() {
-
     this.waveShowingAccount = true;
     this.result = false
-    this.cdChange.detectChanges()
-
+    this.leave_syndicate.getSyndicateSize(this.sId, this.syndicate.syndicate_type).subscribe(data => {
+      if (data) {
+        if (data.response[0].get_syndicate_size.response.status == "SUCCESS") {
+          this.waveShowingAccount = false;
+          this.sizeOfSyndicate = data.response[0].get_syndicate_size.response.syndicate_size;
+          this.result = true
+        }
+        else {
+          this.waveShowingAccount = false;
+          this.result = true
+          this.dynamicText="TRY AGAIN"
+        }
+      }
+    })
   }
 
 }

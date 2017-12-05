@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, SimpleChange, OnChanges } from '@angular/core';
-import { LoadingController, AlertController, NavController } from 'ionic-angular';
+import { LoadingController, AlertController, ViewController, NavController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 import { OfferService } from '../../services/offer.service';
@@ -19,11 +19,13 @@ export class PopupConfirmPaymentComponent implements OnChanges {
     showBuyNowView: boolean = false;
     confirmPaymentSuccess: boolean = true;
     buttonValu = "";
+    payment_Type: any;
+    payment_Type2: any;
 
     public cardSelected: any
     public cardsValue: any
     public cardsList: any[]
-    public payment_Type:any;
+    //public payment_Type:any;
     public offer_detail = "";
 
     public customerDetails
@@ -38,9 +40,8 @@ export class PopupConfirmPaymentComponent implements OnChanges {
 
     @Output() onPaymentComplete = new EventEmitter();
 
-
-    @Input('existing-cards') existingPaymilCards;  
-    @Input("payment-type") paymentType;  
+    @Input('existing-cards') existingPaymilCards;
+    @Input("payment-type") paymentType;
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
 
@@ -74,7 +75,6 @@ export class PopupConfirmPaymentComponent implements OnChanges {
             // console.log("customerDetails", this.customerDetails );
 
         }
-
         if (changes["paymentType"] && changes["paymentType"].currentValue) {
             debugger
             this.payment_Type = changes["paymentType"].currentValue;
@@ -89,6 +89,8 @@ export class PopupConfirmPaymentComponent implements OnChanges {
         private params: Params,
         private iab: InAppBrowser,
         public srvOffer: OfferService,
+       // public navCtrl: NavController,
+        public viewCtrl: ViewController,
         public alertCtrl: AlertController,
         public appSound: AppSoundProvider,
         public loadingCtrl: LoadingController,
@@ -149,6 +151,7 @@ export class PopupConfirmPaymentComponent implements OnChanges {
                 data = data.response[0];
                 if (data.process_paymill_card_payment) {
                     data = data.process_paymill_card_payment.response
+                    this.payment_Type2 = this.payment_Type;
                     this.confirmPaymentSuccess = (data.status == "SUCCESS")
                 }
 
@@ -222,6 +225,11 @@ export class PopupConfirmPaymentComponent implements OnChanges {
         loader.present()
         return loader;
     }
-
+    viewTicketsCash() {
+        this.navCtrl.popToRoot();
+    }
+    getMoreLines() {
+        this.togglePopup();
+    }
 
 }

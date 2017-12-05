@@ -22,7 +22,7 @@ export class AffiliatePage implements OnInit {
         private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
         private viewctrl: ViewController,
         private navCtrl: NavController,
-        private getCardsSrv:forkOffersSyndicate,
+        private getCardsSrv: forkOffersSyndicate,
         private offerService: OfferService,
         private modalController: ModalController,
         public cdRef: ChangeDetectorRef
@@ -216,35 +216,70 @@ export class AffiliatePage implements OnInit {
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
 
-    openPurchage(offer) {
-        let loader = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
-        });
-        loader.present().then(() => {
-            this.getCardsSrv.paymentCardDetails().subscribe((data) => {
+    // openPurchage(offer) {
+    //     let loader = this.loadingCtrl.create({
+    //         spinner: 'hide',
+    //         content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+    //     });
+    //     loader.present().then(() => {
+    //         this.getCardsSrv.paymentCardDetails().subscribe((data) => {
+    //             debugger
+    //             let token_exists = 0;
+    //             for (var i = 0; i < data.response.length; ++i) {
+    //                 if (data.response[i].get_customer_paymill_card_details) {
+    //                     localStorage.removeItem("buttonText");
+    //                     localStorage.setItem("buttonText", offer);
+    //                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+    //                 }
+    //             }
+    //             if (token_exists > 0) {
+    //                 debugger
+    //                 this.userCards = data.response;
+    //                 loader.dismiss();
+    //                 this.confirmPayment.togglePopup()
+    //             } else {
+    //                 loader.dismiss()
+    //                 //this.confirmPayment.togglePopup()
+    //             }
+    //         }, (err) => {
+    //             loader.dismiss()
+    //             console.log("StorePage::showPaymentOptions() error", err);
+    //         });
+    //     })
+
+
+    // }
+
+    openPurchage(offerId: any = "") {
+        this.offerService.getExistingPaymilCardsDetails2().subscribe((data) => {
+            console.log("StorePage::showPaymentOptions() success", data);
+            let token_exists = 0;
+            for (var i = 0; i < data.response.length; ++i) {
                 debugger
-                let token_exists = 0;
-                for (var i = 0; i < data.response.length; ++i) {
-                    if (data.response[i].get_customer_paymill_card_details) {
-                        localStorage.removeItem("buttonText");
-                        localStorage.setItem("buttonText", offer);
-                        token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-                    }
+                if (data.response[i].get_customer_paymill_card_details) {
+                    token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
                 }
-                if (token_exists > 0) {
-                    debugger
-                    this.userCards = data.response;
-                    loader.dismiss();
-                    this.confirmPayment.togglePopup()
-                } else {
-                    loader.dismiss()
-                    //this.confirmPayment.togglePopup()
-                }
-            }, (err) => {
-                loader.dismiss()
-                console.log("StorePage::showPaymentOptions() error", err);
-            });
-        })
+            }
+            if (token_exists > 0) {
+                localStorage.removeItem("buttonText");
+                localStorage.setItem("buttonText", "buttonText");
+
+                this.userCards = data.response;
+
+                console.log("StorePage::showPaymentOptions() success", this.userCards);
+
+
+                console.log("StorePage::showPaymentOptions() success", this.userCards);
+                this.confirmPayment.togglePopup()
+            } else {
+            }
+        }, (err) => {
+
+            console.log("StorePage::showPaymentOptions() error", err);
+        });
+
+
     }
+
+
 }
