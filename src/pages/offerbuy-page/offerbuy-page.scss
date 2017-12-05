@@ -55,6 +55,7 @@
 }
 .BuyBtn
 {
+    z-index: 1;
     height: 34px;
     font-size: 1.1em;
     background:#00A651;
@@ -90,6 +91,7 @@ ion-pullup .footer ion-toolbar {
 }
 offer-buy{
 .m{
+    z-index: 9999;
     .price{
         margin-top: 3%;
         position: relative;
@@ -122,7 +124,8 @@ offer-buy{
        margin-top: 5%
    }
    .toolbar-background-md{
-       height: 82%;
+       background: #333!important;
+       height: 90%;
    }
    
    .iconArrow{
@@ -193,6 +196,7 @@ offer-buy{
       }
       .myGrid{
         padding: 12px 0!important;
+        //background: #333;
       }
      
 }

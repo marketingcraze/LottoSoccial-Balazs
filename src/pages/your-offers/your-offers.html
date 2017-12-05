@@ -12,25 +12,27 @@
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
 <ion-content style="background-color:#E8E8E8;margin-top: 27px"  (ionScroll)="scrollHandlerYourOffers($event)" id="reddemOffersContent">
-   
-  <div class="offer-of-the-day"  ion-fixed>
-      <p text-center style="margin-top: 0px; padding: 6px;font-size: 18px;margin-bottom: 0px;width:100%;text-align:center;background-color: #249940;color:white;height: 6vh ">DEAL OF THE DAY! <span style="margin-left: 15px">{{hrs}} {{mins}} {{sec}}</span></p>
-      <div style="background-color:#249940; ">
+   <div style="height: 30vh;position: relative" ion-fixed >
+  <div class="offer-of-the-day"  >
+      <p text-center style="margin-top: 0px; padding: 6px;font-size: 18px;margin-bottom: 0px;width:100%;text-align:center;background-color: #E2E2E2;color:black;height: 6vh ">DEAL OF THE DAY! <span style="margin-left: 15px;color: black">{{hrs}} {{mins}} {{sec}}</span></p>
+      <div style="background-color:#E2E2E2; ">
       <ion-slides style="margin-top: -5px;margin-left: 5px" slidesPerView=2 >
-        <ion-slide *ngFor="let product of offersForYou let i = index" style="background-color: #249940;">
-          <div style="height: 22vh">
-          <img style="width: 100%" src="{{product.product_icon}}" class="img-responsive" (tap)="offerOfTheDayModal(i) ">
+        <ion-slide *ngFor="let product of offersForYou let i = index" style="background-color: #E2E2E2;">
+          <div style="height: 22vh;background-color: #E2E2E2;" >
+          <img style="width: 100%;height: 90%;box-shadow: 0px 19px 10px -6px #888888" src="{{product.product_icon}}" class="img-responsive" (tap)="offerOfTheDayModal(i) ">
         </div>
         </ion-slide>     
       </ion-slides>
     </div>
     </div>
+  </div>
+</ion-content>
+<ion-content class="bottomContent" style="margin-top: 37vh!important;margin-bottom: 25%!important">
+<div style="position: relative;margin-bottom: 20%!important">
+   <ion-list text-center style="margin-bottom: 20%!important;position: absolute;">
+     <hr />
+    <div id="innerYourOffers" style="padding: 0px;margin:0px;width: 100%;height: 140vh;text-align: center;margin-bottom: 15%!important">
    
-
-
-   <ion-list text-center style="margin-bottom: 20%;position: absolute;margin-top: 40%">
-
-    <div id="innerYourOffers" style="padding: 0px;margin:0px;width: 100%;margin-top: 15%;height: 110vh;text-align: center">
       <p text-center text-uppercase no-margin style="font-size: 14px;text-align: center;width: 100%">Choose the lottery you want to play</p>
       <ion-grid style="text-align: center">
         <ion-row style="text-align: center">
@@ -49,11 +51,13 @@
             </div>
           </ion-col>
         </ion-row>
+        <br><br><br><br>
       </ion-grid>    
+      <br><br><br><br>
     </div>
 
   </ion-list>
-
+</div>
 <!-- 
     <div class="card-title">
       <img src="assets/image/euro-banner.png" class="img-responsive">
@@ -182,7 +186,9 @@
  
 
 </ion-content>
-<div  *ngIf="down_arrow_showing==1">
+<br>
+<br>
+<div *ngIf="down_arrow_showing==1">
     <span *ngIf="downShowing==0"  >
         <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
    </span>

@@ -14,6 +14,7 @@ import { BadgesPage } from '../badges/badges';
 import { inboxModal } from '../inbox-popup/inbox-popup';
 import { referFriend } from '../refer-friend-page/refer-friend-page';
 
+import { Badge } from '@ionic-native/badge';
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
@@ -23,12 +24,13 @@ import { AppVersion } from '@ionic-native/app-version';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 import { TabsPage } from '../tabs/tabs';
-
+import { CusHeaderComponent } from '../../components/cus-header/cus-header';
 import { your_vouchers } from '../your_vouchers/your_vouchers';
 import { AffiliatePage } from '../affiliate/affiliate'
 import { HelpPage } from '../Help/Help'
 import { NewSyndicatePage } from '../new-syndicate/new-syndicate'
 import { AffiliatePage2 } from '../affiliate2/affiliate2'
+import { prizeBreakdownPage } from '../prize-breakdown/prize-breakdown';
 
 declare var webengage: any;
 
@@ -81,6 +83,7 @@ export class HomePage implements OnInit {
     image_Data: any;
     rootPage: any = TabsPage;
     messageLoading = false;
+    imageUpdate: string = ""
 
     private homeMessage: any;
     public messages: any[] = [];
@@ -88,6 +91,8 @@ export class HomePage implements OnInit {
     constructor(
         public zone: NgZone,
         public params: Params,
+        public badge: Badge,
+        // public cusHeader: CusHeaderComponent,
         private iab: InAppBrowser,
         private appVersion: AppVersion,
         public platform: Platform,
@@ -127,6 +132,7 @@ export class HomePage implements OnInit {
                     this.accountDetails = data[i].get_account_details.response;
                     if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
                         var str = this.accountDetails.profile_image
+                        this.imageUpdate = this.accountDetails.profile_image
                         console.log("last character is ", str.charAt(str.length - 1))
                         if (str.charAt(str.length - 1) == ".") {
                             str = str.substring(0, str.length - 1);
@@ -138,7 +144,7 @@ export class HomePage implements OnInit {
                         }
                         else {
 
-                            this.image_Data = "assets/icon/user.svg"
+                            this.image_Data = str
                         }
                     }
                     else {
@@ -191,6 +197,7 @@ export class HomePage implements OnInit {
         });*/
     }
     ionViewWillEnter() {
+        console.log("ionViewWillEnter in home page")
         this.commonSrv.trackSegmentPage("Home", "HomePage").subscribe(
             data => {
                 console.log("track segment called");
@@ -203,12 +210,27 @@ export class HomePage implements OnInit {
 
     closeMenu1() {
         this.menu.close();
+        if (localStorage.getItem("imageUrl")) {
+            this.image_Data = localStorage.getItem("imageUrl")
+        }
+        this.srvHome.getHomeMessages().take(1).subscribe((data) => {
+            this.zone.run(() => {
+                this.homeMessage = data.response[0].get_home_message.response;
+                this.params.setUnreadCount(this.homeMessage.notification.length);
+            });
+
+        }, (err) => {
+            console.log("onOpenRightMenu error ", err);
+        })
+
+
     }
 
     onLeftMenuSelection(selection) {
         console.log("HomePage::onLeftMenuSelection");
         this.appSound.play('menuClick');
         this.menu.close();
+        debugger
         switch (selection) {
             case 'accounts':
                 this.params.goPage(AccountPage)
@@ -234,7 +256,9 @@ export class HomePage implements OnInit {
             case 'affiliate2':
                 this.params.goPage(AffiliatePage2)
                 break
-
+            case 'prizeBreak':
+                this.params.goPage(prizeBreakdownPage)
+                break
             case 'help':
                 this.params.goPage(HelpPage)
                 //   let opt:string = "toolbarposition=top";
@@ -283,7 +307,7 @@ export class HomePage implements OnInit {
                 this.messageLoading = false;
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;
-                this.params.setUnreadCount(this.homeMessage.count);
+                this.params.setUnreadCount(this.homeMessage.notification.length);
             });
 
         }, (err) => {
@@ -316,8 +340,17 @@ export class HomePage implements OnInit {
 
     onOpenLeftMenu() {
         this.appSound.play('menuClick');
+        if (localStorage.getItem("imageUrl")) {
+            this.image_Data = localStorage.getItem("imageUrl")
+        }
+        else if (this.imageUpdate != "") {
+            this.image_Data = this.imageUpdate
+        }
+        else {
+            this.image_Data = "assets/icon/user.svg"
+        }
     }
-    
+
 
     // markAsUnread() {
 

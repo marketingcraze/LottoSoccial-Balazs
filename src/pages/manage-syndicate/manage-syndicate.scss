@@ -1,4 +1,14 @@
 page-manage-syndicate {
+ //FONT IMPORT
+ @import url(https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext);
+ //HOVER-SLIDE TRANSITIONS
+ $hover: all 0.2s ease-in;
+ $slide:all, 0.4s 0.1s, cubic-bezier(0.55,0,0.1,1);
+ //COLORS
+ $light-grey: #e0dfe1;
+ $grey: #9f9e9f;
+ $white: #ffffff;
+ $blue: #0190ec;
     .toolbar-background-md { background: #255fc7; }
     .mynav { min-height: 42px; }
     .toolbar-title-md {
@@ -34,12 +44,13 @@ page-manage-syndicate {
         padding: 10px;
     }
     .tkt-day {
-        background: #6699cc;
-        padding: 3px 5px;
-        color: white;
-        font-size: 12px;
-        border-radius: 2px;
-        margin-right: 5px;
+      background: #6699cc;
+      padding: 3px 5px;
+      color: white;
+      font-size: 12px;
+      border-radius: 2px;
+      margin-right: 5px;
+      display: -webkit-inline-box;
     }
     .s-ic {
         margin-right: 5px;
@@ -49,4 +60,145 @@ page-manage-syndicate {
         float: right;
         font-size: 20px;
     }
+    .icon3 {
+        display: inline-block;
+        vertical-align: top;
+       
+        width: 35px;
+        height: 21px;
+        border-radius: 8px;
+        position: relative;
+        cursor: pointer;
+       
+        
+        &.blue {
+          background-color: $blue;
+          border-top-left-radius: 0;
+          
+          &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -14px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 14px 24px 0;
+            border-color: transparent $blue transparent transparent;
+          }
+          
+         
+            .bar {
+              width: 36px;
+              
+              &:before {
+                width: 36px;
+              }
+              
+              &:after {
+                width: 40px;
+              }
+            }
+         
+        }
+        
+        &.grey {
+          
+          
+          border-top-right-radius: 0;
+          
+          &:before {
+            content: "";
+            
+          }
+          
+          
+            .dot {
+              animation: wave 0.8s .4s ease-out infinite;
+            }
+            
+            .dot-left {
+              animation: wave 0.8s .2s ease-out infinite;
+            }
+            
+            .dot-right {
+              animation: wave 0.8s .6s ease-out infinite;
+            }
+         
+        }
+      }
+      
+      .bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: 40px;
+        margin-left: -20px;
+        margin-top: -3px;
+        height: 6px;
+        background-color: $white;
+        transition: $slide;
+        
+        &:before {
+          content: "";
+          position: absolute;
+          display: block;
+          height: 100%;
+          width: 40px;
+          top: -12px;
+          background-color: $white;
+          transition: $slide;
+        }
+        
+        &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          height: 100%;
+          width: 30px;
+          bottom: -12px;
+          background-color: $white;
+          transition: $slide;
+        }
+      }
+      
+      .dot {
+        display: block;
+        background-color: $blue;
+        position: absolute;
+        top: 50%;
+        left: 71%;
+        width: 7px;
+        height: 7px;
+        margin-top: -5px;
+        margin-left: -12px;
+        border-radius: 100%;
+        transition: $slide;
+        
+        &.dot-left {
+          content: "";
+          position: absolute;
+          display: block;
+          width: 7px;
+          height: 7px;
+          margin-left: -25px;
+          background-color: $blue;
+          border-radius: 100%;
+          transition: $slide;
+        }
+        
+        &.dot-right {
+          position: absolute;
+          display: block;
+          width: 7px;
+          height: 7px;
+          margin-left: 0px;
+          background-color: $blue;
+          border-radius: 100%;
+          transition: $slide;
+        }
+      }
+      
+   
 }

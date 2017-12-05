@@ -102,7 +102,7 @@ export class MySyndicatePage {
     manage_syndicates(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicatePage, { syndicate: sd});
+        let Modal = this.modalCtrl.create(ManageSyndicatePage, { syndicate: sd });
         Modal.onDidDismiss(data => {
             if (data == 'offerPage') {
                 var tabs: Tabs = this.navCtrl.parent.parent.parent;
@@ -115,7 +115,7 @@ export class MySyndicatePage {
     manage_syndicates2(sd: any) {
         debugger
         this.appSound.play('buttonClick');
-        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate_id: sd });
+        let Modal = this.modalCtrl.create(ManageSyndicate2Page, { syndicate: sd });
         Modal.present();
         // this.appSound.play('buttonClick');
         // this.app.getRootNav().push(ManageSyndicate2Page);
@@ -136,12 +136,11 @@ export class MySyndicatePage {
     loadSyndicate() {
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present();
         this._syndService.syndicateList().subscribe((res) => {
             console.log('syndicate list');
-
             loader.dismiss();
             if (res.response[0].get_syndicate_list.response.syndicate_group) {
                 this.syndArr = res.response[0].get_syndicate_list.response.syndicate_group;
@@ -154,6 +153,12 @@ export class MySyndicatePage {
                 }
                 localStorage.setItem("syndicateP", "1")
                 console.log("syndSrr is ", this.syndArr)
+                setTimeout(()=>
+                {
+                    this.down_arrow_showing = 0
+                    this.cdRef.detectChanges()
+                    console.log("value changed for dwn arow in syndicate")
+                }, 3000);
                 this.chatcount = res.response[0].get_syndicate_list.response.peepso_notification_count.data["ps-js-notifications"].count;
                 if (this.chatcount > 0) {
                     $(".ctNow").removeClass('pulse');
@@ -170,8 +175,13 @@ export class MySyndicatePage {
 
                 console.log(this.syndArr);
             }
+            else {
+                this.viewEmpty = true;
+            }
 
         })
+
+
     }
 
     toggleAcc(i) {
@@ -260,7 +270,7 @@ export class MySyndicatePage {
     private _showLoader() {
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;

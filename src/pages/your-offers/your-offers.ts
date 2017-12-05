@@ -84,7 +84,36 @@ export class YourOffersPage {
 		console.log('ionViewDidLoad YourOffersPage');
 	}
 	ionViewWillEnter(){
-	
+		var a = localStorage.getItem("yourOffersP")
+		if(localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null)
+		{
+			var scrollDiv = document.getElementById('reddemOffersContent').clientHeight;
+			var innerDiv = document.getElementById('innerYourOffers').scrollHeight;	debugger
+			var valu = scrollDiv + this.content.scrollTop
+			console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
+			if (valu < innerDiv) 
+			{
+			  this.down_arrow_showing = 1
+
+			}
+			else{
+			  this.down_arrow_showing = 0
+			}
+			localStorage.setItem("yourOffersP","1")
+			this.content.enableScrollListener();
+		}
+		  else{
+			this.down_arrow_showing = 0
+			this.cdRef.detectChanges()
+			this.content.enableScrollListener();
+		}
+		setTimeout(()=>
+		{
+			this.down_arrow_showing = 0
+			this.cdRef.detectChanges()
+			console.log("value changed for dwn arow in yours offer")
+		}, 3000);
+		
 	}
 
 
@@ -189,25 +218,7 @@ export class YourOffersPage {
 						this.subscribeTimer0();
 						this.delay(4000);
 						debugger
-						var a = localStorage.getItem("yourOffersP")
-						if(localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null)
-						{
-							var scrollDiv = document.getElementById('reddemOffersContent').clientHeight;
-							var innerDiv = document.getElementById('innerYourOffers').scrollHeight;	debugger
-							var valu = scrollDiv + this.content.scrollTop
-							console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
-							if (valu < innerDiv) 
-							{
-							  this.down_arrow_showing = 1
-							}
-							else{
-							  this.down_arrow_showing = 0
-							}
-						}
-						  else{
-							this.down_arrow_showing = 0
-						}
-						this.content.enableScrollListener();
+						
  						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.lotteryProductData[0].draw_countdown));
 						break;
 					}

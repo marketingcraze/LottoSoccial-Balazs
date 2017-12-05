@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild,ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Params } from '../../services/params';
 import { Badge } from '@ionic-native/badge';
 
@@ -7,6 +7,7 @@ import { Badge } from '@ionic-native/badge';
 	templateUrl: 'cus-header.html'
 })
 export class CusHeaderComponent {
+	showBell: boolean = false;
 	@ViewChild('animation') input;
 	@Input('title') title;
 	@Input('isHome') isHome;
@@ -19,24 +20,29 @@ export class CusHeaderComponent {
 
 	constructor(private params: Params, public badge: Badge) {
 		console.log('CusHeaderComponent');
-	
-		this.unreadCount = params.unreadCount;
 
-		params.events.subscribe('unread-count', (count) => {
+		this.inboxBellCount()
+	}
+	inboxBellCount() {
+		this.unreadCount = this.params.unreadCount;
+
+		this.params.events.subscribe('unread-count', (count) => {
+			debugger
 			console.log('CusHeaderComponent::', count);
 			this.unreadCount = count;
 			if (this.unreadCount == undefined) {
 				this.unreadCount = 0;
 				this.badge.set(this.unreadCount);
+				this.showBell = true
 			} else {
 				this.badge.set(this.unreadCount);
+				this.showBell = true
 			}
 
 			console.log("unread count is ----------------->>>>>>>>>>>>>>>>> ", this.unreadCount)
 
 		});
 	}
-
 	ngAfterViewInit() { }
 
 	goHomePage() {
@@ -51,9 +57,9 @@ export class CusHeaderComponent {
 	ionViewWillEnter() {
 		console.log("I'm alive!");
 		this.animateButton()
-	  }
-	animateButton(){
-        this.input.start({ type: 'bounce', duration: '5000' })
-    }
+	}
+	animateButton() {
+		this.input.start({ type: 'bounce', duration: '5000' })
+	}
 
 }

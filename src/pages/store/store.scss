@@ -540,7 +540,7 @@ body {
 			}
 		}
 		.big-content{
-			background-color: #333;
+			background: #333!important;
 			margin-left: 10px;
 			margin-right: 10px;
 			width: calc( 100% - 20px);
@@ -909,7 +909,7 @@ body {
 // width: 62%!important;
 // }
 .swiper-container{
-	background-color: black;
+	background-color: #333!important;
  }
  .bottom-slide .swiper-slide{
  width: 50%!important;
@@ -936,7 +936,7 @@ body {
 	color: white;
 	font-size: 20px;
 	position: relative;
-	bottom: 22vh;
+	bottom: 21vh;
 	
  }
  .HomeAmount{
@@ -1009,6 +1009,7 @@ body {
 	margin-top: 5%
 }
 .toolbar-background-md{
+	background: #333!important;
 	height: 82%;
 }
 }

@@ -1,0 +1,178 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-title class="title">{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-grid>
+            <ion-row style="padding: 6px 10%;text-align: center;">
+                <ion-col col-12>
+                    <span style="font-weight: 900;">SUMMARY OF WINNINGS(09 DEC - 14 DEC)</span>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-col col-9 style="float:left">
+                        <p>TOTAL CASH WINNINGS</p>
+                        <p>TOTAL BONUS CREDIT</p>
+                        <p>TOTAL REWARD POINTS</p>
+                    </ion-col>
+                    <ion-col style="float:right" col-3>
+                        <p style="position: relative;left: 70%;color: green">11</p>
+                        <p style="position: relative;left: 70%;color:red">11</p>
+                        <p style="position: relative;left: 70%;color:blue">11</p>
+                    </ion-col>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <div class="shareContent">
+                    <ion-icon ios="ios-share-outline" md="ios-share-outline"></ion-icon>
+                    <span ion-text>SHARE NOW AND GET 500 POINTS!</span>
+                </div>
+            </ion-row>
+            <ion-row style="border-top: 1px solid;border-bottom: 1px solid;margin-top: 8px;height:45px">
+                <ion-item>
+                    <ion-col col-11 style="float: left">
+                        <span style="font-size: 0.9em;font-weight: 800;"> VIEW WINNING LINES</span>
+                    </ion-col>
+                    <ion-col col-1 style="float:right">
+                        <ion-icon ios="ios-arrow-up" md="md-arrow-up" *ngIf="up" style="font-weight: bold;font-size:x-large;" (tap)="toggle()"></ion-icon>
+                        <ion-icon ios="ios-arrow-down" md="md-arrow-down" *ngIf="!up" style="font-weight: bold;font-size:x-large;" (tap)="toggle()"></ion-icon>
+                    </ion-col>
+                </ion-item>
+            </ion-row>
+            <div *ngIf="up">
+                <ion-row style="height: 35px;background: #B7B7B7;font-size: large;font-weight: 900;">
+                    <ion-col>
+                        <span>YOUR WINS FOR TONY123</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="background: white;height: 80px">
+                    <ion-col col-8>
+                        <span style="padding: 5px;font-size: initial;font-weight: 800;">EURO FRI 09 DEC </span>
+                        <br>
+                        <div style="display: -webkit-inline-box;margin-top: 5%">
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background: #6699CC;margin-left:5px;">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background:#B7B7B7;margin-left:5px">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background: #B7B7B7;margin-left:5px">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background: #6699CC;margin-left:5px">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background: #6699CC;margin-left:5px">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background:#B7B7B7;margin-left:5px">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                            <div style="height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background: #B7B7B7;margin-left:5px">
+                                <span style="position: relative;left: 6px;top: 5px;">10</span>
+                            </div>
+                        </div>
+                    </ion-col>
+                    <ion-col no-padding col-4 style="float :right">
+                        <span>View Tickets </span>
+                        <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px; margin-left: 5px;position: relative;top: 6px;"></span>
+                        <br>
+                        <p style="margin-left: 57%;color: red;">2.14</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+
+                </ion-row>
+            </div>
+
+
+
+            <ion-row>
+                <ion-col no-padding>
+                    <ion-item style="text-align: center">
+                        <span style="white-space: normal">Go to your account to manage your winning</span>
+                        <br>
+                        <button style="height: 40px;width: 40%;margin-top: 10px;" ion-button color="secondary" (tap)="accountPage()">GO TO ACCOUNT</button>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row style="padding: 10px 12px;">
+                <ion-col>
+                    <span style="font-weight: 900">SYNDICATED CHECKED (09 DEC - 14 DEC)</span>
+                </ion-col>
+            </ion-row>
+            <ion-row no-padding style="background-color:white">
+                <div style="border-top: 1px solid;width: 100%;    padding: 10px 6px;">
+                    <ion-col no-padding col-8 style="float :left">
+                        <span>Euro FRI 09 DEC</span>
+                        <br>
+                        <span>TONY123</span>
+                    </ion-col>
+                    <ion-col no-padding col-4 style="float :right">
+                        <span>View Tickets </span>
+                        <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px; margin-left: 5px;position: relative;top: 6px;"></span>
+                    </ion-col>
+                </div>
+                <div style="border-top: 1px solid;width: 100%;padding: 10px 6px;">
+                    <ion-col no-padding col-8 style="float :left">
+                        <span>Euro FRI 09 DEC</span>
+                        <br>
+                        <span>TONY123</span>
+                    </ion-col>
+                    <ion-col no-padding col-4 style="float :right">
+                        <span>View Tickets </span>
+                        <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px; margin-left: 5px;position: relative;top: 6px;"></span>
+                    </ion-col>
+                </div>
+                <div style="border-top: 1px solid;width: 100%;padding: 10px 6px;">
+                    <ion-col no-padding col-8 style="float :left">
+                        <span>Euro FRI 09 DEC</span>
+                        <br>
+                        <span>TONY123</span>
+                    </ion-col>
+                    <ion-col no-padding col-4 style="float :right">
+                        <span>View Tickets </span>
+                        <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px; margin-left: 5px;position: relative;top: 6px;"></span>
+                    </ion-col>
+                </div>
+                <div style="border-top: 1px solid;width: 100%;padding: 10px 6px;">
+                    <ion-col no-padding col-8 style="float :left">
+                        <span>Euro FRI 09 DEC</span>
+                        <br>
+                        <span>TONY123</span>
+                    </ion-col>
+                    <ion-col no-padding col-4 style="float :right">
+                        <span>View Tickets </span>
+                        <span class="icon-s" style="content: url(./assets/icon/view_more.svg);min-width: 14px; margin-left: 5px;position: relative;top: 6px;"></span>
+                    </ion-col>
+                </div>
+            </ion-row>
+
+
+        </ion-grid>
+    </ion-list>
+</ion-content>

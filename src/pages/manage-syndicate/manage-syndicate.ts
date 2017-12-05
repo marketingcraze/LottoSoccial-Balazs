@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController, App } from 'ionic-angular';
 import { LeavePage } from '../leave/leave';
 
@@ -13,11 +13,15 @@ import { LeavePage } from '../leave/leave';
   templateUrl: 'manage-syndicate.html'
 })
 export class ManageSyndicatePage {
+  waveShowingAccount: boolean = false;
+  result: boolean = false;
   syndicate: any;
   sId: any;
   oneOff: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public cdChange: ChangeDetectorRef,
+    public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
     this.syndicate = this.navParams.get("syndicate")
     this.sId = this.syndicate.syndicate_id;
     if (this.syndicate.syndicate_end_date == 'oneoff') {
@@ -41,6 +45,13 @@ export class ManageSyndicatePage {
         this.viewCtrl.dismiss(data)
     });
     leaveModal.present();
+  }
+  getSize() {
+
+    this.waveShowingAccount = true;
+    this.result = false
+    this.cdChange.detectChanges()
+
   }
 
 }

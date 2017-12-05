@@ -125,42 +125,16 @@ export class OffersForYouPage {
 
 	}
 	buyCreditOffer(offerId: any, prosub_id: any, buttonText: any) {
-		let loader = this.loadingctrl.create();
+		let loader = this.loadingctrl.create({
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+		});
 		loader.present().then(() => {
-			this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {
-				console.log("StorePage::showPaymentOptions() success", data);
-				let token_exists = 0;
-
-				for (var i = 0; i < data.response.length; ++i) {
-					if (data.response[i].get_customer_paymill_card_details) {
-						token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-					}
-				}
-				if (token_exists > 0) {
-					//   this.storage.set('btnValue', bu);
-					localStorage.removeItem("buttonText");
-					localStorage.setItem("buttonText", buttonText);
-
-					//data.response.push({ offer: offerId });
-					this.userCards = data.response;
-
-					console.log("StorePage::showPaymentOptions() success", this.userCards);
-					loader.dismiss();
-					// loader.dismiss()
-					// let modal = this.modalCtrlr.create(confirmOfferPurchasePage, {
-					// })
-					// modal.present();
-
-					console.log("StorePage::showPaymentOptions() success", this.userCards);
-					this.confirmPayment.togglePopup()
-				} else {
-					loader.dismiss()
-					alert("Token not exist")
-				}
-			}, (err) => {
-				loader.dismiss()
-				console.log("StorePage::showPaymentOptions() error", err);
-			});
+			localStorage.removeItem("buttonText");
+			localStorage.setItem("buttonText", buttonText);
+			this.userCards = "";
+			this.confirmPayment.togglePopup()
+			loader.dismiss()
 		})
 
 	}

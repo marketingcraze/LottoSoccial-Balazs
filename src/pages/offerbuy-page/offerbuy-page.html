@@ -92,7 +92,7 @@
 
         <div *ngFor="let items of credit_offer let j=index;">
             <span *ngIf="j<1">
-                <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px" (click)="buyCashOffer(items)">BUY NOW</button>
+                <button ion-button class="BuyBtn" style="float: none;width: 50%;border-radius: 5px;height: 40px;" (tap)="buyCashOffer(items)">BUY NOW</button>
             </span>
         </div>
 
@@ -145,42 +145,45 @@
 </ion-grid> -->
 
 </ion-content>
-<ion-pullup #pullup id="pullup" (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" 
-[maxHeight]="getMaximumHeight()" style="height: 10vh!important">
+<ion-pullup #pullup id="pullup" (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" [maxHeight]="getMaximumHeight()"
+    style="height: 10vh!important;z-index: 9999">
     <!-- <ion-pullup-tab [footer]="pullup" (tap)="toggleFooter()">
                     <ion-icon name="arrow-up" *ngIf="footerState == 0"></ion-icon>
                     <ion-icon name="arrow-down" *ngIf="footerState == 1"></ion-icon>
                 </ion-pullup-tab> -->
-    <ion-toolbar style="position: relative;top: 15px;" (tap)="toggleFooter()"  class="m">
-        
+    <ion-toolbar style="position: relative;top: 15px;" (tap)="toggleFooter()" class="m">
+
         <span style="margin-left: 5px;z-index: 9999;color: white;font-size: 1.3em">
-                HOW TO PLAY
-              </span>
-              <span style=" margin-top: -7px;position: absolute;margin-left: -25px;z-index: 100;color: white;font-size: 1.4em" >
-                  <ion-icon style="margin-left: 27vw" *ngIf="showDown" name="arrow-down" ></ion-icon>
-                  <ion-icon style="margin-left: 27vw" *ngIf="!showDown" name="arrow-up"></ion-icon>
-                </span>
-  
+            HOW TO PLAY
+        </span>
+        <span style=" margin-top: -7px;position: absolute;margin-left: -25px;z-index: 100;color: white;font-size: 1.4em">
+            <ion-icon style="margin-left: 27vw" *ngIf="showDown" name="arrow-down"></ion-icon>
+            <ion-icon style="margin-left: 27vw" *ngIf="!showDown" name="arrow-up"></ion-icon>
+        </span>
+
     </ion-toolbar>
-    <ion-content  >
-  
+    <ion-content>
+
         <ion-grid class="myGrid">
             <ion-row>
                 <ion-col col-6 style="margin-top: 1px;text-align: center;background-color: #255FC7;height: min-content">
-                    <span style="color: white;font-size: 18px;top: 2%;position: relative">HOW TO PLAY</span>
-                    <img src="assets/img/happys.png" style="margin-top: 5%">
+                    <div>
+                        <span style="color: white;font-size: 18px;top: 2%;position: relative">HOW TO PLAY</span>
+                        <img src="assets/img/happys.png" style="margin-top: 5%">
+                    </div>
                 </ion-col>
 
-                <ion-col col-6 style="background-color: white;height: min-content">
-                    <div style="width: 100%;height: 20%;position: relative">
-                        <p class="price">PRICE BREAKDOWN</p>
-                    </div>
-                    <div style="width: 100%;position: relative;text-align: center;height: 19.5vh;margin-bottom: 10px;margin-top: -10px">
-                        <p style="margin: 0px">
-                            <span style="margin-right: 10%;font-size: 1em;text-align: left">1line</span>
-                            <span style="margin-left: 14%;font-size: 1em">£0.30</span>
-                        </p>
-                        <p style="margin: 0px">
+                <ion-col col-6>
+                    <div style="background-color: white;height: min-content">
+                        <div style="width: 100%;height: 20%;position: relative">
+                            <p class="price">PRICE BREAKDOWN</p>
+                        </div>
+                        <div style="width: 100%;position: relative;text-align: center;height: 19.5vh;margin-bottom: 10px;margin-top: -10px">
+                            <p style="margin: 0px;font-size: initial!important" *ngFor="let item of credit_offer | filter:{draw:(product?.draw_group|keys)[credit_filter_draw], game:product?.name|capitalizeFirst};let i=index;">
+                                <span style="margin-right: 10%;font-size: 1em;text-align: left">{{item?.line}}</span>
+                                <span style="margin-left: 14%;font-size: 1em"> £{{item?.prize | number : '1.1-1'}}</span>
+                            </p>
+                            <!-- <p style="margin: 0px">
                             <span style="margin-right: 10%;font-size: 1em;text-align: left">2lines</span>
                             <span style="margin-left: 10%;font-size: 1em">£0.60</span>
                         </p>
@@ -199,10 +202,13 @@
                         <p style="margin: 0px">
                             <span style="margin-right: 10%;font-size: 1em;text-align: left">10lines</span>
                             <span style="margin-left: 5%;font-size: 1em">£3.00</span>
-                        </p>
+                        </p> -->
+                        </div>
                     </div>
                 </ion-col>
-                <br><br><br>
+                <br>
+                <br>
+                <br>
             </ion-row>
         </ion-grid>
 

@@ -28,9 +28,9 @@
         <!-- <div class="h-ticker"> -->
         <!-- <span style="margin-left: 5px" *ngFor="let product of l.Product_Name | filter:{syndicate:l[i]}"> {{product}} - </span> -->
         <ion-slides [autoplay]="slideAutoplay" speed="6000">
-          <ion-slide *ngFor="let product of l.Product_Name | filter:{syndicate:l[i]}">
-            <span > {{product}}</span>
-
+          <ion-slide *ngFor="let productData of l.Product_Name">
+            <marquee *ngIf="l.Product_Name.length<=1">{{productData.product}}</marquee>
+            <span *ngIf="l.Product_Name.length>1"> {{productData.product}}</span>
           </ion-slide>
         </ion-slides>
         <!-- </div> -->

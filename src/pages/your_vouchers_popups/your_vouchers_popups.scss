@@ -14,12 +14,12 @@
       border: 0;
       box-shadow: 0 16px 150px rgba(0,0,0,1.4);
       background-color: #fafafa;
-      border-radius: 10px;
+      border-radius: 3px;
     
       }
       .fixed-content {
         background-color: white;
-        border-radius: 10px
+        border-radius: 3px
       }
     .popup-img{
       height: 50px;
@@ -54,17 +54,15 @@
       position: relative;  
       max-width: 100%;
       width: 100%;
-     min-height: 335px !important;
-     padding-top: 13% !important;
-     padding-bottom: 13% !important;
-     
+      min-height: 335px !important;
+      padding-top: 13% !important;
+      padding-bottom: 13% !important;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       margin: auto;
       border: 0;
-     
       border: 0;
       box-shadow: 0 16px 150px rgba(0,0,0,1.4);
       border-radius: 10px;
@@ -91,15 +89,14 @@ padding-top: 5%;
   padding:10px;
   padding-top:40%;
   padding-bottom: 150px;
- 
   bottom: 70px;
   border-radius: 10px;
   overflow: visible;
   position: relative;  
   max-width: 100%;
   width: 100%;
- min-height: 200px !important;
- padding-top: 13% !important;
+  min-height: 200px !important;
+  padding-top: 13% !important;
   top: 0;
   bottom: 0;
   left: 0;
@@ -148,4 +145,4 @@ padding-top: 5%;
 .label-md {
   margin: 2px 0px 13px 0;
 }
-    }
+}

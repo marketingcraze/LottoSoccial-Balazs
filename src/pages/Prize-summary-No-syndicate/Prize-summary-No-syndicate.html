@@ -3,6 +3,7 @@
     <ion-title>Prize Summary</ion-title>
   </ion-navbar>
 </ion-header>
+<popup-confirm-payment #confirmPayment [existing-cards]="userCards" (onPaymentComplete)="paymentDone()"></popup-confirm-payment>
 <ion-content class="main-bg">
     <div style="background: #fff;margin-top: 12px;padding: 10px;">
         <img src="./assets/image/smartsad_ico@3x.png" style="width: 50%;">
@@ -23,11 +24,11 @@
                 <div style="margin-right: 10px;"><b style="font-size:18px">{{sec}}</b> <br><span>Secs</span></div>
             </div>
             <div style="display: -webkit-inline-box;color: #fff;">
-                <button style="font-size: 10px;margin: 0;margin-top: -25px;" ion-button class="btn-ccg" >{{data?.next_draw?.button_text}}</button>
+                <button style="font-size: 10px;margin: 0;margin-top: -25px;" ion-button class="btn-ccg" (tap)="openpaymentPopup()">{{data?.next_draw?.button_text}}</button>
             </div>
         </div>
         <div style="padding: 15px;"> Or go to the store for a wide range of offers</div>
-        <button ion-button class="btn-ccg" style="margin-bottom: 20px;">GO TO STORE</button>
+        <button ion-button class="btn-ccg" style="margin-bottom: 20px;" (tap)="goToStore()">GO TO STORE</button>
     </div>
     
     
