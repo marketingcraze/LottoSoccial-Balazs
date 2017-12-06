@@ -5,6 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-content class="green-div">
+  <img (tap)=close() src="assets/img/button.png" class="imgClassClose">
   <div class="head-text">Check your winnings</div>
   <div *ngIf="!loading">
     <span style="content: url('./assets/icon/user2.svg'); width:40px;"></span>
@@ -21,10 +22,10 @@
     <div *ngIf="!loading" style="padding:30px;">Munching numbers...</div>
   </div>
   <div class="move1" style="padding-top:30px;" *ngIf="errorMsg != ''">{{errorMsg}}</div>
-  <div *ngIf="hideAtFinish" style="height: 50px;overflow: hidden;" id="tickerMain">
+  <div *ngIf="hideAtFinish" style="height: 55px;overflow: hidden;" id="tickerMain">
     <div id="ticker">
       <div class="" style="padding: 10px 0;" *ngFor="let l of sList2 let i=index">
-        <div>Syndicate {{l?.syndicate_name}}</div>
+        <div style="font-size: large">SYNDICATE {{l?.syndicate_name}}</div>
         <!-- <div class="h-ticker"> -->
         <!-- <span style="margin-left: 5px" *ngFor="let product of l.Product_Name | filter:{syndicate:l[i]}"> {{product}} - </span> -->
         <ion-slides [autoplay]="slideAutoplay" speed="6000">
@@ -37,18 +38,30 @@
       </div>
     </div>
   </div>
-  <div class="fadeIn" *ngIf="!hideAtFinish">Completed</div>
-
-  <div style="padding: 0 20px;" *ngIf="sList">
-    <ion-slides pager style="height: 275px;">
-      <ion-slide *ngFor="let d of sList2; let mi = index;">
-        <div style="border:2px solid white; padding: 10px;">
-          <div style="padding-bottom: 10px;">BONUS CREDIT</div>
-          <div>Bonus credit is a type of currency you can use on Lotto Social to buy tickets on any lottery you like! you aquire
-            bonus credit by checkeing your winnings and converting your low value winnings in 4x their cash value
-          </div>
-        </div>
-      </ion-slide>
-    </ion-slides>
+  <div class="fadeIn" *ngIf="!hideAtFinish">
+    <img src="assets/image/completed.png">
   </div>
 </ion-content>
+<ion-footer no-lines>
+  <ion-slides *ngIf="sList.length>0" pager loop autoplay="3000" slidesPerView=1 style="padding: 0 20px 15px;">
+    <ion-slide>
+
+      <div class="imgOverLay" >Title1</div>
+      <div class="imgOverLay">description</div>
+
+        <img style="position: relative" src="http://lottosocial.s3.amazonaws.com/app_assets/checkmywinnings_slider/slider1.jpg">
+    </ion-slide>
+    <ion-slide>
+      <div class="imgOverLay">Title2</div>
+      <div class="imgOverLay">description</div>
+
+      <img style="position: relative" src="http://lottosocial.s3.amazonaws.com/app_assets/checkmywinnings_slider/slider2.jpg">
+    </ion-slide>
+    <ion-slide>
+      <div class="imgOverLay">Title3</div>
+      <div class="imgOverLay">description</div>
+
+      <img style="position: relative" src="http://lottosocial.s3.amazonaws.com/app_assets/checkmywinnings_slider/slider3.jpg">
+    </ion-slide>
+  </ion-slides>
+</ion-footer>

@@ -109,5 +109,20 @@ button.swiper-pagination-bullet {
     0% { opacity: 0; transform: scale(0.5); }
     100% { opacity: 1;;font-size: large; transform: scale(1); }
     }
-
+    .imgClassClose{
+        position: fixed;
+        height: 20px;
+        width: 20px;
+        left: 92.5%;
+        top: 1.5%;
+        z-index: 9999;
+        opacity: 2.9;
+      }
+.imgOverLay{
+    top: 55px;
+    color: white;
+    font-size: larger;
+    position: relative;
+    z-index: 10;
+}
 }
