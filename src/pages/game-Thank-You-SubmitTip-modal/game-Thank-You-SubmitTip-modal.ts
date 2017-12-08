@@ -21,7 +21,7 @@ export class GameThankyouSubmittip {
     goToPlayGames(data) {
         this.loading=this.loadingctrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         this.loading.present();
         this.nvctrl.push(PlayGamePage, { game: this.currentGameId });

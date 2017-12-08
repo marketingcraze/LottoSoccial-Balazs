@@ -35,7 +35,7 @@ export class CheckWinningsPage {
     this.nav = this.app.getRootNav();
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
   }
 

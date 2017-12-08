@@ -36,7 +36,7 @@ export class LeavePage {
   pauseSyndicate() {
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     loader.present().then(() => {
       this.serviceLeave.managedSyndicatePause(this.syndicateId).subscribe(data => {
@@ -58,7 +58,7 @@ export class LeavePage {
   leaveSyndicateManaged() {
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     loader.present().then(() => {
       this.serviceLeave.manageSyndicateLeave(this.syndicateId).subscribe(data => {

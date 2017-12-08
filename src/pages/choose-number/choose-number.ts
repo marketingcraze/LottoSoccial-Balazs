@@ -166,7 +166,7 @@ export class ChooseNumberPage {
   syndNumber(id: any) {
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     loader.present();
     this._syndService.syndnumber(id).subscribe((res) => {

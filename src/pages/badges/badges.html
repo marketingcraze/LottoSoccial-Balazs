@@ -11,7 +11,7 @@
                     <img src="{{highestBadge?.thumbnail}}" style="width: 25%;padding: 5px;" />
                 </div>
                 <img src="assets/img/gold_star.png" style="position: absolute;top: 20px;right: 88px;height: 16px">
-                <span style="position: absolute;top: 20px;right: 10px;">{{highestBadge?.points}} Points</span>
+                <span style="position: absolute;top: 20px;right: 10px;">{{highestBadge?.points | number : '1.0-2'}} Points</span>
                 <div style="font-size:1.2em">Badegs with most progress</div>
                 <div style="padding: 5px;">{{highestBadge?.precentage}}%</div>
                 <div>
@@ -38,7 +38,7 @@
                         </ion-col>
                         <ion-col col-4 class="right pad-t-25">
                             <img src="assets/img/gold_star.png" style="position: absolute;top: 3px;right: 75px;height: 16px">
-                            <span style="position: absolute;top: 3px;right: 13px">{{d?.points}} Pts</span>
+                            <span style="position: absolute;top: 3px;right: 13px">{{d?.points | number: '1.0-0'}} Pts</span>
                             <button style="width: 90%" ion-button class="btn btn1" (click)="viewTickets(d)" *ngIf="d.precentage<'100'"> EARN</button>
                             <button style="width: 90%" ion-button class="btn btn1" (click)="viewTickets(d)" disabled="disabled" *ngIf="d.precentage=='100' && d.collect=='1'">COLLECT </button>
                             <button style="width: 90%" ion-button class="btn btn1" (click)="viewTickets(d)" *ngIf="d.precentage=='100' && d.collect=='0'">COLLECT </button>

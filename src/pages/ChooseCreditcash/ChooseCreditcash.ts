@@ -29,7 +29,7 @@ export class ChooseCreditcashPage {
     public _syndSrvc: SyndicateService, public loadingCtrl: LoadingController) {
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     this.claimevent_id = navParams.get('cid');
     this.cash = navParams.get('cash');

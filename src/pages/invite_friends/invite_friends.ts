@@ -44,11 +44,11 @@ export class InviteFriendsPage {
     console.log(this.sid);
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     this.loader2 = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     this.searchControl = new FormControl();
     this.searchControl.valueChanges.debounceTime(100).subscribe(search => {

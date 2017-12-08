@@ -13,7 +13,7 @@
     <span style="content: url('./assets/icon/user2.svg'); width:40px;"></span>
   </div>
   <div *ngIf="loading">
-    <span style="content: url('./assets/vid/blue_bg.gif'); width:140px;"></span>
+    <span style="content: url('./assets/vid/new1.gif'); width:140px;"></span>
   </div>
   <div>
     <marquee *ngIf="loading">
@@ -43,15 +43,15 @@
   </div>
 </ion-content>
 <ion-footer no-lines>
-  <ion-slides *ngIf="sList.length>0" pager loop autoplay="3000" slidesPerView=1 style="padding: 0 20px 15px;">
-    <ion-slide>
+  <ion-slides *ngIf="slidesWinnings && slidesWinnings.length>0" pager loop autoplay="3000" slidesPerView=1 style="padding: 0 20px 15px;">
+    <ion-slide *ngFor="let slidechk of slidesWinnings">
 
-      <div class="imgOverLay" >Title1</div>
-      <div class="imgOverLay">description</div>
+      <div class="imgOverLay">{{slidechk?.title}}</div>
+      <div class="imgOverLay">{{slidechk?.description}}</div>
 
-        <img style="position: relative" src="http://lottosocial.s3.amazonaws.com/app_assets/checkmywinnings_slider/slider1.jpg">
+      <img style="position: relative" src="{{slidechk?.image}}">
     </ion-slide>
-    <ion-slide>
+    <!-- <ion-slide>
       <div class="imgOverLay">Title2</div>
       <div class="imgOverLay">description</div>
 
@@ -62,6 +62,6 @@
       <div class="imgOverLay">description</div>
 
       <img style="position: relative" src="http://lottosocial.s3.amazonaws.com/app_assets/checkmywinnings_slider/slider3.jpg">
-    </ion-slide>
+    </ion-slide> -->
   </ion-slides>
 </ion-footer>

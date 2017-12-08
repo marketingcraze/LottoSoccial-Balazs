@@ -687,7 +687,7 @@ export class StorePage {
     private _showLoader() {
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
-            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         loader.present()
         return loader;
@@ -838,7 +838,7 @@ export class StorePage {
 
             let loader = this.loadingCtrl.create({
                 spinner: 'hide',
-                content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+                content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
             });
             loader.present().then(() => {
                 this.srvOffer.buyCurrentOfferOnHomeCard(offerId).subscribe((data) => {

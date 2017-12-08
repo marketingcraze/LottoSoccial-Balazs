@@ -15,7 +15,7 @@ export class recentWinnerTips {
     ionViewWillEnter() {
         let loader = this._loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         loader.present().then(() => {
             this._recentTips.getRecentWinnerTips(this.gameInfo.game_name).subscribe(

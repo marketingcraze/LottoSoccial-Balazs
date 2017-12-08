@@ -153,7 +153,7 @@ export class offerBuy {
     ionViewWillEnter() {
         this.loading = this.loadingCtrl.create({
             spinner: 'hide',
-            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         this.loading.present().then(() => {
             this.offerBuyData.dedicatedOfferData(this.productName)
@@ -251,7 +251,7 @@ export class offerBuy {
         debugger
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
-            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         loader.present().then(() => {
             this.getCardsSrv.paymentCardDetails(offer.offer_id).subscribe((data) => {

@@ -62,7 +62,7 @@ export class AffiliatePage2 implements OnInit {
       
         let loading = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         console.log('ionViewDidLoad PlayGamePage');
         loading.present().then(() => {
@@ -185,7 +185,7 @@ export class AffiliatePage2 implements OnInit {
     openPurchage() {
         // let loader = this.loadingCtrl.create({
         //     spinner: 'hide',
-        //     content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+        //     content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         // });
         // loader.present().then(() => {
         //     this.getCardsSrv.paymentCardDetails().subscribe((data) => {

@@ -1,4 +1,4 @@
-page-prize-summary-Early-check {
+page-prize-summary-No-syndicate {
     .main-bg {
         text-align: center;
         background: #e3e3e3;
@@ -6,12 +6,19 @@ page-prize-summary-Early-check {
     }
     .homeTime-left{
 	background-color: black;
-	height: 50px;
-    text-align: center;
+    height: 50px;
     font-size: 12px;
     padding: 5px;
  }
+ font-size{
+    font-size: 14px;
+ }
  .btn-ccg {
         background: green;
+    }
+    @media only screen and (max-width: 320px) {
+        .font-size{
+            font-size: 9px;
+         }
     }
 }

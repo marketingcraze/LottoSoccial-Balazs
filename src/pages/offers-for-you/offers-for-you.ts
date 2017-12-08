@@ -51,7 +51,7 @@ export class OffersForYouPage {
 		this.tabbarElement.style.display = 'none';
 		let loading = this.loadingctrl.create({
 			spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loading.present().then(() => {
 			this.forkSrv.getForkOffers().subscribe(data => {
@@ -127,7 +127,7 @@ export class OffersForYouPage {
 	buyCreditOffer(offerId: any, prosub_id: any, buttonText: any) {
 		let loader = this.loadingctrl.create({
 			spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present().then(() => {
 			localStorage.removeItem("buttonText");

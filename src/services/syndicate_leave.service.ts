@@ -220,7 +220,7 @@ export class leaveSyndicate {
         var response = this.http.post(action, parameter, opt).map(response => response.json());
         return response;
     }
-    getChkWinningsSlider(){
+    getChkWinningsSlider() {
         if (!CommonService.session) {
             return new Observable(observer => {
                 observer.next(null);
@@ -239,16 +239,10 @@ export class leaveSyndicate {
         let parameter = {
             "request": [
                 {
-                    "session_ID": "avjtjgu0f257f0orggqufcn5g2",
-                    "page_ID": "6",
-                    "screen_id": "6.1",
-                    "action": "get_prev_check_list",
-                    "website": "Lotto Social",
-                    "website_id": "27",
-                    "source_site": "mobi.lottosocial.com",
-                    "module_name": "get_previous_check_list",
-                    "customer_id":"1970400"
-                 
+                    "page_id": "9",
+                    "screen_id": "9..1.1",
+                    "module_name": "get_checkmywin_slider",
+                    "customer_id": this.customerId
                 }
             ]
         }

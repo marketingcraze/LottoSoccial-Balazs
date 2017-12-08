@@ -17,6 +17,7 @@ declare const $
   templateUrl: 'check-winnings-next.html'
 })
 export class CheckWinningsNextPage {
+  slidesWinnings: any;
   chkWinningsSlider: any;
   slideAutoplay: any;
   options: any;
@@ -45,32 +46,31 @@ export class CheckWinningsNextPage {
     }
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
   }
 
   ionViewDidLoad() {
-
+    this.getSlider();
     this.checkWinnings();
     console.log('ionViewDidLoad CheckWinningsNextPage');
   }
   ionViewWillEnter() {
-    debugger;
-    var tabs: Tabs = this.navCtrl.parent
+  
     this.viewCtrl.showBackButton(false);
+  }
+  getSlider() {
+    this.loading = true
+    this.sliderSrv.getChkWinningsSlider().subscribe((data) => {
+      debugger
+      this.slidesWinnings = data.response[0].get_checkmywin_slider.response.sliders
+    })
   }
   checkWinnings() {
     this.loading = true
-    // this.sliderSrv.getChkWinningsSlider().subscribe(data => {
-    //   if (data) {
-    //     debugger
-    //     this.chkWinningsSlider = data.response[0].get_checkmywin_slider.response.sliders;
-    //   }
-    // })
     this._syndService.checkWinnings()
       .subscribe((res) => {
-
-        res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Fri" }] }, { "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Wed" }] }] } } }] }
+        res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Fri" },{ "product": "Lotto Sat" }, { "product": "Lotto Fri" }] }, { "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Wed" }] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ABIA0891", "syndicate_id": 2615959, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0899", "syndicate_id": 2615963, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ABIA0891", "syndicate_id": 2615959, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ABY011", "syndicate_id": 2615960, "Product_Name": ["hello Gunjan4", "hello Gunjan5", "hello Gunjan6"] }, { "syndicate_name": "ABY0784", "syndicate_id": 2615977, "Product_Name": ["hello Gunjan7", "hello Gunjan8", "hello Gunjan9"] }, { "syndicate_name": "ZULA0191", "syndicate_id": 2615962, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZULA0653", "syndicate_id": 2615961, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0812", "syndicate_id": 2615965, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0846", "syndicate_id": 2615952, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0899", "syndicate_id": 2615963, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ZURI0865", "syndicate_id": 2615376 }, { "syndicate_name": "ZURI0865", "syndicate_id": 2615376 }, { "syndicate_name": "ABIE0813", "syndicate_id": 2615377 }, { "syndicate_name": "ZURI0143", "syndicate_id": 2615378 }, { "syndicate_name": "ZURI0698", "syndicate_id": 2615379 }, { "syndicate_name": "ABY033", "syndicate_id": 2615380 }, { "syndicate_name": "ZULA092", "syndicate_id": 2615381 }, { "syndicate_name": "BRAD0442", "syndicate_id": 2615382 }, { "syndicate_name": "ZURI08", "syndicate_id": 2615383 }, { "syndicate_name": "ABIA0657", "syndicate_id": 2615384 }, { "syndicate_name": "ZURI0378", "syndicate_id": 2615385 }, { "syndicate_name": "ABIA0835", "syndicate_id": 2615386 }, { "syndicate_name": "ZULA0124", "syndicate_id": 2615388 }, { "syndicate_name": "ZULA0124", "syndicate_id": 2615388 }, { "syndicate_name": "ZURI0951", "syndicate_id": 2615389 }, { "syndicate_name": "ZURI0951", "syndicate_id": 2615389 }, { "syndicate_name": "ZULA038", "syndicate_id": 2615390 }, { "syndicate_name": "ZULA038", "syndicate_id": 2615390 }] } } }] }
@@ -100,10 +100,9 @@ export class CheckWinningsNextPage {
           if (this.sList2.length < this.sList.length) {
             this.sList2.push(this.sList[this.sList2.length])
             this.duration = (this.sList[this.sList2.length - 1].Product_Name.length) * 6000
-            this.slideAutoplay = (this.sList[this.sList2.length - 1].Product_Name.length) * 100
+            this.slideAutoplay = (this.sList[this.sList2.length - 1].Product_Name.length) *100 
             durations = this.duration
             $("#tickerMain").animate({ scrollTop: $("#ticker").height() }, 500);
-            this.nextSlide();
             this.animateSyndicate(durations);
           }
           else {
@@ -119,10 +118,6 @@ export class CheckWinningsNextPage {
     } else {
       this.movetoPage()
     }
-  }
-
-  nextSlide() {
-    this.slides.slideNext()
   }
 
   movetoPage() {

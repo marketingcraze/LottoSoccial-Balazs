@@ -15,35 +15,45 @@
             <div style="font-size: 24px;color: skyblue;font-family: Lato-black;">{{data?.next_draw?.offer_jackpot}}</div>
         </div>
         <div class="homeTime-left" text-left>
-            <span text-center style="text-align: center">
-                <img style="height: 33px;width: 14%" src="assets/icon/timer.svg" />
-                <span style="color:white;vertical-align: super;">TIME LEFT: </span>
-            </span>
-            <div style="display: -webkit-inline-box;color: #fff;">
-                <div style="margin-right: 10px; /*margin-left: 15px;*/">
-                    <b style="font-size:18px">{{day}}</b>
-                    <br>
-                    <span>Days</span>
+
+            <ion-col col-7>
+                <div style="text-align: left;position: relative;bottom: 12px;" class="font-size">
+                    <span text-center style="text-align: center">
+                        <img style="height: 33px;width: 14%" src="assets/icon/timer.svg" />
+                        <span style="color:white;vertical-align: super;">TIME LEFT: </span>
+                    </span>
+                    <div style="display: -webkit-inline-box;color: #fff;">
+                        <div style="margin-right: 10px; /*margin-left: 15px;*/">
+                            <b style="font-size:18px">{{day}}</b>
+                            <br>
+                            <span>Days</span>
+                        </div>
+                        <div style="margin-right: 10px;">
+                            <b style="font-size:18px">{{hrs}}</b>
+                            <br>
+                            <span>Hrs</span>
+                        </div>
+                        <div style="margin-right: 10px;">
+                            <b style="font-size:18px">{{min}}</b>
+                            <br>
+                            <span>Mins</span>
+                        </div>
+                        <div style="margin-right: 10px;">
+                            <b style="font-size:18px">{{sec}}</b>
+                            <br>
+                            <span>Secs</span>
+                        </div>
+                    </div>
                 </div>
-                <div style="margin-right: 10px;">
-                    <b style="font-size:18px">{{hrs}}</b>
-                    <br>
-                    <span>Hrs</span>
+            </ion-col>
+            <ion-col col-5>
+                <div style="text-align: right;position: relative; bottom: 45px;">
+                    <div style="display: -webkit-inline-box;color: #fff;">
+                        <button style="font-size: 10px;margin: 0;margin-top: -25px;" ion-button class="btn-ccg" (tap)="openpaymentPopup()">{{data?.next_draw?.button_text}}</button>
+                    </div>
                 </div>
-                <div style="margin-right: 10px;">
-                    <b style="font-size:18px">{{min}}</b>
-                    <br>
-                    <span>Mins</span>
-                </div>
-                <div style="margin-right: 10px;">
-                    <b style="font-size:18px">{{sec}}</b>
-                    <br>
-                    <span>Secs</span>
-                </div>
-            </div>
-            <div style="display: -webkit-inline-box;color: #fff;">
-                <button style="font-size: 10px;margin: 0;margin-top: -25px;" ion-button class="btn-ccg" (tap)="openpaymentPopup()">{{data?.next_draw?.button_text}}</button>
-            </div>
+            </ion-col>
+
         </div>
         <div style="padding: 15px;"> Or go to the store for a wide range of offers</div>
         <button ion-button class="btn-ccg" style="margin-bottom: 20px;" (tap)="goToStore()">GO TO STORE</button>

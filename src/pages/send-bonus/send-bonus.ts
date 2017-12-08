@@ -164,7 +164,7 @@ export class SendBonusPage {
 	buyCreditOffer(offerId: any, openSuccessModal: any) {
 		this.loading = this.loadingCtrl.create({
 			spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		this.loading.present().then(() => {
 			this.offerService.buy_Credit_Offer(offerId, this.visitorId).subscribe(data => {
@@ -224,7 +224,7 @@ export class SendBonusPage {
 	private _showLoader() {
 		let loader = this.loadingCtrl.create({
 			spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present()
 		return loader;

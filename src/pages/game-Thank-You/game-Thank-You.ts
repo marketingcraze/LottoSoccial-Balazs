@@ -33,7 +33,7 @@ export class GameThankYou {
   ionViewDidLoad() {
     this.loading = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     this.loading.present().then(() => {
       this.playgameService.gameThankyouPage(this.Customer_award_log_id)

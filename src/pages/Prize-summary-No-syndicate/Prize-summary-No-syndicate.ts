@@ -4,6 +4,7 @@ import { SyndicateService } from '../../providers/syndicate-service';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
 
 declare const $
 declare var cordova: any;
@@ -35,7 +36,8 @@ export class PrizeSummaryNoSyndicate {
         public navParams: NavParams,
         public platform: Platform,
         private storage: Storage,
-        private iab:InAppBrowser,
+        private getCardsSrv: forkOffersSyndicate,
+        private iab: InAppBrowser,
         public viewCtrl: ViewController,
         public _syndService: SyndicateService,
         public loadingCtrl: LoadingController,
@@ -107,7 +109,7 @@ export class PrizeSummaryNoSyndicate {
         debugger
         this.loader = this.loadingCtrl.create({
             spinner: 'hide',
-            content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         this.loader.present();
         this._syndService.prizeBreakDown().
@@ -125,8 +127,41 @@ export class PrizeSummaryNoSyndicate {
             })
     }
     openpaymentPopup() {
-        this.userCards
-        this.confirmPayment.togglePopup()
+        debugger
+        let loader = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+        });
+        loader.present().then(() => {
+            this.getCardsSrv.paymentCardDetails(this.data.offer_id).subscribe((data) => {
+                console.log("StorePage::showPaymentOptions() success", data);
+                let token_exists = 0;
+                debugger
+                for (var i = 0; i < data.response.length; ++i) {
+                    if (data.response[i].get_customer_paymill_card_details) {
+                        token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
+                    }
+                }
+                if (token_exists > 0) {
+                    localStorage.removeItem("buttonText");
+                    localStorage.setItem("buttonText", this.data.prize);
+                    this.userCards = data.response;
+                    // this.paymentType = "CashOffer";
+                    console.log("StorePage::showPaymentOptions() success", this.userCards);
+                    loader.dismiss();
+
+                    console.log("StorePage::showPaymentOptions() success", this.userCards);
+                    this.confirmPayment.togglePopup()
+                } else {
+                    loader.dismiss()
+                    // this.goPaymentWebviewHomeoffer(offerId, prosub_id);
+                }
+            }, (err) => {
+                loader.dismiss()
+                console.log("StorePage::showPaymentOptions() error", err);
+            });
+        })
+
     }
     goToStore() {
 
