@@ -49,8 +49,8 @@ export class PlayGamePage implements OnInit {
           "UserId": CurrentUserid,
         });
         webengage.screen("PlayGamePage")
-        webengage.notification.onDismiss((inAppData)=> {
-       });
+        webengage.notification.onDismiss((inAppData) => {
+        });
       }
     });
   }
@@ -101,9 +101,9 @@ export class PlayGamePage implements OnInit {
   ionViewDidLoad() {
     this.loading = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
-    console.log('ionViewDidLoad PlayGamePage');
+    //console.log('ionViewDidLoad PlayGamePage');
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
@@ -140,9 +140,7 @@ export class PlayGamePage implements OnInit {
       }
     })
   }
-  ionViewWillEnter() {
 
-  }
   close() {
     this.navCtrl.pop();
   }
@@ -155,21 +153,13 @@ export class PlayGamePage implements OnInit {
           StatusBar.hide()
           if (event.url.includes("win")) {
             browser.close();
-            this.nav.push(PlayGamesThankYou, { customer_awardLog_id: this.customerAwardLogId, gameLevel: this.gameLevelThanlyou, game_Id: this.GameId })
+            this.nav.push(PlayGamesThankYou, { customer_awardLog_id: this.customerAwardLogId, gameLevel: this.gameLevelThanlyou, game_Id: this.GameId, gameName: this.gameInfo })
           }
           else if (event.url.includes("loss")) {
             browser.close();
             this.navCtrl.push(gameLoss, { gameId: this.GameId })
           }
         });
-
-        //If we want to close the page after the page is loaded
-
-        //   browser.addEventListener('loadstop', (event) => {
-        //     alert("loadstop"+event);
-
-        // });
-
       }
     });
 
@@ -212,7 +202,7 @@ export class PlayGamePage implements OnInit {
     this.playgameService.getGameBadges(gameID).subscribe(data => {
       debugger;
       if (data) {
-        this.gameBadge=data.response[0].gamebadges[0];
+        this.gameBadge = data.response[0].gamebadges[0];
       }
     })
   }

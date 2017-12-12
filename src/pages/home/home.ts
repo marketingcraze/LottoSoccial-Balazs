@@ -1,7 +1,7 @@
 import { Component, ViewChild, NgZone, OnInit } from '@angular/core';
 import {
     Platform, MenuController, Nav, NavController, LoadingController,
-    AlertController, ModalController
+    AlertController, ModalController, ItemSliding
 } from 'ionic-angular';
 import { Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -33,13 +33,6 @@ import { AffiliatePage2 } from '../affiliate2/affiliate2'
 import { prizeBreakdownPage } from '../prize-breakdown/prize-breakdown';
 
 declare var webengage: any;
-
-
-
-
-
-declare var webengage: any;
-
 export interface PageInterface {
     title: string;
     component: any;
@@ -98,6 +91,7 @@ export class HomePage implements OnInit {
         public platform: Platform,
         private srvHome: HomeService,
         public menu: MenuController,
+        // public itemSlide: ItemSliding,
         private navCtrl: NavController,
         private srvDb: DatabaseService,
         private commonSrv: CommonService,
@@ -304,6 +298,7 @@ export class HomePage implements OnInit {
             console.log("onOpenRightMenu success ", data);
             this.zone.run(() => {
                 debugger
+                var items: ItemSliding
                 this.messageLoading = false;
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;

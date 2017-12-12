@@ -278,7 +278,8 @@ body {
 		height: 5%;
 	}
 	.score-panel{
-		padding: 42px 0 0 0;
+		//padding: 42px 0 0 0;
+		height: 6%;
 		background-color: white;
 		line-height: 2em;
 		position: absolute;
@@ -1032,5 +1033,19 @@ ion-pullup .footer ion-toolbar {
 .invitesyndicate{
  width:100%;
  height: 150px
+}
+.ion-ios-Msg, .ion-md-Msg{
+	content: url(../assets/icon/msg.png);
+	width: 11vw;
+	margin-left: -5px;
+	bottom: 10%;
+	position: relative;
+}
+.badgehomePage{
+	color: red;
+	background-color: #E7D011;
+	position: fixed;
+    left: 93%;
+    bottom: 96%;
 }
 }

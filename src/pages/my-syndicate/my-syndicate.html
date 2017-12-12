@@ -13,210 +13,256 @@
 </ion-header>-->
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
-<ion-content class="marg-top-12 main-bg" id="asynd" style="height: 86%" (ionScroll)="scrollHandlerSyndicate($event)"   >
-    <div id="innerMySyndicate" >
-  <div id="sstate" *ngIf="syndArr.length > 0">
-  <div *ngFor="let sd of syndArr; let i = index;">
-  <div class="synd-card" *ngIf="sd.syndicate_type !='PRIVATE'">
-    <ion-card>
-      <div >
-      <!--<img [src]="sd.image_url">-->
-      <div>
-      <img [src]="sd.image_url">
-      <div class="c-title">
-        {{sd.syndicate_name}}
-      </div>
-      <ion-item>
-      <ion-grid>
-      <ion-row>
-          <ion-col col-50 class="left"><span class="date-lbl">Created: {{sd.syndicate_start_date | date: format}}</span></ion-col>
-          <ion-col col-50 class="right"><span class="date-lbl" style="margin-right: 30px;">End date: {{sd.syndicate_end_date}}</span>
-              <span class="pmic" *ngIf="!toggled[i]" (tap)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;"></ion-icon></span>
-              <span class="pmic" *ngIf="toggled[i]" (tap)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;"></ion-icon></span>
-          </ion-col>
-      </ion-row>
-      </ion-grid>
-      </ion-item>
-      </div>
-      </div>
-      <div *ngIf="toggled[i]">
-       <span *ngIf="sd.product_group.length>0">
-     <ion-item style="border-bottom: 1px solid #AAAAAA"> 
-        <ion-grid>
-          <ion-row *ngFor="let tkt of sd.product_group;let j = index;">
-            <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
-                <input type="button" value="{{tkt?.product_name}}"  style="color: white;border: none;border-radius: 2px;
-                font-size: 12px;padding: 5px;height: 30px;max-width:100%;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;background-color: #255FC7" (tap)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
-              </ion-col>
-              <ion-col col-9 class="right">
-                <p class="ticketsInfoP" style="margin-left: 0px!important"> x {{tkt.ticket_count}} tickets {{tkt.ticket_valid_date}}</p>
-              </ion-col>
-         </ion-row>
-        </ion-grid>
-      </ion-item>
-    </span>
-        <ion-item  style="border-bottom: 1px solid #AAAAAA">
-          <div>
-            <button ion-button class="btn" style="float: left!important;width: 40%!important" (tap)="openOfferPage()"> BUY MORE </button>
-            <button ion-button class="btn" style="float: right!important;width: 40%!important" (tap)="viewTickets(i)"> YOUR TICKETS </button>
-          </div>
-        </ion-item>
-    
-      <ion-item  style="font-size: 14px;border-bottom: 1px solid #AAAAAA">
-        <span *ngIf="sd.check_status == 'CHECKED'">
-          <div (tap)="checkwins()" class="ckNow pulse" style="width: 48%;display: inline-block"><span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span> <span class="synd-f">CHECK NOW!</span></div>
-          </span>
-        <span  *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'">
-          <div style="width: 48%;display: inline-block" >
-          <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 19px;vertical-align: text-bottom;"></span>
-           <span class="synd-f">DUE TO PLAY</span>
-          </div>
-          </span>
-       
-        <ion-col class="right" style="text-align: right;display: inline-block;width: 50%"><span class="tkt-a" (tap)="manage_syndicates(sd)">
-            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
-            <ion-col style="top: -2px"><span class="synd-f" style="color:#000000;">SETTINGS</span></ion-col>
-          </span></ion-col>
-      </ion-item>
-      </div>
-    </ion-card>
-  </div>
+<ion-content class="marg-top-12 main-bg" id="asynd" style="height: 86%" (ionScroll)="scrollHandlerSyndicate($event)">
+  <div id="innerMySyndicate">
+    <div id="sstate" *ngIf="syndArr.length > 0">
+      <div *ngFor="let sd of syndArr; let i = index;">
+        <div class="synd-card" *ngIf="sd.syndicate_type !='PRIVATE'">
+          <ion-card>
+            <div>
+              <!--<img [src]="sd.image_url">-->
+              <div>
+                <img [src]="sd.image_url">
+                <div class="c-title">
+                  {{sd.syndicate_name}}
+                </div>
+                <ion-item>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-50 class="left">
+                        <span class="date-lbl">Created: {{sd.syndicate_start_date | date: format}}</span>
+                      </ion-col>
+                      <ion-col col-50 class="right">
+                        <span class="date-lbl" style="margin-right: 30px;">End date: {{sd.syndicate_end_date}}</span>
+                        <span class="pmic" *ngIf="!toggled[i]" (tap)="toggleAcc(i)">
+                          <ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;"></ion-icon>
+                        </span>
+                        <span class="pmic" *ngIf="toggled[i]" (tap)="toggleAcc(i)">
+                          <ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;"></ion-icon>
+                        </span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item>
+              </div>
+            </div>
+            <div *ngIf="toggled[i]">
+              <span *ngIf="sd.product_group.length>0">
+                <ion-item style="border-bottom: 1px solid #AAAAAA">
+                  <ion-grid>
+                    <ion-row *ngFor="let tkt of sd.product_group;let j = index;">
+                      <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
+                        <input type="button" value="{{tkt?.product_name}}" style="color: white;border: none;border-radius: 2px;
+                font-size: 12px;padding: 5px;height: 30px;max-width:100%;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;background-color: #255FC7"
+                          (tap)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
+                      </ion-col>
+                      <ion-col col-9 class="right">
+                        <p class="ticketsInfoP" style="margin-left: 0px!important"> x {{tkt.ticket_count}} tickets {{tkt.ticket_valid_date}}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item>
+              </span>
+              <ion-item style="border-bottom: 1px solid #AAAAAA">
+                <div>
+                  <button ion-button class="btn" style="float: left!important;width: 40%!important" (tap)="openOfferPage()"> BUY MORE </button>
+                  <button ion-button class="btn" style="float: right!important;width: 40%!important" (tap)="viewTickets(i)"> YOUR TICKETS </button>
+                </div>
+              </ion-item>
 
-  <div class="synd-card" *ngIf="sd.syndicate_type =='PRIVATE'">
-    <ion-card>
-      <div>
-      <!--<img [src]="sd.image_url">-->
-      <div>
-      <img [src]="sd.image_url">
-      <div class="c-title">
-        {{sd.syndicate_name}}
-      </div>
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-5 class="left"><span class="date-lbl" style="margin-right: 2px;">
-              <button ion-button class="ctNow chat-btn pulse" (tap)="chatNow(i)">CHAT NOW</button>
-              <span class="circle"><img src="./assets/img/chat_bubble.png"/><span style="padding: 5px;">{{chatcount}}</span></span></span></ion-col>
-            <ion-col col-7 class="left" style="line-height: 25px;"><span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
-            <span style="font-size: 12px; color: #B7B7B7;">{{sd.member_playing_count}}/{{sd.members_count}}</span>
-              <span class="pmic" *ngIf="!toggled[i]" (tap)="toggleAcc(i)"><ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 2px;font-size: 1em;color: #B7B7B7"></ion-icon></span>
-              <span class="pmic" *ngIf="toggled[i]" (tap)="toggleAcc(i)"><ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 2px;font-size: 1em;color: #B7B7B7"></ion-icon></span>
-            </ion-col>
-            <!--<ion-col col-50 class="left"><span class="date-lbl"><button ion-button class="chat-btn">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
+              <ion-item style="font-size: 14px;border-bottom: 1px solid #AAAAAA">
+                <span *ngIf="sd.check_status == 'CHECKED'">
+                  <div (tap)="checkwins()" class="ckNow pulse" style="width: 48%;display: inline-block">
+                    <span class="icon-s" style="content: url(./assets/img/status_check.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span>
+                    <span class="synd-f">CHECK NOW!</span>
+                  </div>
+                </span>
+                <span *ngIf="sd.check_status == 'SYNDICATE DUE TO PLAY'">
+                  <div style="width: 48%;display: inline-block">
+                    <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 19px;vertical-align: text-bottom;"></span>
+                    <span class="synd-f">DUE TO PLAY</span>
+                  </div>
+                </span>
+
+                <ion-col class="right" style="text-align: right;display: inline-block;width: 50%">
+                  <span class="tkt-a" (tap)="manage_syndicates(sd)">
+                    <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
+                    <ion-col style="top: -2px">
+                      <span class="synd-f" style="color:#000000;">SETTINGS</span>
+                    </ion-col>
+                  </span>
+                </ion-col>
+              </ion-item>
+            </div>
+          </ion-card>
+        </div>
+
+        <div class="synd-card" *ngIf="sd.syndicate_type =='PRIVATE'">
+          <ion-card>
+            <div>
+              <!--<img [src]="sd.image_url">-->
+              <div>
+                <img [src]="sd.image_url">
+                <div class="c-title">
+                  {{sd.syndicate_name}}
+                </div>
+                <ion-item>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-5 class="left">
+                        <span class="date-lbl" style="margin-right: 2px;">
+                          <button ion-button class="ctNow chat-btn pulse" (tap)="chatNow(i)">CHAT NOW</button>
+                          <span class="circle">
+                            <img src="./assets/img/chat_bubble.png" />
+                            <span style="padding: 5px;">{{chatcount}}</span>
+                          </span>
+                        </span>
+                      </ion-col>
+                      <ion-col col-7 class="left" style="line-height: 25px;">
+                        <span class="date-lbl" style="font-size: 12px;">PLAYING MEMBERS:</span>
+                        <span style="font-size: 12px; color: #B7B7B7;">{{sd.member_playing_count}}/{{sd.members_count}}</span>
+                        <span class="pmic" *ngIf="!toggled[i]" (tap)="toggleAcc(i)">
+                          <ion-icon ios="ios-arrow-down" md="md-arrow-down" style="font-weight: bold;margin-top: 2px;font-size: 1em;color: #B7B7B7"></ion-icon>
+                        </span>
+                        <span class="pmic" *ngIf="toggled[i]" (tap)="toggleAcc(i)">
+                          <ion-icon ios="ios-arrow-up" md="md-arrow-up" style="font-weight: bold;margin-top: 2px;font-size: 1em;color: #B7B7B7"></ion-icon>
+                        </span>
+                      </ion-col>
+                      <!--<ion-col col-50 class="left"><span class="date-lbl"><button ion-button class="chat-btn">CHAT NOW</button><span class="circle" style="background: url('./assets/img/chat_bubble.png'); background-size: cover;">10</span></span></ion-col>
             <ion-col col-50 class="right" style="line-height: 34px;"><span class="date-lbl">PLAYING MEMBERS:</span>{{sd.member_playing_count}}/{{sd.members_count}}</ion-col>-->
-          </ion-row>
-          <!--<ion-row>
+                    </ion-row>
+                    <!--<ion-row>
             <ion-col col-50 class="left"><span class="tkt-lbl">Your tickets</span></ion-col>
             <ion-col col-50 class="right"><span class="tkt-a" (tap)="manage_syndicates2()">Manage syndicate</span></ion-col>
           </ion-row>-->
-        </ion-grid>
-      </ion-item>
-      </div>
-      <div *ngIf="toggled[i]">
-        <ion-item text-wrap text-center>
-          <ion-grid text-center>
-            <ion-row text-center *ngFor="let pd of sd.product_group; let j = index;">
-              <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
-                <input type="button" value="{{sd.product_group[j]?.product_name}}" [style.backgroundColor]="sd.product_group[j].product_color? sd.product_group[j].product_color :'#316BCB' " style="color: white;border: none;border-radius: 2px;
-                font-size: 12px;padding: 5px;height: 30px;max-width:100%;overflow: hidden;white-space: nowrap;text-overflow:ellipsis" (tap)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
-              </ion-col>
-              <ion-col col-9>
-                <p class="ticketsInfoP">   x {{sd?.product_group[j]?.ticket_count}} tickets Valid for {{sd?.product_group[j]?.ticket_valid_date}}</p>
-              </ion-col>
-            </ion-row>
-    
-          </ion-grid>
-        </ion-item>
-      </div>
-      </div>
-      <div *ngIf="toggled[i]">
-      <ion-row style="padding: 5px 12px; background: #FEE5E5" *ngIf="sd.purchased_status">
-            <ion-col class="left" style="color: #C10A09;">You haven't bought tickets for your syndicate yet</ion-col>
-            <ion-col class="right"><button ion-button class="btn2" (tap)="showPaymentOptions(sd)"> BUY NOW </button></ion-col>
-      </ion-row>
-      <ion-item *ngIf="sd.purchased_status">
-        <ion-row style="padding: 0 5px 10px 5px;">
-            <ion-col col-50 class="left"><span class="tkt-lbl"></span></ion-col>
-            <ion-col col-50 class="right"><span class="tkt-a" (tap)="manage_syndicates2(sd)"><ion-icon ios="ios-settings" md="md-settings"></ion-icon></span></ion-col>
-        </ion-row>
-          <div style="padding:0; text-align: center">
-            <button ion-button class="btn" (tap)="Invite(sd.syndicate_id)">ADD MEMBERS</button>
-          </div>
-      </ion-item>
-      <ion-item *ngIf="!sd.purchased_status">
-        
-          <div style="padding:0; text-align: center; float: left;">
-            <button ion-button class="btn" (tap)="Invite(sd.syndicate_id)">ADD MEMBERS</button>
-          </div>
-          <div style="padding:0; text-align: center;float: right;">
-            <button ion-button class="btn" (tap)="viewTickets(i)"> VIEW TICKETS </button>
-          </div>
-      </ion-item>
-      <ion-item style="height: 30px">
-        <ion-row >
-          <ion-col col-50 class="left" (tap)="checkwins()"><span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span> <span class="synd-f">DUE TO PLAY</span></ion-col>
-          <ion-col col-50 class="right"><span class="tkt-a" (tap)="manage_syndicates2(sd)">
-            <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
-            <ion-col style="top: -2px"><span class="synd-f" style="color:#000000;">SETTINGS</span></ion-col>
-          </span></ion-col>
-        </ion-row>
-      </ion-item>
-      </div>
-    </ion-card>
-  </div>
-  </div>
-  </div>
+                  </ion-grid>
+                </ion-item>
+              </div>
+              <div *ngIf="toggled[i]">
+                <ion-item text-wrap text-center>
+                  <ion-grid text-center>
+                    <ion-row text-center *ngFor="let pd of sd.product_group; let j = index;">
+                      <ion-col col-3 class="left" style="vertical-align: -webkit-baseline-middle">
+                        <input type="button" value="{{sd.product_group[j]?.product_name}}" [style.backgroundColor]="sd.product_group[j].product_color? sd.product_group[j].product_color :'#316BCB' "
+                          style="color: white;border: none;border-radius: 2px;
+                font-size: 12px;padding: 5px;height: 30px;max-width:100%;overflow: hidden;white-space: nowrap;text-overflow:ellipsis"
+                          (tap)="viewPrivateTickets(sd.product_group,sd.syndicate_id,sd.syndicate_type)">
+                      </ion-col>
+                      <ion-col col-9>
+                        <p class="ticketsInfoP"> x {{sd?.product_group[j]?.ticket_count}} tickets Valid for {{sd?.product_group[j]?.ticket_valid_date}}</p>
+                      </ion-col>
+                    </ion-row>
 
-  <div id="estate" *ngIf="syndArr.length == 0 && viewEmpty">
-    <div class="danger">
-      <div style="font-family: lato-black;">NO TICKETS FOUND</div>
-      <div>YOU'VE GOT TO BE IN TO WIN IT</div>
-    </div>
-    <div class="sub-div">
-      <div class="pad-10" style="border-bottom: 1px solid #ccc;">
-        <div style="font-weight: bold;">Let me tell you why you should join a ayndicate</div>
-        <ion-row style="padding-top: 10px;">
-          <ion-col col-3 style="padding: 20px;"><img src="./assets/icon/settings_ico.svg" /></ion-col>
-          <ion-col col-9 style="text-align: left">
-            <div style="color:#B7B7B7;">MORE TICKETS = MORE CHANCES</div>
-            <div>Your syndicate companions will share their lines with you meaning more chances for everyone</div>
-          </ion-col>
-        </ion-row>
+                  </ion-grid>
+                </ion-item>
+              </div>
+            </div>
+            <div *ngIf="toggled[i]">
+              <ion-row style="padding: 5px 12px; background: #FEE5E5" *ngIf="sd.purchased_status">
+                <ion-col class="left" style="color: #C10A09;">You haven't bought tickets for your syndicate yet</ion-col>
+                <ion-col class="right">
+                  <button ion-button class="btn2" (tap)="showPaymentOptions(sd)"> BUY NOW </button>
+                </ion-col>
+              </ion-row>
+              <ion-item *ngIf="sd.purchased_status">
+                <ion-row style="padding: 0 5px 10px 5px;">
+                  <ion-col col-50 class="left">
+                    <span class="tkt-lbl"></span>
+                  </ion-col>
+                  <ion-col col-50 class="right">
+                    <span class="tkt-a" (tap)="manage_syndicates2(sd)">
+                      <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+                    </span>
+                  </ion-col>
+                </ion-row>
+                <div style="padding:0; text-align: center">
+                  <button ion-button class="btn" (tap)="Invite(sd.syndicate_id)">ADD MEMBERS</button>
+                </div>
+              </ion-item>
+              <ion-item *ngIf="!sd.purchased_status">
+
+                <div style="padding:0; text-align: center; float: left;">
+                  <button ion-button class="btn" (tap)="Invite(sd.syndicate_id)">ADD MEMBERS</button>
+                </div>
+                <div style="padding:0; text-align: center;float: right;">
+                  <button ion-button class="btn" (tap)="viewTickets(i)"> VIEW TICKETS </button>
+                </div>
+              </ion-item>
+              <ion-item style="height: 30px">
+                <ion-row>
+                  <ion-col col-50 class="left" (tap)="checkwins()">
+                    <span class="icon-s" style="content: url(./assets/img/status_due.png);min-width: 14px;width: 17px;vertical-align: text-bottom;"></span>
+                    <span class="synd-f">DUE TO PLAY</span>
+                  </ion-col>
+                  <ion-col col-50 class="right">
+                    <span class="tkt-a" (tap)="manage_syndicates2(sd)">
+                      <ion-icon ios="ios-settings" md="md-settings" style="margin-top: auto !important;transform: scale(1.1,1.1);"></ion-icon>
+                      <ion-col style="top: -2px">
+                        <span class="synd-f" style="color:#000000;">SETTINGS</span>
+                      </ion-col>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+            </div>
+          </ion-card>
+        </div>
       </div>
-      <div class="pad-10" style="border-bottom: 1px solid #ccc;">
-        <ion-row >
-          <ion-col col-3 style="padding: 20px;">
-            <img src="./assets/icon/payment_ico.svg" />
-          </ion-col>
-          <ion-col col-9 style="text-align: left">
-            <div style="color:#B7B7B7;">NO HIDDEN FEES</div>
-            <div>100% of your winnigs is equally shared among the members of your syndicate. No hidden fees, no surprise</div>
-          </ion-col>
-        </ion-row>
+    </div>
+
+    <div id="estate" *ngIf="syndArr.length == 0 && viewEmpty">
+      <div class="danger">
+        <div style="font-family: lato-black;">NO TICKETS FOUND</div>
+        <div>YOU'VE GOT TO BE IN TO WIN IT</div>
       </div>
-      <div class="pad-10" style="border-bottom: 1px solid #ccc;">
-        <ion-row >
-          <ion-col col-3 style="padding: 20px;"><img src="./assets/icon/syndicate_ico.svg" /></ion-col>
-          <ion-col col-9 style="text-align: left">
-            <div style="color:#B7B7B7;">MORE THAN JUST LOTTERY</div>
-            <div>Get rewards points to play games ecery time you check your winnings, bonus credits to get more tickets for free, competition, prize draws and a lot more!</div>
-          </ion-col>
-        </ion-row>
-        <div class="f-bold green" style="padding-top: 15px;">SO WHAT ARE YOU WAITING FOR?</div>
-        <div class="f-bold">Clicks the green button below to join or start a new syndicate!</div>
+      <div class="sub-div">
+        <div class="pad-10" style="border-bottom: 1px solid #ccc;">
+          <div style="font-weight: bold;">Let me tell you why you should join a ayndicate</div>
+          <ion-row style="padding-top: 10px;">
+            <ion-col col-3 style="padding: 20px;">
+              <img src="./assets/icon/settings_ico.svg" />
+            </ion-col>
+            <ion-col col-9 style="text-align: left">
+              <div style="color:#B7B7B7;">MORE TICKETS = MORE CHANCES</div>
+              <div>Your syndicate companions will share their lines with you meaning more chances for everyone</div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="pad-10" style="border-bottom: 1px solid #ccc;">
+          <ion-row>
+            <ion-col col-3 style="padding: 20px;">
+              <img src="./assets/icon/payment_ico.svg" />
+            </ion-col>
+            <ion-col col-9 style="text-align: left">
+              <div style="color:#B7B7B7;">NO HIDDEN FEES</div>
+              <div>100% of your winnigs is equally shared among the members of your syndicate. No hidden fees, no surprise</div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="pad-10" style="border-bottom: 1px solid #ccc;">
+          <ion-row>
+            <ion-col col-3 style="padding: 20px;">
+              <img src="./assets/icon/syndicate_ico.svg" />
+            </ion-col>
+            <ion-col col-9 style="text-align: left">
+              <div style="color:#B7B7B7;">MORE THAN JUST LOTTERY</div>
+              <div>Get rewards points to play games ecery time you check your winnings, bonus credits to get more tickets for
+                free, competition, prize draws and a lot more!</div>
+            </ion-col>
+          </ion-row>
+          <div class="f-bold green" style="padding-top: 15px;">SO WHAT ARE YOU WAITING FOR?</div>
+          <div class="f-bold">Clicks the green button below to join or start a new syndicate!</div>
+        </div>
+      </div>
+      <div class="btn-div">
+        <button ion-button (tap)="joinSynd()" class="btn">JOIN A SYNDICATE</button>
+      </div>
     </div>
   </div>
-  <div class="btn-div">
-    <button ion-button (tap)="next()" class="btn">JOIN A SYNDICATE</button>
-  </div>
-  </div>
-</div>
 </ion-content>
 
 <div *ngIf="down_arrow_showing==1">
-    <span *ngIf="downShowing==0"  >
-        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
-   </span>
+  <span *ngIf="downShowing==0">
+    <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+  </span>
 </div>
-
-

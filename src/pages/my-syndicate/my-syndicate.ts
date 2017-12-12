@@ -153,8 +153,7 @@ export class MySyndicatePage {
                 }
                 localStorage.setItem("syndicateP", "1")
                 console.log("syndSrr is ", this.syndArr)
-                setTimeout(()=>
-                {
+                setTimeout(() => {
                     this.down_arrow_showing = 0
                     this.cdRef.detectChanges()
                     console.log("value changed for dwn arow in syndicate")
@@ -278,6 +277,10 @@ export class MySyndicatePage {
     Invite(sid: any) {
         console.log(sid);
         this.app.getRootNav().push(InviteFriendsPage, { sid: sid });
+    }
+    joinSynd() {
+        var tabs: Tabs = this.navCtrl.parent.parent.parent;
+        tabs.select(4);
     }
 
 

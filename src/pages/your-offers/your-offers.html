@@ -1,4 +1,4 @@
-<cus-header title="Offers" notification-count="0"></cus-header>
+<!-- <cus-header title="Offers" notification-count="0"></cus-header> -->
 <!-- 
 <ion-header>
   <ion-navbar color="primary">
@@ -11,7 +11,7 @@
  -->
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
 
-<ion-content style="background-color:#E8E8E8;margin-top: 27px"  (ionScroll)="scrollHandlerYourOffers($event)" id="reddemOffersContent">
+<ion-content style="background-color:#E8E8E8;"  (ionScroll)="scrollHandlerYourOffers($event)" id="reddemOffersContent">
    <div style="height: 30vh;position: relative" ion-fixed >
   <div class="offer-of-the-day"  >
       <p text-center style="margin-top: 0px; padding: 6px;font-size: 18px;margin-bottom: 0px;width:100%;text-align:center;background-color: #E2E2E2;color:black;height: 6vh ">DEAL OF THE DAY! <span style="margin-left: 15px;color: black">{{hrs}} {{mins}} {{sec}}</span></p>

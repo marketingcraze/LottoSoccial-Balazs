@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, Platform, NavParams } from 'ionic-angular';
 import { GameThankYou } from '../game-Thank-You/game-Thank-You';
 
-declare var webengage:any;
+declare var webengage: any;
 
 @Component({
   selector: 'play-games-thank-you',
@@ -10,9 +10,10 @@ declare var webengage:any;
 })
 
 export class PlayGamesThankYou implements OnInit {
+  gameName: any;
   customerAwardId: string;
   game_level: any;
-  GameId:any;
+  GameId: any;
 
   ngOnInit(): void {
     this.platform.ready().then((readySource) => {
@@ -32,15 +33,16 @@ export class PlayGamesThankYou implements OnInit {
 
   }
   constructor(private nav: NavController, public platform: Platform, private navParams: NavParams) {
-   
+
     this.customerAwardId = navParams.get('customer_awardLog_id');
     this.game_level = navParams.get('gameLevel');
     this.GameId = navParams.get('game_Id');
+    this.gameName = navParams.get('gameName');
   }
 
   navToThankyou2page() {
- 
-    this.nav.push(GameThankYou, { customerAwardLogId: this.customerAwardId,GameIdThanku:this.GameId });
+
+    this.nav.push(GameThankYou, { customerAwardLogId: this.customerAwardId, GameIdThanku: this.GameId, game_name: this.gameName });
   }
 
 

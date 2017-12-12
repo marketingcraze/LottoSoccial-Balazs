@@ -1,7 +1,7 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
     App, Platform, NavController, NavParams, ActionSheetController,
-    Slides, LoadingController, AlertController, ModalController, Loading, Tabs
+    Slides, LoadingController, AlertController, ModalController, Loading, Tabs, MenuController
 } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -33,6 +33,7 @@ declare var $: any;
     templateUrl: 'store.html'
 })
 export class StorePage {
+    unreadCount: any;
     invitedPsyndicate: any;
     showDown: boolean;
     @ViewChild("pullup") pullUp: any;
@@ -169,6 +170,7 @@ export class StorePage {
         public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
+        private menuCtrl: MenuController,
         private storage: Storage,
         public srvOffer: OfferService,
         private iab: InAppBrowser,
@@ -265,7 +267,9 @@ export class StorePage {
 
                 } else if (data[i].get_home_message) {
                     this.homeMessage = data[i].get_home_message.response;
-                    params.setUnreadCount(this.homeMessage.count);
+                    debugger
+                    this.unreadCount = this.homeMessage.notification.length;
+                    this.params.setUnreadCount(this.unreadCount);
                 } else if (data[i].get_home_events) {
                     // this.homeEvents = data[i].get_home_events.response.events[0];
                     // this.millionerImage = data[i].get_home_events.response.events
@@ -292,7 +296,7 @@ export class StorePage {
         });
 
         this.checkCardExists();
-
+        this.inboxBellCount()
     }
     lastCalling() {
         this.commonSrv.getCreditPoints().subscribe(data => {
@@ -899,7 +903,7 @@ export class StorePage {
     countSlider(ev: any) {
 
         this.appSound.play("cardFlip")
-        
+
         let direction = ev.direction;
         if (direction == 2 && this.counts < this.carouselSlide.length()) {
             if (this.count == this.carouselSlide.length() - 1) {
@@ -921,29 +925,24 @@ export class StorePage {
         var tabs: Tabs = this.navCtrl.parent;
         tabs.select(4);
     }
+    openNotificationMenu() {
+        debugger
+        var menu1 = this.menuCtrl.getMenus();
+        menu1[0].open();
+    }
+    inboxBellCount() {
+        debugger
+        this.unreadCount = this.params.unreadCount;
+        this.params.events.subscribe('unread-count', (count) => {
+            debugger
+            console.log('CusHeaderComponent::', count);
+            this.unreadCount = count;
+            console.log("unread count is ----------------->>>>>>>>>>>>>>>>> ", this.unreadCount)
+
+        });
+    }
 
 }
-
-//    let lastIndex=this.carouselSlide.length(); 
-//    = this.carouselSlide.getActiveIndex();
-
-//    this.currentSliderCount--; 
-//    this.counts++;
-//    if(this.counts==1&&this.currentSliderCount==-1)
-//    {
-//     this.currentSliderCount=this.counts;
-//    }
-//    else{
-//     this.currentSliderCount=this.counts-1;
-
-
-//    if(this.count==1&& this.currentSliderCount==0 && this.currentSliderCount< lastIndex)
-//    {
-//     this.currentSliderCount=this.count;
-//    }
-//    else{
-//     this.currentSliderCount++; 
-//    }
 
 
 
