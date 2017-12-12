@@ -20,12 +20,12 @@
 <ion-content class="marg-top-12 main-bg">
     <div class="inner-body">
       <div class="pad-10">
-          <div class="h-title"> SYNDICATE DETAILS </div>
-          <div class="s-title"> Choose a photo and a name for your new syndicate </div>
+          <!-- <div class="h-title"> SYNDICATE DETAILS </div> -->
+          <div class="s-title" style="text-align:left;padding: 5px;padding-left: 0;"> Choose a photo and a name for your new syndicate </div>
       </div>
       <form [formGroup]="todo" >
           <div style="text-align: center;">
-            <ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" maxlength="25"></ion-input>
+            <ion-input class="ng-dirty ng-touched ng-invalid" type="text" placeholder="Enter syndicate name" formControlName="title" [(ngModel)]="title" maxlength="25" (keyup.enter)="chooseImage()"></ion-input>
           </div>
       <div class="img-picker" [ngClass]="{ 'n-bg': !hideimagebtn , 'w-bg': hideimagebtn }">
           <button ion-button outline icon-left class="marg-35" type="button" [hidden]="hideimagebtn" (click)="chooseImage()">

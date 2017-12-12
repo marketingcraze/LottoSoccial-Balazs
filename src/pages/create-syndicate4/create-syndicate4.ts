@@ -122,6 +122,16 @@ export class CreateSyndicate4Page {
   }
   tick(i, p) {
     this.dataArr[i].dayactive[p] = !this.dataArr[i].dayactive[p]
+    var count = 0;
+    for(var j=0; j<this.dataArr[i].dayactive.length; j++) {
+      if(!this.dataArr[i].dayactive[j]) {
+        count++;
+      }
+    }
+    if(count == this.dataArr[i].dayactive.length) {
+      this.dataArr[i].dayactive[p] = true;
+    } 
+
     if (this.validArr[i]) {
       if (this.dataArr[i].dayactive.indexOf(true) == -1) {
         this.validArr[i] = false

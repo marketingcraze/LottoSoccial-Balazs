@@ -145,7 +145,10 @@
               <div>
                 <div class="divider"></div>
                 <p *ngIf="offerSelected">SPECIAL OFFERS ADDED</p>
-                <p *ngIf="!offerSelected" style="width: 80%;">Don’t forget to add your special offers</p>
+                <p *ngIf="!offerSelected" style="width: 80%;text-transform:uppercase;font-style: italic;">
+                  <span style="font-weight: bold;">Special Offers</span><br/><br/>
+                  <span>Don’t forget to add your special offers</span>
+                </p>
               </div>
             </div>
           </ion-col>

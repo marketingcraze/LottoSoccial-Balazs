@@ -24,6 +24,26 @@
     <div>{{termsData?.syndicate_name}}</div>
   </div>
   <div class="pad-10 inner-body">
+      <div class="section-btm">
+          <p class="head">WHAT'S NEXT?</p>
+          <ion-grid>
+              <ion-row>
+                <ion-col col-2 class="text-center pad-2"><div class="c-number">1</div></ion-col>
+                <ion-col col-10 class="pad-top pad-2 lh-23"><a href="#" class="text-deco">JOIN</a> the syndicate</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-2 class="text-center pad-2"><div class="c-number">2</div></ion-col>
+                <ion-col col-10 class="pad-top pad-2 lh-23"><a href="#" class="text-deco">SELECT</a> your own ticket to add to the pool</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-2 class="text-center pad-2"><div class="c-number">3</div></ion-col>
+                <ion-col col-10 class="pad-top pad-2 lh-23"><a href="#" class="text-deco">INVITE</a> more friend to join you!<br/> More lines = More chaances </ion-col>
+              </ion-row>
+          </ion-grid>
+          <!--<div style="text-align: center;" class="pad-10">
+              <button ion-button type="button" (click)="next()" class="btn">AGREE AND JOIN</button>
+          </div>-->
+        </div>
     <div class="section-top">
       <div class="pad-10-tlr">Every member equally contribute as follows:</div>
       <div class="pad-10-lr">
@@ -39,30 +59,11 @@
         <p style="font-size: 14px;">and receives an equal share of all the winnings!</p>
       </div>
     </div>
-    <div class="section-btm">
-      <p class="head">WHAT'S NEXT?</p>
-      <ion-grid>
-          <ion-row>
-            <ion-col col-2 class="text-center pad-2"><div class="c-number">1</div></ion-col>
-            <ion-col col-10 class="pad-top pad-2 lh-23"><a href="#" class="text-deco">JOIN</a> the syndicate</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-2 class="text-center pad-2"><div class="c-number">2</div></ion-col>
-            <ion-col col-10 class="pad-top pad-2 lh-23"><a href="#" class="text-deco">SELECT</a> your own ticket to add to the pool</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-2 class="text-center pad-2"><div class="c-number">3</div></ion-col>
-            <ion-col col-10 class="pad-top pad-2 lh-23"><a href="#" class="text-deco">INVITE</a> more friend to join you!<br/> More lines = More chaances </ion-col>
-          </ion-row>
-      </ion-grid>
-      <!--<div style="text-align: center;" class="pad-10">
-          <button ion-button type="button" (click)="next()" class="btn">AGREE AND JOIN</button>
-      </div>-->
-    </div>
+    
   </div>
   <div>
     <ion-list>
-      <ion-item (click)="aggreement()">View Syndicate agreement<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>
+      <ion-item (click)="aggreement()">View Syndicate Agreement<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>
       <!--<ion-item (click)="tandc()">View Terms & Conditions<ion-icon item-right ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></ion-item>-->
     </ion-list>
   </div>

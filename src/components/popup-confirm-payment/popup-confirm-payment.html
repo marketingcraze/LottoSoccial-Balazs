@@ -45,7 +45,8 @@
             </ion-row>
             <ion-row>
               <p class="center" text-center color="light">Syndicate {{syndicate.syndicate_name}} created!
-                <br>What you want to do next?</p>
+                <br>What you want to do next?
+              </p>
             </ion-row>
             <ion-row>
               <button class="center" *ngIf="!payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="viewTickets()">VIEW TICKETS</button>
@@ -54,6 +55,10 @@
             <ion-row>
               <button class="center" *ngIf="!payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="viewOffers()">VIEW MORE OFFERS</button>
               <button class="center" *ngIf="payment_Type=='CashOffer'" ion-button padding outline round color="light" (click)="getMoreLines()">GET MORE LINES</button>
+            </ion-row>
+            <ion-row>
+                <button class="center" *ngIf="payment_Type=='syndicate'" ion-button padding outline round color="light" (click)="viewOffers()">VIEW TICKETS</button>
+                <button class="center" *ngIf="payment_Type=='syndicate'" ion-button padding outline round color="light" (click)="close()">CLOSE</button>
             </ion-row>
           </ion-grid>
         </div>

@@ -18,6 +18,7 @@ export class SignupInvitedPage {
 	public navCtrl: NavController
 	public sid:any;
 	public mid:any;
+	public sDetails: any;
 
 	constructor( 
 		public app:App,
@@ -32,6 +33,7 @@ export class SignupInvitedPage {
 	}
 
 	ionViewDidLoad() {
+		this.getSyndicateDetails();
     	console.log('ionViewDidLoad SignupInvitedPage');
 	}
 
@@ -52,6 +54,22 @@ export class SignupInvitedPage {
 				this.navCtrl.push(CreateSyndicate5Page);
 				console.log(res);
 			})
+	}
+
+	getSyndicateDetails() {
+		  let loader = this.loadingCtrl.create({
+				spinner: 'hide',
+				content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+			});
+			loader.present();
+
+		  this._syndService.geInvitedSyndicateDetails(this.sid)
+		  .subscribe((res)=> {
+			loader.dismiss()
+			console.log(res);
+			this.sDetails = res.response["0"].get_invited_private_syndicate.response;
+		  })
+		  
 	}
 
 

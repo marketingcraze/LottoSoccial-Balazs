@@ -9,23 +9,23 @@
 <ion-content >
     <div class="card-top" >
       <div class="card-image">
-        <img src="assets/img/220.png">
-        <h4 text-center text-bold>Hatchster syndicate</h4>
+        <img [src]="sDetails?.private_syndicate_image_url">
+        <h4 text-center text-bold>{{sDetails?.syndicate_name}}</h4>
       </div>
     </div>
 
     <ion-item >
       <ion-avatar item-left>
-        <img src="assets/icon/account_ico.svg">
+        <img [src]="sDetails?.invitee_profile_pic_url" onerror="this.src='assets/icon/account_ico.svg'">
       </ion-avatar>
-      <p item-content>Laura has invited you to join their syndicate with other 3 players</p>
+      <p item-content>{{sDetails?.invitee_member_name}} has invited you to join their syndicate with other {{sDetails?.syndicate_invited_count}} players</p>
     </ion-item>
         	
   	<div class="lotteries">
   		<p item-left>Lotteries played in this syndicate</p>
-  		<p><span>EURO TUE</span> x10 tickets valid for 17 Feb 2017</p>
+  		<p *ngFor="let d of sDetails?.product_group"><span>{{d?.product_name}}</span> x{{d?.ticket_count}} tickets valid for {{d?.ticket_valid_date}}</p>
   		
-  		<p><span>EURO FRI</span> x10 tickets valid for 17 Feb 2017</p>
+  		<!-- <p><span>EURO FRI</span> x10 tickets valid for 17 Feb 2017</p> -->
   	</div>
     
 
@@ -35,14 +35,14 @@
     
     <ion-grid class="members">
       <ion-row >
-      	<p class="center">4 current members</p>
+      	<p class="center">{{sDetails?.member_count}} current members</p>
       </ion-row>
       <ion-row justify-content-center>
         <ion-slides loop slidesPerView=4 spaceBetween=0>
-          <ion-slide>
-            <img src="assets/icon/account_ico.svg"><p>Paul</p>
+          <ion-slide *ngFor="let u of sDetails?.member_group">
+            <img [src]="u?.profile_image" onerror="this.src='assets/icon/account_ico.svg'"><p>{{u?.name}}</p>
           </ion-slide>
-          <ion-slide>
+          <!-- <ion-slide>
             <img src="assets/icon/account_ico.svg"><p>Martin</p>
           </ion-slide>
           <ion-slide>
@@ -53,7 +53,7 @@
           </ion-slide>
           <ion-slide>
             <img src="assets/icon/account_ico.svg"><p>Martin</p>
-          </ion-slide>
+          </ion-slide> -->
         </ion-slides>
       </ion-row>
       <ion-row justify-content-center>

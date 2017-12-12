@@ -68,8 +68,8 @@ page-create-syndicate5 {
     }
     .section-top {
         font-size: 14px;
-        border-bottom: 1px solid #ccc;
     }
+    
     .desc-p {
         // text-align: center;
         margin: 5px 0;
@@ -81,10 +81,12 @@ page-create-syndicate5 {
         vertical-align: middle;
     }
     .section-btm {
+        border-bottom: 2px solid #ccc;
         .head{
             text-align: center;
             font-weight: bold;
             font-size: 16px;
+            margin: 0;
         }
         .c-number {
             background: #2f76d1;
