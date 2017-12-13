@@ -58,7 +58,9 @@
             </ion-row>
             <ion-row>
                 <button class="center" *ngIf="payment_Type=='syndicate'" ion-button padding outline round color="light" (click)="viewOffers()">VIEW TICKETS</button>
-                <button class="center" *ngIf="payment_Type=='syndicate'" ion-button padding outline round color="light" (click)="close()">CLOSE</button>
+            </ion-row>
+            <ion-row style="padding-top:150px;">
+              <button class="center" *ngIf="payment_Type=='syndicate'" ion-button padding outline round color="light" (click)="close()">CLOSE</button>
             </ion-row>
           </ion-grid>
         </div>

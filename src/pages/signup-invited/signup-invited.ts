@@ -73,6 +73,13 @@ export class SignupInvitedPage {
 		  })
 		  
 	}
+	decline() {
+		this._syndService.DeclineInvite(this.sid, this.mid)
+		.subscribe((res)=> {
+			console.log(res);
+		})
+	}
+	
 
 
 }
