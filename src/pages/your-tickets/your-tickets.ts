@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { ViewTicketsPage } from '../view-tickets/view-tickets';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 let loader: any;
 /*
   Generated class for the YourTickets page.
@@ -26,7 +27,7 @@ export class YourTicketsPage {
     lines: [[12, 54, 23, 41, 19, 13, 34], [11, 24, 43, 29, 31, 46, 20], [41, 13, 10, 1, 5, 32, 19], [12, 15, 31, 41, 19, 17, 1], [52, 16, 34, 16, 12, 10, 9]],
     raffle: ['MVPC20881', 'ZVPD06683', 'HWPG19556', 'JWPG51409', 'VXPN10586']
   }]
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public appSound: AppSoundProvider, public navParams: NavParams, public viewCtrl: ViewController, public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
     this.products = this.navParams.get('products');
     this.sid = this.navParams.get('synd');
     this.stype = this.navParams.get('stype');
@@ -48,6 +49,7 @@ export class YourTicketsPage {
     }
   }
   close() {
+    this.appSound.play('buttonClick');
     this.navCtrl.pop();
   }
   toggles(i) {
@@ -60,9 +62,11 @@ export class YourTicketsPage {
     }
   }
   viewTickets(i) {
+    this.appSound.play('buttonClick');
     this.navCtrl.push(ViewTicketsPage);
   }
   getTickets(pid, len) {
+    this.appSound.play('buttonClick');
     this._syndService.getTickets(parseInt(pid), this.sid, this.stype)
       .subscribe((res) => {
         this.allTicketData.push(res.response.response.ticket_group);
@@ -90,8 +94,8 @@ export class YourTicketsPage {
     }
     loader.dismiss();
   }
-  indexAlphabetic(val){
-    return String.fromCharCode(65+val);
+  indexAlphabetic(val) {
+    return String.fromCharCode(65 + val);
   }
 
 }

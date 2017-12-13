@@ -22,6 +22,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Camera } from 'ionic-native'
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
 	selector: 'page-signup',
@@ -78,6 +79,7 @@ export class SignupPage {
 		public navParams: NavParams,
 		public commonSrv:CommonService,
 		public alertCtrl:AlertController,
+		public appSound: AppSoundProvider,
 		public toastCtrl:ToastController,
 		public imagePicker: ImagePicker,
 		private popoverCtrl: PopoverController,	
@@ -178,7 +180,7 @@ export class SignupPage {
 		Camera.getPicture(cameraOptions).then((fileUri)=>{
 			this.signup.image = fileUri
 			localStorage.setItem("imageUrl", fileUri)
-			debugger
+			 
 			//this.uploadImage()
 			this.uploadPhoto(this.signup.image)
 			this.uniqueDeviceID.get()
@@ -221,6 +223,7 @@ export class SignupPage {
 	}
 
 	showPassword(input: any): any {
+		this.appSound.play('buttonClick');
 		this.showPass = !this.showPass;
 		input.type = input.type === 'password' ? 'text' : 'password';
 	}
@@ -249,15 +252,12 @@ export class SignupPage {
 	}
 
 	submitSignup(form:any){
-
-		
+		this.appSound.play('buttonClick');
 		localStorage.setItem('isInstall', "firstTimeInstall");
 		// let nav = this.app.getRootNav();
         // nav.setRoot(NewSyndicatePage);
 		
 		// this.signup.free_reg_msn = "" + this.country_number + this.signup.mobile;
-		debugger;
-		
 		var img=localStorage.getItem('userimg');
 		this.prepareMobile();
 		this.signup.country_code = this.selectedCountry.dialCode;
@@ -282,7 +282,7 @@ export class SignupPage {
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present();
-		debugger
+		 
 		this.authSrv.addUser(this.signup).subscribe(
 			data=>{
 			
@@ -292,7 +292,7 @@ export class SignupPage {
 				// show register success message and redirect to login
 				
 				try {
-					debugger
+					 
                     data = data.response;
                 } catch (e) {
                     data = undefined;
@@ -306,7 +306,7 @@ export class SignupPage {
 						
 					}).present()
 				}else{
-				debugger
+				 
 					this.onRegistrationSuccess(data)
 				}
 			},
@@ -322,7 +322,7 @@ export class SignupPage {
 	onRegistrationSuccess(data:any){
 		console.log('onRegistrationSuccess', data);
 		// this.submitLogin();
-		debugger
+		 
 		if (data[0].register.response.message == "both_exists") {
 			let alert = this.alertCtrl.create({
                 title: 'Cool!',
@@ -454,10 +454,12 @@ url:""
 	}
 
 	goInvited(ev){
+		this.appSound.play('buttonClick');
 		let nav = this.app.getRootNav();
         nav.setRoot(SignupInvitedPage);
 	}
 	goLogin(ev){
+		this.appSound.play('buttonClick');
 		this.tabs.select(1);
 	}
 	
@@ -479,7 +481,6 @@ url:""
 	}
 
 	private readFile(file: any) {
-		
 		const reader = new FileReader();
 		reader.onloadend = () => {
 			const imgBlob = new Blob([reader.result], {type:'image/jpg'});
@@ -490,7 +491,7 @@ url:""
 	}
 
 	private postData(blob:any, fileName:string) {
-		debugger
+		 
 		let server = CommonService.apiUrl + 
             CommonService.version + '/upload/?process=profile';
 
@@ -520,7 +521,7 @@ url:""
 		.map(response => response.json())
 		// .finally(() => console.log('inside finaly'))
 		.subscribe((ok) => {
-			debugger;
+			 ;
 			this.loading.dismiss();
 			console.log("uploadPhoto:");
 			console.log(ok);

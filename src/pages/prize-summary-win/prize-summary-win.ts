@@ -6,6 +6,7 @@ import { ChooseCreditcashPage } from '../ChooseCreditcash/ChooseCreditcash';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { YourGamesPage } from '../your-games/your-games';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 /*
   Generated class for the CheckWinnings page.
 
@@ -27,6 +28,7 @@ export class PrizeSummaryWinPage {
     public viewCtrl: ViewController,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
+    public appSound: AppSoundProvider,
     public modalCtrl: ModalController,
     public _syndSrvc: SyndicateService
   ) {
@@ -41,6 +43,7 @@ export class PrizeSummaryWinPage {
     this.loadPrize();
   }
   chooseCreditcash() {
+    this.appSound.play('buttonClick');
     let leave2Modal = this.modalCtrl.create(ChooseCreditcashPage, { cid: this.allData.claim_event_id, cash: this.prizeData.CashEquAmount, credit: this.prizeData.credit_win.value });
     leave2Modal.onDidDismiss(data => {
       this.viewCtrl.dismiss(data)
@@ -64,6 +67,7 @@ export class PrizeSummaryWinPage {
       })
   }
   goto(value: any = 'game') {
+    this.appSound.play('buttonClick');
     this.viewCtrl.dismiss(value)
 
   }

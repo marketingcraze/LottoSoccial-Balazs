@@ -7,6 +7,7 @@ import { Observable } from "rxjs/Rx";
 import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
 import { IonPullUpFooterState } from 'ionic-pullup';
 import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
     selector: 'offer-buy',
@@ -51,11 +52,12 @@ export class offerBuy {
     constructor(private offerBuyData: productOffer,
         private loadingCtrl: LoadingController,
         private storage: Storage,
+        public appSound: AppSoundProvider,
         private modalCtrl: ModalController,
         private getCardsSrv: forkOffersSyndicate,
         private offerService: OfferService,
         private navprms: NavParams,
-    public cdf: ChangeDetectorRef ) {
+        public cdf: ChangeDetectorRef) {
 
 
         this.footerState = IonPullUpFooterState.Collapsed;
@@ -217,6 +219,7 @@ export class offerBuy {
 
     }
     openTipsModal() {
+        this.appSound.play('buttonClick');
         let modalTips = this.modalCtrl.create(buyOfferTips);
         modalTips.present();
     }
@@ -233,15 +236,14 @@ export class offerBuy {
     }
 
     toggleFooter() {
-        if(this.change == false)
-        {
+        if (this.change == false) {
             this.change = true
         }
-        else{
+        else {
             this.change = false
         }
         this.cdf.detectChanges()
-        
+
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
     }
     getMaximumHeight() {

@@ -69,13 +69,13 @@ export class TabsPage {
         this.gameData = "game data";
 
         this.mySelectedIndex = navParams.data.tabIndex || 2;
-// debugger
         if (this.params.events) {
             this.params.events.subscribe('go-page', (page) => {
                 let currentTab = this.homeTabs.getActiveChildNav();
                 console.log("go-page", page, currentTab);
                 try {
                     if (page && currentTab.enabled) {
+                        this.appSound.play('menuClick');
                         currentTab.push(page);
                     }
                 } catch (e) {
@@ -108,7 +108,7 @@ export class TabsPage {
         // this.initData();
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         loader.present();
 
@@ -150,10 +150,8 @@ export class TabsPage {
     }
 
     onSelectTab(tab) {
-        // debugger;
         var tabss = this.homeTabs.getActiveChildNav()
         if (tabss._views[1]) {
-            // tabss[0]._views[0].dismiss();
             tabss._views[1].dismiss();
         }
         var menu1 = this.menuCtrl.getMenus();
@@ -168,7 +166,7 @@ export class TabsPage {
                 this.goToStore();
                 break
             case 'sideMenu':
-            menu1[1].open();
+                menu1[1].open();
             default:
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hidehome', true)
                 // this.renderer.setElementClass(this.homeTabs.getNativeElement(), 'hide-account', false)
@@ -185,41 +183,34 @@ export class TabsPage {
     }
 
     goToStore() {
-        // console.log("goToStore()");
-        this.storage.get('session')
-            .then(
-            data => {
-                let session: any = JSON.parse(data);
-                //   let url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=';
-                //   url += session.customer_id + '&customer_token=' + session.customer_token;
-                //   console.log("session data", data, url);
+        //     // console.log("goToStore()");
+        //     this.storage.get('session')
+        //         .then(
+        //         data => {
+        //             let session: any = JSON.parse(data);
+        //             this.platform.ready().then(() => {
+        //                 if (typeof cordova !== 'undefined') {
 
-                //   let opt:string = "toolbarposition=top";
-                //   const browser = this.iab.create(url, "_blank", opt);
-
-                this.platform.ready().then(() => {
-                    if (typeof cordova !== 'undefined') {
-
-                        var browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top')
-                        // browser.on("loadstop").
-                        //     subscribe(
-                        //     (data) => {
-                        //         debugger
-                        //         // alert(data)
-                        //         browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
-                        //     },
-                        //     err => {
-                        //         console.log("InAppBrowser Loadstop Event Error: " + err);
-                        //     });
-                    }
-                });
+        //                     var browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=store-new&customer_id=' + session.customer_id + '&customer_token=' + session.customer_token + '', '_blank', 'location=no,toolbarposition=top')
+        //                     // browser.on("loadstop").
+        //                     //     subscribe(
+        //                     //     (data) => {
+        //                     //         debugger
+        //                     //         // alert(data)
+        //                     //         browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
+        //                     //     },
+        //                     //     err => {
+        //                     //         console.log("InAppBrowser Loadstop Event Error: " + err);
+        //                     //     });
+        //                 }
+        //             });
 
 
-            }, error => {
-                this.params.setIsInternetAvailable(false);
-                console.log(error)
-            }
-            );
+        //         }, error => {
+        //             this.params.setIsInternetAvailable(false);
+        //             console.log(error)
+        //         }
+        //         );
     }
 
 }

@@ -57,7 +57,7 @@ export class GameThankYou {
   }
 
   OpenSubmitTipModal() {
-
+    this.appSound.play('buttonClick');
     this.loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -78,11 +78,10 @@ export class GameThankYou {
         },
         err => {
           console.log("error", err);
+          this.appSound.play('Error');
         }
         );
     });
-
-
   }
 
 }

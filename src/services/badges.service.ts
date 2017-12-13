@@ -25,6 +25,7 @@ export class badgesOs {
                 observer.complete();
             });
         }
+        debugger
         this.customerId = CommonService.session.customer_id;
         let action = "https://nima.lottosocial.com/wp-json/mobi/v2/getbadges"
         let parameter = {

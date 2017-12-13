@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { PlayGame } from '../../services/playgame.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PlayGamePage } from '../play-games/play-games';
 
 @Component({
@@ -12,13 +13,14 @@ export class GameThankyouSubmittip {
     loading:any;
     constructor(private nvctrl: NavController,
         private navParms: NavParams,
+        public appSound: AppSoundProvider,
         private viewctrl: ViewController,
         private loadingctrl:LoadingController
     ) {
         this.currentGameId = this.navParms.get('current_gameid')
     }
-
     goToPlayGames(data) {
+        this.appSound.play('buttonClick');
         this.loading=this.loadingctrl.create({
             spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,

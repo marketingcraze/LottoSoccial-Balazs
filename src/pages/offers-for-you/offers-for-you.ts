@@ -4,6 +4,7 @@ import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { OfferService } from '../../services/offer.service';
 import { CommonService } from '../../services/common.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class OffersForYouPage {
 		private st: SimpleTimer,
 		public navCtrl: NavController,
 		public platform: Platform,
+		public appSound: AppSoundProvider,
 		public forkSrv: forkOffersSyndicate,
 		public srvOffer: OfferService,
 		public loadingctrl: LoadingController,
@@ -42,12 +44,12 @@ export class OffersForYouPage {
 	}
 
 	goBack() {
+		this.appSound.play('buttonClick');
 		this.tabbarElement.style.display = 'flex';
 		var tabs: Tabs = this.navCtrl.parent.parent.parent;
 		tabs.select(2);
 	}
 	ionViewWillEnter() {
-
 		this.tabbarElement.style.display = 'none';
 		let loading = this.loadingctrl.create({
 			spinner: 'hide',
@@ -125,6 +127,7 @@ export class OffersForYouPage {
 
 	}
 	buyCreditOffer(offerId: any, prosub_id: any, buttonText: any) {
+		this.appSound.play('buttonClick');
 		let loader = this.loadingctrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,

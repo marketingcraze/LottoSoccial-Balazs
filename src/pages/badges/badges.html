@@ -15,7 +15,8 @@
                 <div style="font-size:1.2em">Badegs with most progress</div>
                 <div style="padding: 5px;">{{highestBadge?.precentage}}%</div>
                 <div>
-                    <button ion-button class="btn btn1" (click)="viewTickets(highestBadge)" style="background: white;color: lightseagreen;"> EARN </button>
+                    <button ion-button class="btn btn1" (click)="viewTickets(highestBadge)" style="background: white;color: lightseagreen;">
+                    EARN </button>
                 </div>
             </div>
             <div>
@@ -26,7 +27,7 @@
                         </ion-col>
                         <ion-col col-5 class="left pad-top-18">
                             <div class="text-bold" [innerHTML]="d.post_title"></div>
-                            <div class="light-font pad-tb">{{d.precentage | number : '1.0-2'}}% completed</div>
+                            <div class="light-font pad-tb">{{d.precentage}}% completed</div>
                             <div>
                                 <span *ngFor="let gr of d.steps">
                                     <img *ngIf="gr.percentage<'100'" src="https://cdn1.iconfinder.com/data/icons/n-badge-set/512/badge-14-512.png" class="badge-small"

@@ -65,14 +65,14 @@ export class OffersPage implements OnInit {
     this.appSound.play('menuClick');
   }
   onSelectTab(tab: any) {
-    debugger
+    this.appSound.play('buttonClick');
     if (tab == 'store') {
      this.goToStore()
     }
   }
 
   goToStore() {
-
+    this.appSound.play('buttonClick');
     this.storage.get('session')
       .then(
       data => {

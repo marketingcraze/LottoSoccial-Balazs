@@ -236,26 +236,10 @@ export class MySyndicatePage {
 
     chatNow(i) {
         debugger;
-        //  if(this.syndArr[i].peepso_group_id !=0) {
-        // let opt: string = "toolbarposition=top";
-        // let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to='+this.syndArr[i].peepso_group_url;
-        // str += '/&customer_id='+ this.customer_id+'&customer_token=' + this.customerToken ;
-        // this.iab.create(str, 'blank', opt);
-        //  }
-
         this.platform.ready().then(() => {
             if (typeof cordova !== 'undefined') {
                 const browser = this.iab.create('https://nima.lottosocial.com/webview-auth/?redirect_to=' + this.syndArr[i].peepso_group_url + '&customer_id=' + this.customer_id + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbarposition=top');
-                // browser.on("loadstop").
-                //     subscribe(
-                //     (data) => {
-                //         debugger
-                //        // alert(data)
-                //         browser.insertCSS({ code: "body{background-color:#4286f4!important;}" })
-                //     },
-                //     err => {
-                //         console.log("InAppBrowser Loadstop Event Error: " + err);
-                //     });
+
             }
         });
 
@@ -275,10 +259,12 @@ export class MySyndicatePage {
         return loader;
     }
     Invite(sid: any) {
+        this.appSound.play('buttonClick');
         console.log(sid);
         this.app.getRootNav().push(InviteFriendsPage, { sid: sid });
     }
     joinSynd() {
+        this.appSound.play('buttonClick');
         var tabs: Tabs = this.navCtrl.parent.parent.parent;
         tabs.select(4);
     }

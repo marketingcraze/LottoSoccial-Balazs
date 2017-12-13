@@ -6,6 +6,7 @@ import { AffiliatePopup } from '../affiliate_popups/affiliate_popups'
 import { Content } from 'ionic-angular'
 import { OfferService } from '../../services/offer.service';
 import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service'
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
     selector: 'page-affliate',
@@ -24,6 +25,7 @@ export class AffiliatePage implements OnInit {
         private navCtrl: NavController,
         private getCardsSrv: forkOffersSyndicate,
         private offerService: OfferService,
+        public appSound: AppSoundProvider,
         private modalController: ModalController,
         public cdRef: ChangeDetectorRef
     ) {
@@ -62,7 +64,6 @@ export class AffiliatePage implements OnInit {
     }
 
     getAffiliateData() {
-
         let loading = this.loadingCtrl.create({
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -130,6 +131,7 @@ export class AffiliatePage implements OnInit {
         this.luckyDipDate = dates.getDate();
     }
     dismissPopUp(data) {
+        this.appSound.play('buttonClick');
         this.scrollContent = document.querySelector('.scroll-content');
         this.scrollContent.style['overflow'] = 'hidden';
         let modal = this.modalController.create(AffiliatePopup);
@@ -180,12 +182,6 @@ export class AffiliatePage implements OnInit {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // openPopUp() {
-    //     let modal = this.modalController.create(AffiliatePopup, {
-    //     })
-    //     modal.present();
-    // }
-
     calTime(date: any) {
 
         let now = new Date().getTime();
@@ -215,47 +211,12 @@ export class AffiliatePage implements OnInit {
         this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
-
-    // openPurchage(offer) {
-    //     let loader = this.loadingCtrl.create({
-    //         spinner: 'hide',
-    //         content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
-    //     });
-    //     loader.present().then(() => {
-    //         this.getCardsSrv.paymentCardDetails().subscribe((data) => {
-    //             debugger
-    //             let token_exists = 0;
-    //             for (var i = 0; i < data.response.length; ++i) {
-    //                 if (data.response[i].get_customer_paymill_card_details) {
-    //                     localStorage.removeItem("buttonText");
-    //                     localStorage.setItem("buttonText", offer);
-    //                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
-    //                 }
-    //             }
-    //             if (token_exists > 0) {
-    //                 debugger
-    //                 this.userCards = data.response;
-    //                 loader.dismiss();
-    //                 this.confirmPayment.togglePopup()
-    //             } else {
-    //                 loader.dismiss()
-    //                 //this.confirmPayment.togglePopup()
-    //             }
-    //         }, (err) => {
-    //             loader.dismiss()
-    //             console.log("StorePage::showPaymentOptions() error", err);
-    //         });
-    //     })
-
-
-    // }
-
     openPurchage(offerId: any = "") {
+        this.appSound.play('buttonClick');
         this.offerService.getExistingPaymilCardsDetails2().subscribe((data) => {
             console.log("StorePage::showPaymentOptions() success", data);
             let token_exists = 0;
             for (var i = 0; i < data.response.length; ++i) {
-                debugger
                 if (data.response[i].get_customer_paymill_card_details) {
                     token_exists = data.response[i].get_customer_paymill_card_details.response.token_exists
                 }
@@ -274,12 +235,10 @@ export class AffiliatePage implements OnInit {
             } else {
             }
         }, (err) => {
-
+            this.appSound.play('Error');
             console.log("StorePage::showPaymentOptions() error", err);
         });
 
-
     }
-
 
 }

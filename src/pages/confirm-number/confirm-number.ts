@@ -130,7 +130,12 @@ export class ConfirmNumberPage {
           this.currentTime = new Date();
       }, 1000);
       this.loader.dismiss();
-    })
+    }) , (Err) => {
+      this.loader.present();
+      this.appSound.play('Error');
+      alert("Error occured")
+  }
+
   }
 
   showPaymentOptions() {
@@ -157,7 +162,11 @@ export class ConfirmNumberPage {
         this.loader.dismiss();
       }
       
-    })
+    }) , (Err) => {
+      this.loader.present();
+      this.appSound.play('Error');
+      alert("Error occured")
+  }
   }
 
 
@@ -184,6 +193,8 @@ export class ConfirmNumberPage {
         }, (err) => {
             console.log("ConfirmNumberPage::showPaymentOptions() error", err);
             loader.dismiss();
+            this.appSound.play('Error');
+            alert("Error occured")
         });
         
     }
@@ -385,10 +396,11 @@ timer0callback(data) {
           this.buysyndicate(data.order_id)
         }
         
-      })
-
-    
-
+      }), (Err) => {
+        this.loader.present();
+        this.appSound.play('Error');
+        alert("Error occured")
+    }
   }
 
 }

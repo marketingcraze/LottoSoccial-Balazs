@@ -4,6 +4,7 @@ import { RedeemGamesPage } from '../../pages/redeem-games/redeem-games'
 import { paymentService } from '../../services/paymentService'
 import { Storage } from '@ionic/storage';
 import { PlayGamePage } from '../play-games/play-games';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class getGamesModal {
     private paymentSrv: paymentService,
     private storage: Storage,
     private loadingCtrl: LoadingController,
+    public appSound: AppSoundProvider,
     private changeDetect: ChangeDetectorRef,
     private modalController: ModalController,
     private navprms: NavParams) {
@@ -45,7 +47,7 @@ export class getGamesModal {
     });
     this.VoucherCode = this.navprms.get("VoucherCode")
     this.price = this.navprms.get("price")
-    this.fixedPrice=this.navprms.get("price")
+    this.fixedPrice = this.navprms.get("price")
     this.pointsLive = this.price;
     this.title = this.navprms.get("title")
     this.price_after = this.navprms.get("price_after")
@@ -60,15 +62,15 @@ export class getGamesModal {
   }
 
   dismissPopUp(data: any = 1) {
-
+    this.appSound.play('buttonClick');
     this.viewctrl.dismiss(data);
   }
   confirmpurchase() {
-
+    this.appSound.play('buttonClick');
     this.productCount = this.counter;
     let loading = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
     loading.present().then(() => {
       this.paymentSrv.redeemGame(this.visitorId, this.productCount, this.price, this.productName, this.productDetail, this.awardID).subscribe(data => {
@@ -82,18 +84,22 @@ export class getGamesModal {
           else {
             this.value = false;
             this.statusBuy = 'FAILED';
-
           }
-
         }
-      })
+      }), (Err) => {
+        loading.dismiss()
+        this.appSound.play('Error');
+        alert("Error occured")
+      }
     })
 
   }
   closePopup() {
+    this.appSound.play('buttonClick');
     this.navCtrl.popAll()
   }
   minusCounter() {
+    this.appSound.play('buttonClick');
     if (this.counter != 1 && this.price <= this.creditBalance) {
 
       this.disable = document.getElementById("imgPlus");
@@ -104,6 +110,7 @@ export class getGamesModal {
     }
   }
   plusCounter() {
+    this.appSound.play('buttonClick');
     if (this.counter < 5 && this.price != this.creditBalance) {
 
       this.counter++;
@@ -111,7 +118,6 @@ export class getGamesModal {
       this.changeDetect.detectChanges();
     }
     else if (this.price >= this.creditBalance) {
-      debugger
       this.disable = document.getElementById("imgPlus");
       this.disable.style.filter = "opacity(0.5) drop-shadow(0 0 0 gray)"
       // this.disable="opacity(0.5) drop-shadow(0 0 0 gray)";
@@ -119,6 +125,7 @@ export class getGamesModal {
 
   }
   moveToPlayGame() {
+    this.appSound.play('buttonClick');
     this.navCtrl.popAll();
     this.navCtrl.push(PlayGamePage, { game: this.gameId })
   }

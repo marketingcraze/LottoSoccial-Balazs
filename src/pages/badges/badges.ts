@@ -21,7 +21,7 @@ export class BadgesPage {
     down_arrow_showing = 0;
     loader: any;
     completedStepCount: number;
-    percentage: any;
+    percentage: number;
     highestBadge: any;
     steps: any;
     BadgeData: any
@@ -43,73 +43,15 @@ export class BadgesPage {
     ionViewDidLoad() {
         console.log('inside badges');
         this.getbadges();
-
-
-        /*this.data = [{
-            name:'Newbie',
-            completed: 100,
-            points: 100,
-            total:1,
-            count: 1
-        },
-        {
-            name:'Checked in',
-            completed: 66,
-            points: 500,
-            total:3,
-            count: 2
-        },
-        {
-            name:'Arcade',
-            completed: 20,
-            points: 1000,
-            total:5,
-            count: 1
-        },
-        {
-            name:'Bruci Bonus',
-            completed: 100,
-            points: 300,
-            total:5,
-            count: 5
-        },
-        {
-            name:'Jet-set',
-            completed: 40,
-            points: 500,
-            total:5,
-            count: 2
-        },
-        {
-            name:'Read all about it',
-            completed: 0,
-            points: 500,
-            total:1,
-            count: 0
-        },
-        {
-            name:'Subscriber',
-            completed: 100,
-            points: 500,
-            total:1,
-            count: 1
-        }]*/
-
-        /*for(var i=0; i<this.data.length; i++) {
-            var grarr = Array(this.data[i].total - this.data[i].count).fill('whatever');
-            var gnarr = Array(this.data[i].count).fill('whatever');
-            this.data[i].greenC = gnarr;
-            this.data[i].grayC = grarr;
-        }*/
     }
     ionViewWillEnter() {
         // this.viewCtrl.showBackButton(false);
     }
     close() {
+        this.appSound.play('buttonClick');
         this.navCtrl.popAll;
     }
     getbadges() {
-
         this.loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -133,12 +75,15 @@ export class BadgesPage {
                 localStorage.setItem("badgeP", "1")
                 this.content.enableScrollListener();
 
-            })
-
-
+            }), (Err) => {
+                this.loader.dismiss();
+                this.appSound.play('Error');
+                alert("Error occured")
+            }
     }
 
     viewBadges() {
+        this.appSound.play('buttonClick');
         this.navCtrl.push(BadgeViewPage);
     }
     scrollHandlerBadges(event) {
@@ -197,6 +142,7 @@ export class BadgesPage {
         return maxPrecentage
     }
     viewTickets(d: any) {
+        this.appSound.play('buttonClick');
         this.navCtrl.push(BadgeViewPage, { badge: d });
     }
 

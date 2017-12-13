@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, App } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare const $: any;
 @Component({
   selector: 'page-chooseCredit-modal',
@@ -9,7 +10,7 @@ declare const $: any;
 export class CreditModalPage {
   deviceHeight: any;
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams,  public appSound: AppSoundProvider, public viewCtrl: ViewController, public app: App) { }
 
   ionViewDidLoad() {
     this.deviceHeight = window.screen.height;
@@ -20,10 +21,12 @@ export class CreditModalPage {
   }
 
   dismissm() {
+    this.appSound.play('buttonClick');
     let data
     this.viewCtrl.dismiss(data);
   }
   nothanks() {
+    this.appSound.play('buttonClick');
     this.viewCtrl.dismiss();
     //this.navCtrl.push(TabsPage);
     //this.app.getRootNav().push(TabsPage); 
@@ -32,6 +35,7 @@ export class CreditModalPage {
     //this.navCtrl.setRoot(TabsPage, {tabIndex: 1});
   }
   find(data: any = "SBC") {
+    this.appSound.play('buttonClick');
     this.viewCtrl.dismiss(data)
   }
 

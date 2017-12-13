@@ -68,7 +68,6 @@ export class AffiliatePage2 implements OnInit {
         loading.present().then(() => {
             this._affiliateServices.loadAffiliateData()
                 .subscribe(data => {
-                    
                     this.affilateModelBinding = data.response[0].get_affiliate_page_details.response.product_group[0];
                     this.getDateAndMonth(this.affilateModelBinding.countdown);
                     this.regular_from = this.affilateModelBinding.regular_from
@@ -144,14 +143,6 @@ export class AffiliatePage2 implements OnInit {
         })
       
     }
-
-   
-
-    // openPopUp() {
-    //     let modal = this.modalController.create(AffiliatePopup, {
-    //     })
-    //     modal.present();
-    // }
 
     calTime(date: any) {
    

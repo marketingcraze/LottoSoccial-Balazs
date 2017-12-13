@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events, LoadingController, AlertController } from 'ionic-angular';
-
+import { AppSoundProvider } from '../../../providers/app-sound/app-sound';
 import { AccountService } from '../../../services/account.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class EditProfileEmail {
 	    public navParams: NavParams,
 		public navCtrl: NavController, 
 		private srvAccount:AccountService,
+		public appSound: AppSoundProvider,
 	    private loadingCtrl:LoadingController,
 	    private alertCtrl: AlertController) {
 
@@ -35,6 +36,7 @@ export class EditProfileEmail {
 	}
 
 	submitEmail(emailForm){
+		this.appSound.play('buttonClick');
 		console.log('EditProfileEmail::submitEmail() ', this.email);
 
 		if (this.email.new_email != this.email.confirm_email) {
@@ -71,18 +73,21 @@ export class EditProfileEmail {
             
 
         }, err => {
-            loader.dismiss();
+			loader.dismiss();
+			this.appSound.play('Error');
             console.log("AccountPage::ionViewDidLoad", err);
         });
 	}
 
 	closeMe() {
+		this.appSound.play('buttonClick');
 		console.log('EditProfileEmail::dismiss() ');
   		let data = { 'foo': 'bar' };
 		this.events.publish('closeMe', data);
 	}
 
 	showPassword(input: any): any {
+		this.appSound.play('buttonClick');
 		input.type = input.type === 'password' ? 'text' : 'password';
 	}
 

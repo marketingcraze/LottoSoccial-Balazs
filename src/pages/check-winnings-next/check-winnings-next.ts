@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, Slides, Tabs, ModalController } from 'ionic-angular';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { PrizeSummaryWinPage } from '../prize-summary-win/prize-summary-win';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PrizeSummaryNoSyndicate } from '../Prize-summary-No-syndicate/Prize-summary-No-syndicate';
 import { PrizeSummaryEarlyCheck } from '../Prize-summary-Early-check/Prize-summary-Early-check';
 import { leaveSyndicate } from '../../services/syndicate_leave.service';
@@ -35,6 +36,7 @@ export class CheckWinningsNextPage {
     public navCtrl: NavController,
     private modalCtrl: ModalController,
     public navParams: NavParams,
+    public appSound: AppSoundProvider,
     public viewCtrl: ViewController,
     public sliderSrv: leaveSyndicate,
     public _syndService: SyndicateService,
@@ -70,7 +72,7 @@ export class CheckWinningsNextPage {
     this.loading = true
     this._syndService.checkWinnings()
       .subscribe((res) => {
-        res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Fri" },{ "product": "Lotto Sat" }, { "product": "Lotto Fri" }] }, { "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Wed" }] }] } } }] }
+        //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Fri" },{ "product": "Lotto Sat" }, { "product": "Lotto Fri" }] }, { "syndicate_name": "ACE0351", "syndicate_id": 2616015, "Product_Name": [{ "product": "Lotto Sat" }, { "product": "Lotto Wed" }] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ABIA0891", "syndicate_id": 2615959, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0899", "syndicate_id": 2615963, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ABIA0891", "syndicate_id": 2615959, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ABY011", "syndicate_id": 2615960, "Product_Name": ["hello Gunjan4", "hello Gunjan5", "hello Gunjan6"] }, { "syndicate_name": "ABY0784", "syndicate_id": 2615977, "Product_Name": ["hello Gunjan7", "hello Gunjan8", "hello Gunjan9"] }, { "syndicate_name": "ZULA0191", "syndicate_id": 2615962, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZULA0653", "syndicate_id": 2615961, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0812", "syndicate_id": 2615965, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0846", "syndicate_id": 2615952, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }, { "syndicate_name": "ZURI0899", "syndicate_id": 2615963, "Product_Name": ["hello Gunjan", "hello Gunjan2", "hello Gunjan3"] }] } } }] }
         //res = { "response": [{ "cliamable_syndicates": { "response": { "status": "SUCCESS", "message": "", "syndicate_group": [{ "syndicate_name": "ZURI0865", "syndicate_id": 2615376 }, { "syndicate_name": "ZURI0865", "syndicate_id": 2615376 }, { "syndicate_name": "ABIE0813", "syndicate_id": 2615377 }, { "syndicate_name": "ZURI0143", "syndicate_id": 2615378 }, { "syndicate_name": "ZURI0698", "syndicate_id": 2615379 }, { "syndicate_name": "ABY033", "syndicate_id": 2615380 }, { "syndicate_name": "ZULA092", "syndicate_id": 2615381 }, { "syndicate_name": "BRAD0442", "syndicate_id": 2615382 }, { "syndicate_name": "ZURI08", "syndicate_id": 2615383 }, { "syndicate_name": "ABIA0657", "syndicate_id": 2615384 }, { "syndicate_name": "ZURI0378", "syndicate_id": 2615385 }, { "syndicate_name": "ABIA0835", "syndicate_id": 2615386 }, { "syndicate_name": "ZULA0124", "syndicate_id": 2615388 }, { "syndicate_name": "ZULA0124", "syndicate_id": 2615388 }, { "syndicate_name": "ZURI0951", "syndicate_id": 2615389 }, { "syndicate_name": "ZURI0951", "syndicate_id": 2615389 }, { "syndicate_name": "ZULA038", "syndicate_id": 2615390 }, { "syndicate_name": "ZULA038", "syndicate_id": 2615390 }] } } }] }
@@ -90,7 +92,11 @@ export class CheckWinningsNextPage {
         if (!this.sList) {
           this.errorMsg = "There is no syndicate";
         }
-      })
+      }), (Err) => {
+        this.loading = false;
+        this.appSound.play('Error');
+        alert("Error occured")
+    }
   }
 
   animateSyndicate(durations: any) {
@@ -137,6 +143,7 @@ export class CheckWinningsNextPage {
 
   }
   openModal(pages: any) {
+    this.appSound.play('buttonClick');
     let modal = this.modalCtrl.create(pages)
     modal.present()
     modal.onDidDismiss((data: any[]) => {
@@ -146,6 +153,7 @@ export class CheckWinningsNextPage {
     })
   }
   close() {
+    this.appSound.play('buttonClick');
     this.viewCtrl.dismiss();
   }
 }

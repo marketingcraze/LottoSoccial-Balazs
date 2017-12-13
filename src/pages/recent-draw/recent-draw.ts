@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 /*
   Generated class for the RecentDraw page.
@@ -13,7 +14,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class RecentDrawPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {}
+  constructor(public navCtrl: NavController, public appSound: AppSoundProvider, public navParams: NavParams, public viewCtrl: ViewController) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecentDrawPage');
@@ -22,6 +23,7 @@ export class RecentDrawPage {
     this.viewCtrl.showBackButton(false);
   }
   close() {
+    this.appSound.play('buttonClick');
     this.navCtrl.pop();
   }
 

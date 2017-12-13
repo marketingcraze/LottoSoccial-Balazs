@@ -76,8 +76,6 @@ export class PlayGamePage implements OnInit {
   boosterInfo = ""
   recent_winner: any;
 
-
-
   constructor(
     private _modalController: ModalController,
     public platform: Platform,
@@ -103,7 +101,6 @@ export class PlayGamePage implements OnInit {
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
-    //console.log('ionViewDidLoad PlayGamePage');
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
@@ -129,6 +126,7 @@ export class PlayGamePage implements OnInit {
 
   }
   showBoosterModal() {
+    this.appSound.play('buttonClick');
     this.scrollContent = document.querySelector('.scroll-content');
     this.scrollContent.style['overflow'] = 'hidden';
     let myModal = this._modalController.create(GetBooster, { customer_award_log_id: this.gameInfo });
@@ -142,10 +140,12 @@ export class PlayGamePage implements OnInit {
   }
 
   close() {
+    this.appSound.play('buttonClick');
     this.navCtrl.pop();
   }
 
   openThankyouPage() {
+    this.appSound.play('buttonClick');
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
         const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbar=no');
@@ -165,14 +165,17 @@ export class PlayGamePage implements OnInit {
 
   }
   howToPlay() {
+    this.appSound.play('buttonClick');
     this.howToPlayModal = this._modalController.create(howtoplay, { gameInfo: this.gameInfo })
     this.howToPlayModal.present();
   }
   recentWinnerTipsmodal() {
+    this.appSound.play('buttonClick');
     this.howToPlayModal = this._modalController.create(recentWinnerTips, { gameInfo: this.gameInfo })
     this.howToPlayModal.present();
   }
   gameTermsModal() {
+    this.appSound.play('buttonClick');
     this.howToPlayModal = this._modalController.create(gameTerms, { gameTermsdata: this.gameInfo })
     this.howToPlayModal.present();
   }

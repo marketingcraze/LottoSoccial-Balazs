@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 import { ConfirmNumberPage } from '../confirm-number/confirm-number';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare var $: any;
 
 @Component({
@@ -16,7 +17,7 @@ export class ChooseNumberPage {
   syndId: any;
   clicked = false
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public appSound: AppSoundProvider, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
     //this.dataArr = JSON.parse(localStorage.getItem('cardSelected'));
     this.syndId = this.navParams.get('s_id')
     // this.syndId = localStorage.getItem('synd_id');
@@ -193,8 +194,12 @@ export class ChooseNumberPage {
       }
       console.log(this.dataArr)
 
-    })
+    }), (Err) => {
+      loader.dismiss();
+      this.appSound.play('Error');
+      alert("Error occured")
   }
+}
 
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);

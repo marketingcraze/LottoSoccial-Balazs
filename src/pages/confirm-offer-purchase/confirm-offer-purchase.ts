@@ -125,6 +125,7 @@ export class confirmOfferPurchasePage implements OnChanges{
             }, (err) => {
                 console.log("PopupConfirmPaymentComponent::checkCardExists() error", err);
                 this.confirmPaymentSuccess = false
+                this.appSound.play('Error');
                 this.params.setIsInternetAvailable(false)
             })
         }

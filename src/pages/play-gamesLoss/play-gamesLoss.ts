@@ -14,6 +14,7 @@ import { Observable } from "rxjs/Observable";
 import { CordovaInstance } from "@ionic-native/core";
 import { Subscription } from "rxjs/Rx";
 
+
 declare var $:any;
 declare var webengage: any;
 declare var cordova: any;
@@ -90,6 +91,7 @@ export class gameLoss{
   
     }
     showBoosterModal() {
+      this.appSound.play('buttonClick');
       let myModal = this._modalController.create(GetBooster, { customer_award_log_id: this.gameInfo });
       myModal.present();
     }
@@ -97,6 +99,7 @@ export class gameLoss{
       this.navCtrl.pop();
     }
     openThankyouPage() {
+      this.appSound.play('buttonClick');
       this.platform.ready().then(() => {
         if (typeof cordova !== 'undefined') {
           var options = {

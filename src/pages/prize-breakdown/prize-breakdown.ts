@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { fail } from 'assert';
 import { AccountPage } from '../account/account'
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
     selector: 'prize-breakdown',
@@ -10,7 +11,7 @@ import { AccountPage } from '../account/account'
 export class prizeBreakdownPage {
     title: string = "Prize Breakdown";
     up: boolean = true;
-    constructor(private navCtrl: NavController) {
+    constructor(private navCtrl: NavController, public appSound: AppSoundProvider, ) {
         debugger
         console.log("visited")
     }
@@ -25,6 +26,7 @@ export class prizeBreakdownPage {
         }
     }
     accountPage() {
+        this.appSound.play('buttonClick');
         this.navCtrl.push(AccountPage)
     }
 }

@@ -32,7 +32,6 @@ export class SyndicatesPage implements OnInit {
     }
 
     tab1child = MySyndicatePage;
-    // tab2child = CreateSyndicateTab;
     tab2child = CheckWinningsPage;
 
     indexSelected: number;
@@ -63,6 +62,7 @@ export class SyndicatesPage implements OnInit {
     }
 
     goHomePage(){
+        this.appSound.play('buttonClick');
         this.params.goHomePage();
     }
 

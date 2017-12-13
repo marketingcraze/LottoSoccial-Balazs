@@ -146,6 +146,7 @@ export class RedeemGamesPage implements OnInit {
 
   }
   confirmSelectionPage(index) {
+    this.appSound.play('buttonClick');
     this.scrollContent = document.querySelector('.scroll-content');
     this.scrollContent.style['overflow'] = 'hidden';
 
@@ -176,10 +177,12 @@ export class RedeemGamesPage implements OnInit {
 
   }
   mgmPage() {
+    this.appSound.play('buttonClick');
     let mgmModal = this.modalController.create(referFriend);
     mgmModal.present();
   }
   openShare() {
+    this.appSound.play('buttonClick');
     if (this.platform.is('cordova')) {
       this.share.share("demo message", "Demo subject", "", "Demo data").
         then(() => {
@@ -190,6 +193,7 @@ export class RedeemGamesPage implements OnInit {
     }
   }
   openGameBlog(index:any) {
+    this.appSound.play('buttonClick');
     let modal = this.modalController.create(gameBlog,{redeem_products_blog: this.redeem_products[index].blog_content});
     modal.present();
   }

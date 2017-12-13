@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events, LoadingController, AlertController } from 'ionic-angular';
-
+import { AppSoundProvider } from '../../../providers/app-sound/app-sound';
 import { AccountService } from '../../../services/account.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class EditProfilePassword {
 		public events:Events,
 		public navParams: NavParams,
 		private srvAccount:AccountService,
+		public appSound: AppSoundProvider,
 	    private loadingCtrl:LoadingController,
 	    private alertCtrl: AlertController) {
 
@@ -30,6 +31,7 @@ export class EditProfilePassword {
 	}
 
 	submitPassword(passwordForm){
+		this.appSound.play('buttonClick');
 		console.log('EditProfilePassword::submitEmail() ', this.password);
 
 		if (this.password.new_password != this.password.confirm_password) {
@@ -66,19 +68,22 @@ export class EditProfilePassword {
             
 
         }, err => {
-            loader.dismiss();
+			loader.dismiss();
+			this.appSound.play('Error');
             console.log("EditProfilePassword::submitPassword", err);
         });
 	}
 
 
 	closeMe() {
+		this.appSound.play('buttonClick');
 		console.log('EditProfilePassword::dismiss() ');
   		let data = { 'foo': 'bar' };
 		this.events.publish('closeMe', data);
 	}
 	
 	showPassword(input: any): any {
+		this.appSound.play('buttonClick');
 		input.type = input.type === 'password' ? 'text' : 'password';
 	}
 

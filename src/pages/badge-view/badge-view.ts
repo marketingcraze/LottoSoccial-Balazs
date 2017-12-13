@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { SyndicateService } from '../../providers/syndicate-service';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { badgesOs } from '../../services/badges.service';
 
 
@@ -27,12 +28,12 @@ export class BadgeViewPage {
     private toastCtrl: ToastController,
     private contacts: Contacts,
     public platform: Platform,
+    public appSound: AppSoundProvider,
     private _badgess: badgesOs,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
     private socialSharing: SocialSharing,
     public viewCtrl: ViewController) {
-    debugger;
     this.BadgeData = this.navParams.get("badge")
     if (this.BadgeData.steps) {
       this.steps = this.BadgeData.steps;
@@ -63,6 +64,7 @@ export class BadgeViewPage {
     return count;
   }
   collect(d: any) {
+    this.appSound.play('buttonClick');
     var loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -75,6 +77,8 @@ export class BadgeViewPage {
             alert("Points collected successfully")
           }
           else {
+            this.appSound.play('Error');
+            alert("Error occured")
             loader.dismiss()
           }
         }

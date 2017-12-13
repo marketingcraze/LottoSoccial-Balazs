@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams,Platform } from 'ionic-angular';
 
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare var webengage:any;
 
@@ -25,7 +26,8 @@ export class NewSyndicatePage implements OnInit {
 
 
 	constructor(public navCtrl: NavController,
-		 public platform:Platform, 
+     public platform:Platform, 
+     public appSound: AppSoundProvider,
 		public navParams: NavParams) {
 
 	}
@@ -36,6 +38,7 @@ export class NewSyndicatePage implements OnInit {
 
 
 	goPage(page:number){
+    this.appSound.play('buttonClick');
   		this.navCtrl.push(AddSyndicatePage, {tab: page});
   	}
   	

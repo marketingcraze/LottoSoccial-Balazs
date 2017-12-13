@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, LoadingController, Platform } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { ReferFriend } from '../../services/referfriend.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
     selector: 'refer-friend',
@@ -16,7 +17,7 @@ export class referFriend {
     shareImage: any;
     shareUrl: any;
 
-    constructor(private share: SocialSharing, private platform: Platform, private loadingCtrl: LoadingController, private referService: ReferFriend) {
+    constructor(private share: SocialSharing, public appSound: AppSoundProvider, private platform: Platform, private loadingCtrl: LoadingController, private referService: ReferFriend) {
 
     }
     // facebookShare() {
@@ -73,6 +74,7 @@ export class referFriend {
     //     }
     // }
     shareNow() {
+        this.appSound.play('buttonClick');
         if (this.platform.is('cordova')) {
             this.share.share("Hello this is message" , "This is subject","","https://nima.lottosocial.com/").then(() => {
 

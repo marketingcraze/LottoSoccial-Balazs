@@ -297,12 +297,16 @@ export class HomePage implements OnInit {
         this.srvHome.getHomeMessages().take(1).subscribe((data) => {
             console.log("onOpenRightMenu success ", data);
             this.zone.run(() => {
-                debugger
+                this.appSound.play('inbox');
                 var items: ItemSliding
                 this.messageLoading = false;
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;
                 this.params.setUnreadCount(this.homeMessage.notification.length);
+                setTimeout(() => {
+                    document.getElementById("delete0").style.transform = "translate3d(-140px, 0px, 0px)"
+                }, 1000);
+
             });
 
         }, (err) => {
@@ -346,15 +350,9 @@ export class HomePage implements OnInit {
         }
     }
 
-
-    // markAsUnread() {
-
-    //     console.log("markAsUnread()");
-    // }
     markAsRead(cardId: any, index) {
-        debugger
+        this.appSound.play('buttonClick');
         var btn = document.getElementById('btnRead' + index).style.backgroundColor = 'gray'
-        debugger
         this.srvHome.markAsRead(cardId).subscribe((data) => {
             if (data) {
                 if (data.response[0].mark_home_inbox_message.response.status == 'SUCCESS') {
@@ -366,6 +364,7 @@ export class HomePage implements OnInit {
     }
 
     deleteNotification(cardId: any, index) {
+        this.appSound.play('buttonClick');
         this.srvHome.deleteMsg(cardId).subscribe((data) => {
             if (data) {
                 if (data.response[0].delete_home_inbox_message.response.status == 'SUCCESS') {
@@ -373,17 +372,22 @@ export class HomePage implements OnInit {
                     document.getElementById("delete" + index).style.display = 'none';
                 }
             }
-        })
+        }), (Err) => {
+            this.appSound.play('Error');
+            alert("Error occured")
+        }
     }
 
     saveItem() {
         console.log("saveItem()");
     }
     alert(i: any) {
+        this.appSound.play('buttonClick');
         let inboxPopup = this._modalCtrl.create(inboxModal, { CurrentMessage: this.messages[i] });
         inboxPopup.present();
     }
     mgmPage() {
+        this.appSound.play('buttonClick');
         let mgmModal = this._modalCtrl.create(referFriend);
         mgmModal.present();
     }

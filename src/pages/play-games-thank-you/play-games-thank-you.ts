@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Platform, NavParams } from 'ionic-angular';
 import { GameThankYou } from '../game-Thank-You/game-Thank-You';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare var webengage: any;
 
@@ -32,7 +33,7 @@ export class PlayGamesThankYou implements OnInit {
     }, 3000);  //3s
 
   }
-  constructor(private nav: NavController, public platform: Platform, private navParams: NavParams) {
+  constructor(private nav: NavController,public appSound: AppSoundProvider, public platform: Platform, private navParams: NavParams) {
 
     this.customerAwardId = navParams.get('customer_awardLog_id');
     this.game_level = navParams.get('gameLevel');
@@ -41,7 +42,7 @@ export class PlayGamesThankYou implements OnInit {
   }
 
   navToThankyou2page() {
-
+    this.appSound.play('buttonClick');
     this.nav.push(GameThankYou, { customerAwardLogId: this.customerAwardId, GameIdThanku: this.GameId, game_name: this.gameName });
   }
 

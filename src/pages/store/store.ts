@@ -267,7 +267,7 @@ export class StorePage {
 
                 } else if (data[i].get_home_message) {
                     this.homeMessage = data[i].get_home_message.response;
-                    debugger
+
                     this.unreadCount = this.homeMessage.notification.length;
                     this.params.setUnreadCount(this.unreadCount);
                 } else if (data[i].get_home_events) {
@@ -325,7 +325,6 @@ export class StorePage {
         })
     }
     onPopUp() {
-        debugger
         let modal = this.modalCtrlr.create(OverlayPage);
         modal.present();
     }
@@ -387,7 +386,6 @@ export class StorePage {
     }
 
     showPaymentOptions(offer) {
-
         this.appSound.play('buttonClick');
         if (!this.customerToken) {
             this.goPaymentWebview(offer);
@@ -424,7 +422,6 @@ export class StorePage {
         }
     }
     goPaymentWebviewHomeoffer(offer: any, prosub_id) {
-
         let opt: string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
         str += '&customer_id=' + CommonService.session.customer_id + '&customer_token='
@@ -435,7 +432,6 @@ export class StorePage {
     }
 
     goPaymentWebview(offer: any) {
-
         let opt: string = "toolbarposition=top";
         let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
         str += '&customer_id=' + CommonService.session.customer_id + '&customer_token='
@@ -465,13 +461,13 @@ export class StorePage {
     }
 
     mgmPageOpen() {
-
+        this.appSound.play('buttonClick');
         let modal = this.modalCtrlr.create(referFriend);
         modal.present()
     }
 
     gameTargetLink(target) {
-
+        this.appSound.play('buttonClick');
         this.appSound.play('buttonClick');
         var parts = target.split('/');
         var gameId = parts[1].slice(8);
@@ -491,26 +487,7 @@ export class StorePage {
     }
 
     showWhatsOn() {
-        // console.log("showWhatsOn: " + this.slideInUp);
-        // this.appSound.play('buttonClick');
 
-        // if (this.slideInUp) {
-
-        //     let timeoutId = setTimeout(() => {
-        //         this.whatsOn = !this.whatsOn;
-        //         clearTimeout(timeoutId);
-        //     }, 500);
-        //     this.slideInUp = !this.slideInUp;
-
-        // } else {
-
-        //     this.whatsOn = !this.whatsOn;
-
-        //     let timeoutId = setTimeout(() => {
-        //         this.slideInUp = !this.slideInUp;
-        //         clearTimeout(timeoutId);
-        //     },100);
-        // }
         if (this.slideInUp) {
             let timeoutId = setTimeout(() => {
                 this.whatsOn = !this.whatsOn;
@@ -556,6 +533,7 @@ export class StorePage {
     }
 
     viewAllOffers() {
+        this.appSound.play('buttonClick');
         this.params.goTab(4);
     }
 
@@ -593,6 +571,7 @@ export class StorePage {
     }
 
     goHomePage() {
+        this.appSound.play('buttonClick');
         this.params.goHomePage();
     }
 
@@ -699,6 +678,7 @@ export class StorePage {
 
 
     tip() {
+        this.appSound.play('buttonClick');
         console.log("clicked1")
         if (this.tip11 == true) {
 
@@ -718,6 +698,7 @@ export class StorePage {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     tip2() {
+        this.appSound.play('buttonClick');
         console.log("clicked2")
         if (this.tip22 == true) {
             this.tip22 = false
@@ -732,6 +713,7 @@ export class StorePage {
 
     //pull up code here
     footerExpanded() {
+        this.appSound.play('buttonClick');
         this.showDown = true;
         var a = this.pullUp;
         this.count = 1;
@@ -739,6 +721,7 @@ export class StorePage {
     }
 
     footerCollapsed() {
+        this.appSound.play('buttonClick');
         this.showDown = false;
         var a = this.pullUp
         console.log('Footer collapsed!');
@@ -761,7 +744,6 @@ export class StorePage {
     }
     getMaximumHeight() {
         return window.innerHeight / 1.1;
-
     }
 
     //countDown timer
@@ -825,13 +807,13 @@ export class StorePage {
         this.tip22 = false;
     }
     openModal(eventData: any) {
-        debugger;
+     
         let modal = this.modalCtrlr.create(eventBlog, { event: eventData })
         modal.present();
     }
 
     buyCreditOffer(offerId: any, prosub_id: any, buttonText: any) {
-
+        this.appSound.play('buttonClick');
         console.log("StorePage::showPaymentOptions()", offerId);
         // let offer = {total_cost:4.99} ;
 
@@ -884,6 +866,7 @@ export class StorePage {
         }
     }
     showModalForcreditoffer() {
+        this.appSound.play('buttonClick');
         let homeCard: boolean = true;
         let resultModal = this.modalCtrlr.create(offerBuyResultPage, { syndicateName: this.buyoffer, status: this.offerStatus, homeCard });
         resultModal.present();
@@ -895,15 +878,13 @@ export class StorePage {
         })
     }
     mgmOpenPage() {
-
+        this.appSound.play('buttonClick');
         this.navCtrl.push(referFriend);
 
     }
 
     countSlider(ev: any) {
-
         this.appSound.play("cardFlip")
-
         let direction = ev.direction;
         if (direction == 2 && this.counts < this.carouselSlide.length()) {
             if (this.count == this.carouselSlide.length() - 1) {
@@ -922,19 +903,19 @@ export class StorePage {
 
     }
     redirectToOfferPage() {
+        this.appSound.play('buttonClick');
         var tabs: Tabs = this.navCtrl.parent;
         tabs.select(4);
     }
     openNotificationMenu() {
-        debugger
+        this.appSound.play('menuClick');
         var menu1 = this.menuCtrl.getMenus();
         menu1[0].open();
     }
     inboxBellCount() {
-        debugger
         this.unreadCount = this.params.unreadCount;
         this.params.events.subscribe('unread-count', (count) => {
-            debugger
+
             console.log('CusHeaderComponent::', count);
             this.unreadCount = count;
             console.log("unread count is ----------------->>>>>>>>>>>>>>>>> ", this.unreadCount)

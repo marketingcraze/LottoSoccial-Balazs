@@ -45,8 +45,9 @@
     </ion-card>
 
     <ion-card class="options your-achievements">
+        <ion-spinner *ngIf="!badgesLoaded" class="center" name="bubbles"></ion-spinner>
         <h3 text-center>YOUR ACHIEVEMENTS</h3>
-        <ion-slides slidesPerView=6 spaceBetween="13">
+        <ion-slides *ngIf="badgesLoaded" slidesPerView=6 spaceBetween="13">
                 <ion-slide>
                     <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()" />
                     <p text-center>Get more!</p>
