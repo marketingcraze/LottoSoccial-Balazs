@@ -86,6 +86,7 @@ export class your_vouchers {
   }
   voucherCodeClaimButton() {
     this.appSound.play('buttonClick');
+   // document.getElementById('img').className ='red1';
     console.log("Voucher entered code is " + this.voucher_code)
     if (this.voucher_code == "") {
       let alert = this.alertCtrl.create({

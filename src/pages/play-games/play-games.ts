@@ -162,7 +162,7 @@ export class PlayGamePage implements OnInit {
         });
       }
     });
-
+    
   }
   howToPlay() {
     this.appSound.play('buttonClick');

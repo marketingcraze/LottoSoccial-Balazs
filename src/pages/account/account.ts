@@ -7,6 +7,7 @@ import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
 import { ActionSheetController } from 'ionic-angular'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
@@ -61,6 +62,7 @@ export class AccountPage {
 
 
 	private homeMessage: any = {};
+	options1: NativeTransitionOptions
 	private accountDetails: any = {
 		//bonus_credit: 0.00,
 		message: "",
@@ -111,7 +113,8 @@ export class AccountPage {
 		private file: File,
 		private http: Http,
 		public commonSrv: CommonService,
-		private actionSheet: ActionSheet) {
+		private actionSheet: ActionSheet,
+		private nativePageTransitions: NativePageTransitions ) {
 
 		console.log('AccountPage');
 
@@ -124,6 +127,8 @@ export class AccountPage {
 		})
 
 
+		this.loadAccountData()
+		
 	}
 	ionViewWillEnter() {
 
@@ -132,7 +137,9 @@ export class AccountPage {
 		console.log('ionViewDidLoad AccountPage');
 		this.loadAccountData()
 	}
-
+	ionViewWillLeave() {
+	
+		}
 	scrollHandlerAccount(event) {
 		var scrollDiv = document.getElementById('accountContent').clientHeight;
 		var innerDiv = document.getElementById('innerAccount').scrollHeight;
@@ -312,7 +319,27 @@ export class AccountPage {
 	showUpdateDetailsModal() {
 		this.appSound.play('buttonClick');
 		console.log("AccountPage::showUpdateDetailsModal");
+		if (this.platform.is('cordova')) {
+		this.options1 = {
+			direction: 'right',
+			duration: 1000,
+			slowdownfactor: 0,
+			slidePixels: 0,
+			iosdelay: 100,
+			androiddelay: 150,
+			fixedPixelsTop: 0,
+			fixedPixelsBottom: 0
+		   };
+		
+		   this.nativePageTransitions.slide(this.options1)
+		   .then()
+		   .catch();
+		this.nativePageTransitions.slide(this.options1);
 		this.navCtrl.push(EditProfilePage);
+		}
+		else{
+			this.navCtrl.push(EditProfilePage);
+		}
 		// load account data
 		// let profileModal = this.modalCtrl.create(EditProfilePage, {});
 		// profileModal.present();

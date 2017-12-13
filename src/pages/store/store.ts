@@ -188,6 +188,8 @@ export class StorePage {
             localStorage.setItem('isInstall', "moreThanFirst");
             this.onPopUp();
         }
+      //  this.onPopUp();
+        
         this.waveShowing = true
 
         storage.get('firstTimeLoad').then((firstTimeLoad: any) => {

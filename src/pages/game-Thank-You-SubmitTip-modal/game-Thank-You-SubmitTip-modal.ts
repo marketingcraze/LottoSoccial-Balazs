@@ -3,7 +3,7 @@ import { NavController, NavParams, ViewController, LoadingController, AlertContr
 import { PlayGame } from '../../services/playgame.service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { PlayGamePage } from '../play-games/play-games';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 @Component({
     selector: 'gameThanku-submitTip',
     templateUrl: 'game-Thank-You-SubmitTip-modal.html'
@@ -15,7 +15,9 @@ export class GameThankyouSubmittip {
         private navParms: NavParams,
         public appSound: AppSoundProvider,
         private viewctrl: ViewController,
-        private loadingctrl:LoadingController
+        private loadingctrl:LoadingController,
+        public platform:Platform,
+        public share:SocialSharing,
     ) {
         this.currentGameId = this.navParms.get('current_gameid')
     }
@@ -28,5 +30,17 @@ export class GameThankyouSubmittip {
         this.loading.present();
         this.nvctrl.push(PlayGamePage, { game: this.currentGameId });
         this.loading.dismiss();
+  
+    
     }
+    shareNow() {
+        if (this.platform.is('cordova')) {
+            this.share.share("Hello this is message" , "This is subject","","https://nima.lottosocial.com/").then(() => {
+    
+            }).catch((data) => {
+                alert(data);
+            })
+        }
+    }
+
 }

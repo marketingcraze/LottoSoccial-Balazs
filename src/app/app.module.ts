@@ -139,6 +139,7 @@ import { Badge } from '@ionic-native/badge'
 import { AppVersion } from '@ionic-native/app-version';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 // pipes
 import { MyFilterPipe } from '../pipes/contact-selected'
@@ -399,7 +400,7 @@ import { prizeBreakdownPage } from '../pages/prize-breakdown/prize-breakdown';
         AgreementPage,
         SyndicateCreatedModalPage
     ],
-    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, ActionSheet,
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, ActionSheet,NativePageTransitions,
         AnimationService, DatabaseService, paymentService, CommonService, Badge, UniqueDeviceID, AuthService, HomeService, AccountService, Params, AffiliateServices,
         SQLite, ImagePicker, Transfer, File, InAppBrowser, OneSignal, SyndicateService, VoucherService,
         Network, SimpleTimer, OfferService, Market, NativeAudio, AppSoundProvider, productOffer, PlayGame, ReferFriend, SocialSharing, Device, Contacts, forkOffersSyndicate, winnerTips, badgesOs, AppVersion, leaveSyndicate]
