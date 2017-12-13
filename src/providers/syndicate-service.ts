@@ -595,6 +595,33 @@ export class SyndicateService {
 
     }
 
+    DeclineInvite(pid:any, mid:any) {
+        let action = "https://nima.lottosocial.com/wp-json/mobi/v2/privatesyndicate/";
+        let headopt = SyndicateService.getHeader();
+        let data = {
+            "request": [{
+                "session_ID": CommonService.sessionId,
+                "action": "click_to_decline",
+                "website": "Lotto Social",
+                "website_id": "27",
+                "source_site": "mobi.lottosocial.com",
+                "page_id": "12",
+                "screen_id": "12.3",
+                "module_name": "join_private_syndicate",
+                "customer_id": CommonService.session.customer_id,
+                "private_syndicate_id": pid,
+                "invite_member_id": mid,
+                "join_status": "declined"
+              }]
+          }
+          return this.http.post(action, data, { headers:headopt })
+          .map(res => res.json())
+          .map((res) => {
+              return res;
+      })
+          
+    }
+
     profanity(name:any) {
         let action = "https://nima.lottosocial.com/wp-json/mobi/v2/profanity_validate/";
         let data = {

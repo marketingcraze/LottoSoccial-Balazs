@@ -75,7 +75,7 @@
           <p *ngFor="let t of dataArr; let li=index">
            <span *ngIf="li != 0">+</span>{{t.linecount}} line(s) in {{t.name}}
             <span *ngFor="let d of t.days; let di = index;">
-              <span *ngIf="t.dayactive[di]"><span *ngIf="di == t.days.length-1 && di>0">and </span>{{d}}</span>
+              <span *ngIf="t.dayactive[di]">{{d}}</span>
             </span>
 
            <!-- <span *ngIf="t.dayactive[0]">{{t.days[0]}}</span>
