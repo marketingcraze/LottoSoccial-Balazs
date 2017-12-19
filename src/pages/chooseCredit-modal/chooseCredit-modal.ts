@@ -10,7 +10,8 @@ declare const $: any;
 export class CreditModalPage {
   deviceHeight: any;
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public appSound: AppSoundProvider, public viewCtrl: ViewController, public app: App) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+      public appSound: AppSoundProvider, public viewCtrl: ViewController, public app: App) { }
 
   ionViewDidLoad() {
     this.deviceHeight = window.screen.height;

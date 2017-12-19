@@ -861,6 +861,7 @@ export class StorePage {
                     }
                 }, (err) => {
                     loader.dismiss()
+                    this.appSound.play('Error');
                     console.log("StorePage::showPaymentOptions() error", err);
                 });
             })
