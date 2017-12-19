@@ -67,11 +67,13 @@ export class EditProfileDetails {
 				loader.dismiss();
 				if (success) {
 					console.log("EditProfileDetails::submitDetails", success);
-					this.toastCtrl.create({
+					let toast = this.toastCtrl.create({
 						message: 'Profile was updated successfully',
 						duration: 3000,
 						position: 'top'
 					});
+					toast.present();
+
 				}
 
 
@@ -80,6 +82,7 @@ export class EditProfileDetails {
 				this.appSound.play('Error');
 				console.log("AccountPage::ionViewDidLoad", err);
 			});
+
 	}
 
 

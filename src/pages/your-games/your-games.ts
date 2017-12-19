@@ -1,5 +1,5 @@
 import { Component, NgModule, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
-import { App, NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
+import { App, NavController, NavParams, LoadingController, Tabs, ToastController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GetBooster } from '../play-games-get-booster/play-games-get-booster';
@@ -33,6 +33,7 @@ export class YourGamesPage implements OnInit {
     public navParams: NavParams,
     public authSrv: AuthService,
     public platform: Platform,
+    public toastCtrl: ToastController,
     public appSound: AppSoundProvider,
     private loadingCtrl: LoadingController,
     private iab: InAppBrowser,
@@ -145,6 +146,18 @@ export class YourGamesPage implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad YourGamesPage', this.navParams.data);
+  }
+  moreDescription(game_detail) {
+    debugger
+    let toast = this.toastCtrl.create({
+      message: game_detail,
+      showCloseButton: true,
+      closeButtonText: 'Ok',
+      position: 'middle',
+      cssClass: 'toaster'
+    });
+    toast.present();
+
   }
 
 }

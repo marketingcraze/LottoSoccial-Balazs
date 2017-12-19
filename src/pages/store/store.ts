@@ -917,7 +917,6 @@ export class StorePage {
     inboxBellCount() {
         this.unreadCount = this.params.unreadCount;
         this.params.events.subscribe('unread-count', (count) => {
-
             console.log('CusHeaderComponent::', count);
             this.unreadCount = count;
             console.log("unread count is ----------------->>>>>>>>>>>>>>>>> ", this.unreadCount)

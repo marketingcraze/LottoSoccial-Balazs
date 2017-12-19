@@ -121,6 +121,7 @@ export class AccountPage {
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 		this._badgesOs.getBadgesData().subscribe(badgeData => {
 			if (badgeData) {
+				debugger
 				this.badgesForYou = badgeData.response[0].badges
 				this.badgesLoaded = true
 			}
@@ -130,9 +131,7 @@ export class AccountPage {
 		this.loadAccountData()
 		
 	}
-	ionViewWillEnter() {
-
-	}
+	
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad AccountPage');
 		this.loadAccountData()
@@ -167,14 +166,6 @@ export class AccountPage {
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present();
-
-		// load data
-		// this._badgesOs.getBadgesData().subscribe(badgeData => {
-		// 	if (badgeData) {
-		// 		this.badgesForYou = badgeData.response[0].badges
-		// 		this.badgesLoaded = true
-		// 	}
-		// })
 		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
 			.then(data => {
 				loader.dismiss();

@@ -14,8 +14,8 @@
         <ion-spinner class="center" name="bubbles"></ion-spinner>
       </ion-item>
 
-      <ion-item-sliding id="delete{{i}}" *ngFor="let message of messages let i=index">
-        <ion-item style="background-color: #333333;border-right:10px solid #C10A09" text-wrap (click)="alert(i)">
+      <ion-item-sliding #slidingItem id="delete{{i}}" *ngFor="let message of messages let i=index">
+        <ion-item #item style="background-color: #333333;border-right:10px solid #C10A09" text-wrap (click)="alert(i)">
           <span item-left class="">
             <img *ngIf="message.icon_url" src="{{message.icon_url}}" alt="" width="24" height="24" />
             <img *ngIf="!message.icon_url" src="assets/icon/notification_ico.svg" alt="" width="16" height="16" />

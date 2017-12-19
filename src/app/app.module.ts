@@ -161,6 +161,8 @@ import { AffiliatePage2 } from '../pages/affiliate2/affiliate2'
 import { } from '../pages'
 import { SessionCheckOutPage } from '../pages/session-check-out/session-check-out';
 import { prizeBreakdownPage } from '../pages/prize-breakdown/prize-breakdown';
+import { Pipe } from '@angular/core/src/metadata/directives';
+import { filterBadgeEarned } from '../pipes/filterEarnedBadge';
 
 
 @NgModule({
@@ -264,6 +266,7 @@ import { prizeBreakdownPage } from '../pages/prize-breakdown/prize-breakdown';
         lotsPipe,
         FilterPipe,
         FilterBadge,
+        filterBadgeEarned,
         KeysPipe,
         DayPipe,
         ValuePipe,

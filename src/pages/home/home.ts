@@ -1,7 +1,7 @@
 import { Component, ViewChild, NgZone, OnInit } from '@angular/core';
 import {
     Platform, MenuController, Nav, NavController, LoadingController,
-    AlertController, ModalController, ItemSliding
+    AlertController, ModalController, ItemSliding, Item
 } from 'ionic-angular';
 import { Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -46,6 +46,8 @@ export interface PageInterface {
 })
 export class HomePage implements OnInit {
     @ViewChild('btn-unread') btnRead: any;
+    @ViewChild('slidingItem') slideItm: ItemSliding;
+    @ViewChild('item') Itm: Item;
     versionNumber: Promise<any>;
     accountDetails: any;
 
@@ -272,7 +274,6 @@ export class HomePage implements OnInit {
             });
         }
     }
-
     goPage(page) {
         this.menu.close();
 
@@ -304,7 +305,10 @@ export class HomePage implements OnInit {
                 this.messages = this.homeMessage.notification;
                 this.params.setUnreadCount(this.homeMessage.notification.length);
                 setTimeout(() => {
-                    document.getElementById("delete0").style.transform = "translate3d(-140px, 0px, 0px)"
+                    this.slideItm.setElementClass("active-sliding", true);
+                    this.slideItm.setElementClass("active-slide", true);
+                    this.slideItm.setElementClass("active-options-right", true);
+                    this.Itm.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
                 }, 1000);
 
             });
@@ -312,6 +316,16 @@ export class HomePage implements OnInit {
         }, (err) => {
             console.log("onOpenRightMenu error ", err);
         })
+    }
+
+
+    open(itemSlide: ItemSliding, item: Item) {
+        debugger
+        // reproduce the slide on the click
+        itemSlide.setElementClass("active-sliding", true);
+        itemSlide.setElementClass("active-slide", true);
+        itemSlide.setElementClass("active-options-right", true);
+        item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
     }
 
 
