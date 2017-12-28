@@ -4,7 +4,7 @@ import {
     Slides, LoadingController, AlertController, ModalController, Loading, Tabs, MenuController
 } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { Badge } from '@ionic-native/badge';
 
 import { JoinSyndicatePage } from '../join-syndicate/join-syndicate';
 import { AddSyndicatePage } from '../add-syndicate/add-syndicate';
@@ -172,6 +172,7 @@ export class StorePage {
         public navParams: NavParams,
         private menuCtrl: MenuController,
         private storage: Storage,
+        public badge:Badge,
         public srvOffer: OfferService,
         private iab: InAppBrowser,
         public commonSrv: CommonService,
@@ -920,6 +921,7 @@ export class StorePage {
         this.params.events.subscribe('unread-count', (count) => {
             console.log('CusHeaderComponent::', count);
             this.unreadCount = count;
+            this.badge.set(this.unreadCount);
             console.log("unread count is ----------------->>>>>>>>>>>>>>>>> ", this.unreadCount)
 
         });

@@ -273,11 +273,15 @@ body {
 	    	width: 1.4em;
 	    	height: 1.4em;
 	    	bottom: 1px;
-	    	right: 3px
+				right: 3px;
+				height: 18px;
+				width: 18px;
 	    }
 	}
 	.profile-picture{
 		background: #e3e3e3;
+		height: 72px;
+		width: 72px;
 	}
 	ion-slide{
 		width: 15%!important;
@@ -358,11 +362,15 @@ body {
 			margin: 0 8px 0 0;
 		}
 		.update-img{
-			width: 12px;
+			width: 16px;
+			height: 16px;
 			max-width: 14px;
 			display: inherit;
 		    margin: 0 4px;
 		}
+	}
+	.spanClass{
+		padding: 12px;
 	}
 
 	.links{

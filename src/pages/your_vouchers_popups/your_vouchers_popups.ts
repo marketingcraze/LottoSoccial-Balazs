@@ -10,7 +10,8 @@ declare var $: any;
   templateUrl: 'your_vouchers_popups.html'
 })
 export class your_vouchers_popups {
-  show: boolean=false;
+  reasonCode: any;
+  show: boolean = false;
   VoucherCode: any = "";
   VoucherCodeDescription: any = "";
 
@@ -22,7 +23,7 @@ export class your_vouchers_popups {
   sucessState: any = "";
   gift_status: any = "";
   contentHeight: any = "";
-  shButton:any= 0
+  shButton: any = 3
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -50,13 +51,13 @@ export class your_vouchers_popups {
       data => {
         this.middleData = data.response[0].voucher_validation.response.Voucher_description;
         this.gift_status = data.response[0].voucher_validation.response.gift_status;
-
+        this.reasonCode = data.response[0].voucher_validation.response.reason_code;
+        debugger
         this.lottoMiddleJson = this.middleData.split("#");
-        if(data.response[0].voucher_validation.response.status == "1")
-        {
+        if (data.response[0].voucher_validation.response.status == "1") {
           this.shButton = 1
         }
-        else{
+        else {
           this.shButton = 0
         }
         debugger

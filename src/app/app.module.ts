@@ -163,6 +163,7 @@ import { SessionCheckOutPage } from '../pages/session-check-out/session-check-ou
 import { prizeBreakdownPage } from '../pages/prize-breakdown/prize-breakdown';
 import { Pipe } from '@angular/core/src/metadata/directives';
 import { filterBadgeEarned } from '../pipes/filterEarnedBadge';
+import { productOfferNullfilter } from '../pipes/productOfferNullfilter';
 
 
 @NgModule({
@@ -267,6 +268,7 @@ import { filterBadgeEarned } from '../pipes/filterEarnedBadge';
         FilterPipe,
         FilterBadge,
         filterBadgeEarned,
+        productOfferNullfilter,
         KeysPipe,
         DayPipe,
         ValuePipe,

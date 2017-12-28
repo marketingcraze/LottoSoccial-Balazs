@@ -6,16 +6,12 @@ import { Content, Tabs } from 'ionic-angular'
 import { OffersPage } from '../offers/offers'
 import { GamesPage } from '../games/games';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
-/*
-  Generated class for the CheckWinnings page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-check-winnings',
   templateUrl: 'check-winnings.html'
 })
+
 export class CheckWinningsPage {
   nav: NavController;
   @ViewChild(Content) content: Content;
@@ -23,6 +19,7 @@ export class CheckWinningsPage {
   loader: any;
   downShowing = 0;
   down_arrow_showing = 0;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -45,8 +42,7 @@ export class CheckWinningsPage {
     console.log('ionViewDidLoad CheckWinningsPage');
     this.loadWinnings();
   }
-  ionViewWillEnter() {
-  }
+  //go to checkWinningsNext page (green one)
   next() {
     this.appSound.play('buttonClick');
     let modal = this.modalCtrl.create(CheckWinningsNextPage)
@@ -71,7 +67,7 @@ export class CheckWinningsPage {
       }
     })
   }
-
+  //Loading the all winnings
   loadWinnings() {
     this.loader.present();
     this._syndService.loadWinnings()
@@ -95,11 +91,10 @@ export class CheckWinningsPage {
         alert("Error occured")
       }
   }
+  //Scroll handle
   scrollHandlerSyndicate(event) {
-
     var innerDiv = document.getElementById('innerWinnings').scrollHeight;
     var scrollDiv = document.getElementById('winningContent').clientHeight;
-
     var valu = scrollDiv + this.content.scrollTop
     console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
     if (valu > innerDiv) {
@@ -113,10 +108,8 @@ export class CheckWinningsPage {
       this.cdRef.detectChanges();
     }
   }
+  //delay
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-
-
 }

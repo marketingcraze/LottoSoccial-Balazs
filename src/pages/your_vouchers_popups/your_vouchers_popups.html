@@ -1,5 +1,3 @@
-
-
 <ion-content class="modal-page" text-center>
 
   <ion-list *ngIf="value=='0'" ion-fixed style="width: 100%">
@@ -8,9 +6,12 @@
       <div>
         <table style="width: 100%">
           <tr>
-            <td class="imgleftIcon"> <img src='assets/img/voucher_ico.png' style="width: 100%"> </td>
+            <td class="imgleftIcon">
+              <img src='assets/img/voucher_ico.png' style="width: 100%"> </td>
             <td class="imgleftIconTD">
-              <p class="voucherCode"><b>{{VoucherCode}}</b></p>
+              <p class="voucherCode">
+                <b>{{VoucherCode}}</b>
+              </p>
               <p class="voucherCodeDesc">{{VoucherCodeDescription}}</p>
             </td>
           </tr>
@@ -20,54 +21,59 @@
     <ion-item no-lines text-wrap>
       <div style="margin-top: -4px">
         <ul style="font-size: 14px" *ngFor='let lst of lottoMiddleJson;let i=index;'>
-          <li  *ngIf="lst" class="middleDescription">{{lottoMiddleJson[i]}}</li>
-         <li  *ngIf="!lst" style="font-size: 15px;"> Invalid Voucher</li>
+          <li *ngIf="lst" class="middleDescription">{{lottoMiddleJson[i]}}</li>
+          <li *ngIf="!lst && reasonCode=='invalid_voucher'" style="font-size: 15px;"> Invalid Voucher</li>
+          <li *ngIf="!lst && !reasonCode=='invalid_voucher'" style="font-size: 15px;">No Description found</li>
         </ul>
       </div>
     </ion-item>
     <ion-item text-center no-lines style="border-radius: 0px 0px 10px 10px">
       <div style="text-align: center">
-        <input *ngIf="shButton==1" type="button" value="CLAIM NOW" class="claimButton" (click) = "done()" >
-        <input *ngIf="shButton==0" type="button" value="TRY AGAIN" class="claimButton" (click) = "dismissPopUp()" >
+        <input *ngIf="shButton==1" type="button" value="CLAIM NOW" class="claimButton" (click)="done()">
+        <input *ngIf="shButton==0" type="button" value="TRY AGAIN" class="claimButton" (click)="dismissPopUp()">
+        <input *ngIf="shButton==3" type="button" value="Please Wait.." class="claimButton" (click)="dismissPopUp()">
       </div>
-        <div class="dismissLinkDiv" >
-          <p class="dismissLink" (click)="dismissPopUp()">Maybe Later </p>
-        </div>
-      </ion-item>
+      <div class="dismissLinkDiv">  
+        <p class="dismissLink" (click)="dismissPopUp()">Maybe Later </p>
+      </div>
+    </ion-item>
 
   </ion-list>
   <ion-list class="buycard" *ngIf="value=='1'" ion-fixed>
-    
-        <button ion-button icon-only class="successIcon">
-                  <ion-icon style="width:70px; "><img src="assets/icon/check_icon.png"> </ion-icon>
-                </button>
-        <ion-row text-center>
-            <ion-col col-12 class="messagecolor">
-                Voucher Claimed Successfully
-            </ion-col>
-        </ion-row>
-        <ion-row style="padding-top: 5%; height: 45px">
-            <ion-col col-12>
-                <button ion-button outline round class="moveToVoucher" color="light" (click)="moveToVouchers()">BACK TO VOUCHERS</button>
-            </ion-col>
-        </ion-row>
-    
 
-</ion-list>
-<div *ngIf="value=='2'" class="errorcard">
-  <button ion-button icon-only class="failedBackground">
-            <ion-icon style="width:50px; "><img src="assets/icon/failed_icon.png"> </ion-icon>
-          </button>
-  <ion-row text-center>
+    <button ion-button icon-only class="successIcon">
+      <ion-icon style="width:70px; ">
+        <img src="assets/icon/check_icon.png"> </ion-icon>
+    </button>
+    <ion-row text-center>
       <ion-col col-12 class="messagecolor">
-        Voucher Claimed Failed <br> please try again
+        Voucher Claimed Successfully
       </ion-col>
-  </ion-row>
-  <ion-row style="margin-top: 20px">
+    </ion-row>
+    <ion-row style="padding-top: 5%; height: 45px">
       <ion-col col-12>
-          <button class="failedMoveToVoucherButton" ion-button outline round color="light" (click)="moveToVouchers()">TRY AGAIN</button>
+        <button ion-button outline round class="moveToVoucher" color="light" (click)="moveToVouchers()">BACK TO VOUCHERS</button>
       </ion-col>
-  </ion-row>
-</div>
+    </ion-row>
+
+
+  </ion-list>
+  <div *ngIf="value=='2'" class="errorcard">
+    <button ion-button icon-only class="failedBackground">
+      <ion-icon style="width:50px; ">
+        <img src="assets/icon/failed_icon.png"> </ion-icon>
+    </button>
+    <ion-row text-center>
+      <ion-col col-12 class="messagecolor">
+        Voucher Claimed Failed
+        <br> please try again
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 20px">
+      <ion-col col-12>
+        <button class="failedMoveToVoucherButton" ion-button outline round color="light" (click)="moveToVouchers()">TRY AGAIN</button>
+      </ion-col>
+    </ion-row>
+  </div>
 
 </ion-content>

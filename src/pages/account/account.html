@@ -7,14 +7,13 @@
         <ion-card>
             <ion-item class="line">
                 <ion-avatar class="account-avatar" item-center item-left>
-                    <img class="profile-picture" src="{{image_Data}}" width="72" height="72" alt="Profile" />
-                    <img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"
-                    />
+                    <img class="profile-picture" src="{{image_Data}}" alt="Profile" />
+                    <img class="update-icon" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()" />
                 </ion-avatar>
                 <h2>{{(!accountDetails.nick_name || accountDetails.nick_name=='null') ? "Add nickname": accountDetails.nick_name
                     }}
                     <span (click)="updateNickName()">
-                        <img class="update-img" item-left width="16" height="16" src="assets/icon/edit-ico.svg" />
+                        <img class="update-img" item-left src="assets/icon/edit-ico.svg" />
                     </span>
                 </h2>
                 <p>{{accountDetails.msn}}</p>
@@ -34,8 +33,8 @@
                     <p text-center>Get more!</p>
                 </ion-slide>
                 <ion-slide *ngFor="let badge of badgesForYou | filterBadgeEarned:1 ">
-                    <img src="{{badge?.thumbnail}}"  alt="No Img" (click)="goToBadgesView(badge)">
-                    <p  text-center>{{badge?.post_title}}</p>
+                    <img src="{{badge?.thumbnail}}" alt="No Img" (click)="goToBadgesView(badge)">
+                    <p text-center>{{badge?.post_title}}</p>
                 </ion-slide>
             </ion-slides>
         </ion-card>
@@ -140,13 +139,13 @@
         <ion-card class="links">
             <div text-center>
                 <a (click)="openWebView('about/')">
-                    <span style="padding: 12px"> About </span>
+                    <span class="spanClass"> About </span>
                 </a>
                 <a (click)="openWebView('terms-and-conditions/')">
-                    <span style="padding: 12px"> Terms of service </span>
+                    <span class="spanClass"> Terms of service </span>
                 </a>
                 <a (click)="openWebView('privacy-policy-for-lottery-syndicate-members/')">
-                    <span style="padding: 12px"> Privacy policy </span>
+                    <span class="spanClass"> Privacy policy </span>
                 </a>
             </div>
         </ion-card>
