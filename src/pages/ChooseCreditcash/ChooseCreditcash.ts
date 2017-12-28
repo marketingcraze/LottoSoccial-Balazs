@@ -5,18 +5,13 @@ import { CreditModalPage } from '../chooseCredit-modal/chooseCredit-modal';
 import { SyndicateService } from '../../providers/syndicate-service';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare const $: any;
-/*
-  Generated class for the Leave2 page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-ChooseCreditcash',
   templateUrl: 'ChooseCreditcash.html'
 })
-export class ChooseCreditcashPage {
 
+export class ChooseCreditcashPage {
   deviceHeight: any;
   mless = 'less';
   mlBool = true
@@ -91,7 +86,7 @@ export class ChooseCreditcashPage {
           this.loader.present();
           this.appSound.play('Error');
           alert("Error occured")
-      }
+        }
 
     } else {
       this.chooseCredit();

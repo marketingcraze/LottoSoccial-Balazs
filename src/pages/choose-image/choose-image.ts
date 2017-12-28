@@ -11,7 +11,6 @@ declare var window: any;
 import { Observable, ObservableInput } from 'rxjs/Observable';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
@@ -33,17 +32,13 @@ export class ChooseImagePage {
     private file: File,
     private http: Http,
     public appSound: AppSoundProvider,
-    private loadingCtrl: LoadingController
-  ) {
-
-
-
-  }
+    private loadingCtrl: LoadingController) { }
 
   ionViewDidLoad() {
     this.getCovers();
     console.log('ionViewDidLoad ChooseImagePage');
   }
+
   chooseImage() {
     console.log('image selected');
   }
@@ -53,7 +48,6 @@ export class ChooseImagePage {
     this.appSound.play('buttonClick');
     this.navCtrl.push(CreateSyndicatePage, { 'image': image });
   }
-
 
   accessGallery() {
     let cameraOptions = {
@@ -96,6 +90,7 @@ export class ChooseImagePage {
       }, 5000)
     });
   }
+
   private error;
   private loader: any;
   private uploadPhoto(imageFileUri: any): void {
@@ -104,7 +99,6 @@ export class ChooseImagePage {
       content: 'Uploading...'
     });
     this.loader.present();
-
     this.file.resolveLocalFilesystemUrl(imageFileUri)
       .then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
       .catch(err => console.log(err));
@@ -126,7 +120,6 @@ export class ChooseImagePage {
   postData(blob: any, fileName: string) {
     console.log('postdata')
     let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=syndicate';
-
     var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
     let myHeaders: Headers = new Headers();
     myHeaders.set('Authorization',
@@ -139,7 +132,6 @@ export class ChooseImagePage {
       'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
     );
     // myHeaders.append('Content-type', "image/"+extension);
-
     let options = {
       fileKey: fileName,
       fileName: fileName,
@@ -149,11 +141,9 @@ export class ChooseImagePage {
     console.log('inside service');
     console.log(blob);
     console.log(fileName);
-
     return this.http.post(server, blob, options)
       .catch(err => this.handleError(err))
       .map(response => response.json())
-      // .finally(() => console.log('inside finaly'))
       .subscribe((ok) => {
         this.loader.dismiss();
         console.log("uploadPhoto:");
@@ -164,10 +154,6 @@ export class ChooseImagePage {
         this.appSound.play('Error');
         alert("Error occured")
       }
-    // 	.map(res => res.json())
-    //   .map((res) => {
-    //     return res;
-    //  })
   }
 
   private handleError(error: Response | any) {
@@ -181,5 +167,4 @@ export class ChooseImagePage {
     }
     return Observable.throw(errMsg);
   }
-
 }

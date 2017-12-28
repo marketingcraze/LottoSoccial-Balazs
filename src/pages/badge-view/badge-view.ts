@@ -10,8 +10,6 @@ import 'rxjs/add/operator/map';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { badgesOs } from '../../services/badges.service';
 
-
-
 @Component({
   selector: 'page-badge-view',
   templateUrl: 'badge-view.html'
@@ -48,12 +46,10 @@ export class BadgeViewPage {
       }
   }
 
-  ionViewDidLoad() {
-
-  }
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
+  //complete steps
   countCompletedStep(steps) {
     var count = 0;
     for (let i = 0; i < steps.length; i++) {
@@ -63,6 +59,7 @@ export class BadgeViewPage {
     }
     return count;
   }
+  //collect points API
   collect(d: any) {
     this.appSound.play('buttonClick');
     var loader = this.loadingCtrl.create({
@@ -84,5 +81,14 @@ export class BadgeViewPage {
         }
       })
     })
+  }
+  //share wit friends 
+  nativeShare() {
+    this.appSound.play('buttonClick');
+    if (this.platform.is('cordova')) {
+      this.socialSharing.share("Hello this is message", "This is subject", "", "https://nima.lottosocial.com/").then(() => {
+      }).catch((data) => {
+      })
+    }
   }
 }

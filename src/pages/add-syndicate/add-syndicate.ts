@@ -15,18 +15,11 @@ export class AddSyndicatePage {
     tab2Root: any = CreateSyndicateTab;
 
     selectedTabId = 0;
-
     constructor(public navCtrl: NavController, 
         public navParams: NavParams) {
-
         this.selectedTabId = navParams.get('tab');
     }
-
-
     ionViewDidLoad() {
         console.log('ionViewDidLoad AddSyndicatePage');
-        
     }
-
-
 }

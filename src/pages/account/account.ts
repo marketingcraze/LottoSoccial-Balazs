@@ -8,7 +8,6 @@ import { ActionSheetController } from 'ionic-angular'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
@@ -17,8 +16,6 @@ import { AccountService } from '../../services/account.service';
 import { CommonService } from '../../services/common.service';
 
 import { badgesOs } from '../../services/badges.service';
-
-
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { BadgesPage } from '../badges/badges';
@@ -29,7 +26,6 @@ import { BadgeViewPage } from '../badge-view/badge-view';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { Camera } from 'ionic-native'
 import { File, FileEntry } from '@ionic-native/file';
-
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
@@ -41,30 +37,26 @@ declare var webengage: any;
 	templateUrl: 'account.html'
 })
 export class AccountPage {
+	@ViewChild(Content) content: Content;
+
 	badgesLoaded: boolean = false;
 	bonusCredit: number;
 	rewardPoints: number;
 	badgesForYou: any;
 	waveShowingAccount: boolean = true;
-	@ViewChild(Content) content: Content;
 	private cache: CacheController;
-
 	private profileProgress: number = 50;
 	private refreshCache: boolean = false;
 	private unreadCount: number = 0;
 	downShowing = 0;
 	image_Data: any;
 	down_arrow_showing = 0
-
 	winning_balanceAPI;
 	reward_pointsAPI;
 	bonus_creditAPI;
-
-
 	private homeMessage: any = {};
 	options1: NativeTransitionOptions
 	private accountDetails: any = {
-		//bonus_credit: 0.00,
 		message: "",
 		msn: "",
 		nick_name: null,
@@ -75,22 +67,13 @@ export class AccountPage {
 	};
 	buttonLabels = [];
 	options: ActionSheetOptions = {
-
 		subtitle: 'Are you sure you want to log out?',
 		buttonLabels: this.buttonLabels,
 		addCancelButtonWithLabel: 'Cancel',
 		addDestructiveButtonWithLabel: 'Log Out',
 		androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
 		destructiveButtonLast: true
-
 	};
-
-	//   subtitle: 'Are you sure you want to log out?',
-	//   buttonLabels: this.buttonLabels,
-	//   addCancelButtonWithLabel: 'Cancel',
-	//   addDestructiveButtonWithLabel: 'Delete',
-	//   androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
-	//   destructiveButtonLast: true
 	constructor(
 		public app: App,
 		private params: Params,
@@ -114,10 +97,8 @@ export class AccountPage {
 		private http: Http,
 		public commonSrv: CommonService,
 		private actionSheet: ActionSheet,
-		private nativePageTransitions: NativePageTransitions ) {
-
+		private nativePageTransitions: NativePageTransitions) {
 		console.log('AccountPage');
-
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 		this._badgesOs.getBadgesData().subscribe(badgeData => {
 			if (badgeData) {
@@ -126,29 +107,20 @@ export class AccountPage {
 				this.badgesLoaded = true
 			}
 		})
-
-
 		this.loadAccountData()
-		
 	}
-	
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad AccountPage');
 		this.loadAccountData()
 	}
-	ionViewWillLeave() {
-	
-		}
 	scrollHandlerAccount(event) {
 		var scrollDiv = document.getElementById('accountContent').clientHeight;
 		var innerDiv = document.getElementById('innerAccount').scrollHeight;
-
 		var valu = scrollDiv + this.content.scrollTop
 		console.log("data is ", valu, innerDiv, scrollDiv)
 		if (valu > innerDiv) {
 			this.downShowing = 1
 			this.cdRef.detectChanges();
-
 		}
 		else {
 			this.downShowing = 0
@@ -159,8 +131,8 @@ export class AccountPage {
 	delay(ms: number) {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
+	//load accounts page data
 	loadAccountData() {
-		// show loading screen
 		let loader = this.loadingCtrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -203,7 +175,6 @@ export class AccountPage {
 								else {
 									this.image_Data = this.accountDetails.profile_image
 								}
-
 							}
 						}
 						else {
@@ -219,11 +190,6 @@ export class AccountPage {
 					}
 					this.content.enableScrollListener();
 				}
-
-
-				console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
-
-				// 
 				var a = localStorage.getItem("arrow_accountP")
 				if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
 					this.down_arrow_showing = 1
@@ -239,9 +205,8 @@ export class AccountPage {
 				this.params.setIsInternetAvailable(false);
 				console.log("AccountPage::ionViewDidLoad", err);
 			});
-
-
 	}
+	//Update nickname alert ctrl
 	updateNickName() {
 		this.appSound.play('buttonClick');
 		let alert = this.alertCtrl.create({
@@ -267,11 +232,10 @@ export class AccountPage {
 		});
 		alert.present();
 	}
-
+	//logout and removing all session to not show old data in new id
 	logout() {
 		console.log("AccountPage::logout");
 		this.appSound.play('buttonClick');
-
 		this.cache.clearDatabaseOnLogout();
 		localStorage.removeItem("imageUrl")
 		this.storage.remove('session_ID');
@@ -284,18 +248,12 @@ export class AccountPage {
 		localStorage.removeItem("redeemP")
 		localStorage.removeItem("yourOffersP")
 		localStorage.removeItem("yourGamesP")
-
-
 		this.platform.ready().then((readySource) => {
-
 			if (this.platform.is('cordova')) {
 				webengage.engage();
 				webengage.user.logout();
 			}
-
 		});
-
-
 		this.storage.remove('session')
 			.then(
 			data => {
@@ -306,53 +264,50 @@ export class AccountPage {
 			error => console.log(error)
 			);
 	}
-
+	//Update details modal
 	showUpdateDetailsModal() {
 		this.appSound.play('buttonClick');
 		console.log("AccountPage::showUpdateDetailsModal");
 		if (this.platform.is('cordova')) {
-		this.options1 = {
-			direction: 'right',
-			duration: 1000,
-			slowdownfactor: 0,
-			slidePixels: 0,
-			iosdelay: 100,
-			androiddelay: 150,
-			fixedPixelsTop: 0,
-			fixedPixelsBottom: 0
-		   };
-		
-		   this.nativePageTransitions.slide(this.options1)
-		   .then()
-		   .catch();
-		this.nativePageTransitions.slide(this.options1);
-		this.navCtrl.push(EditProfilePage);
-		}
-		else{
+			this.options1 = {
+				direction: 'right',
+				duration: 1000,
+				slowdownfactor: 0,
+				slidePixels: 0,
+				iosdelay: 100,
+				androiddelay: 150,
+				fixedPixelsTop: 0,
+				fixedPixelsBottom: 0
+			};
+
+			this.nativePageTransitions.slide(this.options1)
+				.then()
+				.catch();
+			this.nativePageTransitions.slide(this.options1);
 			this.navCtrl.push(EditProfilePage);
 		}
-		// load account data
-		// let profileModal = this.modalCtrl.create(EditProfilePage, {});
-		// profileModal.present();
+		else {
+			this.navCtrl.push(EditProfilePage);
+		}
 	}
-
+	//open Webview
 	openUrl(url: string) {
 		this.appSound.play('buttonClick');
 		let opt: string = "toolbarposition=top";
 		this.iab.create(url, "_blank", opt);
 	}
-
+	//go to home page
 	goHomePage() {
 		this.appSound.play('buttonClick');
 		this.params.goHomePage();
 	}
-
+	//open webview
 	openWebView(str: string) {
 		this.appSound.play('buttonClick');
 		let opt: string = "toolbarposition=top";
 		this.iab.create(CommonService.sitename + str, 'blank', opt);
 	}
-
+	//Update nick name
 	updateNickname(nick) {
 		console.log('AccountPage::updateNickname() ', nick);
 		this.appSound.play('buttonClick');
@@ -361,21 +316,13 @@ export class AccountPage {
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present();
-
-		// load data
 		this.srvAccount.updateNick(nick).take(1)
 			.subscribe((success: any) => {
 				loader.dismiss();
-
-				console.log("AccountPage::updateNickname", success);
 				if (success) {
 					let res = success.response[0].update_nick_name.response;
-
 					this.refreshCache = true;
 					this.loadAccountData();
-
-					console.log("AccountPage::updateNickname", res);
-
 					let alert = this.alertCtrl.create({
 						title: res.status,
 						subTitle: res.message,
@@ -383,23 +330,24 @@ export class AccountPage {
 					});
 					alert.present();
 				}
-
 			}, err => {
 				loader.dismiss();
 				this.appSound.play('Error');
-				// show offline
 				this.params.setIsInternetAvailable(false);
 				console.log("AccountPage::updateNickname", err);
 			});
 	}
+	//Go to badges
 	moveToBadgeOs() {
 		this.appSound.play('buttonClick');
 		this.navCtrl.push(BadgesPage)
 	}
+	//Go to offers
 	openCreditModule() {
 		this.appSound.play('buttonClick');
 		this.navCtrl.push(OffersPage, { "app": "outside" });
 	}
+	//Go to get games 
 	openGetGamesModule() {
 		this.appSound.play('buttonClick');
 		this.navCtrl.push(GamesPage, { "app": "outside" });
@@ -417,7 +365,6 @@ export class AccountPage {
 		Camera.getPicture(cameraOptions).then((fileUri) => {
 			this.image_Data = fileUri
 			localStorage.setItem("imageUrl", fileUri)
-			//this.uploadImage()
 			this.uploadPhoto(fileUri)
 
 		}),
@@ -427,13 +374,12 @@ export class AccountPage {
 			}
 
 	}
+	//Loading balance
 	lastCalling() {
 		if (localStorage.getItem("imageUrl")) {
 			this.image_Data = localStorage.getItem("imageUrl")
 		}
-
 		var dat = localStorage.getItem("imageUrl")
-
 		this.commonSrv.getCreditPoints().subscribe(data => {
 			console.log("at last data is ", data)
 			if (data) {
@@ -479,7 +425,7 @@ export class AccountPage {
 		);
 
 	}
-
+	//#region Profile Upload
 	selectProfileImage() {
 		this.appSound.play('buttonClick');
 		this.openGallery()
@@ -496,10 +442,10 @@ export class AccountPage {
 
 		this.file.resolveLocalFilesystemUrl(imageFileUri)
 			.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
-			.catch((err) =>{
+			.catch((err) => {
 				this.appSound.play('Error');
 				this.loading.dismiss()
-			} );
+			});
 	}
 
 	private readFile(file: any) {
@@ -539,7 +485,6 @@ export class AccountPage {
 		this.http.post(server, blob, options)
 			.catch(err => this.handleError(err))
 			.map(response => response.json())
-			// .finally(() => console.log('inside finaly'))
 			.subscribe((ok) => {
 				debugger
 				this.loading.dismiss();
@@ -553,16 +498,18 @@ export class AccountPage {
 
 	}
 	private customerId: string = "";
-
 	uploadAPI_Image(image_url: any) {
-		debugger
 		this.srvAccount.saveImageUrl(image_url).subscribe(data => {
 			if (data) {
-				// alert(data.response)
+				alert("Uploaded");
 			}
 
 		})
 	}
+
+	//#endregion profile pic upload
+
+	//Error handling
 	private handleError(error: Response | any) {
 		this.loading.dismiss();
 		this.appSound.play('Error');
@@ -577,10 +524,12 @@ export class AccountPage {
 		this.error = errMsg;
 		return Observable.throw(errMsg);
 	}
+	//Move to badges
 	goToBadgesView(badge: any) {
 		this.appSound.play('buttonClick');
 		this.navCtrl.push(BadgeViewPage, { badge: badge });
 	}
+	//Action sheet
 	presentActionSheet() {
 		if (this.platform.is('cordova')) {
 			this.actionSheet.show(this.options).then((buttonIndex: number) => {

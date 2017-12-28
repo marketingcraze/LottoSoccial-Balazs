@@ -57,7 +57,7 @@
   <ion-content>
     <ion-item text-center>
       <div class="UpperPart">
-        <span style="color: #E6D011;font-size: medium">{{accountDetails?.nick_name}}</span>
+        <span style="color: #E6D011;font-size: medium">{{accountDetails?.nick_name?accountDetails?.nick_name:'Nick name'}}</span>
         <ion-avatar class="account-avatarSlide">
           <img class="profile-pictureSlide" src="{{image_Data?image_Data:'assets/icon/user.svg'}}" width="72" height="72" alt="Profile"
           />

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NavController, LoadingController, ViewController, ModalController } from 'ionic-angular';
 import { AffiliateServices } from '../../services/affliate.service';
 import { Observable } from "rxjs/Rx";
@@ -11,21 +11,11 @@ import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service'
     templateUrl: 'affiliate2.html'
 })
 export class AffiliatePage2 implements OnInit {
-  
-    userCards: any;
-    @ViewChild(Content) content:Content;
+    @ViewChild(Content) content: Content;
     @ViewChild("confirmPayment") confirmPayment;
-    tabbarElement:any;
-    constructor(
-        private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
-        private viewctrl: ViewController,
-        private getCardsSrv:forkOffersSyndicate,
-        private navCtrl:NavController,
-        private modalController: ModalController,
-        public cdRef: ChangeDetectorRef
-    ) {
-        this.tabbarElement = document.querySelector('.tabbar');
-    }
+
+    userCards: any;
+    tabbarElement: any;
     affilateModel: any = [];
     affilateModelBinding: any = [];
     day: any = [];
@@ -33,7 +23,6 @@ export class AffiliatePage2 implements OnInit {
     mins: any = [];
     sec: any = [];
     TimeLeft: string = ""
-    //NewTimeLeft: any;
     result: any = [];
     tDate: any = []
     sliceData: any = []
@@ -48,21 +37,30 @@ export class AffiliatePage2 implements OnInit {
     bonus_to: any;
     regular_duplicate: any;
     bonus_duplicate: any;
-    dummy:any;
+    dummy: any;
     downShowing = 0;
-    scrollContent:any;
+    scrollContent: any;
     down_arrow_showing = 0;
 
-    ngOnInit() {
-      
-        this.getAffiliateData();
+    constructor(
+        private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
+        private viewctrl: ViewController,
+        private getCardsSrv: forkOffersSyndicate,
+        private navCtrl: NavController,
+        private modalController: ModalController,
+        public cdRef: ChangeDetectorRef
+    ) {
+        this.tabbarElement = document.querySelector('.tabbar');
     }
 
+    ngOnInit() {
+        this.getAffiliateData();
+    }
+    //get Affiliate data
     getAffiliateData() {
-      
         let loading = this.loadingCtrl.create({
             spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+            content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         console.log('ionViewDidLoad PlayGamePage');
         loading.present().then(() => {
@@ -77,20 +75,20 @@ export class AffiliatePage2 implements OnInit {
                     this.regular_duplicate = this.affilateModelBinding.regular_duplicate;
                     this.bonus_duplicate = this.affilateModelBinding.bonus_duplicate;
                     Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.affilateModelBinding.countdown));
-                    this.dummy = (String(this.affilateModelBinding.offer_jackpot).substr(0,4))
+                    this.dummy = (String(this.affilateModelBinding.offer_jackpot).substr(0, 4))
                     var a = localStorage.getItem("affiliate2P")
-                    if(localStorage.getItem("affiliate2P") == undefined || localStorage.getItem("affiliate2P") == null)
-                    {
+                    if (localStorage.getItem("affiliate2P") == undefined || localStorage.getItem("affiliate2P") == null) {
                         this.down_arrow_showing = 1
                     }
-                    else{
+                    else {
                         this.down_arrow_showing = 0
                     }
-                    localStorage.setItem("affiliate2P","1")
+                    localStorage.setItem("affiliate2P", "1")
                     loading.dismiss();
                 })
         })
     }
+
     ionViewWillEnter() {
         this.tabbarElement.style.display = 'none';
         this.delay(4000);
@@ -99,31 +97,29 @@ export class AffiliatePage2 implements OnInit {
     ionViewWillLeave() {
         this.tabbarElement.style.display = 'flex';
     }
-    scrollHandlerAffiliate(event){
-        
-          var innerDiv = document.getElementById('innerAffiliate').scrollHeight;
-          var scrollDiv = document.getElementById('affiliateContent').clientHeight;
-          
-          var valu = scrollDiv + this.content.scrollTop
-          console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
-          if (valu >= innerDiv - 60) 
-          {
+    //Scroll handling
+    scrollHandlerAffiliate(event) {
+        var innerDiv = document.getElementById('innerAffiliate').scrollHeight;
+        var scrollDiv = document.getElementById('affiliateContent').clientHeight;
+        var valu = scrollDiv + this.content.scrollTop
+        console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
+        if (valu >= innerDiv - 60) {
             console.log("botom")
             this.downShowing = 1
             this.cdRef.detectChanges();
         }
-        else
-        {
-          this.downShowing = 0
-          this.down_arrow_showing = 0
-          this.cdRef.detectChanges();
+        else {
+            this.downShowing = 0
+            this.down_arrow_showing = 0
+            this.cdRef.detectChanges();
         }
-        }
-        delay(ms: number) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-      }
+    }
+    //delay 
+    delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    //#region Timinf
     getDateAndMonth(date: any) {
-       
         var dates = new Date(date);
         var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var months = ["January ", "February", "March", "April", "May", "June ", "July", "August ", "September", "October", "November", "December",];
@@ -132,20 +128,18 @@ export class AffiliatePage2 implements OnInit {
         this.luckyDipDate = dates.getDate();
     }
     dismissPopUp(data) {
-        this.scrollContent=document.querySelector('.scroll-content');
-		this.scrollContent.style['overflow']='hidden';
-        let modal=this.modalController.create(AffiliatePopup);
+        this.scrollContent = document.querySelector('.scroll-content');
+        this.scrollContent.style['overflow'] = 'hidden';
+        let modal = this.modalController.create(AffiliatePopup);
         modal.present();
         modal.onDidDismiss((data: any[]) => {
-            this.scrollContent=document.querySelector('.scroll-content');
-            this.scrollContent.style['overflow']='none';
-             this.viewctrl.dismiss();
+            this.scrollContent = document.querySelector('.scroll-content');
+            this.scrollContent.style['overflow'] = 'none';
+            this.viewctrl.dismiss();
         })
-      
     }
 
     calTime(date: any) {
-   
         let now = new Date().getTime();
         if (!date) {
             return this.result;
@@ -153,13 +147,11 @@ export class AffiliatePage2 implements OnInit {
         if (typeof (date) === "string") {
             date = new Date(date);
         }
-
         let delta = Math.floor((now - date.getTime()) / 1000);
         if (delta < 0) {
             this.result = "-"
             delta = Math.abs(delta);
         }
-
         let dayCal = Math.floor(delta / 86400);
         delta %= 86400
         let hourCal = Math.floor(delta / 3600);
@@ -167,12 +159,12 @@ export class AffiliatePage2 implements OnInit {
         let minuteCal = Math.floor(delta / 60);
         delta %= 60
         let secondsCal = Math.floor(delta)
-
         this.day = (dayCal <= 9) ? '0' + dayCal : dayCal;
         this.hrs = (hourCal <= 9) ? '0' + hourCal : hourCal;
         this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
+    //#endregion timimg
     openPurchage() {
         // let loader = this.loadingCtrl.create({
         //     spinner: 'hide',

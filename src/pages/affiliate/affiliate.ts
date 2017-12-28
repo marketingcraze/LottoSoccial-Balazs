@@ -13,24 +13,12 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
     templateUrl: 'affiliate.html'
 })
 export class AffiliatePage implements OnInit {
-    userCards: any;
-    tabbarElement: any;
     @ViewChild("confirmPayment") confirmPayment;
     @ViewChild(Content) content: Content;
 
+    userCards: any;
+    tabbarElement: any;
     tabBarElement: any;
-    constructor(
-        private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
-        private viewctrl: ViewController,
-        private navCtrl: NavController,
-        private getCardsSrv: forkOffersSyndicate,
-        private offerService: OfferService,
-        public appSound: AppSoundProvider,
-        private modalController: ModalController,
-        public cdRef: ChangeDetectorRef
-    ) {
-        this.tabbarElement = document.querySelector('.tabbar');
-    }
     affilateModel: any = [];
     affilateModelBinding: any = [];
     day: any = [];
@@ -39,7 +27,6 @@ export class AffiliatePage implements OnInit {
     down_arrow_showing = 0;
     sec: any = [];
     TimeLeft: string = ""
-    //NewTimeLeft: any;
     result: any = [];
     tDate: any = []
     sliceData: any = []
@@ -58,11 +45,24 @@ export class AffiliatePage implements OnInit {
     downShowing = 0;
     scrollContent: any;
 
+    constructor(
+        private _affiliateServices: AffiliateServices, private loadingCtrl: LoadingController,
+        private viewctrl: ViewController,
+        private navCtrl: NavController,
+        private getCardsSrv: forkOffersSyndicate,
+        private offerService: OfferService,
+        public appSound: AppSoundProvider,
+        private modalController: ModalController,
+        public cdRef: ChangeDetectorRef
+    ) {
+        this.tabbarElement = document.querySelector('.tabbar');
+    }
+
     ngOnInit() {
         this.getRanMethod();
         this.getAffiliateData();
     }
-
+    //Get affiliate page data
     getAffiliateData() {
         let loading = this.loadingCtrl.create({
             spinner: 'hide',
@@ -94,19 +94,20 @@ export class AffiliatePage implements OnInit {
                 })
         })
     }
+
     ionViewWillEnter() {
         this.tabbarElement.style.display = 'none';
         this.delay(4000);
         this.content.enableScrollListener();
     }
+
     ionViewWillLeave() {
         this.tabbarElement.style.display = 'flex';
     }
+    //Scrolling handler
     scrollHandlerAffiliate(event) {
-
         var innerDiv = document.getElementById('innerAffiliate').scrollHeight;
         var scrollDiv = document.getElementById('affiliateContent').clientHeight;
-
         var valu = scrollDiv + this.content.scrollTop
         if (valu > innerDiv - 60) {
             this.downShowing = 1
@@ -121,8 +122,8 @@ export class AffiliatePage implements OnInit {
     delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+    //Get date and month
     getDateAndMonth(date: any) {
-
         var dates = new Date(date);
         var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var months = ["January ", "February", "March", "April", "May", "June ", "July", "August ", "September", "October", "November", "December",];
@@ -130,6 +131,7 @@ export class AffiliatePage implements OnInit {
         this.luckyDipMonth = months[dates.getMonth()];
         this.luckyDipDate = dates.getDate();
     }
+    //dismiss popup - here we are enabling smooth scrooling
     dismissPopUp(data) {
         this.appSound.play('buttonClick');
         this.scrollContent = document.querySelector('.scroll-content');
@@ -142,10 +144,9 @@ export class AffiliatePage implements OnInit {
             this.scrollContent.style['overflow'] = 'none';
             this.viewctrl.dismiss();
         })
-
     }
+    //Random number on befalf of range
     genrateRanNumberUpdate(luckyDips: any, index: any) {
-
         let j = 0;
         let d: any = [];
         d[j++] = this.getRandomInt(this.regular_from, this.regular_to);
@@ -161,9 +162,8 @@ export class AffiliatePage implements OnInit {
     genrateRanNumber(index: any) {
         this.getRanMethod();
     }
-
+    //logic for getting random numbers
     getRanMethod() {
-
         for (let i = 0; i < 10; i++) {
             let j = 0;
             let d: any = [];
@@ -181,9 +181,8 @@ export class AffiliatePage implements OnInit {
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
+    //Timer 
     calTime(date: any) {
-
         let now = new Date().getTime();
         if (!date) {
             return this.result;
@@ -191,13 +190,11 @@ export class AffiliatePage implements OnInit {
         if (typeof (date) === "string") {
             date = new Date(date);
         }
-
         let delta = Math.floor((now - date.getTime()) / 1000);
         if (delta < 0) {
             this.result = "-"
             delta = Math.abs(delta);
         }
-
         let dayCal = Math.floor(delta / 86400);
         delta %= 86400
         let hourCal = Math.floor(delta / 3600);
@@ -205,12 +202,12 @@ export class AffiliatePage implements OnInit {
         let minuteCal = Math.floor(delta / 60);
         delta %= 60
         let secondsCal = Math.floor(delta)
-
         this.day = (dayCal <= 9) ? '0' + dayCal : dayCal;
         this.hrs = (hourCal <= 9) ? '0' + hourCal : hourCal;
         this.mins = (minuteCal <= 9) ? '0' + minuteCal : minuteCal;
         this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
     }
+    //Open popup for purchage
     openPurchage(offerId: any = "") {
         this.appSound.play('buttonClick');
         this.offerService.getExistingPaymilCardsDetails2().subscribe((data) => {
@@ -224,13 +221,7 @@ export class AffiliatePage implements OnInit {
             if (token_exists > 0) {
                 localStorage.removeItem("buttonText");
                 localStorage.setItem("buttonText", "buttonText");
-
                 this.userCards = data.response;
-
-                console.log("StorePage::showPaymentOptions() success", this.userCards);
-
-
-                console.log("StorePage::showPaymentOptions() success", this.userCards);
                 this.confirmPayment.togglePopup()
             } else {
             }
@@ -238,7 +229,5 @@ export class AffiliatePage implements OnInit {
             this.appSound.play('Error');
             console.log("StorePage::showPaymentOptions() error", err);
         });
-
     }
-
 }
