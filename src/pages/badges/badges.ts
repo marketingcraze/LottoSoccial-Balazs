@@ -40,13 +40,11 @@ export class BadgesPage {
         public cdRef: ChangeDetectorRef) { }
 
 
-    ionViewDidLoad() {
+    ionViewWillEnter() {
         console.log('inside badges');
         this.getbadges();
     }
-    ionViewWillEnter() {
-        // this.viewCtrl.showBackButton(false);
-    }
+
     close() {
         this.appSound.play('buttonClick');
         this.navCtrl.popAll;
@@ -56,30 +54,33 @@ export class BadgesPage {
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
-        this.loader.present();
-        this._badgess.getBadgesData()
-            .subscribe((res) => {
-                this.loader.dismiss();
-                debugger
-                this.data = res.response[0].badges;
-                this.addPrecentage(this.data);
-                this.highestBadge = this.findHighestPrecentage(this.data)
-                console.log(this.data);
-                var a = localStorage.getItem("badgeP")
-                if (localStorage.getItem("badgeP") == undefined || localStorage.getItem("badgeP") == null) {
-                    this.down_arrow_showing = 1
-                }
-                else {
-                    this.down_arrow_showing = 0
-                }
-                localStorage.setItem("badgeP", "1")
-                this.content.enableScrollListener();
+        this.loader.present().then(() => {
+            this._badgess.getBadgesData()
+                .subscribe((res) => {
+                    this.loader.dismiss();
+                    debugger
+                    this.data = res.response[0].badges;
+                    this.addPrecentage(this.data);
+                    this.highestBadge = this.findHighestPrecentage(this.data)
+                    console.log(this.data);
+                    var a = localStorage.getItem("badgeP")
+                    if (localStorage.getItem("badgeP") == undefined || localStorage.getItem("badgeP") == null) {
+                        this.down_arrow_showing = 1
+                    }
+                    else {
+                        this.down_arrow_showing = 0
+                    }
+                    localStorage.setItem("badgeP", "1")
+                    this.content.enableScrollListener();
 
-            }), (Err) => {
-                this.loader.dismiss();
-                this.appSound.play('Error');
-                alert("Error occured")
-            }
+                }), (err) => {
+                    debugger
+                    this.loader.dismiss();
+                    this.appSound.play('Error');
+                    alert("Error occured")
+                }
+        })
+
     }
 
     viewBadges() {

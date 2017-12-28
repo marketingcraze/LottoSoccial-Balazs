@@ -114,7 +114,7 @@ export class AccountPage {
 		private http: Http,
 		public commonSrv: CommonService,
 		private actionSheet: ActionSheet,
-		private nativePageTransitions: NativePageTransitions ) {
+		private nativePageTransitions: NativePageTransitions) {
 
 		console.log('AccountPage');
 
@@ -129,16 +129,16 @@ export class AccountPage {
 
 
 		this.loadAccountData()
-		
+
 	}
-	
+
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad AccountPage');
 		this.loadAccountData()
 	}
 	ionViewWillLeave() {
-	
-		}
+
+	}
 	scrollHandlerAccount(event) {
 		var scrollDiv = document.getElementById('accountContent').clientHeight;
 		var innerDiv = document.getElementById('innerAccount').scrollHeight;
@@ -311,24 +311,24 @@ export class AccountPage {
 		this.appSound.play('buttonClick');
 		console.log("AccountPage::showUpdateDetailsModal");
 		if (this.platform.is('cordova')) {
-		this.options1 = {
-			direction: 'right',
-			duration: 1000,
-			slowdownfactor: 0,
-			slidePixels: 0,
-			iosdelay: 100,
-			androiddelay: 150,
-			fixedPixelsTop: 0,
-			fixedPixelsBottom: 0
-		   };
-		
-		   this.nativePageTransitions.slide(this.options1)
-		   .then()
-		   .catch();
-		this.nativePageTransitions.slide(this.options1);
-		this.navCtrl.push(EditProfilePage);
+			this.options1 = {
+				direction: 'right',
+				duration: 1000,
+				slowdownfactor: 0,
+				slidePixels: 0,
+				iosdelay: 100,
+				androiddelay: 150,
+				fixedPixelsTop: 0,
+				fixedPixelsBottom: 0
+			};
+
+			this.nativePageTransitions.slide(this.options1)
+				.then()
+				.catch();
+			this.nativePageTransitions.slide(this.options1);
+			this.navCtrl.push(EditProfilePage);
 		}
-		else{
+		else {
 			this.navCtrl.push(EditProfilePage);
 		}
 		// load account data
@@ -496,10 +496,10 @@ export class AccountPage {
 
 		this.file.resolveLocalFilesystemUrl(imageFileUri)
 			.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
-			.catch((err) =>{
+			.catch((err) => {
 				this.appSound.play('Error');
 				this.loading.dismiss()
-			} );
+			});
 	}
 
 	private readFile(file: any) {
