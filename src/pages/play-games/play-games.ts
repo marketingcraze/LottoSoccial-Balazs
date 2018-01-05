@@ -37,7 +37,7 @@ declare var cordova: any;
 })
 
 export class PlayGamePage implements OnInit {
-  gameBadge: any;
+  gameBadge: any='';
 
   scrollContent: any;
   ngOnInit(): void {
@@ -114,6 +114,7 @@ export class PlayGamePage implements OnInit {
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
           this.recent_winner = responseData.response[1].get_game_recent_winners.response
+          debugger
           this.getBadges(this.GameId)
           this.loading.dismiss();
           this.pageLoaded = true;

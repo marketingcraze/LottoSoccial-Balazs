@@ -304,13 +304,20 @@ export class HomePage implements OnInit {
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;
                 this.params.setUnreadCount(this.homeMessage.notification.length);
-                setTimeout(() => {
-                    this.slideItm.setElementClass("active-sliding", true);
-                    this.slideItm.setElementClass("active-slide", true);
-                    this.slideItm.setElementClass("active-options-right", true);
-                    this.Itm.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
-                }, 1000);
-
+                if (this.homeMessage.count > 0) {
+                    setTimeout(() => {
+                        this.slideItm.setElementClass("active-sliding", true);
+                        this.slideItm.setElementClass("active-slide", true);
+                        this.slideItm.setElementClass("active-options-right", true);
+                        this.Itm.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
+                    }, 1000);
+                    setTimeout(() => {
+                        this.slideItm.setElementClass("active-sliding", false);
+                        this.slideItm.setElementClass("active-slide", false);
+                        this.slideItm.setElementClass("active-options-right", false);
+                        this.Itm.setElementStyle("transform", "translate3d(0px, 0px, 0px)");
+                    }, 4000);
+                }
             });
 
         }, (err) => {

@@ -54,22 +54,22 @@
 </ion-menu>
 
 <ion-menu side="left" type="overlay" swipeEnabled=false [content]="content" persistent="true" id="menu2" (ionOpen)="onOpenLeftMenu()">
-  <ion-content>
+  <ion-content class="menuLeftBg">
     <ion-item text-center>
       <div class="UpperPart">
-        <span style="color: #E6D011;font-size: medium">{{accountDetails?.nick_name?accountDetails?.nick_name:'Nick name'}}</span>
+        <span style="color: #333;font-size: medium">{{accountDetails?.nick_name?accountDetails?.nick_name:'Nick name'}}</span>
         <ion-avatar class="account-avatarSlide">
           <img class="profile-pictureSlide" src="{{image_Data?image_Data:'assets/icon/user.svg'}}" width="72" height="72" alt="Profile"
           />
         </ion-avatar>
-        <p style="font-size: medium;white-space: normal;">
+        <p style="font-size: medium;white-space: normal;color:#333">
           {{accountDetails?.program_description}}
         </p>
       </div>
       <div class="sidemenuCoupon" (click)="mgmPage()">
-        <ion-row>
+        <ion-row style="background-color: green;border-radius: 3px">
           <ion-col col-9>
-            <span style="color: #2F76D1;vertical-align:sub;">{{accountDetails?.user_code}}</span>
+            <span style="color: #fff;vertical-align:sub;">{{accountDetails?.user_code}}</span>
           </ion-col>
           <ion-col col3>
             <ion-icon ios="ios-share-outline" md="ios-share-outline" class="shareBucketicon"></ion-icon>
@@ -96,7 +96,7 @@
         <span class="color"> Affiliate2 </span>
       </ion-item>
       <ion-item text-wrap (tap)="onLeftMenuSelection('prizeBreak')">
-        <span class="color"> prize Break </span>
+        <span class="color"> Prize Break </span>
       </ion-item>
       <ion-item text-wrap (tap)="onLeftMenuSelection('pSyndicate')">
         <span class="color">Private Syndicate</span>
@@ -108,14 +108,14 @@
     </ion-list>
   </ion-content>
   <ion-footer>
-    <ion-item text-wrap style="border-top: 1px solid" (click)="onLeftMenuSelection('help')">
+    <ion-item text-wrap style="border-top: 1px solid gray" (click)="onLeftMenuSelection('help')">
       <span class="color">Help</span>
     </ion-item>
 
     <ion-item>
       <div text-center>
-        <img src="assets/icon/logo_icoFooter.svg" height="20px" width="20px" style="margin-bottom: 1px;margin-right: 10px;">
-        <span style="font-family: cursive;font-size:0.8em;color: white;vertical-align: super;">Lotto Social app version 2.6.1</span>
+        <img src="assets/icon/logo_ico.svg" height="20px" width="20px" style="margin-bottom: 1px;margin-right: 10px;">
+        <span style="font-family: cursive;font-size:0.8em;color: #333;vertical-align: super;">Lotto Social app version 2.6.1</span>
       </div>
     </ion-item>
   </ion-footer>

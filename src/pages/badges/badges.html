@@ -21,7 +21,7 @@
             </div>
             <div>
                 <ion-grid class="pad-0">
-                    <ion-row class="b-border" *ngFor="let d of data; let i = index;">
+                    <ion-row class="b-border" *ngFor="let d of data | filterBadge:0; let i = index;">
                         <ion-col col-3 class="">
                             <img src="{{d.thumbnail}}" style="width: 100%;padding: 5px;" />
                         </ion-col>
