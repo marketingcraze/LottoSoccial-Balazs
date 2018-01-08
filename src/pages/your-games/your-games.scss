@@ -20,7 +20,10 @@ page-your-games {
 	no-internet-message{
 		position: absolute;
 		width: 100%;
-	}
+  }
+  .scroll-content{
+    height: 100%;
+  }
 	.yourgameslist{
         margin-bottom:-6px;
     }

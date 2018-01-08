@@ -9,75 +9,87 @@
   <newArrow-Header title="Vouchers" notification-count="5"></newArrow-Header>
 </ion-header>
 
-<ion-content scroll="true" class="mainContent" style="margin-bottom: 46px" >
-  
-  <ion-list class="firstList">
-<div style="background: white;height: 35vh">
-    <ion-item text-wrap text-center no-lines style="margin-top: 5px">
-      <div class="voucherCodeHeadingDiv">
-        <span><b class="voucherCodeHeading">REDEEM YOUR VOUCHER CODE</b></span><br>
-        <p class="voucherCodeSubHeading">Enter your voucher code here below to claim your offer</p>
+<ion-content scroll="true" class="mainContent" style="margin-bottom: 46px">
 
-      </div>
-    </ion-item>
-    <!-- <ion-item class="voucherCodeTextItem">
+  <ion-list class="firstList">
+    <div style="background: white;">
+      <ion-item text-wrap text-center no-lines style="margin-top: 5px">
+        <div class="voucherCodeHeadingDiv">
+          <span>
+            <b class="voucherCodeHeading">REDEEM YOUR VOUCHER CODE</b>
+          </span>
+          <br>
+          <p class="voucherCodeSubHeading">Enter your voucher code here below to claim your offer</p>
+
+        </div>
+      </ion-item>
+      <!-- <ion-item class="voucherCodeTextItem">
 
       <ion-input type="text" placeholder="Enter Voucher code"  ></ion-input>
     </ion-item> -->
-    <ion-col col-10 #popoverText>
-			<ion-item style="position: relative;top: -12px;">
-				<ion-input type="text" name="mobile" [(ngModel)] = "voucher_code" placeholder="Enter Voucher code" required></ion-input>
-			</ion-item>
-		</ion-col>
-
-    <ion-item text-wrap text-center no-lines style="top: -2vh">
-      <div class="redeemButtonDiv" id="img">
-        <input type="button" value="VIEW" class="redeemButton" (tap)="voucherCodeClaimButton()"/>
+      <ion-row no-padding class="rowBorders">
+        <ion-col col-8>
+          <ion-item no-lines>
+            <ion-input type="text" name="mobile" [(ngModel)]="voucher_code" placeholder="Enter Voucher code" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-lines>
+            <input type="button" value="VIEW" class="voucherListButton" style="margin-left: 32%;width: 71%;top:5px;position:relative" (tap)="voucherCodeClaimButton()" />
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-list>
+      <div *ngIf="count>0" style="margin-top: 4px">
+        <ion-item text-wrap text-center class="yourVoucherList">
+          <span>
+            <b class="yourVoucherListHeading">YOUR VOUCHER LIST</b>
+          </span>
+          <br>
+          <p class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</p>
+        </ion-item>
       </div>
-    </ion-item>
-  </div>
-<ion-list>
-    <div *ngIf="count>0" style="margin-top: 4px">
-      <ion-item text-wrap text-center class="yourVoucherList">
-        <span><b class="yourVoucherListHeading">YOUR VOUCHER LIST</b></span><br>
-        <p class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</p>
-      </ion-item>
-    </div>
 
-    <div *ngIf="!count>0">
-      <ion-item no-lines text-wrap text-center class="yourVoucherList">
-        <span><b class="yourVoucherListHeading">YOUR VOUCHER LIST</b></span><br>
-        <span class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</span>
-      </ion-item>
-    </div>
-    <!-- [ngStyle]="{height: height+ 'px'}" -->
-    <ion-scroll no-padding scrollX="true" scrollY="true" *ngIf="count>0" [ngStyle]="{height: height+ 'px'}">
-     
-    <div *ngFor='let lst of appList;let i=index;' >
+      <div *ngIf="!count>0">
+        <ion-item no-lines text-wrap text-center class="yourVoucherList">
+          <span>
+            <b class="yourVoucherListHeading">YOUR VOUCHER LIST</b>
+          </span>
+          <br>
+          <span class="yourVoucherListSubHeading">Here is a list of your Unlocked Vouchers</span>
+        </ion-item>
+      </div>
+      <!-- [ngStyle]="{height: height+ 'px'}" -->
+      <ion-scroll no-padding scrollX="true" scrollY="true" *ngIf="count>0" [ngStyle]="{height: height+ 'px'}">
 
-      <ion-item no-lines  id="voucherListItem">
-        <ion-thumbnail item-left class="thumbnalTag">
-          <img src='assets/img/voucher_ico.png' class="thumbnailListImage">
-        </ion-thumbnail>
+        <div *ngFor='let lst of appList;let i=index;'>
 
-        <div item-center text-wrap>
-          <p class="thumbnailListContent">{{lst.voucher_description}}</p><br>
-          <p class="expire_inner" style="padding-top: 27px">
-            Expires <span class="expires">{{resultDate[i]}}</span>
-          </p>
+          <ion-item no-lines id="voucherListItem">
+            <ion-thumbnail item-left class="thumbnalTag">
+              <img src='assets/img/voucher_ico.png' class="thumbnailListImage">
+            </ion-thumbnail>
+
+            <div item-center text-wrap>
+              <p class="thumbnailListContent">{{lst.voucher_description}}</p>
+              <br>
+              <p class="expire_inner" style="padding-top: 27px">
+                Expires
+                <span class="expires">{{resultDate[i]}}</span>
+              </p>
+            </div>
+
+            <div item-right class="listItemButtonDiv">
+              <input type="button" value="VIEW" class="voucherListButton" (tap)="selectedButtonID(i)" />
+            </div>
+
+
+          </ion-item>
+
         </div>
 
-        <div item-right class="listItemButtonDiv">
-          <input type="button" value="VIEW" class="voucherListButton" (tap)="selectedButtonID(i)" />
-        </div>
-
-      
-      </ion-item>
-      
-    </div>
- 
-    </ion-scroll>
-    <!-- 
+      </ion-scroll>
+      <!-- 
     <ion-item text-wrap align-left no-lines>
         <div>
           <table style="width: 100%"  *ngFor='let lst of appList'>
@@ -88,12 +100,12 @@
             </tr>
           </table>
         </div> -->
-<!-- <ion-item>
+      <!-- <ion-item>
       <div style="text-align: center" >
         <a  class="allOfersLink" (click) = "openOffersOfTheDay()">View all offers available</a>
       </div>
     </ion-item>-->
-</ion-list> 
+    </ion-list>
 
 
   </ion-list>

@@ -7,7 +7,7 @@
         <ion-card>
             <ion-item class="line">
                 <ion-avatar class="account-avatar" item-center item-left>
-                    <img class="profile-picture" src="{{image_Data}}" alt="Profile" />
+                    <img class="profile-picture" src="{{image_Data}}" />
                     <img class="update-icon" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()" />
                 </ion-avatar>
                 <h2>{{(!accountDetails.nick_name || accountDetails.nick_name=='null') ? "Add nickname": accountDetails.nick_name
@@ -27,7 +27,7 @@
         <ion-card class="options your-achievements">
             <ion-spinner *ngIf="!badgesLoaded" class="center" name="bubbles"></ion-spinner>
             <h3 text-center>YOUR ACHIEVEMENTS</h3>
-            <ion-slides *ngIf="badgesLoaded" slidesPerView=6 spaceBetween="13">
+            <ion-slides *ngIf="badgesLoaded" slidesPerView=3 >
                 <ion-slide>
                     <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()" />
                     <p text-center>Get more!</p>

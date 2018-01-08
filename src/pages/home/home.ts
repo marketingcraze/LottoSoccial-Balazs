@@ -312,10 +312,7 @@ export class HomePage implements OnInit {
                         this.Itm.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
                     }, 1000);
                     setTimeout(() => {
-                        this.slideItm.setElementClass("active-sliding", false);
-                        this.slideItm.setElementClass("active-slide", false);
-                        this.slideItm.setElementClass("active-options-right", false);
-                        this.Itm.setElementStyle("transform", "translate3d(0px, 0px, 0px)");
+                        this.slideItm.close();
                     }, 4000);
                 }
             });
@@ -326,14 +323,14 @@ export class HomePage implements OnInit {
     }
 
 
-    open(itemSlide: ItemSliding, item: Item) {
-        debugger
-        // reproduce the slide on the click
-        itemSlide.setElementClass("active-sliding", true);
-        itemSlide.setElementClass("active-slide", true);
-        itemSlide.setElementClass("active-options-right", true);
-        item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
-    }
+    // open(itemSlide: ItemSliding, item: Item) {
+    //     debugger
+    //     // reproduce the slide on the click
+    //     itemSlide.setElementClass("active-sliding", true);
+    //     itemSlide.setElementClass("active-slide", true);
+    //     itemSlide.setElementClass("active-options-right", true);
+    //     item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
+    // }
 
 
     checkForNewRelease() {

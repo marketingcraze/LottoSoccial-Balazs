@@ -13,6 +13,22 @@ page-yourvouchers {
   
   padding-top: 0px;
 }
+.rowBorders{
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+}
+.item-md{
+  border-bottom:none!important;
+  padding-left: 0px!important; 
+}
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child{
+  border-bottom-color: none!important;
+  box-shadow: none!important;
+}
+ion-label{
+  overflow: visible;
+}
+
 .voucherCodeTextItem{
   padding-right: 16px;
   margin-top: -12px;

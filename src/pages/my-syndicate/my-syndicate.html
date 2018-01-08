@@ -13,7 +13,7 @@
 </ion-header>-->
 
 <popup-confirm-payment #confirmPayment [existing-cards]="userCards"></popup-confirm-payment>
-<ion-content class="marg-top-12 main-bg" id="asynd" style="height: 86%" (ionScroll)="scrollHandlerSyndicate($event)">
+<ion-content class="main-bg" id="asynd" (ionScroll)="scrollHandlerSyndicate($event)">
   <div id="innerMySyndicate">
     <div id="sstate" *ngIf="syndArr.length > 0">
       <div *ngFor="let sd of syndArr; let i = index;">
