@@ -13,6 +13,7 @@ import { offerBuyResultPage } from '../offerBuyresultpage/offerBuyresultpage';
 import { Observable } from 'rxjs/Rx';
 import { referFriend } from '../refer-friend-page/refer-friend-page';
 import { CommonService } from '../../services/common.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare var $: any;
 /*
   Generated class for the SendBonusPage page.
@@ -77,6 +78,7 @@ export class SendBonusPage {
 		public ngZone: NgZone,
 		public offerService: OfferService,
 		public authSrv: AuthService,
+		public appSound: AppSoundProvider,
 		public navCtrl: NavController,
 		public modalCtrlr: ModalController,
 		public menu: MenuController, public commonSrv: CommonService,
@@ -162,6 +164,7 @@ export class SendBonusPage {
 	}
 
 	buyCreditOffer(offerId: any, openSuccessModal: any) {
+		this.appSound.play('buttonClick');
 		this.loading = this.loadingCtrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -230,6 +233,7 @@ export class SendBonusPage {
 		return loader;
 	}
 	showModalForcreditoffer() {
+		this.appSound.play('buttonClick');
 		let resultModal = this.modalCtrlr.create(offerBuyResultPage, { syndicateName: this.buyoffer, status: this.offerStatus });
 		resultModal.present();
 		resultModal.onDidDismiss((data: any) => {
@@ -265,12 +269,12 @@ export class SendBonusPage {
 
 	}
 	mgmPage() {
+		this.appSound.play('buttonClick');
 		let mgmModal = this.modalCtrlr.create(referFriend);
 		mgmModal.present();
 	}
 
 	lastCalling() {
-		debugger
 		this.commonSrv.getCreditPoints().subscribe(data => {
 			console.log("at last data is ", data)
 			if (data) {
@@ -293,8 +297,6 @@ export class SendBonusPage {
 
 			}
 			this.waveShowingAccount = false
-
-
 		})
 	}
 }

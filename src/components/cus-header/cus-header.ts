@@ -24,6 +24,7 @@ export class CusHeaderComponent {
 		this.inboxBellCount()
 	}
 	inboxBellCount() {
+		debugger
 		this.unreadCount = this.params.unreadCount;
 
 		this.params.events.subscribe('unread-count', (count) => {

@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController, App } from 'ionic-angular';
 import { LeavePage } from '../leave/leave';
 import { leaveSyndicate } from '../../services/syndicate_leave.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 /*
   Generated class for the ManageSyndicate page.
@@ -25,6 +26,7 @@ export class ManageSyndicatePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public cdChange: ChangeDetectorRef,
     public leave_syndicate: leaveSyndicate,
+    public appSound: AppSoundProvider,
     public viewCtrl: ViewController, public modalCtrl: ModalController, public app: App) {
     this.syndicate = this.navParams.get("syndicate")
     this.sId = this.syndicate.syndicate_id;
@@ -40,9 +42,11 @@ export class ManageSyndicatePage {
     this.viewCtrl.showBackButton(false);
   }
   close() {
+    this.appSound.play('buttonClick');
     this.navCtrl.pop();
   }
   leaveSyndicate() {
+    this.appSound.play('buttonClick');
     let leaveModal = this.modalCtrl.create(LeavePage, { syndId: this.sId, billingDate: this.syndicate.resume_billing_date });
     leaveModal.onDidDismiss(data => {
       if (data == 'offerPage')
@@ -51,6 +55,7 @@ export class ManageSyndicatePage {
     leaveModal.present();
   }
   getSize() {
+    this.appSound.play('buttonClick');
     this.waveShowingAccount = true;
     this.result = false
     this.leave_syndicate.getSyndicateSize(this.sId, this.syndicate.syndicate_type).subscribe(data => {

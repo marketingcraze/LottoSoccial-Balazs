@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 import { ConfirmNumberPage } from '../confirm-number/confirm-number';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare var $: any;
 
 @Component({
@@ -16,7 +17,7 @@ export class ChooseNumberPage {
   syndId: any;
   clicked = false
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public appSound: AppSoundProvider, public _syndService: SyndicateService, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
     //this.dataArr = JSON.parse(localStorage.getItem('cardSelected'));
     this.syndId = this.navParams.get('s_id')
     // this.syndId = localStorage.getItem('synd_id');
@@ -29,9 +30,9 @@ export class ChooseNumberPage {
 
   next() {
     console.log(this.errArr);
-    this.clicked= true
+    this.clicked = true
     if (this.errArr.indexOf(false) != -1) {
-      
+
       // this.dError = true
       return
     }
@@ -151,7 +152,6 @@ export class ChooseNumberPage {
     } else {
       this.dError = false
     }
-
     // if(this.dataArr[r].lines[w].indexOf(val) == -1) {
     //   console.log('index c')
     //   this.dataArr[r].lines[w][i] = val;
@@ -160,9 +160,8 @@ export class ChooseNumberPage {
     //   console.log('inside else');
     //   this.dataArr[r].lines[w][i] = "";
     // }
-
   }
-
+  //Syndicate number getting from API
   syndNumber(id: any) {
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
@@ -192,16 +191,18 @@ export class ChooseNumberPage {
         this.dataArr[i].hasError = errorArr;
       }
       console.log(this.dataArr)
-
-    })
+    }), (Err) => {
+      loader.dismiss();
+      this.appSound.play('Error');
+      alert("Error occured")
+    }
   }
 
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
-
+  //Track By index
   trackByIndex(index: number, obj: any): any {
     return index;
   }
-
 }

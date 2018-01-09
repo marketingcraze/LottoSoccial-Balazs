@@ -4,6 +4,7 @@ import { your_vouchers_popups } from '../../pages/your_vouchers_popups/your_vouc
 import { YourOffersPage } from '../../pages/your-offers/your-offers'
 import { VoucherService } from '../../services/voucherList_service'
 import { SimpleTimer } from 'ng2-simple-timer';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 
 @Component({
@@ -26,7 +27,9 @@ export class your_vouchers {
   appList: any = [];
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
-    private modalController: ModalController, public voucher_service: VoucherService,
+    private modalController: ModalController,
+    public appSound: AppSoundProvider,
+    public voucher_service: VoucherService,
     private loadingCtrl: LoadingController, private timerInstance: SimpleTimer, ) {
     this.voucher_code = ""
   }
@@ -82,6 +85,8 @@ export class your_vouchers {
     this.count = 0;
   }
   voucherCodeClaimButton() {
+    this.appSound.play('buttonClick');
+   // document.getElementById('img').className ='red1';
     console.log("Voucher entered code is " + this.voucher_code)
     if (this.voucher_code == "") {
       let alert = this.alertCtrl.create({
@@ -107,7 +112,7 @@ export class your_vouchers {
 
   }
   selectedButtonID(index) {
-    debugger
+    this.appSound.play('buttonClick');
     let modal = this.modalController.create(your_vouchers_popups, {
       VoucherDetail: this.appList[index].voucher_description,
       VoucherCode: this.appList[index].voucher_code,

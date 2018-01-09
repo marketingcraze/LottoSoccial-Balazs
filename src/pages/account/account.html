@@ -1,179 +1,161 @@
-
 <ion-header>
     <newArrow-Header title="Accounts" notification-count="5"></newArrow-Header>
-  </ion-header>
+</ion-header>
 
 <ion-content (ionScroll)="scrollHandlerAccount($event)" id="accountContent">
-        <div id="innerAccount" >
-	<ion-card>
-        
-        <ion-item class="line">
-	        <ion-avatar class="account-avatar" item-center item-left>
-
-				<img class="profile-picture" src="{{image_Data}}" width="72" height="72" alt="Profile" />
-
-				<img class="update-icon" width="16" height="16" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()"/>
-			</ion-avatar>
-			<h2>{{(!accountDetails.nick_name || accountDetails.nick_name=='null') ? "Add nickname": accountDetails.nick_name }}<span (click)="updateNickName()"><img class="update-img" item-left width="16" height="16" src="assets/icon/edit-ico.svg"/></span></h2>
-			<p>{{accountDetails.msn}}</p>
-            <progress-bar [progress]="accountDetails.percentage"></progress-bar>
-			<p class="profile-completion">Profile completion {{accountDetails.percentage}}%</p>
-            <p class="account-badge" item-right><img src="assets/img/gen_badge.png"></p>
-        </ion-item>
-
-        <!-- <ion-row class="info">
-        	<ion-col text-center>
-	        	<h1 color="primary" text-bold></h1>
-	        	<p>REWARD POINTS</p>
-	        	<button class="center" ion-button padding>redeem</button>
-        	</ion-col>
-         
-        	<ion-col text-center>
-	        	<h1 color="bonus"></h1>
-	        	<p>BONUS CREDIT</p>
-	        	<button class="center" color="bonus" ion-button padding>spend</button>
-        	</ion-col>
-         
-        	<ion-col text-center>
-	        	<h1 color="secondary"></h1>
-	        	<p>CASH</p>
-	        	<button class="center" color="secondary" ion-button padding >cashout</button>
-        	</ion-col>
-         
-        </ion-row> -->
-        
-    </ion-card>
-
-    <ion-card class="options your-achievements">
-        <h3 text-center>YOUR ACHIEVEMENTS</h3>
-        <ion-slides slidesPerView=6 spaceBetween="13">
+    <div id="innerAccount">
+        <ion-card>
+            <ion-item class="line">
+                <ion-avatar class="account-avatar" item-center item-left>
+                    <img class="profile-picture" src="{{image_Data}}" />
+                    <img class="update-icon" src="assets/icon/update_arrows.svg" alt="Update" (click)="selectProfileImage()" />
+                </ion-avatar>
+                <h2>{{(!accountDetails.nick_name || accountDetails.nick_name=='null') ? "Add nickname": accountDetails.nick_name
+                    }}
+                    <span (click)="updateNickName()">
+                        <img class="update-img" item-left src="assets/icon/edit-ico.svg" />
+                    </span>
+                </h2>
+                <p>{{accountDetails.msn}}</p>
+                <progress-bar [progress]="accountDetails.percentage"></progress-bar>
+                <p class="profile-completion">Profile completion {{accountDetails.percentage}}%</p>
+                <p class="account-badge" item-right>
+                    <img src="assets/img/gen_badge.png">
+                </p>
+            </ion-item>
+        </ion-card>
+        <ion-card class="options your-achievements">
+            <ion-spinner *ngIf="!badgesLoaded" class="center" name="bubbles"></ion-spinner>
+            <h3 text-center>YOUR ACHIEVEMENTS</h3>
+            <ion-slides *ngIf="badgesLoaded" slidesPerView=3 >
                 <ion-slide>
                     <img src="assets/icon/plus_white.svg" alt="Badge" class="pulsateButton" (click)="moveToBadgeOs()" />
                     <p text-center>Get more!</p>
-               </ion-slide>
-                <ion-slide *ngFor="let badge of badgesForYou" >
+                </ion-slide>
+                <ion-slide *ngFor="let badge of badgesForYou | filterBadgeEarned:1 ">
                     <img src="{{badge?.thumbnail}}" alt="No Img" (click)="goToBadgesView(badge)">
                     <p text-center>{{badge?.post_title}}</p>
-                </ion-slide> 
+                </ion-slide>
             </ion-slides>
-    </ion-card>
+        </ion-card>
 
-    <ion-card class="options">
-        <ion-item class="line" >
-            <img item-left width="16" height="16" src="assets/icon/cash_ico2.svg" alt="Update"/>
-            <p>Cash balance</p>
-            <div  *ngIf="waveShowingAccount==true" item-right >
-                <span class="tooltip t1">
-                  <i class="icon2 icon-chat grey" style="margin-left: 5vw">
-                      <span class="dot dot-left"></span>
-                      <span class="dot"></span>
-                      <span class="dot dot-right"></span>
-                    </i>
-                </span>
-              </div> 
-              <div *ngIf="waveShowingAccount==false" item-right >
-            <ion-badge color="secondary">&pound;{{winning_balanceAPI}}</ion-badge>
+        <ion-card class="options">
+            <ion-item class="line">
+                <img item-left width="16" height="16" src="assets/icon/cash_ico2.svg" alt="Update" />
+                <p>Cash balance</p>
+                <div *ngIf="waveShowingAccount==true" item-right>
+                    <span class="tooltip t1">
+                        <i class="icon2 icon-chat grey" style="margin-left: 5vw">
+                            <span class="dot dot-left"></span>
+                            <span class="dot"></span>
+                            <span class="dot dot-right"></span>
+                        </i>
+                    </span>
+                </div>
+                <div *ngIf="waveShowingAccount==false" item-right>
+                    <ion-badge color="secondary">&pound;{{winning_balanceAPI}}</ion-badge>
+                </div>
+                <ion-icon ios="ios-arrow-forward" item-right (click)="openWebView('cashout/')"></ion-icon>
+            </ion-item>
+            <ion-item class="line">
+                <img item-left width="16" height="16" src="assets/icon/bc_ico.svg" alt="Update" />
+                <p>Bonus credit</p>
+                <div *ngIf="waveShowingAccount==true" item-right>
+                    <span class="tooltip t1">
+                        <i class="icon2 icon-chat grey" style="margin-left: 5vw">
+                            <span class="dot dot-left"></span>
+                            <span class="dot"></span>
+                            <span class="dot dot-right"></span>
+                        </i>
+                    </span>
+                </div>
+                <div *ngIf="waveShowingAccount==false" item-right>
+                    <ion-badge color="bonus">{{bonus_creditAPI}}</ion-badge>
+                </div>
+                <ion-icon ios="ios-arrow-forward" (click)="openCreditModule()" item-right></ion-icon>
+            </ion-item>
+            <ion-item>
+                <img item-left width="16" height="16" src="assets/icon/rwp_icon.svg" alt="Update" />
+                <p>Reward points</p>
+                <div *ngIf="waveShowingAccount==true" item-right>
+                    <span class="tooltip t1">
+                        <i class="icon2 icon-chat grey" style="margin-left: 5vw">
+                            <span class="dot dot-left"></span>
+                            <span class="dot"></span>
+                            <span class="dot dot-right"></span>
+                        </i>
+                    </span>
+                </div>
+                <div *ngIf="waveShowingAccount==false" item-right>
+                    <ion-badge>{{reward_pointsAPI}}</ion-badge>
+                </div>
+                <ion-icon ios="ios-arrow-forward" (click)="openGetGamesModule()" item-right></ion-icon>
+            </ion-item>
+        </ion-card>
+
+        <ion-card>
+            <ion-item>
+                <p>What's on</p>
+                <ion-icon ios="ios-arrow-forward" item-right (click)="openWebView('blog/')"></ion-icon>
+            </ion-item>
+        </ion-card>
+
+        <ion-card class="options">
+            <ion-item class="line">
+                <img item-left width="16" height="16" src="assets/icon/edit-ico.svg" alt="Update" />
+                <p>Update your details</p>
+                <ion-icon ios="ios-arrow-forward" (click)="showUpdateDetailsModal()" item-right></ion-icon>
+            </ion-item>
+            <ion-item class="help">
+                <img item-left width="16" height="16" src="assets/icon/help-ico.svg" alt="Update" />
+                <p>Need help?</p>
+                <ion-icon ios="ios-arrow-forward" (click)="openUrl('https://help.lotto-social.com/hc/en-us')" item-right></ion-icon>
+            </ion-item>
+        </ion-card>
+
+
+        <ion-card class="options">
+            <ion-item class="line">
+                <img item-left width="16" height="16" src="assets/icon/fb-ico.svg" alt="Update" />
+                <p>Lotto Social on Facebook</p>
+                <ion-icon ios="ios-arrow-forward" (click)="openUrl('https://www.facebook.com/LottoSocial/')" item-right></ion-icon>
+            </ion-item>
+            <ion-item>
+                <img item-left width="16" height="16" src="assets/icon/tw-ico.svg" alt="Update" />
+                <p>Lotto Social on Twitter</p>
+                <ion-icon ios="ios-arrow-forward" (click)="openUrl('https://twitter.com/lotto_social?lang=en')" item-right></ion-icon>
+            </ion-item>
+        </ion-card>
+
+
+        <ion-card class="options">
+            <ion-item>
+                <img item-left width="16" height="16" src="assets/icon/logout.svg" alt="Update" />
+                <p>Logout</p>
+                <ion-icon ios="ios-arrow-forward" (click)="presentActionSheet()" item-right></ion-icon>
+            </ion-item>
+        </ion-card>
+
+        <ion-card class="links">
+            <div text-center>
+                <a (click)="openWebView('about/')">
+                    <span class="spanClass"> About </span>
+                </a>
+                <a (click)="openWebView('terms-and-conditions/')">
+                    <span class="spanClass"> Terms of service </span>
+                </a>
+                <a (click)="openWebView('privacy-policy-for-lottery-syndicate-members/')">
+                    <span class="spanClass"> Privacy policy </span>
+                </a>
             </div>
-            <ion-icon ios="ios-arrow-forward" item-right (click)="openWebView('cashout/')"></ion-icon>
-        </ion-item>
-        <ion-item class="line" >
-            <img item-left width="16" height="16" src="assets/icon/bc_ico.svg" alt="Update"/>
-            <p>Bonus credit</p>
-            <div  *ngIf="waveShowingAccount==true" item-right >
-                <span class="tooltip t1">
-                  <i class="icon2 icon-chat grey" style="margin-left: 5vw">
-                      <span class="dot dot-left"></span>
-                      <span class="dot"></span>
-                      <span class="dot dot-right"></span>
-                    </i>
-                </span>
-              </div> 
-              <div *ngIf="waveShowingAccount==false" item-right>
-            <ion-badge color="bonus">{{bonus_creditAPI}}</ion-badge>
-        </div>
-            <ion-icon ios="ios-arrow-forward" (click)="openCreditModule()" item-right></ion-icon>
-        </ion-item>
-        <ion-item >
-            <img item-left width="16" height="16" src="assets/icon/rwp_icon.svg" alt="Update"/>
-            <p>Reward points</p>
-            <div  *ngIf="waveShowingAccount==true" item-right >
-                <span class="tooltip t1">
-                  <i class="icon2 icon-chat grey" style="margin-left: 5vw">
-                      <span class="dot dot-left"></span>
-                      <span class="dot"></span>
-                      <span class="dot dot-right"></span>
-                    </i>
-                </span>
-              </div> 
-              <div *ngIf="waveShowingAccount==false" item-right>
-            <ion-badge >{{reward_pointsAPI}}</ion-badge>
-        </div>
-            <ion-icon ios="ios-arrow-forward" (click)="openGetGamesModule()" item-right></ion-icon>
-        </ion-item>
-    </ion-card>
-
-	<ion-card>
-        <ion-item >
-			<p>What's on</p>
-			<ion-icon ios="ios-arrow-forward" item-right (click)="openWebView('blog/')"></ion-icon>
-        </ion-item>
-    </ion-card>
-
-	<ion-card class="options">
-        <ion-item class="line" >
-        	<img item-left width="16" height="16" src="assets/icon/edit-ico.svg" alt="Update"/>
-			<p>Update your details</p>
-			<ion-icon ios="ios-arrow-forward" (click)="showUpdateDetailsModal()" item-right></ion-icon>
-        </ion-item>
-        <ion-item class="help" >
-        	<img item-left width="16" height="16" src="assets/icon/help-ico.svg" alt="Update"/>
-			<p>Need help?</p>
-			<ion-icon ios="ios-arrow-forward" (click)="openUrl('https://help.lotto-social.com/hc/en-us')" item-right></ion-icon>
-        </ion-item>
-    </ion-card>
-
-
-	<ion-card class="options">
-        <ion-item class="line" >
-        	<img item-left width="16" height="16" src="assets/icon/fb-ico.svg" alt="Update"/>
-			<p>Lotto Social on Facebook</p>
-			<ion-icon ios="ios-arrow-forward" (click)="openUrl('https://www.facebook.com/LottoSocial/')" item-right></ion-icon>
-        </ion-item>
-        <ion-item >
-        	<img item-left width="16" height="16" src="assets/icon/tw-ico.svg" alt="Update"/>
-			<p>Lotto Social on Twitter</p>
-			<ion-icon ios="ios-arrow-forward" (click)="openUrl('https://twitter.com/lotto_social?lang=en')" item-right></ion-icon>
-        </ion-item>
-    </ion-card>
-
-
-    <ion-card class="options">
-        <ion-item >
-            <img item-left width="16" height="16" src="assets/icon/logout.svg" alt="Update"/>
-            <p>Logout</p>
-            <ion-icon ios="ios-arrow-forward" (click)="presentActionSheet()" item-right></ion-icon>
-        </ion-item>
-    </ion-card>
-    
-	<ion-card class="links">
-        <div text-center>
-            <a (click)="openWebView('about/')"><span style="padding: 12px"> About </span> </a>
-            <a (click)="openWebView('terms-and-conditions/')"><span style="padding: 12px"> Terms of service </span></a>
-            <a (click)="openWebView('privacy-policy-for-lottery-syndicate-members/')"><span style="padding: 12px">  Privacy policy </span> </a>
-        </div>
-    </ion-card>
-	</div>
+        </ion-card>
+    </div>
 </ion-content>
 
 
 
 <div *ngIf="down_arrow_showing==1">
-        <span *ngIf="downShowing==0"  >
-            <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
-       </span>
-    </div>
-    
-
-
-
-
+    <span *ngIf="downShowing==0">
+        <div class="arrow" style="z-index: 9; border: none;background-image: url('assets/img/down_arrow_pulsate.png');" id="newDiv"></div>
+    </span>
+</div>

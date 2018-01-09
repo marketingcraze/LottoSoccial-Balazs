@@ -42,6 +42,9 @@ ion-slide{
     75%  {top:15px;}
     100% {top:20px;}
 }
+.scroll-content{
+    height: 100%;
+}
 .arrow {
   position: fixed;
   left: 50%;
@@ -94,6 +97,7 @@ ion-slide{
 .bottomContent{
     .scroll-content{
         height: 100%!important;
+        margin-top: 5%!important;
     }
 }
 }

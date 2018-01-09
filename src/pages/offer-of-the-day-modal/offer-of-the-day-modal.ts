@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { CommonService } from '../../services/common.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare var cordova: any;
 
@@ -9,8 +10,6 @@ declare var cordova: any;
     templateUrl: 'offer-of-the-day-modal.html'
 })
 export class offerOfTheDayModal {
-
-
     offerOftheDay: any;
     customerId: any;
     customerToken: any;
@@ -19,32 +18,33 @@ export class offerOfTheDayModal {
     constructor(private nvctrl: NavController,
         private navParms: NavParams,
         private viewctrl: ViewController,
+        public appSound: AppSoundProvider,
         private loadingctrl: LoadingController,
         private platform: Platform
     ) {
-    
+
         this.customerId = CommonService.session.customer_id;
         this.customerToken = CommonService.session.customer_token;
         this.offerOftheDay = this.navParms.get("offerOfTheDay")
         this.WebViewUrl = this.navParms.get("offerOfTheDay").product_web_link;
     }
-
     goToWbView() {
-       var url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.WebViewUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '';
-       console.log("url is ------> " + url)
+        this.appSound.play('buttonClick');
+        var url = 'https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.WebViewUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '';
+        console.log("url is ------> " + url)
         this.platform.ready().then(() => {
-                const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.WebViewUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no');
-                browser.addEventListener('loadstart', (event) => {
-                    if (event.url.includes("win")) {
-                        browser.close();
-                        // this.nav.push(PlayGamesThankYou,{customer_awardLog_id:this.customerAwardLogId,gameLevel:this.gameLevelThanlyou,game_Id:this.GameId})
-                    }
-                });
-                
-            })
-    }
+            const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.WebViewUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no');
+            browser.addEventListener('loadstart', (event) => {
+                if (event.url.includes("win")) {
+                    browser.close();
+                    // this.nav.push(PlayGamesThankYou,{customer_awardLog_id:this.customerAwardLogId,gameLevel:this.gameLevelThanlyou,game_Id:this.GameId})
+                }
+            });
 
-    dismiss(data:any=1) {
+        })
+    }
+    dismiss(data: any = 1) {
+        this.appSound.play('buttonClick');
         this.viewctrl.dismiss(data);
     }
 }

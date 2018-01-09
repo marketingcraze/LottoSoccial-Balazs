@@ -37,7 +37,7 @@ declare var cordova: any;
 })
 
 export class PlayGamePage implements OnInit {
-  gameBadge: any;
+  gameBadge: any='';
 
   scrollContent: any;
   ngOnInit(): void {
@@ -49,8 +49,8 @@ export class PlayGamePage implements OnInit {
           "UserId": CurrentUserid,
         });
         webengage.screen("PlayGamePage")
-        webengage.notification.onDismiss((inAppData)=> {
-       });
+        webengage.notification.onDismiss((inAppData) => {
+        });
       }
     });
   }
@@ -76,8 +76,6 @@ export class PlayGamePage implements OnInit {
   boosterInfo = ""
   recent_winner: any;
 
-
-
   constructor(
     private _modalController: ModalController,
     public platform: Platform,
@@ -101,9 +99,8 @@ export class PlayGamePage implements OnInit {
   ionViewDidLoad() {
     this.loading = this.loadingCtrl.create({
       spinner: 'hide',
-			content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
     });
-    console.log('ionViewDidLoad PlayGamePage');
     this.loading.present().then(() => {
       this.playgameService.getGameInfo(this.GameId)
         .subscribe(
@@ -117,6 +114,7 @@ export class PlayGamePage implements OnInit {
           this.customerAwardLogId = responseData.response[0].get_game_info.response.customer_award_logid;
           this.gameUrl = responseData.response[0].get_game_info.response.destination_url;
           this.recent_winner = responseData.response[1].get_game_recent_winners.response
+          debugger
           this.getBadges(this.GameId)
           this.loading.dismiss();
           this.pageLoaded = true;
@@ -129,6 +127,7 @@ export class PlayGamePage implements OnInit {
 
   }
   showBoosterModal() {
+    this.appSound.play('buttonClick');
     this.scrollContent = document.querySelector('.scroll-content');
     this.scrollContent.style['overflow'] = 'hidden';
     let myModal = this._modalController.create(GetBooster, { customer_award_log_id: this.gameInfo });
@@ -140,14 +139,14 @@ export class PlayGamePage implements OnInit {
       }
     })
   }
-  ionViewWillEnter() {
 
-  }
   close() {
+    this.appSound.play('buttonClick');
     this.navCtrl.pop();
   }
 
   openThankyouPage() {
+    this.appSound.play('buttonClick');
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
         const browser = cordova.InAppBrowser.open('https://nima.lottosocial.com/webview-auth/?redirect_to=' + [this.gameUrl] + '&customer_id=' + this.customerId + '&customer_token=' + this.customerToken + '', '_blank', 'location=no,toolbar=no');
@@ -155,34 +154,29 @@ export class PlayGamePage implements OnInit {
           StatusBar.hide()
           if (event.url.includes("win")) {
             browser.close();
-            this.nav.push(PlayGamesThankYou, { customer_awardLog_id: this.customerAwardLogId, gameLevel: this.gameLevelThanlyou, game_Id: this.GameId })
+            this.nav.push(PlayGamesThankYou, { customer_awardLog_id: this.customerAwardLogId, gameLevel: this.gameLevelThanlyou, game_Id: this.GameId, gameName: this.gameInfo })
           }
           else if (event.url.includes("loss")) {
             browser.close();
             this.navCtrl.push(gameLoss, { gameId: this.GameId })
           }
         });
-
-        //If we want to close the page after the page is loaded
-
-        //   browser.addEventListener('loadstop', (event) => {
-        //     alert("loadstop"+event);
-
-        // });
-
       }
     });
-
+    
   }
   howToPlay() {
+    this.appSound.play('buttonClick');
     this.howToPlayModal = this._modalController.create(howtoplay, { gameInfo: this.gameInfo })
     this.howToPlayModal.present();
   }
   recentWinnerTipsmodal() {
+    this.appSound.play('buttonClick');
     this.howToPlayModal = this._modalController.create(recentWinnerTips, { gameInfo: this.gameInfo })
     this.howToPlayModal.present();
   }
   gameTermsModal() {
+    this.appSound.play('buttonClick');
     this.howToPlayModal = this._modalController.create(gameTerms, { gameTermsdata: this.gameInfo })
     this.howToPlayModal.present();
   }
@@ -212,7 +206,7 @@ export class PlayGamePage implements OnInit {
     this.playgameService.getGameBadges(gameID).subscribe(data => {
       debugger;
       if (data) {
-        this.gameBadge=data.response[0].gamebadges[0];
+        this.gameBadge = data.response[0].gamebadges[0];
       }
     })
   }

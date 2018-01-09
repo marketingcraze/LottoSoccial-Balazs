@@ -8,6 +8,7 @@ import { InviteFriendsPage } from '../invite_friends/invite_friends';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { leaveSyndicate } from '../../services/syndicate_leave.service'
 import { debounce } from 'ionic-native/node_modules/rxjs/operator/debounce';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 
 
@@ -29,6 +30,7 @@ export class ManageSyndicate2Page {
     private platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
+    public appSound: AppSoundProvider,
     public leveSynd: leaveSyndicate,
     public loadingCtrl: LoadingController,
     public viewCtrl: ViewController,
@@ -48,10 +50,11 @@ export class ManageSyndicate2Page {
     this.viewCtrl.showBackButton(false);
   }
   close() {
+    this.appSound.play('buttonClick');
     this.navCtrl.pop();
   }
   leaveSyndicate() {
-    debugger
+    this.appSound.play('buttonClick');
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg.gif" style="height:100px!important">`,
@@ -71,18 +74,23 @@ export class ManageSyndicate2Page {
 
   }
   agreement() {
+    this.appSound.play('buttonClick');
     this.navCtrl.push(TandcPage);
   }
   viewRecent() {
+    this.appSound.play('buttonClick');
     this.navCtrl.push(RecentDrawPage);
   }
   viewTicket() {
+    this.appSound.play('buttonClick');
     this.navCtrl.push(YourTicketsPage);
   }
   Invite() {
+    this.appSound.play('buttonClick');
     this.navCtrl.push(InviteFriendsPage);
   }
   openUrl(url: string) {
+    this.appSound.play('buttonClick');
     this.platform.ready().then(() => {
       if (typeof cordova !== 'undefined') {
         const browser = this.iab.create(url, "_blank", 'location=no,toolbarposition=top');
@@ -90,6 +98,7 @@ export class ManageSyndicate2Page {
     })
   }
   getSize() {
+    this.appSound.play('buttonClick');
     this.waveShowingAccount = true;
     this.result = false
     this.leveSynd.getSyndicateSize(this.sId, this.syndicate.syndicate_type).subscribe(data => {

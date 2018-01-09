@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ChooseImagePage } from '../choose-image/choose-image';
 import { CreateSyndicate2Page } from '../create-syndicate2/create-syndicate2';
 import { SyndicateService } from '../../providers/syndicate-service';
@@ -19,7 +19,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
   templateUrl: 'create-syndicate.html'
 })
 export class CreateSyndicatePage {
-  public todo : FormGroup;
+  public todo: FormGroup;
   public hideimagebtn: boolean = false
   public imagechosed: boolean = false
   public namechosed: boolean = false
@@ -27,21 +27,21 @@ export class CreateSyndicatePage {
   public title: string = ''
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public appSound:AppSoundProvider,
-    private formBuilder: FormBuilder, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public appSound: AppSoundProvider,
+    private formBuilder: FormBuilder,
     private viewCtrl: ViewController,
-    private _syndService:SyndicateService,
-    private loadingCtrl:LoadingController) {
+    private _syndService: SyndicateService,
+    private loadingCtrl: LoadingController) {
 
     this.todo = this.formBuilder.group({
       title: ['', Validators.required],
       image: ['', Validators.required]
     });
-    
+
     this.sImage = this.navParams.get('image');
-    if(this.sImage != undefined && this.sImage != '') {
+    if (this.sImage != undefined && this.sImage != '') {
       var title = JSON.parse(localStorage.getItem('sdetails')).title
       var data = {
         title: title,
@@ -54,17 +54,17 @@ export class CreateSyndicatePage {
     }
   }
   ionViewWillEnter() {
-        this.viewCtrl.showBackButton(false);
-        if(localStorage.getItem('sdetails')) {
-          var storeddata = JSON.parse(localStorage.getItem('sdetails'))
-          this.sImage = storeddata.image
-          this.title = storeddata.title
-          if(this.sImage != undefined && this.sImage != '') {
-            this.hideimagebtn = true
-          }
-          
-        }
+    this.viewCtrl.showBackButton(false);
+    if (localStorage.getItem('sdetails')) {
+      var storeddata = JSON.parse(localStorage.getItem('sdetails'))
+      this.sImage = storeddata.image
+      this.title = storeddata.title
+      if (this.sImage != undefined && this.sImage != '') {
+        this.hideimagebtn = true
+      }
+
     }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateSyndicatePage');
@@ -80,15 +80,15 @@ export class CreateSyndicatePage {
     this.navCtrl.push(ChooseImagePage);
   }
 
-  logForm(){
+  logForm() {
     console.log("image link", this.sImage)
     console.log("text view title ", this.todo.value.title)
     this.appSound.play('buttonClick');
-    if(!this.todo.valid) {
-      if(this.sImage == '' || !this.sImage) {
+    if (!this.todo.valid) {
+      if (this.sImage == '' || !this.sImage) {
         this.imagechosed = true
         return;
-      } else if(this.sImage != '' && !this.todo.valid) {
+      } else if (this.sImage != '' && !this.todo.valid) {
         this.namechosed = true
         return;
       } else {
@@ -98,36 +98,39 @@ export class CreateSyndicatePage {
     } else {
       var patt = /^[^\W0-9_][a-zA-Z0-9\s]+$/
       console.log("syndicate title", patt.test(this.todo.value.title))
-        if(patt.test(this.todo.value.title)) {
-           this.imagechosed = false
-          this.namechosed = false
-        } else {
-          this.namechosed = true
-          return;
-        }
+      if (patt.test(this.todo.value.title)) {
+        this.imagechosed = false
+        this.namechosed = false
+      } else {
+        this.namechosed = true
+        return;
+      }
     }
     let loader = this.loadingCtrl.create({
-          spinner: 'hide',
-          content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
-        });
-        loader.present();
-   this._syndService.profanity(this.todo.value.title)
-   .subscribe((res)=> {
-     console.log(res);
-     loader.dismiss();
-     if(res.response[0].profanity_check.response.valid_str) {
-       var data = {
-          title: this.todo.value.title,
-          image: this.sImage
-       }
-        localStorage.setItem('sdetails', JSON.stringify(data));
-        this.navCtrl.push(CreateSyndicate2Page);
-     } else {
-       alert("please check your syndicate name")
-      return
-     }
-   })
-    
+      spinner: 'hide',
+      content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+    });
+    loader.present();
+    this._syndService.profanity(this.todo.value.title)
+      .subscribe((res) => {
+        console.log(res);
+        loader.dismiss();
+        if (res.response[0].profanity_check.response.valid_str) {
+          var data = {
+            title: this.todo.value.title,
+            image: this.sImage
+          }
+          localStorage.setItem('sdetails', JSON.stringify(data));
+          this.navCtrl.push(CreateSyndicate2Page);
+        } else {
+          alert("please check your syndicate name")
+          return
+        }
+      }), (Err) => {
+        loader.dismiss();
+        this.appSound.play('Error');
+        alert("Error occured")
+      }
   }
 
 }

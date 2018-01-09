@@ -1,4 +1,4 @@
-<cus-header title="Game" (homeClicked)="goHomePage()"></cus-header>
+<!-- <cus-header title="Game" (homeClicked)="goHomePage()"></cus-header> -->
 
 <ion-content class="card-background-page" (ionScroll)="scrollHandlerGame($event)" id="contentsGames">
     <div id="innerGames">
@@ -10,11 +10,11 @@
                     
                 </ion-thumbnail>
                 <h2>{{game?.game_title}}</h2>
-                <p ion-text color="orange">{{game?.game_detail_group?.game_details_1 | slice:0:20 }}</p>
+                <p ion-text color="orange">{{game?.game_detail_group?.game_details_1 | slice:0:15 }} <span (tap)="moreDescription(game?.game_detail_group?.game_details_1)" style="color:dodgerblue"> Read more</span></p>
                 <button ion-button item-right class="buttonStart" *ngIf="i==0" style="height: 34px" (click)="play(game)">START</button>
                 <button ion-button item-right color="secondary" *ngIf="i!=0" style="width: 71px;height: 34px" (click)="play(game)">START</button>
             </ion-item>
-            <ion-item-divider style="color:#333333!important;top:-8px!important;" *ngIf="i < game_group?.length-1">{{game?.game_detail_group?.game_details_2}}</ion-item-divider>
+            <!-- <ion-item-divider style="color:#333333!important;top:-8px!important;" *ngIf="i < game_group?.length-1">{{game?.game_detail_group?.game_details_2}}</ion-item-divider> -->
             <!--<ion-item>
             <ion-thumbnail item-left>
                 <img src="assets/img/sample_thumb_04@3x.png">

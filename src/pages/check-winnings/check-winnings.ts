@@ -5,16 +5,13 @@ import { SyndicateService } from '../../providers/syndicate-service';
 import { Content, Tabs } from 'ionic-angular'
 import { OffersPage } from '../offers/offers'
 import { GamesPage } from '../games/games';
-/*
-  Generated class for the CheckWinnings page.
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-check-winnings',
   templateUrl: 'check-winnings.html'
 })
+
 export class CheckWinningsPage {
   nav: NavController;
   @ViewChild(Content) content: Content;
@@ -22,12 +19,14 @@ export class CheckWinningsPage {
   loader: any;
   downShowing = 0;
   down_arrow_showing = 0;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public app: App,
     public modalCtrl: ModalController,
     public viewCtrl: ViewController,
+    public appSound: AppSoundProvider,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
     public cdRef: ChangeDetectorRef
@@ -43,39 +42,32 @@ export class CheckWinningsPage {
     console.log('ionViewDidLoad CheckWinningsPage');
     this.loadWinnings();
   }
-  ionViewWillEnter() {
-    // debugger;
-    // var tabs: Tabs = this.navCtrl.parent.parent;
-
-  }
+  //go to checkWinningsNext page (green one)
   next() {
-    debugger
+    this.appSound.play('buttonClick');
     let modal = this.modalCtrl.create(CheckWinningsNextPage)
     modal.present()
     modal.onDidDismiss((data: any) => {
       if (data) {
-        debugger
         if (data == 'game') {
           var tabs: Tabs = this.navCtrl.parent.parent.parent;
           tabs.select(3)
-
+          this.appSound.play('buttonClick');
         }
         else if (data == 'SBC') {
           var tabs: Tabs = this.navCtrl.parent.parent.parent;
           tabs.getActiveChildNav().setRoot(OffersPage, { "app": "outside" })
-          // var nav=this.app.getRootNav()
-          // nav.push(OffersPage, { "app": "outside" })
+          this.appSound.play('buttonClick');
         }
-        else if(data=='RDM'){
+        else if (data == 'RDM') {
           var tabs: Tabs = this.navCtrl.parent.parent.parent;
           tabs.getActiveChildNav().setRoot(GamesPage, { "app": "outside" })
+          this.appSound.play('buttonClick');
         }
-
       }
     })
-    // this.app.getRootNav().push(CheckWinningsNextPage);
   }
-
+  //Loading the all winnings
   loadWinnings() {
     this.loader.present();
     this._syndService.loadWinnings()
@@ -93,13 +85,16 @@ export class CheckWinningsPage {
         this.myWinnings = res.response["0"].get_previous_check_list.response.previous_check_group;
 
         this.content.enableScrollListener();
-      });
+      }), (Err) => {
+        this.loader.dismiss();
+        this.appSound.play('Error');
+        alert("Error occured")
+      }
   }
+  //Scroll handle
   scrollHandlerSyndicate(event) {
-
     var innerDiv = document.getElementById('innerWinnings').scrollHeight;
     var scrollDiv = document.getElementById('winningContent').clientHeight;
-
     var valu = scrollDiv + this.content.scrollTop
     console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
     if (valu > innerDiv) {
@@ -113,10 +108,8 @@ export class CheckWinningsPage {
       this.cdRef.detectChanges();
     }
   }
+  //delay
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-
-
 }

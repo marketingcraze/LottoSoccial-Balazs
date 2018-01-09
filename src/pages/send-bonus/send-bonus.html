@@ -24,7 +24,7 @@
           </span> 
       </ion-item>
 
-    <ion-slides initialSlide=0 spaceBetween={{spaceBetween}}>
+    <ion-slides class="marginTop" initialSlide=0 spaceBetween={{spaceBetween}}>
       <ion-slide *ngFor="let product of credit_product let id=index">
         <ion-card class="SlideSpace" id={{id}} *ngIf="!product.resultshow && !product.erroeshow && check">
           <ion-grid>

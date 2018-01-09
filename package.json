@@ -32,6 +32,7 @@
         "@ionic-native/in-app-browser": "^3.14.0",
         "@ionic-native/market": "^3.14.0",
         "@ionic-native/native-audio": "^4.1.0",
+        "@ionic-native/native-page-transitions": "^4.5.2",
         "@ionic-native/network": "^3.14.0",
         "@ionic-native/onesignal": "^3.14.0",
         "@ionic-native/photo-library": "^4.3.2",
@@ -45,6 +46,7 @@
         "angular2-countrypicker": "^1.0.0",
         "animate.css": "^3.5.2",
         "autoprefixer": "^7.1.2",
+        "com.telerik.plugins.nativepagetransitions": "^0.6.5",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-actionsheet": "^2.3.3",
@@ -129,7 +131,8 @@
             },
             "cordova-plugin-badge": {},
             "cordova-plugin-uniquedeviceid": {},
-            "cordova-plugin-actionsheet": {}
+            "cordova-plugin-actionsheet": {},
+            "com.telerik.plugins.nativepagetransitions": {}
         },
         "platforms": [
             "android",

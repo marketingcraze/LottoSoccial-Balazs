@@ -4,6 +4,7 @@ import { SyndicateService } from '../../providers/syndicate-service';
 import { PrizeSummaryWinPage } from '../prize-summary-win/prize-summary-win';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare const $
 declare var cordova: any;
 @Component({
@@ -19,6 +20,7 @@ export class PrizeSummaryEarlyCheck {
     public viewCtrl: ViewController,
     public platform: Platform,
     public storage: Storage,
+    public appSound: AppSoundProvider,
     public iab: InAppBrowser,
     public _syndService: SyndicateService,
     public loadingCtrl: LoadingController,
@@ -44,6 +46,7 @@ export class PrizeSummaryEarlyCheck {
       })
   }
   openStore() {
+    this.appSound.play('buttonClick');
     this.storage.get('session')
       .then(
       data => {

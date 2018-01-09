@@ -13,6 +13,22 @@ page-yourvouchers {
   
   padding-top: 0px;
 }
+.rowBorders{
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+}
+.item-md{
+  border-bottom:none!important;
+  padding-left: 0px!important; 
+}
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child{
+  border-bottom-color: none!important;
+  box-shadow: none!important;
+}
+ion-label{
+  overflow: visible;
+}
+
 .voucherCodeTextItem{
   padding-right: 16px;
   margin-top: -12px;
@@ -29,6 +45,50 @@ page-yourvouchers {
   text-align: center;
   
 }
+
+// .red1 {
+//   margin-top: 2%;
+//   margin-bottom: 2%;
+//   text-align: center;
+//   animation-name: red1;
+//   -webkit-animation-name: red1;
+//   animation-duration: 1.25s;
+//   -webkit-animation-duration: 1.25s;
+//   animation-timing-function: ease-in-out;
+//   -webkit-animation-timing-function: ease-in-out;
+//   -webkit-animation-fill-mode:forwards;
+//   /*Chrome 16+, Safari 4+*/
+//   -moz-animation-fill-mode:forwards;
+//   /*FF 5+*/
+//   -o-animation-fill-mode:forwards;
+//   /*Not implemented yet*/
+//   -ms-animation-fill-mode:forwards;
+//   /*IE 10+*/
+//   animation-fill-mode:forwards;
+//   /*when the spec is finished*/
+//   visibility:visible;
+// }
+// @keyframes red1 {
+//   0% {
+//       transform: scale(1);
+//       opacity: 1;
+//   }
+//   100% {
+//       transform: scale(1.3);
+//       opacity: 0;
+//   }
+// }
+// @-webkit-keyframes red1 {
+//   0% {
+//       -webkit-transform: scale(1);
+//       opacity: 1;
+//   }
+//   100% {
+//       -webkit-transform: scale(1.3);
+//       opacity: 0;
+//   }
+// }
+
 .label-md[stacked], .label-md[floating] {
   margin-bottom: 0; 
   margin-left: 0;

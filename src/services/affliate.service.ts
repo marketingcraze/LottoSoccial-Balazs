@@ -57,7 +57,7 @@ export class AffiliateServices {
                 page_id: "22",
                 screen_id: "22.1",
                 action: "affiliate_page",
-                website: "Lotto Social",
+                website: "Lotto Social",   
                 website_id: "27",
                 source_site: "mobi.lottosocial.com",
                 module_name: "get_affiliate_page_details",

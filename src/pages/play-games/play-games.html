@@ -13,20 +13,23 @@
                 {{gameInfo?.game_description}}
             </div>
         </ion-list>
-    </div>
-
-    <div class="ProgressBar-game-play item item-block item-md orange-bg">
-        <div class="progressbarPlayGame" attr.data-perc="{{progressPercentage}}">
-            <div class="barPlayGame color2">
-                <span></span>
-            </div>
-            <div class="labelPlayGame">
-                <span></span>
-            </div>
-        </div>
+        <ion-row>
+            <ion-col>
+                <div class="ProgressBar-game-play item item-block item-md orange-bg">
+                    <div class="progressbarPlayGame" attr.data-perc="{{progressPercentage}}">
+                        <div class="barPlayGame color2">
+                            <span></span>
+                        </div>
+                        <div class="labelPlayGame">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
     </div>
     <br>
-    <div class="badgesContainer" >
+    <div class="badgesContainer" *ngIf="gameBadge!=''">
         <span *ngFor="let badges of gameBadge">
             <img class="badgImg" src="{{badges?.badges_image}}">
         </span>

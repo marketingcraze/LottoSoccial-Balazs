@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController, LoadingController } from 'ionic-angular';
 import { ConfirmModalPage } from '../confirm-modal/confirm-modal';
 import { leaveSyndicate } from '../../services/syndicate_leave.service'
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
   selector: 'page-leave2',
@@ -13,7 +14,7 @@ export class Leave2Page {
   syndicateId: any;
   deviceHeight: any;
   topmar: any;
-  constructor(public navCtrl: NavController, public leaveSynd: leaveSyndicate, public loadingCtrl: LoadingController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public appSound: AppSoundProvider, public leaveSynd: leaveSyndicate, public loadingCtrl: LoadingController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
     debugger
     this.members = this.navParams.get("members");
     this.privateSyndicate = this.navParams.get("syndId")
@@ -27,10 +28,12 @@ export class Leave2Page {
   }
 
   dismissm() {
+    this.appSound.play('buttonClick');
     let data = { 'foo': 'bar' }
     this.viewCtrl.dismiss(data);
   }
   confirm() {
+    this.appSound.play('buttonClick');
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -47,7 +50,7 @@ export class Leave2Page {
             });
             confirmModal.present();
           }
-          else{
+          else {
             loader.dismiss();
             alert("Error occured");
           }

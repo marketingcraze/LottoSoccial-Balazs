@@ -10,6 +10,7 @@ import { CountryListPopPage } from '../country-list-pop/country-list-pop';
 import { CommonService } from '../../services/common.service';
 import { AuthService } from '../../services/auth.service';
 import { Params } from '../../services/params';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare var webengage: any;
 
@@ -61,6 +62,7 @@ export class LoginPage {
         public platform:Platform,
         public authSrv:AuthService, 
         public navParams: NavParams,
+        public appSound: AppSoundProvider,
         public navCtrl: NavController, 
         public commonSrv:CommonService,
         public alertCtrl:AlertController,
@@ -85,7 +87,6 @@ export class LoginPage {
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
         loader.present();
-
         this.commonSrv.getCountry().subscribe(
             data=>{
                 loader.dismiss();
@@ -166,6 +167,7 @@ export class LoginPage {
     }
  
     backButtonPopupClose(){
+        this.appSound.play('buttonClick');
         this.forgotPassPopup=false;  
         this.selectedCountryMobile.name=this.selectedCountry.name;
         this.selectedCountryMobile.dialCode=this.selectedCountry.dialCode;
@@ -174,12 +176,14 @@ export class LoginPage {
 
     
     showPassword(input: any): any {
+        this.appSound.play('buttonClick');
         this.showPass = !this.showPass;
         input.type = input.type === 'password' ? 'text' : 'password';
     }
 
 
     submitLogin(){   
+        this.appSound.play('buttonClick');
         if(this.LoginData.form.controls.password._value=="" ){
             return alert("Enter login details correctly")
         }

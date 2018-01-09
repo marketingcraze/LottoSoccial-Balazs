@@ -211,5 +211,47 @@ export class PlayGame {
         return response;
 
     }
+    submitTip(prod_name: any, comments: any) {
+        if (!CommonService.session) {
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        }
+
+        if (!CommonService.isOnline) {
+            this.params.setIsInternetAvailable(false);
+            return new Observable(observer => {
+                observer.next(null);
+                observer.complete();
+            });
+        }
+
+        this.customerId = CommonService.session.customer_id;
+        let parameter = {
+            "request": [
+                {
+                    "page_id": "3",
+                    "screen_id": "3.7.1",
+                    "module_name": "insert_game_review",
+                    "customer_id": this.customerId,
+                    "product_name": prod_name,
+                    "comment_content": comments,
+                    "comment_author_ip": "",
+                    "comment_agent": "mobile app device details"
+                }
+            ]
+        }
+        let opt: RequestOptions = new RequestOptions({
+            headers: CommonService.getHeaderJson()
+        });
+
+        console.log(CommonService.getHeaderJson());
+        let url = CommonService.apiUrl + "v2/gamereview/";
+
+        var response = this.http.post(url, parameter, opt).map(res => res.json());
+
+        return response;
+    }
 
 }

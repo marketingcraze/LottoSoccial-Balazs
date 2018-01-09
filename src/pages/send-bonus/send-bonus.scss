@@ -38,6 +38,10 @@ page-send-bonus {
         padding: 100px 200px;
         text-align: center;
       }
+
+      .item-md{
+        border-bottom:none!important;
+      }
       
       .main-wrapper {
         padding-top: 60px;
@@ -188,10 +192,25 @@ page-send-bonus {
         }
       }
       
+      
       //animation
       @keyframes wave {
         0%    { transform: translateY(0); }
         50%    { transform: translateY(5px); }
         100%  { transform: translateY(0); }
       }
+      .marginTop{
+       margin-top:10% 
+      }
+      @media only screen and (max-width: 736px) {
+        .marginTop{
+          margin-top:15% 
+         }
+      }
+      @media only screen and (max-width: 320px) {
+        .marginTop{
+          margin-top:2% 
+         }
+      }
+    
 }

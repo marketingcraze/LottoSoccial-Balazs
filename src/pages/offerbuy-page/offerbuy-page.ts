@@ -7,6 +7,9 @@ import { Observable } from "rxjs/Rx";
 import { buyOfferTips } from '../BuyofferPageTips/BuyofferPageTips';
 import { IonPullUpFooterState } from 'ionic-pullup';
 import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
+import { CommonService } from '../../services/common.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'offer-buy',
@@ -51,11 +54,14 @@ export class offerBuy {
     constructor(private offerBuyData: productOffer,
         private loadingCtrl: LoadingController,
         private storage: Storage,
+        public appSound: AppSoundProvider,
         private modalCtrl: ModalController,
         private getCardsSrv: forkOffersSyndicate,
         private offerService: OfferService,
         private navprms: NavParams,
-    public cdf: ChangeDetectorRef ) {
+        public commonSrv: CommonService,
+        private iab: InAppBrowser,
+        public cdf: ChangeDetectorRef) {
 
 
         this.footerState = IonPullUpFooterState.Collapsed;
@@ -188,28 +194,7 @@ export class offerBuy {
         this.position = index;
         this.credit_filter_draw = index;
     }
-    // buyCreditOffer(offerId: any) {
-    //     this.loading = this.loadingCtrl.create();
-    //     this.loading.present().then(() => {
-    //         this.offerService.buy_Credit_Offer(offerId, this.visitorId).subscribe(data => {
-    //             this.loading.dismiss();
-    //             this.buyoffer = data.response.response;
-    //             this.buyOfferStatus = data.response.response.status;
-    //             if (this.buyOfferStatus === "FAIL") {
-    //                 this.openFailureModal();
-    //             }
-    //             else {
-    //                 this.openSuccessModal();
-    //             }
-    //         },
-    //             err => {
-
-    //                 console.log("error", err);
-    //             },
-    //             () => console.log("offer buy successfully")
-    //         );
-    //     })
-    // }
+    
     openFailureModal() {
 
     }
@@ -217,6 +202,7 @@ export class offerBuy {
 
     }
     openTipsModal() {
+        this.appSound.play('buttonClick');
         let modalTips = this.modalCtrl.create(buyOfferTips);
         modalTips.present();
     }
@@ -233,15 +219,14 @@ export class offerBuy {
     }
 
     toggleFooter() {
-        if(this.change == false)
-        {
+        if (this.change == false) {
             this.change = true
         }
-        else{
+        else {
             this.change = false
         }
         this.cdf.detectChanges()
-        
+
         this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
     }
     getMaximumHeight() {
@@ -275,7 +260,7 @@ export class offerBuy {
                     this.confirmPayment.togglePopup()
                 } else {
                     loader.dismiss()
-                    // this.goPaymentWebviewHomeoffer(offerId, prosub_id);
+                    this.goPaymentWebview(offer.offer_id);
                 }
             }, (err) => {
                 loader.dismiss()
@@ -286,15 +271,15 @@ export class offerBuy {
 
     }
     paymentDone() {
-        /*
-        let alert = this.alertCtrl.create({
-            title: 'Success!',
-            subTitle: 'Successfully transaction completed.',
-            buttons: ['OK']
-        });
-        alert.present();
-        */
+        
     }
-
+    goPaymentWebview(offer: any) {
+        let opt: string = "toolbarposition=top";
+        let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
+        str += '&customer_id=' + CommonService.session.customer_id + '&customer_token='
+        str += CommonService.session.customer_token + '&offer_id=' + offer + '&prosub_id=1111';
+        console.log("goPaymentWebview", str);
+        this.iab.create(str, 'blank', opt);
+    }
 
 }

@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit,ChangeDetectorRef } from '@angular/core';
-import { Platform, NavController, NavParams, LoadingController, AlertController, ModalController,Content } from 'ionic-angular';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Platform, NavController, NavParams, LoadingController, AlertController, ModalController, Content } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -17,7 +17,7 @@ import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { offerOfTheDayModal } from '../../pages/offer-of-the-day-modal/offer-of-the-day-modal'
 import { SimpleTimer } from 'ng2-simple-timer';
 import { Observable } from "rxjs/Rx";
-declare var webengage:any;
+declare var webengage: any;
 @Component({
 	selector: 'page-your-offers',
 	templateUrl: 'your-offers.html'
@@ -25,7 +25,7 @@ declare var webengage:any;
 export class YourOffersPage {
 	scrollContent: any;
 	@ViewChild("confirmPayment") confirmPayment;
-	@ViewChild(Content) content:Content;
+	@ViewChild(Content) content: Content;
 	private cache: CacheController;
 
 	userCards: any;
@@ -48,15 +48,15 @@ export class YourOffersPage {
 	result: any = [];
 	resultDate: any = [];
 	day: any = [];
-    hrs: any = [];
-    mins: any = [];
+	hrs: any = [];
+	mins: any = [];
 	sec: any = [];
 	down_arrow_showing = 0;
 
 
 	private lotteryProductData: any
 	private offersForYou: any
-	downShowing  = 0;
+	downShowing = 0;
 
 	constructor(
 		private st: SimpleTimer,
@@ -74,7 +74,7 @@ export class YourOffersPage {
 		public modalController: ModalController,
 		public appSound: AppSoundProvider,
 		public loadingCtrl: LoadingController,
-		public cdRef:ChangeDetectorRef ) {
+		public cdRef: ChangeDetectorRef) {
 
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
 		this.checkCardExists();
@@ -83,45 +83,38 @@ export class YourOffersPage {
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad YourOffersPage');
 	}
-	ionViewWillEnter(){
+	ionViewWillEnter() {
 		var a = localStorage.getItem("yourOffersP")
-		if(localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null)
-		{
+		if (localStorage.getItem("yourOffersP") == undefined || localStorage.getItem("yourOffersP") == null) {
 			var scrollDiv = document.getElementById('reddemOffersContent').clientHeight;
-			var innerDiv = document.getElementById('innerYourOffers').scrollHeight;	debugger
+			var innerDiv = document.getElementById('innerYourOffers').scrollHeight; debugger
 			var valu = scrollDiv + this.content.scrollTop
 			console.log("sdsdsdsdsdsdsds", innerDiv, scrollDiv, valu)
-			if (valu < innerDiv) 
-			{
-			  this.down_arrow_showing = 1
+			if (valu < innerDiv) {
+				this.down_arrow_showing = 1
 
 			}
-			else{
-			  this.down_arrow_showing = 0
+			else {
+				this.down_arrow_showing = 0
 			}
-			localStorage.setItem("yourOffersP","1")
+			localStorage.setItem("yourOffersP", "1")
 			this.content.enableScrollListener();
 		}
-		  else{
+		else {
 			this.down_arrow_showing = 0
 			this.cdRef.detectChanges()
 			this.content.enableScrollListener();
 		}
-		setTimeout(()=>
-		{
+		setTimeout(() => {
 			this.down_arrow_showing = 0
 			this.cdRef.detectChanges()
 			console.log("value changed for dwn arow in yours offer")
 		}, 3000);
-		
+
 	}
-
-
-
 	checkCardExists() {
 		console.log("OffersPage::checkCardExists()");
 		let loader = this._showLoader();
-
 		this.srvOffer.getJackpotList().subscribe((data) => {
 			console.log("OffersPage::getJackpotList() success", data);
 			if (data.response && data.response[0]
@@ -162,46 +155,42 @@ export class YourOffersPage {
 					data.response.push({ offer: offer });
 					this.userCards = data.response;
 					console.log("OffersPage::showPaymentOptions() success", this.userCards);
-					
-					localStorage.setItem("yourOffersP","1")
+
+					localStorage.setItem("yourOffersP", "1")
 					loader.dismiss();
 					this.confirmPayment.togglePopup()
 				} else {
 					this.goPaymentWebview();
 				}
-				
-				
+
+
 			}, (err) => {
 				console.log("OffersPage::showPaymentOptions() error", err);
 				loader.dismiss();
 			})
 		}
 	}
-	scrollHandlerYourOffers(event){
+	scrollHandlerYourOffers(event) {
 		var scrollDiv = document.getElementById('reddemOffersContent').clientHeight;
 		var innerDiv = document.getElementById('innerYourOffers').scrollHeight;
-			
-			var valu = scrollDiv + this.content.scrollTop
-			console.log("data is " , valu, innerDiv, scrollDiv)
-			if (valu > innerDiv + 200) 
-			{
-			  this.downShowing = 1
-			  this.cdRef.detectChanges();
-		  }
-		  else
-		  {
+
+		var valu = scrollDiv + this.content.scrollTop
+		console.log("data is ", valu, innerDiv, scrollDiv)
+		if (valu > innerDiv + 200) {
+			this.downShowing = 1
+			this.cdRef.detectChanges();
+		}
+		else {
 			this.downShowing = 0
 			this.down_arrow_showing = 0
 			this.cdRef.detectChanges();
-		  }
-		  }
-		  delay(ms: number) {
-			return new Promise(resolve => setTimeout(resolve, ms));
 		}
+	}
+	delay(ms: number) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
 
 	ngOnInit() {
-
-
 		this.cache.loadModules("offers", "2", ["fetch_lottery_products"])
 			.then(data => {
 
@@ -212,14 +201,14 @@ export class YourOffersPage {
 					console.log("OffersPage::ionViewDidEnter", i, data[i].fetch_lottery_products);
 					if (data[i].fetch_lottery_products) {
 						this.lotteryProductData = data[i].fetch_lottery_products.response.lottery_product_data
-						
+
 						this.offersForYou = data[i].fetch_lottery_products.response.offers_for_you
 						this.st.newTimer('1sec', 1);
 						this.subscribeTimer0();
 						this.delay(4000);
 						debugger
-						
- 						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.lotteryProductData[0].draw_countdown));
+
+						Observable.interval(1000).takeWhile(() => true).subscribe(() => this.calTime(this.lotteryProductData[0].draw_countdown));
 						break;
 					}
 				}
@@ -229,29 +218,30 @@ export class YourOffersPage {
 				console.log("OffersPage::ionViewDidEnter", err);
 			});
 
-			this.platform.ready().then((readySource) => {
-				var CurrentUserid = localStorage.getItem('appCurrentUserid');
-				if (this.platform.is('cordova')) {
-				  webengage.engage();
-				  webengage.track('Play Game Page', {
+		this.platform.ready().then((readySource) => {
+			var CurrentUserid = localStorage.getItem('appCurrentUserid');
+			if (this.platform.is('cordova')) {
+				webengage.engage();
+				webengage.track('Play Game Page', {
 					"UserId": CurrentUserid,
-				  });
-				  webengage.screen("YourOfferPage")
-				  webengage.notification.onDismiss((inAppData)=> {
-				 });
-				}
-			  });
+				});
+				webengage.screen("YourOfferPage")
+				webengage.notification.onDismiss((inAppData) => {
+				});
+			}
+		});
 	}
 
 
 	goPaymentWebview() {
+		this.appSound.play('buttonClick');
 		let opt: string = "toolbarposition=top";
 		let str = 'https://nima.lottosocial.com/webview-auth/?redirect_to=free_reg'
 		str += '&customer_id=' + CommonService.session.customer_id + '&customer_token=' + this.customerToken + '&Offer_ID=1188'
 		this.iab.create(str, 'blank', opt);
 	}
 
-	private _showLoader(){
+	private _showLoader() {
 		let loader = this.loadingCtrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -262,6 +252,7 @@ export class YourOffersPage {
 
 	//Offer Buy page
 	openBuyPage(index) {
+		this.appSound.play('buttonClick');
 		var TimeLeft = document.getElementById("countDown").innerText;
 		var dealOfTheDayTime = this.lotteryProductData[0].draw_countdown
 		var timer2 = this.lotteryProductData[index].draw_countdown
@@ -270,16 +261,17 @@ export class YourOffersPage {
 	}
 
 	offerOfTheDayModal(index: any) {
-		this.scrollContent=document.querySelector('.scroll-content');
-		this.scrollContent.style['overflow']='hidden';
+		this.appSound.play('buttonClick');
+		this.scrollContent = document.querySelector('.scroll-content');
+		this.scrollContent.style['overflow'] = 'hidden';
 		let modal = this.modalController.create(offerOfTheDayModal, {
 			offerOfTheDay: this.offersForYou[index]
 		})
 		modal.present();
 		modal.onDidDismiss((data: any[]) => {
 			if (data) {
-			 this.scrollContent=document.querySelector('.scroll-content');
-			 this.scrollContent.style['overflow']='none';
+				this.scrollContent = document.querySelector('.scroll-content');
+				this.scrollContent.style['overflow'] = 'none';
 			}
 		})
 	}
@@ -292,7 +284,6 @@ export class YourOffersPage {
 
 	subscribeTimer0() {
 		if (this.timer0Id) {
-
 			// Unsubscribe if timer Id is defined
 			this.st.unsubscribe(this.timer0Id);
 			this.timer0Id = undefined;
@@ -311,13 +302,9 @@ export class YourOffersPage {
 
 	timer0callback(data): string {
 		this.resultDate = [];
-		
-
 		for (var i = 0; i < data.length; i++) {
 			var value: any = data[i].draw_countdown
 			this.result = "";
-
-
 			let now = new Date().getTime();
 			if (!value) {
 				return this.result;
@@ -328,10 +315,9 @@ export class YourOffersPage {
 
 			let delta = Math.floor((now - value.getTime()) / 1000);
 			if (delta < 0) {
-				
+
 				delta = Math.abs(delta);
 			}
-
 
 			let day = Math.floor(delta / 86400);
 			delta %= 86400
@@ -341,63 +327,54 @@ export class YourOffersPage {
 			delta %= 60
 			let seconds = Math.floor(delta)
 
-
-
 			this.result += (day < 9) ? '0' + day + ':' : day + ':';
-
 			this.result += (hour < 9) ? '0' + hour + ':' : hour + ':';
 			this.result += (minute < 9) ? '0' + minute + ':' : minute + ':';
 			this.result += (seconds < 9) ? '0' + seconds : seconds;
-
 			this.resultDate.push(this.result)
-
-
 		}
-		
 
 		return this.resultDate
 	}
-	calTime(NewLeft:any){
-
-
+	calTime(NewLeft: any) {
 
 		let now = new Date().getTime();
 		let now1 = new Date(NewLeft).getTime();
-		
-		if(now1 >= now){
-		if (!NewLeft) {
-			return this.result;
+
+		if (now1 >= now) {
+			if (!NewLeft) {
+				return this.result;
+			}
+			if (typeof (NewLeft) === "string") {
+				NewLeft = new Date(NewLeft);
+			}
+
+			let delta = Math.floor((now - NewLeft.getTime()) / 1000);
+			if (delta < 0) {
+				this.result = "-"
+				delta = Math.abs(delta);
+			}
+
+			let dayCal = Math.floor(delta / 86400);
+			delta %= 86400
+			let hourCal = Math.floor(delta / 3600);
+			delta %= 3600
+			let minuteCal = Math.floor(delta / 60);
+			delta %= 60
+			let secondsCal = Math.floor(delta)
+
+			this.day = (dayCal <= 9) ? '0' + dayCal : dayCal;
+			this.hrs = (hourCal <= 9) ? '0' + hourCal + " :" : hourCal + " :";
+			this.mins = (minuteCal <= 9) ? '0' + minuteCal + " :" : minuteCal + " :";
+			this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
 		}
-		if (typeof (NewLeft) === "string") {
-			NewLeft = new Date(NewLeft);
+		else {
+			this.day = '00'
+			this.hrs = '00' + " :";
+			this.mins = '00' + " :";
+			this.sec = '00'
+
 		}
-	
-		let delta = Math.floor((now - NewLeft.getTime()) / 1000);
-		if (delta < 0) {
-			this.result = "-"
-			delta = Math.abs(delta);
-		}
-	
-		let dayCal = Math.floor(delta / 86400);
-		delta %= 86400
-		let hourCal = Math.floor(delta / 3600);
-		delta %= 3600
-		let minuteCal = Math.floor(delta / 60);
-		delta %= 60
-		let secondsCal = Math.floor(delta)
-	
-		this.day = (dayCal <= 9) ? '0' + dayCal: dayCal;
-		this.hrs = (hourCal <= 9) ? '0' + hourCal  + " :"  : hourCal + " :";
-		this.mins = (minuteCal <= 9) ? '0' + minuteCal  + " :"  : minuteCal + " :";
-		this.sec = (secondsCal <= 9) ? '0' + secondsCal : secondsCal;
-	}
-	else{
-		this.day =  '00' 
-		this.hrs = '00' + " :";
-		this.mins = '00' + " :";
-		this.sec = '00'
-	
-}
 	}
 
 }

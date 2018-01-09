@@ -5,6 +5,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { forkOffersSyndicate } from '../../services/syndicateForkOffer.service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 declare const $
 declare var cordova: any;
@@ -38,6 +39,7 @@ export class PrizeSummaryNoSyndicate {
         private storage: Storage,
         private getCardsSrv: forkOffersSyndicate,
         private iab: InAppBrowser,
+        public appSound: AppSoundProvider,
         public viewCtrl: ViewController,
         public _syndService: SyndicateService,
         public loadingCtrl: LoadingController,
@@ -106,7 +108,6 @@ export class PrizeSummaryNoSyndicate {
 
     }
     getData() {
-        debugger
         this.loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -114,7 +115,6 @@ export class PrizeSummaryNoSyndicate {
         this.loader.present();
         this._syndService.prizeBreakDown().
             subscribe((res) => {
-                debugger
                 this.loader.dismiss();
                 console.log(JSON.stringify(res));
                 this.data = res.response["0"].check_mywinnings.response.syndicate_offer;
@@ -127,7 +127,7 @@ export class PrizeSummaryNoSyndicate {
             })
     }
     openpaymentPopup() {
-        debugger
+        this.appSound.play('buttonClick');
         let loader = this.loadingCtrl.create({
             spinner: 'hide',
             content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -164,7 +164,7 @@ export class PrizeSummaryNoSyndicate {
 
     }
     goToStore() {
-
+        this.appSound.play('buttonClick');
         this.storage.get('session')
             .then(
             data => {

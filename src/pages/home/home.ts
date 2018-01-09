@@ -1,7 +1,7 @@
 import { Component, ViewChild, NgZone, OnInit } from '@angular/core';
 import {
     Platform, MenuController, Nav, NavController, LoadingController,
-    AlertController, ModalController
+    AlertController, ModalController, ItemSliding, Item
 } from 'ionic-angular';
 import { Splashscreen } from 'ionic-native';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -33,13 +33,6 @@ import { AffiliatePage2 } from '../affiliate2/affiliate2'
 import { prizeBreakdownPage } from '../prize-breakdown/prize-breakdown';
 
 declare var webengage: any;
-
-
-
-
-
-declare var webengage: any;
-
 export interface PageInterface {
     title: string;
     component: any;
@@ -53,6 +46,8 @@ export interface PageInterface {
 })
 export class HomePage implements OnInit {
     @ViewChild('btn-unread') btnRead: any;
+    @ViewChild('slidingItem') slideItm: ItemSliding;
+    @ViewChild('item') Itm: Item;
     versionNumber: Promise<any>;
     accountDetails: any;
 
@@ -98,6 +93,7 @@ export class HomePage implements OnInit {
         public platform: Platform,
         private srvHome: HomeService,
         public menu: MenuController,
+        // public itemSlide: ItemSliding,
         private navCtrl: NavController,
         private srvDb: DatabaseService,
         private commonSrv: CommonService,
@@ -278,7 +274,6 @@ export class HomePage implements OnInit {
             });
         }
     }
-
     goPage(page) {
         this.menu.close();
 
@@ -303,17 +298,39 @@ export class HomePage implements OnInit {
         this.srvHome.getHomeMessages().take(1).subscribe((data) => {
             console.log("onOpenRightMenu success ", data);
             this.zone.run(() => {
-                debugger
+                this.appSound.play('inbox');
+                var items: ItemSliding
                 this.messageLoading = false;
                 this.homeMessage = data.response[0].get_home_message.response;
                 this.messages = this.homeMessage.notification;
                 this.params.setUnreadCount(this.homeMessage.notification.length);
+                if (this.homeMessage.count > 0) {
+                    setTimeout(() => {
+                        this.slideItm.setElementClass("active-sliding", true);
+                        this.slideItm.setElementClass("active-slide", true);
+                        this.slideItm.setElementClass("active-options-right", true);
+                        this.Itm.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
+                    }, 1000);
+                    setTimeout(() => {
+                        this.slideItm.close();
+                    }, 4000);
+                }
             });
 
         }, (err) => {
             console.log("onOpenRightMenu error ", err);
         })
     }
+
+
+    // open(itemSlide: ItemSliding, item: Item) {
+    //     debugger
+    //     // reproduce the slide on the click
+    //     itemSlide.setElementClass("active-sliding", true);
+    //     itemSlide.setElementClass("active-slide", true);
+    //     itemSlide.setElementClass("active-options-right", true);
+    //     item.setElementStyle("transform", "translate3d(-140px, 0px, 0px)");
+    // }
 
 
     checkForNewRelease() {
@@ -351,15 +368,9 @@ export class HomePage implements OnInit {
         }
     }
 
-
-    // markAsUnread() {
-
-    //     console.log("markAsUnread()");
-    // }
     markAsRead(cardId: any, index) {
-        debugger
+        this.appSound.play('buttonClick');
         var btn = document.getElementById('btnRead' + index).style.backgroundColor = 'gray'
-        debugger
         this.srvHome.markAsRead(cardId).subscribe((data) => {
             if (data) {
                 if (data.response[0].mark_home_inbox_message.response.status == 'SUCCESS') {
@@ -371,6 +382,7 @@ export class HomePage implements OnInit {
     }
 
     deleteNotification(cardId: any, index) {
+        this.appSound.play('buttonClick');
         this.srvHome.deleteMsg(cardId).subscribe((data) => {
             if (data) {
                 if (data.response[0].delete_home_inbox_message.response.status == 'SUCCESS') {
@@ -378,17 +390,22 @@ export class HomePage implements OnInit {
                     document.getElementById("delete" + index).style.display = 'none';
                 }
             }
-        })
+        }), (Err) => {
+            this.appSound.play('Error');
+            alert("Error occured")
+        }
     }
 
     saveItem() {
         console.log("saveItem()");
     }
     alert(i: any) {
+        this.appSound.play('buttonClick');
         let inboxPopup = this._modalCtrl.create(inboxModal, { CurrentMessage: this.messages[i] });
         inboxPopup.present();
     }
     mgmPage() {
+        this.appSound.play('buttonClick');
         let mgmModal = this._modalCtrl.create(referFriend);
         mgmModal.present();
     }

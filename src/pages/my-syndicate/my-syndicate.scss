@@ -22,7 +22,7 @@ page-my-syndicate {
         border-radius: 10px !important;
     }
     .scroll-content {
-        margin-top:3% !important;
+        height: 100%;
     }
     #estate{
         margin-top: 5%;
@@ -60,7 +60,9 @@ page-my-syndicate {
     .tabbar {
         background-color: #1F4C87 !important;
     }
-
+    #sstate{
+        margin-top: -12px;
+    }
     .item-md .text-md-calm {
         color: #2F76D1 !important;
     }

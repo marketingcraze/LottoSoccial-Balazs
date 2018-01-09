@@ -3,19 +3,15 @@ import { NavController, NavParams, ViewController, ModalController, LoadingContr
 import { CashModalPage } from '../chooseCash-modal/chooseCash-modal';
 import { CreditModalPage } from '../chooseCredit-modal/chooseCredit-modal';
 import { SyndicateService } from '../../providers/syndicate-service';
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare const $: any;
-/*
-  Generated class for the Leave2 page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-ChooseCreditcash',
   templateUrl: 'ChooseCreditcash.html'
 })
-export class ChooseCreditcashPage {
 
+export class ChooseCreditcashPage {
   deviceHeight: any;
   mless = 'less';
   mlBool = true
@@ -25,7 +21,7 @@ export class ChooseCreditcashPage {
   credit: any;
   loader: any
   topmar: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,
+  constructor(public navCtrl: NavController, public appSound: AppSoundProvider, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,
     public _syndSrvc: SyndicateService, public loadingCtrl: LoadingController) {
     this.loader = this.loadingCtrl.create({
       spinner: 'hide',
@@ -45,6 +41,7 @@ export class ChooseCreditcashPage {
 
 
   chooseCredit() {
+    this.appSound.play('buttonClick');
     let chooseCreditModal = this.modalCtrl.create(CreditModalPage);
     chooseCreditModal.onDidDismiss(data => {
       this.viewCtrl.dismiss(data)
@@ -52,6 +49,7 @@ export class ChooseCreditcashPage {
     chooseCreditModal.present();
   }
   chooseCash() {
+    this.appSound.play('buttonClick');
     let chooseCashModal = this.modalCtrl.create(CashModalPage);
     chooseCashModal.onDidDismiss(data => {
       this.viewCtrl.dismiss(data)
@@ -59,6 +57,7 @@ export class ChooseCreditcashPage {
     chooseCashModal.present();
   }
   readMore() {
+    this.appSound.play('buttonClick');
     if (this.mlBool == true) {
       this.mlBool = false;
       this.mless = 'more'
@@ -75,6 +74,7 @@ export class ChooseCreditcashPage {
     }
   }
   choose() {
+    this.appSound.play('buttonClick');
     if (this.isCash) {
       this.loader.present();
       this._syndSrvc.convertCash(this.claimevent_id)
@@ -82,7 +82,12 @@ export class ChooseCreditcashPage {
           console.log(res);
           this.chooseCash();
           this.loader.dismiss();
-        })
+        }), (Err) => {
+          this.loader.present();
+          this.appSound.play('Error');
+          alert("Error occured")
+        }
+
     } else {
       this.chooseCredit();
     }

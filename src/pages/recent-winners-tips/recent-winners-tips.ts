@@ -13,7 +13,7 @@ export class recentWinnerTips {
         this.gameInfo = _recentWinnerTips.get('gameInfo');
     }
     ionViewWillEnter() {
-        let loader = this._loadingCtrl.create({
+        let loader = this._loadingCtrl.create({ 
             spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
         });
@@ -21,7 +21,8 @@ export class recentWinnerTips {
             this._recentTips.getRecentWinnerTips(this.gameInfo.game_name).subscribe(
                 data => {
                     if (data) {
-                        this.tipsData = data.response[0].get_game_tipss.response.tips;
+                        debugger
+                        this.tipsData = data.response[0].get_game_tips.response.tips;
                         loader.dismiss();
                     }
                 },

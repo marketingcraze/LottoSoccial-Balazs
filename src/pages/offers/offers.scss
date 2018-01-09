@@ -64,11 +64,12 @@ page-offers {
     }
 
     .content {
-        margin-top: $toolbar-md-height;
+       // margin-top: $toolbar-md-height;
+        top:-10px;
         height: calc(100% - #{$toolbar-md-height});
     }
     .tabbar{
-        margin-top: $toolbar-md-height;
+       // margin-top: $toolbar-md-height;
         height: $toolbar-md-height;
     }
     .tabs-ios .tabbar, .tabs-md .tabbar {
@@ -302,7 +303,7 @@ page-offers {
     .SlideSpace
     {
         padding:10px;
-        min-height: 405px;
+        // min-height: 405px;
         .SlidePrice
         {
             font-size: 28px;

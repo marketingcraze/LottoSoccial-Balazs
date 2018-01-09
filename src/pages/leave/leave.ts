@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { leaveSyndicate } from '../../services/syndicate_leave.service'
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 
 @Component({
   selector: 'page-leave',
@@ -16,6 +17,7 @@ export class LeavePage {
   topmar: any;
   constructor(public navCtrl: NavController,
     private loadingCtrl: LoadingController,
+    public appSound: AppSoundProvider,
     public navParams: NavParams,
     public serviceLeave: leaveSyndicate,
     public viewCtrl: ViewController) {
@@ -30,10 +32,12 @@ export class LeavePage {
   }
 
   dismissm() {
+    this.appSound.play('buttonClick');
     let data = { 'foo': 'bar' }
     this.viewCtrl.dismiss(data);
   }
   pauseSyndicate() {
+    this.appSound.play('buttonClick');
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -53,9 +57,11 @@ export class LeavePage {
     })
   }
   moveTOffer(data: any = 'offerPage') {
+    this.appSound.play('buttonClick');
     this.viewCtrl.dismiss(data)
   }
   leaveSyndicateManaged() {
+    this.appSound.play('buttonClick');
     let loader = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -69,7 +75,7 @@ export class LeavePage {
             this.leaveSuccess = false;
             this.leave = true
           }
-          else{
+          else {
             alert("oops!! Errrrrrr")
           }
         }
@@ -77,6 +83,7 @@ export class LeavePage {
     })
   }
   leaveSynd() {
+    this.appSound.play('buttonClick');
     this.paused = false;
     this.leave = false
     this.leaveSuccess = true;

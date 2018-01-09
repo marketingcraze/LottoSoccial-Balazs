@@ -56,6 +56,7 @@ export class EditProfilePage {
 
 
 	submitDetails(detailsForm){
+		this.appSound.play('buttonClick');
 		console.log('EditProfilePage::submitDetails', this.accountData);
 		this.appSound.play('buttonClick');
 
@@ -125,7 +126,8 @@ export class EditProfilePage {
             
 
         }, err => {
-            loader.dismiss();
+			loader.dismiss();
+			this.appSound.play('Error');
             console.log("AccountPage::ionViewDidLoad", err);
             // show offline
             this.params.setIsInternetAvailable(false);

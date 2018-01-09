@@ -7,7 +7,7 @@ import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet';
 import { ActionSheetController } from 'ionic-angular'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
-
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { Params } from '../../services/params';
 import { HomeService } from '../../services/service.home';
 import { DatabaseService } from '../../services/db.service';
@@ -16,8 +16,6 @@ import { AccountService } from '../../services/account.service';
 import { CommonService } from '../../services/common.service';
 
 import { badgesOs } from '../../services/badges.service';
-
-
 import { AuthPage } from '../auth/auth';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { BadgesPage } from '../badges/badges';
@@ -28,7 +26,6 @@ import { BadgeViewPage } from '../badge-view/badge-view';
 import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 import { Camera } from 'ionic-native'
 import { File, FileEntry } from '@ionic-native/file';
-
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
@@ -40,28 +37,26 @@ declare var webengage: any;
 	templateUrl: 'account.html'
 })
 export class AccountPage {
+	@ViewChild(Content) content: Content;
+
+	badgesLoaded: boolean = false;
 	bonusCredit: number;
 	rewardPoints: number;
 	badgesForYou: any;
 	waveShowingAccount: boolean = true;
-	@ViewChild(Content) content: Content;
 	private cache: CacheController;
-
 	private profileProgress: number = 50;
 	private refreshCache: boolean = false;
 	private unreadCount: number = 0;
 	downShowing = 0;
-	image_Data:any;
+	image_Data: any;
 	down_arrow_showing = 0
-
 	winning_balanceAPI;
 	reward_pointsAPI;
 	bonus_creditAPI;
-
-
 	private homeMessage: any = {};
+	options1: NativeTransitionOptions
 	private accountDetails: any = {
-		//bonus_credit: 0.00,
 		message: "",
 		msn: "",
 		nick_name: null,
@@ -71,23 +66,14 @@ export class AccountPage {
 		percentage: 0
 	};
 	buttonLabels = [];
-	 options: ActionSheetOptions = {
-		
+	options: ActionSheetOptions = {
 		subtitle: 'Are you sure you want to log out?',
 		buttonLabels: this.buttonLabels,
 		addCancelButtonWithLabel: 'Cancel',
 		addDestructiveButtonWithLabel: 'Log Out',
 		androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
 		destructiveButtonLast: true
-		
-	  };
-
-	//   subtitle: 'Are you sure you want to log out?',
-	//   buttonLabels: this.buttonLabels,
-	//   addCancelButtonWithLabel: 'Cancel',
-	//   addDestructiveButtonWithLabel: 'Delete',
-	//   androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
-	//   destructiveButtonLast: true
+	};
 	constructor(
 		public app: App,
 		private params: Params,
@@ -110,32 +96,31 @@ export class AccountPage {
 		private file: File,
 		private http: Http,
 		public commonSrv: CommonService,
-		private actionSheet: ActionSheet ) {
-
+		private actionSheet: ActionSheet,
+		private nativePageTransitions: NativePageTransitions) {
 		console.log('AccountPage');
-
 		this.cache = new CacheController(params, platform, srvDb, srvHome, alertCtrl);
-
+		this._badgesOs.getBadgesData().subscribe(badgeData => {
+			if (badgeData) {
+				debugger
+				this.badgesForYou = badgeData.response[0].badges
+				this.badgesLoaded = true
+			}
+		})
 		this.loadAccountData()
-	
 	}
-
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad AccountPage');
-
-
+		this.loadAccountData()
 	}
-
 	scrollHandlerAccount(event) {
 		var scrollDiv = document.getElementById('accountContent').clientHeight;
 		var innerDiv = document.getElementById('innerAccount').scrollHeight;
-
 		var valu = scrollDiv + this.content.scrollTop
 		console.log("data is ", valu, innerDiv, scrollDiv)
 		if (valu > innerDiv) {
 			this.downShowing = 1
 			this.cdRef.detectChanges();
-
 		}
 		else {
 			this.downShowing = 0
@@ -146,102 +131,82 @@ export class AccountPage {
 	delay(ms: number) {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
+	//load accounts page data
 	loadAccountData() {
-		// show loading screen
 		let loader = this.loadingCtrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present();
-	  
-		// load data
-		this._badgesOs.getBadgesData().subscribe(badgeData => {
-		 if (badgeData) {
-		  this.badgesForYou = badgeData.response[0].badges
-		 }
-		})
 		this.cache.loadModules("home", "1", ["get_account_details"], this.refreshCache)
-		 .then(data => {
-		  loader.dismiss();
-		  this.waveShowingAccount = true
-		  this.refreshCache = false;
-	  
-		  console.log("AccountPage::ionViewDidLoad", data);
-		  for (var i = 0; i < data.length; i++) {
-		   if (data[i].get_account_details) {
-			this.accountDetails = data[i].get_account_details.response;
-			if (this.accountDetails.bonus_credit) {
-	  
-			 this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
-			 this.lastCalling()
-			}
-			else {
-			 this.bonusCredit = 0;
-			}
-			if (this.accountDetails.reward_points) {
-			 this.rewardPoints = parseInt(this.accountDetails.reward_points)
-			}
-			else {
-			 this.rewardPoints = 0;
-			}
-	  
-	  
-	  
-			if(this.accountDetails.profile_image && this.accountDetails.profile_image != "null")
-			{
-			 var str = this.accountDetails.profile_image
-			 console.log("last character is ",str.charAt(str.length - 1) )
-			 if(str.charAt(str.length - 1) == ".")
-			 {
-			 str = str.substring(0, str.length - 1);
-			 this.image_Data = str
-			 }
-			 else{
-				if(localStorage.getItem("imageUrl"))
-				{
-				 this.image_Data = localStorage.getItem("imageUrl")
+			.then(data => {
+				loader.dismiss();
+				this.waveShowingAccount = true
+				this.refreshCache = false;
+				console.log("AccountPage::ionViewDidLoad", data);
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].get_account_details) {
+						this.accountDetails = data[i].get_account_details.response;
+						if (this.accountDetails.bonus_credit) {
+
+							this.bonusCredit = parseInt(this.accountDetails.bonus_credit.slice(1));
+							this.lastCalling()
+						}
+						else {
+							this.bonusCredit = 0;
+						}
+						if (this.accountDetails.reward_points) {
+							this.rewardPoints = parseInt(this.accountDetails.reward_points)
+						}
+						else {
+							this.rewardPoints = 0;
+						}
+						if (this.accountDetails.profile_image && this.accountDetails.profile_image != "null") {
+							var str = this.accountDetails.profile_image
+							console.log("last character is ", str.charAt(str.length - 1))
+							if (str.charAt(str.length - 1) == ".") {
+								str = str.substring(0, str.length - 1);
+								this.image_Data = str
+							}
+							else {
+								if (localStorage.getItem("imageUrl")) {
+									this.image_Data = localStorage.getItem("imageUrl")
+								}
+								else {
+									this.image_Data = this.accountDetails.profile_image
+								}
+							}
+						}
+						else {
+							if (localStorage.getItem("imageUrl")) {
+								this.image_Data = localStorage.getItem("imageUrl")
+							} else {
+								this.image_Data = "assets/icon/user.svg"
+							}
+						}
+					} else if (data[i].get_home_message) {
+						this.homeMessage = data[i].get_home_message.response;
+						this.unreadCount = this.homeMessage.unread;
+					}
+					this.content.enableScrollListener();
 				}
-				else{
-					this.image_Data = this.accountDetails.profile_image
+				var a = localStorage.getItem("arrow_accountP")
+				if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
+					this.down_arrow_showing = 1
 				}
-			  
-			 }
-			}
-			else{
-			 if(localStorage.getItem("imageUrl"))
-			 {
-			  this.image_Data = localStorage.getItem("imageUrl")
-			 }else{
-			 this.image_Data = "assets/icon/user.svg"
-			 }
-			}
-		   } else if (data[i].get_home_message) {
-			this.homeMessage = data[i].get_home_message.response;
-			this.unreadCount = this.homeMessage.unread;
-		   }
-		   this.content.enableScrollListener();
-		  }
-	  
-	  
-		  console.log("AccountPage::ionViewDidLoad accountDetails", this.accountDetails);
-	  
-		  // 
-		  var a = localStorage.getItem("arrow_accountP")
-		  if (localStorage.getItem("arrow_accountP") == undefined || localStorage.getItem("arrow_accountP") == null) {
-		   this.down_arrow_showing = 1
-		  }
-		  else {
-		   this.down_arrow_showing = 0
-		  }
-		  localStorage.setItem("arrow_accountP", "1")
-	  
-		 }, err => {
-		  loader.dismiss();
-		  // show offline
-		  this.params.setIsInternetAvailable(false);
-		  console.log("AccountPage::ionViewDidLoad", err);
-		 });
-	   }
+				else {
+					this.down_arrow_showing = 0
+				}
+				localStorage.setItem("arrow_accountP", "1")
+
+			}, err => {
+				loader.dismiss();
+				this.appSound.play('Error');
+				this.params.setIsInternetAvailable(false);
+				console.log("AccountPage::ionViewDidLoad", err);
+			});
+	}
+	//Update nickname alert ctrl
 	updateNickName() {
 		this.appSound.play('buttonClick');
 		let alert = this.alertCtrl.create({
@@ -267,11 +232,10 @@ export class AccountPage {
 		});
 		alert.present();
 	}
-
+	//logout and removing all session to not show old data in new id
 	logout() {
 		console.log("AccountPage::logout");
 		this.appSound.play('buttonClick');
-
 		this.cache.clearDatabaseOnLogout();
 		localStorage.removeItem("imageUrl")
 		this.storage.remove('session_ID');
@@ -284,18 +248,12 @@ export class AccountPage {
 		localStorage.removeItem("redeemP")
 		localStorage.removeItem("yourOffersP")
 		localStorage.removeItem("yourGamesP")
-
-
 		this.platform.ready().then((readySource) => {
-
 			if (this.platform.is('cordova')) {
 				webengage.engage();
 				webengage.user.logout();
 			}
-
 		});
-
-
 		this.storage.remove('session')
 			.then(
 			data => {
@@ -306,52 +264,65 @@ export class AccountPage {
 			error => console.log(error)
 			);
 	}
-
+	//Update details modal
 	showUpdateDetailsModal() {
+		this.appSound.play('buttonClick');
 		console.log("AccountPage::showUpdateDetailsModal");
-		this.navCtrl.push(EditProfilePage);
-		// load account data
-		// let profileModal = this.modalCtrl.create(EditProfilePage, {});
-		// profileModal.present();
-	}
+		if (this.platform.is('cordova')) {
+			this.options1 = {
+				direction: 'right',
+				duration: 1000,
+				slowdownfactor: 0,
+				slidePixels: 0,
+				iosdelay: 100,
+				androiddelay: 150,
+				fixedPixelsTop: 0,
+				fixedPixelsBottom: 0
+			};
 
+			this.nativePageTransitions.slide(this.options1)
+				.then()
+				.catch();
+			this.nativePageTransitions.slide(this.options1);
+			this.navCtrl.push(EditProfilePage);
+		}
+		else {
+			this.navCtrl.push(EditProfilePage);
+		}
+	}
+	//open Webview
 	openUrl(url: string) {
+		this.appSound.play('buttonClick');
 		let opt: string = "toolbarposition=top";
 		this.iab.create(url, "_blank", opt);
 	}
-
+	//go to home page
 	goHomePage() {
+		this.appSound.play('buttonClick');
 		this.params.goHomePage();
 	}
-
+	//open webview
 	openWebView(str: string) {
+		this.appSound.play('buttonClick');
 		let opt: string = "toolbarposition=top";
 		this.iab.create(CommonService.sitename + str, 'blank', opt);
 	}
-
+	//Update nick name
 	updateNickname(nick) {
 		console.log('AccountPage::updateNickname() ', nick);
-
+		this.appSound.play('buttonClick');
 		let loader = this.loadingCtrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
 		loader.present();
-
-		// load data
 		this.srvAccount.updateNick(nick).take(1)
 			.subscribe((success: any) => {
 				loader.dismiss();
-
-				console.log("AccountPage::updateNickname", success);
 				if (success) {
 					let res = success.response[0].update_nick_name.response;
-
 					this.refreshCache = true;
 					this.loadAccountData();
-
-					console.log("AccountPage::updateNickname", res);
-
 					let alert = this.alertCtrl.create({
 						title: res.status,
 						subTitle: res.message,
@@ -359,22 +330,26 @@ export class AccountPage {
 					});
 					alert.present();
 				}
-
 			}, err => {
 				loader.dismiss();
-				// show offline
+				this.appSound.play('Error');
 				this.params.setIsInternetAvailable(false);
 				console.log("AccountPage::updateNickname", err);
 			});
 	}
+	//Go to badges
 	moveToBadgeOs() {
+		this.appSound.play('buttonClick');
 		this.navCtrl.push(BadgesPage)
 	}
+	//Go to offers
 	openCreditModule() {
-
+		this.appSound.play('buttonClick');
 		this.navCtrl.push(OffersPage, { "app": "outside" });
 	}
+	//Go to get games 
 	openGetGamesModule() {
+		this.appSound.play('buttonClick');
 		this.navCtrl.push(GamesPage, { "app": "outside" });
 	}
 	private openGallery() {
@@ -390,20 +365,21 @@ export class AccountPage {
 		Camera.getPicture(cameraOptions).then((fileUri) => {
 			this.image_Data = fileUri
 			localStorage.setItem("imageUrl", fileUri)
-			//this.uploadImage()
 			this.uploadPhoto(fileUri)
 
 		}),
-			err => console.log(err);
+			err => {
+				this.appSound.play('Error');
+				console.log(err);
+			}
+
 	}
+	//Loading balance
 	lastCalling() {
-		debugger;
 		if (localStorage.getItem("imageUrl")) {
 			this.image_Data = localStorage.getItem("imageUrl")
 		}
-		
 		var dat = localStorage.getItem("imageUrl")
-
 		this.commonSrv.getCreditPoints().subscribe(data => {
 			console.log("at last data is ", data)
 			if (data) {
@@ -425,11 +401,10 @@ export class AccountPage {
 
 			}
 			this.waveShowingAccount = false
-
-
 		})
 	}
 	uploadImage() {
+		this.appSound.play('buttonClick');
 		let loader = this.loadingCtrl.create({
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
@@ -440,18 +415,19 @@ export class AccountPage {
 			(data: any) => {
 				loader.dismiss();
 				console.log("image upload successful", data);
-
 			},
 			err => {
 				loader.dismiss();
+				this.appSound.play('Error');
 				console.log("image upload error", err);
 			},
 			() => console.log("image upload complete")
 		);
 
 	}
-
+	//#region Profile Upload
 	selectProfileImage() {
+		this.appSound.play('buttonClick');
 		this.openGallery()
 	}
 	private error;
@@ -462,36 +438,30 @@ export class AccountPage {
 			spinner: 'hide',
 			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
 		});
-debugger
 		this.loading.present();
 
 		this.file.resolveLocalFilesystemUrl(imageFileUri)
 			.then(entry => (<FileEntry>entry).file(file => this.readFile(file)))
-			.catch(err => 	this.loading.dismiss());
+			.catch((err) => {
+				this.appSound.play('Error');
+				this.loading.dismiss()
+			});
 	}
 
 	private readFile(file: any) {
-		debugger
 		this.loading.dismiss();
 		var reader;
 		reader = new FileReader();
 		reader.onloadend = (e) => {
-
 			const imgBlob = new Blob([reader.result], { type: 'image/jpg' });
-
 			var p = reader.response
 			var m = reader.result
-
 			this.postData(imgBlob, file.name);
 		};
 		reader.readAsArrayBuffer(file);
-
 	}
 
 	postData(blob: any, fileName: string) {
-		debugger
-		//let server = CommonService.apiUrl +			CommonService.version + '/upload/?process=profile';
-
 		let server = 'https://nima.lottosocial.com/wp-json/mobi/v2/upload/?process=profile'
 		var extension = fileName.substr(fileName.lastIndexOf('.') + 1);
 		let myHeaders: Headers = new Headers();
@@ -504,8 +474,6 @@ debugger
 			'oauth_version="1.0",' +
 			'oauth_signature="mQF41gSF7KIuVqzqcI0nSX1UklE%3D"'
 		);
-
-
 		let options = {
 			fileKey: fileName,
 			fileName: fileName,
@@ -517,7 +485,6 @@ debugger
 		this.http.post(server, blob, options)
 			.catch(err => this.handleError(err))
 			.map(response => response.json())
-			// .finally(() => console.log('inside finaly'))
 			.subscribe((ok) => {
 				debugger
 				this.loading.dismiss();
@@ -525,23 +492,27 @@ debugger
 				console.log(ok);
 				this.uploadAPI_Image(ok.response.image_name);
 			}), (Err) => {
+				this.appSound.play('Error');
 				this.loading.dismiss();
 			}
 
 	}
 	private customerId: string = "";
-
 	uploadAPI_Image(image_url: any) {
-		debugger
 		this.srvAccount.saveImageUrl(image_url).subscribe(data => {
 			if (data) {
-				// alert(data.response)
+				alert("Uploaded");
 			}
 
 		})
 	}
+
+	//#endregion profile pic upload
+
+	//Error handling
 	private handleError(error: Response | any) {
 		this.loading.dismiss();
+		this.appSound.play('Error');
 		let errMsg: string;
 		if (error instanceof Response) {
 			const body = error.json() || '';
@@ -553,55 +524,24 @@ debugger
 		this.error = errMsg;
 		return Observable.throw(errMsg);
 	}
-
-	ionViewWillEnter() {
-
-		// this._badgesOs.getBadgesData().subscribe(badgeData => {
-		// 	if (badgeData) {
-
-		// 		this.badgesForYou = badgeData.response[0].badges
-		// 	}
-		// })
-
-	}
+	//Move to badges
 	goToBadgesView(badge: any) {
-
+		this.appSound.play('buttonClick');
 		this.navCtrl.push(BadgeViewPage, { badge: badge });
 	}
+	//Action sheet
 	presentActionSheet() {
 		if (this.platform.is('cordova')) {
-		this.actionSheet.show(this.options).then((buttonIndex: number) => {
-			console.log('Button pressed: ' + buttonIndex);
-			if(buttonIndex == 1){
-				this.logout()	
-			}
-		  });
+			this.actionSheet.show(this.options).then((buttonIndex: number) => {
+				console.log('Button pressed: ' + buttonIndex);
+				if (buttonIndex == 1) {
+					this.logout()
+				}
+			});
 		}
-		else
-		{
+		else {
 			this.logout()
 		}
-		// let actionSheet = this.actionSheetCtrl.create({
-		// 	title: 'Are you sure you want to log out?',
-		// 	buttons: [
-		// 		{
-		// 			text: 'Log Out',
-		// 			role: 'destructive',
-		// 			handler: () => {
-		// 				this.logout()
-		// 			}
-		// 		},
-		// 		{
-		// 			text: 'Cancel',
-		// 			role: 'cancel',
-		// 			handler: () => {
-		// 				console.log('Cancel clicked');
-		// 			}
-		// 		}
-		// 	]
-		// });
-
-		// actionSheet.present();
 	}
 
 

@@ -23,6 +23,7 @@ export class SignupInvitedPage {
 	constructor( 
 		public app:App,
 		public navParams: NavParams,
+		public appSound: AppSoundProvider,
 		public _syndService: SyndicateService, public loadingCtrl: LoadingController) {
 
 		this.navCtrl = app.getRootNav();
@@ -38,6 +39,7 @@ export class SignupInvitedPage {
 	}
 
 	goHome(){
+		this.appSound.play('buttonClick');
 		this.navCtrl.push( HomePage );
 	}
 

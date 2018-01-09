@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { VoucherService } from '../../services/voucherList_service'
+import { AppSoundProvider } from '../../providers/app-sound/app-sound';
 declare var $: any;
 
 
@@ -9,7 +10,8 @@ declare var $: any;
   templateUrl: 'your_vouchers_popups.html'
 })
 export class your_vouchers_popups {
-  show: boolean=false;
+  reasonCode: any;
+  show: boolean = false;
   VoucherCode: any = "";
   VoucherCodeDescription: any = "";
 
@@ -21,11 +23,12 @@ export class your_vouchers_popups {
   sucessState: any = "";
   gift_status: any = "";
   contentHeight: any = "";
-  shButton:any= 0
+  shButton: any = 3
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     private viewctrl: ViewController,
+    public appSound: AppSoundProvider,
     private navParms: NavParams, public voucher_service: VoucherService, private loadingCtrl: LoadingController) {
     this.VoucherCode = this.navParms.get("VoucherCode")
     this.VoucherCodeDescription = this.navParms.get("VoucherDetail")
@@ -34,29 +37,8 @@ export class your_vouchers_popups {
     console.log("voucher code is ", this.VoucherCode)
     console.log("mobile Number is ", this.mobileNumber)
 
-
-
-
-    // if(this.VCODE == undefined)
-    //   {
-    //     this.VCODE = "VOUCHERCODER"
-    //   }
-    // console.log("VCODE value is " + this.VCODE)
-
-
   }
-  ionEnter() {
 
-    //  this.contentHeight = $("#list").height + 80; //50 added for top and bottom margin
-    // console.log("main height is ", this.contentHeight)
-    // console.log("height is ", document.getElementById('list').getBoundingClientRect().height + 40)   
-    // console.log("height is ", document.getElementById('list').scrollHeight + 40)   
-    // console.log("height is ",document.getElementById('list').offsetHeight + 40)   
-    // console.log($("#list").height());
-    // console.log($("#list").innerHeight());
-    // console.log($("#list").outerHeight());
-
-  }
   ionViewWillUnload() {
     this.contentHeight = 0;
   }
@@ -69,18 +51,17 @@ export class your_vouchers_popups {
       data => {
         this.middleData = data.response[0].voucher_validation.response.Voucher_description;
         this.gift_status = data.response[0].voucher_validation.response.gift_status;
-
+        this.reasonCode = data.response[0].voucher_validation.response.reason_code;
+        debugger
         this.lottoMiddleJson = this.middleData.split("#");
-        if(data.response[0].voucher_validation.response.status == "1")
-        {
+        if (data.response[0].voucher_validation.response.status == "1") {
           this.shButton = 1
         }
-        else{
+        else {
           this.shButton = 0
         }
         debugger
         this.delay(300);
-        this.ionEnter();
         loader.dismiss()
         this.show = true;
 
@@ -105,9 +86,6 @@ export class your_vouchers_popups {
     this.viewctrl.dismiss(data);
   }
   done() {
-
-
-
     this.callSucessAPI()
   }
   callSucessAPI() {
@@ -136,7 +114,7 @@ export class your_vouchers_popups {
     )
   }
   moveToVouchers() {
-    debugger;
+    this.appSound.play('buttonClick');
     var data = { "foo": "foo" }
     this.viewctrl.dismiss(data);
   }
