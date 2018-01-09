@@ -83,6 +83,7 @@ export class SignupInvitedPage {
 		.subscribe((res)=> {
 			console.log(res);
 			loader.dismiss()
+			this.navCtrl.setRoot(HomePage)
 		})
 	}
 	
