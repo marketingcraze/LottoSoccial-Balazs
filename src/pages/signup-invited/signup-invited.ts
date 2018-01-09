@@ -72,9 +72,15 @@ export class SignupInvitedPage {
 		  
 	}
 	decline() {
+		let loader = this.loadingCtrl.create({
+			spinner: 'hide',
+			content: `<img src="assets/vid/blue_bg2.gif" style="height:100px!important">`,
+		});
+		loader.present();
 		this._syndService.DeclineInvite(this.sid, this.mid)
 		.subscribe((res)=> {
 			console.log(res);
+			loader.dismiss()
 		})
 	}
 	
